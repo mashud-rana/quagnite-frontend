@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "../assets/css/globals.css";
 import localFont from "next/font/local";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 
 const satoshi = localFont({
   src: [
@@ -40,7 +41,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={satoshi.className}>
-      <body>{children}</body>
+      <body>
+        <AntdRegistry>{children}</AntdRegistry>
+      </body>
     </html>
   );
 }

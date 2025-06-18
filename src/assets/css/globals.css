@@ -42,6 +42,22 @@
 
 /**Typography**/
 
+.ic_section_space {
+  padding: 100px 0;
+}
+
+.ic_section_space_top {
+  padding-top: 100px;
+}
+
+.ic_section_space_bottom {
+  padding-bottom: 100px;
+}
+
+.ic_section_heading {
+  margin-bottom: 50px;
+}
+
 p,
 small,
 label,
@@ -55,4 +71,40 @@ textarea,
 button {
   font-size: 16px;
   line-height: 24px;
+}
+
+h1 {
+  font-size: 96px;
+  line-height: 60px;
+  letter-spacing: 1px;
+}
+
+h2 {
+  font-size: 80px;
+  line-height: 55px;
+  letter-spacing: 1px;
+}
+
+h3 {
+  font-size: 64px;
+  line-height: 60px;
+  letter-spacing: 1px;
+}
+
+h4 {
+  font-size: 48px;
+  line-height: 60px;
+  letter-spacing: 1px;
+}
+
+h5 {
+  font-size: 24px;
+  line-height: 30px;
+}
+
+h6 {
+  font-size: 20px;
+  line-height: 25px;
+  letter-spacing: -0.18px;
+  font-weight: 900;
 }

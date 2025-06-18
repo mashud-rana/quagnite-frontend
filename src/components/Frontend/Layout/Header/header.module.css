@@ -1,0 +1,54 @@
+.headerWrapper {
+  background-color: #ffffff;
+  padding: 10px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.navbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo a {
+  font-size: 22px;
+  font-weight: bold;
+  color: #1677ff;
+  text-decoration: none;
+}
+
+.menuCenter {
+  display: flex;
+  justify-content: center;
+  min-width: 300px;
+  overflow: visible;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  white-space: nowrap;
+  flex-shrink: 0; /* 👈 prevent squishing */
+}
+
+.switchText {
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.icon {
+  font-size: 18px;
+  cursor: pointer;
+  color: #444;
+}
+
+.loginBtn {
+  font-weight: 500;
+}
