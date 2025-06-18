@@ -1,0 +1,58 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+/* variable set up */
+:root {
+  --white: #ffffff;
+  --black: #000000;
+}
+/* common class */
+.ic_white {
+  color: var(--white);
+}
+
+.ic_black {
+  color: var(--black);
+}
+
+/* font weight */
+.fw_300 {
+  font-weight: 300;
+}
+.fw_400 {
+  font-weight: 400;
+}
+
+.fw_500 {
+  font-weight: 500;
+}
+
+.fw_600 {
+  font-weight: 600;
+}
+
+.fw_700 {
+  font-weight: 700;
+}
+
+.fw_900 {
+  font-weight: 900;
+}
+
+/**Typography**/
+
+p,
+small,
+label,
+span,
+a,
+li,
+ul,
+ol,
+input,
+textarea,
+button {
+  font-size: 16px;
+  line-height: 24px;
+}
