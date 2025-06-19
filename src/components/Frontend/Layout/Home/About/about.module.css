@@ -1,0 +1,107 @@
+.aboutSection {
+  padding: 60px 20px;
+  background-color: #f9f9f9;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: auto;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Left: 8/12 */
+.leftColumn {
+  flex: 0 0 66.6666%;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Right: 4/12 */
+.rightColumn {
+  flex: 0 0 33.3333%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Circular Image Container */
+.circleContainer {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.circle {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  animation: rotateCircle 12s linear infinite;
+}
+
+.circleImg {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+/* Position images at 4 corners of the circle */
+.circleImg:nth-child(1) {
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.circleImg:nth-child(2) {
+  right: 0;
+  top: 50%;
+  transform: translate(50%, -50%);
+}
+
+.circleImg:nth-child(3) {
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+}
+
+.circleImg:nth-child(4) {
+  left: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Animation */
+@keyframes rotateCircle {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .leftColumn,
+  .rightColumn {
+    flex: 0 0 100%;
+    text-align: center;
+  }
+
+  .circleContainer {
+    margin-top: 30px;
+  }
+}
