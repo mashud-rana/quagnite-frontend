@@ -1,78 +1,89 @@
-import React from "react";
-import { Menu, Dropdown, Button } from "antd";
-import {
-  SearchOutlined,
-  ShoppingCartOutlined,
-  DownOutlined,
-} from "@ant-design/icons";
+"use client";
+import React, { useState } from "react";
 import styles from "./header.module.css";
+import {
+  FaSearch,
+  FaShoppingCart,
+  FaBars,
+  FaTimes,
+  FaChevronDown,
+} from "react-icons/fa";
+import Image from "next/image";
+import logo from "@/assets/images/logo.png";
 import Link from "next/link";
 
-const menuItems = [
-  {
-    key: "about",
-    label: <a href="#">About Us</a>,
-  },
-  {
-    key: "partner",
-    label: <a href="#">Partner Assist</a>,
-  },
-  {
-    key: "assist",
-    label: (
-      <Dropdown
-        menu={{
-          items: [
-            {
-              key: "assist1",
-              label: <a href="#">Assist Option 1</a>,
-            },
-            {
-              key: "assist2",
-              label: <a href="#">Assist Option 2</a>,
-            },
-          ],
-        }}
-        trigger={["click"]}
-      >
-        <span>
-          Assist <DownOutlined />
-        </span>
-      </Dropdown>
-    ),
-  },
-  {
-    key: "index",
-    label: <a href="#">Index</a>,
-  },
-];
-
 const Header = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [assistOpen, setAssistOpen] = useState(false);
+
+  const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
+  const toggleAssist = () => setAssistOpen(!assistOpen);
+
   return (
-    <div className={styles.headerWrapper}>
-      <div className={styles.navbar}>
+    <header className="container">
+      <div className={styles.ic_header}>
         {/* Logo */}
-        <div className={styles.logo}>
-          <Link href="/">LOGO</Link>
+        <div className={styles.ic_logo}>
+          <Image src={logo} height={49} width={217} alt="logo"></Image>
         </div>
 
-        {/* Menu */}
-        <div className={styles.menuCenter}>
-          <Menu mode="horizontal" selectable={false} items={menuItems} />
-        </div>
+        {/* Navigation */}
+        <nav className={`${styles.nav} ${mobileMenuOpen ? styles.open : ""}`}>
+          <ul className={styles.menu}>
+            <li>
+              <Link href="#">About Us</Link>
+            </li>
+            <li>
+              <Link href="#">Partner</Link>
+            </li>
+            <li className={styles.dropdown}>
+              <button className={styles.dropdownBtn} onClick={toggleAssist}>
+                Assist
+                <FaChevronDown
+                  className={`${styles.arrow} ${
+                    assistOpen ? styles.rotate : ""
+                  }`}
+                />
+              </button>
+              {assistOpen && (
+                <ul className={styles.submenu}>
+                  <li>
+                    <Link href="#">Submenu 1</Link>
+                  </li>
+                  <li>
+                    <Link href="#">Submenu 2</Link>
+                  </li>
+                </ul>
+              )}
+            </li>
+            <li>
+              <a href="#">Index</a>
+            </li>
 
-        {/* Right Section */}
-        <div className={styles.rightSection}>
-          <span className={styles.switchText}>INDIVIDUAL</span> |
-          <span className={styles.switchText}>ORGANISATION</span>
-          <SearchOutlined className={styles.icon} />
-          <ShoppingCartOutlined className={styles.icon} />
-          <Button type="primary" className={styles.loginBtn}>
-            Login
-          </Button>
+            <li className={styles.ic_organisation_show}>
+              <span className={styles.type}>INDIVIDUAL</span>
+              <span className={styles.pipe}>|</span>
+              <span className={styles.type}>ORGANISATION</span>
+            </li>
+          </ul>
+        </nav>
+
+        {/* Actions */}
+        <div className={styles.actions}>
+          <div className={styles.ic_individual}>
+            <span className={styles.type}>INDIVIDUAL</span>
+            <span className={styles.pipe}>|</span>
+            <span className={styles.type}>ORGANISATION</span>
+          </div>
+          <FaSearch className={styles.icon} />
+          <FaShoppingCart className={styles.icon} />
+          <button className={styles.loginBtn}>Login</button>
+          <button className={styles.mobileToggle} onClick={toggleMobileMenu}>
+            {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+          </button>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

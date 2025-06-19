@@ -6,6 +6,7 @@
 :root {
   --white: #ffffff;
   --black: #000000;
+  --primary-color: #5c81f7;
 }
 /* common class */
 .ic_white {
@@ -107,4 +108,10 @@ h6 {
   line-height: 25px;
   letter-spacing: -0.18px;
   font-weight: 900;
+}
+
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 15px;
 }
