@@ -115,3 +115,27 @@ h6 {
   margin: 0 auto;
   padding: 0 15px;
 }
+
+/* Responsive Design */
+@media (max-width: 1199px) {
+  h6 {
+    font-size: 18px;
+    /* line-height: 23px; */
+  }
+
+  h5 {
+    font-size: 22px;
+    line-height: 28px;
+  }
+}
+
+@media (max-width: 991px) {
+  h6 {
+    font-size: 18px;
+  }
+
+  h5 {
+    font-size: 20px;
+    line-height: 26px;
+  }
+}
