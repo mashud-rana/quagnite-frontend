@@ -1,0 +1,73 @@
+.ic_title {
+  margin: 15px 0px 50px 0px;
+}
+
+.tabContent {
+  padding: 30px 20px;
+  background: var(--gray);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.tabGrid {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+/* Left Column (Text) */
+.leftCol {
+  flex: 0 0 66.666%;
+}
+
+.leftCol h4 {
+  /* font-size: 1.5rem; */
+  margin-bottom: 12px;
+}
+
+.leftCol p {
+  /* font-size: 1rem; */
+  /* color: #666; */
+}
+
+/* Right Column (Images) */
+.rightCol {
+  flex: 0 0 33.333%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainImage {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.smallIcon {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  width: 60px;
+  height: 60px;
+}
+
+@media (max-width: 768px) {
+  .tabGrid {
+    flex-direction: column;
+  }
+
+  .leftCol,
+  .rightCol {
+    flex: 0 0 100%;
+    text-align: center;
+  }
+
+  .smallIcon {
+    position: static;
+    margin-top: 16px;
+  }
+}
