@@ -22,6 +22,10 @@
   background-color: #060606;
 }
 
+.ic_bg_white {
+  background-color: var(--white);
+}
+
 .ic_bg {
   background-color: #e7e7e7;
 }
@@ -80,6 +84,10 @@
   border-radius: 60px 60px 0px 0px;
 }
 
+.mb_20 {
+  margin-bottom: 20px;
+}
+
 p,
 small,
 label,
@@ -103,8 +111,9 @@ h1 {
 
 h2 {
   font-size: 80px;
-  line-height: 55px;
+  line-height: 75px;
   letter-spacing: 1px;
+  font-weight: 300;
 }
 
 h3 {
@@ -150,7 +159,19 @@ h6 {
 
 /* Responsive Design */
 
+@media (max-width: 1650px) {
+  h2 {
+    font-size: 70px;
+    line-height: 70px;
+  }
+}
+
 @media (max-width: 1399px) {
+  h2 {
+    font-size: 66px;
+    line-height: 62px;
+  }
+
   h3 {
     font-size: 60px;
     line-height: 56px;
@@ -211,6 +232,11 @@ h6 {
 }
 
 @media (max-width: 1199px) {
+  h2 {
+    font-size: 64px;
+    line-height: 68px;
+  }
+
   h3 {
     font-size: 48px;
     line-height: 50px;
@@ -242,13 +268,9 @@ h6 {
 }
 
 @media (max-width: 991px) {
-  h6 {
-    font-size: 18px;
-  }
-
-  h5 {
-    font-size: 20px;
-    line-height: 26px;
+  h2 {
+    font-size: 52px;
+    line-height: 58px;
   }
 
   h3 {
@@ -266,6 +288,15 @@ h6 {
     line-height: 35px;
   }
 
+  h5 {
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  h6 {
+    font-size: 18px;
+  }
+
   .ic_section_space_58 {
     padding: 40px 0;
   }
@@ -279,6 +310,11 @@ h6 {
 }
 
 @media (max-width: 767px) {
+  h2 {
+    font-size: 40px;
+    line-height: 46px;
+  }
+
   h3 {
     font-size: 38px;
     line-height: 38px;
@@ -312,6 +348,11 @@ h6 {
 }
 
 @media (max-width: 480px) {
+  h2 {
+    font-size: 36px;
+    line-height: 40px;
+  }
+
   h3 {
     font-size: 30px;
     line-height: 30px;

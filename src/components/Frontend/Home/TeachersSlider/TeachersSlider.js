@@ -246,32 +246,6 @@ export default function TeacherSlider() {
 
         {/* Swiper Carousel */}
         <div className={styles.carouselContainer}>
-          {/* <Swiper
-            modules={[Autoplay, EffectCoverflow]}
-            effect="coverflow"
-            grabCursor={true}
-            centeredSlides={true}
-            loop={true}
-            slidesPerView="auto"
-            initialSlide={3}
-            autoplay={{
-              delay: 3500,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
-            speed={800}
-            coverflowEffect={{
-              rotate: 0,
-              stretch: 0,
-              depth: 100,
-              modifier: 2.5,
-              slideShadows: false,
-            }}
-            onSwiper={setSwiperInstance}
-            onSlideChange={handleSlideChange}
-            className={styles.teacherSwiper}
-          > */}
-
           <Swiper
             modules={[Autoplay, EffectCoverflow]}
             effect="coverflow"
@@ -281,11 +255,11 @@ export default function TeacherSlider() {
             slidesPerView="auto"
             initialSlide={3}
             spaceBetween={30} // ✅ This creates spacing between each card
-            autoplay={{
-              delay: 3500,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
+            // autoplay={{
+            //   delay: 3500,
+            //   disableOnInteraction: false,
+            //   pauseOnMouseEnter: true,
+            // }}
             speed={1000}
             coverflowEffect={{
               rotate: 0,
