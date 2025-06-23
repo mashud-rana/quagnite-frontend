@@ -2,6 +2,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../assets/css/globals.css";
 import localFont from "next/font/local";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const satoshi = localFont({
   src: [

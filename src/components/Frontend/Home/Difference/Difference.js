@@ -2,15 +2,16 @@ import { Tabs } from "antd";
 import styles from "./difference.module.css";
 import img1 from "@/assets/images/industries/difference.png";
 import icon1 from "@/assets/images/industries/dif-icn.png";
+import icon2 from "@/assets/images/about/img1.png";
 import Image from "next/image";
 
 const tabData = [
   {
     key: "1",
     label: "Personalized Training",
-    title: "Customized Learning for You",
+    title: "Personalized Training",
     subtitle:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget tortor at nibh mollis in id magna. Fusce elementum at lacus vel viverra. Sed id massa purus. ",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget tortor at nibh mollis in id magna. Fusce elementum at lacus vel viverra. Sed id massa purus.",
     image: img1,
     icon: icon1,
   },
@@ -20,7 +21,7 @@ const tabData = [
     title: "Your Path to Success",
     subtitle: "Get guidance from experienced coaches at every step.",
     image: img1,
-    icon: icon1,
+    icon: icon2,
   },
   {
     key: "3",
@@ -76,18 +77,22 @@ const items = tabData.map((tab) => ({
   key: tab.key,
   label: tab.label,
   children: (
-    <div className={styles.tabContent}>
-      <div className={styles.tabGrid}>
+    <div className={styles.ic_tab_content}>
+      <div className={styles.ic_tab_grid}>
         {/* Left Column */}
-        <div className={styles.leftCol}>
+        <div className={styles.ic_left_col}>
           <h4>{tab.title}</h4>
           <p>{tab.subtitle}</p>
         </div>
 
         {/* Right Column */}
-        <div className={styles.rightCol}>
-          <Image src={tab.image} alt="Main" className={styles.mainImage} />
-          <Image src={tab.icon} alt="Decorative" className={styles.smallIcon} />
+        <div className={styles.ic_right_col}>
+          <Image src={tab.image} alt="Main" className={styles.ic_main_image} />
+          <Image
+            src={tab.icon}
+            alt="Decorative"
+            className={styles.ic_small_icon}
+          />
         </div>
       </div>
     </div>
