@@ -1,0 +1,182 @@
+.ic_wrapper {
+  position: relative;
+}
+
+.ic_line_img {
+  position: absolute;
+  right: 16%;
+  top: -10%;
+}
+
+.ic_img_container {
+  text-align: center;
+  position: relative;
+}
+
+.ic_card {
+  position: absolute;
+  top: 55%;
+  color: var(--white);
+  width: 450px;
+  padding: 32px;
+  text-align: start;
+  border-radius: 16px;
+  background: rgba(69, 45, 131, 0.1);
+  backdrop-filter: blur(62.7px);
+  font-weight: 300;
+  left: 5%;
+}
+
+.ic_card2 {
+  position: absolute;
+  top: 20%;
+  right: 8%;
+  color: var(--white);
+  width: 450px;
+  padding: 32px;
+  text-align: start;
+  border-radius: 16px;
+  background: rgba(69, 45, 131, 0.1);
+  backdrop-filter: blur(62.7px);
+  font-weight: 300;
+}
+
+@media (max-width: 1399px) {
+  .ic_img {
+    height: 700px;
+    width: 700px;
+  }
+
+  .ic_card {
+    width: 420px;
+    padding: 28px;
+    left: 7%;
+  }
+
+  .ic_card2 {
+    right: 9%;
+    width: 420px;
+    padding: 28px;
+  }
+
+  .ic_line_img {
+    width: 270px;
+    width: 300px;
+    right: 16%;
+    top: -10%;
+  }
+}
+
+@media (max-width: 1299px) {
+  .ic_img {
+    height: 670px;
+    width: 700px;
+  }
+
+  .ic_card {
+    padding: 26px;
+    left: 5.5%;
+  }
+
+  .ic_card2 {
+    right: 8.5%;
+    padding: 24px;
+  }
+
+  .ic_sub_title {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .ic_img {
+    height: 630px;
+    width: 630px;
+  }
+
+  .ic_card {
+    left: 2%;
+  }
+
+  .ic_card2 {
+    right: 5%;
+  }
+}
+
+@media (max-width: 991px) {
+  .ic_img {
+    height: 550px;
+    width: 550px;
+  }
+
+  .ic_card {
+    width: 350px;
+    top: 60%;
+    left: 7%;
+  }
+
+  .ic_card2 {
+    width: 350px;
+    top: 10%;
+    right: 9%;
+  }
+
+  .ic_sub_title {
+    font-size: 12px;
+  }
+
+  .ic_line_img {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .ic_img {
+    height: 500px;
+    width: 500px;
+  }
+
+  .ic_card {
+    width: 300px;
+    left: 2%;
+  }
+
+  .ic_card2 {
+    width: 300px;
+    right: 2%;
+  }
+}
+
+@media (max-width: 575px) {
+  .ic_img {
+    height: 400px;
+    width: 400px;
+  }
+
+  .ic_card {
+    width: 300px;
+    top: 70%;
+    left: 2%;
+  }
+
+  .ic_card2 {
+    width: 300px;
+    top: 5%;
+    right: 2%;
+  }
+}
+
+@media (max-width: 480px) {
+  .ic_img {
+    height: 300px;
+    width: 300px;
+  }
+
+  .ic_card {
+    display: none;
+  }
+
+  .ic_card2 {
+    display: none;
+  }
+}

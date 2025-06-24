@@ -8,7 +8,7 @@ import WhyQuagniteSection from "@/components/Frontend/Home/WhyQuagnite/WhyQuagni
 
 export default function Home() {
   return (
-    <div className="ic_bg_black">
+    <>
       <Hero />
       <About />
       <School />
@@ -16,6 +16,6 @@ export default function Home() {
       <Difference />
       <WhyQuagniteSection />
       <TeachersSlider />
-    </div>
+    </>
   );
 }

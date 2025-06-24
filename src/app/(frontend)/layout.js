@@ -3,11 +3,11 @@ import Header from "@/components/Frontend/Layout/Header/Header";
 
 const FrontendLayout = ({ children }) => {
   return (
-    <>
+    <div>
       <Header />
-      <main>{children}</main>
+      <main className="ic_bg_black">{children}</main>
       <Footer />
-    </>
+    </div>
   );
 };
 
