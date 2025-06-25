@@ -14,8 +14,8 @@ export default function Home() {
       <School />
       <Industries />
       <Difference />
-      <WhyQuagniteSection />
-      <TeachersSlider />
+      {/* <WhyQuagniteSection /> */}
+      {/* <TeachersSlider /> */}
     </>
   );
 }

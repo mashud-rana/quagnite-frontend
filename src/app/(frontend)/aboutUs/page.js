@@ -14,7 +14,7 @@ const AboutUsPage = () => {
       <Passion />
       <Values />
       <UspMake />
-      <Founder />
+      {/* <Founder /> */}
     </>
   );
 };

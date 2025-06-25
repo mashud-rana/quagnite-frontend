@@ -9,6 +9,7 @@ import Image from "next/image";
 const Hero = () => {
   return (
     <section
+      className="ic_section_margin_top"
       style={{
         backgroundImage: `url(${bg.src})`,
         backgroundSize: "cover",
