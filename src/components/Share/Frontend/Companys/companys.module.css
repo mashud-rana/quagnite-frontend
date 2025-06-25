@@ -1,0 +1,12 @@
+.logoWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+}
+
+.ic_img {
+  width: 120px;
+  height: auto;
+  /* object-fit: cover; */
+}

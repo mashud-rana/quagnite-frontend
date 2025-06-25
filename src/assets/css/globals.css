@@ -6,10 +6,16 @@
 :root {
   --white: #ffffff;
   --black: #000000;
+  --purple: #441889;
   --primary-color: #5c81f7;
   --gray: #e7e7e7;
 }
 /* common class */
+
+.ic_purple {
+  color: var(--purple);
+}
+
 .ic_white {
   color: var(--white);
 }
