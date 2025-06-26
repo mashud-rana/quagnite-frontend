@@ -218,7 +218,7 @@ const teachersData = [
 ];
 
 export default function TeacherSlider() {
-  const [activeIndex, setActiveIndex] = useState(3); // Start with John Morris
+  const [activeIndex, setActiveIndex] = useState(3);
   const [swiperInstance, setSwiperInstance] = useState(null);
 
   const handleSlideChange = (swiper) => {
@@ -246,7 +246,7 @@ export default function TeacherSlider() {
 
         {/* Swiper Carousel */}
         <div className={styles.carouselContainer}>
-          <Swiper
+          {/* <Swiper
             modules={[Autoplay, EffectCoverflow]}
             effect="coverflow"
             grabCursor={true}
@@ -254,12 +254,39 @@ export default function TeacherSlider() {
             loop={true}
             slidesPerView="auto"
             initialSlide={3}
-            spaceBetween={30} // ✅ This creates spacing between each card
-            // autoplay={{
-            //   delay: 3500,
-            //   disableOnInteraction: false,
-            //   pauseOnMouseEnter: true,
-            // }}
+            spaceBetween={30}
+            autoplay={{
+              delay: 4000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            speed={600}
+            coverflowEffect={{
+              rotate: 0,
+              stretch: 0,
+              depth: 100,
+              modifier: 2.5,
+              slideShadows: false,
+            }}
+            onSwiper={setSwiperInstance}
+            onSlideChange={handleSlideChange}
+            className={styles.teacherSwiper}
+          > */}
+
+          <Swiper
+            modules={[Autoplay, EffectCoverflow]}
+            effect="coverflow"
+            grabCursor={true}
+            centeredSlides={true}
+            loop={true}
+            slidesPerView="auto"
+            initialSlide={4}
+            spaceBetween={100}
+            autoplay={{
+              delay: 3500,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
             speed={1000}
             coverflowEffect={{
               rotate: 0,

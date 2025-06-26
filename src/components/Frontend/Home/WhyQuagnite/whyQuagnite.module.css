@@ -206,14 +206,37 @@
   }
 }
 
-.ic_img3 {
-  text-align: center;
+.ic_img_container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-.ic_img3 img {
-  width: 100%;
+.ic_small_img1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
   height: auto;
 }
+
+.ic_small_img2 {
+  position: absolute;
+  top: 30%;
+  left: 4%;
+}
+
+.ic_small_img3 {
+  position: absolute;
+  top: 30%;
+  right: 4%;
+}
+
+/* .ic_img_container img {
+  width: 100%;
+  height: auto;
+} */
 
 /* Responsive Design */
 @media (max-width: 1399px) {
@@ -226,9 +249,16 @@
     width: 68%;
   }
 
-  .ic_img3 img {
-    width: 90%;
-    height: auto;
+  .ic_small_img2 {
+    height: 120px;
+    width: 350px;
+    left: 6%;
+  }
+
+  .ic_small_img3 {
+    height: 120px;
+    width: 350px;
+    right: 6%;
   }
 }
 @media (max-width: 1299px) {
@@ -243,6 +273,11 @@
 
   .ic_featureTitle {
     margin-bottom: 12px;
+  }
+
+  .ic_small_img1 {
+    width: 70%;
+    height: auto;
   }
 }
 
@@ -276,6 +311,23 @@
 
   .ic_text {
     font-size: 15px;
+  }
+
+  .ic_small_img2 {
+    height: 100px;
+    width: 250px;
+    left: 4%;
+  }
+
+  .ic_small_img3 {
+    height: 100px;
+    width: 270px;
+    right: 4%;
+  }
+
+  .ic_small_img1 {
+    width: 75%;
+    height: auto;
   }
 }
 
@@ -332,6 +384,23 @@
   .featureItem {
     margin-top: 0px;
   }
+
+  .ic_small_img2 {
+    height: 80px;
+    width: 200px;
+    left: 4%;
+  }
+
+  .ic_small_img3 {
+    height: 80px;
+    width: 200px;
+    right: 4%;
+  }
+
+  .ic_small_img1 {
+    width: 70%;
+    height: auto;
+  }
 }
 
 @media (max-width: 575px) {
@@ -358,8 +427,38 @@
     margin-top: 8px;
   }
 
-  .ic_img3 img {
-    width: 100%;
+  .ic_small_img2 {
+    height: 70px;
+    width: 180px;
+    left: 3%;
+  }
+
+  .ic_small_img3 {
+    height: 70px;
+    width: 180px;
+    right: 3%;
+  }
+
+  .ic_small_img1 {
+    width: 80%;
     height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .ic_small_img1 {
+    width: 80%;
+    height: auto;
+  }
+  .ic_small_img2 {
+    height: 40px;
+    width: 100px;
+    left: 4%;
+  }
+
+  .ic_small_img3 {
+    height: 40px;
+    width: 100px;
+    right: 4%;
   }
 }

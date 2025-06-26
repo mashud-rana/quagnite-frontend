@@ -2,6 +2,8 @@ import styles from "./whyQuagnite.module.css";
 import img1 from "@/assets/images/all/sui1.png";
 import img2 from "@/assets/images/all/sui2.png";
 import img3 from "@/assets/images/all/dashboard.png";
+import img4 from "@/assets/images/all/dashboard1.png";
+import img5 from "@/assets/images/all/dashboard2.png";
 import Image from "next/image";
 
 const features = [
@@ -93,8 +95,28 @@ export default function WhyQuagniteSection() {
           </div>
         </div>
 
-        <div className={styles.ic_img3}>
-          <Image src={img3} height={500} width={1200} alt="" />
+        <div className={styles.ic_img_container}>
+          <Image
+            className={styles.ic_small_img1}
+            src={img3}
+            height={520}
+            width={850}
+            alt=""
+          />
+          <Image
+            className={styles.ic_small_img2}
+            src={img5}
+            height={130}
+            width={370}
+            alt=""
+          />
+          <Image
+            className={styles.ic_small_img3}
+            src={img4}
+            height={130}
+            width={370}
+            alt=""
+          />
         </div>
       </div>
     </section>
