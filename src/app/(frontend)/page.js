@@ -18,7 +18,7 @@ export default function Home() {
       <Difference />
       <Companys />
 
-      {/* <WhyQuagniteSection /> */}
+      <WhyQuagniteSection />
       {/* <TeachersSlider /> */}
 
       <Hire />
