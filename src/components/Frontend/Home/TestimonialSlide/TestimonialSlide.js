@@ -58,37 +58,7 @@ const slideItems = [
   },
 ];
 
-export default function TestimonialSlider() {
-  //   const [currentSlide, setCurrentSlide] = useState(3);
-
-  //   useEffect(() => {
-  //     const interval = setInterval(() => {
-  //       setCurrentSlide((prev) => (prev + 1) % slideItems.length);
-  //     }, 3000);
-
-  //     return () => clearInterval(interval);
-  //   }, []);
-
-  // ..........................................................
-
-  //   const [currentIndex, setCurrentIndex] = useState(0);
-
-  //   useEffect(() => {
-  //     const interval = setInterval(() => {
-  //       setCurrentIndex((prev) => (prev + 1) % slideItems.length);
-  //     }, 3000);
-
-  //     return () => clearInterval(interval);
-  //   }, []);
-
-  //   const getItemForPosition = (position) => {
-  //     const index = (currentIndex + position) % slideItems.length;
-  //     return slideItems[index];
-  //   };
-
-  //   const activeItem = getItemForPosition(3);
-  // ----------------------------------------------------------------
-
+const TestimonialSlide = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalSlides = slideItems.length;
   const centerPosition = 3; // 4th position (0-indexed)
@@ -109,133 +79,8 @@ export default function TestimonialSlider() {
 
   // Get active item (center position)
   const activeItem = getItemForPosition(centerPosition);
-
   return (
-    // <div className={styles.container}>
-    //   <div className={styles.content}>
-    //     <div className={styles.testimonialQuote}>
-    //       {slideItems[currentSlide]?.quote}
-    //     </div>
-
-    //     <div className={styles.sliderContainer}>
-    //       <div className={styles.slider}>
-    //         {slideItems.map((item, index) => (
-    //           <div
-    //             key={item.id}
-    //             // className={`${styles.slide}
-    //             //  ${index === currentSlide ? styles.slideActive : ""}
-    //             // `}
-    //             className={`${styles.slide}
-    //            `}
-    //           >
-    //             <div className={styles.circle}>
-    //               <Image
-    //                 src={item.image || "/placeholder.svg"}
-    //                 alt={item.name}
-    //                 className={styles.slideImage}
-    //                 width={300}
-    //                 height={300}
-    //               />
-    //             </div>
-    //           </div>
-    //         ))}
-    //       </div>
-    //     </div>
-
-    //     <div className={styles.activeName}>
-    //       {slideItems[currentSlide]?.name}
-    //     </div>
-    //   </div>
-    // </div>
-
-    //   .....................................................
-
-    // <div className={styles.container}>
-    //   <div className={styles.content}>
-    //     <div className={styles.testimonialQuote}>{activeItem.quote}</div>
-
-    //     <div className={styles.sliderContainer}>
-    //       <div className={styles.slider}>
-    //         <div className={`${styles.slide} ${styles.position1}`}>
-    //           <div className={styles.circle}>
-    //             <img
-    //               src={getItemForPosition(0).image || "/placeholder.svg"}
-    //               alt={getItemForPosition(0).name}
-    //               className={styles.slideImage}
-    //             />
-    //           </div>
-    //         </div>
-
-    //         <div className={`${styles.slide} ${styles.position2}`}>
-    //           <div className={styles.circle}>
-    //             <img
-    //               src={getItemForPosition(1).image || "/placeholder.svg"}
-    //               alt={getItemForPosition(1).name}
-    //               className={styles.slideImage}
-    //             />
-    //           </div>
-    //         </div>
-
-    //         <div className={`${styles.slide} ${styles.position3}`}>
-    //           <div className={styles.circle}>
-    //             <img
-    //               src={getItemForPosition(2).image || "/placeholder.svg"}
-    //               alt={getItemForPosition(2).name}
-    //               className={styles.slideImage}
-    //             />
-    //           </div>
-    //         </div>
-
-    //         <div
-    //           className={`${styles.slide} ${styles.position4} ${styles.slideActive}`}
-    //         >
-    //           <div className={styles.circle}>
-    //             <img
-    //               src={getItemForPosition(3).image || "/placeholder.svg"}
-    //               alt={getItemForPosition(3).name}
-    //               className={styles.slideImage}
-    //             />
-    //           </div>
-    //         </div>
-
-    //         <div className={`${styles.slide} ${styles.position5}`}>
-    //           <div className={styles.circle}>
-    //             <img
-    //               src={getItemForPosition(4).image || "/placeholder.svg"}
-    //               alt={getItemForPosition(4).name}
-    //               className={styles.slideImage}
-    //             />
-    //           </div>
-    //         </div>
-
-    //         <div className={`${styles.slide} ${styles.position6}`}>
-    //           <div className={styles.circle}>
-    //             <img
-    //               src={getItemForPosition(5).image || "/placeholder.svg"}
-    //               alt={getItemForPosition(5).name}
-    //               className={styles.slideImage}
-    //             />
-    //           </div>
-    //         </div>
-
-    //         <div className={`${styles.slide} ${styles.position7}`}>
-    //           <div className={styles.circle}>
-    //             <img
-    //               src={getItemForPosition(6).image || "/placeholder.svg"}
-    //               alt={getItemForPosition(6).name}
-    //               className={styles.slideImage}
-    //             />
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </div>
-
-    //     <div className={styles.activeName}>{activeItem.name}</div>
-    //   </div>
-    // </div>
-
-    //   ----------------------------------------------
-    <div className={styles.container}>
+    <div className="container">
       <div className={styles.content}>
         <div className={styles.testimonialQuote}>{activeItem.quote}</div>
 
@@ -253,10 +98,12 @@ export default function TestimonialSlider() {
                   } ${isCenter ? styles.slideActive : ""}`}
                 >
                   <div className={styles.circle}>
-                    <img
+                    <Image
                       src={item.image || "/placeholder.svg"}
                       alt={item.name}
                       className={styles.slideImage}
+                      height={300}
+                      width={300}
                     />
                   </div>
                 </div>
@@ -269,4 +116,6 @@ export default function TestimonialSlider() {
       </div>
     </div>
   );
-}
+};
+
+export default TestimonialSlide;
