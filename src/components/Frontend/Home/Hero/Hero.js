@@ -3,7 +3,7 @@ import styles from "./hero.module.css";
 import img1 from "@/assets/images/all/hero1.png";
 import img2 from "@/assets/images/all/hero2.png";
 import img3 from "@/assets/images/all/hero3.png";
-import bg from "@/assets/images/all/hero-bg.png";
+import bg from "@/assets/images/all/bg.png";
 import Image from "next/image";
 
 const Hero = () => {
