@@ -7,25 +7,29 @@
   align-items: center;
 }
 
-.contentCard {
-  width: 63%;
+.ic_main_title {
+  margin-top: 8px;
+  margin-bottom: 20px;
 }
 
 .ic_text_container {
   background: var(--gray);
-  border-radius: 16px;
-  padding: 32px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 32px 32px 32px 100px;
+  position: relative;
+  z-index: 1;
+  border-radius: 12px;
+  clip-path: polygon(50px 0%, 100% 0%, 100% 100%, 100px 100%, 0% 100%);
 }
 
 .imageSection {
-  width: 37%;
+  width: 32%;
+  z-index: 3;
 }
 
 .businessImage {
-  margin-right: 71px;
   margin-bottom: 30px;
-  z-index: 3;
+  margin-left: -10px;
 }
 
 .title {
@@ -71,44 +75,18 @@
   z-index: 3;
 }
 
-/* Blue Glowing Orbs */
-.ic_circle1 {
-  position: absolute;
-  top: 25%;
-  right: 26%;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  background: linear-gradient(108.98deg, #917ffb 27.06%, #441889 90.91%),
-    #d9d9d9;
-  filter: blur(6.1px);
-  animation: float 4s ease-in-out infinite;
-}
-
 .ic_circle2 {
   position: absolute;
-  bottom: 10%;
+  top: 10%;
   left: 30%;
   width: 60px;
   height: 60px;
   background: radial-gradient(circle, #7fc0fb 0%, transparent 70%);
   clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
   animation: float 4s ease-in-out infinite reverse;
-  filter: drop-shadow(0 0 6px #7fc0fb); /* Optional glowing effect */
+  filter: drop-shadow(0 0 6px #7fc0fb);
 }
 
-/* .glowOrb2 {
-    position: absolute;
-    bottom: 10%;
-    left: 30%;
-    width: 60px;
-    height: 60px;
-    background: radial-gradient(circle, #7fc0fb 0%, transparent 70%);
-    clip-path: polygon(60% 100%, 0% 0%, 100% 0%);
-    animation: float 4s ease-in-out infinite reverse;
-  } */
-
-/* Floating Document Cards */
 .floatingDoc1 {
   position: absolute;
   top: 25%;
@@ -186,7 +164,6 @@
   animation: pulse 3s ease-in-out infinite;
 }
 
-/* Small Geometric Dots */
 .geometricDot1 {
   position: absolute;
   top: 45%;
@@ -201,10 +178,10 @@
 
 .geometricDot4 {
   position: absolute;
-  bottom: 15%;
-  left: 3%;
-  width: 35px;
-  height: 7px;
+  top: 35%;
+  left: 8%;
+  width: 38px;
+  height: 8px;
   background: linear-gradient(180deg, #ff7600 0%, #f69745 100%);
   border-radius: 11px;
   animation: floatRotate 3s ease-in-out infinite;
@@ -223,29 +200,6 @@
   }
 }
 
-.geometricDot2 {
-  position: absolute;
-  top: 10%;
-  right: 10%;
-  width: 12px;
-  height: 12px;
-  background: #9ca3af;
-  border-radius: 50%;
-  animation: float 3.5s ease-in-out infinite reverse;
-}
-
-.geometricDot3 {
-  position: absolute;
-  top: 15%;
-  left: 35%;
-  width: 4px;
-  height: 4px;
-  background: #d1d5db;
-  border-radius: 50%;
-  animation: float 2.2s ease-in-out infinite;
-}
-
-/* Animations */
 @keyframes float {
   0%,
   100% {
@@ -272,33 +226,21 @@
   }
 }
 
-.ic_animation_img {
-  position: absolute;
-  bottom: 6%;
-  left: 45%;
-  animation: pulse 6s ease-in-out infinite;
-}
-
 .ic_line_img {
   position: absolute;
   top: 15%;
   left: -3%;
 }
 
-/* Responsive Design */
 @media (max-width: 1650px) {
   .businessImage {
     width: 600px;
     height: 400px;
+    margin-left: 12px;
   }
 
   .exploreButton {
     padding: 12px 26px;
-  }
-
-  .ic_animation_img {
-    width: 100px;
-    height: 100px;
   }
 }
 
@@ -306,15 +248,8 @@
   .businessImage {
     width: 550px;
     height: 380px;
-    /* margin-left: -160px; */
     margin-bottom: 40px;
-  }
-
-  .ic_animation_img {
-    bottom: 6%;
-    left: 46%;
-    width: 90px;
-    height: 90px;
+    margin-left: 0px;
   }
 
   .ic_description {
@@ -322,8 +257,9 @@
     width: 75%;
   }
 
-  .ic_text_container {
-    padding: 28px;
+  .ic_main_title {
+    margin-top: 4px;
+    margin-bottom: 16px;
   }
 
   .exploreButton {
@@ -334,19 +270,14 @@
 
 @media (max-width: 1199px) {
   .businessImage {
-    width: 500px;
-    height: 350px;
-    /* margin-left: -140px; */
+    width: 530px;
+    height: 380px;
     margin-bottom: 40px;
-  }
-
-  .ic_animation_img {
-    width: 80px;
-    height: 80px;
+    margin-left: -50px;
   }
 
   .ic_text_container {
-    padding: 26px;
+    padding: 26px 26px 26px 80px;
   }
 
   .ic_description {
@@ -361,14 +292,13 @@
   }
 }
 
-@media (max-width: 1024px) {
+/* @media (max-width: 1024px) {
   .businessImage {
     width: 470px;
     height: 330px;
-    /* margin-left: -130px; */
     margin-bottom: 40px;
   }
-}
+} */
 
 @media (max-width: 991px) {
   .ic_grid {
@@ -376,31 +306,11 @@
     flex-direction: column;
   }
 
-  .ic_animation_img {
-    bottom: -5%;
-    width: 50px;
-    height: 50px;
-  }
-
-  .ic_circle1 {
-    top: 50%;
-    right: 40%;
-    width: 30px;
-    height: 30px;
-  }
-
   .ic_circle2 {
     bottom: -10%;
     left: 30%;
     width: 40px;
     height: 40px;
-  }
-
-  .geometricDot2 {
-    top: 48%;
-    right: 15%;
-    width: 8px;
-    height: 8px;
   }
 
   .geometricDot1 {
@@ -425,6 +335,12 @@
     display: none;
   }
 
+  .ic_text_container {
+    margin-top: 25px;
+    padding: 26px 26px 26px 26px;
+    clip-path: polygon(0px 0%, 100% 0%, 100% 100%, 100px 100%, 0% 100%);
+  }
+
   .contentCard {
     width: 100%;
     padding: 0px;
@@ -447,13 +363,6 @@
     width: 420px;
     height: auto;
   }
-
-  /* .floatingDoc1,
-    .floatingDoc2,
-    .ic_circle1,
-    .ic_circle2 {
-      display: none;
-    } */
 
   .ic_description {
     margin: 6px 0 13px 0;

@@ -28,7 +28,7 @@ const Values = () => {
   return (
     <section className="ic_section_space_top_58">
       <div className="container ic_white">
-        <h6>SCHOOLS</h6>
+        <h6>OUR VALUES</h6>
         <div className={styles.grid}>
           {valueData.map((school) => (
             <div className={styles.ic_card} key={school.id}>

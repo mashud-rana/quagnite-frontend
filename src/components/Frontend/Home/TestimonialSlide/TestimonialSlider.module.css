@@ -1,25 +1,22 @@
 .content {
   position: relative;
   z-index: 2;
-  width: 100%;
   text-align: center;
 }
 
 .testimonialQuote {
   color: white;
-  font-size: 1.4rem;
+  font-size: 20px;
   font-weight: 300;
   line-height: 1.7;
-  margin-bottom: 4rem;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 50%;
+  margin: 0 auto;
   opacity: 1;
   transition: all 0.6s ease;
 }
 
 .sliderContainer {
-  margin: 3rem 0;
+  margin: 50px 0;
   position: relative;
   display: flex;
   align-items: center;
@@ -30,9 +27,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 40px;
   width: 100%;
-  max-width: 800px;
+  height: 130px;
 }
 
 .slide {
@@ -42,8 +39,18 @@
   transition: all 0.6s ease;
 }
 
+/* .slide {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.6s ease;
+} */
+
 .circle {
-  border: 3px solid #ff4444;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -60,56 +67,123 @@
   transition: all 0.6s ease;
 }
 
-/* Dynamic position styles */
 .position1 .circle,
 .position7 .circle {
-  width: 40px;
-  height: 40px;
+  width: 68px;
+  height: 68px;
   border-width: 2px;
   opacity: 0.5;
 }
 
 .position2 .circle,
 .position6 .circle {
-  width: 60px;
-  height: 60px;
+  width: 90px;
+  height: 90px;
   border-width: 2px;
   opacity: 0.7;
 }
 
 .position3 .circle,
 .position5 .circle {
-  width: 80px;
-  height: 80px;
+  width: 108px;
+  height: 108px;
   border-width: 3px;
   opacity: 0.8;
 }
 
-/* Center position (position4) - Always active */
 .position4 .circle {
+  width: 165px;
+  height: 165px;
+  border-width: 4px;
+  opacity: 1;
+  transform: scale(1.05);
+  border: 4px solid #806ab7;
+}
+
+/* .position4 .circle {
   width: 120px;
   height: 120px;
   border-width: 4px;
   opacity: 1;
   box-shadow: 0 0 20px rgba(255, 68, 68, 0.4);
   transform: scale(1.05);
-}
+} */
 
 .activeName {
   color: white;
-  font-size: 1.25rem;
   font-weight: 500;
-  margin-top: 2rem;
-  opacity: 0.9;
   transition: all 0.6s ease;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .container {
-    padding: 1rem;
+@media (max-width: 1299px) {
+  .testimonialQuote {
+    font-size: 18px;
   }
 
+  .slider {
+    gap: 40px;
+    height: 90px;
+  }
+
+  .position1 .circle,
+  .position7 .circle {
+    width: 50px;
+    height: 50px;
+  }
+
+  .position2 .circle,
+  .position6 .circle {
+    width: 70px;
+    height: 70px;
+  }
+
+  .position3 .circle,
+  .position5 .circle {
+    width: 90px;
+    height: 90px;
+  }
+
+  .position4 .circle {
+    width: 130px;
+    height: 130px;
+  }
+}
+
+@media (max-width: 991px) {
+  .slider {
+    gap: 30px;
+    height: 40px;
+  }
+
+  .position1 .circle,
+  .position7 .circle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .position2 .circle,
+  .position6 .circle {
+    width: 60px;
+    height: 60px;
+  }
+
+  .position3 .circle,
+  .position5 .circle {
+    width: 80px;
+    height: 80px;
+  }
+
+  .position4 .circle {
+    width: 100px;
+    height: 100px;
+  }
+
+  .activeName {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
   .testimonialQuote {
     font-size: 1.1rem;
     margin-bottom: 3rem;
@@ -148,17 +222,12 @@
 }
 
 @media (max-width: 480px) {
-  .container {
-    padding: 1rem;
-  }
-
   .testimonialQuote {
-    font-size: 1rem;
-    margin-bottom: 2rem;
+    font-size: 18px;
   }
 
   .slider {
-    gap: 10px;
+    gap: 30px;
   }
 
   .position1 .circle,

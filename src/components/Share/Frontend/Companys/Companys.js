@@ -18,22 +18,22 @@ const logos = [img1, img2, img3, img4, img5, img1, img2, img4];
 
 const Companys = () => {
   return (
-    <section>
+    <section className="ic_section_space">
       <div className="container">
         <div>
           <Swiper
             modules={[Autoplay]}
             slidesPerView={5}
-            spaceBetween={30}
+            spaceBetween={20}
             loop={true}
             autoplay={{
               delay: 2000,
               disableOnInteraction: false,
             }}
             breakpoints={{
-              320: { slidesPerView: 2 },
-              768: { slidesPerView: 3 },
-              1024: { slidesPerView: 4 },
+              320: { slidesPerView: 3 },
+              768: { slidesPerView: 4 },
+              1024: { slidesPerView: 5 },
             }}
           >
             {logos.map((logo, index) => (
@@ -43,7 +43,7 @@ const Companys = () => {
                     src={logo}
                     alt={`Company Logo ${index + 1}`}
                     width={100}
-                    height={50}
+                    height={80}
                     objectFit="contain"
                     className={styles.ic_img}
                   />

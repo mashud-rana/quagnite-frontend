@@ -2,11 +2,36 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80px;
+  height: auto;
+  width: 160px;
 }
 
 .ic_img {
-  width: 120px;
   height: auto;
-  /* object-fit: cover; */
+  object-fit: contain;
+  width: 100%;
+}
+
+@media (max-width: 1399px) {
+  .logoWrapper {
+    width: 140px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .logoWrapper {
+    width: 130px;
+  }
+}
+
+@media (max-width: 991px) {
+  .logoWrapper {
+    width: 110px;
+  }
+}
+
+@media (max-width: 767px) {
+  .logoWrapper {
+    width: 90px;
+  }
 }

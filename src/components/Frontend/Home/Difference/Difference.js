@@ -100,7 +100,7 @@ const items = tabData.map((tab) => ({
 }));
 const Difference = () => {
   return (
-    <div className="ic_white ic_section_space">
+    <div className="ic_white ic_section_space_top">
       <div className="container">
         <div>
           <h6>WHY US</h6>

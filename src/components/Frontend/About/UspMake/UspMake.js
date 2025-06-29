@@ -26,7 +26,7 @@ const valueData = [
 
 const UspMake = () => {
   return (
-    <section className={`${styles.ic_wrapper} ic_section_space`}>
+    <section className={`${styles.ic_wrapper} ic_section_space_bottom`}>
       <Image
         className={styles.ic_line_img}
         src={img1}
@@ -37,7 +37,7 @@ const UspMake = () => {
       <div className="container ic_white">
         <div className={styles.grid}>
           <div className={styles.ic_text_conteiner}>
-            <h6 className="mb_20">About Us</h6>
+            <h6 className="mb_20">OUR USP</h6>
             <h3>
               We<span> make</span> difference
             </h3>

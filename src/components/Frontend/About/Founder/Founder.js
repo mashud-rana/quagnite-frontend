@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./founder.module.css";
 import { FaInstagram, FaLinkedin } from "react-icons/fa";
+import { PiLinkedinLogoBold } from "react-icons/pi";
 import Image from "next/image";
 import img1 from "@/assets/images/about/founder.png";
 import bg from "@/assets/images/about/founder-bg.png";
@@ -26,14 +27,14 @@ const Founder = () => {
               alt="Founder"
               width={600}
               height={400}
-              className={styles.founderImage}
+              className={styles.ic_founderImage}
             />
           </div>
 
           {/* Right Column: Content */}
           <div className={styles.rightColumn}>
             <h6>Founder</h6>
-            <h3>Lorem Ipsum Dolar</h3>
+            <h4>Lorem Ipsum Dolar</h4>
             <p className={styles.subtitle}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
               dignissim dui id lobortis vulputate. Nulla sodales enim quis
@@ -47,7 +48,7 @@ const Founder = () => {
               ultrices nulla in, suscipit varius eros.
             </p>
 
-            <div className={styles.socialIcons}>
+            <div className={styles.ic_socialIcons}>
               <a
                 href="https://instagram.com"
                 target="_blank"
@@ -60,7 +61,7 @@ const Founder = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaLinkedin className={styles.icon} />
+                <PiLinkedinLogoBold className={styles.icon} />
               </a>
             </div>
           </div>

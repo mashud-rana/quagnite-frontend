@@ -62,6 +62,10 @@
 
 /**Typography**/
 
+.ic_section_margin_top_80 {
+  margin-top: 80px;
+}
+
 .ic_section_margin_top {
   margin-top: 100px;
 }
@@ -263,11 +267,15 @@ h6 {
   .py_26 {
     padding: 24px 0px;
   }
+
+  .radious_16 {
+    border-radius: 10px;
+  }
 }
 
 @media (max-width: 1299px) {
   h3 {
-    font-size: 58px;
+    font-size: 56px;
     line-height: 54px;
   }
 
@@ -494,6 +502,10 @@ h6 {
 
   .ic_section_space_bottom {
     padding-bottom: 60px;
+  }
+
+  .ic_section_margin_top_80 {
+    margin-top: 70px;
   }
 
   .ic_section_space {

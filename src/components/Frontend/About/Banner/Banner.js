@@ -7,7 +7,7 @@ import bg from "@/assets/images/all/about-bg.png";
 const AboutBanner = () => {
   return (
     <section
-      className="ic_section_margin_top"
+      className="ic_section_margin_top_80"
       style={{
         backgroundImage: `url(${bg.src})`,
         backgroundSize: "cover",
