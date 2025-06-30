@@ -82,7 +82,7 @@ const items = tabData.map((tab) => ({
         {/* Left Column */}
         <div className={styles.ic_left_col}>
           <h4>{tab.title}</h4>
-          <p>{tab.subtitle}</p>
+          <p className={styles.ic_width}>{tab.subtitle}</p>
         </div>
 
         {/* Right Column */}

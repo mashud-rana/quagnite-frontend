@@ -62,7 +62,7 @@
   top: 30%;
   left: -16%;
   z-index: 3;
-  animation: rotateCircle 6s ease-in-out infinite reverse;
+  animation: rotateCircle 15s ease-in-out infinite reverse;
 }
 
 @keyframes float {

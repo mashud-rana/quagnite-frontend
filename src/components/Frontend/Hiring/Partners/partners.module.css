@@ -1,0 +1,190 @@
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.textContent {
+  color: var(--white);
+}
+
+.description {
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.logosContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 18px 0;
+  align-items: center;
+}
+
+/* Row with 3 cards */
+.row3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  width: 100%;
+  justify-items: center;
+}
+
+/* Row with 2 cards */
+.row2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  width: 80%;
+  justify-items: center;
+}
+
+.logoCard {
+  background: white;
+  border-radius: 12px;
+  /* padding: 1.5rem; */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  width: 100%;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: floatLogo 3s ease-in-out infinite;
+}
+
+.logoCard:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.logoImage {
+  max-width: 100%;
+  /* max-height: 50px; */
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.logoCard:hover .logoImage {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+/* Optional staggered delays for more natural effect */
+.logoCard:nth-child(2n) {
+  animation-delay: 0.3s;
+}
+.logoCard:nth-child(3n) {
+  animation-delay: 0.6s;
+}
+.logoCard:nth-child(4n) {
+  animation-delay: 0.9s;
+}
+
+@keyframes floatLogo {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1399px) {
+  .logoCard {
+    background: white;
+    border-radius: 12px;
+    /* padding: 1.5rem; */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* .logoImage {
+    width: 50px;
+  } */
+
+  .logosContainer {
+    width: 85%;
+    margin: auto;
+  }
+
+  .logoImage {
+    height: 35px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .content {
+    grid-template-columns: 1fr;
+    /* gap: 3rem; */
+    text-align: center;
+  }
+
+  .row3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .row2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .logoImage {
+    height: 30px;
+  }
+}
+
+/* @media (max-width: 768px) {
+  .container {
+    padding: 2rem 1rem;
+  }
+
+  .heading {
+    font-size: 2.2rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .row3 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .row2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .logoCard {
+    max-width: 150px;
+    min-height: 60px;
+    padding: 1rem;
+  }
+
+  .logoImage {
+    max-height: 40px;
+  }
+} */
+
+@media (max-width: 480px) {
+  .row3,
+  .row2 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

@@ -8,6 +8,7 @@ import bg from "@/assets/images/all/hiring-bg.png";
 import badgeImg from "@/assets/images/all/badge.png";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 const HiringBanner = () => {
   const [progress, setProgress] = useState(0);
@@ -42,13 +43,19 @@ const HiringBanner = () => {
         <div className={styles.ic_hero_container}>
           {/* Left Content */}
           <div className={styles.leftContent}>
-            <h4>Build the workforce you need for the future of technology.</h4>
-            <p className={styles.heroDescription}>
-              Quagnite-trained employees are armed with not just the knowledge
-              and skills, but the attitude needed to succeed in a rapidly
-              changing environment. Save time and energy recruiting from
-              Quagnite and be confident that you are getting the very best.
-            </p>
+            <CardAnimation index={0} direction="left">
+              <h4>
+                Build the workforce you need for the future of technology.
+              </h4>
+            </CardAnimation>
+            <CardAnimation index={1} direction="up">
+              <p className={styles.heroDescription}>
+                Quagnite-trained employees are armed with not just the knowledge
+                and skills, but the attitude needed to succeed in a rapidly
+                changing environment. Save time and energy recruiting from
+                Quagnite and be confident that you are getting the very best.
+              </p>
+            </CardAnimation>
           </div>
 
           {/* Right Content - Image with Circular Progress and Badge */}

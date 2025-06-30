@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./teammate.module.css";
 import img1 from "@/assets/images/all/teammate.png";
-import AnimateOnScroll from "@/components/Share/AnimateOnScroll";
+import AnimateOnScroll from "@/components/Share/ClientComponent/AnimateOnScroll";
 
 const Teammate = () => {
   return (

@@ -628,3 +628,8 @@ h6 {
 .antdTabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
   color: var(--black) !important;
 }
+
+/* company swipper js  */
+.swiper-wrapper {
+  align-items: center;
+}

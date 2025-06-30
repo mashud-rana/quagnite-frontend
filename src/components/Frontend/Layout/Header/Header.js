@@ -32,7 +32,7 @@ const Header = () => {
           <nav className={`${styles.nav} ${mobileMenuOpen ? styles.open : ""}`}>
             <ul className={styles.menu}>
               <li>
-                <Link href="/aboutUs">About Us</Link>
+                <Link href="/about-us">About Us</Link>
               </li>
               <li>
                 <Link href="#">Partner</Link>

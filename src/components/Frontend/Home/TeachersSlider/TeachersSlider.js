@@ -85,7 +85,7 @@ export default function TeachersSlider() {
               slideShadows: false,
             }}
             autoplay={{
-              delay: 10000,
+              delay: 1000,
               disableOnInteraction: false,
             }}
             loop={true}
