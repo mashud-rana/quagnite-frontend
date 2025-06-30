@@ -129,6 +129,11 @@
 .w_70 {
   width: 55%;
 }
+
+.p_16 {
+  padding: 56px;
+}
+
 p,
 small,
 label,

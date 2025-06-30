@@ -1,0 +1,246 @@
+.ic_hero_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 110px;
+}
+
+.leftContent {
+  color: white;
+  z-index: 2;
+}
+
+.heroDescription {
+  font-size: 16px;
+  line-height: 25px;
+  letter-spacing: -0.18px;
+  font-weight: 400;
+  margin: 30px 0 0 0;
+}
+
+.ic_hero_img {
+  padding-top: 85px;
+}
+
+.imageWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.badge {
+  position: absolute;
+  bottom: 70px;
+  right: 0px;
+  z-index: 3;
+  animation: floatBadge 2.5s ease-in-out infinite;
+}
+
+@keyframes floatBadge {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.progressWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.progressBar {
+  position: absolute;
+  top: -30px;
+  left: -30px;
+  width: 250px;
+  height: 250px;
+  z-index: 3;
+}
+
+.progressText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #8b8cfd;
+  color: white;
+  border-radius: 50%;
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+  align-content: center;
+  height: 100px;
+  width: 100px;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* Responsive Design */
+
+@media (max-width: 1399px) {
+  .ic_hero_img {
+    padding-top: 80px;
+  }
+
+  .progressBar {
+    width: 180px;
+    height: 180px;
+  }
+
+  .progressText {
+    font-size: 20px;
+    height: 70px;
+    width: 70px;
+  }
+
+  .ic_large_img {
+    width: 560px;
+    height: auto;
+  }
+
+  .ic_hero_container {
+    gap: 80px;
+  }
+
+  .heroDescription {
+    margin: 25px 0 0 0;
+  }
+}
+
+@media (max-width: 1199px) {
+  .progressBar {
+    width: 150px;
+    height: 150px;
+  }
+
+  .progressText {
+    font-size: 18px;
+    height: 60px;
+    width: 60px;
+  }
+
+  .ic_hero_img {
+    padding-top: 75px;
+  }
+
+  .ic_large_img {
+    width: 500px;
+    height: auto;
+  }
+
+  .ic_hero_container {
+    gap: 70px;
+  }
+
+  .heroDescription {
+    margin: 22px 0 0 0;
+  }
+}
+
+@media (max-width: 1040px) {
+  .heroDescription {
+    margin: 20px 0 0 0;
+  }
+
+  .ic_hero_container {
+    grid-template-columns: 1fr;
+    gap: 0px;
+    text-align: center;
+    padding: 60px 60px 0px 60px;
+  }
+
+  .ic_hero_img {
+    padding-top: 50px;
+  }
+
+  .ic_large_img {
+    width: 450px;
+    height: auto;
+  }
+}
+
+@media (max-width: 991px) {
+  .heroDescription {
+    margin: 18px 0 0 0;
+    font-weight: 300;
+  }
+
+  .ic_large_img {
+    width: 400px;
+    height: auto;
+  }
+
+  .ic_hero_container {
+    padding: 50px 50px 0px 50px;
+  }
+
+  .progressBar {
+    width: 130px;
+    height: 130px;
+  }
+
+  .progressText {
+    font-size: 15px;
+    height: 55px;
+    width: 55px;
+  }
+}
+
+@media (max-width: 575px) {
+  .ic_large_img {
+    width: 350px;
+    height: auto;
+  }
+
+  .heroDescription {
+    margin: 16px 0 0 0;
+  }
+
+  .ic_hero_container {
+    padding: 50px 10px 0px 10px;
+  }
+
+  .ic_hero_img {
+    padding-top: 30px;
+  }
+
+  .progressBar {
+    width: 120px;
+    height: 120px;
+  }
+
+  .progressText {
+    font-size: 15px;
+    height: 55px;
+    width: 55px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ic_large_img {
+    width: 300px;
+    height: auto;
+  }
+
+  .ic_hero_container {
+    padding: 50px 0px 0px 0px;
+  }
+
+  .progressBar {
+    left: -20px;
+    width: 110px;
+    height: 110px;
+  }
+
+  .progressText {
+    font-size: 14px;
+    height: 50px;
+    width: 50px;
+  }
+}
