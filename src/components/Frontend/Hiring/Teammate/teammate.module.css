@@ -78,9 +78,17 @@
   .teammateContent {
     width: 88%;
   }
+
+  .teammateContainer {
+    gap: 30px;
+  }
 }
 
 @media (max-width: 991px) {
+  .teammateContainer {
+    gap: 25px;
+  }
+
   .teammateContent {
     width: 100%;
   }
