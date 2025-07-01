@@ -29,6 +29,14 @@
   gap: 0.5rem;
   font-size: 1.5rem;
   font-weight: bold;
+  width: 217px;
+  height: auto;
+  padding-top: 10px;
+}
+
+.logo img {
+  width: 100%;
+  height: auto;
 }
 
 .logoIcon {
@@ -55,17 +63,18 @@
 .socialIcon {
   width: 2.5rem;
   height: 2.5rem;
-  background-color: #1a1a1a;
+  background-color: var(--white);
   border-radius: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
-  transition: all 0.3s ease;
+  color: #1a1a1a;
+  transition: all 0.5s ease;
 }
 
 .socialIcon:hover {
   background-color: #2a2a2a;
+  color: var(--white);
   transform: translateY(-2px);
 }
 
@@ -140,7 +149,7 @@
 }
 
 .emailInput:focus {
-  border-bottom-color: #6366f1;
+  border-bottom-color: #8c8b8b;
 }
 
 .submitButton {
@@ -172,7 +181,27 @@
 }
 
 /* Responsive Design */
+
+@media (max-width: 1399px) {
+  .logo img {
+    width: 90%;
+    height: auto;
+  }
+}
+
+@media (max-width: 1199px) {
+  .logo img {
+    width: 80%;
+    height: auto;
+  }
+}
+
 @media (max-width: 1024px) {
+  .logo img {
+    width: 70%;
+    height: auto;
+  }
+
   .content {
     grid-template-columns: 1fr 1.5fr;
     gap: 2rem;
@@ -191,6 +220,11 @@
 }
 
 @media (max-width: 768px) {
+  .logo img {
+    width: 65%;
+    height: auto;
+  }
+
   .footer {
     padding: 3rem 0 2rem;
   }
@@ -221,6 +255,11 @@
 }
 
 @media (max-width: 480px) {
+  /* .logo img {
+    width: 60%;
+    height: auto;
+  } */
+
   .footer {
     padding: 2rem 0 1.5rem;
   }
