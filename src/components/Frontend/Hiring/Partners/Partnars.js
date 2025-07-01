@@ -77,19 +77,6 @@ const Partnars = () => {
   const row3 = partners.filter((p) => p.row === 3);
   const row4 = partners.filter((p) => p.row === 4);
 
-  //   const renderRow = (rowData) =>
-  //     rowData.map((partner) => (
-  //       <div key={partner.id} className={styles.logoCard}>
-  //         <Image
-  //           src={partner.logo}
-  //           alt={partner.name}
-  //           width={120}
-  //           height={60}
-  //           className={styles.logoImage}
-  //         />
-  //       </div>
-  //     ));
-
   const renderRow = (rowData) =>
     rowData.map((partner, index) => (
       <div
