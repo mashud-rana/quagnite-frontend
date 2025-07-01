@@ -1,3 +1,7 @@
+.ic_wapper {
+  position: relative;
+}
+
 .spiderWeb {
   position: absolute;
   top: 0;
