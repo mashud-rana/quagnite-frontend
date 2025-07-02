@@ -11,68 +11,17 @@ const Train = () => {
     <section className="ic_section_space">
       <div className="container">
         <div className={styles.ic_wapper}>
-          <div className={styles.spiderWeb}>
-            {/* <Image
-              src={img1}
-              alt="Analytics Chart"
-              className={styles.chartImg}
-            /> */}
-            {/* <svg
-            className={styles.webSvg}
-            viewBox="0 0 1400 600"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g stroke="#333" strokeWidth="1" opacity="0.3">
-              <line x1="0" y1="100" x2="1400" y2="100" />
-              <line x1="0" y1="200" x2="1400" y2="200" />
-              <line x1="0" y1="300" x2="1400" y2="300" />
-              <line x1="0" y1="400" x2="1400" y2="400" />
-              <line x1="0" y1="500" x2="1400" y2="500" />
-
-              <line x1="200" y1="0" x2="200" y2="600" />
-              <line x1="400" y1="0" x2="400" y2="600" />
-              <line x1="600" y1="0" x2="600" y2="600" />
-              <line x1="800" y1="0" x2="800" y2="600" />
-              <line x1="1000" y1="0" x2="1000" y2="600" />
-              <line x1="1200" y1="0" x2="1200" y2="600" />
-
-              <line x1="200" y1="100" x2="400" y2="200" />
-              <line x1="400" y1="100" x2="600" y2="300" />
-              <line x1="600" y1="200" x2="800" y2="400" />
-              <line x1="800" y1="100" x2="1000" y2="300" />
-              <line x1="1000" y1="200" x2="1200" y2="400" />
-
-              <line x1="200" y1="300" x2="400" y2="400" />
-              <line x1="400" y1="300" x2="600" y2="500" />
-              <line x1="600" y1="400" x2="800" y2="500" />
-              <line x1="800" y1="300" x2="1000" y2="500" />
-            </g>
-
-            <g fill="#555" opacity="0.6">
-              <circle cx="200" cy="100" r="3" />
-              <circle cx="400" cy="200" r="3" />
-              <circle cx="600" cy="300" r="3" />
-              <circle cx="800" cy="400" r="3" />
-              <circle cx="1000" cy="300" r="3" />
-              <circle cx="1200" cy="400" r="3" />
-              <circle cx="400" cy="400" r="3" />
-              <circle cx="600" cy="500" r="3" />
-              <circle cx="800" cy="500" r="3" />
-              <circle cx="1000" cy="500" r="3" />
-            </g>
-          </svg> */}
-          </div>
-
           <div className={styles.content}>
             {/* Left Side - Layered Images */}
             <div
               className={styles.leftSection}
               style={{
                 backgroundImage: `url(${bg.src})`,
-                backgroundSize: "cover",
+                backgroundSize: "contain",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
+                width: "100%",
+                overflow: "hidden",
               }}
             >
               {/* Chart Image */}

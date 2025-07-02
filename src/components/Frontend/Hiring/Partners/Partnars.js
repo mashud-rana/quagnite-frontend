@@ -79,12 +79,7 @@ const Partnars = () => {
 
   const renderRow = (rowData) =>
     rowData.map((partner, index) => (
-      <div
-        key={partner.id}
-        style={{
-          width: "100%",
-        }}
-      >
+      <div className="w_100" key={partner.id}>
         <CardAnimation index={index}>
           <div className={styles.logoCard}>
             <Image

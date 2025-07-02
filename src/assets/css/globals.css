@@ -138,6 +138,10 @@
   padding: 56px;
 }
 
+.w_100 {
+  width: 100%;
+}
+
 p,
 small,
 label,

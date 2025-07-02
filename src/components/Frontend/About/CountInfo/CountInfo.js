@@ -34,21 +34,23 @@ const stats = [
 const CountInfo = () => {
   return (
     <section className="ic_section_space">
-      <div className="container ic_bg radious_16">
-        <div className={styles.grid}>
-          {stats.map((stat) => (
-            <div key={stat.id}>
-              <h1>
-                <CountUp
-                  className={styles.title}
-                  end={stat.value}
-                  suffix={stat.suffix}
-                  duration={5}
-                />
-              </h1>
-              <p className="mt_30">{stat.subtitle}</p>
-            </div>
-          ))}
+      <div className="container ">
+        <div className="ic_bg radious_16">
+          <div className={styles.grid}>
+            {stats.map((stat) => (
+              <div key={stat.id}>
+                <h1>
+                  <CountUp
+                    className={styles.title}
+                    end={stat.value}
+                    suffix={stat.suffix}
+                    duration={5}
+                  />
+                </h1>
+                <p className="mt_30">{stat.subtitle}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  gap: 110px;
+  gap: 70px;
 }
 
 .leftContent {
@@ -19,7 +19,12 @@
 }
 
 .ic_hero_img {
+  width: 100%;
   padding-top: 85px;
+}
+
+.ic_hero_img img {
+  object-fit: fill;
 }
 
 /* Responsive Design */
@@ -35,7 +40,7 @@
   }
 
   .ic_hero_container {
-    gap: 80px;
+    gap: 60px;
   }
 
   .heroDescription {
@@ -54,7 +59,7 @@
   }
 
   .ic_hero_container {
-    gap: 70px;
+    gap: 50px;
   }
 
   .heroDescription {
