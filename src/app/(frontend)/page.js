@@ -23,7 +23,7 @@ export default function Home() {
 
       <WhyQuagniteSection />
       {/* <TeachersSlider /> */}
-      <TestimonialSlider />
+      {/* <TestimonialSlider /> */}
       {/* <TestimonialSlider /> */}
 
       <Hire />

@@ -192,6 +192,15 @@ h4 {
   font-weight: 300;
 }
 
+h4 span {
+  font-size: 48px;
+  line-height: 60px;
+  letter-spacing: 1px;
+  font-weight: 300;
+  color: #f59645;
+  font-weight: 600;
+}
+
 h5 {
   font-size: 24px;
   line-height: 30px;
@@ -237,6 +246,11 @@ h6 {
   }
 
   h4 {
+    font-size: 44px;
+    line-height: 56px;
+  }
+
+  h4 span {
     font-size: 44px;
     line-height: 56px;
   }
@@ -302,6 +316,11 @@ h6 {
     line-height: 54px;
   }
 
+  h4 span {
+    font-size: 42px;
+    line-height: 54px;
+  }
+
   .ic_section_space_58 {
     padding: 50px 0;
   }
@@ -360,6 +379,11 @@ h6 {
     line-height: 42px;
   }
 
+  h4 span {
+    font-size: 36px;
+    line-height: 42px;
+  }
+
   h6 {
     font-size: 18px;
     /* line-height: 23px; */
@@ -412,6 +436,11 @@ h6 {
   }
 
   h4 {
+    font-size: 30px;
+    line-height: 40px;
+  }
+
+  h4 span {
     font-size: 30px;
     line-height: 40px;
   }
@@ -509,6 +538,11 @@ h6 {
   }
 
   h4 {
+    font-size: 28px;
+    line-height: 38px;
+  }
+
+  h4 span {
     font-size: 28px;
     line-height: 38px;
   }

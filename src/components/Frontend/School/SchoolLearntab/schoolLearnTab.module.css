@@ -3,7 +3,7 @@
 }
 
 .headerSection {
-  margin-bottom: 38px;
+  margin-bottom: 30px;
 }
 
 .ic_subtitle {
@@ -26,7 +26,7 @@
 .tabNavigation {
   display: flex;
   gap: 0;
-  margin-bottom: 44px;
+  margin-bottom: 36px;
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -62,17 +62,10 @@
   color: white;
 }
 
-.tabContent {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  /* align-items: center; */
-}
-
 .contentLeft {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 .contentDescription {
@@ -128,12 +121,8 @@
 /* Responsive Design */
 
 @media (max-width: 1299px) {
-  .tabContent {
-    gap: 30px;
-  }
-
   .contentLeft {
-    gap: 16px;
+    gap: 14px;
   }
 
   .exploreButton {
@@ -144,14 +133,14 @@
   }
 
   .tabButton {
-    padding: 12px 24px;
+    padding: 11px 22px;
     font-size: 14px;
     border-radius: 10px;
     margin-right: 16px;
   }
 
   .tabNavigation {
-    margin-bottom: 36px;
+    margin-bottom: 32px;
   }
 
   .ic_subtitle {
@@ -164,16 +153,15 @@
   }
 
   .headerSection {
-    margin-bottom: 36px;
+    margin-bottom: 28px;
   }
 }
 @media (max-width: 991px) {
-  .tabContent {
-    gap: 20px;
+  .headerSection {
+    margin-bottom: 26px;
   }
-
   .contentLeft {
-    gap: 10px;
+    gap: 12px;
   }
 
   .exploreButton {
@@ -190,19 +178,17 @@
     margin-right: 14px;
   }
 
-  .headerSection {
+  .tabNavigation {
     margin-bottom: 30px;
   }
 }
 
 @media (max-width: 768px) {
-  .tabContent {
-    grid-template-columns: 1fr;
-    gap: 30px;
+  .headerSection {
+    margin-bottom: 24px;
   }
-
   .tabNavigation {
-    margin-bottom: 34px;
+    margin-bottom: 28px;
   }
 
   .tabButton {
@@ -221,18 +207,15 @@
   }
 
   .contentLeft {
-    gap: 8px;
-  }
-
-  .headerSection {
-    margin-bottom: 28px;
+    gap: 10px;
   }
 }
 
 @media (max-width: 480px) {
   .headerSection {
-    margin-bottom: 26px;
+    margin-bottom: 20px;
   }
+
   .tabButton {
     padding: 7px 19px;
     font-size: 11px;
@@ -246,6 +229,6 @@
   }
 
   .tabNavigation {
-    margin-bottom: 30px;
+    margin-bottom: 26px;
   }
 }

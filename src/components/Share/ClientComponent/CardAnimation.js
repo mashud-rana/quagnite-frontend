@@ -1,22 +1,3 @@
-// "use client";
-// import React from "react";
-// import { motion } from "framer-motion";
-
-// const CardAnimation = ({ children, index = 0 }) => {
-//   return (
-//     <motion.div
-//       initial={{ opacity: 0, y: 30 }}
-//       whileInView={{ opacity: 1, y: 0 }}
-//       transition={{ duration: 0.6, delay: index * 0.1 }}
-//       viewport={{ once: true, amount: 0.3 }}
-//     >
-//       {children}
-//     </motion.div>
-//   );
-// };
-
-// export default CardAnimation;
-
 "use client";
 import React from "react";
 import { motion } from "framer-motion";

@@ -1,8 +1,9 @@
 import AboutBanner from "@/components/Frontend/About/Banner/Banner";
-import Learningtab from "@/components/Frontend/Hiring/Learningtab/Learningtab";
 import React from "react";
 import img1 from "@/assets/images/all/about-hero.png";
 import LearningRoadmap from "@/components/Frontend/School/LearningRoadmap/LearningRoadmap";
+import SchoolLearnTab from "@/components/Frontend/School/SchoolLearntab/SchoolLearnTab";
+import Featured from "@/components/Frontend/School/Featured/Featured";
 const page = () => {
   return (
     <div>
@@ -13,8 +14,10 @@ const page = () => {
         }
         img={img1}
       />
-      <Learningtab />
+
+      <SchoolLearnTab />
       <LearningRoadmap />
+      <Featured />
     </div>
   );
 };
