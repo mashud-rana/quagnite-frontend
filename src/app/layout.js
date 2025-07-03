@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../assets/css/globals.css";
 import localFont from "next/font/local";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
+import NextTopLoader from "nextjs-toploader";
 
 const satoshi = localFont({
   src: [
@@ -42,6 +43,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={satoshi.className}>
       <body>
+        <NextTopLoader color="#5C81F7" height={3} />
         <AntdRegistry>{children}</AntdRegistry>
       </body>
     </html>

@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./footer.module.css";
 import img from "@/assets/images/footer-logo.png";
 import Image from "next/image";
+import Link from "next/link";
 
 const footerData = {
   resources: [
@@ -36,9 +37,10 @@ const Footer = () => {
             {/* Brand Section */}
             <div className={styles.brandSection}>
               <div className={styles.logo}>
-                <Image src={img} alt="" height={49} width={217} />
-                {/* <span className={styles.logoIcon}>Q</span>
-                <span className={styles.logoText}>UAGNITE</span> */}
+                {/* <Image src={img} alt="" height={49} width={217} /> */}
+                <Link href="/">
+                  <Image src={img} alt="" height={49} width={217} />
+                </Link>
               </div>
 
               <div className={styles.socialIcons}>

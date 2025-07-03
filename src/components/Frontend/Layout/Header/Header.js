@@ -25,7 +25,10 @@ const Header = () => {
         <div className={styles.ic_header}>
           {/* Logo */}
           <div className={styles.ic_logo}>
-            <Image src={logo} height={49} width={217} alt="logo"></Image>
+            {/* <Image src={logo} height={49} width={217} alt="logo"></Image> */}
+            <Link href="/">
+              <Image src={logo} height={49} width={217} alt="logo"></Image>
+            </Link>
           </div>
 
           {/* Navigation */}
