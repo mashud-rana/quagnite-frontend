@@ -5,6 +5,7 @@ import img3 from "@/assets/images/all/dashboard.png";
 import img4 from "@/assets/images/all/dashboard1.png";
 import img5 from "@/assets/images/all/dashboard2.png";
 import Image from "next/image";
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 const features = [
   {
@@ -41,16 +42,22 @@ export default function WhyQuagniteSection() {
           <div className={styles.ic_title_container}>
             <div>
               <div className={styles.ic_width}>
-                <h6 className="mb_16">WHY QUAGNITE?</h6>
-                <h3 className="mb_20">
-                  Education <span>suitable</span> to you
-                </h3>
+                <CardAnimation index={0} direction="down">
+                  <h6 className="mb_16">WHY QUAGNITE?</h6>
+                </CardAnimation>
+                <CardAnimation index={0} direction="left">
+                  <h3 className="mb_20">
+                    Education <span>suitable</span> to you
+                  </h3>
+                </CardAnimation>
               </div>
-              <p className={styles.ic_description}>
-                Quagnite offers an efficient process from education to
-                employment. Join a pipeline of training and education that opens
-                up opportunities for a better future.
-              </p>
+              <CardAnimation index={0} direction="up">
+                <p className={styles.ic_description}>
+                  Quagnite offers an efficient process from education to
+                  employment. Join a pipeline of training and education that
+                  opens up opportunities for a better future.
+                </p>
+              </CardAnimation>
             </div>
 
             <div className={styles.ic_icon_Cards}>
@@ -72,52 +79,58 @@ export default function WhyQuagniteSection() {
           </div>
 
           {/* Features Timeline */}
-          <div className={styles.featuresContainer}>
-            <div className={styles.timeline}>
-              {features.map((feature, index) => (
-                <div key={feature.id} className={styles.featureItem}>
-                  <div className={styles.dotContainer}>
-                    <div
-                      className={`${styles.dot}`}
-                      style={{ backgroundColor: feature.dotColor }}
-                    />
-                    {index < features.length - 1 && (
-                      <div className={styles.line} />
-                    )}
+          <CardAnimation index={0} direction="up">
+            <div className={styles.featuresContainer}>
+              <div className={styles.timeline}>
+                {features.map((feature, index) => (
+                  <div key={feature.id} className={styles.featureItem}>
+                    <div className={styles.dotContainer}>
+                      <div
+                        className={`${styles.dot}`}
+                        style={{ backgroundColor: feature.dotColor }}
+                      />
+                      {index < features.length - 1 && (
+                        <div className={styles.line} />
+                      )}
+                    </div>
+                    <div className={styles.featureContent}>
+                      <h5 className={styles.ic_featureTitle}>
+                        {feature.title}
+                      </h5>
+                      <p className={styles.ic_text}>{feature.description}</p>
+                    </div>
                   </div>
-                  <div className={styles.featureContent}>
-                    <h5 className={styles.ic_featureTitle}>{feature.title}</h5>
-                    <p className={styles.ic_text}>{feature.description}</p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          </CardAnimation>
         </div>
 
-        <div className={styles.ic_img_container}>
-          <Image
-            className={styles.ic_small_img1}
-            src={img3}
-            height={520}
-            width={850}
-            alt=""
-          />
-          <Image
-            className={styles.ic_small_img2}
-            src={img5}
-            height={130}
-            width={370}
-            alt=""
-          />
-          <Image
-            className={styles.ic_small_img3}
-            src={img4}
-            height={130}
-            width={370}
-            alt=""
-          />
-        </div>
+        <CardAnimation index={0} direction="down">
+          <div className={styles.ic_img_container}>
+            <Image
+              className={styles.ic_small_img1}
+              src={img3}
+              height={520}
+              width={850}
+              alt=""
+            />
+            <Image
+              className={styles.ic_small_img2}
+              src={img5}
+              height={130}
+              width={370}
+              alt=""
+            />
+            <Image
+              className={styles.ic_small_img3}
+              src={img4}
+              height={130}
+              width={370}
+              alt=""
+            />
+          </div>
+        </CardAnimation>
       </div>
     </section>
   );

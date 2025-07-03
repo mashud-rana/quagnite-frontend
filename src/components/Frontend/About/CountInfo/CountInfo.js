@@ -2,6 +2,7 @@
 import React from "react";
 import styles from "./countinfo.module.css";
 import CountUp from "react-countup";
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 const stats = [
   {
@@ -35,23 +36,28 @@ const CountInfo = () => {
   return (
     <section className="ic_section_space">
       <div className="container ">
-        <div className="ic_bg radious_16">
-          <div className={styles.grid}>
-            {stats.map((stat) => (
-              <div key={stat.id}>
-                <h1>
-                  <CountUp
-                    className={styles.title}
-                    end={stat.value}
-                    suffix={stat.suffix}
-                    duration={5}
-                  />
-                </h1>
-                <p className="mt_30">{stat.subtitle}</p>
-              </div>
-            ))}
+        <CardAnimation index={0} direction="up">
+          <div className="ic_bg radious_16">
+            <div className={styles.grid}>
+              {stats.map((stat) => (
+                <div key={stat.id}>
+                  <CardAnimation index={0} direction="up">
+                    <h1>
+                      <CountUp
+                        className={styles.title}
+                        end={stat.value}
+                        suffix={stat.suffix}
+                        duration={5}
+                      />
+                    </h1>
+
+                    <p className="mt_30">{stat.subtitle}</p>
+                  </CardAnimation>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        </CardAnimation>
       </div>
     </section>
   );

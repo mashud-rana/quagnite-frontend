@@ -38,12 +38,17 @@ const collapseData = [
 ];
 
 const SkillCollapse = () => {
-  const [activeKeys, setActiveKeys] = useState(["1"]);
+  // const [activeKeys, setActiveKeys] = useState(["1"]);
+  const [activeKey, setActiveKey] = useState("1");
+
+  // const togglePanel = (key) => {
+  //   setActiveKeys((prev) =>
+  //     prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]
+  //   );
+  // };
 
   const togglePanel = (key) => {
-    setActiveKeys((prev) =>
-      prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]
-    );
+    setActiveKey((prev) => (prev === key ? null : key));
   };
 
   return (
@@ -64,7 +69,8 @@ const SkillCollapse = () => {
 
           <div className={styles.collapseWrapper}>
             {collapseData.map((item, index) => {
-              const isActive = activeKeys.includes(item.key);
+              // const isActive = activeKeys.includes(item.key);
+              const isActive = activeKey === item.key;
               return (
                 <CardAnimation key={item.key} index={index}>
                   <div className={styles.collapseItem}>

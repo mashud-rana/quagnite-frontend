@@ -4,6 +4,7 @@ import img1 from "@/assets/images/industries/difference.png";
 import icon1 from "@/assets/images/industries/dif-icn.png";
 import icon2 from "@/assets/images/about/img1.png";
 import Image from "next/image";
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 const tabData = [
   {
@@ -75,7 +76,7 @@ const tabData = [
 
 const items = tabData.map((tab) => ({
   key: tab.key,
-  label: tab.label,
+  label: <p className={styles.ic_font}>{tab.label}</p>,
   children: (
     <div className={styles.ic_tab_content}>
       <div className={styles.ic_tab_grid}>
@@ -103,8 +104,12 @@ const Difference = () => {
     <div className="ic_white ic_section_space_top">
       <div className="container">
         <div>
-          <h6>WHY US</h6>
-          <h3 className={styles.ic_title}>The Quagnite Difference</h3>
+          <CardAnimation index={0} direction="left">
+            <h6>WHY US</h6>
+          </CardAnimation>
+          <CardAnimation index={0} direction="up">
+            <h3 className={styles.ic_title}>The Quagnite Difference</h3>
+          </CardAnimation>
         </div>
 
         <div>

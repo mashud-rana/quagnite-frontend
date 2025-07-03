@@ -4,6 +4,7 @@ import styles from "./school.module.css";
 import icon1 from "@/assets/images/school/icon1.png";
 import hover1 from "@/assets/images/school/hover1.png";
 import Image from "next/image";
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 const School = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -60,37 +61,41 @@ const School = () => {
     <section className="ic_bg_black">
       <div className="ic_section_space_58 radious_60 ic_bg">
         <div className="container">
-          <h6 className={styles.ic_title}>SCHOOLS</h6>
-          <div className={styles.grid}>
-            {schoolsData.map((school) => (
-              <div
-                key={school.id}
-                className={`${styles.card} ${
-                  hoveredCard === school.id ? styles.hoveredCard : ""
-                }`}
-                onMouseEnter={() => setHoveredCard(school.id)}
-                onMouseLeave={() => setHoveredCard(null)}
-                style={
-                  hoveredCard === school.id
-                    ? { "--hoverImage": `url(${school.hover.src})` }
-                    : {}
-                }
-              >
-                <div className={styles.iconContainer}>
-                  <Image
-                    src={school.icon}
-                    className={styles.icon}
-                    height={34}
-                    width={34}
-                    alt="icon"
-                  />
+          <CardAnimation index={0} direction="left">
+            <h6 className={styles.ic_title}>SCHOOLS</h6>
+          </CardAnimation>
+          <CardAnimation index={0} direction="up">
+            <div className={styles.grid}>
+              {schoolsData.map((school) => (
+                <div
+                  key={school.id}
+                  className={`${styles.card} ${
+                    hoveredCard === school.id ? styles.hoveredCard : ""
+                  }`}
+                  onMouseEnter={() => setHoveredCard(school.id)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                  style={
+                    hoveredCard === school.id
+                      ? { "--hoverImage": `url(${school.hover.src})` }
+                      : {}
+                  }
+                >
+                  <div className={styles.iconContainer}>
+                    <Image
+                      src={school.icon}
+                      className={styles.icon}
+                      height={34}
+                      width={34}
+                      alt="icon"
+                    />
+                  </div>
+                  <h5 className={styles.ic_card_title}>{school.title}</h5>
+                  <p className={styles.ic_description}>{school.description}</p>
+                  <button className={styles.ic_button}>EXPLORE</button>
                 </div>
-                <h5 className={styles.ic_card_title}>{school.title}</h5>
-                <p className={styles.ic_description}>{school.description}</p>
-                <button className={styles.ic_button}>EXPLORE</button>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </CardAnimation>
         </div>
       </div>
     </section>

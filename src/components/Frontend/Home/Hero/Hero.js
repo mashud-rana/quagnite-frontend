@@ -5,6 +5,7 @@ import img2 from "@/assets/images/all/hero2.png";
 import img3 from "@/assets/images/all/hero3.png";
 import bg from "@/assets/images/all/bg.png";
 import Image from "next/image";
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 const Hero = () => {
   return (
@@ -21,36 +22,43 @@ const Hero = () => {
         <div className={styles.ic_hero_container}>
           {/* Left Content */}
           <div className={styles.leftContent}>
-            <h2 className="mb_20">Supercharge your passion</h2>
-            <p className={styles.heroDescription}>
-              Quagnite offers training and education tailored to meet the needs
-              of the individual, for businesses and individuals alike. From
-              self-paced learning to expert instruction, a broad range of
-              subjects gives you the skills you need to succeed at the leading
-              edge of technology and industry.
-            </p>
-            <button className={styles.exploreButton}>EXPLORE</button>
+            <CardAnimation index={0} direction="left">
+              <h2 className="mb_20">Supercharge your passion</h2>
+            </CardAnimation>
+            <CardAnimation index={0} direction="up">
+              <p className={styles.heroDescription}>
+                Quagnite offers training and education tailored to meet the
+                needs of the individual, for businesses and individuals alike.
+                From self-paced learning to expert instruction, a broad range of
+                subjects gives you the skills you need to succeed at the leading
+                edge of technology and industry.
+              </p>
+
+              <button className={styles.exploreButton}>EXPLORE</button>
+            </CardAnimation>
           </div>
 
           {/* Right Content - 3 Images Layout */}
-          <div className={styles.rightContent}>
-            <div className={styles.imagesContainer}>
-              {/* Main Large Image */}
-              <div className={styles.mainImage}>
-                <Image src={img1} height={470} width={420} alt="" />
-              </div>
+          <CardAnimation index={0} direction="right">
+            <div className={styles.rightContent}>
+              <div className={styles.imagesContainer}>
+                {/* Main Large Image */}
+                <div className={styles.mainImage}>
+                  <Image src={img1} height={470} width={420} alt="" />
+                </div>
 
-              {/* Positioned Image 1 - Top Right */}
-              <div className={styles.positionedImage1}>
-                <Image src={img3} height={100} width={300} alt="" />
-              </div>
+                {/* Positioned Image 1 - Top Right */}
+                <div className={styles.positionedImage1}>
+                  <Image src={img3} height={100} width={300} alt="" />
+                </div>
 
-              {/* Positioned Image 2 - Bottom Left */}
-              <div className={styles.positionedImage2}>
-                <Image src={img2} height={200} width={250} alt="" />
+                {/* Positioned Image 2 - Bottom Left */}
+                <div className={styles.positionedImage2}>
+                  <Image src={img2} height={200} width={250} alt="" />
+                </div>
               </div>
             </div>
-          </div>
+          </CardAnimation>
         </div>
 
         {/* Background Decorative Elements */}

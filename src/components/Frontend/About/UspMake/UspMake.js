@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./uspmake.module.css";
 import img1 from "@/assets/images/about/usp-line.png";
 import Image from "next/image";
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 const valueData = [
   {
@@ -37,16 +38,20 @@ const UspMake = () => {
       <div className="container ic_white">
         <div className={styles.grid}>
           <div className={styles.ic_text_conteiner}>
-            <h6 className="mb_20">OUR USP</h6>
-            <h3>
-              We<span> make</span> difference
-            </h3>
+            <CardAnimation index={0} direction="up">
+              <h6 className="mb_20">OUR USP</h6>
+              <h3>
+                We<span> make</span> difference
+              </h3>
+            </CardAnimation>
           </div>
-          {valueData.map((school) => (
-            <div className={styles.ic_card} key={school.id}>
-              <h5 className={styles.ic_card_title}>{school.title}</h5>
-              <p className={styles.ic_description}>{school.description}</p>
-            </div>
+          {valueData.map((school, index) => (
+            <CardAnimation index={index} key={school.id}>
+              <div className={styles.ic_card}>
+                <h5 className={styles.ic_card_title}>{school.title}</h5>
+                <p className={styles.ic_description}>{school.description}</p>
+              </div>
+            </CardAnimation>
           ))}
         </div>
       </div>

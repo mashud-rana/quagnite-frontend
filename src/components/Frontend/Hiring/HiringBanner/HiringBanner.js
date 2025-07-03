@@ -59,85 +59,58 @@ const HiringBanner = () => {
           </div>
 
           {/* Right Content - Image with Circular Progress and Badge */}
-          <div className={styles.ic_hero_img}>
-            <div className={styles.imageWrapper}>
-              {/* Circular Progress Bar (Top-left) */}
-              {/* <div className={styles.progressBar}>
-                <svg style={{ height: 0 }}>
-                  <defs>
-                    <linearGradient
-                      id="orangeGradient"
-                      x1="0%"
-                      y1="0%"
-                      x2="100%"
-                      y2="0%"
-                    >
-                      <stop offset="0%" stopColor="#FFB99B" />
-                      <stop offset="30%" stopColor="#F59948" />
-                      <stop offset="100%" stopColor="#f7A757" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-                <CircularProgressbar
-                  value={progress}
-                  text={`${progress}%`}
-                  styles={buildStyles({
-                    textSize: "16px",
-                    pathColor: "url(#orangeGradient)", // ← Use the gradient
-                    textColor: "#ffffff",
-                    trailColor: "#333",
-                  })}
+          <CardAnimation index={0} direction="right">
+            <div className={styles.ic_hero_img}>
+              <div className={styles.imageWrapper}>
+                <div className={styles.progressBar}>
+                  <svg style={{ height: 0 }}>
+                    <defs>
+                      <linearGradient
+                        id="orangeGradient"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="0%"
+                      >
+                        <stop offset="0%" stopColor="#FFB99B" />
+                        <stop offset="30%" stopColor="#F59948" />
+                        <stop offset="100%" stopColor="#f7A757" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+
+                  <div className={styles.progressWrapper}>
+                    <CircularProgressbar
+                      value={progress}
+                      text=""
+                      strokeWidth={4}
+                      styles={buildStyles({
+                        pathColor: "url(#orangeGradient)",
+                        trailColor: "#574F72",
+                      })}
+                    />
+
+                    {/* Custom Text with background */}
+                    <div className={styles.progressText}>{progress}%</div>
+                  </div>
+                </div>
+
+                {/* Main Image */}
+                <Image
+                  className={styles.ic_large_img}
+                  src={img1}
+                  height={640}
+                  width={720}
+                  alt="Main Image"
                 />
-              </div> */}
 
-              <div className={styles.progressBar}>
-                <svg style={{ height: 0 }}>
-                  <defs>
-                    <linearGradient
-                      id="orangeGradient"
-                      x1="0%"
-                      y1="0%"
-                      x2="100%"
-                      y2="0%"
-                    >
-                      <stop offset="0%" stopColor="#FFB99B" />
-                      <stop offset="30%" stopColor="#F59948" />
-                      <stop offset="100%" stopColor="#f7A757" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-
-                <div className={styles.progressWrapper}>
-                  <CircularProgressbar
-                    value={progress}
-                    text=""
-                    strokeWidth={4}
-                    styles={buildStyles({
-                      pathColor: "url(#orangeGradient)",
-                      trailColor: "#574F72",
-                    })}
-                  />
-
-                  {/* Custom Text with background */}
-                  <div className={styles.progressText}>{progress}%</div>
+                {/* Bottom-right Badge */}
+                <div className={styles.badge}>
+                  <Image src={badgeImg} alt="badge" width={60} height={60} />
                 </div>
               </div>
-
-              {/* Main Image */}
-              <Image
-                className={styles.ic_large_img}
-                src={img1}
-                height={640}
-                width={720}
-                alt="Main Image"
-              />
-
-              {/* Bottom-right Badge */}
-              <div className={styles.badge}>
-                <Image src={badgeImg} alt="badge" width={60} height={60} />
-              </div>
             </div>
-          </div>
+          </CardAnimation>
         </div>
       </div>
     </section>

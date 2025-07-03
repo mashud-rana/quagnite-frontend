@@ -39,28 +39,6 @@ const Header = () => {
               </li>
 
               {/* <li className={styles.dropdown}>
-              <button className={styles.dropdownBtn} onClick={toggleAssist}>
-                Assist
-                <FaChevronDown
-                  className={`${styles.arrow} ${
-                    assistOpen ? styles.rotate : ""
-                  }`}
-                />
-              </button>
-              {assistOpen && (
-                <ul className={styles.submenu}>
-                  <li>
-                    <Link href="#">Submenu 1</Link>
-                  </li>
-                  <li>
-                    <Link href="#">Submenu 2</Link>
-                  </li>
-                </ul>
-              )}
-            </li> */}
-
-              <li className={styles.dropdown}>
-                {/* Remove onClick */}
                 <button className={styles.dropdownBtn}>
                   Assist
                   <FaChevronDown className={styles.arrow} />
@@ -85,22 +63,49 @@ const Header = () => {
                     <Link href="#">Submenu 2</Link>
                   </li>
                 </ul>
+              </li> */}
+
+              <li className={styles.dropdown}>
+                <button
+                  className={styles.dropdownBtn}
+                  onClick={() => setAssistOpen(!assistOpen)}
+                >
+                  Assist
+                  <FaChevronDown
+                    className={`${styles.arrow} ${
+                      assistOpen ? styles.rotate : ""
+                    }`}
+                  />
+                </button>
+                <ul
+                  className={`${styles.submenu} ${
+                    assistOpen && mobileMenuOpen ? styles.submenuOpen : ""
+                  }`}
+                >
+                  <li>
+                    <Link href="#">Submenu 1</Link>
+                  </li>
+                  <li>
+                    <Link href="#">Submenu 2</Link>
+                  </li>
+                  <li>
+                    <Link href="#">Submenu 3</Link>
+                  </li>
+                  <li>
+                    <Link href="#">Submenu 4</Link>
+                  </li>
+                </ul>
               </li>
+
               <li>
                 <a href="#">Index</a>
               </li>
-
-              {/* <li className={styles.ic_organisation_show}>
-              <span className={styles.type}>INDIVIDUAL</span>
-              <span className={styles.pipe}>|</span>
-              <span className={styles.type}>ORGANISATION</span>
-            </li> */}
 
               <li className={styles.ic_organisation_show}>
                 <Link href="#" className={`${styles.type} mb_16`}>
                   INDIVIDUAL
                 </Link>
-                {/* <span className={styles.pipe}>|</span> */}
+
                 <Link href="#" className={styles.type}>
                   ORGANISATION
                 </Link>
