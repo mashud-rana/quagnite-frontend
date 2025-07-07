@@ -1,0 +1,146 @@
+.ic_bg_line_wrapper {
+  position: relative;
+}
+
+.ic_line_img {
+  position: absolute;
+  top: 5%;
+  right: 0;
+  height: auto;
+}
+
+.ic_team_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-items: center;
+  margin-top: 80px;
+}
+
+.ic_title_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 36px;
+  color: var(--white);
+}
+
+.ic_see_all_button {
+  background: #272727;
+  color: var(--white);
+  padding: 8px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  text-transform: uppercase;
+}
+
+.ic_see_all_button:hover {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+.gradientBlue {
+  background: radial-gradient(
+    circle at center,
+    #4977e3 0%,
+    #31519b 50%,
+    #202126 100%
+  );
+}
+
+.gradientOrange {
+  background: radial-gradient(
+    circle at center,
+    #d49240 0%,
+    #8c602b 50%,
+    #2e2722 100%
+  );
+}
+
+.gradientPurple {
+  background: radial-gradient(
+    circle at center,
+    #8b5cf6 0%,
+    #581c87 50%,
+    #242129 100%
+  );
+}
+
+@media (max-width: 1650px) {
+  .ic_line_img {
+    position: absolute;
+    top: 12%;
+    right: 0;
+    height: auto;
+    width: 32%;
+  }
+}
+
+@media (max-width: 1399px) {
+  .ic_team_grid {
+    margin-top: 70px;
+  }
+
+  .ic_line_img {
+    position: absolute;
+    top: 12%;
+    right: 0;
+    height: auto;
+    width: 30%;
+  }
+}
+
+@media (max-width: 1199px) {
+  .ic_team_grid {
+    margin-top: 60px;
+  }
+
+  .ic_title_wrapper {
+    margin-bottom: 32px;
+  }
+
+  .ic_line_img {
+    display: none;
+  }
+}
+
+@media (max-width: 991px) {
+  .ic_team_grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px 20px;
+    margin-top: 50px;
+  }
+
+  .ic_title_wrapper {
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ic_title_wrapper {
+    margin-bottom: 26px;
+  }
+
+  .ic_see_all_button {
+    font-size: 14px;
+    padding: 6px 16px;
+    align-self: flex-end;
+  }
+}
+
+@media (max-width: 575px) {
+  .ic_team_grid {
+    grid-template-columns: 1fr;
+    gap: 80px;
+    margin-top: 40px;
+  }
+
+  .ic_see_all_button {
+    font-size: 13px;
+    padding: 5px 14px;
+  }
+}

@@ -1,0 +1,152 @@
+.ic_title {
+  margin-bottom: 36px;
+  color: var(--white);
+}
+
+.ic_sub_title {
+  color: var(--white);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: transform 0.3s ease;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(63.9px);
+  border-radius: 16px;
+  padding: 23px;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  color: var(--white);
+  /* height: 100%; */
+}
+
+.card:hover {
+  background: var(--gray);
+  backdrop-filter: blur(63.9px);
+  color: var(--black);
+}
+
+.card:hover .ic_button {
+  background-color: var(--primary-color);
+}
+
+.iconContainer {
+  width: 58px;
+  height: 58px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.ic_card_title {
+  font-weight: 500;
+  margin: 18px 0px 16px 0;
+}
+
+.ic_description {
+  font-weight: 300;
+  margin-bottom: 24px;
+}
+
+.ic_des_btn_wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ic_button {
+  border: none;
+  padding: 13px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--white);
+}
+
+.ic_button:hover {
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 1199px) {
+  .ic_title {
+    margin-bottom: 30px;
+  }
+
+  .ic_description {
+    margin-bottom: 22px;
+  }
+
+  .ic_button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 991px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .ic_title {
+    margin-bottom: 26px;
+  }
+
+  .ic_card_title {
+    margin: 18px 0px 10px 0px;
+  }
+
+  .ic_description {
+    margin-bottom: 20px;
+  }
+
+  .ic_button {
+    padding: 8px 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .ic_title {
+    margin-bottom: 24px;
+  }
+
+  .ic_card_title {
+    margin: 16px 0px 8px 0px;
+  }
+
+  .ic_description {
+    margin-bottom: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ic_button {
+    padding: 6px 16px;
+    font-size: 13px;
+  }
+}
