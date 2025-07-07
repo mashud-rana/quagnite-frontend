@@ -39,7 +39,11 @@ const Featured = () => {
     <section className="ic_bg_black">
       <div className="ic_section_space_58 radious_60 ic_bg">
         <div className="container">
-          <h6 className={styles.ic_title}>FEATURED COURSE</h6>
+          {/* <h6 className={styles.ic_title}>FEATURED COURSE</h6> */}
+          <div className={styles.ic_title_wrapper}>
+            <h6 className={styles.ic_title}>FEATURED COURSE</h6>
+            <button className={styles.ic_see_all_button}>See All</button>
+          </div>
           <div className={styles.grid}>
             {featuresData.map((school) => (
               <div
@@ -59,29 +63,33 @@ const Featured = () => {
                   <Image
                     src={school.icon}
                     className={styles.icon}
-                    height={34}
-                    width={34}
+                    height={55}
+                    width={55}
                     alt="icon"
                   />
                 </div>
                 <h5 className={styles.ic_card_title}>{school?.title}</h5>
 
-                <div className={styles.cardContent}>
-                  <ul className={styles.ic_description}>
-                    {school?.description?.map((school, index) => (
-                      <li key={index}>
-                        <div className={styles.ic_flex}>
-                          <IoCheckmarkCircleOutline
-                            className={styles.ic_icn}
-                            size={20}
-                          />
-                          {school}
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
+                <div className={styles.ic_des_btn_wrapper}>
+                  <div className={styles.cardContent}>
+                    <ul className={styles.ic_description}>
+                      {school?.description?.map((school, index) => (
+                        <li key={index}>
+                          <div className={styles.ic_flex}>
+                            <IoCheckmarkCircleOutline
+                              className={styles.ic_icn}
+                              size={20}
+                            />
+                            {school}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className={styles.ic_btn_position}>
+                    <button className={styles.ic_button}>EXPLORE</button>
+                  </div>
                 </div>
-                <button className={styles.ic_button}>EXPLORE</button>
               </div>
             ))}
           </div>

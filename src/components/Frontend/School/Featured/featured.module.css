@@ -1,11 +1,35 @@
-.ic_title {
+.ic_title_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 36px;
 }
+
+.ic_see_all_button {
+  background: #cdcdcd;
+  padding: 8px 20px;
+  font-size: 15px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.ic_see_all_button:hover {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+/* .ic_title {
+  margin-bottom: 36px;
+} */
 
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+  align-items: stretch;
 }
 
 .card {
@@ -13,13 +37,26 @@
   overflow: hidden;
   z-index: 1;
   transition: transform 0.3s ease;
+  /* background: rgba(69, 45, 131, 0.1); */
   background: rgba(69, 45, 131, 0.1);
+  backdrop-filter: blur(63.9px);
   border-radius: 16px;
   padding: 23px;
   transition: all 0.4s ease;
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  /* height: 100%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ic_des_btn_wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /* Image blur layer */
@@ -52,20 +89,10 @@
   background: var(--primary-color);
 }
 
-.iconContainer {
-  width: 58px;
-  height: 58px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-}
-
 .ic_card_title {
   font-size: 32px;
   font-weight: 600;
+  line-height: 30px;
   margin: 18px 0px 16px 0;
 }
 
@@ -95,23 +122,24 @@
   border: none;
   padding: 13px 24px;
   border-radius: 12px;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 15px;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: rgba(0, 0, 0, 0.15);
+  background: #cdcdcd;
 }
 
 .ic_button:hover {
-  background: #555;
+  background-color: var(--primary-color);
+  color: var(--white);
   transform: translateY(-1px);
 }
 
 /* Responsive Design */
 @media (max-width: 1199px) {
-  .ic_title {
+  /* .ic_title {
     margin-bottom: 30px;
-  }
+  } */
 
   .ic_description {
     margin-bottom: 22px;
@@ -122,6 +150,14 @@
     border-radius: 10px;
     font-size: 14px;
   }
+
+  .ic_title_wrapper {
+    margin-bottom: 32px;
+  }
+
+  .ic_card_title {
+    font-size: 28px;
+  }
 }
 
 @media (max-width: 991px) {
@@ -130,12 +166,13 @@
     gap: 18px;
   }
 
-  .ic_title {
+  /* .ic_title {
     margin-bottom: 26px;
-  }
+  } */
 
   .ic_card_title {
-    margin: 18px 0px 10px 0px;
+    font-size: 26px;
+    margin: 19px 0px 12px 0px;
   }
 
   .ic_description {
@@ -145,6 +182,10 @@
   .ic_button {
     padding: 8px 18px;
   }
+
+  .ic_title_wrapper {
+    margin-bottom: 30px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -153,16 +194,27 @@
     gap: 14px;
   }
 
-  .ic_title {
+  /* .ic_title {
     margin-bottom: 24px;
-  }
+  } */
 
   .ic_card_title {
-    margin: 16px 0px 8px 0px;
+    font-size: 24px;
+    margin: 16px 0px 10px 0px;
   }
 
   .ic_description {
     margin-bottom: 18px;
+  }
+
+  .ic_title_wrapper {
+    margin-bottom: 26px;
+  }
+
+  .ic_see_all_button {
+    font-size: 14px;
+    padding: 6px 16px;
+    align-self: flex-end;
   }
 }
 
@@ -170,5 +222,14 @@
   .ic_button {
     padding: 6px 16px;
     font-size: 13px;
+  }
+
+  .ic_see_all_button {
+    font-size: 13px;
+    padding: 5px 14px;
+  }
+
+  .ic_card_title {
+    font-size: 22px;
   }
 }
