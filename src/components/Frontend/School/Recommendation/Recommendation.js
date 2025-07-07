@@ -17,7 +17,7 @@ const schoolsData = [
     icon: icon1,
     title: "School of Applied Data Science",
     description:
-      "Learn how to change the world with data. AI App Dev, Machine Learning Ops, Python... to change the world with data. AI App Dev",
+      "Learn how to change the world with data. AI App Dev, Machine Learning Ops, Python...",
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ const schoolsData = [
 
 const Recommendation = () => {
   return (
-    <div>
+    <section className="ic_section_space_bottom">
       <div className="container">
         <CardAnimation index={0} direction="left">
           <h6 className={`${styles.ic_sub_title} mb_16`}>RECOMMENDATIONS</h6>
@@ -71,7 +71,7 @@ const Recommendation = () => {
           </div>
         </CardAnimation>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -7,6 +7,7 @@ import Featured from "@/components/Frontend/School/Featured/Featured";
 import Coaches from "@/components/Frontend/School/Coaches/Coaches";
 import Bootcamp from "@/components/Frontend/School/Bootcamp/Bootcamp";
 import Recommendation from "@/components/Frontend/School/Recommendation/Recommendation";
+import Exam from "@/components/Frontend/School/Exam/Exam";
 const page = () => {
   return (
     <div>
@@ -22,6 +23,7 @@ const page = () => {
       <LearningRoadmap />
       <Featured />
       <Coaches />
+      <Exam />
       <Bootcamp />
       <Recommendation />
     </div>
