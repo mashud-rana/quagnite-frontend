@@ -12,16 +12,7 @@ import SchoolBanner from "@/components/Frontend/School/SchoolBanner/SchoolBanner
 const page = () => {
   return (
     <div>
-      {/* <AboutBanner
-        title={"Fostering growth and connecting people to opportunity"}
-        subtitle={
-          "Quagnite offers training and education tailored to meet the needs of the individual, for businesses and individuals alike. From self-paced learning to expert instruction, a broad range of subjects gives you the skills you need to succeed at the leading edge of technology and industry."
-        }
-        img={img1}
-      /> */}
-
       <SchoolBanner />
-
       <SchoolLearnTab />
       <LearningRoadmap />
       <Featured />
