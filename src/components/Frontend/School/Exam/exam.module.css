@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 0.5fr 3.33fr;
   align-items: center;
-  margin-bottom: 250px;
+  margin-bottom: 230px;
 }
 
 .examContent {
@@ -94,8 +94,42 @@
 }
 
 /* Responsive for tablets */
+
+@media (max-width: 1399px) {
+  .examSection {
+    grid-template-columns: 1fr;
+    margin-bottom: 230px;
+  }
+
+  .image1 {
+    width: 800px;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .image2 {
+    top: 26%;
+    width: 550px;
+  }
+
+  .image3 {
+    position: absolute;
+    right: 0;
+    bottom: -55%;
+    transform: translateY(-50%);
+  }
+
+  .examContent {
+    bottom: -57%;
+    left: 0px;
+    width: 58%;
+    padding: 20px 20px;
+  }
+}
+
 @media (max-width: 1299px) {
   .examTitle {
+    margin-top: 6px;
     font-size: 30px;
     line-height: 38px;
   }
@@ -104,28 +138,49 @@
     font-size: 14px;
   }
 }
-@media (max-width: 991px) {
-  .examSection {
-    grid-template-columns: 1fr;
-    margin-bottom: 150px;
-  }
 
-  .imageWrapper {
-    justify-content: center;
-  }
-
-  .examContent {
-    position: static;
-    margin-top: 30px;
-    width: 100%;
-    padding: 20px;
-    left: auto;
-    bottom: auto;
-  }
-
+@media (max-width: 1199px) {
   .examTitle {
+    margin-top: 4px;
     font-size: 28px;
-    line-height: 38px;
+    line-height: 30px;
+  }
+
+  .examDescription {
+    font-size: 14px;
+  }
+
+  .examButton {
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+  }
+}
+@media (max-width: 991px) {
+  .examTitle {
+    margin-top: 4px;
+    font-size: 20px;
+    line-height: 28px;
+    margin-bottom: 4px;
+  }
+
+  .examDescription {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .ic_btn_des_wrapper {
+    gap: 0px;
+  }
+
+  .examDescription {
+    font-size: 12px;
+  }
+
+  .examButton {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
   }
 
   .image2 {
@@ -135,25 +190,37 @@
   }
 
   .image3 {
-    right: 10px;
-    bottom: -30%;
+    bottom: -45%;
     width: 200px;
+    height: auto;
+  }
+
+  .examContent {
+    bottom: -57%;
+    left: 0px;
+    width: 65%;
+    padding: 20px 20px;
   }
 }
 
 /* Responsive for mobile */
-@media (max-width: 576px) {
-  .examContent {
-    padding: 16px;
+@media (max-width: 767px) {
+  .examTitle {
+    margin-top: 4px;
+    font-size: 17px;
+    line-height: 28px;
+    margin-bottom: 4px;
   }
 
-  .examTitle {
-    font-size: 22px;
-    line-height: 32px;
+  .examContent {
+    bottom: -57%;
+    left: 0px;
+    width: 60%;
+    padding: 15px 15px;
   }
 
   .examButton {
-    padding: 10px 20px;
+    padding: 6px 18px;
     font-size: 14px;
   }
 
@@ -162,14 +229,13 @@
   }
 
   .image2 {
-    top: 22%;
+    top: 5%;
     left: 18%;
     width: 65%;
   }
 
   .image3 {
-    width: 160px;
-    bottom: -25%;
+    bottom: -40%;
   }
 
   .ic_btn_des_wrapper {
@@ -186,5 +252,61 @@
   .ic_btn_des_wrapper > :last-child {
     justify-content: flex-start;
     margin-top: 15px;
+  }
+}
+
+@media (max-width: 622px) {
+  .examContent {
+    bottom: -80%;
+    left: 0px;
+    width: 95%;
+    padding: 15px 15px;
+  }
+
+  .image3 {
+    bottom: -35%;
+  }
+}
+
+@media (max-width: 575px) {
+  .examContent {
+    bottom: -100%;
+    left: 0px;
+    width: 95%;
+    padding: 15px 15px;
+  }
+
+  .image3 {
+    bottom: -40%;
+  }
+
+  .image2 {
+    top: -20%;
+    left: 18%;
+    width: 65%;
+  }
+}
+
+@media (max-width: 480px) {
+  .examTitle {
+    font-size: 15px;
+  }
+
+  .examContent {
+    bottom: -120%;
+    left: 0px;
+    width: 95%;
+    padding: 15px 15px;
+  }
+
+  .image3 {
+    bottom: -20%;
+    width: 150px;
+  }
+
+  .image2 {
+    top: -50%;
+    left: 18%;
+    width: 65%;
   }
 }

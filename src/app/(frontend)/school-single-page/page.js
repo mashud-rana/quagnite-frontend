@@ -8,16 +8,19 @@ import Coaches from "@/components/Frontend/School/Coaches/Coaches";
 import Bootcamp from "@/components/Frontend/School/Bootcamp/Bootcamp";
 import Recommendation from "@/components/Frontend/School/Recommendation/Recommendation";
 import Exam from "@/components/Frontend/School/Exam/Exam";
+import SchoolBanner from "@/components/Frontend/School/SchoolBanner/SchoolBanner";
 const page = () => {
   return (
     <div>
-      <AboutBanner
+      {/* <AboutBanner
         title={"Fostering growth and connecting people to opportunity"}
         subtitle={
           "Quagnite offers training and education tailored to meet the needs of the individual, for businesses and individuals alike. From self-paced learning to expert instruction, a broad range of subjects gives you the skills you need to succeed at the leading edge of technology and industry."
         }
         img={img1}
-      />
+      /> */}
+
+      <SchoolBanner />
 
       <SchoolLearnTab />
       <LearningRoadmap />

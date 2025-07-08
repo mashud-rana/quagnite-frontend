@@ -47,7 +47,7 @@ const teamMembers = [
 
 const Coaches = () => {
   return (
-    <section className={`ic_section_space ${styles.ic_bg_line_wrapper}`}>
+    <section className={`ic_section_space_top ${styles.ic_bg_line_wrapper}`}>
       <div className="container">
         <CardAnimation index={0} direction="left">
           <div className={styles.ic_title_wrapper}>
