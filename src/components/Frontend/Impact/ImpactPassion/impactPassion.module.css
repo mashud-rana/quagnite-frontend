@@ -17,19 +17,21 @@
 
 .ctaButton {
   margin-top: 10px;
-  background-color: #5c81f7;
-  color: white;
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(1.3px);
   padding: 12px 30px;
   font-size: 15px;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background 0.3s;
+  font-weight: 500;
+  transition: all 0.3s ease-in;
   text-transform: uppercase;
 }
 
 .ctaButton:hover {
-  background-color: #f59645;
+  background-color: var(--primary-color);
+  color: white;
 }
 
 .teammateImage1 {

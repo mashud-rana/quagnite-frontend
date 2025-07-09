@@ -8,7 +8,7 @@ import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 const ImpactPassion = () => {
   return (
-    <section className="ic_section_space">
+    <section className="ic_section_space_top">
       <div className="container">
         <CardAnimation index={1} direction="up">
           <div className="ic_bg radious_16">

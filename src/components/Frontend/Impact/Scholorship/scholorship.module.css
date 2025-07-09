@@ -1,0 +1,320 @@
+.ic_team_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-items: center;
+}
+
+.ic_see_all_button {
+  background: #272727;
+  color: var(--white);
+  padding: 8px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  text-transform: uppercase;
+}
+
+.ic_see_all_button:hover {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+.ic_team_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-items: center;
+}
+
+.ic_team_card {
+  background-color: transparent;
+  border-radius: 16px;
+  width: 100%;
+  transition: all 0.5s ease-in-out;
+}
+
+.ic_team_card:hover .ic_image_container {
+  background: radial-gradient(
+    circle at center,
+    #9d604c 0%,
+    #51353a 50%,
+    #110a1a 100%
+  );
+}
+
+.ic_team_card:hover {
+  transform: translateY(-8px);
+}
+
+.ic_team_card:hover .ic_btn {
+  background: var(--primary-color);
+}
+
+.ic_image_container {
+  width: 100%;
+  height: 240px;
+  border-radius: 16px;
+  margin-bottom: 24px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(62.7px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ic_card_content {
+  padding: 0 8px;
+}
+
+.ic_member_name {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.ic_member_description {
+  color: #a1a1aa;
+  margin-bottom: 20px;
+}
+
+.ic_btn {
+  background: #272727;
+  color: var(--white);
+  border: none;
+  padding: 13px 27px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.ic_btn:hover {
+  background: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(74, 144, 226, 0.3);
+}
+
+.verifiedBadge {
+  position: absolute;
+  bottom: 11px;
+  left: 10px;
+  background: white;
+  border-radius: 8px;
+  padding: 4px;
+  z-index: 5;
+  width: 41px;
+  height: 41px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.completeBadge {
+  position: absolute;
+  top: -11%;
+  right: 25px;
+  background: white;
+  border-radius: 8px;
+  padding: 4px;
+  z-index: 5;
+  width: 57px;
+  height: 57px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ic_title {
+  color: var(--white);
+  margin-bottom: 30px;
+}
+
+.ic_member_image {
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 1399px) {
+  .ic_image_container {
+    height: 240px;
+  }
+
+  .verifiedBadge {
+    width: 30px;
+    height: 30px;
+  }
+
+  .verifiedBadge img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .completeBadge {
+    width: 47px;
+    height: 47px;
+  }
+
+  .completeBadge img {
+    width: 47px;
+    height: 47px;
+  }
+
+  .ic_btn {
+    padding: 10px 22px;
+    font-size: 14px;
+    border-radius: 11px;
+  }
+
+  .ic_title {
+    margin-bottom: 28px;
+  }
+
+  .ic_image_container {
+    height: 220px;
+  }
+
+  .ic_member_image {
+    width: 220px;
+    height: auto;
+  }
+}
+
+@media (max-width: 1199px) {
+  .verifiedBadge {
+    width: 28px;
+    height: 28px;
+  }
+
+  .verifiedBadge img {
+    width: 27px;
+    height: 27px;
+  }
+
+  .completeBadge {
+    width: 37px;
+    height: 37px;
+  }
+
+  .completeBadge img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .ic_title {
+    margin-bottom: 24px;
+  }
+
+  .ic_image_container {
+    height: 200px;
+  }
+
+  .ic_member_image {
+    width: 200px;
+    height: auto;
+  }
+}
+
+@media (max-width: 991px) {
+  .ic_team_grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px 20px;
+  }
+
+  .ic_image_container {
+    height: 230px;
+  }
+
+  .ic_member_name {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .ic_member_description {
+    margin-bottom: 18px;
+  }
+
+  .ic_social_links {
+    gap: 10px;
+  }
+
+  .ic_btn {
+    padding: 8px 20px;
+    font-size: 12px;
+  }
+
+  .ic_title {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ic_see_all_button {
+    font-size: 14px;
+    padding: 6px 16px;
+    align-self: flex-end;
+  }
+
+  .ic_title {
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 575px) {
+  .ic_team_grid {
+    grid-template-columns: 1fr;
+    gap: 80px;
+  }
+
+  .ic_team_card {
+    max-width: 100%;
+  }
+
+  .ic_image_container {
+    height: 250px;
+  }
+
+  .ic_member_name {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .ic_member_description {
+    margin-bottom: 18px;
+  }
+
+  .ic_social_links {
+    gap: 10px;
+  }
+
+  .completeBadge {
+    top: -8%;
+  }
+
+  .ic_btn {
+    padding: 7px 19px;
+    font-size: 11px;
+  }
+
+  .ic_title {
+    margin-bottom: 12px;
+  }
+
+  .ic_image_container {
+    height: 220px;
+  }
+
+  .ic_member_image {
+    width: 190px;
+    height: auto;
+  }
+}

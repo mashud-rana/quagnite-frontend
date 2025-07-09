@@ -5,6 +5,9 @@ import bg from "@/assets/images/all/impact-banner-bg.png";
 import Launch from "@/components/Frontend/Impact/Launch/Launch";
 import ImpactCount from "@/components/Frontend/Impact/ImpactCount/ImpactCount";
 import ImpactPassion from "@/components/Frontend/Impact/ImpactPassion/ImpactPassion";
+import Scholorship from "@/components/Frontend/Impact/Scholorship/Scholorship";
+import Dreams from "@/components/Frontend/Impact/Dreams/Dreams";
+import Success from "@/components/Frontend/Impact/Success/Success";
 
 const ImpactPage = () => {
   return (
@@ -22,6 +25,9 @@ const ImpactPage = () => {
       <Launch />
       <ImpactCount />
       <ImpactPassion />
+      <Scholorship />
+      <Dreams />
+      <Success />
     </>
   );
 };
