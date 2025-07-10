@@ -98,15 +98,15 @@
 }
 
 /* .glowOrb2 {
-  position: absolute;
-  bottom: 10%;
-  left: 30%;
-  width: 60px;
-  height: 60px;
-  background: radial-gradient(circle, #7fc0fb 0%, transparent 70%);
-  clip-path: polygon(60% 100%, 0% 0%, 100% 0%);
-  animation: float 4s ease-in-out infinite reverse;
-} */
+    position: absolute;
+    bottom: 10%;
+    left: 30%;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, #7fc0fb 0%, transparent 70%);
+    clip-path: polygon(60% 100%, 0% 0%, 100% 0%);
+    animation: float 4s ease-in-out infinite reverse;
+  } */
 
 /* Floating Document Cards */
 .floatingDoc1 {
@@ -279,10 +279,8 @@
   animation: pulse 6s ease-in-out infinite;
 }
 
-.ic_line_img {
-  position: absolute;
-  top: 15%;
-  left: -3%;
+.ic_subtitle {
+  width: 60%;
 }
 
 /* Responsive Design */
@@ -371,6 +369,9 @@
 }
 
 @media (max-width: 991px) {
+  .ic_subtitle {
+    width: 100%;
+  }
   .ic_grid {
     display: flex;
     flex-direction: column;
@@ -421,10 +422,6 @@
     height: 6px;
   }
 
-  .ic_line_img {
-    display: none;
-  }
-
   .contentCard {
     width: 100%;
     padding: 0px;
@@ -449,11 +446,11 @@
   }
 
   /* .floatingDoc1,
-  .floatingDoc2,
-  .ic_circle1,
-  .ic_circle2 {
-    display: none;
-  } */
+    .floatingDoc2,
+    .ic_circle1,
+    .ic_circle2 {
+      display: none;
+    } */
 
   .ic_description {
     margin: 6px 0 13px 0;

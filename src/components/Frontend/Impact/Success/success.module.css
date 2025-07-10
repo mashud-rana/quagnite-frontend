@@ -131,7 +131,7 @@
 
 @media (max-width: 480px) {
   .ic_image_container {
-    width: 320px;
+    width: 280px;
   }
 
   .ic_grid {
@@ -139,6 +139,6 @@
   }
 
   .ic_image_container {
-    height: 110px;
+    height: 100px;
   }
 }

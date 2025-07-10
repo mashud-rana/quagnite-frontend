@@ -9,7 +9,8 @@ import Bootcamp from "@/components/Frontend/School/Bootcamp/Bootcamp";
 import Recommendation from "@/components/Frontend/School/Recommendation/Recommendation";
 import Exam from "@/components/Frontend/School/Exam/Exam";
 import SchoolBanner from "@/components/Frontend/School/SchoolBanner/SchoolBanner";
-const page = () => {
+
+const SchoolSinglePage = () => {
   return (
     <div>
       <SchoolBanner />
@@ -24,4 +25,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SchoolSinglePage;

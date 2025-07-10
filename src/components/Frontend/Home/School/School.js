@@ -66,33 +66,43 @@ const School = () => {
           </CardAnimation>
           <CardAnimation index={0} direction="up">
             <div className={styles.grid}>
-              {schoolsData.map((school) => (
-                <div
-                  key={school.id}
-                  className={`${styles.card} ${
-                    hoveredCard === school.id ? styles.hoveredCard : ""
-                  }`}
-                  onMouseEnter={() => setHoveredCard(school.id)}
-                  onMouseLeave={() => setHoveredCard(null)}
-                  style={
-                    hoveredCard === school.id
-                      ? { "--hoverImage": `url(${school.hover.src})` }
-                      : {}
-                  }
-                >
-                  <div className={styles.iconContainer}>
-                    <Image
-                      src={school.icon}
-                      className={styles.icon}
-                      height={34}
-                      width={34}
-                      alt="icon"
-                    />
+              {schoolsData.map((school, index) => (
+                <CardAnimation index={index} key={school.id}>
+                  <div
+                    key={school.id}
+                    className={`${styles.card} ${
+                      hoveredCard === school.id ? styles.hoveredCard : ""
+                    }`}
+                    onMouseEnter={() => setHoveredCard(school.id)}
+                    onMouseLeave={() => setHoveredCard(null)}
+                    style={
+                      hoveredCard === school.id
+                        ? { "--hoverImage": `url(${school.hover.src})` }
+                        : {}
+                    }
+                  >
+                    <div className={styles.iconContainer}>
+                      <Image
+                        src={school.icon}
+                        className={styles.icon}
+                        height={34}
+                        width={34}
+                        alt="icon"
+                      />
+                    </div>
+                    {/* <h5 className={styles.ic_card_title}>{school.title}</h5>
+                  <p className={styles.ic_description}>{school.description}</p> */}
+                    <div className={styles.cardContent}>
+                      <h5 className={styles.ic_card_title}>{school.title}</h5>
+                      <p className={styles.ic_description}>
+                        {school.description}
+                      </p>
+                    </div>
+                    <div>
+                      <button className={styles.ic_button}>EXPLORE</button>
+                    </div>
                   </div>
-                  <h5 className={styles.ic_card_title}>{school.title}</h5>
-                  <p className={styles.ic_description}>{school.description}</p>
-                  <button className={styles.ic_button}>EXPLORE</button>
-                </div>
+                </CardAnimation>
               ))}
             </div>
           </CardAnimation>

@@ -6,7 +6,7 @@ import Teammate from "@/components/Frontend/Hiring/Teammate/Teammate";
 import Train from "@/components/Frontend/Hiring/Train/Train";
 import React from "react";
 
-const page = () => {
+const HiringPage = () => {
   return (
     <>
       <HiringBanner />
@@ -19,4 +19,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default HiringPage;

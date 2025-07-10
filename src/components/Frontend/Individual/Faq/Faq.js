@@ -1,9 +1,9 @@
 "use client";
-
-import { useState } from "react";
-import styles from "./skillcollapse.module.css";
-import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
-import DaynamicCollaps from "./DaynamicCollaps";
+import React, { useState } from "react";
+import styles from "./faq.module.css";
+import Image from "next/image";
+import DaynamicCollaps from "../../Hiring/SkillCollapse/DaynamicCollaps";
+import img from "@/assets/images/all/faq.png";
 
 const collapseData = [
   {
@@ -38,39 +38,39 @@ const collapseData = [
   },
 ];
 
-const SkillCollapse = () => {
+const Faq = () => {
   const [activeKey, setActiveKey] = useState("1");
 
   const togglePanel = (key) => {
     setActiveKey((prev) => (prev === key ? null : key));
   };
-
   return (
-    <section className="ic_section_space">
-      <div className="container">
-        <div className={styles.content}>
-          <div className={styles.ic_header_section}>
-            <CardAnimation index={0} direction="down">
-              <h6 className={styles.ic_subtitle}>WHY HIRE WITH US</h6>
-            </CardAnimation>
-            <CardAnimation index={1} direction="left">
-              <h4 className="w_80">
-                The latest and most relevant skills, in motivated and adaptable
-                teams.
-              </h4>
-            </CardAnimation>
+    <section className="ic_section_space_top">
+      <div className="container ic_white">
+        <h6>Faq</h6>
+        <div className={styles.ic_grid}>
+          <div className={styles.ic_img_wrapper}>
+            <Image
+              className={styles.ic_img}
+              src={img}
+              height={200}
+              width={300}
+              alt=""
+            />
           </div>
 
-          <div className={styles.collapseWrapper}>
-            {collapseData.map((item, index) => (
-              <DaynamicCollaps
-                activeKey={activeKey}
-                index={index}
-                key={index}
-                item={item}
-                togglePanel={togglePanel}
-              />
-            ))}
+          <div>
+            <div className={styles.collapseWrapper}>
+              {collapseData.map((item, index) => (
+                <DaynamicCollaps
+                  activeKey={activeKey}
+                  index={index}
+                  key={index}
+                  item={item}
+                  togglePanel={togglePanel}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -78,4 +78,4 @@ const SkillCollapse = () => {
   );
 };
 
-export default SkillCollapse;
+export default Faq;

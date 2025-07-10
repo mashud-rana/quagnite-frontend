@@ -9,6 +9,9 @@
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -20,6 +23,16 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  height: calc(100% - 56px);
+}
+
+.card:hover .ic_button {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.cardContent {
+  flex-grow: 1;
 }
 
 /* Image blur layer */
@@ -31,7 +44,6 @@
   background-image: var(--hoverImage);
   background-size: contain;
   background-repeat: no-repeat;
-  /* background-position: center; */
   opacity: 0;
   filter: blur(63.9px) brightness(1);
   transition: opacity 0.4s ease, filter 0.4s ease;
