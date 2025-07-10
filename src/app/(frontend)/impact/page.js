@@ -8,6 +8,7 @@ import ImpactPassion from "@/components/Frontend/Impact/ImpactPassion/ImpactPass
 import Scholorship from "@/components/Frontend/Impact/Scholorship/Scholorship";
 import Dreams from "@/components/Frontend/Impact/Dreams/Dreams";
 import Success from "@/components/Frontend/Impact/Success/Success";
+import Opportunities from "@/components/Frontend/Impact/Opportunities/Opportunities";
 
 const ImpactPage = () => {
   return (
@@ -25,6 +26,7 @@ const ImpactPage = () => {
       <Launch />
       <ImpactCount />
       <ImpactPassion />
+      <Opportunities />
       <Scholorship />
       <Dreams />
       <Success />
