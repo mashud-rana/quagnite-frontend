@@ -1,0 +1,376 @@
+.ic_grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 90px;
+  align-items: center;
+  position: relative;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  /* height: calc(100% - 75px); */
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 20px 0px;
+}
+
+.icon {
+  /* width: 100%; */
+  /* height: auto; */
+  object-fit: cover;
+  height: auto;
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+}
+
+.cardLabel {
+  margin-top: 15px;
+  /* border: 1px solid white; */
+  color: #fff;
+  text-align: center;
+}
+
+.contentRight {
+  color: #fff;
+  z-index: 2;
+}
+
+.title {
+  margin: 24px 0;
+}
+
+.button {
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 12px 26px;
+  border-radius: 12px;
+  border: none;
+  text-transform: uppercase;
+
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+  background-color: #4338ca;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+}
+
+.line1 {
+  top: calc(16.66% + 2rem); /* Between Courses and Bootcamp */
+  left: calc(33.33% + 1rem);
+  width: 2rem;
+  height: 2px;
+}
+
+.line2 {
+  top: calc(16.66% + 2rem); /* Between Bootcamp and Exams */
+  left: calc(66.66% + 1rem);
+  width: 2rem;
+  height: 2px;
+}
+
+.line3 {
+  top: calc(50% + 2rem); /* Between eBooks and Forums */
+  left: calc(33.33% + 1rem);
+  width: 2rem;
+  height: 2px;
+}
+
+.line4 {
+  top: calc(50% + 2rem); /* Between Forums and Coaches */
+  left: calc(66.66% + 1rem);
+  width: 2rem;
+  height: 2px;
+}
+
+.line5 {
+  top: 50%; /* Vertical line connecting to right content */
+  left: calc(100% - 2rem); /* Adjust based on grid width */
+  width: 2px;
+  height: calc(100% - 4rem); /* Adjust height to span between rows */
+  transform: translateX(-50%);
+  border-radius: 0;
+}
+
+/* Curved lines for the main flow */
+.line1::after,
+.line2::after,
+.line3::after,
+.line4::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+/* Specific curved line from Exams to right content */
+.line2::after {
+  top: 0;
+  left: 100%;
+  width: 4rem; /* Horizontal segment */
+  height: 2px;
+  transform: translateY(0);
+}
+
+.line2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: calc(100% + 4rem); /* Start of vertical curve */
+  width: 2px;
+  height: 100px; /* Vertical segment length */
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  transform-origin: top left;
+  transform: rotate(90deg); /* This will be a curve */
+}
+
+/* Main flow line from grid to right content */
+.line5 {
+  top: 0;
+  left: calc(
+    66.66% + 1rem + 2rem + 4rem
+  ); /* Position after Exams card and horizontal line */
+  width: 2px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  transform: translateX(-50%);
+}
+
+/* Adjusting line positions to connect cards properly */
+.line1 {
+  top: calc(16.66% + 2rem);
+  left: calc(
+    33.33% - 1rem
+  ); /* Adjusted to connect from center of card 1 to center of card 2 */
+  width: 2rem;
+  height: 2px;
+}
+
+.line2 {
+  top: calc(16.66% + 2rem);
+  left: calc(
+    66.66% - 1rem
+  ); /* Adjusted to connect from center of card 2 to center of card 3 */
+  width: 2rem;
+  height: 2px;
+}
+
+.line3 {
+  top: calc(50% + 2rem);
+  left: calc(33.33% - 1rem);
+  width: 2rem;
+  height: 2px;
+}
+
+.line4 {
+  top: calc(50% + 2rem);
+  left: calc(66.66% - 1rem);
+  width: 2rem;
+  height: 2px;
+}
+
+/* Vertical lines between rows */
+.lineVertical1 {
+  position: absolute;
+  top: calc(16.66% + 2rem);
+  left: calc(16.66% + 2rem); /* Center of first column */
+  width: 2px;
+  height: calc(33.33% + 2rem); /* Height to connect to next row */
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  transform: translateX(-50%);
+}
+
+.lineVertical2 {
+  position: absolute;
+  top: calc(16.66% + 2rem);
+  left: calc(50% + 2rem); /* Center of second column */
+  width: 2px;
+  height: calc(33.33% + 2rem);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  transform: translateX(-50%);
+}
+
+.lineVertical3 {
+  position: absolute;
+  top: calc(16.66% + 2rem);
+  left: calc(83.33% + 2rem); /* Center of third column */
+  width: 2px;
+  height: calc(33.33% + 2rem);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  transform: translateX(-50%);
+}
+
+/* Main flow line from grid to right content */
+.mainFlowLine {
+  position: absolute;
+  top: calc(16.66% + 2rem); /* Start from Exams card row */
+  left: calc(100% - 2rem); /* Start from right edge of grid */
+  width: 2px;
+  height: calc(
+    50% - (16.66% + 2rem)
+  ); /* Adjust height to reach middle of right content */
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  transform: translateX(-50%);
+}
+
+.mainFlowLine::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4rem; /* Horizontal segment */
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  transform: translateX(-100%);
+}
+
+.mainFlowLine::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 4rem; /* Horizontal segment */
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  transform: translateX(-100%);
+}
+
+/* Dots */
+.dot1,
+.dot2 {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.dot1 {
+  top: calc(16.66% + 2rem - 5px); /* Center of Exams card */
+  left: calc(100% - 2rem - 5px); /* End of horizontal line from Exams */
+}
+
+.dot2 {
+  top: calc(50% - 5px); /* Middle of the vertical line */
+  left: calc(100% - 2rem - 5px); /* Same horizontal position as dot1 */
+}
+
+/* Complex line path */
+.linePath {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.linePath svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.linePath path {
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 2;
+  fill: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .gridContainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .iconWrapper {
+    width: 80px;
+    height: 80px;
+  }
+
+  .icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .cardLabel {
+    font-size: 1rem;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .button {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  /* Hide complex lines on smaller screens or simplify */
+  .line1,
+  .line2,
+  .line3,
+  .line4,
+  .line5,
+  .lineVertical1,
+  .lineVertical2,
+  .lineVertical3,
+  .mainFlowLine,
+  .dot1,
+  .dot2,
+  .linePath {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .gridContainer {
+    grid-template-columns: 1fr;
+  }
+}

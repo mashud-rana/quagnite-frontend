@@ -1,0 +1,39 @@
+.ic_text_container {
+  width: 40%;
+  color: var(--white);
+  padding: 20px;
+  background: rgba(68, 24, 137, 0.15);
+  backdrop-filter: blur(62.7px);
+  border-radius: 16px;
+  z-index: 2;
+  position: relative;
+}
+
+.ic_des {
+  font-size: 16px;
+  line-height: 25px;
+}
+
+.ic_img {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+  animation: float 4s ease-in-out infinite;
+  z-index: 1;
+}
+
+.ic_wrapper {
+  padding: 250px 0;
+  position: relative;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}

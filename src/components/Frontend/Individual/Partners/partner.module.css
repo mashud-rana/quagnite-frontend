@@ -20,6 +20,7 @@
 
 .imageSection {
   width: 37%;
+  z-index: 3;
 }
 
 .businessImage {
@@ -74,8 +75,8 @@
 /* Blue Glowing Orbs */
 .ic_circle1 {
   position: absolute;
-  top: 25%;
-  right: 26%;
+  bottom: 10%;
+  right: 53%;
   width: 45px;
   height: 45px;
   border-radius: 50%;
@@ -94,21 +95,9 @@
   background: radial-gradient(circle, #7fc0fb 0%, transparent 70%);
   clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
   animation: float 4s ease-in-out infinite reverse;
-  filter: drop-shadow(0 0 6px #7fc0fb); /* Optional glowing effect */
+  filter: drop-shadow(0 0 6px #7fc0fb);
 }
 
-/* .glowOrb2 {
-    position: absolute;
-    bottom: 10%;
-    left: 30%;
-    width: 60px;
-    height: 60px;
-    background: radial-gradient(circle, #7fc0fb 0%, transparent 70%);
-    clip-path: polygon(60% 100%, 0% 0%, 100% 0%);
-    animation: float 4s ease-in-out infinite reverse;
-  } */
-
-/* Floating Document Cards */
 .floatingDoc1 {
   position: absolute;
   top: 25%;
@@ -189,14 +178,13 @@
 /* Small Geometric Dots */
 .geometricDot1 {
   position: absolute;
-  top: 45%;
+  bottom: 20%;
   right: 3%;
-  width: 35px;
-  height: 7px;
-  background: linear-gradient(180deg, #ff7600 0%, #f69745 100%);
+  width: 12px;
+  height: 59px;
+  background: linear-gradient(0deg, #ff7600 0%, #f69745 100%);
   border-radius: 11px;
-  transform: rotate(113.29deg);
-  animation: float 2.8s ease-in-out infinite;
+  animation: float 3.8s ease-in-out infinite;
 }
 
 .geometricDot4 {
@@ -249,14 +237,14 @@
 @keyframes float {
   0%,
   100% {
-    transform: translateY(0px);
+    /* transform: translateY(0px); */
     opacity: 0.6;
-    transform: rotate(-25deg) scale(1);
+    transform: rotate(25deg) scale(1);
   }
   50% {
     transform: translateY(-10px);
     opacity: 1;
-    transform: rotate(-25deg) scale(1.1);
+    transform: rotate(40deg) scale(1.1);
   }
 }
 
@@ -274,9 +262,10 @@
 
 .ic_animation_img {
   position: absolute;
-  bottom: 6%;
-  left: 45%;
+  top: 6%;
+  right: 22%;
   animation: pulse 6s ease-in-out infinite;
+  z-index: 1;
 }
 
 .ic_subtitle {
@@ -287,7 +276,14 @@
 @media (max-width: 1650px) {
   .businessImage {
     width: 600px;
-    height: 400px;
+    height: 480px;
+  }
+
+  .ic_circle1 {
+    bottom: 2%;
+    right: 50%;
+    width: 42px;
+    height: 42px;
   }
 
   .exploreButton {
@@ -297,6 +293,12 @@
   .ic_animation_img {
     width: 100px;
     height: 100px;
+  }
+
+  .geometricDot1 {
+    right: 12%;
+    width: 10px;
+    height: 50px;
   }
 }
 
@@ -309,8 +311,6 @@
   }
 
   .ic_animation_img {
-    bottom: 6%;
-    left: 46%;
     width: 90px;
     height: 90px;
   }
@@ -327,6 +327,13 @@
   .exploreButton {
     padding: 12px 24px;
     font-size: 14px;
+  }
+
+  .ic_circle1 {
+    bottom: -3%;
+    right: 50%;
+    width: 40px;
+    height: 40px;
   }
 }
 
@@ -366,6 +373,13 @@
     margin-left: -130px;
     margin-bottom: 40px;
   }
+
+  .ic_circle1 {
+    bottom: -5%;
+    right: 30%;
+    width: 36px;
+    height: 36px;
+  }
 }
 
 @media (max-width: 991px) {
@@ -375,19 +389,14 @@
   .ic_grid {
     display: flex;
     flex-direction: column;
+    gap: 10px;
   }
 
   .ic_animation_img {
-    bottom: -5%;
+    right: 45%;
+    top: 40%;
     width: 50px;
     height: 50px;
-  }
-
-  .ic_circle1 {
-    top: 50%;
-    right: 40%;
-    width: 30px;
-    height: 30px;
   }
 
   .ic_circle2 {
@@ -445,12 +454,9 @@
     height: auto;
   }
 
-  /* .floatingDoc1,
-    .floatingDoc2,
-    .ic_circle1,
-    .ic_circle2 {
-      display: none;
-    } */
+  .ic_animation_img {
+    top: 50%;
+  }
 
   .ic_description {
     margin: 6px 0 13px 0;
@@ -465,6 +471,11 @@
 }
 
 @media (max-width: 480px) {
+  .ic_animation_img {
+    right: 40%;
+    top: 55%;
+  }
+
   .businessImage {
     width: 320px;
     height: auto;

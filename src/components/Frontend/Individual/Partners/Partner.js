@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./partner.module.css";
 import img1 from "@/assets/images/all/hiring.png";
-import img2 from "@/assets/images/all/animation.png";
+import img2 from "@/assets/images/all/animation2.png";
 import img3 from "@/assets/images/all/hire-line.png";
 import Image from "next/image";
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
@@ -37,7 +37,7 @@ const Partner = () => {
                   alt="Professional business meeting"
                   className={styles.businessImage}
                   width={630}
-                  height={430}
+                  height={590}
                 />
               </div>
             </div>
@@ -50,29 +50,12 @@ const Partner = () => {
               height={110}
             />
 
-            {/* Floating Decorative Elements */}
             <div className={styles.floatingElements}>
-              {/* Blue Glowing Orbs */}
               <div className={styles.ic_circle1}></div>
-              <div className={styles.ic_circle2}></div>
-
-              {/* Small Floating Document Cards */}
-              {/* <div className={styles.floatingDoc1}>
-              <div className={styles.docContent}></div>
-            </div> */}
-
-              {/* <div className={styles.floatingDoc2}>
-              <div className={styles.docIcon}>📄</div>
-            </div> */}
-
-              {/* Orange Accent Element */}
-              {/* <div className={styles.orangeAccent}></div> */}
-
-              {/* Small Geometric Dots */}
               <div className={styles.geometricDot1}></div>
-              <div className={styles.geometricDot4}></div>
+              {/* <div className={styles.geometricDot4}></div>
               <div className={styles.geometricDot2}></div>
-              <div className={styles.geometricDot3}></div>
+              <div className={styles.geometricDot3}></div> */}
             </div>
           </div>
         </CardAnimation>

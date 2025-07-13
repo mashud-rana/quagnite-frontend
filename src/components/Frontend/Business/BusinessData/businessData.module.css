@@ -1,0 +1,209 @@
+.ic_grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.ic_img_wrapper {
+  position: relative;
+}
+
+.teammateContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px 30px 30px 30px;
+  gap: 16px;
+}
+
+.ctaButton {
+  margin-top: 10px;
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(1.3px);
+  padding: 12px 30px;
+  font-size: 15px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease-in;
+  text-transform: uppercase;
+}
+
+.ctaButton:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.teammateImage1 {
+  /* position: absolute; */
+  /* top: -25px; */
+  padding: 30px;
+  width: 70%;
+  height: auto;
+}
+
+.teammateImg2 {
+  position: absolute;
+  left: 45%;
+  bottom: 30px;
+}
+
+.badge {
+  position: absolute;
+  top: 40%;
+  right: 20%;
+  z-index: 3;
+  animation: floatBadge 2.5s ease-in-out infinite;
+}
+
+@keyframes floatBadge {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.title {
+  font-size: 36px;
+}
+
+.ic_data_container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (max-width: 1399px) {
+  .teammateImage1 {
+    /* position: absolute;
+      top: -25px;
+      padding: 0 30px 30px 30px;
+      width: 90%;
+      height: auto; */
+  }
+
+  .teammateImg2 {
+    width: 250px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .ctaButton {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .teammateContent {
+    gap: 10px;
+  }
+
+  .badge img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 1040px) {
+  .teammateImg2 {
+    left: 45%;
+    bottom: 35px;
+  }
+
+  .ctaButton {
+    padding: 8px 18px;
+    font-size: 12px;
+  }
+
+  .teammateContent {
+    gap: 4px;
+  }
+}
+
+@media (max-width: 991px) {
+  .ic_grid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 0px;
+  }
+
+  .teammateImage1 {
+    position: sticky;
+    margin-top: 30px;
+    padding: 0 30px 0px 30px;
+    width: 40%;
+    height: auto;
+  }
+
+  .teammateImg2 {
+    left: 25%;
+    bottom: 30px;
+  }
+
+  .badge {
+    top: 40%;
+    right: 55%;
+  }
+}
+
+@media (max-width: 767px) {
+  .teammateImage1 {
+    position: sticky;
+    margin-top: 30px;
+    padding: 0 30px 0px 30px;
+    width: 55%;
+    height: auto;
+  }
+
+  .teammateImg2 {
+    left: 45%;
+    width: 180px;
+    height: auto;
+  }
+
+  .teammateContent {
+    padding: 20px 30px 30px 30px;
+  }
+
+  .badge {
+    top: 45%;
+    right: 37%;
+  }
+}
+
+@media (max-width: 575px) {
+  .teammateImage1 {
+    position: sticky;
+    margin-top: 30px;
+    padding: 0 30px 0px 30px;
+    width: 75%;
+  }
+
+  .teammateImg2 {
+    left: 60%;
+    width: 160px;
+  }
+
+  .badge {
+    top: 45%;
+    right: 15%;
+  }
+}
+
+@media (max-width: 480px) {
+  .teammateImage1 {
+    position: sticky;
+    margin-top: 30px;
+    padding: 0 30px 0px 30px;
+    width: 75%;
+  }
+
+  .teammateImg2 {
+    left: 54%;
+    width: 140px;
+  }
+}
