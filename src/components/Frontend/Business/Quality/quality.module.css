@@ -119,7 +119,6 @@
 }
 
 .description {
-  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 36px;
 }
 
@@ -144,26 +143,27 @@
 .discountBanner {
   background-color: #333042;
   border-radius: 12px;
-  padding: 1.5rem 2rem;
-  margin-top: 3rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 32px;
   animation: fadeInScale 1s ease-out forwards;
+  color: var(--white);
 }
 
 .discountText {
-  font-size: 1.25rem;
-  color: var(--white);
-  margin: 0;
+  display: flex;
+  align-items: center;
+  padding: 25px;
+}
+
+.ic_off {
   font-weight: 400;
+  font-size: 24px;
 }
 
 .discountPercentage {
-  font-size: 2.5rem;
+  font-size: 48px;
   font-weight: 700;
   color: var(--white);
-  margin-right: 0.5rem;
+  margin-right: 8px;
 }
 
 /* Keyframe Animations */
@@ -229,10 +229,85 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
+
+@media (max-width: 1399px) {
+  .title {
+    margin-bottom: 20px;
+  }
+
+  .description {
+    margin-bottom: 30px;
+  }
+
+  .ic_off {
+    font-size: 20px;
+  }
+
+  .discountPercentage {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 1299px) {
+  .title {
+    margin-bottom: 16px;
+  }
+
+  .description {
+    margin-bottom: 26px;
+  }
+
+  .ic_off {
+    font-size: 18px;
+  }
+
+  .discountPercentage {
+    font-size: 32px;
+  }
+
+  .discountBanner {
+    margin-top: 28px;
+  }
+
+  .discountText {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .title {
+    margin-bottom: 12px;
+  }
+
+  .description {
+    margin-bottom: 24px;
+  }
+
+  .ic_off {
+    font-size: 16px;
+  }
+
+  .discountPercentage {
+    font-size: 28px;
+  }
+
+  .discountBanner {
+    margin-top: 24px;
+  }
+
+  .discountText {
+    padding: 18px;
+  }
+
+  .ic_grid {
+    gap: 70px;
+  }
+}
+
+@media (max-width: 767px) {
   .ic_grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 70px;
     text-align: center;
   }
 
@@ -246,8 +321,8 @@
   .card {
     position: relative;
     margin: 0 auto 1.5rem auto;
-    transform: none !important; /* Reset absolute positioning for stacking */
-    animation: none !important; /* Disable floating animations on mobile */
+    transform: none !important;
+    animation: none !important;
   }
 
   .card1,
@@ -265,14 +340,10 @@
   }
 
   .card2 {
-    margin-top: -2rem; /* Overlap slightly */
+    margin-top: -2rem;
   }
   .card3 {
-    margin-top: -2rem; /* Overlap slightly */
-  }
-
-  .title {
-    font-size: 2.5rem;
+    margin-top: -2rem;
   }
 
   .description {
@@ -284,17 +355,13 @@
   }
 
   .discountPercentage {
-    font-size: 2rem;
+    font-size: 48px;
   }
 }
 
 @media (max-width: 768px) {
   .section {
     padding: 4rem 1rem;
-  }
-
-  .title {
-    font-size: 2.2rem;
   }
 
   .discountPercentage {
@@ -307,10 +374,6 @@
 }
 
 @media (max-width: 480px) {
-  .title {
-    font-size: 1.8rem;
-  }
-
   .discountPercentage {
     font-size: 1.5rem;
   }

@@ -64,10 +64,12 @@ const Quality = () => {
               <button className={styles.button}>GET STARTED</button>
 
               <div className={styles.discountBanner}>
-                <p className={styles.discountText}>
-                  <span className={styles.discountPercentage}>25%</span> off
-                  when you enroll for Teams
-                </p>
+                <div className={styles.discountText}>
+                  <span className={styles.discountPercentage}>25%</span>
+                  <span className={styles.ic_off}>
+                    off when you enroll for Teams
+                  </span>
+                </div>
               </div>
             </div>
           </div>

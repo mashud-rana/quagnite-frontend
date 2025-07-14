@@ -8,15 +8,14 @@ import React from "react";
 
 const BusinessPage = () => {
   return (
-    <div>
-      <h1>kj</h1>
+    <>
       <BusinessData />
       <Industries />
       <Benefits />
       <Success />
       <Quality />
       <Integrate />
-    </div>
+    </>
   );
 };
 
