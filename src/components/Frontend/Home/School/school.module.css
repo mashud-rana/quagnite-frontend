@@ -66,13 +66,14 @@
 
 .iconContainer {
   width: 58px;
-  height: 58px;
+  /* height: 58px; */
   background: rgba(255, 255, 255, 0.9);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  padding: 14px 0px;
 }
 
 .ic_card_title {
@@ -164,5 +165,9 @@
   .ic_button {
     padding: 6px 16px;
     font-size: 13px;
+  }
+
+  .iconContainer {
+    padding: 12px 0px;
   }
 }

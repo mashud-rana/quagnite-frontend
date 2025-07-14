@@ -1,0 +1,317 @@
+.backgroundElements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bgSphere1 {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: rgba(139, 92, 246, 0.3);
+  border-radius: 50%;
+  filter: blur(80px);
+  top: 10%;
+  left: 15%;
+  animation: floatSphere 10s ease-in-out infinite alternate;
+}
+
+.bgSphere2 {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: rgba(245, 158, 11, 0.2);
+  border-radius: 50%;
+  filter: blur(70px);
+  bottom: 20%;
+  right: 10%;
+  animation: floatSphere 12s ease-in-out infinite alternate-reverse;
+}
+
+.bgTriangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 100px solid rgba(6, 182, 212, 0.3);
+  filter: blur(50px);
+  top: 30%;
+  left: 40%;
+  transform: rotate(45deg);
+  animation: floatTriangle 8s ease-in-out infinite alternate;
+}
+
+.ic_grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 93px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.chartsContainer {
+  position: relative;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  border-radius: 16px;
+  position: absolute;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card1 {
+  top: 0;
+  left: 0;
+  z-index: 2;
+  transform: translateY(0px);
+  animation: cardFloat1 10s ease-in-out infinite alternate;
+}
+
+.card2 {
+  /* width: 450px;
+  height: 350px; */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(0px);
+  z-index: 4;
+  animation: cardFloat2 12s ease-in-out infinite alternate-reverse;
+}
+
+.card3 {
+  bottom: 0;
+  right: 0;
+  z-index: 3;
+  transform: translateY(0px);
+  animation: cardFloat3 8s ease-in-out infinite alternate;
+}
+
+.chartImage {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.contentRight {
+  color: #fff;
+  z-index: 1;
+}
+
+.title {
+  margin-bottom: 24px;
+}
+
+.description {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 36px;
+}
+
+.button {
+  background-color: var(--primary-color);
+  border: none;
+  color: white;
+  padding: 12px 26px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+}
+
+.button:hover {
+  background-color: #4338ca;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+}
+
+.discountBanner {
+  background-color: #333042;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  margin-top: 3rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: fadeInScale 1s ease-out forwards;
+}
+
+.discountText {
+  font-size: 1.25rem;
+  color: var(--white);
+  margin: 0;
+  font-weight: 400;
+}
+
+.discountPercentage {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-right: 0.5rem;
+}
+
+/* Keyframe Animations */
+@keyframes floatSphere {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-20px) translateX(20px);
+  }
+}
+
+@keyframes floatTriangle {
+  0%,
+  100% {
+    transform: rotate(45deg) translateY(0) translateX(0);
+  }
+  50% {
+    transform: rotate(50deg) translateY(-15px) translateX(15px);
+  }
+}
+
+@keyframes cardFloat1 {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes cardFloat2 {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateY(0px);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-12px);
+  }
+}
+
+@keyframes cardFloat3 {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .ic_grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .chartsContainer {
+    height: auto;
+    min-height: 400px;
+    display: block;
+    position: relative;
+  }
+
+  .card {
+    position: relative;
+    margin: 0 auto 1.5rem auto;
+    transform: none !important; /* Reset absolute positioning for stacking */
+    animation: none !important; /* Disable floating animations on mobile */
+  }
+
+  .card1,
+  .card2,
+  .card3 {
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    transform: none;
+    width: 80%;
+    max-width: 350px;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .card2 {
+    margin-top: -2rem; /* Overlap slightly */
+  }
+  .card3 {
+    margin-top: -2rem; /* Overlap slightly */
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .discountBanner {
+    margin-top: 2rem;
+  }
+
+  .discountPercentage {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 1rem;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .discountPercentage {
+    font-size: 1.8rem;
+  }
+
+  .discountText {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .discountPercentage {
+    font-size: 1.5rem;
+  }
+
+  .discountText {
+    font-size: 1rem;
+  }
+}

@@ -3,13 +3,22 @@ import Image from "next/image";
 import React from "react";
 import styles from "./whyus.module.css";
 import img1 from "@/assets/images/all/whyus.png";
+import bg from "@/assets/images/all/why-us-bg.png";
 
 const Whyus = () => {
   return (
-    <section className="ic_section_space_top">
+    <section className="ic_section_space">
       <div className="container">
         <CardAnimation index={1} direction="up">
-          <div className="ic_bg radious_16">
+          <div
+            style={{
+              backgroundImage: `url(${bg.src})`,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+            }}
+            className=" ic_white radious_16"
+          >
             <div className={styles.ic_grid}>
               <div>
                 <div className={styles.ic_img_wrapper}>

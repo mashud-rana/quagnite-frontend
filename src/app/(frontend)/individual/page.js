@@ -10,7 +10,7 @@ import React from "react";
 const IndividualPage = () => {
   return (
     <>
-      <IndiBanner />
+      {/* <IndiBanner /> */}
       <Whyus />
       <Benefits />
       <School />

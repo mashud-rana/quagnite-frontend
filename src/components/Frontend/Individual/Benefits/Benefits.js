@@ -30,7 +30,7 @@ const schoolsData = [
 
 const Benefits = () => {
   return (
-    <section className="ic_section_space">
+    <section className="">
       <div className="container">
         <CardAnimation index={0} direction="left">
           <h6 className={`${styles.ic_sub_title} mb_16`}>BENEFITS</h6>

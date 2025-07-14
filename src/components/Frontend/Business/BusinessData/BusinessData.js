@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./businessData.module.css";
-import img1 from "@/assets/images/all/dashboard.png";
+import img1 from "@/assets/images/all/chart-data.png";
 import img2 from "@/assets/images/all/impact-passion-progress.png";
 import badgeImg from "@/assets/images/all/passion-logo.png";
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
@@ -19,7 +19,7 @@ const BusinessData = () => {
                     className={styles.teammateImage1}
                     src={img1}
                     alt="Teammate"
-                    width={476}
+                    width={486}
                     height={297}
                   />
 

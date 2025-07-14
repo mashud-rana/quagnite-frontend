@@ -1,18 +1,20 @@
 .ic_grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  padding: 30px;
+  gap: 10px;
 }
 
 .ic_img_wrapper {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .teammateContent {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 30px 30px 30px 30px;
-  gap: 16px;
 }
 
 .ctaButton {
@@ -35,23 +37,19 @@
 }
 
 .teammateImage1 {
-  /* position: absolute; */
-  /* top: -25px; */
-  padding: 30px;
-  width: 70%;
   height: auto;
 }
 
 .teammateImg2 {
   position: absolute;
   left: 45%;
-  bottom: 30px;
+  bottom: 20%;
 }
 
 .badge {
   position: absolute;
-  top: 40%;
-  right: 20%;
+  top: 15%;
+  right: 16%;
   z-index: 3;
   animation: floatBadge 2.5s ease-in-out infinite;
 }
@@ -79,17 +77,33 @@
 }
 
 @media (max-width: 1399px) {
-  .teammateImage1 {
-    /* position: absolute;
-      top: -25px;
-      padding: 0 30px 30px 30px;
-      width: 90%;
-      height: auto; */
-  }
-
   .teammateImg2 {
     width: 250px;
     height: 80px;
+  }
+}
+
+@media (max-width: 1299px) {
+  .badge {
+    right: 15%;
+  }
+
+  .teammateImg2 {
+    position: absolute;
+    bottom: 20%;
+  }
+
+  .teammateImage1 {
+    width: 440px;
+    height: auto;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .ic_data_container {
+    gap: 16px;
   }
 }
 
@@ -107,12 +121,48 @@
     width: 60px;
     height: 60px;
   }
+
+  .teammateImage1 {
+    width: 420px;
+    height: auto;
+  }
+
+  .badge {
+    top: 20%;
+    right: 22%;
+  }
+
+  .teammateImage1 {
+    width: 380px;
+    height: auto;
+  }
+
+  .teammateImg2 {
+    width: 200px;
+    height: auto;
+    bottom: 25%;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+
+  .ic_data_container {
+    gap: 14px;
+  }
 }
 
 @media (max-width: 1040px) {
+  .teammateImage1 {
+    width: 350px;
+    height: auto;
+  }
+
   .teammateImg2 {
+    width: 180px;
+    height: auto;
     left: 45%;
-    bottom: 35px;
+    bottom: 30%;
   }
 
   .ctaButton {
@@ -128,82 +178,58 @@
 @media (max-width: 991px) {
   .ic_grid {
     grid-template-columns: repeat(1, 1fr);
-    gap: 0px;
-  }
-
-  .teammateImage1 {
-    position: sticky;
-    margin-top: 30px;
-    padding: 0 30px 0px 30px;
-    width: 40%;
-    height: auto;
+    gap: 20px;
+    padding: 20px;
   }
 
   .teammateImg2 {
-    left: 25%;
-    bottom: 30px;
+    left: 30%;
   }
 
   .badge {
-    top: 40%;
-    right: 55%;
+    right: 56%;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .ic_data_container {
+    gap: 12px;
   }
 }
 
 @media (max-width: 767px) {
-  .teammateImage1 {
-    position: sticky;
-    margin-top: 30px;
-    padding: 0 30px 0px 30px;
-    width: 55%;
-    height: auto;
-  }
-
-  .teammateImg2 {
-    left: 45%;
-    width: 180px;
-    height: auto;
-  }
-
-  .teammateContent {
-    padding: 20px 30px 30px 30px;
-  }
-
   .badge {
-    top: 45%;
-    right: 37%;
+    right: 40%;
   }
 }
 
 @media (max-width: 575px) {
   .teammateImage1 {
-    position: sticky;
-    margin-top: 30px;
-    padding: 0 30px 0px 30px;
-    width: 75%;
+    width: 300px;
   }
 
   .teammateImg2 {
-    left: 60%;
-    width: 160px;
+    left: 50%;
   }
 
   .badge {
-    top: 45%;
-    right: 15%;
+    right: 23%;
+  }
+
+  .title {
+    font-size: 26px;
   }
 }
 
 @media (max-width: 480px) {
   .teammateImage1 {
-    position: sticky;
-    margin-top: 30px;
-    padding: 0 30px 0px 30px;
-    width: 75%;
+    width: 250px;
   }
 
   .teammateImg2 {
-    left: 54%;
+    left: 40%;
     width: 140px;
   }
 }

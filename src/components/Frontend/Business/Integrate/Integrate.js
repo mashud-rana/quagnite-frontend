@@ -40,7 +40,7 @@ const Integrate = () => {
   ];
 
   return (
-    <section>
+    <section className="ic_section_space">
       <div className="container">
         <div className={styles.ic_grid}>
           <div className={styles.gridContainer}>
