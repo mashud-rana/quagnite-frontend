@@ -6,7 +6,7 @@ import img1 from "@/assets/images/apply-jobs/form-right.png";
 import styles from "./personalinfo.module.css";
 import { toast, Bounce } from "react-toastify";
 
-export default function PersonalInfo() {
+export default function PersonalInfo({ setActiveStep }) {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
