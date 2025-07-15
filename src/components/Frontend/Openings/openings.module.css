@@ -1,0 +1,221 @@
+/* Filter Bar */
+.filterBar {
+  margin-bottom: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  color: white;
+}
+
+.filterLabel {
+  font-size: 1.125rem; /* text-lg */
+  font-weight: 600; /* font-semibold */
+}
+
+/* Custom Select (Dropdown) */
+.selectWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.customSelect {
+  width: 120px;
+  padding: 0.5rem 1rem;
+  padding-right: 2.5rem; /* Space for the custom arrow */
+  border: none;
+  background-color: #171717; /* Neutral-900 equivalent */
+  color: white;
+  border-radius: 0.375rem; /* rounded-md */
+  appearance: none; /* Remove default browser arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  font-size: 0.875rem; /* text-sm */
+}
+
+.customSelect:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5); /* Focus ring */
+}
+
+.selectArrowIcon {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* Allow clicks to pass through to the select */
+  color: white;
+}
+
+/* Job Card */
+.jobCard {
+  margin-bottom: 16px;
+  border-radius: 8px;
+  overflow: hidden; /* Ensures gradient and shadow are contained */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+}
+
+.jobCardHeader {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(62.7px);
+  backdrop-filter: blur(62.7px);
+  padding: 24px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.jobCardHeader:hover {
+  background-color: #3f3f46; /* Neutral-700 equivalent */
+}
+
+.jobCardHeaderExpanded {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: #191919;
+}
+
+.jobCardContent {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  background-color: #262626; /* Default background for content */
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  position: relative;
+}
+
+.jobCardContentVisible {
+  max-height: 500px; /* Arbitrary large value to show content */
+  padding: 24px;
+  color: #e4e4e7; /* Gray-200 equivalent */
+}
+
+.jobCardContentGradientOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(62.7px);
+}
+
+.jobCardContentInner {
+  position: relative;
+  z-index: 10;
+}
+
+.jobCardDescription {
+  margin-bottom: 16px;
+  font-size: 0.875rem; /* text-sm */
+}
+
+.jobCardDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.875rem; /* text-sm */
+}
+
+.jobCardDetailLabel {
+  font-weight: 500; /* font-medium */
+}
+
+.jobCardApplyButtonContainer {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Gradient Button */
+.gradientButton {
+  background: linear-gradient(
+    to right,
+    #6366f1,
+    #8b5cf6
+  ); /* Indigo to Violet */
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.gradientButton:hover {
+  opacity: 0.9;
+}
+
+/* >>>>>....................... */
+/* .jobContainer {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+} */
+
+.sectionTitle {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.jobsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.jobCard {
+  background-color: #191919;
+  /* border: 1px solid #e2e2e2; */
+  padding: 1.5rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  color: var(--white);
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+
+.jobCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.active {
+  color: #ffffff;
+}
+
+.jobHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.jobTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.shortDesc {
+  font-size: 16px;
+}
+
+.icon {
+  font-size: 1.2rem;
+}
+
+.fullDesc {
+  margin-top: 1rem;
+  /* font-size: 0.95rem; */
+}

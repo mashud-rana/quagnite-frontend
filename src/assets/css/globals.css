@@ -36,6 +36,10 @@
   background-color: #e7e7e7;
 }
 
+.ic_text_color {
+  color: #f69745;
+}
+
 /* font weight */
 .fw_300 {
   font-weight: 300;
@@ -714,4 +718,13 @@ h6 {
 /* company swipper js  */
 .swiper-wrapper {
   align-items: center;
+}
+
+/* .............................  */
+.ic_ant .ant-tabs-nav .ant-tabs-nav-wrap {
+  display: none !important;
+}
+
+.ic_ant .ant-tabs-nav {
+  display: none !important;
 }

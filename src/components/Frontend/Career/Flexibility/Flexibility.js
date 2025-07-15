@@ -7,7 +7,7 @@ import styles from "./flexibility.module.css";
 
 const Flexibility = () => {
   return (
-    <section className={` ${styles.ic_wrapper} ic_section_space_bottom`}>
+    <section className={` ${styles.ic_wrapper} ic_section_space`}>
       <div className="container ic_white">
         <CardAnimation index={0} direction="up">
           <div className={styles.ic_img_container}>
@@ -22,7 +22,8 @@ const Flexibility = () => {
             </div>
 
             <div className={styles.ic_card}>
-              <h6 className="mb_16">OUR VISION</h6>
+              <h6 className="mb_16">CULTURE</h6>
+              <h4 className={styles.ic_title}>Inclusive and Supportive</h4>
               <p className={styles.ic_sub_title}>
                 Because of our belief in knowledge as a basic right, we want to
                 transform the way people access training and education with
@@ -32,7 +33,8 @@ const Flexibility = () => {
             </div>
 
             <div className={styles.ic_card2}>
-              <h6 className="mb_16">OUR VISION</h6>
+              <h6 className="mb_16">LIFE AT QUAGNITE</h6>
+              <h4 className={styles.ic_title}>Flexibility and Excellence</h4>
               <p className={styles.ic_sub_title}>
                 Because of our belief in knowledge as a basic right, we want to
                 transform the way people access training and education with
