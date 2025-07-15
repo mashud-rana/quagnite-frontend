@@ -4,6 +4,7 @@ import { Row, Col } from "antd";
 import styles from "./applyforjob.module.css";
 import PersonalInfo from "../PersonalInfo/PersonalInfo";
 import Documentation from "../Documentation/Documentation";
+import DiversityAndInclusion from "../DiversityAndInclusion/DiversityAndInclusion";
 
 const stepData = [
   { id: 1, label: "Personal Information" },
@@ -41,7 +42,7 @@ export default function ApplyForJob() {
 
         {activeStep === 1 && <PersonalInfo setActiveStep={setActiveStep} />}
         {activeStep === 2 && <Documentation setActiveStep={setActiveStep} />}
-        {/* {activeStep === 3 && <DiversityAndInclusion />} */}
+        {activeStep === 3 && <DiversityAndInclusion />}
       </div>
     </section>
   );
