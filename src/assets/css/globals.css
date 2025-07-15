@@ -1,6 +1,8 @@
 * {
   margin: 0;
   padding: 0;
+  outline: 0;
+  box-sizing: border-box;
 }
 /* variable set up */
 :root {
@@ -113,13 +115,16 @@
 .mb_16 {
   margin-bottom: 16px;
 }
+.mb-18 {
+  margin-bottom: 18px;
+}
 
 /* .mb_17 {
   margin-bottom: 17px;
 } */
- .mb-35{
+.mb-35 {
   margin-bottom: 35px;
- }
+}
 
 .mb_20 {
   margin-bottom: 20px;
@@ -289,7 +294,7 @@ h6 {
   .ic_section_space {
     padding: 90px 0;
   }
-  .mb-35{
+  .mb-35 {
     margin-bottom: 32px;
   }
 
@@ -358,7 +363,7 @@ h6 {
   .ic_section_space {
     padding: 80px 0;
   }
-  .mb-35{
+  .mb-35 {
     margin-bottom: 28px;
   }
 
@@ -426,7 +431,7 @@ h6 {
   .ic_section_space_top_58 {
     padding-top: 45px;
   }
-  .mb-35{
+  .mb-35 {
     margin-bottom: 26px;
   }
 
@@ -444,6 +449,20 @@ h6 {
 
   .mb_20 {
     margin-bottom: 14px;
+  }
+  p,
+  small,
+  label,
+  span,
+  a,
+  li,
+  ul,
+  ol,
+  input,
+  textarea,
+  button {
+    font-size: 15px;
+    line-height: 22px;
   }
 }
 
@@ -505,7 +524,7 @@ h6 {
   .ic_section_space {
     padding: 70px 0;
   }
-  .mb-35{
+  .mb-35 {
     margin-bottom: 24px;
   }
 
@@ -553,7 +572,7 @@ h6 {
   .w_70 {
     width: 80%;
   }
-  .mb-35{
+  .mb-35 {
     margin-bottom: 22px;
   }
 
@@ -567,6 +586,20 @@ h6 {
 
   .ic_section_space_88 {
     padding: 40px 0;
+  }
+  p,
+  small,
+  label,
+  span,
+  a,
+  li,
+  ul,
+  ol,
+  input,
+  textarea,
+  button {
+    font-size: 14px;
+    line-height: 20px;
   }
 }
 
@@ -608,7 +641,7 @@ h6 {
   .ic_section_space {
     padding: 60px 0;
   }
-  .mb-35{
+  .mb-35 {
     margin-bottom: 20px;
   }
 
