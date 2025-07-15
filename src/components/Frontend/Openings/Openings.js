@@ -70,7 +70,6 @@ const Openings = () => {
         <FilterBar filters={filters} onChange={handleChange} />
 
         <div className={styles.jobContainer}>
-          <h2 className={styles.sectionTitle}>Job Openings</h2>
           <div className={styles.jobsList}>
             {jobPosts.map((job) => {
               const isActive = activeId === job.id;
