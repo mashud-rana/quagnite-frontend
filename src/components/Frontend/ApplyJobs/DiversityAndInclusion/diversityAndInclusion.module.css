@@ -1,3 +1,126 @@
 .ic_diversity {
-  color: aliceblue;
+  color: 3fff;
+}
+
+.select_wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.ic_real_file_input {
+  width: 100%;
+  padding: 12px;
+  padding-right: 36px;
+  border-radius: 12px;
+  border: 1px solid #fff;
+  background-color: transparent;
+  font-size: 15px;
+  color: #fff;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  z-index: 1;
+  position: relative;
+}
+
+.ic_real_file_input option {
+  color: #000;
+  background-color: #fff;
+}
+
+.select_arrow_icon {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #fff;
+  font-size: 18px;
+  z-index: 2;
+}
+
+.ic_textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #fff;
+  background-color: transparent;
+  font-size: 16px;
+  color: #fff;
+  resize: vertical;
+}
+
+.ic_submit_btn {
+  border-radius: 12px;
+  height: 48px;
+  outline: none;
+  border: none;
+  padding: 0px 23px;
+  background: #5c81f7;
+  color: white;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.ic_submit_btn:hover {
+  box-shadow: 0px 2px 20px #5c81f7;
+}
+
+.ic_title {
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+  color: #fff;
+}
+
+.ic_disclaimer_text {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.error {
+  color: red;
+  font-size: 13px;
+  margin-top: 6px;
+  padding-left: 10px;
+}
+.ic_title {
+  display: block;
+  margin-bottom: 24px;
+}
+.ic_apply_for_job_right img {
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 1199.98px) {
+  .ic_submit_btn {
+    height: 45px;
+    padding: 0 20px;
+    font-size: 15px;
+    line-height: normal;
+  }
+  .ic_title {
+    margin-bottom: 20px;
+  }
+}
+@media (max-width: 991.98px) {
+  .ic_submit_btn {
+    height: 40px;
+    font-size: 14px;
+  }
+  .ic_title {
+    margin-bottom: 18px;
+  }
+}
+@media (max-width: 767.98px) {
+  .ic_apply_for_job_right {
+    display: none;
+  }
+  .ic_title {
+    margin-bottom: 16px;
+  }
 }
