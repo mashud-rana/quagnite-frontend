@@ -4,7 +4,7 @@ import styles from "./diversityAndInclusion.module.css";
 import { Col, Row } from "antd";
 import Image from "next/image";
 import { toast, Bounce } from "react-toastify";
-import img1 from "@/assets/images/apply-jobs/form-right.png";
+import img1 from "@/assets/images/apply-jobs/Diversity-img.png";
 import { IoIosArrowDown } from "react-icons/io";
 import { useRouter } from "next/navigation";
 

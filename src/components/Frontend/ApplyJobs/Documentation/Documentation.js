@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styles from "./documentation.module.css";
 import { Col, Row } from "antd";
 import Image from "next/image";
-import img1 from "@/assets/images/apply-jobs/form-right.png";
+import img1 from "@/assets/images/apply-jobs/documentation-img.png";
 import { FaArrowUpLong, FaCheck, FaPlus } from "react-icons/fa6";
 import { toast, Bounce } from "react-toastify";
 
