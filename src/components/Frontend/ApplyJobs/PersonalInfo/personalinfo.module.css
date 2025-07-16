@@ -46,3 +46,44 @@
   padding: 5px 0 0 20px;
   color: red;
 }
+.ic_apply_for_job_right img {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 1199.98px) {
+  .ic_apply_for_job_left input {
+    height: 45px;
+    padding: 0 20px;
+  }
+  .ic_apply_for_job_left button {
+    height: 45px;
+    padding: 0 20px;
+    font-size: 15px;
+    line-height: normal;
+  }
+}
+@media (max-width: 991.98px) {
+  .ic_apply_for_job_left input {
+    height: 40px;
+    padding: 0 15px;
+  }
+  .ic_apply_for_job_left button {
+    height: 40px;
+    font-size: 14px;
+  }
+}
+@media (max-width: 767.98px) {
+  .ic_apply_for_job_right {
+    display: none;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .ic_apply_for_job_name {
+    display: block;
+  }
+  .ic_apply_for_job_name div {
+    width: 100%;
+  }
+}
