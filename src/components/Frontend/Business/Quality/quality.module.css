@@ -1,5 +1,5 @@
 .ic_wrapper {
-  padding: 30px 0;
+  padding: 45px 0;
 }
 
 .backgroundElements {
@@ -62,13 +62,14 @@
 
 .chartsContainer {
   position: relative;
-  height: 350px;
+  height: 323px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .card {
+  max-width: 100%;
   border-radius: 16px;
   position: absolute;
   transition: transform 0.5s ease, box-shadow 0.5s ease;
@@ -78,6 +79,7 @@
 }
 
 .card1 {
+  max-width: 100%;
   top: 0;
   left: 0;
   z-index: 2;
@@ -86,8 +88,7 @@
 }
 
 .card2 {
-  /* width: 450px;
-  height: 350px; */
+  max-width: 100%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) translateY(0px);
@@ -249,6 +250,10 @@
 }
 
 @media (max-width: 1299px) {
+  .ic_grid {
+    gap: 70px;
+  }
+
   .title {
     margin-bottom: 16px;
   }
@@ -271,6 +276,15 @@
 
   .discountText {
     padding: 20px;
+  }
+
+  .button {
+    padding: 10px 24px;
+    border-radius: 8px;
+  }
+
+  .chartsContainer {
+    height: 300px;
   }
 }
 
@@ -300,32 +314,66 @@
   }
 
   .ic_grid {
-    gap: 70px;
+    gap: 50px;
+  }
+
+  .button {
+    padding: 8px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 991px) {
+  .card1 {
+    width: 45%;
+  }
+
+  .card3 {
+    width: 45%;
+  }
+
+  .ic_grid {
+    gap: 40px;
+  }
+
+  .chartsContainer {
+    height: 290px;
+  }
+
+  .ic_wrapper {
+    padding: 30px 0;
   }
 }
 
 @media (max-width: 767px) {
+  .ic_wrapper {
+    padding: 20px 0;
+  }
+
   .ic_grid {
     grid-template-columns: 1fr;
-    gap: 70px;
+    gap: 20px;
     text-align: center;
+    padding-top: 16px;
   }
 
   .chartsContainer {
-    height: auto;
-    min-height: 400px;
+    /* height: auto; */
+    /* height: 323px; */
+    min-height: 250px;
     display: block;
     position: relative;
   }
 
-  .card {
+  /* .card {
     position: relative;
     margin: 0 auto 1.5rem auto;
     transform: none !important;
     animation: none !important;
-  }
+  } */
 
-  .card1,
+  /* .card1,
   .card2,
   .card3 {
     top: auto;
@@ -337,48 +385,36 @@
     max-width: 350px;
     height: auto;
     padding: 1rem;
-  }
+  } */
 
-  .card2 {
+  /* .card2 {
     margin-top: -2rem;
   }
   .card3 {
     margin-top: -2rem;
-  }
-
-  .description {
-    font-size: 1rem;
-  }
-
-  .discountBanner {
-    margin-top: 2rem;
-  }
+  } */
 
   .discountPercentage {
     font-size: 48px;
   }
-}
 
-@media (max-width: 768px) {
-  .section {
-    padding: 4rem 1rem;
+  .chartsContainer {
+    min-height: 300px;
   }
-
   .discountPercentage {
-    font-size: 1.8rem;
+    font-size: 24px;
   }
 
   .discountText {
-    font-size: 1.1rem;
+    font-size: 16px;
   }
 }
+
+/* @media (max-width: 768px) {
+} */
 
 @media (max-width: 480px) {
-  .discountPercentage {
-    font-size: 1.5rem;
-  }
-
-  .discountText {
-    font-size: 1rem;
+  .chartsContainer {
+    min-height: 220px;
   }
 }

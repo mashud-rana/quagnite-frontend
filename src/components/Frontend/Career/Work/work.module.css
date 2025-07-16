@@ -1,0 +1,399 @@
+.ic_grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 0;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.textCard {
+  background-color: #f0f0f0;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  color: #1a1a1a;
+  /* max-width: 500px; */
+}
+
+.description {
+  margin-bottom: 24px;
+}
+
+.button {
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 12px 26px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+}
+
+.button:hover {
+  background-color: #4338ca;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+}
+
+.imageContainer {
+  /* margin-left: -120px; */
+  z-index: 2;
+}
+
+.alumniImage {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  /* filter: grayscale(100%); */
+  object-fit: cover;
+}
+
+/* .....................................................  */
+.ic_wrapper {
+  position: relative;
+}
+
+.floatingElements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ic_circle1 {
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: linear-gradient(108.98deg, #917ffb 27.06%, #441889 90.91%),
+    #d9d9d9;
+  filter: blur(6.1px);
+  animation: float 4s ease-in-out infinite;
+}
+
+.ic_circle2 {
+  position: absolute;
+  top: 75%;
+  left: 55%;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: linear-gradient(108.98deg, #917ffb 27.06%, #441889 90.91%),
+    #d9d9d9;
+  filter: blur(6.1px);
+  animation: float 4s ease-in-out infinite;
+}
+
+.ic_circle3 {
+  position: absolute;
+  top: 10%;
+  left: 42%;
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  background: linear-gradient(108.98deg, #917ffb 27.06%, #441889 90.91%),
+    #d9d9d9;
+  animation: float 4s ease-in-out infinite;
+}
+
+.ic_circle4 {
+  position: absolute;
+  top: 72%;
+  left: 0;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: linear-gradient(108.98deg, #917ffb 27.06%, #441889 90.91%),
+    #d9d9d9;
+  filter: blur(3.1px);
+  animation: float 4s ease-in-out infinite;
+}
+
+.geometricDot1 {
+  position: absolute;
+  top: 15%;
+  left: 5%;
+  width: 12px;
+  height: 59px;
+  background: linear-gradient(180deg, #ff7600 0%, #f69745 100%);
+  border-radius: 11px;
+  transform: rotate(113.29deg);
+  animation: float 2.8s ease-in-out infinite;
+  z-index: 0;
+}
+
+.geometricDot2 {
+  position: absolute;
+  bottom: 8%;
+  left: 8%;
+  width: 12px;
+  height: 59px;
+  background: linear-gradient(180deg, #ff7600 0%, #f69745 100%);
+  border-radius: 11px;
+  transform: rotate(113.29deg);
+  animation: float 2.8s ease-in-out infinite;
+  z-index: 0;
+}
+
+.ic_animation_img {
+  position: absolute;
+  bottom: 6%;
+  left: 27%;
+  animation: pulse 6s ease-in-out infinite;
+}
+
+.ic_animation_img2 {
+  position: absolute;
+  bottom: 5%;
+  left: 20%;
+  animation: pulse 6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: translateY(0) rotate(-25deg) scale(1);
+    filter: brightness(1);
+  }
+  25% {
+    transform: translateY(-5px) rotate(-23deg) scale(1.05);
+    filter: brightness(1.05);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-10px) rotate(-25deg) scale(1.1);
+    filter: brightness(1.1);
+  }
+  75% {
+    transform: translateY(-5px) rotate(-27deg) scale(1.05);
+    filter: brightness(1.05);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+    opacity: 0.6;
+    transform: rotate(-125deg) scale(1);
+  }
+  50% {
+    transform: translateY(-10px);
+    opacity: 1;
+    transform: rotate(-125deg) scale(1.1);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1299px) {
+  .ic_circle1 {
+    right: 29%;
+    width: 40px;
+    height: 40px;
+  }
+
+  .ic_circle2 {
+    right: 2%;
+    width: 40px;
+    height: 40px;
+  }
+
+  .ic_circle3 {
+    right: 10%;
+    width: 25px;
+    height: 25px;
+  }
+
+  .ic_circle4 {
+    top: 74%;
+    width: 40px;
+    height: 40px;
+  }
+
+  .geometricDot1 {
+    width: 10px;
+    height: 50px;
+  }
+
+  .geometricDot2 {
+    width: 10px;
+    height: 50px;
+    bottom: 2%;
+  }
+
+  .ic_animation_img {
+    bottom: 0%;
+    left: 26%;
+    width: 70px;
+    height: 70px;
+  }
+
+  .ic_animation_img2 {
+    position: absolute;
+    bottom: 0%;
+    right: 18%;
+    animation: pulse 6s ease-in-out infinite;
+  }
+}
+
+@media (max-width: 991px) {
+  .ic_grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    text-align: center;
+  }
+
+  .textCard {
+    max-width: 100%;
+  }
+
+  .description {
+    margin-bottom: 20px;
+  }
+
+  .imageContainer {
+    order: -1;
+  }
+
+  /* .imageContainer {
+    margin-left: 0px;
+  } */
+
+  .button {
+    padding: 10px 22px;
+  }
+
+  /* .geometricDot1 {
+    top: 60%;
+    right: 20%;
+    width: 26px;
+    height: 6px;
+    background: linear-gradient(180deg, #ff7600 0%, #f69745 100%);
+    border-radius: 11px;
+    transform: rotate(113.29deg);
+    animation: float 2.8s ease-in-out infinite;
+  } */
+
+  .ic_circle1 {
+    top: 0%;
+    left: 35%;
+    width: 30px;
+    height: 30px;
+  }
+
+  .ic_circle2 {
+    top: 8%;
+    right: 3%;
+    width: 30px;
+    height: 30px;
+  }
+
+  .ic_circle3 {
+    width: 20px;
+    height: 20px;
+  }
+
+  .ic_circle4 {
+    top: 20%;
+    left: 15%;
+    width: 30px;
+    height: 30px;
+  }
+
+  .geometricDot1 {
+    top: 10%;
+    left: 10%;
+    width: 10px;
+    height: 50px;
+  }
+
+  .geometricDot2 {
+    top: 40%;
+    width: 10px;
+    height: 50px;
+    bottom: 2%;
+  }
+
+  .ic_animation_img {
+    top: 30%;
+    left: 3%;
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .textCard {
+    padding: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .description {
+    margin-bottom: 18px;
+  }
+
+  .button {
+    padding: 8px 20px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+
+  .textCard {
+    padding: 22px;
+  }
+
+  .geometricDot1 {
+    width: 20px;
+    height: 3px;
+  }
+
+  .ic_circle1 {
+    top: 4%;
+    right: 38%;
+    width: 20px;
+    height: 20px;
+  }
+
+  .ic_circle2 {
+    top: 50%;
+    right: 3%;
+    width: 20px;
+    height: 20px;
+  }
+
+  .ic_circle3 {
+    width: 10px;
+    height: 10px;
+  }
+
+  .ic_circle4 {
+    top: 20%;
+    left: 15%;
+    width: 20px;
+    height: 20px;
+  }
+
+  .geometricDot1 {
+    top: 10%;
+    left: 40%;
+    width: 7px;
+    height: 40px;
+  }
+
+  .geometricDot2 {
+    top: 40%;
+    width: 7px;
+    height: 40px;
+    height: 50px;
+    bottom: 2%;
+  }
+}

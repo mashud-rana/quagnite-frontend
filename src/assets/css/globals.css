@@ -721,10 +721,6 @@ h6 {
 }
 
 /* .............................  */
-.ic_ant .ant-tabs-nav .ant-tabs-nav-wrap {
-  display: none !important;
-}
-
-.ic_ant .ant-tabs-nav {
-  display: none !important;
+.border {
+  border: 1px solid white;
 }

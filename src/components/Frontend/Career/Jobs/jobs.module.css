@@ -1,0 +1,160 @@
+/* .section {
+  background-color: #000; 
+  padding: 6rem 1rem;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+/* .container {
+  max-width: 1000px;
+  width: 100%;
+  color: #fff;
+} */
+
+.label {
+  color: var(--white);
+  margin-bottom: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 36px;
+}
+
+.title {
+  color: var(--white);
+}
+
+.highlight {
+  color: #f97316; /* Orange highlight */
+}
+
+.seeAllButton {
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 10px 26px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.seeAllButton:hover {
+  background-color: #2a2a2a;
+  transform: translateY(-2px);
+}
+
+.jobList {
+  display: flex;
+  flex-direction: column;
+}
+
+.jobItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 36px;
+  padding-top: 18px;
+  border-bottom: 1px solid #333;
+}
+
+.jobItem:last-child {
+  border-bottom: none; /* No border for the last item */
+}
+
+.jobTitle {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0;
+  color: var(--white);
+}
+
+.jobDescription {
+  color: var(--white);
+  /* margin-top: 10px; */
+  max-width: 700px;
+}
+
+.arrowIcon {
+  width: 44px;
+  height: auto;
+  color: var(--white);
+  flex-shrink: 0;
+  margin-left: 16px;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 1199px) {
+  .arrowIcon {
+    width: 35px;
+  }
+
+  .seeAllButton {
+    padding: 8px 18px;
+    font-size: 14px;
+  }
+
+  .header {
+    margin-bottom: 26px;
+  }
+
+  .label {
+    margin-bottom: 20px;
+  }
+
+  .jobDescription {
+    margin-top: 6px;
+  }
+}
+
+@media (max-width: 768px) {
+  .seeAllButton {
+    width: fit-content;
+  }
+
+  .jobTitle {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .jobTitle {
+    font-size: 18px;
+  }
+
+  .jobItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0px;
+    padding-bottom: 20px;
+    padding-top: 18px;
+  }
+
+  .arrowIcon {
+    width: 30px;
+    align-self: flex-end;
+    /* margin-top: 8px; */
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .label {
+    margin-bottom: 14px;
+  }
+
+  .jobDescription {
+    margin-top: 4px;
+  }
+}
