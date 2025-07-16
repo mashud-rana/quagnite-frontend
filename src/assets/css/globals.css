@@ -125,6 +125,9 @@
 .mb-35 {
   margin-bottom: 35px;
 }
+.mb-24 {
+  margin-bottom: 24px;
+}
 
 .mb_20 {
   margin-bottom: 20px;
@@ -132,6 +135,9 @@
 
 .mt_30 {
   margin-top: 30px;
+}
+.mb-24 {
+  margin-bottom: 24px;
 }
 
 .py_26 {
@@ -304,6 +310,9 @@ h6 {
   .mt_30 {
     margin-top: 28px;
   }
+  .mb-24 {
+    margin-bottom: 22px;
+  }
 
   .mb_20 {
     margin-bottom: 18px;
@@ -375,6 +384,9 @@ h6 {
 
   .mt_30 {
     margin-top: 26px;
+  }
+  .mb-24 {
+    margin-bottom: 20px;
   }
   .mb-18 {
     margin-bottom: 16px;
@@ -449,6 +461,9 @@ h6 {
 
   .mt_30 {
     margin-top: 24px;
+  }
+  .mb-24 {
+    margin-bottom: 18px;
   }
   .mb-18 {
     margin-bottom: 15px;
@@ -549,6 +564,9 @@ h6 {
   .mt_30 {
     margin-top: 22px;
   }
+  .mb-24 {
+    margin-bottom: 16px;
+  }
 
   .mb_16 {
     margin-bottom: 8px;
@@ -595,6 +613,9 @@ h6 {
   }
   .mb-35 {
     margin-bottom: 22px;
+  }
+  .mb-24 {
+    margin-bottom: 14px;
   }
 
   .mb_20 {
@@ -677,6 +698,9 @@ h6 {
   .mt_30 {
     margin-top: 20px;
   }
+  .mb-24 {
+    margin-bottom: 12px;
+  }
   .mb-18 {
     margin-bottom: 13px;
   }
@@ -725,9 +749,11 @@ h6 {
   .mt_30 {
     margin-top: 18px;
   }
-
   .mb_20 {
     margin-bottom: 6px;
+  }
+  .mb-24 {
+    margin-bottom: 10px;
   }
   .mb-18 {
     margin-bottom: 12px;
