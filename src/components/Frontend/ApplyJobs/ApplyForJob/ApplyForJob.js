@@ -13,7 +13,7 @@ const stepData = [
 ];
 
 export default function ApplyForJob() {
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep, setActiveStep] = useState(2);
 
   return (
     <section className={`${styles.ic_apply_for_job} ic_section_space`}>
