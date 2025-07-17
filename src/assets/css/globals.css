@@ -270,6 +270,14 @@ h6 {
 .ic-btn1:hover {
   box-shadow: 0px 2px 20px #5c81f7;
 }
+.ic-btn1.ic-btn2 {
+  background: #272727;
+  transition: all 0.3s;
+}
+.ic-btn1.ic-btn2:hover {
+  background: #5c81f7;
+  box-shadow: 0px 2px 20px #5c81f7;
+}
 
 /* Responsive Design */
 

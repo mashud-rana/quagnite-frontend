@@ -1,0 +1,41 @@
+.ic_top_rated_main {
+  color: aliceblue;
+}
+
+.ic_top_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ic_alumni_card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.ic_alumni_img {
+  border-radius: 16px;
+  background: #d9d9d9;
+  height: 265px;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  overflow: hidden;
+}
+.ic_alumni_img:hover img {
+  transform: scale(1.1);
+}
+.ic_alumni_img img {
+  width: 160px;
+  height: 244px;
+  transition: all linear 0.3s;
+}
+@media (max-width: 1199.98px) {
+  .ic_alumni_img {
+    height: 220px;
+  }
+  .ic_alumni_img img {
+    width: 135px;
+    height: 210px;
+    object-fit: cover;
+  }
+}
