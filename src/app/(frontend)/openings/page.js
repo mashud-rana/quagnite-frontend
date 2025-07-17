@@ -3,10 +3,9 @@ import React from "react";
 
 const OpeningsPage = () => {
   return (
-    <div>
-      <h1>kdk</h1>
+    <>
       <Openings />
-    </div>
+    </>
   );
 };
 

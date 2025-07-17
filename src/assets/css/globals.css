@@ -150,6 +150,10 @@
   width: 100%;
 }
 
+.pt_50 {
+  margin-top: 50px;
+}
+
 p,
 small,
 label,

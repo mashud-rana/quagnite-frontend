@@ -1,60 +1,63 @@
-/* Filter Bar */
 .filterBar {
   margin-bottom: 32px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 16px;
-  color: white;
+  color: var(--white);
 }
 
 .filterLabel {
-  font-size: 1.125rem; /* text-lg */
-  font-weight: 600; /* font-semibold */
+  font-size: 1.125rem;
+  font-weight: 600;
 }
 
-/* Custom Select (Dropdown) */
 .selectWrapper {
   position: relative;
   display: inline-block;
+  width: 120px;
 }
 
 .customSelect {
-  width: 120px;
-  padding: 0.5rem 1rem;
-  padding-right: 2.5rem; /* Space for the custom arrow */
+  width: 90%;
+  height: 50px;
+  padding: 8px 32px 8px 0;
+  background-color: black;
   border: none;
-  background-color: #171717; /* Neutral-900 equivalent */
-  color: white;
-  border-radius: 0.375rem; /* rounded-md */
-  appearance: none; /* Remove default browser arrow */
+  border-top: 2px solid var(--white);
+  color: var(--white);
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   cursor: pointer;
-  font-size: 0.875rem; /* text-sm */
+  line-height: 1;
+  vertical-align: middle;
+  position: relative;
+  z-index: 1;
 }
 
 .customSelect:focus {
+  border-top: 2px solid #f69745;
   outline: none;
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5); /* Focus ring */
+  /* box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5); */
 }
 
 .selectArrowIcon {
   position: absolute;
-  right: 0.75rem;
+  right: 8px;
   top: 50%;
   transform: translateY(-50%);
-  pointer-events: none; /* Allow clicks to pass through to the select */
-  color: white;
+  pointer-events: none;
+  color: var(--white);
+  font-size: 1px;
+  z-index: 2;
 }
-
-/* Job Card */
 .jobCard {
   margin-bottom: 16px;
   border-radius: 8px;
-  overflow: hidden; /* Ensures gradient and shadow are contained */
+  overflow: hidden;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .jobCardHeader {
@@ -73,7 +76,7 @@
 }
 
 .jobCardHeader:hover {
-  background-color: #3f3f46; /* Neutral-700 equivalent */
+  background-color: #3f3f46;
 }
 
 .jobCardHeaderExpanded {
@@ -86,16 +89,16 @@
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease-out;
-  background-color: #262626; /* Default background for content */
+  background-color: #262626;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   position: relative;
 }
 
 .jobCardContentVisible {
-  max-height: 500px; /* Arbitrary large value to show content */
+  max-height: 500px;
   padding: 24px;
-  color: #e4e4e7; /* Gray-200 equivalent */
+  color: #e4e4e7;
 }
 
 .jobCardContentGradientOverlay {
@@ -113,18 +116,18 @@
 
 .jobCardDescription {
   margin-bottom: 16px;
-  font-size: 0.875rem; /* text-sm */
+  font-size: 0.875rem;
 }
 
 .jobCardDetails {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  font-size: 0.875rem; /* text-sm */
+  font-size: 0.875rem;
 }
 
 .jobCardDetailLabel {
-  font-weight: 500; /* font-medium */
+  font-weight: 500;
 }
 
 .jobCardApplyButtonContainer {
@@ -133,13 +136,8 @@
   justify-content: flex-end;
 }
 
-/* Gradient Button */
 .gradientButton {
-  background: linear-gradient(
-    to right,
-    #6366f1,
-    #8b5cf6
-  ); /* Indigo to Violet */
+  background: linear-gradient(to right, #6366f1, #8b5cf6);
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
@@ -147,7 +145,7 @@
   border: none;
   cursor: pointer;
   transition: opacity 0.2s ease-in-out;
-  white-space: nowrap; /* Prevent text wrapping */
+  white-space: nowrap;
 }
 
 .gradientButton:hover {
@@ -202,9 +200,7 @@
 }
 
 .jobTitle {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.3rem;
+  margin-bottom: 12px;
 }
 
 .shortDesc {
@@ -217,5 +213,21 @@
 
 .fullDesc {
   margin-top: 1rem;
-  /* font-size: 0.95rem; */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fullDesc {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.fullDesc.show {
+  max-height: 500px;
+  opacity: 1;
 }

@@ -8,14 +8,14 @@ import React from "react";
 
 const CareerPage = () => {
   return (
-    <div>
+    <>
       <Professional />
       <ImpactCount />
       <Flexibility />
       <Certification />
       <Jobs />
       <Work />
-    </div>
+    </>
   );
 };
 

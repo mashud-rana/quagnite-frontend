@@ -65,13 +65,52 @@ const Openings = () => {
   // const visibleJobs = showAll ? filteredJobs : filteredJobs.slice(0, 3);
 
   return (
-    <section className="ic_section_space ic_ant">
+    <section className="ic_section_space pt_50">
       <div className="container">
         <FilterBar filters={filters} onChange={handleChange} />
 
         <div className={styles.jobContainer}>
           <div className={styles.jobsList}>
             {jobPosts.map((job) => {
+              const isActive = activeId === job.id;
+              return (
+                <div
+                  key={job.id}
+                  className={`${styles.jobCard} ${
+                    isActive ? styles.active : ""
+                  }`}
+                  style={
+                    isActive
+                      ? { backgroundImage: `url(${bgImage.src})` }
+                      : undefined
+                  }
+                  onClick={() => toggleJob(job.id)}
+                >
+                  <div className={styles.jobHeader}>
+                    <div>
+                      <h5 className={styles.jobTitle}>{job.title}</h5>
+                      <p className={styles.shortDesc}>{job.shortDescription}</p>
+                    </div>
+                    <div className={styles.icon}>
+                      {isActive ? <FaChevronUp /> : <FaChevronDown />}
+                    </div>
+                  </div>
+
+                  <div
+                    className={`${styles.fullDesc} ${
+                      isActive ? styles.show : ""
+                    }`}
+                  >
+                    <p>{job.fullDescription}</p>
+                    <p>Location: lorem ipsum</p>
+                    <p>Experience: lorem ipsum</p>
+                    <p>Availability: lorem ipsum</p>
+                  </div>
+                </div>
+              );
+            })}
+
+            {/* {jobPosts.map((job) => {
               const isActive = activeId === job.id;
               return (
                 <div
@@ -98,11 +137,14 @@ const Openings = () => {
                   {isActive && (
                     <div className={styles.fullDesc}>
                       <p>{job.fullDescription}</p>
+                      <p>Location: lorem ipsum</p>
+                      <p>Experience: lorem ipsum</p>
+                      <p>Availability: lorem ipsum</p>
                     </div>
                   )}
                 </div>
               );
-            })}
+            })} */}
           </div>
         </div>
       </div>
