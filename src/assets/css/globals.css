@@ -279,6 +279,24 @@ h6 {
   box-shadow: 0px 2px 20px #5c81f7;
 }
 
+.slick-list {
+  padding: 50px 0 !important;
+}
+
+.slick-track {
+  display: flex;
+  align-items: center;
+}
+
+.slick-slide {
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.slick-center {
+  transform: scale(1.2);
+  z-index: 2;
+}
 /* Responsive Design */
 
 @media (max-width: 1650px) {

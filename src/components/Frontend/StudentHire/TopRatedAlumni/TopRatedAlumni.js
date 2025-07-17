@@ -28,7 +28,7 @@ const alumniData = [
 
 export default function TopRatedAlumni() {
   return (
-    <section className="ic_section_space_bottom">
+    <section className="">
       <div className="container">
         <div className={styles.ic_top_rated_main}>
           <div className={`${styles.ic_top_header} ic_section_heading`}>

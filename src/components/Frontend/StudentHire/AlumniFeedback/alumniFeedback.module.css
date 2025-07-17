@@ -1,0 +1,14 @@
+.ic_alumni_feedback {
+  color: #fff;
+  overflow: hidden;
+}
+
+.ic_slider_item {
+  border-radius: 16px;
+}
+.ic_slider_item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+}
