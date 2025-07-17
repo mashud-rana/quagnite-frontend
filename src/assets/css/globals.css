@@ -189,7 +189,8 @@ input,
 textarea,
 button {
   font-size: 16px;
-  line-height: 24px;
+  line-height: 25px;
+  font-weight: 300;
 }
 ol,
 li {
@@ -520,7 +521,7 @@ h6 {
   .mb_20 {
     margin-bottom: 14px;
   }
-  p,
+  /* p,
   small,
   label,
   span,
@@ -533,7 +534,7 @@ h6 {
   button {
     font-size: 15px;
     line-height: 22px;
-  }
+  } */
   .ic-btn1 {
     height: 45px;
     padding: 0 20px;
@@ -682,7 +683,7 @@ h6 {
   .ic_section_heading {
     margin-bottom: 30px;
   }
-  p,
+  /* p,
   small,
   label,
   span,
@@ -695,7 +696,7 @@ h6 {
   button {
     font-size: 14px;
     line-height: 20px;
-  }
+  } */
 }
 
 @media (max-width: 575.98px) {

@@ -66,14 +66,11 @@
   padding-bottom: 33px;
 }
 
-.ic_panel_content {
-  color: white;
+/* .ic_panel_content {
   font-size: 16px;
   line-height: 1.6;
   margin: 0;
-  opacity: 0.9;
-  /* padding-right: 10px; */
-}
+} */
 
 /* Responsive Design */
 @media (max-width: 1299px) {
@@ -81,10 +78,10 @@
     font-size: 18px;
   }
 
-  .ic_panel_content {
+  /* .ic_panel_content {
     font-size: 15px;
     line-height: 1.5;
-  }
+  } */
 
   .ic_collapse_header {
     padding: 22px 0;
@@ -112,10 +109,10 @@
     margin-bottom: 25px;
   }
 
-  .ic_panel_content {
+  /* .ic_panel_content {
     font-size: 15px;
     line-height: 1.5;
-  }
+  } */
 
   .ic_content_inner {
     padding-bottom: 22px;
