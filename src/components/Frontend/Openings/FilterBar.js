@@ -32,7 +32,7 @@ const filterOptions = {
 const FilterBar = ({ filters, onChange }) => {
   return (
     <div className={styles.filterBar}>
-      <span className={styles.filterLabel}>Filter</span>
+      <h5 className={styles.filterLabel}>Filter</h5>
       {Object.entries(filterOptions).map(([key, options]) => (
         <CustomSelect
           key={key}

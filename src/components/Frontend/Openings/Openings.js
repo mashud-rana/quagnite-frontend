@@ -105,6 +105,12 @@ const Openings = () => {
                     <p>Location: lorem ipsum</p>
                     <p>Experience: lorem ipsum</p>
                     <p>Availability: lorem ipsum</p>
+
+                    <div className={styles.jobCardApplyButtonContainer}>
+                      <button className={styles.gradientButton}>
+                        Apply Now
+                      </button>
+                    </div>
                   </div>
                 </div>
               );

@@ -3,25 +3,26 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 16px;
+  gap: 56px;
   color: var(--white);
 }
 
 .filterLabel {
-  font-size: 1.125rem;
-  font-weight: 600;
+  /* font-size: 1.125rem; */
+  /* font-weight: 600; */
 }
 
 .selectWrapper {
   position: relative;
   display: inline-block;
-  width: 120px;
+  width: 80px;
 }
 
 .customSelect {
+  padding: 8px;
   width: 90%;
   height: 50px;
-  padding: 8px 32px 8px 0;
+  padding: 8px 32px 8px 5px;
   background-color: black;
   border: none;
   border-top: 2px solid var(--white);
@@ -131,17 +132,17 @@
 }
 
 .jobCardApplyButtonContainer {
-  margin-top: 24px;
+  /* margin-top: 24px; */
   display: flex;
   justify-content: flex-end;
 }
 
 .gradientButton {
-  background: linear-gradient(to right, #6366f1, #8b5cf6);
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  font-weight: 600;
+  background: var(--primary-color);
+  color: var(--white);
+  padding: 12px 26px;
+  border-radius: 12px;
+  font-weight: 500;
   border: none;
   cursor: pointer;
   transition: opacity 0.2s ease-in-out;
@@ -158,24 +159,24 @@
   margin: 40px auto;
   padding: 0 20px;
 } */
-
+/* 
 .sectionTitle {
   text-align: center;
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 2rem;
-}
+} */
 
 .jobsList {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 16px;
 }
 
 .jobCard {
   background-color: #191919;
   /* border: 1px solid #e2e2e2; */
-  padding: 1.5rem;
+  padding: 24px;
   border-radius: 12px;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -230,4 +231,28 @@
 .fullDesc.show {
   max-height: 500px;
   opacity: 1;
+}
+
+@media (max-width: 991px) {
+  .jobCard {
+    padding: 18px;
+  }
+
+  .filterBar {
+    gap: 30px;
+  }
+
+  .gradientButton {
+    padding: 8px 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .jobCard {
+    padding: 16px;
+  }
+
+  .filterBar {
+    gap: 20px;
+  }
 }
