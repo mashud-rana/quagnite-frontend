@@ -324,6 +324,9 @@ h6 {
   .mb_16 {
     margin-bottom: 14px;
   }
+  .mb-12 {
+    margin-bottom: 12px;
+  }
 
   .py_26 {
     padding: 24px 0px;
