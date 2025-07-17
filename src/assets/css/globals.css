@@ -1,6 +1,8 @@
 * {
   margin: 0;
   padding: 0;
+  outline: 0;
+  box-sizing: border-box;
 }
 /* variable set up */
 :root {
@@ -117,10 +119,19 @@
 .mb_16 {
   margin-bottom: 16px;
 }
+.mb-18 {
+  margin-bottom: 18px;
+}
 
 /* .mb_17 {
   margin-bottom: 17px;
 } */
+.mb-35 {
+  margin-bottom: 35px;
+}
+.mb-24 {
+  margin-bottom: 24px;
+}
 
 .mb_20 {
   margin-bottom: 20px;
@@ -128,6 +139,18 @@
 
 .mt_30 {
   margin-top: 30px;
+}
+.mb-24 {
+  margin-bottom: 24px;
+}
+.mb-12 {
+  margin-bottom: 12px;
+}
+.mb-8 {
+  margin-bottom: 8px;
+}
+.mb-6 {
+  margin-bottom: 6px;
 }
 
 .py_26 {
@@ -167,6 +190,10 @@ textarea,
 button {
   font-size: 16px;
   line-height: 24px;
+}
+ol,
+li {
+  list-style: none;
 }
 
 h1 {
@@ -232,6 +259,26 @@ h6 {
   padding: 0 15px;
 }
 
+.ic-btn1 {
+  border-radius: 12px;
+  height: 48px;
+  outline: none;
+  border: none;
+  padding: 0px 23px;
+  background: #5c81f7;
+  color: white;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.ic-btn1:hover {
+  box-shadow: 0px 2px 20px #5c81f7;
+}
+
 /* Responsive Design */
 
 @media (max-width: 1650px) {
@@ -241,7 +288,7 @@ h6 {
   }
 }
 
-@media (max-width: 1399px) {
+@media (max-width: 1399.98px) {
   h2 {
     font-size: 66px;
     line-height: 62px;
@@ -278,6 +325,9 @@ h6 {
   .ic_section_space_top_58 {
     padding-top: 54px;
   }
+  .ic_section_heading {
+    margin-bottom: 45px;
+  }
 
   .radious_60 {
     border-radius: 30px 30px 0px 0px;
@@ -294,19 +344,27 @@ h6 {
   .ic_section_space {
     padding: 90px 0;
   }
+  .mb-35 {
+    margin-bottom: 32px;
+  }
 
   .mt_30 {
     margin-top: 28px;
+  }
+  .mb-24 {
+    margin-bottom: 22px;
   }
 
   .mb_20 {
     margin-bottom: 18px;
   }
+  .mb-18 {
+    margin-bottom: 17px;
+  }
 
   .mb_16 {
     margin-bottom: 14px;
   }
-
   .py_26 {
     padding: 24px 0px;
   }
@@ -360,9 +418,18 @@ h6 {
   .ic_section_space {
     padding: 80px 0;
   }
+  .mb-35 {
+    margin-bottom: 28px;
+  }
 
   .mt_30 {
     margin-top: 26px;
+  }
+  .mb-24 {
+    margin-bottom: 20px;
+  }
+  .mb-18 {
+    margin-bottom: 16px;
   }
 
   .mb_16 {
@@ -378,7 +445,7 @@ h6 {
   }
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 1199.98px) {
   h2 {
     font-size: 64px;
     line-height: 68px;
@@ -425,9 +492,21 @@ h6 {
   .ic_section_space_top_58 {
     padding-top: 45px;
   }
+  .ic_section_heading {
+    margin-bottom: 40px;
+  }
+  .mb-35 {
+    margin-bottom: 26px;
+  }
 
   .mt_30 {
     margin-top: 24px;
+  }
+  .mb-24 {
+    margin-bottom: 18px;
+  }
+  .mb-18 {
+    margin-bottom: 15px;
   }
 
   .mb_16 {
@@ -441,9 +520,29 @@ h6 {
   .mb_20 {
     margin-bottom: 14px;
   }
+  p,
+  small,
+  label,
+  span,
+  a,
+  li,
+  ul,
+  ol,
+  input,
+  textarea,
+  button {
+    font-size: 15px;
+    line-height: 22px;
+  }
+  .ic-btn1 {
+    height: 45px;
+    padding: 0 20px;
+    font-size: 15px;
+    line-height: normal;
+  }
 }
 
-@media (max-width: 991px) {
+@media (max-width: 991.98px) {
   h2 {
     font-size: 52px;
     line-height: 58px;
@@ -501,13 +600,25 @@ h6 {
   .ic_section_space {
     padding: 70px 0;
   }
+  .ic_section_heading {
+    margin-bottom: 35px;
+  }
+  .mb-35 {
+    margin-bottom: 24px;
+  }
 
   .mt_30 {
     margin-top: 22px;
   }
+  .mb-24 {
+    margin-bottom: 16px;
+  }
 
   .mb_16 {
     margin-bottom: 8px;
+  }
+  .mb-18 {
+    margin-bottom: 14px;
   }
 
   .py_26 {
@@ -525,9 +636,13 @@ h6 {
   .w_80 {
     width: 70%;
   }
+  .ic-btn1 {
+    height: 40px;
+    font-size: 14px;
+  }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767.98px) {
   h2 {
     font-size: 40px;
     line-height: 46px;
@@ -546,6 +661,12 @@ h6 {
   .w_70 {
     width: 80%;
   }
+  .mb-35 {
+    margin-bottom: 22px;
+  }
+  .mb-24 {
+    margin-bottom: 14px;
+  }
 
   .mb_20 {
     margin-bottom: 10px;
@@ -558,9 +679,26 @@ h6 {
   .ic_section_space_88 {
     padding: 40px 0;
   }
+  .ic_section_heading {
+    margin-bottom: 30px;
+  }
+  p,
+  small,
+  label,
+  span,
+  a,
+  li,
+  ul,
+  ol,
+  input,
+  textarea,
+  button {
+    font-size: 14px;
+    line-height: 20px;
+  }
 }
 
-@media (max-width: 575px) {
+@media (max-width: 575.98px) {
   h3 {
     font-size: 34px;
   }
@@ -599,8 +737,22 @@ h6 {
     padding: 60px 0;
   }
 
+  .ic_section_heading {
+    margin-bottom: 25px;
+  }
+
+  .mb-35 {
+    margin-bottom: 20px;
+  }
+
   .mt_30 {
     margin-top: 20px;
+  }
+  .mb-24 {
+    margin-bottom: 12px;
+  }
+  .mb-18 {
+    margin-bottom: 13px;
   }
 
   .mb_16 {
@@ -647,9 +799,14 @@ h6 {
   .mt_30 {
     margin-top: 18px;
   }
-
   .mb_20 {
     margin-bottom: 6px;
+  }
+  .mb-24 {
+    margin-bottom: 10px;
+  }
+  .mb-18 {
+    margin-bottom: 12px;
   }
 
   .mb_16 {
@@ -666,6 +823,10 @@ h6 {
 
   .ic_section_space_top_58 {
     padding-top: 5px;
+  }
+
+  .ic_section_heading {
+    margin-bottom: 20px;
   }
 
   .w_80 {

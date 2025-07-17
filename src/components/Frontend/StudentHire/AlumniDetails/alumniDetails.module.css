@@ -1,0 +1,97 @@
+.ic_alumni_details {
+  padding: 200px 0 60px 0;
+  color: #fff;
+}
+.ic_mainImage {
+  width: 100%;
+  height: 390px;
+  border-radius: 16px;
+  background: #e7e7e7;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+.ic_subImages {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.ic_subImages img {
+  width: 32%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.ic_designation {
+  font-style: normal;
+  font-weight: 900;
+  line-height: 25.2px;
+  letter-spacing: -0.18px;
+}
+.ic_expertise ul li {
+  margin-bottom: 10px;
+}
+
+.ic_courseItems {
+  display: flex;
+  gap: 35px;
+  flex-wrap: wrap;
+}
+
+.ic_courseItem {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 12px;
+}
+
+.ic_courseItem img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.ic_related {
+  display: flex;
+  gap: 16px;
+}
+@media (max-width: 1399.98px) {
+  .ic_alumni_details {
+    padding: 190px 0 55px 0;
+  }
+}
+@media (max-width: 1199.98px) {
+  .ic_alumni_details {
+    padding: 180px 0 50px 0;
+  }
+}
+@media (max-width: 991.98px) {
+  .ic_alumni_details {
+    padding: 170px 0 45px 0;
+  }
+  .ic_courseItem {
+    width: 50px;
+    height: 50px;
+  }
+  .ic_courseItems {
+    gap: 25px;
+  }
+}
+@media (max-width: 767.98px) {
+  .ic_alumni_details {
+    padding: 160px 0 40px 0;
+  }
+  .ic_left {
+    margin-bottom: 20px;
+  }
+}
+@media (max-width: 575.98px) {
+  .ic_alumni_details {
+    padding: 150px 0 40px 0;
+  }
+}
