@@ -20,5 +20,37 @@
   transform: translate(-50%, -50%);
   width: 48px !important;
   height: 48px !important;
-  cursor: pointer;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@media (max-width: 1199.98px) {
+  .ic_play_icon {
+    width: 45px !important;
+    height: 45px !important;
+  }
+}
+@media (max-width: 991.98px) {
+  .ic_play_icon {
+    width: 42px !important;
+    height: 42px !important;
+  }
+}
+@media (max-width: 767.98px) {
+  .ic_play_icon {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
+@media (max-width: 575.98px) {
+  .ic_play_icon {
+    width: 38px !important;
+    height: 38px !important;
+  }
+}
+@media (max-width: 425.98px) {
+  .ic_play_icon {
+    width: 35px !important;
+    height: 35px !important;
+  }
 }

@@ -8,27 +8,26 @@ import img2 from "@/assets/images/student-hire/slider-img2.png";
 import img3 from "@/assets/images/student-hire/slider-img3.png";
 import icon from "@/assets/images/student-hire/play-icon.svg";
 import Fancybox from "@/components/Share/Frontend/Fancybox/Fancybox";
-import { RiPlayLargeLine } from "react-icons/ri";
 
-const feedbackImages = [
+const feedbackItems = [
   {
     thumb: img1,
-    full: img1,
+    full: "https://www.youtube.com/embed/k9g6aVLH3p4?si=py9Cp92QoZzR1RK6",
     alt: "Alumni 1",
   },
   {
     thumb: img2,
-    full: img2,
+    full: "https://www.youtube.com/embed/k9g6aVLH3p4?si=py9Cp92QoZzR1RK6",
     alt: "Alumni 2",
   },
   {
     thumb: img3,
-    full: img3,
+    full: "https://www.youtube.com/embed/k9g6aVLH3p4?si=py9Cp92QoZzR1RK6",
     alt: "Alumni 3",
   },
   {
     thumb: img1,
-    full: img1,
+    full: "https://www.youtube.com/embed/k9g6aVLH3p4?si=py9Cp92QoZzR1RK6",
     alt: "Alumni 4",
   },
 ];
@@ -41,6 +40,15 @@ export default function AlumniFeedback() {
     centerPadding: "0px",
     slidesToShow: 3,
     speed: 500,
+    responsive: [
+      {
+        breakpoint: 575,
+        settings: {
+          slidesToShow: 1,
+          centerMode: false,
+        },
+      },
+    ],
   };
 
   return (
@@ -55,27 +63,22 @@ export default function AlumniFeedback() {
           <div className={styles.ic_slider}>
             <Fancybox>
               <Slider {...settings}>
-                {feedbackImages.map((item, index) => (
+                {feedbackItems.map((item, index) => (
                   <div className={styles.ic_slider_item} key={index}>
                     <a
-                      href={item.full.src}
+                      href={item.full}
                       data-fancybox="alumni-gallery"
                       data-caption={item.alt}
-                      data-options='{"Image": {"zoom": false}}'
+                      data-type="iframe"
+                      data-options='{"iframe": {"preload": false}}'
                     >
+                      <Image src={item.thumb} alt={item.alt} />
                       <Image
-                        src={item.thumb}
-                        alt={item.alt}
-                        width={400}
-                        height={267}
-                        style={{ borderRadius: "16px" }}
+                        src={icon}
+                        alt="Play Icon"
+                        className={styles.ic_play_icon}
                       />
                     </a>
-                    <Image
-                      src={icon}
-                      alt="icon"
-                      className={styles.ic_play_icon}
-                    />
                   </div>
                 ))}
               </Slider>

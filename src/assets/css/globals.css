@@ -281,21 +281,27 @@ h6 {
 
 .slick-list {
   padding: 50px 0 !important;
+  overflow: visible;
 }
 
 .slick-track {
   display: flex;
   align-items: center;
+  overflow: visible;
 }
 
 .slick-slide {
-  transition: all 0.3s ease;
   z-index: 1;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 .slick-center {
   transform: scale(1.2);
-  z-index: 2;
+  z-index: 3 !important;
+}
+.slick-slider {
+  overflow: visible;
 }
 /* Responsive Design */
 
