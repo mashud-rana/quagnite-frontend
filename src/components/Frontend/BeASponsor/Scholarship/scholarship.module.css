@@ -1,0 +1,38 @@
+.ic_scholarship{
+    color: #fff;
+}
+.ic_step {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.ic_step::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 4px;
+  background: #fff;
+  z-index: -1;
+  transform: translateX(-50%);
+}
+.ic_step_item_circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  background: #fff;
+  text-align: center;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  margin: 0 auto;
+}
+.ic_step_item_circle.active {
+  background: linear-gradient(180deg, #ff7600 0%, #f69745 100%);
+}
