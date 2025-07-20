@@ -30,7 +30,7 @@ const sponsorData = {
 
 export default function Sponsor() {
   return (
-    <section className={`${styles.ic_sponsor} ic_section_space`}>
+    <section className={`${styles.ic_sponsor} ic_section_space_top`}>
       <div className="container">
         <div className={styles.ic_sponsor_main}>
           <Row gutter={24} justify="space-between">
