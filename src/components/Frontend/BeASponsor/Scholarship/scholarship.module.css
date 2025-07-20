@@ -36,3 +36,15 @@
 .ic_step_item_circle.active {
   background: linear-gradient(180deg, #ff7600 0%, #f69745 100%);
 }
+@media (max-width: 1199.98px) {
+  .ic_step_item_circle {
+    width: 70px;
+    height: 70px;
+  }
+}
+@media (max-width: 991.98px) {
+  .ic_step_item_circle {
+    width: 60px;
+    height: 60px;
+  }
+}
