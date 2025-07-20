@@ -14,11 +14,13 @@
   bottom: -5px;
   width: 800px;
   height: auto;
+  transition: all 0.3s;
 }
 .ic_banner_right img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  transition: all 0.3s;
 }
 
 @media (max-width: 1399.98px) {
