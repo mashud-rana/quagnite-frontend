@@ -23,15 +23,78 @@
   color: var(--white);
 }
 
-.ic_card {
+.ic_des {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+/* .ic_card {
   padding: 30px 38px;
   background-color: #191919;
   border-radius: 16px;
 }
 
-.ic_des {
-  margin-top: 10px;
+.ic_card:hover {
+  background-color: red;
+} */
+
+.ic_card {
+  position: relative;
+  overflow: hidden;
+  padding: 30px 38px;
+  background-color: #191919;
+  border-radius: 16px;
+  transition: transform 0.4s ease, background-color 0.4s ease;
 }
+
+.ic_card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../../../../assets/images/all/latest-update-bg.png"); /* replace with your image path */
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 0;
+}
+
+.ic_card:hover {
+  transform: scale(1.01);
+}
+
+.ic_card:hover::before {
+  opacity: 1;
+}
+
+/* Keep content above the background image */
+.ic_card * {
+  position: relative;
+  z-index: 1;
+}
+
+.ic_card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5); /* Optional dark overlay for readability */
+  z-index: 0;
+  transition: background 0.4s ease;
+}
+
+.ic_card:hover::after {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 1299px) {
+  .ic_des {
+    font-size: 16px;
+  }
+}
+
 @media (max-width: 991px) {
   .ic_card {
     padding: 20px 26px;
@@ -39,6 +102,10 @@
 
   .ic_flex {
     margin-bottom: 30px;
+  }
+
+  .ic_des {
+    font-size: 16px;
   }
 }
 

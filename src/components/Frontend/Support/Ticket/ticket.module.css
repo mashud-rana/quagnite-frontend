@@ -1,0 +1,123 @@
+.ic_grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+.teammateContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px 30px 30px 30px;
+  gap: 16px;
+}
+
+.ctaButton {
+  margin-top: 10px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 12px 30px;
+  font-size: 15px;
+  border: none;
+  font-weight: 500;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-transform: uppercase;
+}
+
+.ctaButton:hover {
+  transform: scale(1.03);
+}
+
+.ic_img_wrapper {
+  position: relative;
+}
+
+.teammateImage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+}
+
+.teammateImage1 {
+  position: absolute;
+  top: -30px;
+  object-fit: contain;
+}
+
+@media (max-width: 1399px) {
+  .teammateImage1 {
+    width: 270px;
+    height: auto;
+  }
+}
+
+@media (max-width: 1199px) {
+  .ctaButton {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .teammateContent {
+    gap: 10px;
+  }
+  .teammateImage1 {
+    width: 250px;
+    height: auto;
+  }
+}
+
+@media (max-width: 1040px) {
+  .ctaButton {
+    padding: 8px 18px;
+    font-size: 12px;
+  }
+
+  .teammateContent {
+    gap: 3px;
+  }
+}
+
+@media (max-width: 991px) {
+  .teammateImage {
+    position: static;
+  }
+
+  .ic_grid {
+    gap: 0px;
+  }
+
+  .teammateImage1 {
+    width: 220px;
+    height: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .ic_grid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 0px;
+  }
+  .teammateImage {
+    position: static;
+    display: flex;
+    justify-content: center;
+  }
+
+  .teammateImage1 {
+    position: static;
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    padding-top: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .teammateImage1 {
+    max-width: 180px;
+    height: auto;
+  }
+}

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import DaynamicCollaps from "../../Hiring/SkillCollapse/DaynamicCollaps";
 import { ImSearch } from "react-icons/im";
+import styles from "./supportfaq.module.css";
 
 const SupportFaq = () => {
   const [activeKey, setActiveKey] = useState("1");
@@ -47,11 +48,17 @@ const SupportFaq = () => {
     <section>
       <div className="ic_section_space_58 radious_60 ic_bg">
         <div className="container">
-          <div className={`${styles.ic_searchWrapper} mb-35`}>
+          <div className=" mb-35">
+            <h6 className="mb_16">FAQ</h6>
+            <h4>
+              You&apos;ve got questions, we&lsquo;ve got <span>answers</span>
+            </h4>
+          </div>
+          <div className={`${styles.ic_searchWrapper}`}>
             <input
               type="text"
               className={`${styles.ic_searchBox} `}
-              value={searchTerm}
+              // value={searchTerm}
               name="search"
               id="faq-search"
               onChange={(e) => setSearchTerm(e.target.value)}
