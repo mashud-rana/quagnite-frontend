@@ -1,3 +1,4 @@
+import AvailableScholarship from "@/components/Frontend/ApplyScholarship/AvailableScholarship/AvailableScholarship";
 import Faq from "@/components/Frontend/ApplyScholarship/Faq/Faq";
 import Scholarship from "@/components/Frontend/BeASponsor/Scholarship/Scholarship";
 import React from "react";
@@ -7,6 +8,7 @@ export default function page() {
     <div className="ic_section_margin_top_80">
       <Scholarship />
       <Faq />
+      <AvailableScholarship />
     </div>
   );
 }

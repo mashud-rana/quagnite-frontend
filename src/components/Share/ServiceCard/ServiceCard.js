@@ -6,7 +6,7 @@ import styles from "./service.module.css";
 
 export default function ServiceCard({ data = [], buttonText = "View" }) {
   return (
-    <Row gutter={24}>
+    <Row gutter={24} className={styles.ic_service_item}>
       {data.map((alumni, index) => (
         <Col xs={24} sm={12} md={12} lg={8} key={index} className="mb-24">
           <div className={styles.ic_alumni_card}>
