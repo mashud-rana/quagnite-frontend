@@ -3,6 +3,7 @@ import Scholarship from "@/components/Frontend/BeASponsor/Scholarship/Scholarshi
 import React from "react";
 import WeOffer from "@/components/Frontend/BeASponsor/WeOffer/WeOffer";
 import SponsorBanner from "@/components/Frontend/BeASponsor/Banner/Banner";
+import Success from "@/components/Frontend/Impact/Success/Success";
 
 export default function page() {
   return (
@@ -11,6 +12,7 @@ export default function page() {
       <Sponsor />
       <Scholarship />
       <WeOffer />
+      <Success />
     </>
   );
 }
