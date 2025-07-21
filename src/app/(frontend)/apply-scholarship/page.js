@@ -1,5 +1,6 @@
 import AvailableScholarship from "@/components/Frontend/ApplyScholarship/AvailableScholarship/AvailableScholarship";
 import Faq from "@/components/Frontend/ApplyScholarship/Faq/Faq";
+import Testimonial from "@/components/Frontend/ApplyScholarship/Testimonial/Testimonial";
 import Scholarship from "@/components/Frontend/BeASponsor/Scholarship/Scholarship";
 import React from "react";
 
@@ -9,6 +10,7 @@ export default function page() {
       <Scholarship />
       <Faq />
       <AvailableScholarship />
+      <Testimonial />
     </div>
   );
 }
