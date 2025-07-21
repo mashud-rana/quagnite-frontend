@@ -7,6 +7,7 @@ import icon1 from "@/assets/images/apply-scholarship/ratings1.svg";
 import icon2 from "@/assets/images/apply-scholarship/ratings2.svg";
 import bg from "@/assets/images/apply-scholarship/testimonials-bg.png";
 import Image from "next/image";
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 const testimonials = [
   {
@@ -78,28 +79,31 @@ export default function Testimonial() {
       style={{ backgroundImage: `url(${bg.src})` }}
     >
       <div className="container">
-        <h6 className="mb_20">TESTIMONIALS</h6>
-        <h3>Lorem Ipsum Dolar Sit Amet</h3>
-
-        <Slider {...settings}>
-          {testimonials.map((item) => (
-            <div key={item.id} className={`${styles.ic_slide} mb_30`}>
-              <div className={`${styles.ic_rating} mb_16`}>
-                {[...Array(5)].map((_, i) => (
-                  <Image
-                    key={i}
-                    src={i < item.rating ? icon1 : icon2}
-                    alt="rating icon"
-                    width={20}
-                    height={20}
-                  />
-                ))}
+        <CardAnimation index={0} direction="down">
+          <h6 className="mb_20">TESTIMONIALS</h6>
+          <h3>Lorem Ipsum Dolar Sit Amet</h3>
+        </CardAnimation>
+        <CardAnimation index={0} direction="up">
+          <Slider {...settings}>
+            {testimonials.map((item) => (
+              <div key={item.id} className={`${styles.ic_slide} mb_30`}>
+                <div className={`${styles.ic_rating} mb_16`}>
+                  {[...Array(5)].map((_, i) => (
+                    <Image
+                      key={i}
+                      src={i < item.rating ? icon1 : icon2}
+                      alt="rating icon"
+                      width={20}
+                      height={20}
+                    />
+                  ))}
+                </div>
+                <p className="mb_16">{item.feedback}</p>
+                <p className="fw_500 ">{item.name}</p>
               </div>
-              <p className="mb_16">{item.feedback}</p>
-              <p className="fw_500 ">{item.name}</p>
-            </div>
-          ))}
-        </Slider>
+            ))}
+          </Slider>
+        </CardAnimation>
       </div>
     </section>
   );
