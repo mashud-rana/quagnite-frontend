@@ -1,0 +1,25 @@
+.grid {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px 0;
+  text-align: center;
+}
+
+.title {
+  font-size: 96px;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 1024px) {
+  .title {
+    font-size: 72px;
+  }
+}
+
+@media (max-width: 575px) {
+  .title {
+    font-size: 48px;
+  }
+}
