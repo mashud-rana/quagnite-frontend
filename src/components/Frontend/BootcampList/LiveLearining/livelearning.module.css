@@ -1,6 +1,6 @@
-.ic_title {
+/* .ic_title {
   margin-bottom: 36px;
-}
+} */
 
 .grid {
   display: grid;
@@ -78,7 +78,8 @@
 }
 
 .ic_card_title {
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 600;
   margin: 18px 0px 16px 0;
 }
 
@@ -103,9 +104,72 @@
   transform: translateY(-1px);
 }
 
+.ic_filter_wrapper {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.ic_btn {
+  padding: 10px 26px;
+  font-size: 15px;
+  text-transform: uppercase;
+  font-weight: 500;
+  border-radius: 12px;
+  border: none;
+  background-color: #d0d0d0;
+}
+
+.ic_select_wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ic_select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: transparent;
+  border-top: 2px solid #f69745;
+  padding: 10px 5px 10px 5px;
+  cursor: pointer;
+}
+
+.ic_arrow {
+  position: absolute;
+  right: 0px;
+  pointer-events: none;
+  font-size: 14px;
+  color: #333;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.ic_title_container {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  margin-bottom: 36px;
+}
+
+.ic_logo_title_container {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.ic_log_title {
+  font-size: 32px;
+  font-weight: 700;
+}
 /* Responsive Design */
 @media (max-width: 1199px) {
-  .ic_title {
+  .ic_title_container {
     margin-bottom: 30px;
   }
 
@@ -118,6 +182,14 @@
     border-radius: 10px;
     font-size: 14px;
   }
+
+  .ic_log_title {
+    font-size: 28px;
+  }
+
+  .ic_filter_wrapper {
+    gap: 30px;
+  }
 }
 
 @media (max-width: 991px) {
@@ -126,7 +198,7 @@
     gap: 18px;
   }
 
-  .ic_title {
+  .ic_title_container {
     margin-bottom: 26px;
   }
 
@@ -141,6 +213,20 @@
   .ic_button {
     padding: 8px 18px;
   }
+
+  .ic_log_title {
+    font-size: 24px;
+  }
+
+  .ic_btn {
+    padding: 8px 22px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+
+  .ic_filter_wrapper {
+    gap: 20px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -149,7 +235,9 @@
     gap: 14px;
   }
 
-  .ic_title {
+  .ic_title_container {
+    flex-direction: column;
+    gap: 20px;
     margin-bottom: 24px;
   }
 
@@ -159,6 +247,11 @@
 
   .ic_description {
     margin-bottom: 18px;
+  }
+
+  .ic_btn {
+    padding: 6px 18px;
+    font-size: 13px;
   }
 }
 
@@ -170,5 +263,9 @@
 
   .iconContainer {
     padding: 12px 0px;
+  }
+
+  .ic_log_title {
+    font-size: 22px;
   }
 }

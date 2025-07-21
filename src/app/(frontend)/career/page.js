@@ -1,3 +1,4 @@
+import CareerBanner from "@/components/Frontend/Career/CareerBanner/CareerBanner";
 import Certification from "@/components/Frontend/Career/Certification/Certification";
 import Flexibility from "@/components/Frontend/Career/Flexibility/Flexibility";
 import Jobs from "@/components/Frontend/Career/Jobs/Jobs";
@@ -9,6 +10,7 @@ import React from "react";
 const CareerPage = () => {
   return (
     <>
+      <CareerBanner />
       <Professional />
       <ImpactCount />
       <Flexibility />

@@ -23,7 +23,7 @@ const featuresData = [
 
 const Bootcamp = () => {
   return (
-    <section className="ic_section_space">
+    <section className="ic_section_space_top">
       <div className="container ">
         <div className={styles.ic_bootcamp_container}>
           <CardAnimation index={0} direction="up">

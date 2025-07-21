@@ -8,6 +8,7 @@
 .leftContent {
   color: white;
   z-index: 2;
+  padding: 200px 0;
 }
 
 .heroDescription {
@@ -18,32 +19,37 @@
   margin: 30px 0 0 0;
 }
 
-.ic_hero_img {
-  /* width: 100%; */
-  padding-top: 85px;
+.ic_wrapper {
   position: relative;
 }
 
-.ic_hero_img img {
-  object-fit: contain;
+.ic_hero_img {
+  padding-top: 120px;
+  position: absolute;
+  bottom: 0;
+  right: 20px;
+  object-fit: fill;
+  height: auto;
+  border: 2px solid white;
 }
 
-.ic_btn {
-  padding: 10px 26px;
-  color: var(--white);
-  background-color: var(--primary-color);
-  border-radius: 12px;
-  font-size: 15px;
-  text-transform: uppercase;
-  margin-top: 26px;
-  border: none;
-}
+@media (max-width: 1650px) {
+  .ic_hero_img {
+    width: 800px;
+  }
 
-/* Responsive Design */
+  .leftContent {
+    padding: 170px 0;
+  }
+}
 
 @media (max-width: 1399px) {
   .ic_hero_img {
-    padding-top: 80px;
+    width: 750px;
+  }
+
+  .leftContent {
+    padding: 150px 0;
   }
 
   .ic_hero_img img {
@@ -58,11 +64,38 @@
   .heroDescription {
     margin: 25px 0 0 0;
   }
+
+  .progressBar {
+    top: 6%;
+    left: 20%;
+    width: 100px;
+    height: 100px;
+  }
+
+  .progressText {
+    font-size: 10px;
+    height: 35px;
+    width: 35px;
+  }
+}
+
+@media (max-width: 1299px) {
+  .ic_hero_img {
+    width: 650px;
+  }
+
+  .leftContent {
+    padding: 120px 0;
+  }
 }
 
 @media (max-width: 1199px) {
   .ic_hero_img {
-    padding-top: 75px;
+    width: 600px;
+  }
+
+  .leftContent {
+    padding: 120px 0;
   }
 
   .ic_hero_img img {
@@ -92,12 +125,13 @@
   }
 
   .ic_hero_img {
-    padding-top: 20px;
+    width: 500px;
+    position: relative;
+    border: 2px solid white;
   }
 
-  .ic_hero_img img {
-    width: 450px;
-    height: auto;
+  .leftContent {
+    padding: 0px 0;
   }
 }
 
@@ -107,33 +141,12 @@
     font-weight: 300;
   }
 
-  .ic_hero_img img {
-    width: 400px;
-    height: auto;
-  }
-
   .ic_hero_container {
     padding: 50px 50px 0px 50px;
   }
-
-  .ic_btn {
-    padding: 8px 22px;
-    border-radius: 10px;
-    font-size: 14px;
-    margin-top: 20px;
-  }
 }
 
-/* @media (max-width: 767px) {
-
-} */
-
 @media (max-width: 575px) {
-  .ic_hero_img img {
-    width: 350px;
-    height: auto;
-  }
-
   .heroDescription {
     margin: 16px 0 0 0;
   }
@@ -144,11 +157,6 @@
 }
 
 @media (max-width: 480px) {
-  .ic_hero_img img {
-    width: 300px;
-    height: auto;
-  }
-
   .ic_hero_container {
     padding: 50px 0px 0px 0px;
   }

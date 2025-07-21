@@ -683,6 +683,12 @@ h6 {
   .ic_section_heading {
     margin-bottom: 30px;
   }
+
+  h5 {
+    font-size: 18px;
+    line-height: 26px;
+  }
+
   /* p,
   small,
   label,

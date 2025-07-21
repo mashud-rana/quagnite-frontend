@@ -1,11 +1,13 @@
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 import Image from "next/image";
-import React from "react";
+import styles from "./careerBanner.module.css";
+import bg from "@/assets/images/all/career-bg.png";
+import img from "@/assets/images/all/career-banner.png";
 
 const CareerBanner = () => {
   return (
     <section
-      className="ic_section_margin_top_80"
+      className="ic_section_margin_top_80 "
       style={{
         backgroundImage: `url(${bg.src})`,
         backgroundSize: "cover",
@@ -29,15 +31,19 @@ const CareerBanner = () => {
                 industry. Join a team that shares your passion for excellence
                 and desire to provide opportunity to the world.
               </p>
+
+              <button className={styles.ic_btn}>Join us</button>
             </CardAnimation>
           </div>
 
           {/* Right Content - 3 Images Layout */}
 
-          <div className={styles.ic_hero_img}>
-            <CardAnimation index={0} direction="right">
-              <Image src={img} alt="" />
-            </CardAnimation>
+          <div>
+            <div className={styles.ic_hero_img}>
+              <CardAnimation index={0} direction="right">
+                <Image src={img} alt="" width={700} height={580} />
+              </CardAnimation>
+            </div>
           </div>
         </div>
       </div>

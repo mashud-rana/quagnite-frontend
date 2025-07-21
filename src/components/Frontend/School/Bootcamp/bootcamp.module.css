@@ -54,6 +54,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: calc(100% - 46px);
+  height: 100%;
 }
 
 .ic_button {
