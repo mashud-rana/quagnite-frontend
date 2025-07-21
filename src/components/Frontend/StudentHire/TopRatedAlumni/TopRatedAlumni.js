@@ -1,9 +1,8 @@
 "use client";
 import React from "react";
 import styles from "./topRatedAlumni.module.css";
-import Image from "next/image";
-import { Row, Col } from "antd";
 import img1 from "@/assets/images/student-hire/img1.png";
+import ServiceCard from "@/components/Share/ServiceCard/ServiceCard";
 
 const alumniData = [
   {
@@ -38,22 +37,7 @@ export default function TopRatedAlumni() {
             </button>
           </div>
 
-          <Row gutter={24}>
-            {alumniData.map((alumni, index) => (
-              <Col xs={24} sm={12} md={12} lg={8} key={index} className="mb-24">
-                <div className={styles.ic_alumni_card}>
-                  <div className={`${styles.ic_alumni_img} mb-12`}>
-                    <Image src={alumni.image} alt={alumni.name} />
-                  </div>
-                  <p className="mb_16">{alumni.name}</p>
-                  <p className="mb-24">{alumni.description}</p>
-                  <button type="default" className="ic-btn1 ic-btn2">
-                    View
-                  </button>
-                </div>
-              </Col>
-            ))}
-          </Row>
+          <ServiceCard data={alumniData} />
         </div>
       </div>
     </section>
