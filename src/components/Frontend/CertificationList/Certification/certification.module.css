@@ -1,3 +1,12 @@
-.ic_padding_top {
-  margin-top: 44px;
+.ic_grid {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (max-width: 991px) {
+  .ic_grid {
+    margin-top: 40px;
+  }
 }

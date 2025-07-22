@@ -53,7 +53,7 @@ const Filter = () => {
       label: "Salary",
       value: salary,
       setValue: setSalary,
-      options: ["Any", "< $50k", "$50k - $80k", "$80k - $120k", "$120k+"],
+      options: ["Any", " $80k", " $120k", "$120k+"],
       isActive: false,
     },
   ];

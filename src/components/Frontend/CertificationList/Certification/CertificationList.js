@@ -37,7 +37,7 @@ const CertificationList = () => {
   return (
     <section>
       <div className="container">
-        <div className={styles.ic_padding_top}>
+        <div className={styles.ic_grid}>
           {certificates.map((cert, index) => (
             <CertificateCard
               key={index}

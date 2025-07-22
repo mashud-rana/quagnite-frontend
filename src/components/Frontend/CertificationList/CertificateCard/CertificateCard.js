@@ -13,50 +13,39 @@ const CertificateCard = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
-    <div
-      className={styles.card}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <div className={`${styles.card}`}>
       {/* Left - Certificate Image */}
-      <div className={styles.certificateImageContainer}>
+      <div className={styles.certificate_image_container}>
         <Image
-          src={certificateImage || "/placeholder.svg"}
+          src={certificateImage}
           alt="Certificate"
           width={350}
           height={250}
-          className={styles.certificateImage}
+          className={styles.ic_certificate_image}
         />
       </div>
 
       {/* Right - Content */}
-      <div
-        className={`${styles.contentRight} ${
-          isHovered ? styles.hoverBackground : ""
-        }`}
-      >
-        <h3 className={styles.title}>{title}</h3>
-        <p className={styles.description}>{description}</p>
-        <div className={styles.details}>
-          <p>
-            <span className={styles.detailLabel}>Location:</span> {location}
-          </p>
-          <p>
-            <span className={styles.detailLabel}>Experience required:</span>{" "}
-            {experience}
-          </p>
-          <p>
-            <span className={styles.detailLabel}>Availability:</span>{" "}
-            {availability}
-          </p>
+      <div className={styles.ic_center}>
+        <div className={`${styles.ic_content_right} `}>
+          <h5 className={styles.title}>{title}</h5>
+          <p className={styles.description}>{description}</p>
+          <div className={styles.details}>
+            <p>
+              <span>Location:</span> {location}
+            </p>
+            <p>
+              <span>Experience required:</span> {experience}
+            </p>
+            <p>
+              <span>Availability:</span> {availability}
+            </p>
+          </div>
         </div>
-        <button
-          className={`${styles.exploreButton} ${
-            isHovered ? styles.hoverButton : ""
-          }`}
-        >
-          EXPLORE
-        </button>
+      </div>
+
+      <div className={styles.ic_btn_container}>
+        <button className={styles.ic_btn}>explore</button>
       </div>
     </div>
   );
