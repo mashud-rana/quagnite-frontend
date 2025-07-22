@@ -24,13 +24,14 @@
 }
 
 .ic_hero_img {
-  padding-top: 120px;
+  width: 930px;
+  height: auto;
+  /* padding-top: 50px; */
   position: absolute;
   bottom: 0;
   right: 20px;
   object-fit: fill;
   height: auto;
-  border: 2px solid white;
 }
 
 @media (max-width: 1650px) {
@@ -127,7 +128,8 @@
   .ic_hero_img {
     width: 500px;
     position: relative;
-    border: 2px solid white;
+    place-self: center;
+    right: 0;
   }
 
   .leftContent {
@@ -154,10 +156,18 @@
   .ic_hero_container {
     padding: 50px 10px 0px 10px;
   }
+
+  .ic_hero_img {
+    width: 400px;
+  }
 }
 
 @media (max-width: 480px) {
   .ic_hero_container {
     padding: 50px 0px 0px 0px;
+  }
+
+  .ic_hero_img {
+    width: 300px;
   }
 }

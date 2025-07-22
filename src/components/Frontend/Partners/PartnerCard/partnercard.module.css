@@ -1,0 +1,146 @@
+.ic_team_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-items: center;
+}
+
+.ic_team_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-items: center;
+}
+
+.ic_team_card {
+  background-color: transparent;
+  border-radius: 16px;
+  width: 100%;
+  transition: all 0.5s ease-in-out;
+}
+
+.ic_team_card:hover {
+  transform: translateY(-8px);
+}
+
+.ic_team_card:hover .ic_btn {
+  background: var(--primary-color);
+}
+
+.ic_image_container {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  margin-bottom: 24px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(62.7px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ic_card_content {
+  padding: 0px;
+}
+
+.ic_member_name {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  line-height: 1.4;
+  color: var(--white);
+  opacity: 0.8;
+}
+
+.ic_member_description {
+  margin-bottom: 20px;
+  color: var(--white);
+  opacity: 0.6;
+}
+
+.ic_btn {
+  background: #272727;
+  color: var(--white);
+  border: none;
+  padding: 13px 27px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.ic_btn:hover {
+  background: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(74, 144, 226, 0.3);
+}
+
+.ic_member_image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 1399px) {
+  .ic_btn {
+    padding: 10px 22px;
+    font-size: 14px;
+    border-radius: 11px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .ic_image_container {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 991px) {
+  .ic_team_grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .ic_member_name {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .ic_member_description {
+    margin-bottom: 18px;
+  }
+
+  .ic_social_links {
+    gap: 10px;
+  }
+
+  .ic_btn {
+    padding: 8px 20px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 575px) {
+  .ic_team_grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ic_member_name {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .ic_member_description {
+    margin-bottom: 18px;
+  }
+
+  .ic_btn {
+    padding: 7px 19px;
+    font-size: 11px;
+    border-radius: 8px;
+  }
+}

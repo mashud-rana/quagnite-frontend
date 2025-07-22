@@ -1,10 +1,11 @@
+import BlockBanner from "@/components/Frontend/Blockchain/BlockBanner/BlockBanner";
 import Courses from "@/components/Frontend/Blockchain/Courses/Courses";
 import React from "react";
 
 const BlockchainCoursePage = () => {
   return (
     <>
-      <h1>kdkd</h1>
+      <BlockBanner />
       <Courses />
     </>
   );
