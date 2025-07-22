@@ -2,13 +2,13 @@ import CertificationList from "@/components/Frontend/CertificationList/Certifica
 import Filter from "@/components/Frontend/CertificationList/Filter/Filter";
 import React from "react";
 
-const page = () => {
+const CertificationListPage = () => {
   return (
-    <div>
+    <>
       <Filter />
       <CertificationList />
-    </div>
+    </>
   );
 };
 
-export default page;
+export default CertificationListPage;

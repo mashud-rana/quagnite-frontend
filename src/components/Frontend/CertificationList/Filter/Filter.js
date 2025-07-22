@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
 import styles from "./filter.module.css";
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 const Filter = () => {
   // State for each filter's selected value
@@ -70,63 +71,65 @@ const Filter = () => {
   return (
     <div className="ic_section_space_top ">
       <div className="container">
-        <div className={styles.ic_grid}>
-          <span className={styles.filterLabel}>Filter</span>
-          <div className={styles.filterOptions}>
-            {filters.map((filter, index) => (
-              <div
-                key={index}
-                className={`${styles.dropdownWrapper} ${
-                  openDropdown === filter.label ? styles.show : ""
-                }`}
-              >
+        <CardAnimation index={0} direction="up">
+          <div className={styles.ic_grid}>
+            <span className={styles.filterLabel}>Filter</span>
+            <div className={styles.filterOptions}>
+              {filters.map((filter, index) => (
                 <div
-                  className={`${styles.filterDropdown} ${
-                    openDropdown === filter.label ? styles.active : ""
+                  key={index}
+                  className={`${styles.dropdownWrapper} ${
+                    openDropdown === filter.label ? styles.show : ""
                   }`}
-                  onClick={() => handleDropdownToggle(filter.label)}
-                  aria-haspopup="true"
-                  aria-expanded={openDropdown === filter.label}
                 >
-                  <span className={styles.filterText}>{filter.label}</span>
-                  <BsChevronDown
-                    className={`${styles.filterIcon} ${
-                      openDropdown === filter.label ? styles.rotated : ""
-                    }`}
-                  />
                   <div
-                    className={`${styles.underline} ${
-                      filter.isActive ? styles.activeUnderline : ""
+                    className={`${styles.filterDropdown} ${
+                      openDropdown === filter.label ? styles.active : ""
                     }`}
-                  ></div>
-                </div>
-                {openDropdown === filter.label && (
-                  <div className={styles.dropdownContent}>
-                    <div className={styles.dropdownLabel}>{filter.label}</div>
-                    <div className={styles.dropdownSeparator}></div>
-                    {filter.options.map((option, optIndex) => (
-                      <div
-                        key={optIndex}
-                        className={`${styles.dropdownItem} ${
-                          filter.value === option ? styles.selectedItem : ""
-                        }`}
-                        onClick={() =>
-                          handleOptionSelect(
-                            filter.label,
-                            option,
-                            filter.setValue
-                          )
-                        }
-                      >
-                        {option}
-                      </div>
-                    ))}
+                    onClick={() => handleDropdownToggle(filter.label)}
+                    aria-haspopup="true"
+                    aria-expanded={openDropdown === filter.label}
+                  >
+                    <span className={styles.filterText}>{filter.label}</span>
+                    <BsChevronDown
+                      className={`${styles.filterIcon} ${
+                        openDropdown === filter.label ? styles.rotated : ""
+                      }`}
+                    />
+                    <div
+                      className={`${styles.underline} ${
+                        filter.isActive ? styles.activeUnderline : ""
+                      }`}
+                    ></div>
                   </div>
-                )}
-              </div>
-            ))}
+                  {openDropdown === filter.label && (
+                    <div className={styles.dropdownContent}>
+                      <div className={styles.dropdownLabel}>{filter.label}</div>
+                      <div className={styles.dropdownSeparator}></div>
+                      {filter.options.map((option, optIndex) => (
+                        <div
+                          key={optIndex}
+                          className={`${styles.dropdownItem} ${
+                            filter.value === option ? styles.selectedItem : ""
+                          }`}
+                          onClick={() =>
+                            handleOptionSelect(
+                              filter.label,
+                              option,
+                              filter.setValue
+                            )
+                          }
+                        >
+                          {option}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        </CardAnimation>
       </div>
     </div>
   );
