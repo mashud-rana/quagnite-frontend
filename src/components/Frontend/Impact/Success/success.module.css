@@ -140,7 +140,7 @@
   }
 
   .ic_image_container {
-    height: 150px;
+    height: 160px;
   }
 
   .ic_grid {
@@ -154,10 +154,10 @@
   }
 
   .ic_grid {
-    gap: 50px;
+    gap: 40px;
   }
 
   .ic_image_container {
-    height: 100px;
+    height: 110px;
   }
 }
