@@ -27,7 +27,7 @@ const Dreams = () => {
   }, []);
 
   return (
-    <section className="">
+    <section>
       <div className="container">
         <CardAnimation index={1} direction="up">
           <div className="ic_bg radious_16">
