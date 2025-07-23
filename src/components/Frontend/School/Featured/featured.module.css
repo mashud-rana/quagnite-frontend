@@ -56,6 +56,11 @@
   justify-content: space-between;
 }
 
+.card:hover .ic_button {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
 /* Image blur layer */
 .card::before {
   content: "";
@@ -114,6 +119,7 @@
 .ic_icn {
   color: #1179ef;
   margin-top: 3px;
+  font-size: 20px;
 }
 
 .ic_button {

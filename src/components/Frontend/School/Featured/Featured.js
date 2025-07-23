@@ -78,11 +78,13 @@ const Featured = () => {
                         {school?.description?.map((school, index) => (
                           <li key={index}>
                             <div className={styles.ic_flex}>
-                              <IoCheckmarkCircleOutline
-                                className={styles.ic_icn}
-                                size={20}
-                              />
-                              {school}
+                              <div>
+                                <IoCheckmarkCircleOutline
+                                  className={styles.ic_icn}
+                                  // size={20}
+                                />
+                              </div>
+                              <div>{school}</div>
                             </div>
                           </li>
                         ))}
