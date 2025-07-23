@@ -17,7 +17,7 @@
 }
 
 .ic_img {
-  width: 90%;
+  width: 60%;
   position: absolute;
   bottom: 0;
   right: 0;
@@ -27,7 +27,7 @@
 }
 
 .ic_wrapper {
-  padding: 230px 0;
+  padding: 200px 0;
   position: relative;
 }
 
@@ -148,6 +148,6 @@
   }
 
   .ic_text_container {
-    width: 90%;
+    width: 100%;
   }
 }

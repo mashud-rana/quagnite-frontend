@@ -129,6 +129,11 @@
 .mb-35 {
   margin-bottom: 35px;
 }
+
+.mb-45 {
+  margin-bottom: 45px;
+}
+
 .mb-24 {
   margin-bottom: 24px;
 }
@@ -521,6 +526,10 @@ h6 {
   .mb_20 {
     margin-bottom: 14px;
   }
+
+  .mb-45 {
+    margin-bottom: 40px;
+  }
   /* p,
   small,
   label,
@@ -640,6 +649,10 @@ h6 {
   .ic-btn1 {
     height: 40px;
     font-size: 14px;
+  }
+
+  .mb-45 {
+    margin-bottom: 35px;
   }
 }
 
@@ -784,6 +797,10 @@ h6 {
 
   .w_80 {
     width: 99%;
+  }
+
+  .mb-45 {
+    margin-bottom: 30px;
   }
 }
 

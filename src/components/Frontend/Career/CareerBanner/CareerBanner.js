@@ -37,7 +37,6 @@ const CareerBanner = () => {
           </div>
 
           {/* Right Content - 3 Images Layout */}
-
           <div>
             <div className={styles.ic_hero_img}>
               <CardAnimation index={0} direction="right">

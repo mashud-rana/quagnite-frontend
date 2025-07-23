@@ -7,6 +7,7 @@ import Image from "next/image";
 import icon1 from "@/assets/images/all/course.png";
 import icon2 from "@/assets/images/all/forums.png";
 import icon3 from "@/assets/images/all/coaches.png";
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 // Original card list
 const baseCards = [
@@ -67,12 +68,15 @@ const Certification = () => {
         <div className={styles.ic_grid}>
           {/* Left */}
           <div className={styles.contentLeft}>
-            <h6 className="mb_16 ic_text_color">OUR CERTIFICATIONS</h6>
-            <h4 className="mb_16">Industry-Standard proof of expertise.</h4>
-            <p className={styles.description}>
-              From full-stack development to management and engineering, a
-              certification show&apos;s anyone that you&apos;ve put in the time.
-            </p>
+            <CardAnimation index={1} direction="up">
+              <h6 className="mb_16 ic_text_color">OUR CERTIFICATIONS</h6>
+              <h4 className="mb_16">Industry-Standard proof of expertise.</h4>
+              <p className={styles.description}>
+                From full-stack development to management and engineering, a
+                certification show&apos;s anyone that you&apos;ve put in the
+                time.
+              </p>
+            </CardAnimation>
           </div>
 
           {/* Right Carousel */}

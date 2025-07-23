@@ -1,3 +1,4 @@
+import BusinessBanner from "@/components/Frontend/Business/BusinessBanner/BusinessBanner";
 import BusinessData from "@/components/Frontend/Business/BusinessData/BusinessData";
 import HireAlumni from "@/components/Frontend/Business/HireAlumni/HireAlumni";
 import Integrate from "@/components/Frontend/Business/Integrate/Integrate";
@@ -10,6 +11,7 @@ import React from "react";
 const BusinessPage = () => {
   return (
     <>
+      <BusinessBanner />
       <BusinessData />
       <Industries />
       <Benefits />

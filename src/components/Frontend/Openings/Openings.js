@@ -6,6 +6,7 @@ import bgImage from "@/assets/images/all/job-bg.png";
 
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import FilterBar from "./FilterBar";
+import Filter from "../CertificationList/Filter/Filter";
 
 const jobPosts = [
   {
@@ -57,17 +58,11 @@ const Openings = () => {
     setFilters((prev) => ({ ...prev, [key]: value }));
   };
 
-  // const filteredJobs = jobData.filter((job) => {
-  //   // You can implement actual filtering logic based on filters here
-  //   return true;
-  // });
-
-  // const visibleJobs = showAll ? filteredJobs : filteredJobs.slice(0, 3);
-
   return (
-    <section className="ic_section_space pt_50">
+    <section className="">
       <div className="container">
-        <FilterBar filters={filters} onChange={handleChange} />
+        {/* <FilterBar filters={filters} onChange={handleChange} /> */}
+        <Filter />
 
         <div className={styles.jobContainer}>
           <div className={styles.jobsList}>

@@ -9,11 +9,13 @@ import Bootcamp from "@/components/Frontend/School/Bootcamp/Bootcamp";
 import Recommendation from "@/components/Frontend/School/Recommendation/Recommendation";
 import Exam from "@/components/Frontend/School/Exam/Exam";
 import SchoolBanner from "@/components/Frontend/School/SchoolBanner/SchoolBanner";
+import BlockBanner from "@/components/Frontend/Blockchain/BlockBanner/BlockBanner";
 
 const SchoolSinglePage = () => {
   return (
     <div>
-      <SchoolBanner />
+      {/* <SchoolBanner /> */}
+      <BlockBanner />
       <SchoolLearnTab />
       <LearningRoadmap />
       <Featured />

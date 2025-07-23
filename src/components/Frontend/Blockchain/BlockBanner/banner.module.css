@@ -8,7 +8,7 @@
 .leftContent {
   color: white;
   z-index: 2;
-  padding: 150px 0;
+  padding: 120px 0;
 }
 
 .heroDescription {
@@ -21,6 +21,7 @@
 
 .ic_wrapper {
   position: relative;
+  padding-top: 70px;
 }
 
 .ic_hero_img {
@@ -103,10 +104,10 @@
   .ic_hero_img {
     width: 900px;
   }
-
+  /* 
   .leftContent {
     padding: 140px 0;
-  }
+  } */
 
   .ic_hero_img2 {
     max-width: 210px;
@@ -139,7 +140,7 @@
   }
 
   .leftContent {
-    padding: 130px 0;
+    /* padding: 130px 0; */
   }
 
   .heroDescription {
@@ -212,6 +213,10 @@
     max-width: 120px;
     bottom: 18%;
     right: 20%;
+  }
+
+  .ic_wrapper {
+    padding-top: 0px;
   }
 }
 

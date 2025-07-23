@@ -69,7 +69,7 @@ const Filter = () => {
   };
 
   return (
-    <div className="ic_section_space_top ">
+    <div className="ic_section_space_top  mb-45">
       <div className="container">
         <CardAnimation index={0} direction="up">
           <div className={styles.ic_grid}>
