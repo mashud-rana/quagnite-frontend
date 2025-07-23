@@ -1,0 +1,14 @@
+.ic_sponsor {
+  color: #fff;
+}
+
+.ic_designation {
+  font-style: normal;
+  font-weight: 700;
+}
+.ic_mainImage img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: luminosity;
+}

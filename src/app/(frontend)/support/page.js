@@ -7,13 +7,13 @@ import React from "react";
 
 const SupportPage = () => {
   return (
-    <div>
+    <>
       <SupportBanner />
       <Ticket />
       <LatestUpdate />
       <SupportFaq />
       <Contactus />
-    </div>
+    </>
   );
 };
 

@@ -38,35 +38,8 @@ const Header = () => {
                 <Link href="/about-us">About Us</Link>
               </li>
               <li>
-                <Link href="#">Partner</Link>
+                <Link href="/partners">Partner</Link>
               </li>
-
-              {/* <li className={styles.dropdown}>
-                <button className={styles.dropdownBtn}>
-                  Assist
-                  <FaChevronDown className={styles.arrow} />
-                </button>
-                <ul className={styles.submenu}>
-                  <li>
-                    <Link href="#">Submenu 1</Link>
-                  </li>
-                  <li>
-                    <Link href="#">Submenu 2</Link>
-                  </li>
-
-                  <li>
-                    <Link href="#">Submenu 2</Link>
-                  </li>
-
-                  <li>
-                    <Link href="#">Submenu 2</Link>
-                  </li>
-
-                  <li>
-                    <Link href="#">Submenu 2</Link>
-                  </li>
-                </ul>
-              </li> */}
 
               <li className={styles.dropdown}>
                 <button
@@ -105,7 +78,7 @@ const Header = () => {
               </li>
 
               <li className={styles.ic_organisation_show}>
-                <Link href="#" className={`${styles.type} mb_16`}>
+                <Link href="/individual" className={`${styles.type} mb_16`}>
                   INDIVIDUAL
                 </Link>
 
@@ -124,7 +97,7 @@ const Header = () => {
             <span className={styles.type}>ORGANISATION</span>
           </div> */}
             <div className={styles.ic_individual}>
-              <Link href="#" className={styles.type}>
+              <Link href="/individual" className={styles.type}>
                 INDIVIDUAL
               </Link>
               <span className={styles.pipe}>|</span>

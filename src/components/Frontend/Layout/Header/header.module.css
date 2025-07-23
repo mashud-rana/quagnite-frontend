@@ -60,6 +60,7 @@
   text-decoration: none;
   color: var(--black);
   text-transform: uppercase;
+  font-weight: 500;
 }
 
 /* Dropdown */
@@ -75,8 +76,9 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  color: #333;
+  color: var(--black);
   text-transform: uppercase;
+  font-weight: 500;
 }
 
 .arrow {
@@ -138,6 +140,7 @@
   text-decoration: none;
   color: var(--black);
   display: block;
+  font-weight: 500;
 }
 
 /* .pipe {

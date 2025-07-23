@@ -284,7 +284,39 @@ h6 {
 .ic-btn1:hover {
   box-shadow: 0px 2px 20px #5c81f7;
 }
+.ic-btn1.ic-btn2 {
+  background: #272727;
+  transition: all 0.3s;
+}
+.ic-btn1.ic-btn2:hover {
+  background: #5c81f7;
+  box-shadow: 0px 2px 20px #5c81f7;
+}
 
+.slick-list {
+  padding: 50px 0 !important;
+  overflow: visible;
+}
+
+.slick-track {
+  display: flex;
+  align-items: center;
+  overflow: visible;
+}
+
+.slick-slide {
+  z-index: 1;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.slick-center {
+  transform: scale(1.2);
+  z-index: 3 !important;
+}
+.slick-slider {
+  overflow: visible;
+}
 /* Responsive Design */
 
 @media (max-width: 1650px) {
