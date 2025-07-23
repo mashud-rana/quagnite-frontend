@@ -1,0 +1,160 @@
+.ic_hero_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 70px;
+}
+
+.leftContent {
+  color: white;
+  z-index: 2;
+  padding: 250px 0;
+}
+
+.heroDescription {
+  font-size: 16px;
+  line-height: 25px;
+  letter-spacing: -0.18px;
+  font-weight: 400;
+  margin: 30px 0 0 0;
+}
+
+.ic_wrapper {
+  position: relative;
+}
+
+.ic_hero_img {
+  /* width: px; */
+  height: auto;
+  /* padding-top: 50px; */
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  object-fit: fill;
+  height: auto;
+}
+
+@media (max-width: 1650px) {
+  .ic_hero_img {
+    width: 800px;
+  }
+
+  .leftContent {
+    padding: 220px 0;
+  }
+}
+
+@media (max-width: 1399px) {
+  .ic_hero_img {
+    width: 700px;
+  }
+
+  .leftContent {
+    padding: 170px 0;
+  }
+
+  .ic_hero_img img {
+    width: 560px;
+    height: auto;
+  }
+
+  .ic_hero_container {
+    gap: 60px;
+  }
+
+  .heroDescription {
+    margin: 25px 0 0 0;
+  }
+}
+
+@media (max-width: 1299px) {
+  .ic_hero_img {
+    width: 650px;
+  }
+
+  .leftContent {
+    padding: 150px 0;
+  }
+}
+
+@media (max-width: 1199px) {
+  .ic_hero_img {
+    width: 550px;
+  }
+
+  .leftContent {
+    padding: 140px 0;
+  }
+
+  .ic_hero_img img {
+    width: 500px;
+    height: auto;
+  }
+
+  .ic_hero_container {
+    gap: 50px;
+  }
+
+  .heroDescription {
+    margin: 22px 0 0 0;
+  }
+}
+
+@media (max-width: 1040px) {
+  .heroDescription {
+    margin: 20px 0 0 0;
+  }
+
+  .ic_hero_container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    text-align: center;
+    padding: 60px 60px 0px 60px;
+  }
+
+  .ic_hero_img {
+    width: 500px;
+    position: relative;
+    place-self: center;
+    /* right: 0; */
+  }
+
+  .leftContent {
+    padding: 0px 0;
+  }
+}
+
+@media (max-width: 991px) {
+  .heroDescription {
+    margin: 18px 0 0 0;
+    font-weight: 300;
+  }
+
+  .ic_hero_container {
+    padding: 50px 50px 0px 50px;
+  }
+}
+
+@media (max-width: 575px) {
+  .heroDescription {
+    margin: 16px 0 0 0;
+  }
+
+  .ic_hero_container {
+    padding: 50px 10px 0px 10px;
+  }
+
+  .ic_hero_img {
+    width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ic_hero_container {
+    padding: 50px 0px 0px 0px;
+  }
+
+  .ic_hero_img {
+    width: 300px;
+  }
+}

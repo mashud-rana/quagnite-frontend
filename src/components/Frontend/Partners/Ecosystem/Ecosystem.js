@@ -14,23 +14,23 @@ const Ecosystem = () => {
       id: 1,
       icon: icon1,
       hover: hover1,
-      title: "School of Foundational IT",
+      title: "Robust employment network",
       description:
-        "A solid base to launch your career. Immersive tech, user experience, object design...",
+        "Quagnite partners are always growing, and seeking to build life-long connections and motivated teams.",
     },
     {
       id: 2,
       icon: icon1,
       hover: hover1,
-      title: "School of Applied Data Science",
+      title: "Leading edge research and development",
       description:
-        "Learn how to change the world with data. AI App Dev, Machine Learning Ops, Python...",
+        "It’s not just about the product, it’s about finding new ways to apply technology to life.",
     },
     {
       id: 3,
       icon: icon1,
       hover: hover1,
-      title: "School of Enterprise Software",
+      title: "Market-movers with high-performance teams",
       description:
         "The glue that keeps the team going. Full-stack dev, cloud engineering, Jenkins, Git...",
     },
@@ -58,7 +58,7 @@ const Ecosystem = () => {
   ];
 
   return (
-    <section className="ic_bg_black">
+    <section className="ic_bg_black ic_section_margin_top">
       <div className="ic_section_space_58 radious_60 ic_bg">
         <div className="container">
           <CardAnimation index={0} direction="left">

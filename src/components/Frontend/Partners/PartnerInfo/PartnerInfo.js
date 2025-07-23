@@ -1,6 +1,9 @@
 import React from "react";
 import styles from "./partnerinfo.module.css";
 import Image from "next/image";
+import img from "@/assets/images/all/man-laptop2.png";
+import bg from "@/assets/images/all/partner-bg.png";
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 const PartnerInfo = () => {
   const stats = [
@@ -23,33 +26,47 @@ const PartnerInfo = () => {
   ];
 
   return (
-    <section className={styles.section}>
+    <section
+      className="ic_section_space_88"
+      style={{
+        backgroundImage: `url(${bg.src})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+      }}
+    >
       <div className="container">
         <div className={styles.ic_grid}>
           {/* Left Content - Title and Stats */}
           <div className={styles.contentLeft}>
-            <h2 className={styles.title}>
-              Lorem ipsum, consecte adipiscing elit.
-            </h2>
+            <CardAnimation index={1} direction="up">
+              <h4 className={styles.title}>
+                Lorem ipsum, consecte adipiscing elit.
+              </h4>
+            </CardAnimation>
             <div className={styles.statsGrid}>
               {stats.map((stat, index) => (
-                <div key={index} className={styles.statItem}>
-                  <p className={styles.statNumber}>{stat.number}</p>
-                  <p className={styles.statDescription}>{stat.description}</p>
-                </div>
+                <CardAnimation index={index} key={index}>
+                  <div className={styles.statItem}>
+                    <h4 className={styles.statNumber}>{stat.number}</h4>
+                    <p className={styles.statDescription}>{stat.description}</p>
+                  </div>
+                </CardAnimation>
               ))}
             </div>
           </div>
 
           {/* Right Content - Image */}
           <div className={styles.imageContainer}>
-            <Image
-              src="/placeholder.svg?height=600&width=800" // Placeholder for students image
-              alt="Two students looking at a laptop"
-              width={500}
-              height={600}
-              className={styles.studentsImage}
-            />
+            <CardAnimation index={1} direction="right">
+              <Image
+                src={img}
+                alt="Two students looking at a laptop"
+                width={654}
+                height={529}
+                className={styles.studentsImage}
+              />
+            </CardAnimation>
           </div>
         </div>
       </div>
