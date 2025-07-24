@@ -1,0 +1,477 @@
+.ic_wrapper {
+  position: relative;
+}
+
+.ic_grid {
+  display: flex;
+  /* align-items: center; */
+}
+
+.contentCard {
+  width: 100%;
+}
+
+.ic_text_container {
+  background: var(--gray);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding-left: 100px;
+}
+
+.imageSection {
+  width: 40%;
+  z-index: 3;
+  left: 0;
+}
+
+.businessImage {
+  object-fit: contain;
+  margin-left: -50px;
+  /* padding: 150px; */
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #6366f1;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.02em;
+}
+
+.ic_description {
+  margin: 16px 0 18px 0;
+  width: 100%;
+}
+
+.exploreButton {
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6.55px);
+  border: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.exploreButton:hover {
+  background: var(--primary-color);
+  color: var(--white);
+  backdrop-filter: blur(6.55px);
+  transform: translateY(-1px);
+}
+
+.floatingElements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Blue Glowing Orbs */
+.ic_circle1 {
+  position: absolute;
+  bottom: 28%;
+  right: 51%;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: linear-gradient(108.98deg, #917ffb 27.06%, #441889 90.91%),
+    #d9d9d9;
+  filter: blur(6.1px);
+  animation: float 4s ease-in-out infinite;
+}
+
+.ic_circle2 {
+  position: absolute;
+  bottom: 10%;
+  left: 30%;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, #7fc0fb 0%, transparent 70%);
+  clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+  animation: float 4s ease-in-out infinite reverse;
+  filter: drop-shadow(0 0 6px #7fc0fb);
+}
+
+.floatingDoc1 {
+  position: absolute;
+  top: 25%;
+  left: 45%;
+  width: 50px;
+  height: 35px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  animation: float 3s ease-in-out infinite;
+  transform: rotate(-8deg);
+}
+
+.docContent {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  border-radius: 0.5rem;
+  position: relative;
+}
+
+.docContent::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  height: 2px;
+  background: #90caf9;
+  border-radius: 1px;
+}
+
+.docContent::after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 8px;
+  right: 15px;
+  height: 2px;
+  background: #90caf9;
+  border-radius: 1px;
+}
+
+.floatingDoc2 {
+  position: absolute;
+  bottom: 35%;
+  right: 30%;
+  width: 45px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 0.5rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float 4.5s ease-in-out infinite;
+  transform: rotate(12deg);
+}
+
+.docIcon {
+  font-size: 1.2rem;
+  opacity: 0.7;
+}
+
+/* Orange Accent Element */
+.orangeAccent {
+  position: absolute;
+  bottom: 45%;
+  left: 15%;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+  border-radius: 2px;
+  transform: rotate(-25deg);
+  animation: pulse 3s ease-in-out infinite;
+}
+
+/* Small Geometric Dots */
+.geometricDot1 {
+  position: absolute;
+  top: 2%;
+  left: 13%;
+  width: 12px;
+  height: 59px;
+  background: linear-gradient(0deg, #ff7600 0%, #f69745 100%);
+  border-radius: 11px;
+  animation: float 3.8s ease-in-out infinite;
+}
+
+.geometricDot4 {
+  position: absolute;
+  bottom: 15%;
+  left: 3%;
+  width: 35px;
+  height: 7px;
+  background: linear-gradient(180deg, #ff7600 0%, #f69745 100%);
+  border-radius: 11px;
+  animation: floatRotate 3s ease-in-out infinite;
+}
+
+@keyframes floatRotate {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(20deg);
+  }
+  75% {
+    transform: translateY(-10px) rotate(-15deg);
+  }
+}
+
+.geometricDot2 {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  width: 12px;
+  height: 12px;
+  background: #9ca3af;
+  border-radius: 50%;
+  animation: float 3.5s ease-in-out infinite reverse;
+}
+
+.geometricDot3 {
+  position: absolute;
+  top: 15%;
+  left: 35%;
+  width: 4px;
+  height: 4px;
+  background: #d1d5db;
+  border-radius: 50%;
+  animation: float 2.2s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes float {
+  0%,
+  100% {
+    /* transform: translateY(0px); */
+    opacity: 0.6;
+    transform: rotate(25deg) scale(1);
+  }
+  50% {
+    transform: translateY(-10px);
+    opacity: 1;
+    transform: rotate(40deg) scale(1.1);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.1;
+    transform: rotate(-25deg) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(-25deg) scale(1.1);
+  }
+}
+
+.ic_animation_img {
+  position: absolute;
+  top: 6%;
+  right: 22%;
+  animation: pulse 6s ease-in-out infinite;
+  z-index: 1;
+}
+
+.ic_subtitle {
+  width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 1650px) {
+  /* .businessImage {
+    width: 600px;
+    height: 480px;
+  } */
+
+  /* .ic_circle1 {
+    bottom: 12%;
+    left: 40%;
+    width: 42px;
+    height: 42px;
+  } */
+
+  .exploreButton {
+    padding: 12px 26px;
+  }
+
+  .ic_animation_img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .geometricDot1 {
+    right: 12%;
+    width: 10px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 1299px) {
+  /* .businessImage {
+    width: 550px;
+    height: 380px;
+  } */
+
+  .ic_animation_img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .ic_description {
+    margin: 12px 0 16px 0;
+    width: 75%;
+  }
+
+  .ic_text_container {
+    padding: 28px;
+  }
+
+  .exploreButton {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+
+  .ic_circle1 {
+    bottom: -3%;
+    right: 50%;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .businessImage {
+    width: 500px;
+    height: 350px;
+  }
+
+  .ic_animation_img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .ic_text_container {
+    padding: 26px;
+  }
+
+  .ic_description {
+    margin: 8px 0 14px 0;
+    width: 75%;
+  }
+
+  .exploreButton {
+    padding: 10px 22px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .businessImage {
+    width: 470px;
+    height: 330px;
+  }
+
+  .ic_circle1 {
+    bottom: -5%;
+    right: 30%;
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 991px) {
+  .ic_subtitle {
+    width: 100%;
+  }
+  .ic_grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ic_animation_img {
+    right: 45%;
+    top: 40%;
+    width: 50px;
+    height: 50px;
+  }
+
+  .ic_circle2 {
+    bottom: -10%;
+    left: 30%;
+    width: 40px;
+    height: 40px;
+  }
+
+  .geometricDot2 {
+    top: 48%;
+    right: 15%;
+    width: 8px;
+    height: 8px;
+  }
+
+  .geometricDot1 {
+    top: 60%;
+    right: 20%;
+    width: 26px;
+    height: 6px;
+    background: linear-gradient(180deg, #ff7600 0%, #f69745 100%);
+    border-radius: 11px;
+    transform: rotate(113.29deg);
+    animation: float 2.8s ease-in-out infinite;
+  }
+
+  .geometricDot4 {
+    bottom: 5%;
+    left: 10%;
+    width: 26px;
+    height: 6px;
+  }
+
+  .contentCard {
+    width: 100%;
+    padding: 0px;
+  }
+
+  .imageSection {
+    width: 100%;
+    text-align: center;
+  }
+
+  .businessImage {
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .businessImage {
+    width: 420px;
+    height: auto;
+  }
+
+  .ic_animation_img {
+    top: 50%;
+  }
+
+  .ic_description {
+    margin: 6px 0 13px 0;
+    width: 100%;
+  }
+
+  .exploreButton {
+    padding: 8px 20px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ic_animation_img {
+    right: 40%;
+    top: 55%;
+  }
+
+  .businessImage {
+    width: 320px;
+    height: auto;
+  }
+}
