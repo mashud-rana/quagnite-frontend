@@ -59,7 +59,7 @@ const HiringBanner = () => {
           </div>
 
           {/* Right Content - Image with Circular Progress and Badge */}
-          <CardAnimation index={0} direction="right">
+          <CardAnimation index={0} direction="down">
             <div className={styles.ic_hero_img}>
               <div className={styles.imageWrapper}>
                 <div className={styles.progressBar}>

@@ -117,7 +117,7 @@ const Plan = () => {
                   </div>
                 </div>
 
-                <CardAnimation index={0} direction="right">
+                <CardAnimation index={0} direction="down">
                   <div className={styles.contentRight}>
                     <Image
                       src={activeTabData.image || "/placeholder.svg"}

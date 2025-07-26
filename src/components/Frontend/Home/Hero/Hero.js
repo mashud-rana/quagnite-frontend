@@ -39,7 +39,7 @@ const Hero = () => {
           </div>
 
           {/* Right Content - 3 Images Layout */}
-          <CardAnimation index={0} direction="right">
+          <CardAnimation index={0} direction="down">
             <div className={styles.rightContent}>
               <div className={styles.imagesContainer}>
                 {/* Main Large Image */}

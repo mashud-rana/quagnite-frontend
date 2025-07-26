@@ -1,9 +1,10 @@
+import Products from "@/components/Frontend/Products/Products";
 import React from "react";
 
 const ProductPage = () => {
   return (
     <div>
-      <h1>jfjf</h1>
+      <Products />
     </div>
   );
 };

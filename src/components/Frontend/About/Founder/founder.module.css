@@ -1,6 +1,6 @@
 .ic_founder_container {
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 28% 70%;
   gap: 40px;
   align-items: center;
   color: var(--white);

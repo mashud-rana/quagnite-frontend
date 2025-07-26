@@ -39,7 +39,7 @@ const CareerBanner = () => {
           {/* Right Content - 3 Images Layout */}
           <div>
             <div className={styles.ic_hero_img}>
-              <CardAnimation index={0} direction="right">
+              <CardAnimation index={0} direction="down">
                 <Image src={img} alt="" width={700} height={580} />
               </CardAnimation>
             </div>

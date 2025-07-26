@@ -35,7 +35,7 @@ const About = () => {
           </div>
 
           {/* 4/12 Column */}
-          <CardAnimation index={0} direction="right">
+          <CardAnimation index={0} direction="up">
             <div className={styles.ic_right_column}>
               <Image src={line} alt="icon1" className={styles.ic_line_img} />
               <div className={styles.ic_circle_container}>

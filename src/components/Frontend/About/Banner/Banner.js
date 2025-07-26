@@ -87,7 +87,7 @@ const AboutBanner = ({ title, subtitle, img, bg, isProgress }) => {
                 </div>
               )}
             </CardAnimation>
-            <CardAnimation index={0} direction="right">
+            <CardAnimation index={0} direction="down">
               <Image src={img} alt="" />
             </CardAnimation>
           </div>
