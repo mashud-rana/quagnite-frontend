@@ -4,8 +4,14 @@ import styles from "./scholarship.module.css";
 import { Col, Row } from "antd";
 import ScholarshipInfo from "../ScholarshipInfo/ScholarshipInfo";
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
+import StepCard from "@/components/Share/Frontend/StepCard/StepCard";
 
-const stepData = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
+const stepData = [
+  { id: 1, label: "1" },
+  { id: 2, label: "2" },
+  { id: 3, label: "3" },
+  { id: 4, label: "4" },
+];
 
 export default function Scholarship() {
   const [scholarshipActiveStep, setScholarshipActiveStep] = useState(1);
@@ -19,19 +25,7 @@ export default function Scholarship() {
 
             <Row gutter={24} justify="center" className="ic_section_heading">
               <Col xs={24} sm={20} md={16} lg={12}>
-                <div className={styles.ic_step}>
-                  {stepData.map((step) => (
-                    <div key={step.id} className={styles.ic_step_item}>
-                      <div
-                        className={`${styles.ic_step_item_circle} ${
-                          scholarshipActiveStep === step.id ? styles.active : ""
-                        }`}
-                      >
-                        <h6>{step.id}</h6>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <StepCard steps={stepData} activeStep={scholarshipActiveStep} />
               </Col>
             </Row>
           </CardAnimation>
