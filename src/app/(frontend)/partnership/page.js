@@ -4,6 +4,7 @@ import bg from "@/assets/images/partnership/bg.png";
 import img from "@/assets/images/partnership/partner-right.png";
 import ApplyPartner from "@/components/Frontend/Partnership/ApplyPartner/ApplyPartner";
 import Impact from "@/components/Frontend/Partnership/Impact/Impact";
+import Counter from "@/components/Frontend/Partnership/Counter/Counter";
 
 export default function page() {
   return (
@@ -16,6 +17,7 @@ export default function page() {
       />
       <ApplyPartner />
       <Impact />
+      <Counter />
     </>
   );
 }
