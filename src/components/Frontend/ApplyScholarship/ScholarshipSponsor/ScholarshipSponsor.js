@@ -13,7 +13,7 @@ export default function ScholarshipSponsor() {
       <div className="container">
         <div className={styles.ic_scholarship_sponsor_main}>
           <Row gutter={24} align="middle">
-            <Col xm={24} lg={15}>
+            <Col xm={24} lg={12} xl={15}>
               <CardAnimation index={0} direction="left">
                 <div className={styles.ic_left}>
                   <h6 className="mb_16">CONTACT US</h6>
@@ -29,7 +29,7 @@ export default function ScholarshipSponsor() {
                 </div>
               </CardAnimation>
             </Col>
-            <Col xm={24} lg={9}>
+            <Col xm={24} lg={12} xl={9}>
               <CardAnimation index={0} direction="right">
                 <div className={styles.ic_right}>
                   <Image src={img1} alt="img" />
