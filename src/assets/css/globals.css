@@ -396,6 +396,14 @@ h6 {
   .radious_16 {
     border-radius: 10px;
   }
+  .ic_alumni_feedback .slick-prev {
+    left: -10px;
+    z-index: 10;
+  }
+  .ic_alumni_feedback .slick-next {
+    right: -10px;
+    z-index: 10;
+  }
 }
 
 @media (max-width: 1299px) {
