@@ -1,8 +1,9 @@
 .ic_hero_container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.3fr;
   align-items: center;
-  gap: 70px;
+  gap: 0px;
+  /* padding-top: 100px; */
 }
 
 .leftContent {
@@ -19,47 +20,15 @@
 }
 
 .ic_hero_img {
-  width: 100%;
-  padding-top: 85px;
+  width: 115%;
+  padding-top: 170px;
   position: relative;
 }
 
 .ic_hero_img img {
   object-fit: contain;
-}
-
-.progressWrapper {
-  position: relative;
   width: 100%;
-  height: 100%;
-}
-
-.progressBar {
-  position: absolute;
-  top: 6%;
-  left: 25%;
-  width: 150px;
-  height: 150px;
-  z-index: 3;
-}
-
-.progressText {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #8b8cfd;
-  color: white;
-  border-radius: 50%;
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
-  align-content: center;
-  height: 50px;
-  width: 50px;
-  pointer-events: none;
-  user-select: none;
-  white-space: nowrap;
+  height: auto;
 }
 
 /* Responsive Design */
@@ -67,48 +36,36 @@
 @media (max-width: 1399px) {
   .ic_hero_img {
     padding-top: 80px;
+    width: 100%;
   }
 
   .ic_hero_img img {
-    width: 560px;
+    width: 700px;
     height: auto;
   }
 
-  .ic_hero_container {
+  /* .ic_hero_container {
     gap: 60px;
-  }
+  } */
 
   .heroDescription {
     margin: 25px 0 0 0;
-  }
-
-  .progressBar {
-    top: 6%;
-    left: 20%;
-    width: 100px;
-    height: 100px;
-  }
-
-  .progressText {
-    font-size: 10px;
-    height: 35px;
-    width: 35px;
   }
 }
 
 @media (max-width: 1199px) {
   .ic_hero_img {
-    padding-top: 75px;
+    padding-top: 80px;
   }
 
   .ic_hero_img img {
-    width: 500px;
+    width: 600px;
     height: auto;
   }
 
-  .ic_hero_container {
+  /* .ic_hero_container {
     gap: 50px;
-  }
+  } */
 
   .heroDescription {
     margin: 22px 0 0 0;
@@ -128,45 +85,25 @@
   }
 
   .ic_hero_img {
-    padding-top: 20px;
+    padding-top: 15px;
   }
 
   .ic_hero_img img {
-    width: 450px;
+    width: 550px;
     height: auto;
-  }
-
-  .progressBar {
-    top: 4%;
-    left: 38%;
-    width: 60px;
-    height: 60px;
-  }
-
-  .progressText {
-    font-size: 5px;
-    height: 20px;
-    width: 20px;
   }
 }
 
 @media (max-width: 991px) {
-  .progressBar {
-    top: 0%;
-    left: 35%;
-    width: 60px;
-    height: 60px;
-  }
-
   .heroDescription {
     margin: 18px 0 0 0;
     font-weight: 300;
   }
-
+  /* 
   .ic_hero_img img {
     width: 400px;
     height: auto;
-  }
+  } */
 
   .ic_hero_container {
     padding: 50px 50px 0px 50px;
@@ -174,20 +111,13 @@
 }
 
 @media (max-width: 767px) {
-  .progressBar {
-    top: 0%;
-    left: 32%;
+  .ic_hero_img img {
+    width: 450px;
+    height: auto;
   }
 }
 
 @media (max-width: 575px) {
-  .progressBar {
-    width: 40px;
-    height: 40px;
-    top: 0%;
-    left: 28%;
-  }
-
   .ic_hero_img img {
     width: 350px;
     height: auto;
@@ -203,10 +133,6 @@
 }
 
 @media (max-width: 480px) {
-  .progressBar {
-    display: none;
-  }
-
   .ic_hero_img img {
     width: 300px;
     height: auto;

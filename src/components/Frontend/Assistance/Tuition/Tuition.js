@@ -1,12 +1,12 @@
 import React from "react";
-import styles from "./professional.module.css";
-import Image from "next/image";
+import styles from "./tuition.module.css";
 import img1 from "@/assets/images/all/professional.png";
+import Image from "next/image";
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
-const Professional = () => {
+const Tuition = () => {
   return (
-    <section className="ic_section_space">
+    <section className="ic_section_space_top">
       <div className="container">
         <div className="ic_bg_white radious_16">
           <CardAnimation index={1} direction="up">
@@ -24,13 +24,17 @@ const Professional = () => {
 
               {/* Right Content */}
               <div className={styles.teammateContent}>
-                <h6>CAREERS AT QUAGINTE</h6>
-                <h4 className={styles.title}>A team of professionals</h4>
-                <p>
-                  Quagnite includes members from all walks of life, and a wide
-                  variety of backgrounds and nations, all bound together by a
-                  common purpose.
+                <h6>Tuition Assistance</h6>
+                <h4 className={styles.title}>A little help is all it takes</h4>
+                <p className="mb-24">
+                  Don’t let the last little bit keep you from changing your
+                  life. If you need help, we’re here for you. Just tell us a
+                  little more about what you need and we can find a way to yes.
                 </p>
+
+                <div>
+                  <button className="ic_btn">Explore</button>
+                </div>
               </div>
             </div>
           </CardAnimation>
@@ -40,4 +44,4 @@ const Professional = () => {
   );
 };
 
-export default Professional;
+export default Tuition;

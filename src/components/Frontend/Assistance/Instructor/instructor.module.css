@@ -1,0 +1,29 @@
+.cardSubtitle {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.contentWrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.cardColumn {
+  background-color: var(--white);
+  padding: 40px;
+  border-radius: 16px;
+  position: relative;
+}
+
+.ic_tutoring_section_wrapper {
+  position: relative;
+}
+
+.ic_tutoring_image {
+  position: absolute;
+  top: -20%;
+  /* height: 400px;
+  object-fit: contain; */
+  height: auto;
+}

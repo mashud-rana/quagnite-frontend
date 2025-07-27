@@ -16,7 +16,7 @@ const ProductCard = ({ imageSrc, title, description }) => {
         />
       </div>
       <div className={styles.productContent}>
-        <h3 className={styles.productTitle}>{title}</h3>
+        <p className={styles.productTitle}>{title}</p>
         <p className={styles.productDescription}>{description}</p>
         <div>
           <button className={styles.ic_btn}>EXPLORE</button>
