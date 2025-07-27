@@ -1,0 +1,33 @@
+.ic_scholarship_video {
+  color: #fff;
+  padding-top: 60px;
+}
+.ic_scholarship_video .ic_bg_img {
+  width: 100%;
+  height: auto;
+}
+.ic_icon {
+  width: 50px;
+  height: 50px;
+}
+.ic_left {
+  position: relative;
+}
+.ic_fancy {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@media (max-width: 767.98px) {
+  .ic_icon {
+    width: 40px;
+    height: 40px;
+  }
+  .ic_scholarship_video {
+    padding-top: 40px;
+  }
+  .ic_left {
+    margin-bottom: 20px;
+  }
+}
