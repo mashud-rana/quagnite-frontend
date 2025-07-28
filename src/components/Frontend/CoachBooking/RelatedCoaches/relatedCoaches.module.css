@@ -1,7 +1,6 @@
-.ic_top_rated_main {
-  color: var(--white);
+.ic_related_coaches {
+  color: #fff;
 }
-
 .ic_top_header {
   display: flex;
   justify-content: space-between;
