@@ -303,6 +303,10 @@ h6 {
 .slick-slider {
   overflow: visible;
 }
+
+.ic_coach_details .slick-list {
+  padding: 15px 0 !important;
+}
 /* Responsive Design */
 
 @media (max-width: 1650px) {
@@ -572,15 +576,10 @@ h6 {
     font-size: 15px;
     line-height: normal;
   }
+  .ic_coach_details .slick-list {
+    padding: 10px 0 !important;
+  }
 }
-.ic_coach_details .slick-list {
-  padding: 15px 0 !important;
-}
-/* .ic_coach_details .slick-track {
-  display: flex !important;
-  justify-content: space-between !important;
-  gap: 15px !important;
-} */
 
 @media (max-width: 991.98px) {
   h2 {
@@ -679,6 +678,9 @@ h6 {
   .ic-btn1 {
     height: 40px;
     font-size: 14px;
+  }
+  .ic_coach_details .slick-list {
+    padding: 5px 0 !important;
   }
 }
 
