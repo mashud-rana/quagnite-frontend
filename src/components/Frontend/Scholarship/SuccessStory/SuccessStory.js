@@ -10,7 +10,7 @@ export default function SuccessStory() {
     <section className={`ic_section_space_bottom ${styles.ic_success}`}>
       <div className="container">
         <Row gutter={24}>
-          <Col sm={{ span: 24, order: 2 }} md={{ span: 12, order: 1 }}>
+          <Col xs={{ span: 24, order: 2 }} md={{ span: 12, order: 1 }}>
             <div className={styles.ic_left}>
               <CardAnimation index={0} direction="up">
                 <h6 className="mb_16">SUCCESS STORIES</h6>
@@ -27,7 +27,7 @@ export default function SuccessStory() {
             </div>
           </Col>
 
-          <Col sm={{ span: 24, order: 1 }} md={{ span: 12, order: 2 }}>
+          <Col xs={{ span: 24, order: 1 }} md={{ span: 12, order: 2 }}>
             <div className={styles.ic_right}>
               <CardAnimation index={0} direction="right">
                 <Image src={img} alt="img" />
