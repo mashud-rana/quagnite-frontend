@@ -4,6 +4,7 @@ import Testimonial from "@/components/Share/Frontend/TestimonialCard/Testimonial
 import React from "react";
 import rating1 from "@/assets/images/apply-scholarship/ratings1.svg";
 import rating2 from "@/assets/images/apply-scholarship/ratings2.svg";
+import Certificate from "@/components/Frontend/CoachBooking/Certificate/Certificate";
 const testimonialData = [
   {
     id: 1,
@@ -40,6 +41,7 @@ export default function page() {
         ratingFilledIcon={rating1}
         ratingEmptyIcon={rating2}
       />
+      <Certificate />
     </>
   );
 }

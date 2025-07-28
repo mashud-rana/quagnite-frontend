@@ -284,29 +284,37 @@ h6 {
   overflow: visible;
 }
 
-.slick-track {
+.ic_alumni_feedback .slick-track {
   display: flex;
   align-items: center;
   overflow: visible;
 }
 
-.slick-slide {
+.ic_alumni_feedback .slick-slide {
   z-index: 1;
   transition: all 0.3s ease;
   position: relative;
 }
 
-.slick-center {
+.ic_alumni_feedback .slick-center {
   transform: scale(1.2);
   z-index: 3 !important;
 }
-.slick-slider {
+.ic_alumni_feedback .slick-slider {
   overflow: visible;
 }
 
 .ic_coach_details .slick-list {
   padding: 15px 0 !important;
 }
+.ic_certificate .slick-slide {
+  padding: 0 10px;
+}
+
+.ic_certificate .slick-list {
+  margin: 0 -10px;
+}
+
 /* Responsive Design */
 
 @media (max-width: 1650px) {
