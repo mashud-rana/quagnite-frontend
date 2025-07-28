@@ -6,14 +6,15 @@
 
 .contentWrapper {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr;
 }
 
 .cardColumn {
   background-color: var(--white);
-  padding: 40px;
+  /* padding: 40px; */
   border-radius: 16px;
   position: relative;
+  width: 100%;
 }
 
 .ic_tutoring_section_wrapper {
@@ -22,8 +23,27 @@
 
 .ic_tutoring_image {
   position: absolute;
-  top: -20%;
-  /* height: 400px;
-  object-fit: contain; */
+  top: -30%;
   height: auto;
+}
+
+@media (max-width: 1650px) {
+  .ic_tutoring_image {
+    width: 800px;
+    /* width: 780px;
+    top: -25%; */
+  }
+}
+
+@media (max-width: 1599px) {
+  .ic_tutoring_image {
+    width: 600px;
+  }
+
+  .cardColumn {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 16px;
+    position: relative;
+  }
 }

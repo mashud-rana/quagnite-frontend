@@ -1,0 +1,181 @@
+.ic_title {
+  margin-bottom: 36px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: transform 0.3s ease;
+  background: rgba(69, 45, 131, 0.1);
+  border-radius: 16px;
+  padding: 23px;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  height: calc(100% - 56px);
+  height: 100%;
+}
+
+.cardContent {
+  flex-grow: 1;
+}
+
+/* Image blur layer */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: var(--hoverImage);
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0;
+  filter: blur(63.9px) brightness(1);
+  transition: opacity 0.4s ease, filter 0.4s ease;
+}
+
+/* On hover: show the blur background */
+.hoveredCard::before {
+  opacity: 1;
+}
+
+/* Ensure content stays above */
+.card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.iconContainer {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  padding: 14px 0px;
+}
+
+.ic_card_title {
+  font-weight: 500;
+  margin: 18px 0px 16px 0;
+}
+
+.ic_description {
+  font-weight: 300;
+  margin-bottom: 24px;
+}
+
+.ic_logo_title {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.ic_logo_title_wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.featureList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.featureItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 4px 0px;
+  transition: background 0.3s ease;
+}
+
+.arrow {
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 1199px) {
+  .ic_title {
+    margin-bottom: 30px;
+  }
+
+  .ic_description {
+    margin-bottom: 22px;
+  }
+
+  .ic_logo_title {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 991px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .ic_title {
+    margin-bottom: 26px;
+  }
+
+  .ic_card_title {
+    margin: 18px 0px 10px 0px;
+  }
+
+  .ic_description {
+    margin-bottom: 20px;
+  }
+
+  .ic_logo_title {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .ic_title {
+    margin-bottom: 24px;
+  }
+
+  .ic_card_title {
+    margin: 16px 0px 8px 0px;
+  }
+
+  .ic_description {
+    margin-bottom: 18px;
+  }
+
+  .ic_logo_title {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .iconContainer {
+    padding: 12px 0px;
+  }
+}

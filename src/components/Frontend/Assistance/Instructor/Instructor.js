@@ -14,7 +14,7 @@ const Instructor = () => {
           width={894}
           height={576}
         />
-        <div className="container">
+        <div className="">
           <div className={styles.contentWrapper}>
             <div></div>
 
