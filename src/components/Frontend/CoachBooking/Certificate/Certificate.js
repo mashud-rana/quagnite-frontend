@@ -17,6 +17,7 @@ export default function Certificate() {
     dots: false,
     arrows: false,
     infinite: true,
+    autoplay: true,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -25,7 +26,7 @@ export default function Certificate() {
     beforeChange: (_, next) => setActiveIndex(next),
     responsive: [
       {
-        breakpoint: 991,
+        breakpoint: 767,
         settings: {
           slidesToShow: 2,
           centerPadding: "10px",
@@ -44,18 +45,20 @@ export default function Certificate() {
   const dotWidth = 100 / data.length;
 
   return (
-    <section className={`${styles.ic_certificate} ic_certificate`}>
+    <section
+      className={`${styles.ic_certificate} ic_certificate ic_section_space`}
+    >
       <div className="container">
         <div className={styles.ic_certificate_main}>
-          <div className={`${styles.ic_top_header}`}>
+          <div className={`${styles.ic_top_header} ic_section_heading`}>
             <h4>Certificates this coach can help you get</h4>
             <button type="button" className="ic-btn1 ic-btn2">
               See All
             </button>
           </div>
 
-          <CardAnimation index={0} direction="left">
-            <Slider {...settings} className={styles.customSlider}>
+          <CardAnimation index={0} direction="up">
+            <Slider {...settings} className="mb-24">
               {data.map((item, idx) => (
                 <div key={idx} className={styles.ic_slider_main_img}>
                   <Image src={item.image} alt={`Certificate ${idx + 1}`} />
