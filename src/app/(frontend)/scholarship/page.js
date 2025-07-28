@@ -1,3 +1,4 @@
+import Application from "@/components/Frontend/Scholarship/Application/Application";
 import Banner from "@/components/Frontend/Scholarship/Banner/Banner";
 import ScholarshipVideo from "@/components/Frontend/Scholarship/ScholarshipVideo/ScholarshipVideo";
 import ScholarshipWork from "@/components/Frontend/Scholarship/ScholarshipWork/ScholarshipWork";
@@ -11,6 +12,7 @@ export default function page() {
       <ScholarshipVideo />
       <ScholarshipWork />
       <SuccessStory />
+      <Application />
     </>
   );
 }
