@@ -573,6 +573,14 @@ h6 {
     line-height: normal;
   }
 }
+.ic_coach_details .slick-list {
+  padding: 15px 0 !important;
+}
+/* .ic_coach_details .slick-track {
+  display: flex !important;
+  justify-content: space-between !important;
+  gap: 15px !important;
+} */
 
 @media (max-width: 991.98px) {
   h2 {

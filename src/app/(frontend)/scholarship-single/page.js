@@ -1,9 +1,9 @@
-import Application from "@/components/Frontend/Scholarship/Application/Application";
-import Banner from "@/components/Frontend/Scholarship/Banner/Banner";
-import Faq from "@/components/Frontend/Scholarship/Faq/Faq";
-import ScholarshipVideo from "@/components/Frontend/Scholarship/ScholarshipVideo/ScholarshipVideo";
-import ScholarshipWork from "@/components/Frontend/Scholarship/ScholarshipWork/ScholarshipWork";
-import SuccessStory from "@/components/Frontend/Scholarship/SuccessStory/SuccessStory";
+import Application from "@/components/Frontend/ScholarshipSingle/Application/Application";
+import Banner from "@/components/Frontend/ScholarshipSingle/Banner/Banner";
+import Faq from "@/components/Frontend/ScholarshipSingle/Faq/Faq";
+import ScholarshipVideo from "@/components/Frontend/ScholarshipSingle/ScholarshipVideo/ScholarshipVideo";
+import ScholarshipWork from "@/components/Frontend/ScholarshipSingle/ScholarshipWork/ScholarshipWork";
+import SuccessStory from "@/components/Frontend/ScholarshipSingle/SuccessStory/SuccessStory";
 import React from "react";
 
 export default function page() {
