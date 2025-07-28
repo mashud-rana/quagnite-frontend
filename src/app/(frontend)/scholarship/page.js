@@ -1,5 +1,6 @@
 import Application from "@/components/Frontend/Scholarship/Application/Application";
 import Banner from "@/components/Frontend/Scholarship/Banner/Banner";
+import Faq from "@/components/Frontend/Scholarship/Faq/Faq";
 import ScholarshipVideo from "@/components/Frontend/Scholarship/ScholarshipVideo/ScholarshipVideo";
 import ScholarshipWork from "@/components/Frontend/Scholarship/ScholarshipWork/ScholarshipWork";
 import SuccessStory from "@/components/Frontend/Scholarship/SuccessStory/SuccessStory";
@@ -13,6 +14,7 @@ export default function page() {
       <ScholarshipWork />
       <SuccessStory />
       <Application />
+      <Faq />
     </>
   );
 }
