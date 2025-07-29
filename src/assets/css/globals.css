@@ -76,6 +76,10 @@
   margin-top: 100px;
 }
 
+.ic_section_margin_bottom {
+  margin-bottom: 100px;
+}
+
 .ic_section_space_58 {
   padding: 58px 0;
 }
@@ -145,6 +149,11 @@
 .mt_30 {
   margin-top: 36px;
 }
+
+.mt_48 {
+  margin-top: 48px;
+}
+
 .mb-24 {
   margin-bottom: 24px;
 }
@@ -293,28 +302,27 @@ h6 {
   box-shadow: 0px 2px 20px #5c81f7;
 }
 
-.slick-list {
+.ic_alumni_feedback .slick-list {
   padding: 50px 0 !important;
-  overflow: visible;
 }
 
-.slick-track {
+.ic_alumni_feedback .slick-track {
   display: flex;
   align-items: center;
   overflow: visible;
 }
 
-.slick-slide {
+.ic_alumni_feedback .slick-slide {
   z-index: 1;
   transition: all 0.3s ease;
   position: relative;
 }
 
-.slick-center {
+.ic_alumni_feedback .slick-center {
   transform: scale(1.2);
   z-index: 3 !important;
 }
-.slick-slider {
+.ic_alumni_feedback .slick-slider {
   overflow: visible;
 }
 
@@ -327,6 +335,7 @@ h6 {
   color: var(--white);
   background-color: var(--primary-color);
   border-radius: 12px;
+  cursor: pointer;
 }
 
 .ic_see_all_btn {
@@ -339,6 +348,17 @@ h6 {
   background-color: #272727;
   border-radius: 12px;
 }
+.ic_coach_details .slick-list {
+  padding: 15px 0 !important;
+}
+.ic_certificate .slick-slide {
+  padding: 0 16px;
+}
+
+.ic_certificate .slick-list {
+  margin: 0 -16px;
+}
+
 /* Responsive Design */
 
 @media (max-width: 1650px) {
@@ -397,6 +417,10 @@ h6 {
     margin-top: 90px;
   }
 
+  .ic_section_margin_bottom {
+    margin-bottom: 90px;
+  }
+
   .ic_section_space_bottom {
     padding-bottom: 90px;
   }
@@ -431,6 +455,14 @@ h6 {
 
   .radious_16 {
     border-radius: 10px;
+  }
+  .ic_alumni_feedback .slick-prev {
+    left: -10px;
+    z-index: 10;
+  }
+  .ic_alumni_feedback .slick-next {
+    right: -10px;
+    z-index: 10;
   }
 }
 
@@ -469,6 +501,10 @@ h6 {
 
   .ic_section_margin_top {
     margin-top: 80px;
+  }
+
+  .ic_section_margin_bottom {
+    margin-bottom: 80px;
   }
 
   .ic_section_space_bottom {
@@ -616,6 +652,9 @@ h6 {
     font-size: 14px;
     border-radius: 10px;
   }
+  .ic_coach_details .slick-list {
+    padding: 10px 0 !important;
+  }
 }
 
 @media (max-width: 991.98px) {
@@ -669,6 +708,10 @@ h6 {
     margin-top: 70px;
   }
 
+  .ic_section_margin_bottom {
+    margin-bottom: 70px;
+  }
+
   .ic_section_space_bottom {
     padding-bottom: 70px;
   }
@@ -686,6 +729,11 @@ h6 {
   .mt_30 {
     margin-top: 22px;
   }
+
+  .mt_48 {
+    margin-top: 35px;
+  }
+
   .mb-24 {
     margin-bottom: 16px;
   }
@@ -712,6 +760,7 @@ h6 {
   .w_80 {
     width: 70%;
   }
+
   .ic-btn1 {
     height: 40px;
     font-size: 14px;
@@ -719,6 +768,9 @@ h6 {
 
   .mb-45 {
     margin-bottom: 35px;
+  }
+  .ic_coach_details .slick-list {
+    padding: 5px 0 !important;
   }
 }
 
@@ -821,6 +873,10 @@ h6 {
 
   .ic_section_margin_top {
     margin-top: 60px;
+  }
+
+  .ic_section_margin_bottom {
+    margin-bottom: 60px;
   }
 
   .ic_section_space_bottom {

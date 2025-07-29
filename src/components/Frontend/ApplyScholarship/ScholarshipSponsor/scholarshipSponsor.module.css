@@ -59,12 +59,50 @@
 }
 
 @media (max-width: 1199.98px) {
+  .ic_bg_img {
+    right: 20px;
+    width: 350px;
+  }
+}
+@media (max-width: 991.98px) {
+  .ic_bg_img {
+    top: 40%;
+    left: 27%;
+  }
   .ic_bg_img2 {
-    width: 50%;
+    right: 0;
+    top: 35%;
+  }
+  .ic_right {
+    margin-left: 60px;
+  }
+  .ic_scholarship_sponsor_main:after {
+    width: 100%;
+    height: 100%;
+  }
+}
+@media (max-width: 767.98px) {
+  .ic_right {
+    margin-left: 0;
+  }
+  .ic_left {
+    padding: 40px 35px 0;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .ic_left {
+    padding: 30px 30px 0;
+  }
+  .ic_right {
+    height: 300px;
+  }
+  .ic_right img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
   .ic_bg_img {
-    width: 300px;
-    object-fit: cover;
+    left: 0%;
   }
 }

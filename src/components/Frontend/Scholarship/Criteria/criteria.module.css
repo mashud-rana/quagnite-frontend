@@ -1,0 +1,150 @@
+.content {
+  color: var(--white);
+}
+
+.ic_header_section {
+  margin-bottom: 20px;
+}
+
+.ic_subtitle {
+  margin-bottom: 24px;
+}
+
+.collapseWrapper {
+  width: 100%;
+}
+
+.collapseItem {
+  border-bottom: 1px solid #333 !important;
+}
+
+.ic_collapse_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+  border: none;
+  width: 100%;
+}
+
+.ic_collapse_header:hover {
+  color: #f59645;
+}
+
+.ic_collapse_header.active {
+  color: #f59645;
+}
+
+.ic_header_text {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: inherit;
+}
+
+.ic_expand_icon {
+  font-size: 20px;
+  font-weight: 600;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+.collapseContent {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.collapseContent.expanded {
+  max-height: 500px;
+}
+
+.ic_content_inner {
+  padding-bottom: 33px;
+}
+
+/* .ic_panel_content {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0;
+} */
+
+/* Responsive Design */
+@media (max-width: 1299px) {
+  .ic_header_text {
+    font-size: 18px;
+  }
+
+  /* .ic_panel_content {
+    font-size: 15px;
+    line-height: 1.5;
+  } */
+
+  .ic_collapse_header {
+    padding: 22px 0;
+  }
+
+  .ic_header_section {
+    margin-bottom: 16px;
+  }
+
+  .ic_content_inner {
+    padding-bottom: 28px;
+  }
+
+  .ic_subtitle {
+    margin-bottom: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ic_header_text {
+    font-size: 16px;
+  }
+
+  .ic_header_section {
+    margin-bottom: 10px;
+  }
+
+  /* .ic_panel_content {
+    font-size: 15px;
+    line-height: 1.5;
+  } */
+
+  .ic_content_inner {
+    padding-bottom: 22px;
+  }
+
+  .ic_subtitle {
+    margin-bottom: 16px;
+  }
+
+  .ic_collapse_header {
+    padding: 17px 0;
+  }
+
+  .ic_expand_icon {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ic_subtitle {
+    margin-bottom: 14px;
+  }
+
+  /* .ic_header_section {
+    margin-bottom: 22px;
+  } */
+
+  .ic_collapse_header {
+    padding: 16px 0;
+  }
+
+  .ic_header_text {
+    font-size: 16px;
+  }
+}

@@ -2,10 +2,8 @@ import React from "react";
 import styles from "./banner.module.css";
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 import Image from "next/image";
-import bg from "@/assets/images/all/tution-banner-bg.png";
-import img from "@/assets/images/all/tution-banner.png";
 
-const TutionBanner = () => {
+const TutionBanner = ({ bg, img, title, des }) => {
   return (
     <section
       className={` ic_section_margin_top_80 `}
@@ -23,16 +21,10 @@ const TutionBanner = () => {
               {/* Left Content */}
               <div className={styles.leftContent}>
                 <CardAnimation index={0} direction="left">
-                  <h4>Education for all</h4>
+                  <h4>{title}</h4>
                 </CardAnimation>
                 <CardAnimation index={0} direction="up">
-                  <p className={styles.heroDescription}>
-                    Quagnite welcomes students from all walks of life, all
-                    backgrounds, regardless of color, race, or creed. You’re
-                    joining a family, a community, and we help each other out.
-                    If you need tuitions assistance, all you have to do is ask.
-                    We’re here for you.
-                  </p>
+                  <p className={styles.heroDescription}>{des}</p>
                 </CardAnimation>
               </div>
 

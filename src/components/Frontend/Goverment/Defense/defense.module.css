@@ -27,19 +27,6 @@
   gap: 60px;
 }
 
-/* Medium Screens (Tablet) */
-@media (max-width: 1024px) {
-  .ic_grid {
-    grid-template-columns: 1fr; /* Stack content vertically */
-    gap: 40px;
-  }
-
-  .textContainer {
-    /* align-items: center; */
-    /* text-align: center; */
-  }
-}
-
 /* Small Screens (Mobile) */
 @media (max-width: 768px) {
   .ic_grid {

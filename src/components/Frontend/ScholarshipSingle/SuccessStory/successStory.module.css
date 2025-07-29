@@ -1,0 +1,14 @@
+.ic_success {
+  color: var(--white);
+}
+.ic_success img {
+  width: 100%;
+  height: auto;
+  mix-blend-mode: luminosity;
+}
+
+@media (max-width: 767.98px) {
+  .ic_right {
+    margin-bottom: 20px;
+  }
+}

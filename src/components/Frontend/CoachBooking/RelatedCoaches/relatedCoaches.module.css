@@ -1,0 +1,8 @@
+.ic_related_coaches {
+  color: #fff;
+}
+.ic_top_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

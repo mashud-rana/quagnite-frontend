@@ -30,7 +30,7 @@ const footerData = {
 
 const Footer = () => {
   return (
-    <div>
+    <section>
       <footer className={styles.footer}>
         <div className="container">
           <div className={styles.content}>
@@ -157,7 +157,7 @@ const Footer = () => {
           </div>
         </div>
       </footer>
-    </div>
+    </section>
   );
 };
 

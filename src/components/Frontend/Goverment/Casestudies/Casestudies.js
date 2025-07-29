@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Casestudies = () => {
   return (
-    <section className="ic_section_space">
+    <section className="ic_section_space_top">
       <div className="container">
         <div className={styles.ic_grid}>
           <Image
@@ -32,7 +32,7 @@ const Casestudies = () => {
           </div>
         </div>
 
-        <div className={`${styles.ic_grid} ic_section_space_top`}>
+        <div className={`${styles.ic_grid1} mt_48`}>
           <div className={styles.textContainer}>
             <div>
               <h6 className="mb_16">HIRE FROM US</h6>
