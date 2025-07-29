@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import img1 from "@/assets/images/apply-jobs/form-right.png";
 import styles from "./personalinfo.module.css";
 import { toast, Bounce } from "react-toastify";
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 export default function PersonalInfo({ setActiveStep }) {
   const [formData, setFormData] = useState({
@@ -69,38 +70,42 @@ export default function PersonalInfo({ setActiveStep }) {
 
   return (
     <>
-      <h3 className="ic_section_heading">Personal Information</h3>
+      <CardAnimation index={0} direction="left">
+        <h3 className="ic_section_heading">Personal Information</h3>
+      </CardAnimation>
       <Row gutter={24}>
         <Col xs={24} md={14}>
           <div className={styles.ic_apply_for_job_left}>
             <div className={styles.ic_form_main}>
               <form onSubmit={handleSubmit}>
-                <div className={styles.ic_apply_for_job_name}>
-                  <div className="mb-18">
-                    <input
-                      name="firstName"
-                      type="text"
-                      placeholder="First Name"
-                      value={formData.firstName}
-                      onChange={handleChange}
-                    />
-                    {errors.firstName && (
-                      <p className={styles.error}>{errors.firstName}</p>
-                    )}
+                <CardAnimation index={0} direction="down">
+                  <div className={styles.ic_apply_for_job_name}>
+                    <div className="mb-18">
+                      <input
+                        name="firstName"
+                        type="text"
+                        placeholder="First Name"
+                        value={formData.firstName}
+                        onChange={handleChange}
+                      />
+                      {errors.firstName && (
+                        <p className={styles.error}>{errors.firstName}</p>
+                      )}
+                    </div>
+                    <div className="mb-18">
+                      <input
+                        name="lastName"
+                        type="text"
+                        placeholder="Last Name"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                      />
+                      {errors.lastName && (
+                        <p className={styles.error}>{errors.lastName}</p>
+                      )}
+                    </div>
                   </div>
-                  <div className="mb-18">
-                    <input
-                      name="lastName"
-                      type="text"
-                      placeholder="Last Name"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                    />
-                    {errors.lastName && (
-                      <p className={styles.error}>{errors.lastName}</p>
-                    )}
-                  </div>
-                </div>
+                </CardAnimation>
 
                 {[
                   { name: "email", placeholder: "Mail Id", type: "email" },
@@ -138,28 +143,33 @@ export default function PersonalInfo({ setActiveStep }) {
                   },
                 ].map((field) => (
                   <div key={field.name} className="mb-18">
-                    <input
-                      type={field.type || "text"}
-                      name={field.name}
-                      placeholder={field.placeholder}
-                      value={formData[field.name]}
-                      onChange={handleChange}
-                    />
-                    {errors[field.name] && (
-                      <p className={styles.error}>{errors[field.name]}</p>
-                    )}
+                    <CardAnimation index={0} direction="down">
+                      <input
+                        type={field.type || "text"}
+                        name={field.name}
+                        placeholder={field.placeholder}
+                        value={formData[field.name]}
+                        onChange={handleChange}
+                      />
+                      {errors[field.name] && (
+                        <p className={styles.error}>{errors[field.name]}</p>
+                      )}
+                    </CardAnimation>
                   </div>
                 ))}
-
-                <button type="submit">Next</button>
+                <CardAnimation index={0} direction="left">
+                  <button type="submit">Next</button>
+                </CardAnimation>
               </form>
             </div>
           </div>
         </Col>
         <Col xs={24} md={10}>
-          <div className={styles.ic_apply_for_job_right}>
-            <Image src={img1} alt="img" />
-          </div>
+          <CardAnimation index={0} direction="right">
+            <div className={styles.ic_apply_for_job_right}>
+              <Image src={img1} alt="img" />
+            </div>
+          </CardAnimation>
         </Col>
       </Row>
     </>

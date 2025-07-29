@@ -7,6 +7,7 @@ import { toast, Bounce } from "react-toastify";
 import img1 from "@/assets/images/apply-jobs/Diversity-img.png";
 import { IoIosArrowDown } from "react-icons/io";
 import { useRouter } from "next/navigation";
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 export default function DiversityAndInclusion() {
   const router = useRouter();
@@ -56,83 +57,93 @@ export default function DiversityAndInclusion() {
 
   return (
     <div className={styles.ic_diversity}>
-      <h3 className="ic_section_heading">Diversity & Inclusion</h3>
+      <CardAnimation index={0} direction="down">
+        <h3 className="ic_section_heading">Diversity & Inclusion</h3>
+      </CardAnimation>
       <Row gutter={24}>
         <Col xs={24} md={14}>
           <div className={styles.ic_apply_for_job_left}>
             <div className={styles.ic_form_main}>
-              <form onSubmit={handleSubmit}>
-                {[
-                  {
-                    name: "gender",
-                    label: "Gender",
-                    options: ["Male", "Female"],
-                  },
-                  {
-                    name: "race",
-                    label: "Race",
-                    options: ["Asian", "Black", "White", "Mixed", "Other"],
-                  },
-                  {
-                    name: "ethnicity",
-                    label: "Ethnicity",
-                    options: ["Hispanic", "Non-Hispanic", "Prefer not to say"],
-                  },
-                ].map((field) => (
-                  <div key={field.name} className="mb-24">
-                    <div className={styles.select_wrapper}>
-                      <select
-                        name={field.name}
-                        value={formData[field.name]}
-                        onChange={handleChange}
-                        className={styles.ic_real_file_input}
-                      >
-                        <option value="">Select {field.label}</option>
-                        {field.options.map((opt, i) => (
-                          <option key={i} value={opt}>
-                            {opt}
-                          </option>
-                        ))}
-                      </select>
-                      <IoIosArrowDown className={styles.select_arrow_icon} />
+              <CardAnimation index={0} direction="left">
+                <form onSubmit={handleSubmit}>
+                  {[
+                    {
+                      name: "gender",
+                      label: "Gender",
+                      options: ["Male", "Female"],
+                    },
+                    {
+                      name: "race",
+                      label: "Race",
+                      options: ["Asian", "Black", "White", "Mixed", "Other"],
+                    },
+                    {
+                      name: "ethnicity",
+                      label: "Ethnicity",
+                      options: [
+                        "Hispanic",
+                        "Non-Hispanic",
+                        "Prefer not to say",
+                      ],
+                    },
+                  ].map((field) => (
+                    <div key={field.name} className="mb-24">
+                      <div className={styles.select_wrapper}>
+                        <select
+                          name={field.name}
+                          value={formData[field.name]}
+                          onChange={handleChange}
+                          className={styles.ic_real_file_input}
+                        >
+                          <option value="">Select {field.label}</option>
+                          {field.options.map((opt, i) => (
+                            <option key={i} value={opt}>
+                              {opt}
+                            </option>
+                          ))}
+                        </select>
+                        <IoIosArrowDown className={styles.select_arrow_icon} />
+                      </div>
+                      {errors[field.name] && (
+                        <p className={styles.error}>{errors[field.name]}</p>
+                      )}
                     </div>
-                    {errors[field.name] && (
-                      <p className={styles.error}>{errors[field.name]}</p>
-                    )}
+                  ))}
+
+                  <p className={`${styles.ic_disclaimer_text} mb-24`}>
+                    Disclaimer: These questions are voluntary and for
+                    statistical purposes only.
+                  </p>
+
+                  <div className="mb-24">
+                    <label
+                      htmlFor="additionalInfo"
+                      className={`${styles.ic_title} `}
+                    >
+                      Additional Information
+                    </label>
+                    <textarea
+                      name="additionalInfo"
+                      rows={4}
+                      value={formData.additionalInfo}
+                      onChange={handleChange}
+                      className={styles.ic_textarea}
+                    />
                   </div>
-                ))}
 
-                <p className={`${styles.ic_disclaimer_text} mb-24`}>
-                  Disclaimer: These questions are voluntary and for statistical
-                  purposes only.
-                </p>
-
-                <div className="mb-24">
-                  <label
-                    htmlFor="additionalInfo"
-                    className={`${styles.ic_title} `}
-                  >
-                    Additional Information
-                  </label>
-                  <textarea
-                    name="additionalInfo"
-                    rows={4}
-                    value={formData.additionalInfo}
-                    onChange={handleChange}
-                    className={styles.ic_textarea}
-                  />
-                </div>
-
-                <button type="submit" className={styles.ic_submit_btn}>
-                  submit
-                </button>
-              </form>
+                  <button type="submit" className={styles.ic_submit_btn}>
+                    submit
+                  </button>
+                </form>
+              </CardAnimation>
             </div>
           </div>
         </Col>
         <Col xs={24} md={10}>
           <div className={styles.ic_apply_for_job_right}>
-            <Image src={img1} alt="img" />
+            <CardAnimation index={0} direction="right">
+              <Image src={img1} alt="img" />
+            </CardAnimation>
           </div>
         </Col>
       </Row>

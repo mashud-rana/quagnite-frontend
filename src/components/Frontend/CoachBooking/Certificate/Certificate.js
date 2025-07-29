@@ -3,12 +3,10 @@ import React, { useState } from "react";
 import styles from "./certificate.module.css";
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 import Slider from "react-slick";
-import img1 from "@/assets/images/coach-details/coach-details.png";
-import img2 from "@/assets/images/apply-scholarship/service-img.png";
-import img3 from "@/assets/images/apply-scholarship/service-img2.png";
+import img1 from "@/assets/images/coach-details/slider-img.png";
 import Image from "next/image";
 
-const data = [{ image: img1 }, { image: img2 }, { image: img3 }];
+const data = [{ image: img1 }, { image: img1 }, { image: img1 }];
 
 export default function Certificate() {
   const [activeIndex, setActiveIndex] = useState(0);
