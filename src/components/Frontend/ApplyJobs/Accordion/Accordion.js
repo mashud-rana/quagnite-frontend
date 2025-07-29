@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { ImSearch } from "react-icons/im";
 import styles from "./accordion.module.css";
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 const data = [
   {
@@ -62,22 +63,25 @@ export default function Accordion() {
     <section className={styles.ic_accordionSection}>
       <div className="container">
         <div className={styles.ic_wrapper}>
-          <h6 className="mb-16">perks</h6>
-          <h4 className="mb-35">Lorem ipsum dolar sit amet</h4>
-
-          <div className={`${styles.ic_searchWrapper} mb-35`}>
-            <input
-              type="text"
-              className={`${styles.ic_searchBox} `}
-              value={searchTerm}
-              name="search"
-              id="faq-search"
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <span className={styles.ic_searchIcon}>
-              <ImSearch />
-            </span>
-          </div>
+          <CardAnimation index={0} direction="down">
+            <h6 className="mb-16">perks</h6>
+            <h4 className="mb-35">Lorem ipsum dolar sit amet</h4>
+          </CardAnimation>
+          <CardAnimation index={0} direction="down">
+            <div className={`${styles.ic_searchWrapper} mb-35`}>
+              <input
+                type="text"
+                className={`${styles.ic_searchBox} `}
+                value={searchTerm}
+                name="search"
+                id="faq-search"
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <span className={styles.ic_searchIcon}>
+                <ImSearch />
+              </span>
+            </div>
+          </CardAnimation>
 
           {filteredData.length === 0 ? (
             <p className={styles.ic_notFound}>Sorry, not found!</p>
@@ -88,16 +92,20 @@ export default function Accordion() {
                 className={styles.ic_accordionItem}
                 onClick={() => toggleAccordion(index)}
               >
-                <div className={styles.ic_questionRow}>
-                  <h6>{item.question}</h6>
-                  <span className={styles.ic_icon}>
-                    {activeIndex === index ? "−" : "+"}
-                  </span>
-                </div>
-                {activeIndex === index && (
-                  <div className={styles.ic_answer}>
-                    <p>{item.answer}</p>
+                <CardAnimation index={0} direction="down">
+                  <div className={styles.ic_questionRow}>
+                    <h6>{item.question}</h6>
+                    <span className={styles.ic_icon}>
+                      {activeIndex === index ? "−" : "+"}
+                    </span>
                   </div>
+                </CardAnimation>
+                {activeIndex === index && (
+                  <CardAnimation index={0} direction="down">
+                    <div className={styles.ic_answer}>
+                      <p>{item.answer}</p>
+                    </div>
+                  </CardAnimation>
                 )}
               </div>
             ))

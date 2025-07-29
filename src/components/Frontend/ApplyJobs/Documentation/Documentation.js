@@ -6,6 +6,7 @@ import Image from "next/image";
 import img1 from "@/assets/images/apply-jobs/documentation-img.png";
 import { FaArrowUpLong, FaCheck, FaPlus } from "react-icons/fa6";
 import { toast, Bounce } from "react-toastify";
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 const initialFields = [
   { name: "Cover Letter", placeholder: "Cover Letter" },
@@ -62,64 +63,70 @@ export default function Documentation({ setActiveStep }) {
 
   return (
     <div className={styles.ic_document}>
-      <h3 className="ic_section_heading">Documentations</h3>
+      <CardAnimation index={0} direction="down">
+        <h3 className="ic_section_heading">Documentations</h3>
+      </CardAnimation>
       <Row gutter={24}>
         <Col xs={24} md={14}>
           <div className={styles.ic_apply_for_job_left}>
             <div className={styles.ic_form_main}>
-              <form onSubmit={handleSubmit}>
-                {fields.map((field, index) => (
-                  <div key={field.name + index} className="mb-24">
-                    <div className={styles.ic_custom_file_wrapper}>
-                      <label className={styles.ic_custom_file_input}>
-                        <span className={styles.ic_placeholder_text}>
-                          {field.placeholder}
-                        </span>
-                        {uploaded[field.name] ? (
-                          <FaCheck className={styles.ic_check_icon} />
-                        ) : (
-                          <FaArrowUpLong className={styles.ic_upload_icon} />
-                        )}
-                        <input
-                          type="file"
-                          name={field.name}
-                          className={styles.ic_real_file_input}
-                          onChange={(e) => handleFileChange(e, field.name)}
-                        />
-                      </label>
+              <CardAnimation index={0} direction="left">
+                <form onSubmit={handleSubmit}>
+                  {fields.map((field, index) => (
+                    <div key={field.name + index} className="mb-24">
+                      <div className={styles.ic_custom_file_wrapper}>
+                        <label className={styles.ic_custom_file_input}>
+                          <span className={styles.ic_placeholder_text}>
+                            {field.placeholder}
+                          </span>
+                          {uploaded[field.name] ? (
+                            <FaCheck className={styles.ic_check_icon} />
+                          ) : (
+                            <FaArrowUpLong className={styles.ic_upload_icon} />
+                          )}
+                          <input
+                            type="file"
+                            name={field.name}
+                            className={styles.ic_real_file_input}
+                            onChange={(e) => handleFileChange(e, field.name)}
+                          />
+                        </label>
+                      </div>
+                      {errors[field.name] && (
+                        <p className={styles.error}>{errors[field.name]}</p>
+                      )}
                     </div>
-                    {errors[field.name] && (
-                      <p className={styles.error}>{errors[field.name]}</p>
-                    )}
-                  </div>
-                ))}
+                  ))}
 
-                <div
-                  className={`${styles.ic_custom_file_wrapper} mb-18`}
-                  onClick={handleAddMore}
-                >
-                  <label htmlFor="" className={`${styles.ic_title} mb-18`}>
-                    Add title
-                  </label>
-                  <div className={styles.ic_custom_file_input}>
-                    <span className={styles.ic_placeholder_text}>
-                      Certificate {fields.length + 1}
-                    </span>
-                    <FaPlus className={styles.ic_upload_icon} />
+                  <div
+                    className={`${styles.ic_custom_file_wrapper} mb-18`}
+                    onClick={handleAddMore}
+                  >
+                    <label htmlFor="" className={`${styles.ic_title} mb-18`}>
+                      Add title
+                    </label>
+                    <div className={styles.ic_custom_file_input}>
+                      <span className={styles.ic_placeholder_text}>
+                        Certificate {fields.length + 1}
+                      </span>
+                      <FaPlus className={styles.ic_upload_icon} />
+                    </div>
                   </div>
-                </div>
 
-                <button type="submit" className={styles.ic_submit_btn}>
-                  Next
-                </button>
-              </form>
+                  <button type="submit" className={styles.ic_submit_btn}>
+                    Next
+                  </button>
+                </form>
+              </CardAnimation>
             </div>
           </div>
         </Col>
         <Col xs={24} md={10}>
-          <div className={styles.ic_apply_for_job_right}>
-            <Image src={img1} alt="img" />
-          </div>
+          <CardAnimation index={0} direction="right">
+            <div className={styles.ic_apply_for_job_right}>
+              <Image src={img1} alt="img" />
+            </div>
+          </CardAnimation>
         </Col>
       </Row>
     </div>
