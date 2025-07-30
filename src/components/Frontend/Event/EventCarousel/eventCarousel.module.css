@@ -1,0 +1,99 @@
+.slide {
+  padding: 16px;
+}
+
+.card {
+  color: var(--white);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.content {
+  padding: 1rem 0;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 16px 0;
+}
+
+.description {
+  opacity: 0.7;
+  margin-bottom: 28px;
+}
+
+.button {
+  background-color: #272727;
+  color: var(--white);
+  padding: 12px 26px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #1d4ed8;
+}
+
+/* ✅ Custom Arrows */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 36px;
+  color: white;
+  cursor: pointer;
+  z-index: 10;
+  user-select: none;
+}
+
+.prevArrow {
+  left: -30px;
+}
+
+.nextArrow {
+  right: -30px;
+}
+
+@media (max-width: 1399px) {
+  .prevArrow {
+    left: -10px;
+  }
+
+  .nextArrow {
+    right: -10px;
+  }
+
+  .button {
+    padding: 10px 22px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .prevArrow,
+  .nextArrow {
+    display: none;
+  }
+
+  .title {
+    margin: 0 0 10px 0;
+  }
+
+  .description {
+    margin-bottom: 22px;
+  }
+}

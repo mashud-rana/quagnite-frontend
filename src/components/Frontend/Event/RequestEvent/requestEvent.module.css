@@ -1,0 +1,125 @@
+.ic_apply_for_job_left {
+  color: #fff;
+}
+.ic_apply_for_job_left input {
+  width: 100%;
+  border-radius: 12px;
+  background: transparent;
+  height: 47px;
+  outline: none;
+  border: none;
+  padding: 0px 23px;
+  color: #fff;
+  border: 1px solid #fff;
+}
+.ic_apply_for_job_left input::placeholder {
+  color: #fff;
+}
+.ic_apply_for_job_name {
+  display: flex;
+  gap: 18px;
+}
+.ic_apply_for_job_name div {
+  width: 50%;
+}
+
+.ic_apply_for_job_left button {
+  border-radius: 12px;
+  height: 48px;
+  outline: none;
+  border: none;
+  padding: 0px 23px;
+  background: #5c81f7;
+  color: white;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.ic_apply_for_job_left button:hover {
+  box-shadow: 0px 2px 20px #5c81f7;
+}
+.error {
+  padding: 5px 0 0 20px;
+  color: red;
+}
+.ic_apply_for_job_right img {
+  width: 100%;
+  height: auto;
+}
+.ic_apply_for_job_left_textarea {
+  width: 100%;
+  height: 172px;
+  border-radius: 12px;
+  background: transparent;
+  outline: none;
+  border: none;
+  padding: 15px 23px;
+  color: #fff;
+  border: 1px solid #fff;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 25.2px;
+  letter-spacing: -0.18px;
+}
+.ic_apply_for_job_left_textarea::placeholder {
+  color: #fff;
+}
+.ic_scholarship_right img {
+  /* mix-blend-mode: luminosity; */
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 1199.98px) {
+  .ic_apply_for_job_left input {
+    height: 45px;
+    padding: 0 20px;
+  }
+  .ic_apply_for_job_left button {
+    height: 45px;
+    padding: 0 20px;
+    font-size: 15px;
+    line-height: normal;
+  }
+  .ic_apply_for_job_left_textarea {
+    height: 165px;
+  }
+}
+@media (max-width: 991.98px) {
+  .ic_apply_for_job_left input {
+    height: 40px;
+    padding: 0 15px;
+  }
+  .ic_apply_for_job_left button {
+    height: 40px;
+    font-size: 14px;
+  }
+  .ic_apply_for_job_left_textarea {
+    height: 160px;
+  }
+}
+@media (max-width: 767.98px) {
+  .ic_scholarship_right {
+    display: none;
+  }
+  .ic_apply_for_job_left_textarea {
+    height: 155px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .ic_apply_for_job_name {
+    display: block;
+  }
+  .ic_apply_for_job_name div {
+    width: 100%;
+  }
+  .ic_apply_for_job_left_textarea {
+    height: 150px;
+  }
+}
