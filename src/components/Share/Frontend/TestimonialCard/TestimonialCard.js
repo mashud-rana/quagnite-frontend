@@ -84,8 +84,8 @@ export default function Testimonial({
                     />
                   ))}
                 </div>
-                <p className="mb_16">{item.feedback}</p>
-                <p className="fw_500">{item.name}</p>
+                <p className="mb_16 fw_300">{item.feedback}</p>
+                <p className="fw_500 fw_500">{item.name}</p>
               </div>
             ))}
           </Slider>

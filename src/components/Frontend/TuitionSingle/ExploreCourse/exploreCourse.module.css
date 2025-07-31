@@ -1,0 +1,283 @@
+.courseCard {
+  position: relative;
+  background-color: var(--gray);
+  border-radius: 16px;
+}
+
+.decorativeElements {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Purple circles */
+.purpleCircle {
+  position: absolute;
+  background: linear-gradient(108.98deg, #917ffb 27.06%, #441889 90.91%),
+    #d9d9d9;
+  filter: blur(6.1px);
+  border-radius: 50%;
+}
+
+.circle1 {
+  width: 40px;
+  height: 40px;
+  top: 10%;
+  left: 25%;
+  animation: float1 6s ease-in-out infinite;
+}
+
+.circle2 {
+  width: 40px;
+  height: 40px;
+  top: 10%;
+  right: 26%;
+  animation: float2 8s ease-in-out infinite;
+}
+
+.circle3 {
+  width: 25px;
+  height: 25px;
+  bottom: 15%;
+  right: 2%;
+  animation: float3 7s ease-in-out infinite;
+}
+
+.circle6 {
+  width: 20px;
+  height: 20px;
+  top: 15%;
+  right: 5%;
+  animation: float2 8s ease-in-out infinite;
+}
+
+/* Blue circles */
+.blueCircle {
+  position: absolute;
+  background: linear-gradient(108.98deg, #7fc0fb 27.06%, #4088f4 90.91%),
+    #d9d9d9;
+  filter: blur(6.1px);
+  border-radius: 50%;
+}
+
+.circle4 {
+  width: 35px;
+  height: 35px;
+  top: 70%;
+  left: 30%;
+  animation: float4 9s ease-in-out infinite;
+}
+
+.circle5 {
+  width: 20px;
+  height: 20px;
+  bottom: 2%;
+  left: 40%;
+  animation: float5 5s ease-in-out infinite;
+}
+
+/* Orange lines */
+.orangeLine {
+  position: absolute;
+  background: linear-gradient(180deg, #ff7600 0%, #f69745 100%);
+  border-radius: 2px;
+}
+
+.line1 {
+  width: 50px;
+  height: 12px;
+  border-radius: 26px;
+  top: 25%;
+  right: 30%;
+  transform: rotate(45deg);
+  animation: rotate1 10s linear infinite;
+}
+
+.line2 {
+  width: 50px;
+  height: 12px;
+  border-radius: 26px;
+  bottom: 30%;
+  left: 35%;
+  transform: rotate(-30deg);
+  animation: rotate2 8s linear infinite;
+}
+
+/* Blue arrow */
+.blueArrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 20px solid #74b9ff;
+  transform: rotate(45deg);
+}
+
+.arrow1 {
+  top: 40%;
+  right: 25%;
+  animation: bounce 4s ease-in-out infinite;
+  background: linear-gradient(108.98deg, #7fc0fb 27.06%, #4088f4 90.91%),
+    #d9d9d9;
+  filter: blur(6.1px);
+}
+
+/* Animations */
+@keyframes float1 {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px);
+  }
+  50% {
+    transform: translateY(-10px) translateX(-15px);
+  }
+  75% {
+    transform: translateY(-25px) translateX(5px);
+  }
+}
+
+@keyframes float2 {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  33% {
+    transform: translateY(-15px) translateX(-10px);
+  }
+  66% {
+    transform: translateY(-25px) translateX(15px);
+  }
+}
+
+@keyframes float3 {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(-30px) translateX(-20px);
+  }
+}
+
+@keyframes float4 {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-10px) translateX(-5px);
+  }
+  50% {
+    transform: translateY(-20px) translateX(10px);
+  }
+  75% {
+    transform: translateY(-5px) translateX(-15px);
+  }
+}
+
+@keyframes float5 {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(-15px) translateX(20px);
+  }
+}
+
+@keyframes rotate1 {
+  0% {
+    transform: rotate(45deg);
+  }
+  50% {
+    transform: rotate(225deg);
+  }
+  100% {
+    transform: rotate(405deg);
+  }
+}
+
+@keyframes rotate2 {
+  0% {
+    transform: rotate(-30deg);
+  }
+  50% {
+    transform: rotate(150deg);
+  }
+  100% {
+    transform: rotate(330deg);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: rotate(45deg) translateY(0px);
+  }
+  50% {
+    transform: rotate(45deg) translateY(-20px);
+  }
+}
+
+.cardContent {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  padding: 30px;
+}
+
+.imageColumn {
+  flex: 1;
+}
+
+.imageContainer {
+  width: 100%;
+  height: 250px;
+  filter: grayscale(100%);
+}
+
+.manImage {
+  height: auto;
+  position: absolute;
+  right: 0;
+  top: -40%;
+  z-index: 5;
+}
+
+@media (max-width: 767px) {
+  .cardContent {
+    flex-direction: column;
+    /* justify-content: center;
+    align-items: center; */
+    /* padding: 20px; */
+  }
+
+  .imageContainer {
+    height: auto;
+    width: 100%;
+    position: relative;
+  }
+
+  .manImage {
+    position: relative;
+    top: auto;
+    right: auto;
+    transform: translateY(0);
+    width: 100%;
+    /* max-width: 300px; */
+    margin-top: 0px;
+    z-index: 5;
+  }
+
+  .decorativeElements {
+    /* display: none; */
+  }
+}

@@ -1,12 +1,16 @@
+import Blog from "@/components/Frontend/Resource/Blog/Blog";
 import ResourceBanner from "@/components/Frontend/Resource/ResourceBanner/ResourceBanner";
+import VideoCarousel from "@/components/Frontend/Resource/VideoCarousel/VideoCarousel";
 import React from "react";
 
-const Resource = () => {
+const ResourcePage = () => {
   return (
-    <div>
+    <>
       <ResourceBanner />
-    </div>
+      <VideoCarousel />
+      <Blog />
+    </>
   );
 };
 
-export default Resource;
+export default ResourcePage;

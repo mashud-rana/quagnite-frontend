@@ -4,6 +4,7 @@ import team1 from "@/assets/images/all/avail-scholorship.png";
 import team2 from "@/assets/images/all/avail-scholorship.png";
 import Image from "next/image";
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
+import ScholarshipCard from "./ScholarshipCard";
 
 const AvailScholarship = () => {
   const teamMembers = [
@@ -46,37 +47,17 @@ const AvailScholarship = () => {
     <section className="ic_section_space">
       <div className="container">
         <CardAnimation index={0} direction="left">
-          <div className={styles.ic_title}>
+          <div className="ic_title_see_btn_container">
             <h4>Available Scholarships</h4>
             <div>
-              <button className={styles.ic_see_all_button}>See All</button>
+              <button className="ic_see_all_btn">See All</button>
             </div>
           </div>
         </CardAnimation>
 
-        <div className={styles.ic_team_grid}>
+        <div className="ic_team_grid">
           {teamMembers.map((member, index) => (
-            <CardAnimation index={index} key={index}>
-              <div className={styles.ic_team_card}>
-                <div className={`${styles.ic_image_container}`}>
-                  <Image
-                    src={member.image || "/placeholder.svg"}
-                    alt={member.name}
-                    width={260}
-                    height={170}
-                    className={styles.ic_member_image}
-                  />
-                </div>
-                <div className={styles.ic_card_content}>
-                  <h3 className={styles.ic_member_name}>{member.name}</h3>
-                  <p className={styles.ic_member_description}>
-                    {member.description}
-                  </p>
-
-                  <button className={styles.ic_btn}>Hire Now</button>
-                </div>
-              </div>
-            </CardAnimation>
+            <ScholarshipCard key={index} member={member} index={index} />
           ))}
         </div>
       </div>

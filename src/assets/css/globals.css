@@ -339,17 +339,26 @@ h6 {
 }
 
 .ic_see_all_btn {
-  padding: 10px 24px;
-  font-size: 15px;
-  font-weight: 400;
-  text-transform: uppercase;
-  border: none;
+  background: #272727;
   color: var(--white);
-  background-color: #272727;
-  border-radius: 12px;
+  padding: 8px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  text-transform: uppercase;
 }
+
+.ic_see_all_button:hover {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
 .ic_coach_details .slick-list {
-  padding: 15px 0 !important;
+  /* padding: 15px 0 !important; */
+  padding-bottom: 30px;
 }
 .ic_certificate .slick-slide {
   padding: 0 16px;
@@ -357,6 +366,21 @@ h6 {
 
 .ic_certificate .slick-list {
   margin: 0 -16px;
+}
+
+.ic_title_see_btn_container {
+  color: var(--white);
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ic_team_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-items: center;
 }
 
 /* Responsive Design */
@@ -463,6 +487,10 @@ h6 {
   .ic_alumni_feedback .slick-next {
     right: -10px;
     z-index: 10;
+  }
+
+  .ic_title_see_btn_container {
+    margin-bottom: 34px;
   }
 }
 
@@ -647,13 +675,9 @@ h6 {
     border-radius: 10px;
   }
 
-  .ic_see_all_btn {
-    padding: 8px 22px;
-    font-size: 14px;
-    border-radius: 10px;
-  }
   .ic_coach_details .slick-list {
-    padding: 10px 0 !important;
+    /* padding: 10px 0 !important; */
+    padding-bottom: 20px;
   }
 }
 
@@ -770,7 +794,12 @@ h6 {
     margin-bottom: 35px;
   }
   .ic_coach_details .slick-list {
-    padding: 5px 0 !important;
+    /* padding: 5px 0 !important; */
+    padding-bottom: 16px;
+  }
+
+  .ic_team_grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -827,9 +856,9 @@ h6 {
   }
 
   .ic_see_all_btn {
-    padding: 6px 16px;
     font-size: 14px;
-    border-radius: 8px;
+    padding: 6px 16px;
+    align-self: flex-end;
   }
 
   /* p,
@@ -935,6 +964,16 @@ h6 {
 
   .mb-45 {
     margin-bottom: 30px;
+  }
+
+  .ic_title_see_btn_container {
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+  }
+
+  .ic_team_grid {
+    grid-template-columns: 1fr;
   }
 }
 
