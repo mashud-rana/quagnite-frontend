@@ -1,85 +1,71 @@
 "use client";
 import React, { useState } from "react";
-import styles from "./faq.module.css";
-const data = [
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
+import DaynamicCollaps from "../../Hiring/SkillCollapse/DaynamicCollaps";
+
+const collapseData = [
   {
-    question: "Flexible Working Hours",
-    answer: "Next.js is a React framework for production.",
+    key: "1",
+    header: "LOREM IPSUM DOLAR SIT",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dignissim dui id lobortis vulputate. Nulla sodales enim quis euismod consectetur. Ut in laoreet diam, nec efficitur felis. Suspendisse potenti. Pellentesque rutrum nec diam sed pharetra. Maecenas pulvinar varius efficitur.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dignissim dui id lobortis vulputate. Nulla sodales enim quis euismod consectetur.",
   },
   {
-    question: "Health and Wellness Programs",
-    answer: "Yes, because of its SSR and static generation features.",
+    key: "2",
+    header: "LOREM IPSUM DOLAR SIT",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dignissim dui id lobortis vulputate. Nulla sodales enim quis euismod consectetur. Ut in laoreet diam, nec efficitur felis. Suspendisse potenti. Pellentesque rutrum nec diam sed pharetra.",
   },
   {
-    question: "Professional Development",
-    answer: "You can use CSS Modules, Tailwind, or other styling methods.",
+    key: "3",
+    header: "LOREM IPSUM DOLAR SIT",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dignissim dui id lobortis vulputate. Nulla sodales enim quis euismod consectetur. Ut in laoreet diam, nec efficitur felis.",
   },
   {
-    question: "Paid Time Off",
-    answer: "You can use CSS Modules, Tailwind, or other styling methods.",
+    key: "4",
+    header: "LOREM IPSUM DOLAR SIT",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dignissim dui id lobortis vulputate. Nulla sodales enim quis euismod consectetur.",
   },
   {
-    question: "Retirement Plans",
-    answer: "You can use CSS Modules, Tailwind, or other styling methods.",
-  },
-  {
-    question: "Performance Bonuses",
-    answer: "You can use CSS Modules, Tailwind, or other styling methods.",
-  },
-  {
-    question: "Employee Discounts",
-    answer: "You can use CSS Modules, Tailwind, or other styling methods.",
-  },
-  {
-    question: "Work Environment and Culture",
-    answer: "You can use CSS Modules, Tailwind, or other styling methods.",
-  },
-  {
-    question: "Company Events",
-    answer: "You can use CSS Modules, Tailwind, or other styling methods.",
-  },
-  {
-    question: "Equity or Stock Options",
-    answer: "You can use CSS Modules, Tailwind, or other styling methods.",
+    key: "5",
+    header: "LOREM IPSUM DOLAR SIT",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dignissim dui id lobortis vulputate. Nulla sodales enim quis euismod consectetur. Ut in laoreet diam, nec efficitur felis. Suspendisse potenti.",
   },
 ];
 
 export default function Faq() {
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [activeKey, setActiveKey] = useState("1");
 
-  const toggleAccordion = (index) => {
-    setActiveIndex(index === activeIndex ? null : index);
+  const togglePanel = (key) => {
+    setActiveKey((prev) => (prev === key ? null : key));
   };
-
   return (
-    <section className={styles.ic_accordionSection}>
-      <div className="container">
-        <div className={styles.ic_wrapper}>
-          <h6 className="mb-16">FAQ</h6>
-          <h4 className="mb-35">
-            {`You've`} got questions, {`we've`} got{" "}
-            <span className={styles.ic_ans}>answers</span>.
-          </h4>
-
-          {data.map((item, index) => (
-            <div
-              key={index}
-              className={styles.ic_accordionItem}
-              onClick={() => toggleAccordion(index)}
-            >
-              <div className={styles.ic_questionRow}>
-                <h6>{item.question}</h6>
-                <span className={styles.ic_icon}>
-                  {activeIndex === index ? "−" : "+"}
-                </span>
-              </div>
-              {activeIndex === index && (
-                <div className={styles.ic_answer}>
-                  <p>{item.answer}</p>
-                </div>
-              )}
+    <section>
+      <div className="ic_section_space_58 radious_60 ic_bg">
+        <div className="container">
+          <CardAnimation index={1} direction="up">
+            <div className=" mb-24">
+              <h6 className="mb_16">FAQ</h6>
+              <h4>
+                You&#39;ve got questions, we&#39;ve got <span>answers</span>
+              </h4>
             </div>
-          ))}
+          </CardAnimation>
+
+          <div>
+            {collapseData.map((item, index) => (
+              <DaynamicCollaps
+                activeKey={activeKey}
+                index={index}
+                key={index}
+                item={item}
+                togglePanel={togglePanel}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

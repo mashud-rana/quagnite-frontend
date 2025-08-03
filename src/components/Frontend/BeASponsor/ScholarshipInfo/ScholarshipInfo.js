@@ -61,114 +61,117 @@ export default function ScholarshipInfo({ setScholarshipActiveStep }) {
   };
 
   return (
-      <Row gutter={24}>
-          
-          <Col xs={24} md={14}>
-              <CardAnimation index={0} direction="left">
-                <div className={styles.ic_apply_for_job_left}>
-                <div className={styles.ic_form_main}>
-                    <form onSubmit={handleSubmit}>
-                    <div className={styles.ic_apply_for_job_name}>
-                        <div className="mb-18">
-                        <input
-                            name="firstName"
-                            type="text"
-                            placeholder="First Name"
-                            value={formData.firstName}
-                            onChange={handleChange}
-                        />
-                        {errors.firstName && (
-                            <p className={styles.error}>{errors.firstName}</p>
-                        )}
-                        </div>
-                        <div className="mb-18">
-                        <input
-                            name="lastName"
-                            type="text"
-                            placeholder="Last Name"
-                            value={formData.lastName}
-                            onChange={handleChange}
-                        />
-                        {errors.lastName && (
-                            <p className={styles.error}>{errors.lastName}</p>
-                        )}
-                        </div>
-                    </div>
-
-                    <div className="mb-18">
-                        <input
-                        name="orgType"
-                        type="text"
-                        placeholder="Organisation Type"
-                        value={formData.orgType}
-                        onChange={handleChange}
-                        />
-                        {errors.orgType && (
-                        <p className={styles.error}>{errors.orgType}</p>
-                        )}
-                    </div>
-
-                    <div className="mb-18">
-                        <input
-                        name="email"
-                        type="email"
-                        placeholder="Mail ID"
-                        value={formData.email}
-                        onChange={handleChange}
-                        />
-                        {errors.email && <p className={styles.error}>{errors.email}</p>}
-                    </div>
-
-                    <div className="mb-18">
-                        <input
-                        name="phone"
-                        type="text"
-                        placeholder="Phone Number"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        />
-                        {errors.phone && <p className={styles.error}>{errors.phone}</p>}
-                    </div>
-
-                    <div className="mb-18">
-                        <input
-                        name="companyName"
-                        type="text"
-                        placeholder="Company Name"
-                        value={formData.companyName}
-                        onChange={handleChange}
-                        />
-                        {errors.companyName && (
-                        <p className={styles.error}>{errors.companyName}</p>
-                        )}
-                    </div>
-
-                    <div className="mb-18">
-                        <textarea
-                        name="message"
-                        placeholder="message"
-                        value={formData.message}
-                                        onChange={handleChange}
-                                        className={styles.ic_apply_for_job_left_textarea}
-                        />
-                        {errors.message && (
-                        <p className={styles.error}>{errors.message}</p>
-                        )}
-                    </div>
-
-                    <button type="submit">submit</button>
-                    </form>
+    <Row gutter={24} className={styles.ic_scholarship_row}>
+      <Col xs={24} md={14} className={styles.ic_form_col}>
+        <CardAnimation index={0} direction="left">
+          <div className={styles.ic_apply_for_job_left}>
+            <div className={styles.ic_form_main}>
+              <form onSubmit={handleSubmit}>
+                <div className={styles.ic_apply_for_job_name}>
+                  <div className="mb-18">
+                    <input
+                      name="firstName"
+                      type="text"
+                      placeholder="First Name"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                    />
+                    {errors.firstName && (
+                      <p className={styles.error}>{errors.firstName}</p>
+                    )}
+                  </div>
+                  <div className="mb-18">
+                    <input
+                      name="lastName"
+                      type="text"
+                      placeholder="Last Name"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                    />
+                    {errors.lastName && (
+                      <p className={styles.error}>{errors.lastName}</p>
+                    )}
+                  </div>
                 </div>
+
+                <div className="mb-18">
+                  <input
+                    name="orgType"
+                    type="text"
+                    placeholder="Organisation Type"
+                    value={formData.orgType}
+                    onChange={handleChange}
+                  />
+                  {errors.orgType && (
+                    <p className={styles.error}>{errors.orgType}</p>
+                  )}
                 </div>
-              </CardAnimation>
-          </Col>
-          <Col xs={24} md={10}>
-              <CardAnimation index={0} direction="right">
-                <div className={styles.ic_scholarship_right}>
-                <Image src={img1} alt="img" />
+
+                <div className="mb-18">
+                  <input
+                    name="email"
+                    type="email"
+                    placeholder="Mail ID"
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
+                  {errors.email && (
+                    <p className={styles.error}>{errors.email}</p>
+                  )}
                 </div>
-              </CardAnimation>
-          </Col>
+
+                <div className="mb-18">
+                  <input
+                    name="phone"
+                    type="text"
+                    placeholder="Phone Number"
+                    value={formData.phone}
+                    onChange={handleChange}
+                  />
+                  {errors.phone && (
+                    <p className={styles.error}>{errors.phone}</p>
+                  )}
+                </div>
+
+                <div className="mb-18">
+                  <input
+                    name="companyName"
+                    type="text"
+                    placeholder="Company Name"
+                    value={formData.companyName}
+                    onChange={handleChange}
+                  />
+                  {errors.companyName && (
+                    <p className={styles.error}>{errors.companyName}</p>
+                  )}
+                </div>
+
+                <div className="mb-18">
+                  <textarea
+                    name="message"
+                    placeholder="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    className={styles.ic_apply_for_job_left_textarea}
+                  />
+                  {errors.message && (
+                    <p className={styles.error}>{errors.message}</p>
+                  )}
+                </div>
+
+                <button type="submit">submit</button>
+              </form>
+            </div>
+          </div>
+        </CardAnimation>
+      </Col>
+      <Col xs={24} md={10} className={styles.ic_img_col}>
+        <CardAnimation index={0} direction="down">
+          <div className={styles.ic_scholarship_right}>
+            <Image src={img1} alt="img" />
+          </div>
+        </CardAnimation>
+      </Col>
     </Row>
   );
 }

@@ -33,7 +33,7 @@ export default function Banner() {
         </Row>
       </div>
       <div className={styles.ic_right}>
-        <CardAnimation index={0} direction="right">
+        <CardAnimation index={0} direction="down">
           <Image src={img} alt="img" />
         </CardAnimation>
       </div>

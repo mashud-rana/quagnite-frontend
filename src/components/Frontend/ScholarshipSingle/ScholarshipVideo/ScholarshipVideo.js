@@ -39,17 +39,23 @@ export default function ScholarshipVideo() {
             </CardAnimation>
           </Col>
           <Col xs={24} md={13} lg={12}>
-            <CardAnimation index={0} direction="right">
+            <CardAnimation index={0} direction="down">
               <div className={styles.ic_right}>
                 <h4 className="mb_16">Lorem Ipsum dolar sit amet</h4>
-                <p>
+                <p className="fw_300 oc">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
                   pretium odio eget eros tempor sagittis. Sed mollis nunc sed
                   tempor mollis. Nam euismod tortor ut augue lacinia, a rhoncus
                   nibh tempor. Sed purus dui, molestie ac neque non, mattis
                   aliquam velit. Proin aliquam quam egestas volutpat mollis.
                   Nulla nec lacus risus. Praesent eu elit eget tortor efficitur
-                  ullamcorper...
+                  ullamcorper. Donec quis sapien vel libero venenatis rutrum et
+                  in augue. Mauris ac eleifend orci. Suspendisse purus enim,
+                  posuere lacinia pellentesque mollis, porttitor vel quam. Fusce
+                  sit amet lectus est. In ultrices est eleifend nulla semper
+                  ullamcorper eu ac arcu. Morbi nisi lorem, tempor id fringilla
+                  vitae, placerat nec purus. Donec sagittis diam nulla, ut
+                  pharetra ante lacinia non.
                 </p>
               </div>
             </CardAnimation>

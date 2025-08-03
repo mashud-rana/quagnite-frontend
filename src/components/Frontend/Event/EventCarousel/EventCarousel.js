@@ -6,6 +6,7 @@ import Image from "next/image";
 import styles from "./eventCarousel.module.css";
 import img from "@/assets/images/all/carousel-img.png";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 const PrevArrow = ({ onClick }) => (
   <div className={`${styles.arrow} ${styles.prevArrow}`} onClick={onClick}>
@@ -72,26 +73,28 @@ const EventCarousel = () => {
   return (
     <section className="ic_section_space event">
       <div className="container">
-        <Slider {...settings}>
-          {events.map((event) => (
-            <div key={event.id} className={styles.slide}>
-              <div className={styles.card}>
-                <Image
-                  src={event.image}
-                  alt={event.title}
-                  width={500}
-                  height={200}
-                  className={styles.image}
-                />
-                <div className={styles.content}>
-                  <p className={styles.title}>{event.title}</p>
-                  <p className={styles.description}>{event.description}</p>
-                  <button className={styles.button}>Register now</button>
+        <CardAnimation index={0} direction="up">
+          <Slider {...settings}>
+            {events.map((event) => (
+              <div key={event.id} className={styles.slide}>
+                <div className={styles.card}>
+                  <Image
+                    src={event.image}
+                    alt={event.title}
+                    width={500}
+                    height={200}
+                    className={styles.image}
+                  />
+                  <div className={styles.content}>
+                    <p className={styles.title}>{event.title}</p>
+                    <p className={styles.description}>{event.description}</p>
+                    <button className={styles.button}>Register now</button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </Slider>
+            ))}
+          </Slider>
+        </CardAnimation>
       </div>
     </section>
   );

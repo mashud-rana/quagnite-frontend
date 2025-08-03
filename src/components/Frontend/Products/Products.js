@@ -3,7 +3,7 @@ import styles from "./products.module.css";
 import ProductCard from "./ProductCard";
 import img from "@/assets/images/all/product.png";
 
-const Products = () => {
+const Products = ({ title }) => {
   const products = [
     {
       id: 1,
@@ -56,60 +56,62 @@ const Products = () => {
   ];
 
   return (
-    <section className="ic_section_space ic_section_margin_top">
-      <div className="container">
-        <div className={styles.productsSection}>
-          <div className={styles.sidebar}>
-            <h4 className={styles.sidebarHeading}>Products</h4>
-            <div className={styles.filterGroup}>
-              <select className={styles.selectDropdown}>
-                <option value="">Price</option>
-                <option value="low-to-high">Low to High</option>
-                <option value="high-to-low">High to Low</option>
-              </select>
+    <section className="ic_section_space">
+      <div className={styles.ic_wrapper}>
+        <div className="container">
+          <div className={styles.productsSection}>
+            <div className={styles.sidebar}>
+              <h4 className={styles.sidebarHeading}>{title}</h4>
+              <div className={styles.filterGroup}>
+                <select className={styles.selectDropdown}>
+                  <option value="">Price</option>
+                  <option value="low-to-high">Low to High</option>
+                  <option value="high-to-low">High to Low</option>
+                </select>
 
-              <select className={styles.selectDropdown}>
-                <option value="">School</option>
-                <option value="school-a">School A</option>
-                <option value="school-b">School B</option>
-              </select>
+                <select className={styles.selectDropdown}>
+                  <option value="">School</option>
+                  <option value="school-a">School A</option>
+                  <option value="school-b">School B</option>
+                </select>
 
-              <select className={styles.selectDropdown}>
-                <option value="">Industry</option>
-                <option value="tech">Tech</option>
-                <option value="finance">Finance</option>
-              </select>
+                <select className={styles.selectDropdown}>
+                  <option value="">Industry</option>
+                  <option value="tech">Tech</option>
+                  <option value="finance">Finance</option>
+                </select>
 
-              <select className={styles.selectDropdown}>
-                <option value="">Difficulty level</option>
-                <option value="beginner">Beginner</option>
-                <option value="intermediate">Intermediate</option>
-                <option value="advanced">Advanced</option>
-              </select>
+                <select className={styles.selectDropdown}>
+                  <option value="">Difficulty level</option>
+                  <option value="beginner">Beginner</option>
+                  <option value="intermediate">Intermediate</option>
+                  <option value="advanced">Advanced</option>
+                </select>
 
-              <select className={styles.selectDropdown}>
-                <option value="">Duration</option>
-                <option value="short">Short</option>
-                <option value="medium">Medium</option>
-                <option value="long">Long</option>
-              </select>
+                <select className={styles.selectDropdown}>
+                  <option value="">Duration</option>
+                  <option value="short">Short</option>
+                  <option value="medium">Medium</option>
+                  <option value="long">Long</option>
+                </select>
 
-              <select className={styles.selectDropdown}>
-                <option value="">Type</option>
-                <option value="online">Online</option>
-                <option value="in-person">In-person</option>
-              </select>
+                <select className={styles.selectDropdown}>
+                  <option value="">Type</option>
+                  <option value="online">Online</option>
+                  <option value="in-person">In-person</option>
+                </select>
+              </div>
             </div>
-          </div>
-          <div className={styles.productGrid}>
-            {products.map((product) => (
-              <ProductCard
-                key={product.id}
-                imageSrc={product.image}
-                title={product.title}
-                description={product.description}
-              />
-            ))}
+            <div className={styles.productGrid}>
+              {products.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  imageSrc={product.image}
+                  title={product.title}
+                  description={product.description}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

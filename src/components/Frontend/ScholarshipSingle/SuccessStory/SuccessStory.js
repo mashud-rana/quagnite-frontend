@@ -22,14 +22,14 @@ export default function SuccessStory() {
                   dignissim dui id lobortis vulputate. Nulla sodales enim quis
                   euismod consectetur.
                 </p>
-                <button className="ic-btn1">explore</button>
+                <button className="ic_btn">explore</button>
               </CardAnimation>
             </div>
           </Col>
 
           <Col xs={{ span: 24, order: 1 }} md={{ span: 12, order: 2 }}>
             <div className={styles.ic_right}>
-              <CardAnimation index={0} direction="right">
+              <CardAnimation index={0} direction="down">
                 <Image src={img} alt="img" />
               </CardAnimation>
             </div>

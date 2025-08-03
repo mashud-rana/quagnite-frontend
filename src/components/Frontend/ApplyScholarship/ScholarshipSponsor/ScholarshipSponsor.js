@@ -17,7 +17,7 @@ export default function ScholarshipSponsor() {
               <CardAnimation index={0} direction="left">
                 <div className={styles.ic_left}>
                   <h6 className="mb_16">CONTACT US</h6>
-                  <h3 className="mb_16">Become A Sponser</h3>
+                  <h4 className="mb_16">Become A Sponser</h4>
                   <p className="mb-24">
                     If you would like to make a contribution to the future of
                     the technology industry in the form of a scholarship for
@@ -25,14 +25,14 @@ export default function ScholarshipSponsor() {
                     support. Reach out to our team for details and benefits of
                     adding your name to our list of benefactors.
                   </p>
-                  <button className="ic-btn1">explore</button>
+                  <button className="ic_btn">explore</button>
                 </div>
               </CardAnimation>
             </Col>
             <Col xm={24} lg={12} xl={9}>
-              <CardAnimation index={0} direction="right">
+              <CardAnimation index={0} direction="down">
                 <div className={styles.ic_right}>
-                  <Image src={img1} alt="img" />
+                  <Image src={img1} className={styles.ic_main_img} alt="img" />
                 </div>
               </CardAnimation>
             </Col>

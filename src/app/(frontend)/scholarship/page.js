@@ -14,7 +14,7 @@ import Refer from "@/components/Frontend/Scholarship/Refer/Refer";
 
 const ScholarshipPage = () => {
   return (
-    <div>
+    <>
       <ScholarshipBanner />
       <AvailScholarship />
       <Criteria />
@@ -29,7 +29,7 @@ const ScholarshipPage = () => {
       <Success />
       <Sponsor />
       <Refer />
-    </div>
+    </>
   );
 };
 

@@ -1,6 +1,5 @@
 import React from "react";
 import team1 from "@/assets/images/coach-details/related-coach.png";
-import team2 from "@/assets/images/coach-details/related-coach.png";
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 import ScholarshipCard from "../../Scholarship/AvailScholarship/ScholarshipCard";
 
@@ -11,21 +10,13 @@ const teamMembers = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     image: team1,
-    instagram: "#",
-    linkedin: "#",
-    verified: true,
-    complete: true,
   },
   {
     id: 2,
     name: "Lorem Ipsum Dolar Sit Amet",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    image: team2,
-    instagram: "#",
-    linkedin: "#",
-    verified: false,
-    complete: true,
+    image: team1,
   },
   {
     id: 3,
@@ -33,10 +24,6 @@ const teamMembers = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     image: team1,
-    instagram: "#",
-    linkedin: "#",
-    verified: true,
-    complete: false,
   },
 ];
 

@@ -4,7 +4,7 @@ import React from "react";
 const ScholarshipList = () => {
   return (
     <div>
-      <Products />
+      <Products title="Scholarships" />
     </div>
   );
 };

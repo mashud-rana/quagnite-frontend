@@ -68,6 +68,10 @@
 
 /**Typography**/
 
+.oc {
+  opacity: 0.8;
+}
+
 .ic_section_margin_top_80 {
   margin-top: 80px;
 }
@@ -291,7 +295,9 @@ h6 {
   transition: all 0.3s;
 }
 .ic-btn1:hover {
+  background-color: var(--primary-color);
   box-shadow: 0px 2px 20px #5c81f7;
+  transform: translateY(-2px);
 }
 .ic-btn1.ic-btn2 {
   background: #272727;
@@ -336,6 +342,13 @@ h6 {
   background-color: var(--primary-color);
   border-radius: 12px;
   cursor: pointer;
+  transition: 0.3s all ease-in;
+}
+
+.ic_btn:hover {
+  background-color: var(--primary-color);
+  box-shadow: 0px 2px 20px #5c81f7;
+  transform: translateY(-2px);
 }
 
 .ic_see_all_btn {

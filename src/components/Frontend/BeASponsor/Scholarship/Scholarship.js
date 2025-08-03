@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import styles from "./scholarship.module.css";
 import { Col, Row } from "antd";
 import ScholarshipInfo from "../ScholarshipInfo/ScholarshipInfo";
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
@@ -16,9 +15,9 @@ const stepData = [
 export default function Scholarship() {
   const [scholarshipActiveStep, setScholarshipActiveStep] = useState(1);
   return (
-    <section className={`${styles.ic_scholarship} ic_section_space`}>
+    <section className={`ic_white ic_section_space`}>
       <div className="container">
-        <div className={styles.ic_scholarship_main}>
+        <div>
           <CardAnimation index={0} direction="up">
             <h6 className="mb_16">Apply to sponsor a scholarship</h6>
             <h4 className="mb-35">Take the first step.</h4>

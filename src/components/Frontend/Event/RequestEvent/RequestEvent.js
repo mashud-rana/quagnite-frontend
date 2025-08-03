@@ -75,8 +75,8 @@ const RequestEvent = () => {
       <div className="container">
         <h6 className="ic_white mb-35">request to attend event</h6>
         <h4 className="ic_white mb-45">Lorem Ipsum dolar sit amet</h4>
-        <Row gutter={24}>
-          <Col xs={24} md={14}>
+        <Row gutter={24} className={styles.ic_scholarship_row}>
+          <Col xs={24} md={14} className={styles.ic_form_col}>
             <CardAnimation index={0} direction="left">
               <div className={styles.ic_apply_for_job_left}>
                 <div className={styles.ic_form_main}>
@@ -166,8 +166,8 @@ const RequestEvent = () => {
               </div>
             </CardAnimation>
           </Col>
-          <Col xs={24} md={10}>
-            <CardAnimation index={0} direction="right">
+          <Col xs={24} md={10} className={styles.ic_img_col}>
+            <CardAnimation index={0} direction="down">
               <div className={styles.ic_scholarship_right}>
                 <Image src={img1} alt="img" />
               </div>

@@ -16,7 +16,7 @@ const Refer = () => {
             <div className={styles.ic_grid}>
               <div className={styles.contentCard}>
                 <div className={styles.ic_text_container}>
-                  <h6 className="ic_purple">HIRE FROM US</h6>
+                  <h6 className="ic_purple">Refer a Friend</h6>
                   <h4 className="mb_20">
                     If you know someone who would benefit from a scholarship to
                     Quagnite, refer them to our team here.

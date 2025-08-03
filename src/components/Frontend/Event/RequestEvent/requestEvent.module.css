@@ -58,8 +58,8 @@
   outline: none;
   border: none;
   padding: 15px 23px;
-  color: #fff;
-  border: 1px solid #fff;
+  color: var(--white);
+  border: 1px solid var(--white);
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -75,7 +75,7 @@
   height: auto;
 }
 
-@media (max-width: 1199.98px) {
+@media (max-width: 1199px) {
   .ic_apply_for_job_left input {
     height: 45px;
     padding: 0 20px;
@@ -87,32 +87,48 @@
     line-height: normal;
   }
   .ic_apply_for_job_left_textarea {
-    height: 165px;
+    height: 140px;
   }
 }
-@media (max-width: 991.98px) {
+@media (max-width: 991px) {
   .ic_apply_for_job_left input {
     height: 40px;
     padding: 0 15px;
   }
+
   .ic_apply_for_job_left button {
     height: 40px;
     font-size: 14px;
   }
+
   .ic_apply_for_job_left_textarea {
-    height: 160px;
+    height: 110px;
   }
 }
-@media (max-width: 767.98px) {
-  .ic_scholarship_right {
-    display: none;
+@media (max-width: 767px) {
+  .ic_scholarship_row {
+    display: flex;
+    flex-wrap: wrap;
   }
+
+  .ic_form_col {
+    order: 2;
+  }
+
+  .ic_img_col {
+    order: 1;
+  }
+
   .ic_apply_for_job_left_textarea {
     height: 155px;
   }
+
+  .ic_scholarship_right {
+    margin-bottom: 28px;
+  }
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 575px) {
   .ic_apply_for_job_name {
     display: block;
   }
@@ -120,6 +136,6 @@
     width: 100%;
   }
   .ic_apply_for_job_left_textarea {
-    height: 150px;
+    height: 110px;
   }
 }
