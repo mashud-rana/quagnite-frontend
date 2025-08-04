@@ -58,7 +58,7 @@ const PartnerInfo = () => {
 
           {/* Right Content - Image */}
           <div className={styles.imageContainer}>
-            <CardAnimation index={1} direction="right">
+            <CardAnimation index={1} direction="down">
               <Image
                 src={img}
                 alt="Two students looking at a laptop"

@@ -98,7 +98,7 @@
 @media (max-width: 1399px) {
   .examSection {
     grid-template-columns: 1fr;
-    margin-bottom: 230px;
+    margin-bottom: 200px;
   }
 
   .image1 {
@@ -201,6 +201,10 @@
     width: 65%;
     padding: 20px 20px;
   }
+
+  .examSection {
+    margin-bottom: 170px;
+  }
 }
 
 /* Responsive for mobile */
@@ -253,6 +257,10 @@
     justify-content: flex-start;
     margin-top: 15px;
   }
+
+  .examSection {
+    margin-bottom: 140px;
+  }
 }
 
 @media (max-width: 622px) {
@@ -265,6 +273,10 @@
 
   .image3 {
     bottom: -35%;
+  }
+
+  .examSection {
+    margin-bottom: 180px;
   }
 }
 
@@ -308,5 +320,9 @@
     top: -85%;
     left: 18%;
     width: 65%;
+  }
+
+  .examSection {
+    margin-bottom: 170px;
   }
 }

@@ -9,7 +9,7 @@ import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 const Work = () => {
   return (
-    <section className="ic_section_space_bottom">
+    <section>
       <div className="container">
         <CardAnimation index={1} direction="up">
           <div className={styles.ic_wrapper}>

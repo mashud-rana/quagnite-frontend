@@ -9,7 +9,7 @@ import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 const Contactus = () => {
   return (
-    <section className="ic_section_space">
+    <section className="ic_section_space_top">
       <div className="container">
         <CardAnimation index={1} direction="up">
           <div className={styles.ic_wrapper}>
@@ -27,13 +27,13 @@ const Contactus = () => {
 
               {/* Left - Text Card */}
               <div className={styles.textCard}>
-                <h6 className="mb_16">HIRE OUR ALUMNI</h6>
-                <h4 className="mb_16">Build your team</h4>
+                <h6 className="mb_16">CONTACT US</h6>
+                <h4 className="mb_16">Can’t wait for a response?</h4>
                 <p className={styles.description}>
                   Not sure what is right for you? Book a demo with us.
                 </p>
                 <div>
-                  <button className={styles.button}>EXPLORE</button>
+                  <button className="ic_btn">contact us</button>
                 </div>
               </div>
             </div>

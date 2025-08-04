@@ -169,6 +169,14 @@
     grid-template-columns: 1fr;
   }
 
+  .formSection {
+    order: 2;
+  }
+
+  .imageSection {
+    order: 1;
+  }
+
   .ic_btn {
     margin-bottom: 5px;
     padding: 10px 22px;

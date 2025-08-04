@@ -27,7 +27,7 @@ const valueData = [
 
 const Values = () => {
   return (
-    <section className="ic_section_space_top_58">
+    <section>
       <div className="container ic_white">
         <CardAnimation index={0} direction="left">
           <h6>OUR VALUES</h6>

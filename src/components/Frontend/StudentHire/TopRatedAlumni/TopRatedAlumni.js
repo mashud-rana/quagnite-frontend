@@ -1,46 +1,66 @@
 "use client";
 import React from "react";
-import styles from "./topRatedAlumni.module.css";
-import img1 from "@/assets/images/student-hire/img1.png";
-import ServiceCard from "@/components/Share/ServiceCard/ServiceCard";
+import team1 from "@/assets/images/student-hire/img1.png";
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
+import ScholarshipCard from "../../Scholarship/AvailScholarship/ScholarshipCard";
 
-const alumniData = [
+const teamMembers = [
   {
     id: 1,
     name: "Lorem Ipsum Dolar Sit Amet",
-    image: img1,
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    image: team1,
+    instagram: "#",
+    linkedin: "#",
+    verified: true,
+    complete: true,
   },
   {
     id: 2,
     name: "Lorem Ipsum Dolar Sit Amet",
-    image: img1,
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    image: team1,
+    instagram: "#",
+    linkedin: "#",
+    verified: false,
+    complete: true,
   },
   {
     id: 3,
     name: "Lorem Ipsum Dolar Sit Amet",
-    image: img1,
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    image: team1,
+    instagram: "#",
+    linkedin: "#",
+    verified: true,
+    complete: false,
   },
 ];
-
 export default function TopRatedAlumni() {
   return (
-    <section className="">
+    <section>
       <div className="container">
-        <div className={styles.ic_top_rated_main}>
-          <div className={`${styles.ic_top_header} ic_section_heading`}>
-            <h3>Top Rated Alumni</h3>
-            <button type="primary" className="ic-btn1 ic-btn2">
-              See All
-            </button>
+        <CardAnimation index={0} direction="left">
+          <div className="ic_title_see_btn_container">
+            <h4>Related Coaches</h4>
+            <div>
+              <button className="ic_see_all_btn">See All</button>
+            </div>
           </div>
+        </CardAnimation>
 
-          <ServiceCard data={alumniData} />
+        <div className="ic_team_grid">
+          {teamMembers.map((member, index) => (
+            <ScholarshipCard
+              key={index}
+              member={member}
+              index={index}
+              isButton={true}
+            />
+          ))}
         </div>
       </div>
     </section>

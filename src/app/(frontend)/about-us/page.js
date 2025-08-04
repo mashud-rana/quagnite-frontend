@@ -31,7 +31,6 @@ const AboutUsPage = () => {
       <Founder />
       <Team />
       <Certificate />
-
       <Join />
     </>
   );

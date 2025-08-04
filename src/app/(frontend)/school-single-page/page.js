@@ -13,7 +13,7 @@ import BlockBanner from "@/components/Frontend/Blockchain/BlockBanner/BlockBanne
 
 const SchoolSinglePage = () => {
   return (
-    <div>
+    <>
       {/* <SchoolBanner /> */}
       <BlockBanner />
       <SchoolLearnTab />
@@ -23,7 +23,7 @@ const SchoolSinglePage = () => {
       <Exam />
       <Bootcamp />
       <Recommendation />
-    </div>
+    </>
   );
 };
 

@@ -7,6 +7,7 @@ import img3 from "@/assets/images/company/logo3.png";
 import img4 from "@/assets/images/company/logo4.png";
 import img5 from "@/assets/images/company/logo5.png";
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
+import bg from "@/assets/images/all/partner-successful-bg.png";
 
 const partners = [
   {
@@ -95,7 +96,14 @@ const Partnars = () => {
     ));
 
   return (
-    <section>
+    <section
+      style={{
+        backgroundImage: `url(${bg.src})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+      }}
+    >
       <div className="container">
         <div className={styles.content}>
           <div className={styles.textContent}>

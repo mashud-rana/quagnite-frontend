@@ -11,17 +11,6 @@
   height: auto;
 }
 
-.ic_img_wrapper {
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
-  /* height: 100%; */
-}
-
-/* .collapseWrapper {
-  border: 1px solid white;
-} */
-
 @media (max-width: 1299px) {
   .ic_grid {
     margin-top: 20px;

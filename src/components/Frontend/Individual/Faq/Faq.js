@@ -4,6 +4,7 @@ import styles from "./faq.module.css";
 import Image from "next/image";
 import DaynamicCollaps from "../../Hiring/SkillCollapse/DaynamicCollaps";
 import img from "@/assets/images/all/faq.png";
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 const collapseData = [
   {
@@ -50,27 +51,27 @@ const Faq = () => {
         <h6>Faq</h6>
         <div className={styles.ic_grid}>
           <div className={styles.ic_img_wrapper}>
-            <Image
-              className={styles.ic_img}
-              src={img}
-              height={200}
-              width={300}
-              alt=""
-            />
+            <CardAnimation index={0} direction="down">
+              <Image
+                className={styles.ic_img}
+                src={img}
+                height={200}
+                width={300}
+                alt=""
+              />
+            </CardAnimation>
           </div>
 
           <div>
-            <div className={styles.collapseWrapper}>
-              {collapseData.map((item, index) => (
-                <DaynamicCollaps
-                  activeKey={activeKey}
-                  index={index}
-                  key={index}
-                  item={item}
-                  togglePanel={togglePanel}
-                />
-              ))}
-            </div>
+            {collapseData.map((item, index) => (
+              <DaynamicCollaps
+                activeKey={activeKey}
+                index={index}
+                key={index}
+                item={item}
+                togglePanel={togglePanel}
+              />
+            ))}
           </div>
         </div>
       </div>

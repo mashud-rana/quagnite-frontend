@@ -40,7 +40,7 @@ const SupportBanner = () => {
           {/* Right Content - 3 Images Layout */}
 
           <div className={styles.ic_hero_img}>
-            <CardAnimation index={0} direction="right">
+            <CardAnimation index={0} direction="down">
               <Image className={styles.ic_main_img} src={img} alt="" />
             </CardAnimation>
 

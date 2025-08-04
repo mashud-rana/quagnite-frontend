@@ -31,6 +31,8 @@
   color: var(--black);
   padding: 30px;
   border-radius: 16px;
+  height: 100%;
+  height: calc(100% - 30px);
 }
 
 @media (max-width: 1299px) {

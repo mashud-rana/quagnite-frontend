@@ -1,61 +1,39 @@
-.communityForumSection {
-  position: relative;
-  /* width: 100%;
-  min-height: 700px; */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+/* .ic_wrapper {
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(40px);
+} */
 
 .contentWrapper {
   position: relative;
-  margin: 0 auto;
   display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-@media (min-width: 768px) {
-  .contentWrapper {
-    flex-direction: row;
-    align-items: stretch;
-    gap: 3rem;
-  }
+  flex-direction: row;
+  align-items: stretch;
+  gap: 16px;
 }
 
 .imageColumn {
-  flex: 0 0 auto;
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-}
+  flex: 0 0 30%;
+  /* width: 350px; */
+  margin: 0;
 
-@media (min-width: 768px) {
-  .imageColumn {
-    flex: 0 0 40%;
-    margin: 0;
-  }
+  /* flex: 0 0 28%;
+  max-width: 400px;
+  margin: 0; */
 }
 
 .imageCard {
   position: relative;
   width: 100%;
-  height: 500px;
-  background-color: #f5f5f5;
+  height: 690px;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-@media (max-width: 767px) {
-  .imageCard {
-    height: 350px;
-  }
 }
 
 .communityImage {
   filter: grayscale(100%);
   transition: filter 0.3s ease;
+  width: 100%;
+  object-fit: fill;
 }
 
 .imageCard:hover .communityImage {
@@ -66,53 +44,46 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 16px;
 }
 
 .scrollableContainer {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  max-height: 500px;
+  gap: 16px;
+  max-height: 690px;
   overflow-y: auto;
-  padding-right: 1rem;
+  padding-right: 16px;
   scrollbar-width: thin;
-  scrollbar-color: #666 #333;
+  scrollbar-color: var(--white) rgba(255, 255, 255, 0.1);
 }
 
-/* Custom scrollbar for webkit browsers */
+/* WebKit custom scrollbars */
 .scrollableContainer::-webkit-scrollbar {
   width: 8px;
 }
-
 .scrollableContainer::-webkit-scrollbar-track {
   background: #333;
   border-radius: 4px;
 }
-
 .scrollableContainer::-webkit-scrollbar-thumb {
   background: #666;
   border-radius: 4px;
 }
-
 .scrollableContainer::-webkit-scrollbar-thumb:hover {
   background: #888;
 }
 
-@media (max-width: 767px) {
-  .scrollableContainer {
-    max-height: none;
-    overflow-y: visible;
-  }
-}
-
 .forumCard {
-  padding: 2.5rem;
-  border-radius: 20px;
+  padding: 30px;
   color: white;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease;
   flex-shrink: 0;
+
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(24.5px);
+  border-radius: 16px;
 }
 
 .forumCard:hover {
@@ -122,70 +93,80 @@
 .blueCard {
   background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);
 }
-
 .purpleCard {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
 }
-
 .greenCard {
   background: linear-gradient(135deg, #11998e 0%, #38ef7d 50%, #11998e 100%);
 }
-
 .orangeCard {
   background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff6b35 100%);
 }
-
 .tealCard {
   background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 50%, #4ecdc4 100%);
 }
 
-.cardSubtitle {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 1rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.cardHeading {
-  font-size: 2.2rem;
-  font-weight: bold;
-  line-height: 1.2;
-  color: white;
-  margin-bottom: 1.5rem;
-}
-
-@media (max-width: 767px) {
-  .cardHeading {
-    font-size: 1.8rem;
-  }
-}
-
-.cardDescription {
+/* .cardDescription {
   font-size: 0.95rem;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.9);
   margin: 0;
+} */
+
+/* --- RESPONSIVE (Mobile Styles) --- */
+
+@media (max-width: 1199px) {
+  .imageColumn {
+    flex: 0 0 31%;
+    margin: 0;
+  }
+}
+
+@media (max-width: 1040px) {
+  .imageColumn {
+    flex: 0 0 35%;
+    margin: 0;
+  }
+}
+
+@media (max-width: 991px) {
+  .imageColumn {
+    flex: 0 0 38%;
+    margin: 0;
+  }
 }
 
 @media (max-width: 767px) {
+  .contentWrapper {
+    flex-direction: column;
+  }
+
+  .imageColumn {
+    flex: 0 0 100%;
+    width: 100%;
+    margin: 0 auto;
+    height: auto;
+  }
+
+  .imageCard {
+    height: 400px;
+    object-fit: fill;
+  }
+
+  .scrollableContainer {
+    max-height: none;
+    overflow-y: visible;
+  }
+
   .forumCard {
     padding: 2rem;
   }
 
+  .cardHeading {
+    font-size: 1.8rem;
+  }
+
   .cardDescription {
     font-size: 0.9rem;
-  }
-}
-
-/* Responsive adjustments */
-@media (max-width: 767px) {
-  .communityForumSection {
-    padding: 3rem 0;
-  }
-
-  .contentWrapper {
-    padding: 0 1rem;
   }
 }

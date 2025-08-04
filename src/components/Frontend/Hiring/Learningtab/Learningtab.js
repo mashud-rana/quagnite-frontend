@@ -100,9 +100,7 @@ const Learningtab = () => {
                   <p className={styles.contentDescription}>
                     {activeTabData.description}
                   </p>
-                  <button className={styles.exploreButton}>
-                    {activeTabData.buttonText}
-                  </button>
+                  <button className="ic_btn">{activeTabData.buttonText}</button>
                 </CardAnimation>
               </div>
 

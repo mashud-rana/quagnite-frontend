@@ -35,7 +35,7 @@ export default function AlumniDetails() {
             <Col xs={24} md={12} xl={12}>
               <div className={styles.ic_right}>
                 <h6 className="mb-35">Alumni Details</h6>
-                <h3 className="mb-24">Mr.Lorem Ipsum Dola</h3>
+                <h4 className="mb-24">Mr.Lorem Ipsum Dola</h4>
                 <p className={`${styles.ic_designation} mb-24`}>
                   Bio & Experience
                 </p>
@@ -108,7 +108,7 @@ export default function AlumniDetails() {
                     <Image src={rating3} alt="icon" />
                     <p>Government</p>
                   </div>
-                  <button type="submit" className="ic-btn1">
+                  <button type="submit" className="ic_btn">
                     REQUEST A RESUME
                   </button>
                 </div>

@@ -53,7 +53,7 @@ export default function AlumniFeedback() {
 
   return (
     <section
-      className={`${styles.ic_alumni_feedback} ic_section_space ic_alumni_feedback`}
+      className={`${styles.ic_alumni_feedback} ic_section_space_top ic_alumni_feedback`}
     >
       <div className="container">
         <div className={styles.ic_alumni_feedback_main}>

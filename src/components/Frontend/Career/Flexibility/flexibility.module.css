@@ -11,7 +11,7 @@
   position: absolute;
   top: 55%;
   color: var(--white);
-  width: 450px;
+  width: 500px;
   padding: 32px;
   text-align: start;
   border-radius: 16px;
@@ -26,7 +26,7 @@
   top: 20%;
   right: 8%;
   color: var(--white);
-  width: 450px;
+  width: 500px;
   padding: 32px;
   text-align: start;
   border-radius: 16px;
@@ -46,14 +46,14 @@
   }
 
   .ic_card {
-    width: 420px;
+    width: 450px;
     padding: 28px;
     left: 7%;
   }
 
   .ic_card2 {
     right: 9%;
-    width: 420px;
+    width: 450px;
     padding: 28px;
   }
 }
@@ -92,6 +92,10 @@
   .ic_card2 {
     right: 5%;
   }
+
+  .ic_wrapper {
+    padding-bottom: 100px;
+  }
 }
 
 @media (max-width: 991px) {
@@ -101,13 +105,13 @@
   }
 
   .ic_card {
-    width: 350px;
+    width: 400px;
     top: 60%;
     left: 7%;
   }
 
   .ic_card2 {
-    width: 350px;
+    width: 400px;
     top: 10%;
     right: 9%;
   }
@@ -124,18 +128,17 @@
   }
 
   .ic_card {
-    width: 300px;
+    width: 390px;
     left: 2%;
   }
 
   .ic_card2 {
-    width: 300px;
+    width: 390px;
     right: 2%;
   }
 
   .ic_title {
     margin-bottom: 8px;
-    font-size: 22px;
   }
 }
 
@@ -146,19 +149,19 @@
   }
 
   .ic_card {
-    width: 300px;
+    /* width: 300px; */
     top: 70%;
     left: 2%;
   }
 
   .ic_card2 {
-    width: 300px;
+    /* width: 300px; */
     top: 5%;
     right: 2%;
   }
 
   .ic_wrapper {
-    padding-bottom: 120px;
+    padding-bottom: 180px;
   }
 }
 
@@ -170,22 +173,21 @@
 
   .ic_title {
     margin-bottom: 4px;
-    font-size: 22px;
   }
 
   .ic_card {
-    width: 280px;
-    top: 85%;
+    width: 340px;
+    top: 100%;
     left: 0%;
   }
 
   .ic_card2 {
-    width: 280px;
+    width: 340px;
     top: 5%;
     right: 0%;
   }
 
   .ic_wrapper {
-    padding-bottom: 200px;
+    padding-bottom: 350px;
   }
 }

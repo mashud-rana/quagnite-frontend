@@ -18,10 +18,10 @@ export default function Home() {
       <About />
       <School />
       <Industries />
-      {/* <Difference />
+      <Difference />
       <Companys />
 
-      <WhyQuagniteSection /> */}
+      <WhyQuagniteSection />
       {/* <TeachersSlider /> */}
       {/* <TestimonialSlider /> */}
       {/* <TestimonialSlider /> */}

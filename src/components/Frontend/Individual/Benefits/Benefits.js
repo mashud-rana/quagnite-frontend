@@ -1,8 +1,7 @@
 import React from "react";
-import styles from "./benefits.module.css";
-import Image from "next/image";
 import icon1 from "@/assets/images/school/icon1.png";
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
+import BenefitCard from "./BenefitCard";
 
 const schoolsData = [
   {
@@ -30,42 +29,21 @@ const schoolsData = [
 
 const Benefits = () => {
   return (
-    <section>
-      <div className="container">
+    <section className="ic_section_space_bottom">
+      <div className="container ic_white">
         <CardAnimation index={0} direction="left">
-          <h6 className={`${styles.ic_sub_title} mb_16`}>BENEFITS</h6>
+          <h6 className="mb_16">BENEFITS</h6>
         </CardAnimation>
 
         <CardAnimation index={0} direction="up">
-          <h4 className={styles.ic_title}>
+          <h4 className="ic_title">
             The <span>support</span> you need
           </h4>
         </CardAnimation>
         <CardAnimation index={0} direction="up">
-          <div className={styles.grid}>
+          <div className="ic_grid">
             {schoolsData.map((school, index) => (
-              <div className={styles.card} key={school.id}>
-                <CardAnimation index={index}>
-                  <div>
-                    <div className={styles.iconContainer}>
-                      <Image
-                        src={school.icon}
-                        className={styles.icon}
-                        height={34}
-                        width={34}
-                        alt="icon"
-                      />
-                    </div>
-                    <h5 className={styles.ic_card_title}>{school.title}</h5>
-
-                    <div className={styles.ic_des_btn_wrapper}>
-                      <p className={styles.ic_description}>
-                        {school.description}
-                      </p>
-                    </div>
-                  </div>
-                </CardAnimation>
-              </div>
+              <BenefitCard school={school} key={index} index={index} />
             ))}
           </div>
         </CardAnimation>

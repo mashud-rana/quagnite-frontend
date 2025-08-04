@@ -57,7 +57,7 @@ const RequestCandidate = () => {
     console.log("Form submitted:", formData);
   };
   return (
-    <section className="ic_section_space_bottom">
+    <section>
       <div className="container">
         <div className={styles.ic_wrapper}>
           <div className={styles.headerSection}>

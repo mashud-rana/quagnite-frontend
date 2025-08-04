@@ -75,7 +75,7 @@ const teamMembers = [
 
 const Courses = () => {
   return (
-    <section className="ic_section_space">
+    <section className="ic_section_space_top">
       <div className="ic_section_space_58 radious_60 ic_bg">
         <div className="container">
           <CardAnimation index={0} direction="left">
