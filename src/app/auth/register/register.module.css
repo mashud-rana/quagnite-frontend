@@ -1,0 +1,348 @@
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* filter: grayscale(100%); */
+}
+
+.backgroundImage::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background: rgba(0, 0, 0, 0.4); */
+  background: rgba(0, 0, 0, 0.146);
+}
+
+.formContainer {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 77px;
+}
+
+.formCard {
+  /* background: rgba(45, 45, 55, 0.95); */
+  background: rgba(69, 45, 131, 0.1);
+  backdrop-filter: blur(63.9px);
+  border-radius: 1rem;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 300;
+  color: white;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #8692a6;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 16px;
+  color: var(--white);
+  font-weight: 400;
+}
+
+.input {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  padding: 0.875rem 1rem;
+  font-size: 0.9rem;
+  color: white;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.input:focus {
+  border-color: #667eea;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.inputError {
+  border-color: #f69745;
+}
+
+.passwordContainer {
+  position: relative;
+  width: 100%;
+}
+
+.passwordInput {
+  width: 100%;
+  padding-right: 3rem; /* enough space for the toggle icon */
+}
+/* .passwordToggle {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+} */
+
+.passwordToggle {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  font-size: 1.1rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.passwordToggle:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.checkboxGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.checkbox {
+  width: 1.125rem;
+  height: 1.125rem;
+  accent-color: #667eea;
+  cursor: pointer;
+}
+
+.checkboxLabel {
+  font-size: 16px;
+  color: #696f79;
+  cursor: pointer;
+  user-select: none;
+}
+
+.registerButton {
+  background: var(--primary-color);
+  border: none;
+  border-radius: 5px;
+  padding: 13px 26px;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+.registerButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+/* .divider {
+  position: relative;
+  text-align: center;
+} */
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  gap: 0.75rem; /* space between lines and "OR" */
+}
+
+/* .divider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 0;
+}
+
+.dividerText {
+  position: absolute;
+  z-index: 3;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 0 1rem;
+  font-size: 0.85rem;
+  position: relative;
+  z-index: 1;
+} */
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dividerText {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.googleButton {
+  background: white;
+  border: none;
+  border-radius: 5px;
+  padding: 13px 26px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.googleButton:hover {
+  background: #f9fafb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.googleIcon {
+  font-size: 1.1rem;
+  color: #ea4335;
+}
+
+.errorMessage {
+  font-size: 14px;
+  margin-top: 10px;
+  line-height: 0px;
+  color: #f69745;
+}
+
+/* Small tablets and below */
+@media (max-width: 768px) {
+  .formContainer {
+    padding: 0 1.5rem;
+    justify-content: center;
+  }
+
+  .formCard {
+    padding: 2rem 1.5rem;
+    box-shadow: none;
+    background: rgba(69, 45, 131, 0.15); /* slightly more visible on mobile */
+  }
+
+  .title {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .checkboxGroup {
+    /* flex-direction: column;
+    align-items: flex-start; */
+    gap: 0.5rem;
+  }
+
+  .registerButton,
+  .googleButton {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+  }
+
+  .divider {
+    margin: 1rem 0;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .form {
+    gap: 14px;
+  }
+
+  .header {
+    margin-bottom: 18px;
+  }
+
+  .formCard {
+    padding: 1.5rem 1rem;
+    border-radius: 0.75rem;
+  }
+
+  .input,
+  .passwordInput {
+    font-size: 0.85rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .label {
+    font-size: 0.9rem;
+  }
+
+  .dividerText {
+    font-size: 0.8rem;
+  }
+
+  .googleButton {
+    gap: 0.5rem;
+  }
+}
