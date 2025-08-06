@@ -12,9 +12,11 @@
   color: #fff;
   border: 1px solid #fff;
 }
-.ic_apply_for_job_left input::placeholder {
+
+/* .ic_apply_for_job_left input::placeholder {
   color: #fff;
-}
+} */
+
 .ic_apply_for_job_name {
   display: flex;
   gap: 18px;
@@ -44,7 +46,8 @@
 }
 .error {
   padding: 5px 0 0 20px;
-  color: red;
+  color: #ffcd9f;
+  opacity: 0.9;
 }
 .ic_apply_for_job_right img {
   width: 100%;
@@ -66,9 +69,16 @@
   line-height: 25.2px;
   letter-spacing: -0.18px;
 }
+
+.ic_apply_for_job_left input::placeholder,
 .ic_apply_for_job_left_textarea::placeholder {
-  color: #fff;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 300;
 }
+
+/* .ic_apply_for_job_left_textarea::placeholder {
+  color: #fff;
+} */
 
 .ic_scholarship_right img {
   mix-blend-mode: luminosity;

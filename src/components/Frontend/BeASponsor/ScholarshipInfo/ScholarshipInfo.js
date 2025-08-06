@@ -149,7 +149,7 @@ export default function ScholarshipInfo({ setScholarshipActiveStep }) {
                 <div className="mb-18">
                   <textarea
                     name="message"
-                    placeholder="message"
+                    placeholder="Message"
                     value={formData.message}
                     onChange={handleChange}
                     className={styles.ic_apply_for_job_left_textarea}

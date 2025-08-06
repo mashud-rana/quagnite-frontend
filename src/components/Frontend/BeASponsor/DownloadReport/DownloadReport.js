@@ -6,9 +6,7 @@ import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 export default function DownloadReport() {
   return (
-    <section
-      className={`${styles.ic_download_report} ic_section_space_bottom `}
-    >
+    <section className={`${styles.ic_download_report} ic_section_space_top `}>
       <div className="container">
         <div className={styles.ic_download_report_main}>
           <CardAnimation index={0} direction="left">

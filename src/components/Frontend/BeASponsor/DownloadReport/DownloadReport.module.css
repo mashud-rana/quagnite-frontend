@@ -31,7 +31,7 @@
   z-index: 3;
 }
 
-@media (max-width: 1399.98px) {
+@media (max-width: 1399px) {
   .ic_download_inf_details {
     width: 70%;
   }
@@ -43,17 +43,25 @@
     height: auto;
   }
 }
-@media (max-width: 1199.98px) {
+@media (max-width: 1199px) {
   .ic_download_inf_details {
     right: -230px;
   }
 }
-@media (max-width: 992.98px) {
-  .ic_download_inf_details {
+@media (max-width: 991px) {
+  /* .ic_download_inf_details {
     right: -85px;
   }
   .ic_download_inf {
     width: 535px;
+    height: 215px;
+  } */
+
+  .ic_download_inf_details {
+    right: -85px;
+  }
+  .ic_download_inf {
+    width: 80%;
     height: 215px;
   }
 }
