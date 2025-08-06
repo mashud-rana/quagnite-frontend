@@ -7,7 +7,7 @@ import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 const ExploreCourse = () => {
   return (
     <div>
-      <section className="ic_section_space_bottom">
+      <section className="ic_section_space_top">
         <div className="container">
           <CardAnimation index={0} direction="up">
             <div className={styles.courseCard}>

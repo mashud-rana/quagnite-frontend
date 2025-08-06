@@ -34,7 +34,7 @@ const Hero = () => {
                 edge of technology and industry.
               </p>
 
-              <button className={styles.exploreButton}>EXPLORE</button>
+              <button className="ic_btn">EXPLORE</button>
             </CardAnimation>
           </div>
 

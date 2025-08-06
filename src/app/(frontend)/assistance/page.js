@@ -13,12 +13,10 @@ const AssistancePage = () => {
       <AssistanceBanner />
       <Tuition />
       <AssistCoach />
-      <Financing/>
+      <Financing />
       <Companys />
       <Credits />
-      <Instructor/>
-      
-      
+      <Instructor />
     </>
   );
 };

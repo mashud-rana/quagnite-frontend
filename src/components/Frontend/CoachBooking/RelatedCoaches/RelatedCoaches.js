@@ -41,7 +41,7 @@ const teamMembers = [
 
 export default function RelatedCoaches() {
   return (
-    <section>
+    <section className="ic_section_space_bottom">
       <div className="container">
         <CardAnimation index={0} direction="left">
           <div className="ic_title_see_btn_container">

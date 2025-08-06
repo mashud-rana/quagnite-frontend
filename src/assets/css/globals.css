@@ -368,7 +368,11 @@ h6 {
   text-transform: uppercase;
 }
 
-.ic_see_all_button:hover {
+.ic_center {
+  text-align: center;
+}
+
+.ic_see_all_btn:hover {
   background: var(--primary-color);
   color: var(--white);
 }

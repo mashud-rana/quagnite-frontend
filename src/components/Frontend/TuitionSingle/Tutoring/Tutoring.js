@@ -29,11 +29,11 @@ const teamMembers = [
 
 const Tutoring = () => {
   return (
-    <section className="ic_section_space_top">
+    <section className="ic_section_space">
       <div className="container">
         <CardAnimation index={0} direction="left">
           <div className="ic_title_see_btn_container">
-            <h4>Available Scholarships</h4>
+            <h4>Recommended Tutoring</h4>
             <div>
               <button className="ic_see_all_btn">See All</button>
             </div>

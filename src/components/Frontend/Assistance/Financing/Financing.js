@@ -1,14 +1,16 @@
-import Image from 'next/image';
-import React from 'react';
-import styles from "./financing.module.css"
+import Image from "next/image";
+import React from "react";
+import styles from "./financing.module.css";
 import img from "@/assets/images/all/financing.png";
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 const Financing = () => {
-    return (
-      <section>
-        <div className="ic_section_space_58 radious_60 ic_bg">
-          <div className="container">
-            <div className={`${styles.ic_grid2}`}>
+  return (
+    <section>
+      <div className="ic_section_space_58 radious_60 ic_bg">
+        <div className="container">
+          <div className={`${styles.ic_grid2}`}>
+            <CardAnimation index={0} direction="up">
               <div className={styles.textContainer}>
                 <h6 className="mb-24">FINANCING</h6>
                 <h4 className="mb_16">
@@ -23,7 +25,9 @@ const Financing = () => {
                   <button className="ic_btn">Explore</button>
                 </div>
               </div>
+            </CardAnimation>
 
+            <CardAnimation index={0} direction="down">
               <Image
                 className={styles.ic_img}
                 src={img}
@@ -31,11 +35,12 @@ const Financing = () => {
                 height={200}
                 alt=""
               />
-            </div>
+            </CardAnimation>
           </div>
         </div>
-      </section>
-    );
+      </div>
+    </section>
+  );
 };
 
 export default Financing;

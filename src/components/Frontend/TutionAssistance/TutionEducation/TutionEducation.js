@@ -18,8 +18,8 @@ const TutionEducation = () => {
       }}
     >
       <div className="container">
-        <CardAnimation index={0} direction="up">
-          <div className={styles.ic_grid}>
+        <div className={styles.ic_grid}>
+          <CardAnimation index={0} direction="up">
             <Image
               className={styles.ic_img}
               src={img}
@@ -27,6 +27,8 @@ const TutionEducation = () => {
               height={200}
               alt=""
             />
+          </CardAnimation>
+          <CardAnimation index={0} direction="down">
             <div className={styles.textContainer}>
               <div>
                 <h6 className="mb_16">Tuition Assistance</h6>
@@ -42,8 +44,8 @@ const TutionEducation = () => {
                 <button className={styles.ic_btn}>Hire now</button>
               </div>
             </div>
-          </div>
-        </CardAnimation>
+          </CardAnimation>
+        </div>
       </div>
     </section>
   );

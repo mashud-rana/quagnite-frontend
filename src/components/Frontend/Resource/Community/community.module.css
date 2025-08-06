@@ -156,6 +156,7 @@
   .scrollableContainer {
     max-height: none;
     overflow-y: visible;
+    padding-right: 0;
   }
 
   .forumCard {

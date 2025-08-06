@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./govtPartner.module.css";
 import Image from "next/image";
-import img1 from "@/assets/images/all/govt-partner.png";
+import img1 from "@/assets/images/all/govt-partner1.png";
 import img2 from "@/assets/images/all/animation2.png";
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 

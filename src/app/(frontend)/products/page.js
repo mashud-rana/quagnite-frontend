@@ -4,7 +4,7 @@ import React from "react";
 const ProductPage = () => {
   return (
     <div>
-      <Products />
+      <Products title="Coaches" />
     </div>
   );
 };

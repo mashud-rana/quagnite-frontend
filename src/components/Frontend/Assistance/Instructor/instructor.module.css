@@ -11,7 +11,7 @@
 
 .cardColumn {
   background-color: var(--white);
-  /* padding: 40px; */
+  padding: 40px;
   border-radius: 16px;
   position: relative;
   width: 100%;

@@ -21,6 +21,7 @@
 
 .textContainer {
   align-content: center;
+  height: 100%;
 }
 
 @media (max-width: 1399px) {

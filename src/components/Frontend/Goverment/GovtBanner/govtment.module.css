@@ -8,6 +8,7 @@
 .leftContent {
   color: white;
   z-index: 2;
+  padding-bottom: 120px;
 }
 
 .heroDescription {
@@ -30,7 +31,7 @@
 
 .ic_wrapper {
   position: relative;
-  padding-top: 50px;
+  padding-top: 180px;
 }
 
 .ic_layer_img {
@@ -83,6 +84,10 @@
     gap: 60px;
   } */
 
+  .ic_wrapper {
+    padding-top: 120px;
+  }
+
   .heroDescription {
     margin-top: 25px;
   }
@@ -90,11 +95,19 @@
 
 @media (max-width: 1199px) {
   .ic_hero_container {
-    gap: 50px;
+    gap: 00px;
   }
 
   .heroDescription {
     margin-top: 22px;
+  }
+
+  .ic_wrapper {
+    padding-top: 90px;
+  }
+
+  .leftContent {
+    padding-bottom: 70px;
   }
 }
 
@@ -107,7 +120,11 @@
     grid-template-columns: 1fr;
     gap: 0px;
     text-align: center;
-    padding: 60px 60px 0px 60px;
+    padding: 0px 60px 0px 60px;
+  }
+
+  .leftContent {
+    padding-bottom: 10px;
   }
 
   .ic_main_img {
@@ -128,13 +145,17 @@
   }
 
   .ic_hero_container {
-    padding: 50px 50px 0px 50px;
+    padding: 0px 50px 0px 50px;
   }
 
   .ic_layer_img {
     width: 100%;
     height: 60%;
     bottom: 0;
+  }
+
+  .ic_wrapper {
+    padding-top: 80px;
   }
 }
 
@@ -161,7 +182,7 @@
   }
 
   .ic_hero_container {
-    padding: 50px 10px 0px 10px;
+    padding: 0px 10px 0px 10px;
   }
 }
 
@@ -171,7 +192,11 @@
     height: auto;
   }
 
+  .ic_wrapper {
+    padding-top: 60px;
+  }
+
   .ic_hero_container {
-    padding: 50px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
   }
 }

@@ -3,6 +3,7 @@ import React from "react";
 import styles from "./community.module.css";
 import img from "@/assets/images/all/community.png";
 import bg from "@/assets/images/all/community-bg.png";
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 const Community = () => {
   const forumCards = [
@@ -59,40 +60,42 @@ const Community = () => {
       }}
     >
       <div className="container">
-        <div className={styles.contentWrapper}>
-          <div className={styles.imageColumn}>
-            <div className={styles.imageCard}>
-              <Image
-                src={img}
-                alt="Two young men in discussion, one wearing plaid shirt and another in checkered shirt"
-                // fill
-                // style={{ objectFit: "cover" }}
-                className={styles.communityImage}
-                priority
-              />
+        <CardAnimation index={1} direction="up">
+          <div className={styles.contentWrapper}>
+            <div className={styles.imageColumn}>
+              <div className={styles.imageCard}>
+                <Image
+                  src={img}
+                  alt="Two young men in discussion, one wearing plaid shirt and another in checkered shirt"
+                  // fill
+                  // style={{ objectFit: "cover" }}
+                  className={styles.communityImage}
+                  priority
+                />
+              </div>
             </div>
-          </div>
 
-          <div className={styles.contentColumn}>
-            <div className={styles.scrollableContainer}>
-              {forumCards.map((card) => (
-                <div
-                  key={card.id}
-                  // className={`${styles.forumCard} ${
-                  //   styles[card.type + "Card"]
-                  // }`}
+            <div className={styles.contentColumn}>
+              <div className={styles.scrollableContainer}>
+                {forumCards.map((card) => (
+                  <div
+                    key={card.id}
+                    // className={`${styles.forumCard} ${
+                    //   styles[card.type + "Card"]
+                    // }`}
 
-                  className={`${styles.forumCard} 
+                    className={`${styles.forumCard} 
                   }`}
-                >
-                  <h6 className="mb-12">{card.subtitle}</h6>
-                  <h4 className="mb_16">{card.heading}</h4>
-                  <p>{card.description}</p>
-                </div>
-              ))}
+                  >
+                    <h6 className="mb-12">{card.subtitle}</h6>
+                    <h4 className="mb_16">{card.heading}</h4>
+                    <p>{card.description}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        </CardAnimation>
       </div>
     </section>
   );

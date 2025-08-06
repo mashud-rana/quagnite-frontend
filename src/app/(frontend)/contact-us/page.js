@@ -11,19 +11,19 @@ import Problem from "@/components/Frontend/ContactUs/Problem/Problem";
 export default function page() {
   return (
     <>
-      <Banner
+      {/* <Banner
         bgImage={bg}
         rightImage={img}
         heading="Reach out and join the global community of learners."
         paragraph={`From our dedicated staff and instructor corps to the people who make Quagnite a family, we’re here to answer any questions and help you be the best that you can.`}
-      />
+      /> */}
 
-      {/* <TutionBanner
+      <TutionBanner
         bg={bg}
         img={img}
         title="Reach out and join the global community of learners."
         des="From our dedicated staff and instructor corps to the people who make Quagnite a family, we’re here to answer any questions and help you be the best that you can."
-      /> */}
+      />
       <AskUs />
 
       <Recommendation />

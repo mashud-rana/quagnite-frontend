@@ -1,15 +1,14 @@
 .textContainer {
-  align-content: center;
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* justify-content: space-between; */
   padding: 8px 0;
+  height: 100%;
+  align-content: center;
 }
 
 .ic_grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  color: var(--white);
+  align-content: center;
+  /* color: var(--white); */
   gap: 60px;
 }
 
@@ -46,7 +45,7 @@
 @media (max-width: 991px) {
   .ic_grid {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 16px;
   }
 
   .ic_btn {
@@ -56,5 +55,6 @@
 
   .textContainer {
     align-items: flex-start;
+    /* padding: 24px; */
   }
 }

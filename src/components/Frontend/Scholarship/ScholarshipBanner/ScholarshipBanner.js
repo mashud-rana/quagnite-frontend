@@ -39,7 +39,6 @@ const ScholarshipBanner = () => {
               </div>
 
               {/*  Move Image here (inside grid) */}
-
               <Image className={styles.ic_hero_img} src={img} alt="" />
             </div>
           </div>

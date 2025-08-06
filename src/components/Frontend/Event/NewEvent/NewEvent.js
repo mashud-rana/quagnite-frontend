@@ -12,9 +12,7 @@ const NewEvent = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
     console.log("Email submitted:", email);
-    // You can add your email submission logic here
   };
   return (
     <section

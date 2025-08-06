@@ -6,12 +6,12 @@ import React from "react";
 
 const CoachPage = () => {
   return (
-    <div>
+    <>
       <CoachBanner />
       <AssistCoach />
       <Experience />
       <Mentor />
-    </div>
+    </>
   );
 };
 

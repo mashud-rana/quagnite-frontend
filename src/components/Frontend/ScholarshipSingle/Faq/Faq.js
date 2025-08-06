@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import styles from "./faq.module.css";
 import DaynamicCollaps from "../../Hiring/SkillCollapse/DaynamicCollaps";
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
@@ -63,19 +62,19 @@ export default function Faq() {
     setActiveKey((prev) => (prev === key ? null : key));
   };
   return (
-    <section className={`ic_section_space ${styles.ic_faq}`}>
-      <div className="container">
-        <div className={styles.content}>
-          <div className={styles.ic_header_section}>
+    <section className="ic_section_space_top">
+      <div className="container ic_white">
+        <div>
+          <div>
             <CardAnimation index={0} direction="down">
-              <h6 className={styles.ic_subtitle}>FAQ</h6>
+              <h6 className="mb-12">FAQ</h6>
             </CardAnimation>
             <CardAnimation index={1} direction="left">
-              <h4 className="w_80">Lorem Ipsum Dolar Sit Amet</h4>
+              <h4 className="w_80 mb_16">Lorem Ipsum Dolar Sit Amet</h4>
             </CardAnimation>
           </div>
 
-          <div className={styles.collapseWrapper}>
+          <div>
             {faqData.map((item, index) => (
               <DaynamicCollaps
                 activeKey={activeKey}

@@ -44,16 +44,20 @@ export default function Certificate() {
 
   return (
     <section
-      className={`${styles.ic_certificate} ic_certificate ic_section_space`}
+      className={`${styles.ic_certificate} ic_certificate ic_section_space_top`}
     >
       <div className="container">
-        <div className={styles.ic_certificate_main}>
-          <div className={`${styles.ic_top_header} ic_section_heading`}>
-            <h4>Certificates this coach can help you get</h4>
-            <button type="button" className="ic-btn1 ic-btn2">
-              See All
-            </button>
-          </div>
+        <div>
+          <CardAnimation index={0} direction="left">
+            <div className="ic_title_see_btn_container">
+              <h4 className="ic_center">
+                Certificates this coach can help you get
+              </h4>
+              <div>
+                <button className="ic_see_all_btn">See All</button>
+              </div>
+            </div>
+          </CardAnimation>
 
           <CardAnimation index={0} direction="up">
             <Slider {...settings} className="mb-24">

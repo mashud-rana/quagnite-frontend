@@ -45,7 +45,7 @@
 }
 
 .button:hover {
-  background-color: #1d4ed8;
+  background-color: var(--primary-color);
 }
 
 /* ✅ Custom Arrows */

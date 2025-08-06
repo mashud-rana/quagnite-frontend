@@ -15,7 +15,7 @@ const stepData = [
 export default function AskUs() {
   const [scholarshipActiveStep, setScholarshipActiveStep] = useState(1);
   return (
-    <section className={`${styles.ic_ask} ic_section_space`}>
+    <section className={`${styles.ic_ask} ic_section_space_top`}>
       <div className="container">
         <div className={styles.ic_ask_main}>
           <CardAnimation index={0} direction="up">

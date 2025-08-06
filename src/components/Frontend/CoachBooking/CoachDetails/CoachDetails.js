@@ -61,7 +61,7 @@ export default function CoachDetails() {
         <Row gutter={24} justify="space-between">
           <Col xs={24} md={10} lg={11}>
             <div className={styles.ic_left}>
-              <CardAnimation index={0} direction="left">
+              <CardAnimation index={0} direction="up">
                 <Slider {...mainSettings} ref={slider1}>
                   {data.map((item, idx) => (
                     <div key={idx} className={styles.ic_slider_main_img}>
@@ -106,9 +106,9 @@ export default function CoachDetails() {
 
           <Col xs={24} md={14} lg={12}>
             <div className={styles.ic_right}>
-              <CardAnimation index={0} direction="right">
+              <CardAnimation index={0} direction="down">
                 <h6 className="mb-35">Coach Details</h6>
-                <h3 className="mb-24">Mr.Lorem Ipsum Dola</h3>
+                <h4 className="mb-24">Mr.Lorem Ipsum Dola</h4>
                 <p className={`${styles.ic_designation} mb-24`}>
                   Bio & Experience
                 </p>
@@ -148,7 +148,7 @@ export default function CoachDetails() {
                 </div>
                 <div className={`${styles.ic_expertise} ic_section_heading`}>
                   <h6 className="mb-24">Book slot</h6>
-                  <h3 className="mb-24">Mr.Lorem Ipsum Dola</h3>
+                  <h4 className="mb-24">Mr.Lorem Ipsum Dola</h4>
                 </div>
                 <div className={`${styles.ic_input} mb-35`}>
                   <div className={styles.inputWrapper}>
@@ -174,7 +174,7 @@ export default function CoachDetails() {
                     </span>
                   </div>
                 </div>
-                <button type="submit" className="ic-btn1">
+                <button type="submit" className="ic_btn">
                   add to cart
                 </button>
               </CardAnimation>

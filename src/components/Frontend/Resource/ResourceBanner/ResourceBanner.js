@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./resourceBanner.module.css";
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 import Image from "next/image";
-import bg from "@/assets/images/all/bootcamp-banner-bg.png";
+import bg from "@/assets/images/all/resource-banner-bg.png";
 import img from "@/assets/images/all/bootcamp-banner.png";
 
 const ResourceBanner = () => {
@@ -33,9 +33,9 @@ const ResourceBanner = () => {
                     Find what you need here, from the latest news in the tech
                     field to opportunities to meet and network in person.
                   </p>
-                </CardAnimation>
 
-                <button className="ic_btn">Explore</button>
+                  <button className="ic_btn">Explore</button>
+                </CardAnimation>
               </div>
 
               {/* ✅ Move Image here (inside grid) */}
@@ -44,7 +44,7 @@ const ResourceBanner = () => {
                 width={960}
                 height={400}
                 src={img}
-                alt=""
+                alt="community-forum"
               />
             </div>
           </div>

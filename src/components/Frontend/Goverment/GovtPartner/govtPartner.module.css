@@ -410,8 +410,8 @@
   }
 
   .geometricDot1 {
-    top: 60%;
-    right: 20%;
+    top: 0%;
+    left: 35%;
     width: 26px;
     height: 6px;
     background: linear-gradient(180deg, #ff7600 0%, #f69745 100%);

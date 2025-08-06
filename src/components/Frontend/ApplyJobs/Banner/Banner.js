@@ -19,9 +19,9 @@ export default function Banner() {
           <Col xs={24} sm={24} md={14} lg={14} xl={12}>
             <div className={styles.ic_banner_left}>
               <CardAnimation index={0} direction="left">
-                <h3 className="mb_16">
+                <h4 className="mb_16">
                   Lorem ipsum dolor sit amet. (Job Title)
-                </h3>
+                </h4>
                 <p>
                   (Job Description)Lorem ipsum dolor sit amet, consectetur
                   adipiscing elit. Duis dignissim dui id lobortis vulputate.

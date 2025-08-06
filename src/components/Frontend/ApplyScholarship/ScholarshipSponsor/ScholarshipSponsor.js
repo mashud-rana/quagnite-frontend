@@ -9,7 +9,9 @@ import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 export default function ScholarshipSponsor() {
   return (
-    <section className={`${styles.ic_scholarship_sponsor} ic_section_space`}>
+    <section
+      className={`${styles.ic_scholarship_sponsor} ic_section_space_top`}
+    >
       <div className="container">
         <div className={styles.ic_scholarship_sponsor_main}>
           <Row gutter={24} align="middle">

@@ -8,6 +8,7 @@ import img2 from "@/assets/images/student-hire/slider-img2.png";
 import img3 from "@/assets/images/student-hire/slider-img3.png";
 import icon from "@/assets/images/student-hire/play-icon.svg";
 import Fancybox from "@/components/Share/Frontend/Fancybox/Fancybox";
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 const feedbackItems = [
   {
@@ -56,37 +57,39 @@ export default function AlumniFeedback() {
       className={`${styles.ic_alumni_feedback} ic_section_space_top ic_alumni_feedback`}
     >
       <div className="container">
-        <div className={styles.ic_alumni_feedback_main}>
-          <div className="ic_section_heading">
-            <h6 className="mb_16">ALUMNI FEEDBACK</h6>
-            <h3>Pathways to Success</h3>
-          </div>
+        <CardAnimation index={0} direction="up">
+          <div className={styles.ic_alumni_feedback_main}>
+            <div className="ic_section_heading">
+              <h6 className="mb_16">ALUMNI FEEDBACK</h6>
+              <h3>Pathways to Success</h3>
+            </div>
 
-          <div className={styles.ic_slider}>
-            <Fancybox>
-              <Slider {...settings}>
-                {feedbackItems.map((item, index) => (
-                  <div className={styles.ic_slider_item} key={index}>
-                    <a
-                      href={item.full}
-                      data-fancybox="alumni-gallery"
-                      data-caption={item.alt}
-                      data-type="iframe"
-                      data-options='{"iframe": {"preload": false}}'
-                    >
-                      <Image src={item.thumb} alt={item.alt} />
-                      <Image
-                        src={icon}
-                        alt="Play Icon"
-                        className={styles.ic_play_icon}
-                      />
-                    </a>
-                  </div>
-                ))}
-              </Slider>
-            </Fancybox>
+            <div className={styles.ic_slider}>
+              <Fancybox>
+                <Slider {...settings}>
+                  {feedbackItems.map((item, index) => (
+                    <div className={styles.ic_slider_item} key={index}>
+                      <a
+                        href={item.full}
+                        data-fancybox="alumni-gallery"
+                        data-caption={item.alt}
+                        data-type="iframe"
+                        data-options='{"iframe": {"preload": false}}'
+                      >
+                        <Image src={item.thumb} alt={item.alt} />
+                        <Image
+                          src={icon}
+                          alt="Play Icon"
+                          className={styles.ic_play_icon}
+                        />
+                      </a>
+                    </div>
+                  ))}
+                </Slider>
+              </Fancybox>
+            </div>
           </div>
-        </div>
+        </CardAnimation>
       </div>
     </section>
   );

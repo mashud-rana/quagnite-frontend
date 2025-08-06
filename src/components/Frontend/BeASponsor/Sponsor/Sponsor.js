@@ -35,7 +35,7 @@ export default function Sponsor() {
         <div className={styles.ic_sponsor_main}>
           <Row gutter={24} justify="space-between">
             <Col xs={24} md={12} xl={11}>
-              <CardAnimation index={0} direction="left">
+              <CardAnimation index={0} direction="down">
                 <div className={styles.ic_left}>
                   <div className={`${styles.ic_mainImage} mb_20`}>
                     <Image src={sponsorData.image} alt="Sponsor" />
@@ -44,7 +44,7 @@ export default function Sponsor() {
               </CardAnimation>
             </Col>
             <Col xs={24} md={12} xl={11}>
-              <CardAnimation index={0} direction="right">
+              <CardAnimation index={0} direction="up">
                 <div className={styles.ic_right}>
                   <h6 className="mb-35">{sponsorData.heading}</h6>
                   <h4 className="mb-24">{sponsorData.title}</h4>

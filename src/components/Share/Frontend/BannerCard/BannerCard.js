@@ -25,7 +25,7 @@ export default function Banner({ bgImage, rightImage, heading, paragraph }) {
       </div>
       {rightImage && (
         <div className={styles.ic_banner_right}>
-          <CardAnimation index={0} direction="right">
+          <CardAnimation index={0} direction="down">
             <Image src={rightImage} alt="banner-right" />
           </CardAnimation>
         </div>

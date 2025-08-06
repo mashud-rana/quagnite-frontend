@@ -16,14 +16,14 @@ export default function WeOffer() {
         <div className={styles.ic_we_offer_main}>
           <Row gutter={24} align="middle" justify="space-between">
             <Col xs={24} md={10}>
-              <CardAnimation index={0} direction="left">
+              <CardAnimation index={0} direction="down">
                 <div className={styles.ic_we_offer_left}>
                   <Image src={img} alt="img" />
                 </div>
               </CardAnimation>
             </Col>
             <Col xs={24} md={13}>
-              <CardAnimation index={0} direction="right">
+              <CardAnimation index={0} direction="up">
                 <div className={styles.ic_we_offer_right}>
                   <h3 className="mb_16">
                     We offer scholarship to those in need{" "}

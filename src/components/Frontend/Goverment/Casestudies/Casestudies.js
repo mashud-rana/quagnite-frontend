@@ -2,60 +2,70 @@ import React from "react";
 import styles from "./Casestudies.module.css";
 import img from "@/assets/images/all/case-studies.png";
 import Image from "next/image";
+import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 
 const Casestudies = () => {
   return (
     <section className="ic_section_space_top">
       <div className="container">
         <div className={styles.ic_grid}>
-          <Image
-            className={styles.ic_img}
-            src={img}
-            width={400}
-            height={200}
-            alt=""
-          />
-          <div className={styles.textContainer}>
-            <div>
-              <h6 className="mb_16">HIRE FROM US</h6>
-              <h4 className="mb-24">Defense and Military</h4>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                eu elit dictum, euismod mi sagittis, elementum arcu. Morbi id
-                lorem pellentesque, cursus nisl lobortis, eleifend risus.
-              </p>
-            </div>
+          <CardAnimation index={0} direction="up">
+            <Image
+              className={styles.ic_img}
+              src={img}
+              width={400}
+              height={200}
+              alt=""
+            />
+          </CardAnimation>
 
-            <div className={styles.ic_btn_container}>
-              <button className={styles.ic_btn}>Hire now</button>
+          <CardAnimation index={0} direction="down">
+            <div className={styles.textContainer}>
+              <div>
+                <h6 className="mb_16">HIRE FROM US</h6>
+                <h4 className="mb-24">Defense and Military</h4>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
+                  eu elit dictum, euismod mi sagittis, elementum arcu. Morbi id
+                  lorem pellentesque, cursus nisl lobortis, eleifend risus.
+                </p>
+              </div>
+
+              <div className={styles.ic_btn_container}>
+                <button className={styles.ic_btn}>Hire now</button>
+              </div>
             </div>
-          </div>
+          </CardAnimation>
         </div>
 
         <div className={`${styles.ic_grid1} mt_48`}>
-          <div className={styles.textContainer}>
-            <div>
-              <h6 className="mb_16">HIRE FROM US</h6>
-              <h4 className="mb-24">Defense and Military</h4>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                eu elit dictum, euismod mi sagittis, elementum arcu. Morbi id
-                lorem pellentesque, cursus nisl lobortis, eleifend risus.
-              </p>
-            </div>
+          <CardAnimation index={0} direction="down">
+            <div className={styles.textContainer}>
+              <div>
+                <h6 className="mb_16">HIRE FROM US</h6>
+                <h4 className="mb-24">Defense and Military</h4>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
+                  eu elit dictum, euismod mi sagittis, elementum arcu. Morbi id
+                  lorem pellentesque, cursus nisl lobortis, eleifend risus.
+                </p>
+              </div>
 
-            <div className={styles.ic_btn_container}>
-              <button className={styles.ic_btn}>Hire now</button>
+              <div className={styles.ic_btn_container}>
+                <button className={styles.ic_btn}>Hire now</button>
+              </div>
             </div>
-          </div>
+          </CardAnimation>
 
-          <Image
-            className={styles.ic_img}
-            src={img}
-            width={400}
-            height={200}
-            alt=""
-          />
+          <CardAnimation index={0} direction="up">
+            <Image
+              className={styles.ic_img}
+              src={img}
+              width={400}
+              height={200}
+              alt=""
+            />
+          </CardAnimation>
         </div>
       </div>
     </section>
