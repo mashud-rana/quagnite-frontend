@@ -1,7 +1,5 @@
 import React from "react";
-import styles from "./availableScholarship.module.css";
 import team1 from "@/assets/images/apply-scholarship/service-img.png";
-import ServiceCard from "@/components/Share/ServiceCard/ServiceCard";
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 import ScholarshipCard from "../../Scholarship/AvailScholarship/ScholarshipCard";
 

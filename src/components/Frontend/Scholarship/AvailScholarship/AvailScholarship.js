@@ -1,8 +1,6 @@
 import React from "react";
-import styles from "./availScholarship.module.css";
 import team1 from "@/assets/images/all/avail-scholorship.png";
 import team2 from "@/assets/images/all/avail-scholorship.png";
-import Image from "next/image";
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 import ScholarshipCard from "./ScholarshipCard";
 
