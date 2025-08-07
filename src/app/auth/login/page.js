@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
-import styles from "./register.module.css";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Image from "next/image";
+import styles from "./login.module.css";
 import bg from "@/assets/images/auth/register.png";
 import google from "@/assets/images/auth/google.png";
-import Image from "next/image";
 import logo from "@/assets/images/auth/logo.png";
 
-const RegisterPage = () => {
+const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
@@ -18,13 +18,13 @@ const RegisterPage = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log("Form submitted:", data);
-    // Handle form submission here
+    console.log("Login submitted:", data);
+    // Handle login here
   };
 
-  const handleGoogleRegister = () => {
-    console.log("Register with Google clicked");
-    // Handle Google registration here
+  const handleGoogleLogin = () => {
+    console.log("Login with Google clicked");
+    // Handle Google login here
   };
 
   return (
@@ -45,35 +45,10 @@ const RegisterPage = () => {
         <div className={styles.ic_form_container}>
           <div className={styles.ic_form_card}>
             <div className={styles.header}>
-              {/* <h1 className={styles.title}>Create an Account 👋</h1> */}
-              <h1 className={styles.title}>
-                Create an Account <span className={styles.handEmoji}>👋</span>
-              </h1>
-              <p className={styles.subtitle}>
-                Kindly fill in your details to create an account
-              </p>
+              <h4 className="ic_white">Welcome Back</h4>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-              <div className={styles.ic_input_group}>
-                <label className={styles.label}>Your fullname*</label>
-                <input
-                  type="text"
-                  placeholder="John James"
-                  className={`${styles.input} ${
-                    errors.fullname ? styles.inputError : ""
-                  }`}
-                  {...register("fullname", {
-                    required: "Full name is required",
-                  })}
-                />
-                {errors.fullname && (
-                  <span className={styles.errorMessage}>
-                    {errors.fullname.message}
-                  </span>
-                )}
-              </div>
-
               <div className={styles.ic_input_group}>
                 <label className={styles.label}>Email address*</label>
                 <input
@@ -98,20 +73,16 @@ const RegisterPage = () => {
               </div>
 
               <div className={styles.ic_input_group}>
-                <label className={styles.label}>Create password*</label>
+                <label className={styles.label}>Password*</label>
                 <div className={styles.passwordContainer}>
                   <input
                     type={showPassword ? "text" : "password"}
-                    placeholder="Create a password"
+                    placeholder="Enter your password"
                     className={`${styles.input} ${styles.passwordInput} ${
                       errors.password ? styles.inputError : ""
                     }`}
                     {...register("password", {
                       required: "Password is required",
-                      minLength: {
-                        value: 8,
-                        message: "Password must be at least 8 characters",
-                      },
                     })}
                   />
                   <button
@@ -129,27 +100,8 @@ const RegisterPage = () => {
                 )}
               </div>
 
-              <div className={styles.checkboxGroup}>
-                <input
-                  type="checkbox"
-                  id="agreeToTerms"
-                  className={styles.checkbox}
-                  {...register("agreeToTerms", {
-                    required: "You must agree to terms & conditions",
-                  })}
-                />
-                <label htmlFor="agreeToTerms" className={styles.checkboxLabel}>
-                  I agree to terms & conditions
-                </label>
-              </div>
-              {errors.agreeToTerms && (
-                <span className={styles.errorMessage}>
-                  {errors.agreeToTerms.message}
-                </span>
-              )}
-
               <button type="submit" className={styles.registerButton}>
-                Register Account
+                Login
               </button>
 
               <div className={styles.divider}>
@@ -159,10 +111,10 @@ const RegisterPage = () => {
               <button
                 type="button"
                 className={styles.googleButton}
-                onClick={handleGoogleRegister}
+                onClick={handleGoogleLogin}
               >
                 <Image src={google} alt="google" />
-                Register with Google
+                Login with Google
               </button>
             </form>
           </div>
@@ -172,4 +124,4 @@ const RegisterPage = () => {
   );
 };
 
-export default RegisterPage;
+export default LoginPage;
