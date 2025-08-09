@@ -3,9 +3,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.5rem; /* p-4 md:p-6 */
-  background-color: white;
+  padding: 16px 0px; /* p-4 md:p-6 */
+  /* background-color: #F0F2F5; */
   border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  margin: 0 20px;
 }
 
 .searchContainer {
@@ -46,6 +50,27 @@
   display: flex;
   align-items: center;
   gap: 1rem; /* gap-4 */
+}
+
+.mobileMenuButton {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobileMenuButton {
+    display: inline-flex;
+    margin-right: 0.5rem;
+  }
+
+  .searchContainer {
+    max-width: 14rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobileMenuButton {
+    display: none !important; /* ensure hidden on large screens */
+  }
 }
 
 .iconButton {

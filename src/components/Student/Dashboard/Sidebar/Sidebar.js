@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   FaFeatherAlt,
@@ -126,30 +126,52 @@ const otherMenu = [
   },
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ isMobileOpen = false, onClose }) => {
   const [state, setState] = useState("expanded");
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const isNowMobile = window.innerWidth <= 768;
+      setIsMobile(isNowMobile);
+      if (isNowMobile) {
+        // Always force expanded visuals on small devices
+        setState("expanded");
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const toggleSidebar = () => {
+    if (isMobile) return; // disable collapse on small devices
     setState((prev) => (prev === "expanded" ? "collapsed" : "expanded"));
   };
 
   const isExpanded = state === "expanded";
+  const isExpandedEffective = isMobile ? true : isExpanded;
+  const handleLinkClick = () => {
+    if (onClose) onClose();
+  };
   return (
     <aside
       className={`${styles.sidebar} ${
-        isExpanded ? styles.expanded : styles.collapsed
-      }`}
+        isExpandedEffective ? styles.expanded : styles.collapsed
+      } ${isMobileOpen ? styles.open : ""}`}
+      role="complementary"
+      aria-hidden={!isMobileOpen}
     >
       <div className={styles.header}>
         {/* Large Logo (expanded state) */}
-        <div className={`${styles.logo} ${!isExpanded ? styles.hidden : ""}`}>
+        <div className={`${styles.logo} ${!isExpandedEffective ? styles.hidden : ""}`}>
           <FaFeatherAlt className={styles.logoIcon} />
           <span className={styles.logoText}>QUAGNITE</span>
         </div>
 
         {/* Small Logo (collapsed state) */}
         <div
-          className={`${styles.smallLogo} ${isExpanded ? styles.hidden : ""}`}
+          className={`${styles.smallLogo} ${isExpandedEffective ? styles.hidden : ""}`}
         >
           <FaFeatherAlt className={styles.logoIcon} />
         </div>
@@ -164,44 +186,47 @@ const Sidebar = () => {
       </div>
 
       <div className={styles.content}>
-        <div className={styles.menuGroup}>
-          <div
-            className={`${styles.menuLabel} ${
-              !isExpanded ? styles.hidden : ""
-            }`}
-          >
-            Main Menu
-          </div>
-          <ul className={styles.menu}>
-            {mainMenu.map((item, index) => (
-              <li key={index} className={styles.menuItem}>
+        <div className={styles.scrollArea}>
+          <div className={styles.menuGroup}>
+            <div
+              className={`${styles.menuLabel} ${
+                !isExpandedEffective ? styles.hidden : ""
+              }`}
+            >
+              Main Menu
+            </div>
+            <ul className={styles.menu}>
+              {mainMenu.map((item, index) => (
+                <li key={index} className={styles.menuItem}>
                 <Link
-                  href={item.url}
-                  className={`${styles.menuLink} ${
-                    item.isActive ? styles.active : ""
-                  }`}
-                  title={!isExpanded ? item.title : undefined}
-                >
-                  <item.icon className={styles.menuIcon} />
-                  <span
-                    className={`${styles.menuText} ${
-                      !isExpanded ? styles.hidden : ""
+                    href={item.url}
+                    className={`${styles.menuLink} ${
+                      item.isActive ? styles.active : ""
                     }`}
+                    title={!isExpandedEffective ? item.title : undefined}
+                  onClick={handleLinkClick}
                   >
-                    {item.title}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
+                    <item.icon className={styles.menuIcon} />
+                    <span
+                      className={`${styles.menuText} ${
+                        !isExpandedEffective ? styles.hidden : ""
+                      }`}
+                    >
+                      {item.title}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className={styles.separator}></div>
         </div>
 
-        <div className={styles.separator}></div>
-
-        <div className={styles.menuGroup}>
+        <div className={`${styles.menuGroup} ${styles.otherMenuFixed}`}>
           <div
             className={`${styles.menuLabel} ${
-              !isExpanded ? styles.hidden : ""
+              !isExpandedEffective ? styles.hidden : ""
             }`}
           >
             Other Menu
@@ -212,12 +237,13 @@ const Sidebar = () => {
                 <Link
                   href={item.url}
                   className={styles.menuLink}
-                  title={!isExpanded ? item.title : undefined}
+                  title={!isExpandedEffective ? item.title : undefined}
+                  onClick={handleLinkClick}
                 >
                   <item.icon className={styles.menuIcon} />
                   <span
                     className={`${styles.menuText} ${
-                      !isExpanded ? styles.hidden : ""
+                      !isExpandedEffective ? styles.hidden : ""
                     }`}
                   >
                     {item.title}

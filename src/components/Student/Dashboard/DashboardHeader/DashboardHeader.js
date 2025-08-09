@@ -1,11 +1,18 @@
 import React from "react";
-import { FaSearch, FaShoppingCart, FaHeart, FaBell } from "react-icons/fa";
+import { FaSearch, FaShoppingCart, FaHeart, FaBell, FaBars } from "react-icons/fa";
 import styles from "./header.module.css";
 import { Avatar } from "../Avatar/Avatar";
 
-const DashboardHeader = () => {
+const DashboardHeader = ({ onOpenSidebar }) => {
   return (
     <header className={styles.header}>
+      <button
+        className={`${styles.iconButton} ${styles.mobileMenuButton}`}
+        aria-label="Open Sidebar"
+        onClick={onOpenSidebar}
+      >
+        <FaBars className={styles.actionIcon} />
+      </button>
       <div className={styles.searchContainer}>
         <FaSearch className={styles.searchIcon} />
         <input
