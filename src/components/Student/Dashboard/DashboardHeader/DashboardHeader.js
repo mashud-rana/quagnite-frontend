@@ -7,8 +7,12 @@ import {
   FaBars,
 } from "react-icons/fa";
 import styles from "./header.module.css";
-import { Avatar } from "../Avatar/Avatar";
 import Image from "next/image";
+import {
+  MdAddShoppingCart,
+  MdNotificationsNone,
+  MdOutlineFavoriteBorder,
+} from "react-icons/md";
 
 const DashboardHeader = ({ onOpenSidebar }) => {
   return (
@@ -30,20 +34,14 @@ const DashboardHeader = ({ onOpenSidebar }) => {
       </div>
       <div className={styles.actions}>
         <button className={styles.iconButton} aria-label="Favorites">
-          <FaHeart className={styles.actionIcon} />
+          <MdOutlineFavoriteBorder className={styles.actionIcon} />
         </button>
         <button className={styles.iconButton} aria-label="Shopping Cart">
-          <FaShoppingCart className={styles.actionIcon} />
+          <MdAddShoppingCart className={styles.actionIcon} />
         </button>
         <button className={styles.iconButton} aria-label="Notifications">
-          <FaBell className={styles.actionIcon} />
+          <MdNotificationsNone className={styles.actionIcon} />
         </button>
-        {/* <Avatar
-          src="/placeholder.svg?height=36&width=36"
-          alt="User Profile"
-          fallback="CN"
-          className={styles.avatar}
-        /> */}
 
         <div className={styles.avatar}>
           <Image
