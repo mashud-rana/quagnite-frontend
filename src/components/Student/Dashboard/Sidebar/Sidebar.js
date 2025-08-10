@@ -2,19 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import {
-  FaFeatherAlt,
-  FaGraduationCap,
-  FaAward,
-  FaPlay,
-  FaBookOpen,
-  FaLock,
-  FaWallet,
-  FaLifeRing,
-  FaChevronUp,
-  FaBars,
-  FaRegQuestionCircle,
-} from "react-icons/fa";
+import { FaBars, FaRegQuestionCircle } from "react-icons/fa";
 import { LuGraduationCap } from "react-icons/lu";
 import { PiMonitorBold, PiCirclesThreeBold } from "react-icons/pi";
 import { GrPlay } from "react-icons/gr";
@@ -24,7 +12,11 @@ import { MdLockOutline } from "react-icons/md";
 import { GiFeather } from "react-icons/gi";
 
 import styles from "./sidebar.module.css";
-import { Avatar } from "../Avatar/Avatar";
+
+import logo from "@/assets/images/auth/logo.png";
+import logo2 from "@/assets/images/auth/small-logo.png";
+import Image from "next/image";
+import { IoIosArrowForward } from "react-icons/io";
 
 // Menu items
 const mainMenu = [
@@ -69,48 +61,6 @@ const mainMenu = [
     url: "#",
     icon: MdLockOutline,
   },
-
-  {
-    title: "Playground",
-    url: "#",
-    icon: GrPlay,
-  },
-  {
-    title: "E-book",
-    url: "#",
-    icon: BiBookContent,
-  },
-  {
-    title: "Academe",
-    url: "#",
-    icon: RiGraduationCapLine,
-  },
-  {
-    title: "Vault",
-    url: "#",
-    icon: MdLockOutline,
-  },
-
-  {
-    title: "Playground",
-    url: "#",
-    icon: GrPlay,
-  },
-  {
-    title: "E-book",
-    url: "#",
-    icon: BiBookContent,
-  },
-  {
-    title: "Academe",
-    url: "#",
-    icon: RiGraduationCapLine,
-  },
-  {
-    title: "Vault",
-    url: "#",
-    icon: MdLockOutline,
-  },
 ];
 
 const otherMenu = [
@@ -130,22 +80,8 @@ const Sidebar = ({ isMobileOpen = false, onClose }) => {
   const [state, setState] = useState("expanded");
   const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      const isNowMobile = window.innerWidth <= 768;
-      setIsMobile(isNowMobile);
-      if (isNowMobile) {
-        // Always force expanded visuals on small devices
-        setState("expanded");
-      }
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   const toggleSidebar = () => {
-    if (isMobile) return; // disable collapse on small devices
+    if (isMobile) return;
     setState((prev) => (prev === "expanded" ? "collapsed" : "expanded"));
   };
 
@@ -154,6 +90,7 @@ const Sidebar = ({ isMobileOpen = false, onClose }) => {
   const handleLinkClick = () => {
     if (onClose) onClose();
   };
+
   return (
     <aside
       className={`${styles.sidebar} ${
@@ -162,27 +99,43 @@ const Sidebar = ({ isMobileOpen = false, onClose }) => {
       role="complementary"
       aria-hidden={!isMobileOpen}
     >
-      <div className={styles.header}>
-        {/* Large Logo (expanded state) */}
-        <div className={`${styles.logo} ${!isExpandedEffective ? styles.hidden : ""}`}>
-          <FaFeatherAlt className={styles.logoIcon} />
-          <span className={styles.logoText}>QUAGNITE</span>
-        </div>
+      <div className={styles.ic_header_container}>
+        <div className={`${styles.header} ${isExpanded ? "g-15" : ""}`}>
+          {/* Large Logo (expanded state) */}
+          <Image
+            className={`${styles.logo} ${
+              !isExpandedEffective ? styles.hidden : ""
+            }`}
+            src={logo}
+            alt=""
+          />
 
-        {/* Small Logo (collapsed state) */}
-        <div
-          className={`${styles.smallLogo} ${isExpandedEffective ? styles.hidden : ""}`}
-        >
-          <FaFeatherAlt className={styles.logoIcon} />
-        </div>
+          {/* Small Logo + collapse toggle (collapsed state) */}
+          {!isExpandedEffective && (
+            <div className={styles.collapsedLogoWrapper}>
+              <Image className={styles.smallLogo} src={logo2} alt="" />
+              <button
+                className={styles.collapseIcon}
+                onClick={toggleSidebar}
+                aria-label="Expand Sidebar"
+              >
+                <IoIosArrowForward size={20} />
+                {/* Rotated so it looks like ">" */}
+              </button>
+            </div>
+          )}
 
-        <button
-          className={styles.toggleButton}
-          onClick={toggleSidebar}
-          aria-label="Toggle Sidebar"
-        >
-          <FaBars className={styles.toggleIcon} />
-        </button>
+          {/* Toggle button (expanded state only) */}
+          {isExpandedEffective && (
+            <button
+              className={styles.toggleButton}
+              onClick={toggleSidebar}
+              aria-label="Toggle Sidebar"
+            >
+              <FaBars className={styles.toggleIcon} />
+            </button>
+          )}
+        </div>
       </div>
 
       <div className={styles.content}>
@@ -190,7 +143,7 @@ const Sidebar = ({ isMobileOpen = false, onClose }) => {
           <div className={styles.menuGroup}>
             <div
               className={`${styles.menuLabel} ${
-                !isExpandedEffective ? styles.hidden : ""
+                !isExpandedEffective ? styles.menuhidden : ""
               }`}
             >
               Main Menu
@@ -198,13 +151,13 @@ const Sidebar = ({ isMobileOpen = false, onClose }) => {
             <ul className={styles.menu}>
               {mainMenu.map((item, index) => (
                 <li key={index} className={styles.menuItem}>
-                <Link
+                  <Link
                     href={item.url}
                     className={`${styles.menuLink} ${
                       item.isActive ? styles.active : ""
-                    }`}
+                    } ${isExpanded ? "g-15" : ""}`}
                     title={!isExpandedEffective ? item.title : undefined}
-                  onClick={handleLinkClick}
+                    onClick={handleLinkClick}
                   >
                     <item.icon className={styles.menuIcon} />
                     <span
@@ -254,23 +207,6 @@ const Sidebar = ({ isMobileOpen = false, onClose }) => {
           </ul>
         </div>
       </div>
-
-      {/* <div className={styles.footer}>
-        <div className={styles.userProfile}>
-          <Avatar
-            src="/placeholder.svg?height=32&width=32"
-            alt="User Avatar"
-            fallback="U"
-            className={styles.avatar}
-          />
-          <span
-            className={`${styles.username} ${!isExpanded ? styles.hidden : ""}`}
-          >
-            Username
-          </span>
-          {isExpanded && <FaChevronUp className={styles.chevron} />}
-        </div>
-      </div> */}
     </aside>
   );
 };

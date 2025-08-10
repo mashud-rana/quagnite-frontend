@@ -1,7 +1,14 @@
 import React from "react";
-import { FaSearch, FaShoppingCart, FaHeart, FaBell, FaBars } from "react-icons/fa";
+import {
+  FaSearch,
+  FaShoppingCart,
+  FaHeart,
+  FaBell,
+  FaBars,
+} from "react-icons/fa";
 import styles from "./header.module.css";
 import { Avatar } from "../Avatar/Avatar";
+import Image from "next/image";
 
 const DashboardHeader = ({ onOpenSidebar }) => {
   return (
@@ -31,12 +38,22 @@ const DashboardHeader = ({ onOpenSidebar }) => {
         <button className={styles.iconButton} aria-label="Notifications">
           <FaBell className={styles.actionIcon} />
         </button>
-        <Avatar
+        {/* <Avatar
           src="/placeholder.svg?height=36&width=36"
           alt="User Profile"
           fallback="CN"
           className={styles.avatar}
-        />
+        /> */}
+
+        <div className={styles.avatar}>
+          <Image
+            src="/placeholder.svg?height=36&width=36"
+            alt="avater"
+            className={styles.image}
+            width={500}
+            height={200}
+          />
+        </div>
       </div>
     </header>
   );
