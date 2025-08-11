@@ -36,7 +36,7 @@
   border-radius: 12px;
   background-color: #e5e7eb;
   border: none;
-  font-size: 0.875rem;
+  font-size: 16px;
   color: #9795b5;
 }
 
@@ -160,6 +160,25 @@
 
   .header {
     margin: 0 10px;
+  }
+
+  .searchInput {
+    padding-left: 26px;
+    padding-right: 5px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-radius: 10px;
+  }
+
+  .searchContainer {
+    margin-right: 6px;
+  }
+
+  .searchIcon {
+    left: 6px;
+    top: 50%;
+    height: 14px;
+    width: 14px;
   }
 }
 
