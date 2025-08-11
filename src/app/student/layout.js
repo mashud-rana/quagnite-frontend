@@ -13,7 +13,9 @@ const StudentLayout = ({ children }) => {
 
   return (
     <div className="student-layout">
-      <Sidebar isMobileOpen={isSidebarOpen} onClose={closeSidebar} />
+      <div>
+        <Sidebar isMobileOpen={isSidebarOpen} onClose={closeSidebar} />
+      </div>
       <div className="content">
         <DashboardHeader onOpenSidebar={openSidebar} />
         <main className="main">{children}</main>

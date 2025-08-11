@@ -8,6 +8,7 @@
   top: 0;
   z-index: 100;
   margin: 0 20px;
+  padding-bottom: 10px;
 }
 
 .searchContainer {
@@ -31,8 +32,8 @@
   width: 100%;
   padding-left: 50px;
   padding-right: 24px;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   border-radius: 12px;
   background-color: #e5e7eb;
   border: none;
@@ -112,14 +113,17 @@
   cursor: pointer;
 }
 
+@media (max-width: 1199px) {
+  .searchInput {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
 @media (max-width: 769px) {
   .mobileMenuButton {
     display: inline-flex;
     margin-right: 8px;
-  }
-
-  .searchContainer {
-    /* max-width: 14rem; */
   }
 
   .actions {
@@ -160,6 +164,7 @@
 
   .header {
     margin: 0 10px;
+    padding-bottom: 18px;
   }
 
   .searchInput {

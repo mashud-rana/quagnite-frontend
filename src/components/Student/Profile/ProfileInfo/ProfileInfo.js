@@ -23,7 +23,7 @@ const ProfileInfo = () => {
   return (
     <div className={styles.infoContainer}>
       <div className={styles.infoHeader}>
-        <h3 className={styles.infoTitle}>Profile Info</h3>
+        <p className={styles.infoTitle}>Profile Info</p>
         <button className={styles.editButton}>EDIT</button>
       </div>
       <div className={styles.infoGrid}>

@@ -1,13 +1,10 @@
 /* globals.css */
 .student-layout {
   display: flex;
+  width: 100%;
   min-height: 100vh;
-  min-height: 100dvh;
+  /* min-height: 100dvh; */
   background-color: var(--black);
-}
-
-.g-15 {
-  gap: 15px;
 }
 
 .content {
@@ -15,15 +12,18 @@
   display: flex;
   flex-direction: column;
   border-radius: 16px 0px 0px 16px;
-  background-color: #f0f2f5;
+  background-color: var(--white);
 }
 
 .main {
   padding: 20px;
-  flex-grow: 1;
+  /* flex-grow: 1; */
 }
 
-/* overlay for mobile sidebar */
+.g-15 {
+  gap: 15px;
+}
+
 .sidebar-overlay {
   position: fixed;
   inset: 0;
@@ -963,6 +963,10 @@ h6 {
     grid-template-columns: 1fr;
     gap: 14px;
   }
+
+  .content {
+    border-radius: 0px 0px 0px 0px;
+  }
 }
 
 @media (max-width: 575.98px) {
@@ -1120,6 +1124,10 @@ h6 {
 
   .w_80 {
     width: 100%;
+  }
+
+  .main {
+    padding: 10px;
   }
 }
 
