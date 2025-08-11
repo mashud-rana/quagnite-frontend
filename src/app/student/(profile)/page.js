@@ -6,7 +6,6 @@ import React from "react";
 const StudentDashboar = () => {
   return (
     <div>
-      <ProfileBanner />
       <ProfileInfo />
     </div>
   );

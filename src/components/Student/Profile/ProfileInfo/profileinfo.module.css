@@ -20,6 +20,7 @@
   cursor: pointer;
   transition: 0.3s all ease-in;
   font-size: 15px;
+  text-transform: uppercase;
 }
 
 .editButton:hover {

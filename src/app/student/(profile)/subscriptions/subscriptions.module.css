@@ -1,0 +1,28 @@
+.infoHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.infoTitle {
+  font-size: 18px;
+  margin: 0;
+}
+
+.ic_card_container {
+  background-color: #f0f2f5;
+  padding: 20px;
+}
+
+.ic_title {
+  text-transform: capitalize;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 1299px) {
+}
+
+@media (max-width: 480px) {
+}
