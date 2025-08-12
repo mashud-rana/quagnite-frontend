@@ -32,13 +32,11 @@
 .infoGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0;
 }
 
 .infoRow {
   display: grid;
   grid-template-columns: minmax(100px, 200px) 1fr;
-  padding: 14px 0;
   border-bottom: 1px solid #e0e0e0;
   align-items: flex-start;
 }
@@ -50,11 +48,46 @@
 .infoLabel {
   font-weight: 500;
   font-size: 18px;
+  align-content: center;
+  height: 100%;
 }
 
 .infoValue {
-  word-wrap: break-word;
+  width: 100%;
+  background-color: var(--white);
+  border: none;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 16px;
   color: #353535;
+  outline: none;
+  cursor: not-allowed;
+}
+
+.textArea {
+  resize: none;
+  font-family: inherit;
+  font-size: 16px;
+  color: #353535;
+}
+
+.infoValue:disabled {
+  background-color: var(--white);
+  color: #353535;
+  opacity: 1;
+}
+
+.editModeInput {
+  background-color: #d9d9d9 !important;
+  cursor: text;
+}
+
+.editModeRow {
+  border-bottom: none !important;
+}
+
+.editModeGrid {
+  gap: 14px;
 }
 
 @media (max-width: 1299px) {
@@ -63,11 +96,24 @@
     border-radius: 10px;
     font-size: 14px;
   }
+
+  .infoValue {
+    padding: 10px 16px;
+    border-radius: 10px;
+  }
+
+  .infoRow {
+    grid-template-columns: minmax(100px, 180px) 1fr;
+  }
+
+  .editModeGrid {
+    gap: 10px;
+  }
 }
 
 @media (max-width: 991px) {
-  .infoRow {
-    padding: 12px 0;
+  .infoLabel {
+    font-size: 16px;
   }
 }
 
@@ -83,14 +129,20 @@
   }
 
   .infoRow {
-    display: grid;
     grid-template-columns: minmax(100px, 140px) 1fr;
-    padding: 10px 0;
-    border-bottom: 1px solid #e0e0e0;
-    align-items: flex-start;
   }
 
   .infoValue {
     font-size: 14px;
+    padding: 6px 14px;
+    border-radius: 8px;
+  }
+
+  .textArea {
+    font-size: 14px;
+  }
+
+  .editModeGrid {
+    gap: 8px;
   }
 }

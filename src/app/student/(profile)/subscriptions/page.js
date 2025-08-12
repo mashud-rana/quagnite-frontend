@@ -1,11 +1,13 @@
 import React from "react";
 import styles from "./subscriptions.module.css";
+import Image from "next/image";
+import img from "@/assets/images/all/subscription.png";
 
 const SubscriptionsPage = () => {
   return (
     <div>
       <div className={styles.infoHeader}>
-        <p className={styles.infoTitle}>Profile Info</p>
+        <p className={styles.infoTitle}>Subscriptions</p>
       </div>
 
       <div className={styles.ic_card_container}>
@@ -13,7 +15,7 @@ const SubscriptionsPage = () => {
           <h6 className={styles.ic_title}>Personal Subscription</h6>
           <p className="mb-12">Valid till sept 2025</p>
 
-          <ul>
+          <ul className={styles.ic_list_container}>
             <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
             <li>Nulla fermentum tortor eu mauris bibendum luctus. </li>
             <li>
@@ -33,6 +35,15 @@ const SubscriptionsPage = () => {
               torquent per conubia nostra, per inceptos himenaeos
             </li>
           </ul>
+
+          <div className={styles.ic_btn_container}>
+            <button className={styles.ic_btn}>Buy now</button>
+            <button className={styles.ic_btn}>Upgrade</button>
+          </div>
+        </div>
+
+        <div className={styles.ic_img_container}>
+          <Image src={img} className={styles.ic_img} alt="" />
         </div>
       </div>
     </div>
