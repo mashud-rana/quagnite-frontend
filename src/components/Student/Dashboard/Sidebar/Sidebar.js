@@ -28,7 +28,7 @@ const mainMenu = [
   },
   {
     title: "Courses",
-    url: "#",
+    url: "/student/courses",
     icon: LuGraduationCap,
   },
   {

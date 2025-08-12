@@ -1,13 +1,12 @@
 "use client";
 
 import { FaArrowLeft } from "react-icons/fa";
-import styles from "./profileHeader.module.css";
+import styles from "./courseHeader.module.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const ProfileHeader = () => {
+const CoursesHeader = () => {
   const pathname = usePathname();
-
   return (
     <div className={styles.ic_header_container}>
       {/* Title Section */}
@@ -57,4 +56,4 @@ const ProfileHeader = () => {
   );
 };
 
-export default ProfileHeader;
+export default CoursesHeader;
