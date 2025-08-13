@@ -1,11 +1,4 @@
-"use client";
-
-import React, { useState } from "react";
-import { FaArrowUp, FaSearch, FaStar } from "react-icons/fa";
-import FiltersSidebar from "./FiltersSidebar";
-import CourseCard from "./CourseCard";
-import styles from "./course.module.css";
-import { FaAnglesUp } from "react-icons/fa6";
+import CourseCard from "../Course/CourseCard";
 
 const mockCourses = [
   {
@@ -46,50 +39,14 @@ const mockCourses = [
   },
 ];
 
-const Course = () => {
-  const renderStars = (rating) =>
-    Array.from({ length: 5 }, (_, index) => (
-      <FaStar
-        key={index}
-        className={`${styles.star} ${
-          index < rating ? styles.starFilled : styles.starEmpty
-        }`}
-      />
-    ));
-
+const Inprogress = () => {
   return (
-    <div className={styles.coursesContainer}>
-      {/* Search Bar */}
-      <div className={styles.searchContainer}>
-        <div className={styles.searchWrapper}>
-          <input
-            type="text"
-            placeholder="Search"
-            className={styles.searchInput}
-          />
-        </div>
-        <div>
-          <button className={styles.scrollTopButton} aria-label="Scroll to top">
-            <FaAnglesUp className={styles.scrollTopIcon} />
-          </button>
-        </div>
-      </div>
-
-      <div className={styles.contentWrapper}>
-        <FiltersSidebar />
-
-        <div className={styles.coursesList}>
-          {mockCourses.map((course) => (
-            <CourseCard
-              key={course.id}
-              course={course}
-              renderStars={renderStars}
-            />
-          ))}
-        </div>
-      </div>
+    <div className="ic_courses_list">
+      {mockCourses.map((course) => (
+        <CourseCard key={course.id} course={course} />
+      ))}
     </div>
   );
 };
 
-export default Course;
+export default Inprogress;

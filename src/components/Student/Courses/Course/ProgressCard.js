@@ -1,12 +1,11 @@
+import Image from "next/image";
 import React from "react";
 import { FaChartBar } from "react-icons/fa";
 import { FaRegClock, FaStar } from "react-icons/fa6";
 import { FiCalendar } from "react-icons/fi";
 import styles from "./course.module.css";
-import Image from "next/image";
-import img from "@/assets/images/all/subscription.png";
 
-const CourseCard = ({ course }) => {
+const ProgressCard = ({ course }) => {
   return (
     <div className={styles.ic_course_card}>
       <div className={styles.ic_img_text_wrapper}>
@@ -70,4 +69,4 @@ const CourseCard = ({ course }) => {
   );
 };
 
-export default CourseCard;
+export default ProgressCard;

@@ -1,24 +1,24 @@
-.coursesContainer {
+/* .ic_courses_container {
   display: flex;
   flex-direction: column;
   height: 100%;
   padding: 0;
   color: #353535;
-}
+} */
 
-.searchContainer {
+.ic_search_container {
   display: flex;
   align-items: center;
   gap: 24px;
-  /* justify-content: space-between; */
   margin-bottom: 30px;
+  color: #353535;
 }
 
-.searchWrapper {
+.ic_search_wrapper {
   width: 100%;
 }
 
-.searchInput {
+.ic_search_input {
   width: 100%;
   padding: 11px 18px;
   border: 1px solid #e5e7eb;
@@ -27,17 +27,17 @@
   color: #6b7280;
 }
 
-.searchInput:focus {
+.ic_search_input:focus {
   outline: none;
   border-color: var(--primary-color);
   background-color: white;
 }
 
-.searchInput::placeholder {
+.ic_search_input::placeholder {
   color: #9ca3af;
 }
 
-.scrollTopButton {
+.ic_scroll_top_button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -51,25 +51,15 @@
   font-size: 14px;
 }
 
-.scrollTopButton:hover {
+.ic_scroll_top_button:hover {
   background-color: #f9fafb;
   border-color: #d1d5db;
 }
 
-.scrollTopIcon {
-  /* width: 1rem;
-  height: 1rem; */
-  /* color: #6b7280; */
+.ic_scroll_top_icon {
 }
 
-.contentWrapper {
-  display: flex;
-  gap: 24px;
-  flex: 1;
-  overflow: hidden;
-}
-
-.sidebar {
+.ic_sidebar {
   width: 206px;
   flex-shrink: 0;
   height: fit-content;
@@ -78,15 +68,15 @@
   border-radius: 16px;
 }
 
-.filterSection {
+.ic_filter_section {
   margin-bottom: 2rem;
 }
 
-.filterSection:last-child {
+.ic_filter_section:last-child {
   margin-bottom: 0;
 }
 
-.filterTitle {
+.ic_filter_title {
   font-weight: 500;
 }
 
@@ -95,29 +85,29 @@
   margin: 12px 0;
 }
 
-.filterOptions {
+.ic_filter_options {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.checkboxLabel {
+.ic_checkbox_label {
   display: flex;
   align-items: center;
   cursor: pointer;
 }
 
-.checkbox {
+.ic_checkbox {
   width: 16px;
   height: 16px;
   margin-right: 12px;
 }
 
-.checkboxText {
+.ic_checkbox_text {
   user-select: none;
 }
 
-.coursesList {
+.ic_courses_list {
   height: 700px;
   overflow: scroll;
   display: flex;
@@ -125,102 +115,108 @@
   gap: 24px;
 }
 
-.courseCard {
+.ic_course_card {
   border: 1px solid #e2e2e2;
   border-radius: 16px;
   padding: 20px;
   transition: box-shadow 0.2s;
 }
 
-.img_text_wrapper {
+.ic_img_text_wrapper {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   gap: 24px;
 }
 
-.courseCard:hover {
+.ic_course_card:hover {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.courseThumbnail {
+.ic_course_thumbnail {
   flex-shrink: 0;
 }
 
-.thumbnailImage {
+.ic_thumbnail_image {
   width: 160px;
   height: 100px;
   object-fit: cover;
   border-radius: 12px;
 }
 
-.courseTitle {
+.ic_course_title {
   font-size: 20px;
   font-weight: 600;
   margin: 0;
   line-height: 1.4;
 }
 
-.courseDescription {
+.ic_course_description {
   margin: 10px 0 20px 0;
   color: #353535;
 }
 
-.courseMetadata {
+.ic_course_metadata {
   display: flex;
   flex-direction: column;
   gap: 2px;
   margin: 8px 0;
 }
 
-.metadataText {
+.ic_metadata_text {
   font-size: 15px;
 }
 
-.metadataItem {
+.ic_metadata_item {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-.metadataIcon {
+.ic_metadata_icon {
   font-size: 18px;
   color: #6b7280;
 }
 
-.courseRating {
+.ic_course_rating {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.stars {
+.ic_stars {
   display: flex;
   gap: 3px;
 }
 
-.star {
+.ic_star {
   width: 14px;
   height: 14px;
 }
 
-.starFilled {
+.ic_star_filled {
   color: #f59e0b;
 }
 
-.starEmpty {
+.ic_star_empty {
   color: #e5e7eb;
 }
 
-.studentCount {
+.ic_student_count {
   font-size: 15px;
 }
 
-.courseAction {
+.ic_course_action {
   text-align: end;
 }
 
-.startButton {
+/* .ic_course_action2 {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+} */
+
+.ic_start_button {
   background-color: var(--primary-color);
   color: var(--white);
   border: none;
@@ -235,176 +231,174 @@
   white-space: nowrap;
 }
 
-.startButton:hover {
+.ic_start_button:hover {
   box-shadow: 0px 3px 33.7px rgba(92, 129, 247, 0.5);
 }
 
 /* Responsive Design */
 @media (max-width: 1299px) {
-  .courseDescription {
+  .ic_course_description {
     margin: 8px 0 15px 0;
   }
 
-  .startButton {
+  .ic_start_button {
     font-size: 14px;
     padding: 8px 12px;
   }
 
-  .metadataItem {
+  .ic_metadata_item {
     gap: 12px;
   }
 
-  .courseMetadata {
+  .ic_course_metadata {
     gap: 1px;
     margin: 7px 0;
   }
 
-  .img_text_wrapper {
+  .ic_img_text_wrapper {
     gap: 20px;
   }
 
-  .thumbnailImage {
+  .ic_thumbnail_image {
     width: 140px;
     height: 90px;
     object-fit: cover;
     border-radius: 12px;
   }
 
-  .coursesList {
+  .ic_courses_list {
     gap: 20px;
   }
 
-  .searchContainer {
+  .ic_search_container {
     gap: 18px;
     margin-bottom: 28px;
   }
 
-  .searchInput {
+  .ic_search_input {
     padding: 10px 16px;
     border-radius: 10px;
   }
 
-  .scrollTopButton {
+  .ic_scroll_top_button {
     width: 40px;
     height: 40px;
   }
 }
 
 @media (max-width: 1199px) {
-  .courseDescription {
+  .ic_course_description {
     margin: 6px 0 12px 0;
   }
 
-  .courseCard {
+  .ic_course_card {
     padding: 15px;
   }
 
-  .thumbnailImage {
+  .ic_thumbnail_image {
     width: 120px;
     height: 80px;
     border-radius: 8px;
   }
 
-  .courseDescription {
+  .ic_course_description {
     font-size: 15px;
     line-height: 22px;
   }
 
-  .img_text_wrapper {
+  .ic_img_text_wrapper {
     gap: 15px;
   }
 
-  .metadataItem {
+  .ic_metadata_item {
     gap: 10px;
   }
 
-  .courseMetadata {
+  .ic_course_metadata {
     margin: 6px 0;
   }
 
-  .metadataText {
+  .ic_metadata_text {
     font-size: 14px;
   }
 
-  .metadataIcon {
+  .ic_metadata_icon {
     font-size: 16px;
   }
 
-  .courseRating {
+  .ic_course_rating {
     gap: 12px;
   }
 
-  .studentCount {
+  .ic_student_count {
     font-size: 14px;
   }
 
-  .courseTitle {
+  .ic_course_title {
     font-size: 18px;
   }
 
-  .filterOptions {
+  .ic_filter_options {
     gap: 8px;
+  }
+
+  .ic_start_button {
+    font-size: 13px;
+    padding: 6px 12px;
   }
 }
 
 @media (max-width: 991px) {
-  .filterOptions {
+  .ic_filter_options {
     gap: 6px;
   }
 
-  .contentWrapper {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .sidebar {
+  .ic_sidebar {
     width: 100%;
   }
 
-  .coursesList {
+  .ic_courses_list {
     height: 100%;
     gap: 16px;
   }
 
-  .courseAction {
+  /* .ic_course_action {
     align-self: flex-start;
-  }
+  } */
 }
 
 @media (max-width: 480px) {
-  .searchContainer {
+  .ic_search_container {
     gap: 16px;
     margin-bottom: 24px;
   }
 
-  .searchInput {
+  .ic_search_input {
     padding: 7px 14px;
     border-radius: 8px;
     font-size: 14px;
   }
 
-  .scrollTopButton {
+  .ic_scroll_top_button {
     width: 35px;
     height: 35px;
     font-size: 13px;
   }
 
-  .courseCard {
+  .ic_course_card {
     padding: 1rem;
   }
 
-  .img_text_wrapper {
+  .ic_img_text_wrapper {
     flex-direction: column;
     gap: 16px;
   }
 
-  .thumbnailImage {
+  .ic_thumbnail_image {
     width: 130px;
-    /* max-width: 160px; */
   }
 
-  /* .courseMetadata {
-    flex-direction: column;
-    gap: 0.5rem;
-  } */
+  .ic_start_button {
+    font-size: 12px;
+  }
 }

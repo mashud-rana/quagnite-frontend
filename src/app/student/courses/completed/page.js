@@ -1,7 +1,7 @@
 import CourseCard from "@/components/Student/Courses/Course/CourseCard";
 import React from "react";
 
-const InprogressPage = () => {
+const CompletedPage = () => {
   const mockCourses = [
     {
       id: "1",
@@ -50,4 +50,4 @@ const InprogressPage = () => {
   );
 };
 
-export default InprogressPage;
+export default CompletedPage;

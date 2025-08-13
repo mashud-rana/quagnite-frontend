@@ -15,37 +15,34 @@ const FiltersSidebar = () => {
 
   const renderCheckboxList = (items) =>
     items.map((label) => (
-      <label key={label} className={styles.checkboxLabel}>
-        <input type="checkbox" className={styles.checkbox} />
-        <span className={styles.checkboxText}>{label}</span>
+      <label key={label} className={styles.ic_checkbox_label}>
+        <input type="checkbox" className={styles.ic_checkbox} />
+        <span className={styles.ic_checkbox_text}>{label}</span>
       </label>
     ));
 
   return (
-    <aside className={styles.sidebar}>
-      {/* Ways to learn */}
-      <div className={styles.filterSection}>
-        <h5 className={styles.filterTitle}>Ways to learn</h5>
+    <aside className={styles.ic_sidebar}>
+      <div className={styles.ic_filter_section}>
+        <h5 className={styles.ic_filter_title}>Ways to learn</h5>
         <hr className={styles.ic_hr} />
-        <div className={styles.filterOptions}>
+        <div className={styles.ic_filter_options}>
           {renderCheckboxList(waysToLearn)}
         </div>
       </div>
 
-      {/* Skill level */}
-      <div className={styles.filterSection}>
-        <h5 className={styles.filterTitle}>Skill level</h5>
+      <div className={styles.ic_filter_section}>
+        <h5 className={styles.ic_filter_title}>Skill level</h5>
         <hr className={styles.ic_hr} />
-        <div className={styles.filterOptions}>
+        <div className={styles.ic_filter_options}>
           {renderCheckboxList(skillLevels)}
         </div>
       </div>
 
-      {/* Subject */}
-      <div className={styles.filterSection}>
-        <h5 className={styles.filterTitle}>Subject</h5>
+      <div className={styles.ic_filter_section}>
+        <h5 className={styles.ic_filter_title}>Subject</h5>
         <hr className={styles.ic_hr} />
-        <div className={styles.filterOptions}>
+        <div className={styles.ic_filter_options}>
           {renderCheckboxList(subjects)}
         </div>
       </div>
