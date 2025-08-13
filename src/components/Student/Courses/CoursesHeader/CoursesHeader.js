@@ -11,45 +11,44 @@ const CoursesHeader = () => {
     <div className={styles.ic_header_container}>
       {/* Title Section */}
       <div className={styles.ic_title_section}>
-        <Link href="#" className={styles.ic_back_button} aria-label="Go back">
-          <FaArrowLeft className={styles.ic_back_icon} />
-        </Link>
-        <h1 className={styles.ic_page_title}>Profile Management</h1>
+        <h1 className={styles.ic_page_title}>My Courses</h1>
       </div>
 
       {/* Tabs */}
       <nav className={styles.ic_tabs}>
         <Link
-          href="/student"
+          href="/student/courses"
           className={`${styles.ic_tab_item} ${
-            pathname === "/student" ||
-            (!pathname.startsWith("/student/account") &&
-              !pathname.startsWith("/student/subscriptions"))
+            pathname === "/student/courses" ||
+            (!pathname.startsWith("/student/courses/inprogress") &&
+              !pathname.startsWith("/student/courses/completed"))
               ? styles.ic_active
               : ""
           }`}
         >
-          Profile
+          Enrolled courses
         </Link>
 
         <Link
-          href="/student/account"
+          href="/student/courses/inprogress"
           className={`${styles.ic_tab_item} ${
-            pathname.startsWith("/student/account") ? styles.ic_active : ""
-          }`}
-        >
-          Account settings
-        </Link>
-
-        <Link
-          href="/student/subscriptions"
-          className={`${styles.ic_tab_item} ${
-            pathname.startsWith("/student/subscriptions")
+            pathname.startsWith("/student/courses/inprogress")
               ? styles.ic_active
               : ""
           }`}
         >
-          Subscriptions
+          Inprogress pourses
+        </Link>
+
+        <Link
+          href="/student/courses/completed"
+          className={`${styles.ic_tab_item} ${
+            pathname.startsWith("/student/courses/completed")
+              ? styles.ic_active
+              : ""
+          }`}
+        >
+          Completed Courses
         </Link>
       </nav>
     </div>

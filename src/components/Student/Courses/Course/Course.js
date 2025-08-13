@@ -5,6 +5,7 @@ import { FaArrowUp, FaSearch, FaStar } from "react-icons/fa";
 import FiltersSidebar from "./FiltersSidebar";
 import CourseCard from "./CourseCard";
 import styles from "./course.module.css";
+import { FaAnglesUp } from "react-icons/fa6";
 
 const mockCourses = [
   {
@@ -46,32 +47,6 @@ const mockCourses = [
 ];
 
 const Course = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filters, setFilters] = useState({
-    waysToLearn: {
-      all: false,
-      coreCourses: false,
-      expandedCourses: false,
-      labs: false,
-    },
-    skillLevel: { advanced: false, beginner: false, intermediate: false },
-    subject: {
-      businessProfessional: false,
-      creativeProfessional: false,
-      dataProfessional: false,
-      digitalMarketer: false,
-      itOps: false,
-      productManager: false,
-    },
-  });
-
-  const handleFilterChange = (category, option) => {
-    setFilters((prev) => ({
-      ...prev,
-      [category]: { ...prev[category], [option]: !prev[category][option] },
-    }));
-  };
-
   const renderStars = (rating) =>
     Array.from({ length: 5 }, (_, index) => (
       <FaStar
@@ -90,21 +65,18 @@ const Course = () => {
           <input
             type="text"
             placeholder="Search"
-            value={searchTerm}
-            // onChange={(e) => setSearchTerm(e.target.value)}
             className={styles.searchInput}
           />
         </div>
-        <button className={styles.scrollTopButton} aria-label="Scroll to top">
-          <FaArrowUp className={styles.scrollTopIcon} />
-        </button>
+        <div>
+          <button className={styles.scrollTopButton} aria-label="Scroll to top">
+            <FaAnglesUp className={styles.scrollTopIcon} />
+          </button>
+        </div>
       </div>
 
       <div className={styles.contentWrapper}>
-        <FiltersSidebar
-          filters={filters}
-          handleFilterChange={handleFilterChange}
-        />
+        <FiltersSidebar />
 
         <div className={styles.coursesList}>
           {mockCourses.map((course) => (

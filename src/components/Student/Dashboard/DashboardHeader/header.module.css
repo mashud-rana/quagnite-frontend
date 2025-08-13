@@ -35,7 +35,8 @@
   padding-top: 12px;
   padding-bottom: 12px;
   border-radius: 12px;
-  background-color: #e5e7eb;
+  background-color: rgba(107, 107, 107, 0.1);
+  /* background-color: #e5e7eb; */
   border: none;
   font-size: 16px;
   color: #9795b5;
@@ -64,7 +65,8 @@
   height: 48px;
   border-radius: 100%;
   border: none;
-  background-color: #e5e7eb;
+  background-color: rgba(107, 107, 107, 0.1);
+  /* background-color: #e5e7eb; */
   cursor: pointer;
   transition: 0.2s all;
 }

@@ -22,7 +22,7 @@ import { IoIosArrowForward } from "react-icons/io";
 const mainMenu = [
   {
     title: "Explore",
-    url: "#",
+    url: "/student",
     icon: GiFeather,
     isActive: true,
   },
