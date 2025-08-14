@@ -4,6 +4,7 @@ import { FaChartBar } from "react-icons/fa";
 import { FaRegClock, FaStar } from "react-icons/fa6";
 import { FiCalendar } from "react-icons/fi";
 import styles from "./course.module.css";
+import img from "@/assets/images/all/subscription.png";
 
 const ProgressCard = ({ course }) => {
   return (
@@ -55,13 +56,21 @@ const ProgressCard = ({ course }) => {
           </div>
         </div>
 
-        <div>
+        <div className={styles.ic_course_info}>
           <h3 className={styles.ic_course_title}>{course.title}</h3>
           <p className={styles.ic_course_description}>{course.description}</p>
-          <div className={styles.ic_course_action}>
-            <button className={styles.ic_start_button}>
-              START YOUR JOURNEY
-            </button>
+          <div className={styles.ic_course_action2}>
+            <div>
+              {course.progress}% Complete
+              <div className={styles.ic_progress_bar}>
+                <div
+                  className={styles.ic_progress_fill}
+                  style={{ width: `${course.progress}%` }}
+                ></div>
+              </div>
+            </div>
+
+            <button className={styles.ic_start_button}>Finish</button>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import CourseCard from "@/components/Student/Courses/Course/CourseCard";
+import ProgressCard from "@/components/Student/Courses/Course/ProgressCard";
 import React from "react";
 
 const InprogressPage = () => {
@@ -14,6 +15,7 @@ const InprogressPage = () => {
       rating: 4,
       students: 210,
       thumbnail: "/placeholder.svg?height=120&width=200",
+      progress: 75,
     },
     {
       id: "2",
@@ -26,6 +28,7 @@ const InprogressPage = () => {
       rating: 4,
       students: 210,
       thumbnail: "/placeholder.svg?height=120&width=200",
+      progress: 50,
     },
     {
       id: "3",
@@ -38,13 +41,14 @@ const InprogressPage = () => {
       rating: 4,
       students: 210,
       thumbnail: "/placeholder.svg?height=120&width=200",
+      progress: 25,
     },
   ];
 
   return (
     <div className="ic_courses_list">
       {mockCourses.map((course) => (
-        <CourseCard key={course.id} course={course} />
+        <ProgressCard key={course.id} course={course} />
       ))}
     </div>
   );

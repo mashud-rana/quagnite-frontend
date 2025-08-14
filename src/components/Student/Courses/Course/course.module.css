@@ -127,6 +127,8 @@
   flex-direction: row;
   align-items: flex-start;
   gap: 24px;
+  /* border: 1px solid black; */
+  position: relative;
 }
 
 .ic_course_card:hover {
@@ -210,11 +212,46 @@
   text-align: end;
 }
 
-/* .ic_course_action2 {
+.ic_course_info {
+  height: 100%;
   display: flex;
-  justify-content: end;
-  align-items: end;
+  flex-direction: column;
+  justify-content: space-between;
+
+  /* border: 1px solid black; */
+}
+
+.ic_progress_bar {
+  width: 100%;
+  height: 4px;
+  background-color: #4b4b4d;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.ic_progress_fill {
+  height: 100%;
+  background-color: var(--primary-color); /* Blue fill */
+  transition: width 0.4s ease-in-out;
+}
+
+/* .ic_progress_text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #353535;
 } */
+
+.ic_course_action2 {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: end;
+  /* position: absolute;
+  bottom: 0;
+  right: 0; */
+  /* padding-top: 24px; */
+}
 
 .ic_start_button {
   background-color: var(--primary-color);
@@ -223,7 +260,7 @@
   font-weight: 500;
   font-size: 15px;
   text-transform: uppercase;
-  padding: 8px 12px;
+  padding: 7px 12px;
   background: #5c81f7;
   border-radius: 8px;
   cursor: pointer;
@@ -243,7 +280,7 @@
 
   .ic_start_button {
     font-size: 14px;
-    padding: 8px 12px;
+    padding: 6px 12px;
   }
 
   .ic_metadata_item {
@@ -344,7 +381,7 @@
 
   .ic_start_button {
     font-size: 13px;
-    padding: 6px 12px;
+    padding: 5px 12px;
   }
 }
 
@@ -400,5 +437,6 @@
 
   .ic_start_button {
     font-size: 12px;
+    padding: 4px 12px;
   }
 }
