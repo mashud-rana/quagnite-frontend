@@ -33,7 +33,7 @@ const mainMenu = [
   },
   {
     title: "Bootcamps",
-    url: "#",
+    url: "/student/bootcamps",
     icon: PiMonitorBold,
   },
   {

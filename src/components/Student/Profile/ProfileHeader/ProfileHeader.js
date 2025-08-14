@@ -15,7 +15,7 @@ const ProfileHeader = () => {
         <Link href="#" className={styles.ic_back_button} aria-label="Go back">
           <FaArrowLeft className={styles.ic_back_icon} />
         </Link>
-        <h1 className={styles.ic_page_title}>Profile Management</h1>
+        <h1 className="ic_text_36">Profile Management</h1>
       </div>
 
       {/* Tabs */}
