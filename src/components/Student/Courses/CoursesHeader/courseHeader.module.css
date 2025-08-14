@@ -43,6 +43,9 @@
   font-weight: 500;
   position: relative;
   transition: color 0.2s;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
 }
 
 .ic_tab_item:hover {
