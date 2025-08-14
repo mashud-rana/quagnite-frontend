@@ -1,34 +1,64 @@
 .ic_header_container {
   display: flex;
+  align-items: center;
   gap: 5%;
+  width: 100%;
+}
+
+.ic_tabs_wrapper {
+  width: 200px;
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ic_tabs_wrapper {
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+
+  -ms-overflow-style: none;
+
+  scrollbar-width: thin;
+}
+
+.ic_tabs_wrapper::-webkit-scrollbar {
+  height: 4px;
+}
+
+.ic_tabs_wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ic_tabs_wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
 }
 
 .ic_tabs {
-  width: 100%;
   display: flex;
   justify-content: space-between;
-  border-bottom: 2px solid #e2e2e2;
-
   flex-wrap: nowrap;
-  overflow-x: auto;
-  -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
-  scrollbar-width: none;
+  gap: 8px;
+  border-bottom: 2px solid #e2e2e2;
 }
 
 .ic_tabs::-webkit-scrollbar {
-  display: none; /* Hide scrollbar for Chrome/Safari */
+  display: none;
 }
 
 .ic_tab_item {
+  flex: 0 0 auto;
+  white-space: nowrap;
   padding: 12px 24px;
   color: #353535;
   text-decoration: none;
   font-weight: 500;
   position: relative;
+  cursor: pointer;
   transition: color 0.2s;
-
-  flex: 0 0 auto;
-  white-space: nowrap;
 }
 
 .ic_tab_item:hover {
@@ -50,6 +80,7 @@
 }
 
 .ic_btn {
+  flex-shrink: 0;
   background-color: var(--primary-color);
   padding: 6px 16px;
   border-radius: 8px;
@@ -59,13 +90,6 @@
   font-size: 15px;
 }
 
-@media (max-width: 991px) {
-  .ic_tab_item {
-    padding: 10px 15px;
-  }
-}
-
-/* Small screen: tighter spacing */
 @media (max-width: 575px) {
   .ic_tab_item {
     padding: 8px 12px;
