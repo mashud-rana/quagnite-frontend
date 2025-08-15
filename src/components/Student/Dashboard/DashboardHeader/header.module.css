@@ -116,6 +116,16 @@
   cursor: pointer;
 }
 
+/* Mobile dropdown search container */
+.mobileSearchContainer {
+  display: none;
+}
+
+.mobileSearchWrapper {
+  position: relative;
+  margin: 15px 20px 12px 20px;
+}
+
 @media (max-width: 1199px) {
   .searchInput {
     padding-top: 10px;
@@ -147,6 +157,9 @@
     width: 22px;
     height: 22px;
   }
+
+  /* Hide inline search on mobile, show search icon near favorites */
+
 }
 
 @media (max-width: 480px) {
@@ -187,5 +200,23 @@
     top: 50%;
     height: 14px;
     width: 14px;
+  }
+
+  .mobileSearchWrapper {
+    margin: 10px 10px 12px 10px;
+  }
+
+
+
+  .searchContainer {
+    display: none;
+  }
+
+  .mobileSearchIcon {
+    display: inline-flex;
+  }
+
+  .mobileSearchContainer {
+    display: block;
   }
 }
