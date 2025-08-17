@@ -468,6 +468,12 @@ h6 {
   gap: 24px;
 }
 
+.ic_layout_border {
+  border: 1px solid #e7e7e7;
+  padding: 16px;
+  border-radius: 8px;
+}
+
 /* Responsive Design */
 
 @media (max-width: 1650px) {
@@ -1128,7 +1134,6 @@ h6 {
   .ic_text_36 {
     line-height: 32px;
   }
-
 }
 
 @media (max-width: 480px) {

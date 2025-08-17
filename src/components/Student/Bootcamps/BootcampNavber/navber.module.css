@@ -6,7 +6,7 @@
 }
 
 .ic_tabs_wrapper {
-  width: 200px;
+  width: 130px;
   flex: 1;
   overflow-x: auto;
   overflow-y: hidden;
@@ -90,8 +90,53 @@
   font-size: 15px;
 }
 
+.ic_arrow {
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  font-size: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ic_arrow:hover {
+  background: #f3f3f3;
+}
+
+@media (max-width: 1399px) {
+  .ic_header_container {
+    gap: 15px;
+  }
+}
+
 @media (max-width: 575px) {
   .ic_tab_item {
     padding: 8px 12px;
+  }
+
+  .ic_header_container {
+    gap: 10px;
+  }
+
+  .ic_btn {
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+  }
+
+  .ic_arrow {
+    padding: 4px;
+    border-radius: 50%;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ic_tab_item {
+    padding: 8px 8px;
   }
 }

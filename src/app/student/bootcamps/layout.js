@@ -6,8 +6,10 @@ const BootcampLayout = ({ children }) => {
     <div>
       <BootcampHeading />
 
-      <BootcampNavber />
-      <div>{children}</div>
+      <div className="ic_layout_border">
+        <BootcampNavber />
+        <div>{children}</div>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,144 @@
+.overviewContainer {
+  border: 1px solid #e2e2e2;
+  padding: 16px;
+  margin-top: 16px;
+  border-radius: 8px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.subtitle {
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.topSection,
+.bottomSection {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.leftColumn {
+  display: flex;
+  border: 1px solid #e2e2e2;
+  padding: 15px;
+  border-radius: 8px;
+  gap: 36px;
+}
+
+.leftColumn2 {
+  border: 1px solid #e2e2e2;
+  padding: 15px;
+  border-radius: 8px;
+  gap: 36px;
+}
+
+.rightColumn {
+  border: 1px solid #e2e2e2;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 400;
+  color: #111827;
+  margin: 0 0 16px 0;
+}
+
+.ic_list_container {
+  display: flex;
+  gap: 36px;
+}
+
+.statsList {
+  display: flex;
+  flex-direction: column;
+}
+
+.statRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.statLabel {
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.featureLink {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.featureLink:hover {
+  text-decoration: underline;
+}
+
+.descriptionSection {
+  border: 1px solid #e2e2e2;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.descriptionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.descriptionParagraph {
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Learning Lists */
+.learningList {
+  display: flex;
+  flex-wrap: wrap;
+  /* flex-direction: column; */
+  gap: 20px;
+}
+
+.learningItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bulletPoint {
+  font-size: 14px;
+  color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+.learningText {
+  color: #374151;
+  text-wrap: nowrap;
+}
+
+/* Responsive Design */
+
+@media (max-width: 480px) {
+  .overviewContainer {
+    padding: 1rem;
+  }
+}
