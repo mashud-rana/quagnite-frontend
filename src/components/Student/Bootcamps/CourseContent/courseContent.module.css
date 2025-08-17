@@ -40,16 +40,18 @@
 }
 
 .ic_play_button {
+  border: none;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  background: none;
-  border: 1px solid #d1d5db;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  transition: all 0.2s;
+  /* width: 1.5rem;
+  height: 1.5rem; */
+  /* background: none; */
+  /* border: 1px solid #d1d5db; */
+  /* border-radius: 0.25rem; */
+  /* cursor: pointer; */
+  /* transition: all 0.2s; */
 }
 
 .ic_play_button:hover {
@@ -58,13 +60,16 @@
 }
 
 .ic_play_icon {
-  width: 0.75rem;
-  height: 0.75rem;
+  color: #1f2029;
+  font-size: 20px;
+  /* width: 0.75rem;
+  height: 0.75rem; */
 }
 
 .ic_module_title {
-  font-size: 0.875rem;
-  font-weight: 500;
+  /* color: #1f2029; */
+  /* font-size: 0.875rem; */
+  /* font-weight: 500; */
 }
 
 .ic_module_duration {
@@ -128,7 +133,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 1rem 0.75rem 3rem;
+  padding: 12px 0px 12px 28px;
+  /* padding: 0.75rem 1rem 0.75rem 3rem; */
   border-bottom: 1px solid #f1f5f9;
   /* background: #fafbfc; */
   /* position: relative; */
@@ -157,8 +163,8 @@
 }
 
 .ic_video_title {
-  font-size: 0.8rem;
-  color: #374151;
+  /* font-size: 15px;
+  color: #374151; */
 }
 
 .ic_video_duration {
