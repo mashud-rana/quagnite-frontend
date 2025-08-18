@@ -112,8 +112,8 @@ const Difference = () => {
           </CardAnimation>
         </div>
 
-        <div>
-          <section className={styles.ic_tab_container}>
+        <CardAnimation index={0} direction="up">
+          <div className={styles.ic_tab_container}>
             <div>
               <Tabs
                 defaultActiveKey="1"
@@ -122,8 +122,8 @@ const Difference = () => {
                 className="antdTabs"
               />
             </div>
-          </section>
-        </div>
+          </div>
+        </CardAnimation>
       </div>
     </div>
   );

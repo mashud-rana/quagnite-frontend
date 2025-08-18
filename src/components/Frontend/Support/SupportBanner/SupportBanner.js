@@ -1,13 +1,14 @@
 import React from "react";
 import styles from "./supportbanner.module.css";
-import bg from "@/assets/images/all/bg-gradient.png";
+// import bg from "@/assets/images/all/bg-gradient.png";
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 import Image from "next/image";
 import img from "@/assets/images/all/support-woman.png";
 import img2 from "@/assets/images/all/support-banner1.png";
 import img3 from "@/assets/images/all/hero2.png";
 import img4 from "@/assets/images/all/forums.png";
-import layer from "@/assets/images/all/layer.png";
+import bg from "@/assets/images/bg/bg4.png";
+import circle from "@/assets/images/full-circle.png";
 
 const SupportBanner = () => {
   return (
@@ -18,9 +19,11 @@ const SupportBanner = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
-      <Image className={styles.ic_layer_img} src={layer} alt="" />
+      <Image className={styles.ic_layer_img} src={circle} alt="" />
 
       <div className="container">
         <div className={styles.ic_hero_container}>

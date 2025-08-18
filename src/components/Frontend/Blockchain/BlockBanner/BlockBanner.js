@@ -4,10 +4,12 @@ import img2 from "@/assets/images/all/school-banner2.png";
 import img3 from "@/assets/images/all/school-banner3.png";
 import img4 from "@/assets/images/all/school-banner4.png";
 import img5 from "@/assets/images/all/logo.png";
-import bg from "@/assets/images/all/school-banner-bg.png";
+// import bg from "@/assets/images/all/school-banner-bg.png";
+import bg from "@/assets/images/bg/bg1.png";
 import styles from "./banner.module.css";
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 import Image from "next/image";
+import circle from "@/assets/images/full-circle.png";
 
 const BlockBanner = () => {
   return (
@@ -18,8 +20,17 @@ const BlockBanner = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      <Image
+        className={styles.ic_circle1}
+        src={circle}
+        height={1104}
+        width={1104}
+        alt=""
+      />
       <div className={styles.ic_wrapper}>
         <div className="container">
           <div>

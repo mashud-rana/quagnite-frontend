@@ -1,3 +1,7 @@
+.ic_wrapper {
+  padding-top: 100px;
+}
+
 .ic_hero_container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -5,8 +9,32 @@
   gap: 200px;
 }
 
+.ic_circle1 {
+  position: absolute;
+  mix-blend-mode: color-dodge;
+  left: -200px;
+  bottom: -150px;
+  animation: rotateCircle 80s linear infinite;
+}
+
+.ic_circle2 {
+  position: absolute;
+  right: -200px;
+  top: -150px;
+  animation: rotateCircle 80s linear infinite;
+}
+
+@keyframes rotateCircle {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .leftContent {
-  color: white;
+  color: var(--white);
   z-index: 2;
 }
 
@@ -89,6 +117,14 @@
 /* Responsive Design */
 
 @media (max-width: 1399px) {
+  .ic_wrapper {
+    padding-top: 50px;
+  }
+
+  .ic_circle2 {
+    mix-blend-mode: color-dodge;
+  }
+
   .mainImage {
     padding-top: 120px;
   }
@@ -151,6 +187,10 @@
 }
 
 @media (max-width: 1040px) {
+  .ic_wrapper {
+    padding-top: 0px;
+  }
+
   .ic_hero_container {
     gap: 100px;
   }
@@ -208,6 +248,12 @@
     top: 35%;
     right: 20%;
   }
+
+  .ic_circle1,
+  .ic_circle2 {
+    width: 550px;
+    height: auto;
+  }
 }
 
 @media (max-width: 767px) {
@@ -227,6 +273,12 @@
   .exploreButton {
     padding: 12px 20px;
     font-size: 14px;
+  }
+
+  .ic_circle1,
+  .ic_circle2 {
+    width: 500px;
+    height: auto;
   }
 }
 
@@ -278,7 +330,8 @@
 
   .positionedImage2 img {
     width: 120px;
-    height: 90px;
+    height: auto;
+    /* height: 90px; */
   }
 
   .positionedImage2 {

@@ -36,12 +36,22 @@
 .ic_layer_img {
   position: absolute;
   width: 60%;
-  height: 100%;
-  object-fit: contain;
+  height: auto;
   right: 0;
-  z-index: 0;
-  animation: fadeGlow 5s ease-in-out infinite;
+  top: 8%;
+  opacity: 0.5;
+  /* mix-blend-mode: color-dodge; */
+  animation: rotateCircle 80s linear infinite;
   filter: brightness(1.1) saturate(1.2);
+}
+
+@keyframes rotateCircle {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes fadeGlow {
@@ -280,12 +290,6 @@
     left: 5%;
     width: 180px;
     height: auto;
-  }
-
-  .ic_layer_img {
-    width: 100%;
-    height: 60%;
-    bottom: 0;
   }
 }
 

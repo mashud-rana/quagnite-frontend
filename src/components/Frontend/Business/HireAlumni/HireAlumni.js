@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./hireAlumni.module.css";
-import { FaShare } from "react-icons/fa";
 import Image from "next/image";
 import img from "@/assets/images/all/team.png";
 import img2 from "@/assets/images/all/share.png";

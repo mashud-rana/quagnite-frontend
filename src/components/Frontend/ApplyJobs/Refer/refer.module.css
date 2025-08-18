@@ -17,6 +17,7 @@
   left: 0;
   width: 400px;
   height: 480px;
+  object-fit: cover;
   z-index: -1;
 }
 .ic_refer_friend {

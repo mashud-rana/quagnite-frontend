@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./join.module.css";
-import img1 from "@/assets/images/all/join.png";
+import img1 from "@/assets/images/all/join2.png";
 import img2 from "@/assets/images/all/animation.png";
 import img3 from "@/assets/images/all/hire-line.png";
 import Image from "next/image";

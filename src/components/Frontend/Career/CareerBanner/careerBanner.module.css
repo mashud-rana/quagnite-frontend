@@ -5,6 +5,47 @@
   gap: 70px;
 }
 
+.ic_circle1 {
+  width: 60%;
+  height: auto;
+  position: absolute;
+  /* mix-blend-mode: color-dodge; */
+  right: 0;
+  opacity: 0.6;
+  top: 10%;
+  animation: rotateCircle 80s linear infinite;
+}
+
+.ic_file {
+  height: auto;
+  position: absolute;
+  right: 20%;
+  top: 10%;
+  opacity: 0.6;
+  animation: floatUpDown 5s ease-in-out infinite;
+}
+
+@keyframes floatUpDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px); /* upore jabe */
+  }
+  100% {
+    transform: translateY(0); /* abar niche asbe */
+  }
+}
+
+@keyframes rotateCircle {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .leftContent {
   color: white;
   z-index: 2;
@@ -57,6 +98,10 @@
 
   .heroDescription {
     margin: 25px 0 0 0;
+  }
+
+  .ic_file {
+    width: 60px;
   }
 }
 

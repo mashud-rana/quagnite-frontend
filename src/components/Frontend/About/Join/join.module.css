@@ -166,13 +166,14 @@
 
 .geometricDot1 {
   position: absolute;
-  top: 45%;
-  right: 3%;
+  bottom: 9%;
+  left: 41%;
+  transform: rotate(208.29deg) !important;
   width: 35px;
   height: 7px;
   background: linear-gradient(180deg, #ff7600 0%, #f69745 100%);
   border-radius: 11px;
-  transform: rotate(113.29deg);
+  /* transform: rotate(113.29deg); */
   animation: float 2.8s ease-in-out infinite;
 }
 
@@ -314,8 +315,8 @@
   }
 
   .geometricDot1 {
-    top: 60%;
-    right: 20%;
+    top: 40%;
+    left: 65%;
     width: 26px;
     height: 6px;
     background: linear-gradient(180deg, #ff7600 0%, #f69745 100%);

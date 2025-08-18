@@ -358,7 +358,7 @@ h6 {
 .ic_btn:hover {
   background-color: var(--primary-color);
   box-shadow: 0px 2px 20px #5c81f7;
-  transform: translateY(-2px);
+  /* transform: translateY(-2px); */
 }
 
 .ic_see_all_btn {
@@ -544,6 +544,10 @@ h6 {
     padding-bottom: 90px;
   }
 
+  .ic_section_space_top {
+    padding-top: 90px;
+  }
+
   .ic_section_space {
     padding: 90px 0;
   }
@@ -595,6 +599,12 @@ h6 {
   .ic_title_see_btn_container {
     margin-bottom: 34px;
   }
+
+  .ic_btn {
+    padding: 10px 22px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
 }
 
 @media (max-width: 1299px) {
@@ -644,6 +654,10 @@ h6 {
 
   .ic_section_space_bottom {
     padding-bottom: 80px;
+  }
+
+  .ic_section_space_top {
+    padding-top: 80px;
   }
 
   .ic_section_space {
@@ -860,6 +874,10 @@ h6 {
     padding-bottom: 70px;
   }
 
+  .ic_section_space_top {
+    padding-top: 70px;
+  }
+
   .ic_section_space {
     padding: 70px 0;
   }
@@ -1061,6 +1079,10 @@ h6 {
 
   .ic_section_space_bottom {
     padding-bottom: 60px;
+  }
+
+  .ic_section_space_top {
+    padding-top: 60px;
   }
 
   .ic_section_margin_top_80 {

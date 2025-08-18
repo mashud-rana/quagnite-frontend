@@ -63,14 +63,6 @@
 .logoImage {
   max-width: 100%;
   object-fit: contain;
-  filter: grayscale(100%);
-  opacity: 0.7;
-  transition: all 0.3s ease;
-}
-
-.logoCard:hover .logoImage {
-  filter: grayscale(0%);
-  opacity: 1;
 }
 
 /* Optional staggered delays for more natural effect */

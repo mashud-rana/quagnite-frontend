@@ -67,8 +67,8 @@ const Train = () => {
               <div className={styles.rightSection}>
                 <div className={styles.contentCard}>
                   <h6 className={styles.subtitle}>TRAIN YOUR EXISTING TEAM</h6>
-                  <h2 className={styles.title}>Train Your Workforce</h2>
-                  <p className={styles.description}>
+                  <h4 className="mb_16">Train Your Workforce</h4>
+                  <p className="mb-24">
                     Take the first step towards a brighter future.
                   </p>
                   <button className={styles.exploreButton}>EXPLORE</button>

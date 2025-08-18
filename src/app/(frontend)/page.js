@@ -20,7 +20,6 @@ export default function Home() {
       <Industries />
       <Difference />
       <Companys />
-
       <WhyQuagniteSection />
       {/* <TeachersSlider /> */}
       {/* <TestimonialSlider /> */}

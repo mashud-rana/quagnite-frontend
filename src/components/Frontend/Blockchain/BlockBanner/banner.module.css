@@ -21,7 +21,7 @@
 
 .ic_wrapper {
   position: relative;
-  padding-top: 70px;
+  padding-top: 120px;
 }
 
 .ic_hero_img {
@@ -97,6 +97,27 @@
   }
   100% {
     transform: translateY(0);
+  }
+}
+
+.ic_circle1 {
+  height: auto;
+  position: absolute;
+  width: 70%;
+  height: auto;
+  mix-blend-mode: color-dodge;
+  right: 0;
+  top: 20%;
+  /* bottom: -150px; */
+  animation: rotateCircle 80s linear infinite;
+}
+
+@keyframes rotateCircle {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 

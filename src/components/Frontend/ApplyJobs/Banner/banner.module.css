@@ -4,7 +4,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   padding: 220px 0 290px 0;
-  position: relative;
+  /* position: relative; */
   overflow: hidden;
   z-index: 1;
 }
@@ -20,16 +20,15 @@
   height: 100%;
   object-fit: contain;
 }
+
 .ic_banner_shape {
   position: absolute;
-  bottom: -200px;
-  right: -275px;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  z-index: -1;
+  /* bottom: -200px; */
+  right: 0px;
+  width: 60%;
+  height: auto;
   animation: rotate-slow 50s linear infinite;
-  opacity: 0.6;
+  opacity: 0.4;
 }
 @keyframes rotate-slow {
   from {
@@ -78,9 +77,6 @@
   .ic_banner {
     padding: 145px 0 220px;
   }
-  .ic_banner_shape {
-    right: -80px;
-  }
 }
 @media (max-width: 575.98px) {
   .ic_banner_right {
@@ -88,7 +84,6 @@
     height: 300px;
   }
   .ic_banner_shape {
-    bottom: -150px;
-    right: 0px;
+    bottom: -50px;
   }
 }

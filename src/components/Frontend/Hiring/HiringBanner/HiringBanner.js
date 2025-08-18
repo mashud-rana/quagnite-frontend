@@ -4,11 +4,14 @@ import React, { useEffect, useState } from "react";
 import styles from "./hiringBanner.module.css";
 import Image from "next/image";
 import img1 from "@/assets/images/all/hiring-banner.png";
-import bg from "@/assets/images/all/hiring-bg.png";
+// import bg from "@/assets/images/all/hiring-bg.png";
 import badgeImg from "@/assets/images/all/badge.png";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
+
+import bg from "@/assets/images/bg/bg2.png";
+import circle from "@/assets/images/full-circle.png";
 
 const HiringBanner = () => {
   const [progress, setProgress] = useState(0);
@@ -37,8 +40,17 @@ const HiringBanner = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      <Image
+        className={styles.ic_circle1}
+        src={circle}
+        height={944}
+        width={944}
+        alt=""
+      />
       <div className="container">
         <div className={styles.ic_hero_container}>
           {/* Left Content */}

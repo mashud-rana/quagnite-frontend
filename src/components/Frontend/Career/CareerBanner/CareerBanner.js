@@ -1,8 +1,11 @@
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 import Image from "next/image";
 import styles from "./careerBanner.module.css";
-import bg from "@/assets/images/all/career-bg.png";
+// import bg from "@/assets/images/all/career-bg.png";
+import bg from "@/assets/images/bg/bg3.png";
 import img from "@/assets/images/all/career-banner.png";
+import img2 from "@/assets/images/bg/file.png";
+import circle from "@/assets/images/full-circle.png";
 
 const CareerBanner = () => {
   return (
@@ -13,8 +16,26 @@ const CareerBanner = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      <Image
+        className={styles.ic_circle1}
+        src={circle}
+        height={944}
+        width={944}
+        alt=""
+      />
+
+      <Image
+        className={styles.ic_file}
+        src={img2}
+        height={100}
+        width={100}
+        alt=""
+      />
+
       <div className="container">
         <div className={styles.ic_hero_container}>
           {/* Left Content */}

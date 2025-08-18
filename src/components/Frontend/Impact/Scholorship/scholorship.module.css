@@ -227,7 +227,7 @@
 @media (max-width: 991px) {
   .ic_team_grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 60px 20px;
+    gap: 20px;
   }
 
   .ic_image_container {
@@ -272,7 +272,7 @@
 @media (max-width: 575px) {
   .ic_team_grid {
     grid-template-columns: 1fr;
-    gap: 80px;
+    gap: 20px;
   }
 
   .ic_team_card {
