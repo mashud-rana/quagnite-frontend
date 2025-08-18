@@ -170,9 +170,9 @@ const BootcampNavber = () => {
             Discussions
           </Link>
           <Link
-            href="/student/subscriptions"
+            href="/student/bootcamps/notes"
             className={`${styles.ic_tab_item} ${
-              pathname.startsWith("/student/subscriptions")
+              pathname.startsWith("/student/bootcamps/notes")
                 ? styles.ic_active
                 : ""
             }`}

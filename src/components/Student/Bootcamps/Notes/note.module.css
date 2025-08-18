@@ -1,0 +1,295 @@
+.notesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: white;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Rich Text Editor */
+.editorContainer {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background-color: #f9fafb;
+}
+
+.editorToolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background-color: #f3f4f6;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.toolbarButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  width: 2rem;
+  height: 2rem;
+  background: none;
+  border: none;
+  border-radius: 0.25rem;
+  color: #6b7280;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.toolbarButton:hover {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.toolbarSeparator {
+  width: 1px;
+  height: 1.5rem;
+  background-color: #d1d5db;
+  margin: 0 0.25rem;
+}
+
+.dropdownIcon {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.editorContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: white;
+  min-height: 300px;
+}
+
+.editorTextarea {
+  width: 100%;
+  min-height: 200px;
+  border: none;
+  outline: none;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #374151;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.editorTextarea::placeholder {
+  color: #9ca3af;
+}
+
+.embeddedImage {
+  display: flex;
+  justify-content: flex-start;
+  margin: 1rem 0;
+}
+
+.noteImage {
+  max-width: 300px;
+  height: auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.editorActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+}
+
+.cancelButton {
+  background: none;
+  border: 1px solid #d1d5db;
+  color: #6b7280;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancelButton:hover {
+  background-color: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.saveButton {
+  background-color: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.saveButton:hover {
+  background-color: #4f46e5;
+}
+
+/* Notes Section */
+.notesSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.notesTitle {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #111827;
+  margin: 0;
+}
+
+.notesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.noteCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  transition: box-shadow 0.2s;
+}
+
+.noteCard:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.noteHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.noteTitle {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #6366f1;
+  margin: 0;
+}
+
+.noteActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.noteActionButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  background-color: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: background-color 0.2s;
+}
+
+.noteActionButton:hover {
+  background-color: #4f46e5;
+}
+
+.noteContent {
+  flex: 1;
+}
+
+.notePreview {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #6b7280;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .notesContainer {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .editorToolbar {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .toolbarButton {
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: 0.75rem;
+  }
+
+  .editorActions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .cancelButton,
+  .saveButton {
+    width: 100%;
+  }
+
+  .notesGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .noteCard {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .notesContainer {
+    padding: 1rem;
+  }
+
+  .editorContent {
+    padding: 0.75rem;
+  }
+
+  .editorTextarea {
+    min-height: 150px;
+    font-size: 0.8125rem;
+  }
+
+  .noteImage {
+    max-width: 100%;
+  }
+
+  .noteHeader {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .noteActions {
+    align-self: flex-end;
+  }
+}
