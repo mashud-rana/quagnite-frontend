@@ -59,6 +59,7 @@
   position: relative;
   cursor: pointer;
   transition: color 0.2s;
+  font-size: 16px;
 }
 
 .ic_tab_item:hover {
@@ -116,6 +117,7 @@
 @media (max-width: 575px) {
   .ic_tab_item {
     padding: 8px 12px;
+    font-size: 15px;
   }
 
   .ic_header_container {
@@ -138,5 +140,15 @@
 @media (max-width: 480px) {
   .ic_tab_item {
     padding: 8px 8px;
+  }
+
+  .ic_header_container {
+    gap: 4px;
+  }
+
+  .ic_btn {
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 11px;
   }
 }

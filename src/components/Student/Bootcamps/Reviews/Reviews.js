@@ -66,7 +66,7 @@ const Reviews = () => {
         <div className={styles.overallRating}>
           <h4 className={styles.ratingScore}>4.96</h4>
           <div className={styles.ratingLabel}>Course Rating</div>
-          <div className={styles.reviewCount}>3,014 reviews</div>
+          <p>3,014 reviews</p>
         </div>
 
         <div className={styles.ratingBreakdown}>
@@ -88,9 +88,9 @@ const Reviews = () => {
       {/* Reviews Section */}
       <div className={styles.reviewsSection}>
         <div className={styles.reviewsHeader}>
-          <h3 className={styles.reviewsTitle}>Reviews</h3>
+          <p className={styles.reviewsTitle}>Reviews</p>
           <div className={styles.reviewsControls}>
-            <button className={styles.filterButton}>Filter ratings</button>
+            <p>Filter ratings</p>
             <button className={styles.recentButton}>
               RECENT REVIEWS
               <FaChevronDown className={styles.dropdownIcon} />
@@ -99,7 +99,7 @@ const Reviews = () => {
         </div>
 
         {/* Review Input */}
-        <div className={styles.reviewInput}>
+        {/* <div className={styles.reviewInput}>
           <Image
             src={img}
             width={50}
@@ -112,7 +112,7 @@ const Reviews = () => {
             placeholder="Type Your Reviews and Press Enter..."
             className={styles.reviewTextInput}
           />
-        </div>
+        </div> */}
 
         {/* Reviews List */}
         <div className={styles.reviewsList}>

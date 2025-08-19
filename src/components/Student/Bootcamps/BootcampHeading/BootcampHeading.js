@@ -1,10 +1,28 @@
-import React from "react";
-import { FaCalendarAlt, FaMapMarkerAlt, FaPlay } from "react-icons/fa";
+// "use client";
+
+// import React, { useRef, useState } from "react";
+import { FaCalendarAlt, FaMapMarkerAlt, FaPlay, FaPause } from "react-icons/fa";
 import styles from "./heading.module.css";
 import img from "@/assets/images/all/instractor.png";
+import img2 from "@/assets/images/all/poster.png";
 import Image from "next/image";
 
 const BootcampHeading = () => {
+  // const videoRef = useRef(null);
+  // const [isPlaying, setIsPlaying] = useState(false);
+
+  // const handleResume = () => {
+  //   if (videoRef.current) {
+  //     if (videoRef.current.paused) {
+  //       videoRef.current.play();
+  //       setIsPlaying(true);
+  //     } else {
+  //       videoRef.current.pause();
+  //       setIsPlaying(false);
+  //     }
+  //   }
+  // };
+
   return (
     <div>
       <div className={styles.ic_course_info}>
@@ -20,15 +38,24 @@ const BootcampHeading = () => {
         {/* Video Section */}
         <div className={styles.ic_video_section}>
           <div className={styles.ic_video_container}>
-            <img
-              src="/placeholder.svg?height=400&width=600"
-              alt="Course video thumbnail"
+            <video
+              // ref={videoRef}
               className={styles.ic_video_thumbnail}
-            />
-            <button className={styles.ic_resume_button}>
-              <FaPlay className={styles.ic_resume_icon} />
-              RESUME COURSE
-            </button>
+              controls
+              poster={img2.src}
+            >
+              <source src="/videos/coding.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+
+            {/* <button className={styles.ic_resume_button} onClick={handleResume}>
+              {isPlaying ? "PAUSE COURSE" : "RESUME COURSE"}
+              {isPlaying ? (
+                <FaPause className={styles.ic_resume_icon} />
+              ) : (
+                <FaPlay className={styles.ic_resume_icon} />
+              )}
+            </button> */}
           </div>
         </div>
 
@@ -47,21 +74,23 @@ const BootcampHeading = () => {
                 <h6 className={styles.ic_instructor_name_main}>
                   Leslie Alexander
                 </h6>
-                <p className={styles.ic_instructor_title}>
-                  Web Developer | Founder, Hex hybrids
-                </p>
-                <div className={styles.ic_instructor_meta}>
-                  <div className={styles.ic_meta_item}>
-                    <FaMapMarkerAlt className={styles.ic_meta_icon} />
-                    <span>London, UK</span>
+                <div className={styles.ic_text_content}>
+                  <p className={styles.ic_instructor_title}>
+                    Web Developer | Founder, Hex hybrids
+                  </p>
+                  <div className={styles.ic_instructor_meta}>
+                    <div className={styles.ic_meta_item}>
+                      <FaMapMarkerAlt className={styles.ic_meta_icon} />
+                      <span>London, UK</span>
+                    </div>
+                    <div className={styles.ic_meta_item}>
+                      <FaCalendarAlt className={styles.ic_meta_icon} />
+                      <span>Since April 1, 2022</span>
+                    </div>
                   </div>
-                  <div className={styles.ic_meta_item}>
-                    <FaCalendarAlt className={styles.ic_meta_icon} />
-                    <span>Since April 1, 2022</span>
+                  <div>
+                    <span>Level: Beginner</span>
                   </div>
-                </div>
-                <div className={styles.ic_level_badge}>
-                  <span>Level: Beginner</span>
                 </div>
               </div>
             </div>

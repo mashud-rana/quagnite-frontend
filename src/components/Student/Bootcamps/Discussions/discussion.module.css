@@ -1,0 +1,587 @@
+.discussionsContainer {
+  border: 1px solid #e2e2e2;
+  padding: 16px;
+  margin-top: 16px;
+  border-radius: 8px;
+}
+
+/* Top Input Area */
+.topInputContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid #e2e2e2;
+  /* padding: 1rem; */
+  /* background-color: #f3f4f6; */
+  /* border-radius: 0.5rem; */
+  position: relative;
+}
+
+.userAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.topInput {
+  flex: 1;
+  border: none;
+  background: none;
+  font-size: 0.875rem;
+  color: #6b7280;
+  outline: none;
+}
+
+.topInput::placeholder {
+  color: #9ca3af;
+}
+
+.sortButton {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.sortButton:hover {
+  background-color: #4f46e5;
+}
+
+.sortIcon {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+/* Discussions List */
+.discussionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.discussionCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background-color: #fafafa;
+}
+
+/* Discussion Header */
+.discussionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.authorInfo {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.authorAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.authorDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.authorName {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #111827;
+  margin: 0;
+}
+
+.discussionMeta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.starIcon {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: #f59e0b;
+}
+
+.publishTime {
+  color: #6b7280;
+}
+
+.discussionActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background-color: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.actionButton:hover {
+  background-color: #4f46e5;
+}
+
+/* Tags */
+.tagsContainer {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background-color: #e0e7ff;
+  color: #3730a3;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Discussion Content */
+.discussionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.discussionTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.discussionText {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #374151;
+  margin: 0;
+}
+
+.codeBlock {
+  background-color: #1f2937;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.codeContent {
+  color: #f9fafb;
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+/* Discussion Footer */
+.discussionFooter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.likeButton,
+.followButton,
+.replyButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 0.875rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.likeButton:hover,
+.followButton:hover,
+.replyButton:hover {
+  color: #374151;
+  background-color: #f3f4f6;
+}
+
+.footerIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Replies Section */
+.repliesSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.repliesHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.repliesCount {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.seeRepliesButton {
+  background: none;
+  border: none;
+  color: #6366f1;
+  font-size: 0.875rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.seeRepliesButton:hover {
+  color: #4f46e5;
+}
+
+.repliesList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-left: 2rem;
+}
+
+.replyCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 0.375rem;
+  border: 1px solid #e5e7eb;
+}
+
+.replyHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.replyAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.replyAuthorInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.replyAuthorName {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #111827;
+  margin: 0;
+}
+
+.replyMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.replyContent {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #374151;
+  margin: 0;
+}
+
+.replyActions {
+  display: flex;
+  gap: 1rem;
+}
+
+.voteButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: #6366f1;
+  font-size: 0.875rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s;
+}
+
+.voteButton:hover {
+  background-color: #eff6ff;
+}
+
+.voteIcon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+/* Rich Text Reply Editor */
+.replyEditor {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.replyInputContainer {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.replyUserAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.editorWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  background-color: white;
+}
+
+/* Jodit Editor Styling */
+.editorWrapper .jodit-workplace {
+  background-color: white !important;
+}
+
+.editorWrapper .jodit-toolbar {
+  background-color: #f9fafb !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  padding: 0.5rem 0.75rem !important;
+  min-height: auto !important;
+}
+
+.editorWrapper .jodit-toolbar-button {
+  background: none !important;
+  border: none !important;
+  border-radius: 0.25rem !important;
+  color: #6b7280 !important;
+  padding: 0.375rem !important;
+  margin: 0 0.125rem !important;
+  width: 1.75rem !important;
+  height: 1.75rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.editorWrapper .jodit-toolbar-button:hover {
+  background-color: #e5e7eb !important;
+  color: #374151 !important;
+}
+
+.editorWrapper .jodit-toolbar-button svg {
+  width: 0.875rem !important;
+  height: 0.875rem !important;
+}
+
+.editorWrapper .jodit-wysiwyg {
+  background-color: white !important;
+  padding: 0.75rem !important;
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+  color: #374151 !important;
+  min-height: 80px !important;
+  border: none !important;
+}
+
+.editorWrapper .jodit-placeholder {
+  color: #9ca3af !important;
+  font-style: normal !important;
+}
+
+.editorWrapper .jodit-status-bar {
+  display: none !important;
+}
+
+.editorActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background-color: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+}
+
+.cancelButton {
+  background: none;
+  border: 1px solid #d1d5db;
+  color: #6b7280;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancelButton:hover {
+  background-color: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.submitButton {
+  background-color: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submitButton:hover {
+  background-color: #4f46e5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .discussionsContainer {
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
+  .topInputContainer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .sortButton {
+    position: static;
+    transform: none;
+    align-self: flex-end;
+  }
+
+  .discussionHeader {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .discussionActions {
+    align-self: flex-end;
+  }
+
+  .discussionFooter {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .repliesList {
+    margin-left: 0;
+  }
+
+  .replyInputContainer {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .editorActions {
+    justify-content: stretch;
+  }
+
+  .cancelButton,
+  .submitButton {
+    flex: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .discussionsContainer {
+    padding: 1rem;
+  }
+
+  .discussionCard {
+    padding: 1rem;
+  }
+
+  .tagsContainer {
+    gap: 0.25rem;
+  }
+
+  .tag {
+    font-size: 0.6875rem;
+    padding: 0.125rem 0.5rem;
+  }
+
+  .editorWrapper .jodit-toolbar {
+    flex-wrap: wrap !important;
+  }
+
+  .editorWrapper .jodit-toolbar-button {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+  }
+}
