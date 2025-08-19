@@ -168,7 +168,7 @@
   position: relative;
   height: 1px;
   background-color: #7b7b7b;
-  margin-bottom: 40;
+  margin-bottom: 40px;
 }
 
 .topLineWrapper::before,
