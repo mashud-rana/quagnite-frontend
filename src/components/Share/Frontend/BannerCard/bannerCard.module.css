@@ -23,6 +23,25 @@
   transition: all 0.3s;
 }
 
+.ic_circle1 {
+  height: auto;
+  position: absolute;
+  mix-blend-mode: color-dodge;
+  width: 60%;
+  right: 0px;
+  top: 10%;
+  animation: rotateCircle 80s linear infinite;
+}
+
+@keyframes rotateCircle {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (max-width: 1399.98px) {
   .ic_banner_right {
     width: 500px;

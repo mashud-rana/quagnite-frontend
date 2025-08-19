@@ -1,6 +1,6 @@
 import React from "react";
 import Banner from "@/components/Share/Frontend/BannerCard/BannerCard";
-import bg from "@/assets/images/partnership/bg.png";
+// import bg from "@/assets/images/partnership/bg.png";
 import img from "@/assets/images/partnership/partner-right.png";
 import ApplyPartner from "@/components/Frontend/Partnership/ApplyPartner/ApplyPartner";
 import Impact from "@/components/Frontend/Partnership/Impact/Impact";
@@ -8,6 +8,9 @@ import Counter from "@/components/Frontend/Partnership/Counter/Counter";
 import Testimonial from "@/components/Share/Frontend/TestimonialCard/TestimonialCard";
 import rating1 from "@/assets/images/apply-scholarship/ratings1.svg";
 import rating2 from "@/assets/images/apply-scholarship/ratings2.svg";
+
+import bg from "@/assets/images/bg/bg5.png";
+import circle from "@/assets/images/full-circle.png";
 
 const testimonialData = [
   {
@@ -37,7 +40,8 @@ export default function page() {
   return (
     <>
       <Banner
-        bgImage={bg}
+        bg={bg}
+        circle={circle}
         rightImage={img}
         heading="Build your team, build your reach, build the future."
         paragraph={`Partnering with Quagnite lets you show your support to education for everyone, while also allowing you to make contact with highly skilled professionals that are motivated and inspired. Whether you’re looking for employees, consultants, or other opportunities, a partnership with Quagnite sets you up for success.`}

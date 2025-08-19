@@ -1,10 +1,13 @@
 "use client";
 import React from "react";
 import styles from "./govtment.module.css";
-import bg from "@/assets/images/all/govt-bg.png";
+// import bg from "@/assets/images/all/govt-bg.png";
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 import Image from "next/image";
 import img from "@/assets/images/all/govt-img.png";
+
+import bg from "@/assets/images/bg/bg6.png";
+import circle from "@/assets/images/full-circle.png";
 
 const GovtmentBanner = () => {
   return (
@@ -15,15 +18,17 @@ const GovtmentBanner = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
-      {/* <Particles
-        id="tsparticles"
-        init={particlesInit}
-        loaded={particlesLoaded}
-        options={particlesOptions}
-        className={styles.particlesCanvas}
-      /> */}
+      <Image
+        className={styles.ic_circle1}
+        src={circle}
+        height={944}
+        width={944}
+        alt=""
+      />
       <div className="container">
         <div className={styles.ic_hero_container}>
           {/* Left Content */}
