@@ -14,7 +14,7 @@
   /* padding: 1rem; */
   /* background-color: #f3f4f6; */
   /* border-radius: 0.5rem; */
-  position: relative;
+  /* position: relative; */
 }
 
 .userAvatar {
@@ -26,8 +26,8 @@
 }
 
 .topInput {
-  flex: 1;
-  border: none;
+  padding: 14px;
+  background-color: red;
   background: none;
   font-size: 0.875rem;
   color: #6b7280;
@@ -39,10 +39,10 @@
 }
 
 .sortButton {
-  position: absolute;
+  /* position: absolute; */
   right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
+  /* top: 50%; */
+  /* transform: translateY(-50%); */
   display: flex;
   align-items: center;
   gap: 0.5rem;
