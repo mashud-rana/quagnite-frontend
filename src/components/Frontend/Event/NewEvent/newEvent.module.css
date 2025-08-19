@@ -11,6 +11,20 @@
   pointer-events: none;
 }
 
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+    opacity: 0.6;
+    transform: rotate(-25deg) scale(1);
+  }
+  50% {
+    transform: translateY(-10px);
+    opacity: 1;
+    transform: rotate(-25deg) scale(1.1);
+  }
+}
+
 .orangeLine1 {
   position: absolute;
   top: 15%;
@@ -20,6 +34,7 @@
   border-radius: 16px;
   background-color: #ff6b35;
   transform: rotate(-30deg);
+  animation: float 3s ease-in-out infinite;
 }
 
 .orangeLine2 {
@@ -31,6 +46,7 @@
   border-radius: 16px;
   background-color: #ff6b35;
   transform: rotate(-30deg);
+  animation: float 3s ease-in-out infinite;
 }
 
 .purpleCircle1 {
@@ -41,6 +57,7 @@
   height: 12px;
   background-color: #6c5ce7;
   border-radius: 50%;
+  animation: float 2.2s ease-in-out infinite;
 }
 
 .purpleCircle2 {
@@ -51,6 +68,7 @@
   height: 8px;
   background-color: #6c5ce7;
   border-radius: 50%;
+  animation: float 3s ease-in-out infinite;
 }
 
 .contentWrapper {
