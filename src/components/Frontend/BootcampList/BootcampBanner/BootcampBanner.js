@@ -2,7 +2,9 @@ import React from "react";
 import styles from "./bootcampBanner.module.css";
 import CardAnimation from "@/components/Share/ClientComponent/CardAnimation";
 import Image from "next/image";
-import bg from "@/assets/images/all/bootcamp-banner-bg.png";
+// import bg from "@/assets/images/all/bootcamp-banner-bg.png";
+import bg from "@/assets/images/bg/bg2.png";
+import circle from "@/assets/images/full-circle.png";
 import img from "@/assets/images/all/bootcamp-banner.png";
 
 const BootcampBanner = () => {
@@ -14,8 +16,18 @@ const BootcampBanner = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      <Image
+        className={styles.ic_circle1}
+        src={circle}
+        height={944}
+        width={944}
+        alt=""
+      />
+
       <div className={styles.ic_wrapper}>
         <div className="container">
           <div>
