@@ -43,7 +43,7 @@ const mainMenu = [
   },
   {
     title: "Playground",
-    url: "#",
+    url: "/student/playground",
     icon: GrPlay,
   },
   {

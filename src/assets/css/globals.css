@@ -474,6 +474,45 @@ h6 {
   border-radius: 8px;
 }
 
+/* editor design modified  */
+
+.jodit-container:not(.jodit_inline) {
+  border: none !important;
+  border-radius: 12px !important;
+}
+
+.jodit-toolbar__box:not(:empty) {
+  background: #f1f1f1 !important;
+  padding: 10px 10px 0 10px;
+  /* border: none !important; */
+  border-radius: 12px 12px 0 0 !important;
+  border-bottom: none !important;
+}
+
+.jodit-wysiwyg {
+  background: #f1f1f1 !important;
+  /* border: none !important; */
+  padding: 10px 15px !important;
+  border-radius: 0 0 12px 12px !important;
+}
+
+.jodit-toolbar-button {
+  background-color: #f8f8fa;
+  margin: 6px !important;
+  border: 1px solid #dcdada !important;
+  /* background-color: #f7f7fa; */
+}
+
+.jodit-ui-separator {
+  border-right: 0px !important;
+  margin: 0px !important;
+}
+
+.jodit-toolbar-collection_mode_horizontal,
+.jodit-toolbar-editor-collection_mode_horizontal {
+  background-image: none !important;
+}
+
 /* Responsive Design */
 
 @media (max-width: 1650px) {
