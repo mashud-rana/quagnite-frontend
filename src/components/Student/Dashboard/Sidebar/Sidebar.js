@@ -66,7 +66,7 @@ const mainMenu = [
 const otherMenu = [
   {
     title: "Billings",
-    url: "#",
+    url: "/student/billings",
     icon: BiMoneyWithdraw,
   },
   {
