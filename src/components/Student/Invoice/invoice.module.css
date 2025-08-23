@@ -1,51 +1,39 @@
 .invoicesContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  overflow: hidden;
+  overflow-x: hidden;
+
 }
+
+
 
 /* Scrollable wrapper above pagination */
 .scrollWrapper {
+  /* width: 500px; */
   overflow-x: auto;
   border-radius: 0.5rem;
   border: 1px solid #f3f4f6;
   scroll-behavior: smooth;
-  margin-bottom: 1rem; /* space between table and pagination */
-}
-
-/* Custom scrollbar for webkit browsers */
-.scrollWrapper::-webkit-scrollbar {
-  height: 8px;
-}
-
-.scrollWrapper::-webkit-scrollbar-track {
-  background: #f9fafb;
-  border-radius: 4px;
-}
-
-.scrollWrapper::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-  border-radius: 4px;
-}
-
-.scrollWrapper::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
-}
-
-/* Firefox scrollbar */
-.scrollWrapper {
+  margin-bottom: 1rem;
   scrollbar-width: thin;
-  scrollbar-color: #d1d5db #f9fafb;
+  scrollbar-color: #d1d5db #f9fafb; 
 }
+
+
 
 /* Table */
 .tableContainer {
-  min-width: 600px;
+  width: 900px;
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  border: 1px solid #f3f4f6;
+  scroll-behavior: smooth;
+  margin-bottom: 1rem;
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db #f9fafb; 
 }
 
 .invoicesTable {
   width: 100%;
-  min-width: 600px;
   border-collapse: collapse;
   background-color: white;
 }
@@ -198,17 +186,4 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
-  .scrollWrapper {
-    box-shadow: inset -10px 0 10px -10px rgba(0, 0, 0, 0.1);
-  }
-  .tableContainer {
-    min-width: 650px;
-  }
-}
 
-@media (max-width: 480px) {
-  .tableContainer {
-    min-width: 600px;
-  }
-}

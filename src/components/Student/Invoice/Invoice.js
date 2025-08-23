@@ -21,6 +21,8 @@ const Invoice = () => {
       title: "Personal membership",
       amount: 200,
       invoiceNo: "s76ad8axasd",
+      ihh: "z67nm45opq1",
+      ih: "z67nm45opq1",
     },
     {
       id: "2",
@@ -28,6 +30,8 @@ const Invoice = () => {
       title: "Premium membership",
       amount: 350,
       invoiceNo: "b45r89qwzxc",
+      ihh: "z67nm45opq1",
+      ih: "z67nm45opq1",
     },
     {
       id: "3",
@@ -35,6 +39,8 @@ const Invoice = () => {
       title: "Business plan",
       amount: 500,
       invoiceNo: "m12y67hjklp",
+      ihh: "z67nm45opq1",
+      ih: "z67nm45opq1",
     },
     {
       id: "4",
@@ -42,6 +48,8 @@ const Invoice = () => {
       title: "Personal membership",
       amount: 200,
       invoiceNo: "q89we34rtzv",
+      ihh: "z67nm45opq1",
+      ih: "z67nm45opq1",
     },
     {
       id: "5",
@@ -49,6 +57,8 @@ const Invoice = () => {
       title: "Enterprise plan",
       amount: 1000,
       invoiceNo: "z67nm45opq1",
+      ihh: "z67nm45opq1",
+      ih: "z67nm45opq1",
     },
   ];
 
@@ -65,6 +75,10 @@ const Invoice = () => {
                 <th className={styles.headerCell}>Amount</th>
                 <th className={styles.headerCell}>Invoice No.</th>
                 <th className={styles.headerCell}>Action</th>
+                <th className={styles.headerCell}>Acthjhjhjh</th>
+                <th className={styles.headerCell}>Acthjhjhjh</th>
+                <th className={styles.headerCell}>Acthjhjhjh</th>
+                <th className={styles.headerCell}>Acthjhjhjh</th>
               </tr>
             </thead>
             <tbody>
@@ -90,6 +104,10 @@ const Invoice = () => {
                       </button>
                     </div>
                   </td>
+                  <td className={styles.tableCell}>{invoice.ihh}</td>
+                  <td className={styles.tableCell}>{invoice.ih}</td>
+                  <td className={styles.tableCell}>{invoice.ih}</td>
+                  <td className={styles.tableCell}>{invoice.ih}</td>
                 </tr>
               ))}
             </tbody>
