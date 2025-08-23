@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FaBars, FaRegQuestionCircle } from "react-icons/fa";
 import { LuGraduationCap } from "react-icons/lu";
 import { PiMonitorBold, PiCirclesThreeBold } from "react-icons/pi";
@@ -24,7 +25,6 @@ const mainMenu = [
     title: "Explore",
     url: "/student",
     icon: GiFeather,
-    isActive: true,
   },
   {
     title: "Courses",
@@ -38,7 +38,7 @@ const mainMenu = [
   },
   {
     title: "Exams",
-    url: "#",
+    url: "/student/exams",
     icon: PiCirclesThreeBold,
   },
   {
@@ -48,17 +48,17 @@ const mainMenu = [
   },
   {
     title: "E-book",
-    url: "#",
+    url: "/student/ebook",
     icon: BiBookContent,
   },
   {
     title: "Academe",
-    url: "#",
+    url: "/student/academe",
     icon: RiGraduationCapLine,
   },
   {
     title: "Vault",
-    url: "#",
+    url: "/student/vault",
     icon: MdLockOutline,
   },
 ];
@@ -71,7 +71,7 @@ const otherMenu = [
   },
   {
     title: "Support",
-    url: "#",
+    url: "/student/support",
     icon: FaRegQuestionCircle,
   },
 ];
@@ -79,6 +79,18 @@ const otherMenu = [
 const Sidebar = ({ isMobileOpen = false, onClose }) => {
   const [state, setState] = useState("expanded");
   const [isMobile, setIsMobile] = useState(false);
+  const pathname = usePathname();
+
+  // Function to check if a menu item is active
+  const isMenuActive = (menuUrl) => {
+    // For the main dashboard page - only active when exactly on /student
+    if (menuUrl === "/student") {
+      return pathname === "/student";
+    }
+    
+    // For other pages, check if the current path starts with the menu URL
+    return pathname.startsWith(menuUrl);
+  };
 
   const toggleSidebar = () => {
     if (isMobile) return;
@@ -154,7 +166,7 @@ const Sidebar = ({ isMobileOpen = false, onClose }) => {
                   <Link
                     href={item.url}
                     className={`${styles.menuLink} ${
-                      item.isActive ? styles.active : ""
+                      isMenuActive(item.url) ? styles.active : ""
                     } ${isExpanded ? "g-15" : ""}`}
                     title={!isExpandedEffective ? item.title : undefined}
                     onClick={handleLinkClick}
@@ -189,7 +201,9 @@ const Sidebar = ({ isMobileOpen = false, onClose }) => {
               <li key={item.title} className={styles.menuItem}>
                 <Link
                   href={item.url}
-                  className={styles.menuLink}
+                  className={`${styles.menuLink} ${
+                    isMenuActive(item.url) ? styles.active : ""
+                  }`}
                   title={!isExpandedEffective ? item.title : undefined}
                   onClick={handleLinkClick}
                 >

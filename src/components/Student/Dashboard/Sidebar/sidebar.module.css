@@ -118,13 +118,20 @@
   transition: background-color 0.2s;
 }
 
+.expanded .menuLink {
+  gap: 12px;
+}
+
 .menuLink:hover {
   background-color: #2a2a2a;
 }
 
 .menuLink.active {
-  background: rgba(92, 129, 247, 0.2);
+  background: rgba(92, 129, 247, 0.3);
+
 }
+
+
 
 .menuIcon {
   width: 20px;
