@@ -1,0 +1,758 @@
+.invoicesContainer {
+  width: 100%;
+  max-width: 100%;
+  padding: 1rem;
+}
+
+/* Table Header */
+.tableHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.tableTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.filterButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  color: #374151;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filterButton:hover {
+  background-color: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.filterIcon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+/* Filters Section */
+.filtersSection {
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.filterRow {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filterInput,
+.filterSelect {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  min-width: 200px;
+}
+
+.applyFiltersButton {
+  padding: 0.5rem 1rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.applyFiltersButton:hover {
+  background-color: #2563eb;
+}
+
+/* Table Wrapper */
+.tableWrapper {
+  width: 100%;
+}
+
+/* Desktop Table - Hidden on mobile */
+.desktopTable {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  border: 1px solid #f3f4f6;
+  margin-bottom: 1rem;
+  background-color: white;
+}
+
+.desktopTable::-webkit-scrollbar {
+  height: 8px;
+}
+
+.desktopTable::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+.desktopTable::-webkit-scrollbar-track {
+  background: #f9fafb;
+}
+
+.invoicesTable {
+  width: 100%;
+  min-width: 800px;
+  border-collapse: collapse;
+  background-color: white;
+}
+
+.tableHeaderRow {
+  background-color: #f9fafb;
+}
+
+.headerCell {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+  min-width: 120px;
+}
+
+.tableRow {
+  border-bottom: 1px solid #f3f4f6;
+  transition: background-color 0.2s;
+}
+
+.tableRow:hover {
+  background-color: #f9fafb;
+}
+
+.tableCell {
+  padding: 1.25rem 1.5rem;
+  font-size: 0.875rem;
+  color: #111827;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* Status Badges */
+.statusBadge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.statusPaid {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.statusPending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.statusCancelled {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.statusDefault {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+/* Action Buttons */
+.actionButtons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid #d1d5db;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.actionButton:hover {
+  background-color: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.actionIcon {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: #6b7280;
+}
+
+/* Mobile Cards - Hidden on desktop */
+.mobileCards {
+  display: none;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.invoiceCard {
+  background-color: white;
+  border: 1px solid #f3f4f6;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.cardTitle {
+  font-weight: 600;
+  color: #111827;
+  font-size: 1rem;
+}
+
+.cardContent {
+  margin-bottom: 1rem;
+}
+
+.cardRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f9fafb;
+}
+
+.cardRow:last-child {
+  border-bottom: none;
+}
+
+.cardLabel {
+  font-weight: 500;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.cardValue {
+  color: #111827;
+  font-size: 0.875rem;
+}
+
+.cardActions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.cardActionButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  color: #374151;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex: 1;
+  min-width: 120px;
+  justify-content: center;
+}
+
+.cardActionButton:hover {
+  background-color: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.navButton:hover:not(:disabled) {
+  background-color: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.navButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.navIcon {
+  width: 0.75rem;
+  height: 0.75rem;
+  color: #6b7280;
+}
+
+.pageNumbers {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pageButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  background-color: white;
+  font-size: 0.875rem;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.pageButton:hover {
+  background-color: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.activePage {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+  color: white;
+}
+
+.paginationInfo {
+  margin-left: 0.5rem;
+}
+
+.paginationText {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .invoicesContainer {
+    padding: 0.75rem;
+  }
+  
+  .tableTitle {
+    font-size: 1.25rem;
+  }
+  
+  .headerCell {
+    padding: 0.75rem 1rem;
+    min-width: 100px;
+  }
+  
+  .tableCell {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .invoicesContainer {
+    padding: 0.5rem;
+  }
+  
+  .tableHeader {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  
+  .filterButton {
+    align-self: flex-start;
+  }
+  
+  .filterRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filterInput,
+  .filterSelect {
+    min-width: auto;
+    width: 100%;
+  }
+  
+  /* Hide desktop table on mobile */
+  .desktopTable {
+    display: none;
+  }
+  
+  /* Show mobile cards on mobile */
+  .mobileCards {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .pagination {
+    gap: 0.5rem;
+  }
+  
+  .pageNumbers {
+    gap: 0.25rem;
+  }
+  
+  .pageButton {
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: 0.75rem;
+  }
+  
+  .navButton {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .invoicesContainer {
+    padding: 0.25rem;
+  }
+  
+  .tableTitle {
+    font-size: 1.125rem;
+  }
+  
+  .invoiceCard {
+    padding: 0.75rem;
+  }
+  
+  .cardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .cardActions {
+    flex-direction: column;
+  }
+  
+  .cardActionButton {
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .pagination {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .paginationInfo {
+    margin-left: 0;
+  }
+}
+
+/* Responsive Invoice Table Styles */
+.invoicesContainer {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 576px) {
+  .ant-table {
+    font-size: 12px;
+  }
+  
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td {
+    padding: 8px 4px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ant-table {
+    font-size: 14px;
+  }
+  
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td {
+    padding: 12px 8px;
+  }
+}
+
+/* Mobile card styles */
+.mobileCard {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.mobileCardHeader {
+  background: #f8f9fa;
+  padding: 16px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.mobileCardContent {
+  padding: 16px;
+}
+
+.mobileCardRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f1f3f4;
+}
+
+.mobileCardRow:last-child {
+  border-bottom: none;
+}
+
+.mobileCardLabel {
+  font-weight: 500;
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.mobileCardValue {
+  color: #212529;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.mobileCardActions {
+  padding: 16px;
+  background: #f8f9fa;
+  display: flex;
+  gap: 8px;
+}
+
+/* Filter section responsive */
+.filterSection {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive table wrapper */
+.tableWrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom scrollbar */
+.tableWrapper::-webkit-scrollbar {
+  height: 6px;
+}
+
+.tableWrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Status tag colors */
+.statusPaid {
+  background-color: #d4edda;
+  color: #155724;
+  border-color: #c3e6cb;
+}
+
+.statusPending {
+  background-color: #fff3cd;
+  color: #856404;
+  border-color: #ffeaa7;
+}
+
+.statusCancelled {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-color: #f5c6cb;
+}
+
+/* Responsive pagination */
+@media (max-width: 576px) {
+  .ant-pagination {
+    text-align: center;
+  }
+  
+  .ant-pagination-item,
+  .ant-pagination-prev,
+  .ant-pagination-next {
+    margin: 0 2px;
+  }
+}
+
+/* Utility classes for responsive design */
+.hidden-xs {
+  display: none;
+}
+
+@media (min-width: 576px) {
+  .hidden-xs {
+    display: block;
+  }
+}
+
+.hidden-sm {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hidden-sm {
+    display: block;
+  }
+}
+
+.hidden-md {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .hidden-md {
+    display: block;
+  }
+}
+
+.hidden-lg {
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  .hidden-lg {
+    display: block;
+  }
+}
+
+/* Responsive text sizes */
+.text-xs {
+  font-size: 12px;
+}
+
+.text-sm {
+  font-size: 14px;
+}
+
+.text-base {
+  font-size: 16px;
+}
+
+.text-lg {
+  font-size: 18px;
+}
+
+.text-xl {
+  font-size: 20px;
+}
+
+@media (max-width: 576px) {
+  .text-xs {
+    font-size: 10px;
+  }
+  
+  .text-sm {
+    font-size: 12px;
+  }
+  
+  .text-base {
+    font-size: 14px;
+  }
+  
+  .text-lg {
+    font-size: 16px;
+  }
+  
+  .text-xl {
+    font-size: 18px;
+  }
+}
+
+/* Responsive spacing */
+.p-1 { padding: 4px; }
+.p-2 { padding: 8px; }
+.p-3 { padding: 12px; }
+.p-4 { padding: 16px; }
+.p-5 { padding: 20px; }
+
+.m-1 { margin: 4px; }
+.m-2 { margin: 8px; }
+.m-3 { margin: 12px; }
+.m-4 { margin: 16px; }
+.m-5 { margin: 20px; }
+
+@media (max-width: 576px) {
+  .p-1 { padding: 2px; }
+  .p-2 { padding: 4px; }
+  .p-3 { padding: 8px; }
+  .p-4 { padding: 12px; }
+  .p-5 { padding: 16px; }
+  
+  .m-1 { margin: 2px; }
+  .m-2 { margin: 4px; }
+  .m-3 { margin: 8px; }
+  .m-4 { margin: 12px; }
+  .m-5 { margin: 16px; }
+}

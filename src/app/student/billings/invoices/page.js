@@ -1,4 +1,4 @@
-import Invoice from "@/components/Student/Invoice/Invoice";
+import Invoice from "@/components/Student/Billings/Invoice/Invoice";
 import React from "react";
 
 const InvoicesPage = () => {
