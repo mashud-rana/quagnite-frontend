@@ -450,6 +450,7 @@ h6 {
 }
 
 .content {
+  width: 100%;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -495,7 +496,20 @@ h6 {
   border-radius: 8px;
 }
 
-/* editor design modified  */
+/* table ...........................................  */
+.ant-table-pagination-right {
+  justify-content: start !important;
+}
+.ant-table-content td {
+  white-space: nowrap;
+  border-inline-end: none !important;
+}
+
+.ant-table-content {
+  font-size: 16px;
+}
+
+/* editor design modified...........................  */
 
 .jodit-container:not(.jodit_inline) {
   border: none !important;
@@ -1032,6 +1046,10 @@ h6 {
     height: 100%;
     gap: 16px;
   }
+
+  .ant-table-content {
+    font-size: 15px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -1225,6 +1243,10 @@ h6 {
   .ic_common_primary_btn {
     font-size: 12px;
     padding: 3px 14px;
+  }
+
+  .ant-table-content {
+    font-size: 14px;
   }
 }
 

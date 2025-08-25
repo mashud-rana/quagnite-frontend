@@ -1,24 +1,29 @@
 "use client";
 
 import React, { useState } from "react";
-import { Table, Button, Space } from "antd";
-import styles from "./invoice.module.css";
+import { Table, Space } from "antd";
+import styles from "./Purchase.module.css";
 import { GoEye } from "react-icons/go";
 import { MdOutlineDownload } from "react-icons/md";
 
-const InvoiceTable = () => {
+const Purchase = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const columns = [
     {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
+      title: "Invoice ID",
+      dataIndex: "invoiceId",
+      key: "invoiceId",
     },
     {
       title: "Title / Plan",
       dataIndex: "title",
       key: "title",
+    },
+    {
+      title: "Date",
+      dataIndex: "date",
+      key: "date",
     },
     {
       title: "Amount",
@@ -27,9 +32,23 @@ const InvoiceTable = () => {
       render: (text) => `$${text}`,
     },
     {
-      title: "Invoice No",
-      dataIndex: "invoiceNo",
-      key: "invoiceNo",
+      title: "Payment Method",
+      dataIndex: "paymentMethod",
+      key: "paymentMethod",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: (status) => (
+        <span
+          className={
+            status === "Paid" ? styles.ic_status_paid : styles.ic_status_pending
+          }
+        >
+          {status}
+        </span>
+      ),
     },
     {
       title: "Action",
@@ -50,31 +69,39 @@ const InvoiceTable = () => {
   const data = [
     {
       key: "1",
-      date: "2025-08-01",
+      invoiceId: "INV-1001",
       title: "Personal Membership",
+      date: "2025-08-01",
       amount: 200,
-      invoiceNo: "INV-1001",
+      paymentMethod: "Credit Card",
+      status: "Paid",
     },
     {
       key: "2",
-      date: "2025-08-05",
+      invoiceId: "INV-1002",
       title: "Premium Package",
+      date: "2025-08-05",
       amount: 350,
-      invoiceNo: "INV-1002",
+      paymentMethod: "PayPal",
+      status: "Pending",
     },
     {
       key: "3",
-      date: "2025-08-10",
+      invoiceId: "INV-1003",
       title: "Basic Subscription",
+      date: "2025-08-10",
       amount: 100,
-      invoiceNo: "INV-1003",
+      paymentMethod: "Credit Card",
+      status: "Paid",
     },
     {
       key: "4",
-      date: "2025-08-12",
+      invoiceId: "INV-1004",
       title: "Gold Package",
+      date: "2025-08-12",
       amount: 500,
-      invoiceNo: "INV-1004",
+      paymentMethod: "Bank Transfer",
+      status: "Paid",
     },
   ];
 
@@ -90,10 +117,10 @@ const InvoiceTable = () => {
           total: data.length,
           onChange: (page) => setCurrentPage(page),
         }}
-        // scroll={{ x: 900 }}
+        scroll={{ x: 1000 }} // responsive horizontal scroll
       />
     </div>
   );
 };
 
-export default InvoiceTable;
+export default Purchase;

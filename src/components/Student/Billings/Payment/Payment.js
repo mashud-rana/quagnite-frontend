@@ -5,6 +5,9 @@ import styles from "./payment.module.css";
 import img from "@/assets/images/all/american.png";
 import img2 from "@/assets/images/all/mastercard.png";
 import img3 from "@/assets/images/all/discover.png";
+import paypal from "@/assets/images/all/paypal.png";
+import pay from "@/assets/images/all/pay.png";
+import stripe from "@/assets/images/all/stripe.png";
 import Image from "next/image";
 
 const Payment = () => {
@@ -22,18 +25,34 @@ const Payment = () => {
       img: img3,
     },
   ];
+
+  const paymentMethods = [
+    {
+      id: 1,
+      img: paypal,
+      label: "Pay Using PayPal Payment Services",
+    },
+    {
+      id: 2,
+      img: pay,
+      label: "Pay Using Pay Service",
+    },
+    {
+      id: 3,
+      img: stripe,
+      label: "Pay Using Stripe Payment Services",
+    },
+  ];
+
   return (
     <div className={styles.paymentMethodsContainer}>
       {/* Header */}
       <div className={styles.header}>
         <div className={styles.headerLeft}>
-          <h2 className={styles.title}>Credit card</h2>
+          <h6 className={styles.title}>Credit card</h6>
           <span className={styles.subtitle}>Current Payment Method</span>
         </div>
-        <button className={styles.addCardButton}>
-          <FaPlus className={styles.addIcon} />
-          ADD NEW CARD
-        </button>
+        <button className="ic_common_primary_btn">ADD NEW CARD</button>
       </div>
 
       {/* Credit Cards (Static, no logic) */}
@@ -66,51 +85,42 @@ const Payment = () => {
       </div>
 
       {/* Available Payment Methods (Static) */}
-      <div className={styles.availableMethodsSection}>
-        <h3 className={styles.sectionTitle}>Available Payment Methods</h3>
+      <div>
+        <h6 className={styles.title}>Available Payment Methods</h6>
+
         <div className={styles.methodsList}>
-          {/* PayPal */}
-          <div className={styles.paymentMethod}>
-            <div className={styles.methodIcon}>
-              <div className={`${styles.methodLogo} ${styles.paypal}`}>
-                PayPal
+          {paymentMethods.map((method) => (
+            <div key={method.id} className={styles.paymentMethod}>
+              <div className={styles.ic_payment_img_container}>
+                <Image src={method.img} alt={method.label} />
               </div>
+              <span>{method.label}</span>
             </div>
-            <div className={styles.methodDetails}>
-              <span className={styles.methodDescription}>
-                Pay Using PayPal Payment Services
-              </span>
-            </div>
-          </div>
-
-          {/* Apple Pay */}
-          <div className={styles.paymentMethod}>
-            <div className={styles.methodIcon}>
-              <div className={`${styles.methodLogo} ${styles.applepay}`}>
-                Pay
-              </div>
-            </div>
-            <div className={styles.methodDetails}>
-              <span className={styles.methodDescription}>
-                Pay Using Apple pay Payment Services
-              </span>
-            </div>
-          </div>
-
-          {/* Stripe */}
-          <div className={styles.paymentMethod}>
-            <div className={styles.methodIcon}>
-              <div className={`${styles.methodLogo} ${styles.stripe}`}>
-                Stripe
-              </div>
-            </div>
-            <div className={styles.methodDetails}>
-              <span className={styles.methodDescription}>
-                Pay Using Stripe Payment Services
-              </span>
-            </div>
-          </div>
+          ))}
         </div>
+
+        {/* <div className={styles.methodsList}>
+          <div className={styles.paymentMethod}>
+            <div className={styles.ic_payment_img_container}>
+              <Image src={paypal} alt="" />
+            </div>
+            <span>Pay Using PayPal Payment Services</span>
+          </div>
+
+          <div className={styles.paymentMethod}>
+            <div className={styles.ic_payment_img_container}>
+              <Image src={pay} alt="" />
+            </div>
+            <span>Pay Using PayPal Payment Services</span>
+          </div>
+
+          <div className={styles.paymentMethod}>
+            <div className={styles.ic_payment_img_container}>
+              <Image src={stripe} alt="" />
+            </div>
+            <span>Pay Using PayPal Payment Services</span>
+          </div>
+        </div> */}
       </div>
     </div>
   );

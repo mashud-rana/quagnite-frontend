@@ -1,67 +1,39 @@
 .paymentMethodsContainer {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 24px;
 }
 
 /* Header */
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 1rem;
+  align-items: center;
+  /* margin-bottom: 1rem; */
+}
+
+.title {
+  text-transform: capitalize;
+  color: #353535;
 }
 
 .headerLeft {
   display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.title {
-  font-size: 1.5rem;
-  font-weight: 400;
-  color: #111827;
-  margin: 0;
+  align-items: center;
+  /* flex-direction: column; */
+  gap: 16px;
 }
 
 .subtitle {
-  font-size: 0.875rem;
-  color: #6366f1;
-  background-color: #e0e7ff;
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
-  width: fit-content;
-}
-
-.addCardButton {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: #6366f1;
-  color: white;
-  border: none;
-  border-radius: 0.375rem;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  letter-spacing: 0.025em;
-}
-
-.addCardButton:hover {
-  background-color: #4f46e5;
-}
-
-.addIcon {
-  width: 0.875rem;
-  height: 0.875rem;
+  font-size: 14px;
+  background-color: #c2ddff;
+  padding: 2px 12px;
+  border-radius: 8px;
 }
 
 /* Credit Cards Section */
 .creditCardsSection {
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
 }
 
 .cardsGrid {
@@ -119,7 +91,7 @@
 }
 
 .cardValue {
-    font-size: 15px;
+  font-size: 15px;
   color: #111827;
 }
 
@@ -129,7 +101,7 @@
 
 /* Available Payment Methods */
 .availableMethodsSection {
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
 }
 
 .sectionTitle {
@@ -140,62 +112,46 @@
 }
 
 .methodsList {
+  margin-top: 24px;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  /* gap: 16px; */
+}
+
+.ic_payment_img_container {
+  width: 140px;
+  border: 1px solid #e9e7e7;
+  height: 56px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  /* padding: 17px 25px; */
+  border-radius: 12px;
+}
+
+.ic_payment_img {
+  height: auto;
+  object-fit: cover;
 }
 
 .paymentMethod {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background-color: #f9fafb;
-  border-radius: 0.5rem;
-  border: 1px solid #f3f4f6;
-  transition: background-color 0.2s;
+  gap: 24px;
+  padding: 16px 0;
 }
 
-.paymentMethod:hover {
-  background-color: #f3f4f6;
+.paymentMethod:first-child {
+  border-top: 1px solid #e9e7e7;
 }
 
-.methodIcon {
-  flex-shrink: 0;
+.paymentMethod:nth-child(2) {
+  border-top: 1px solid #e9e7e7;
+  border-bottom: 1px solid #e9e7e7;
 }
 
-.methodLogo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 3rem;
-  height: 2rem;
-  border-radius: 0.375rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: white;
-}
-
-.methodLogo.paypal {
-  background-color: #0070ba;
-}
-
-.methodLogo.applepay {
-  background-color: #000000;
-  font-size: 1rem;
-}
-
-.methodLogo.stripe {
-  background-color: #635bff;
-}
-
-.methodDetails {
-  flex: 1;
-}
-
-.methodDescription {
-  font-size: 0.875rem;
-  color: #374151;
+.paymentMethod:last-child {
+  border-bottom: 1px solid #e9e7e7;
 }
 
 /* Responsive Design */
@@ -230,35 +186,41 @@
     /* gap: 12px; */
   }
 
-.cardsGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  .cardsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
 }
-}
-
-
 
 @media (max-width: 991px) {
-  /* .cardHeader {
-    height: 60px;
-    padding: 10px;
-  } */
-
   .ic_img {
     width: 60%;
   }
 
-  .creditCard {
-    /* grid-template-columns: repeat(1, 1fr); */
-    /* gap: 12px; */
+  .cardsGrid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 12px;
   }
 
-.cardsGrid {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 12px;
-}
+  .subtitle {
+    font-size: 12px;
+    padding: 0px 10px;
+  }
 }
 
+@media (max-width: 575px) {
+  .headerLeft {
+    gap: 10px;
+  }
+}
 
+@media (max-width: 480px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: start;
+  }
+}
