@@ -282,6 +282,12 @@ h6 {
   line-height: 40px;
 }
 
+.ic_text2_36 {
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 40px;
+}
+
 .container {
   max-width: 1320px;
   margin: 0 auto;
@@ -555,6 +561,10 @@ h6 {
     font-size: 70px;
     line-height: 70px;
   }
+
+  .ic_text2_36 {
+    font-size: 28px;
+  }
 }
 
 @media (max-width: 1399px) {
@@ -585,6 +595,10 @@ h6 {
 
   .ic_text_36 {
     font-size: 32px;
+  }
+
+  .ic_text2_36 {
+    font-size: 26px;
   }
 
   .ic_section_space_58 {
@@ -706,6 +720,10 @@ h6 {
     font-size: 30px;
   }
 
+  .ic_text2_36 {
+    font-size: 24px;
+  }
+
   .ic_section_space_58 {
     padding: 50px 0;
   }
@@ -821,6 +839,10 @@ h6 {
   .ic_text_36 {
     font-size: 28px;
     line-height: 28px;
+  }
+
+  .ic_text2_36 {
+    font-size: 22px;
   }
 
   .ic_section_space_58 {

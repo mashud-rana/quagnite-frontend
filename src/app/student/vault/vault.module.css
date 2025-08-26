@@ -88,10 +88,16 @@
 }
 
 /* Responsive */
+@media (max-width: 1650px) {
+  .itemTitle {
+    font-size: 20px;
+  }
+}
+
 @media (max-width: 1024px) {
   .mainContent {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 16px;
   }
 
   .cardGradient {
@@ -100,12 +106,12 @@
   }
 
   .itemTitle {
-    font-size: 20px;
-    line-height: 28px;
+    font-size: 18px;
+    line-height: 22px;
   }
 
   .itemDetails {
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 1rem;
   }
 
@@ -126,8 +132,8 @@
   }
 
   .itemTitle {
-    font-size: 18px;
-    line-height: 26px;
+    font-size: 16px;
+    line-height: 16px;
   }
 
   .metaItem {
@@ -148,7 +154,6 @@
 
   .itemTitle {
     font-size: 16px;
-    line-height: 24px;
   }
 
   .metaItem {

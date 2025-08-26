@@ -35,7 +35,7 @@ const VaultPage = () => {
   return (
     <div className={styles.vaultContainer}>
       {/* Page Header */}
-      <h1 className="ic_text_36 ic_white fw_400">Vault</h1>
+      <h1 className="ic_text2_36 ic_white fw_400">Vault</h1>
 
       {/* Main Content */}
       <div className={styles.mainContent}>
@@ -45,10 +45,12 @@ const VaultPage = () => {
             className={styles.cardGradient}
             style={{ backgroundImage: `url(${bg.src})` }}
           >
-            <h2 className="ic_text_36 ic_white fw_400">Certificates</h2>
+            <h2 className="ic_text2_36 ic_white fw_400">Certificates</h2>
 
             <div className={styles.cardBottom}>
-              <h3 className="ic_text_36 ic_white fw_400">Recent Certificate</h3>
+              <h3 className="ic_text2_36 ic_white fw_400">
+                Recent Certificate
+              </h3>
               <hr className={styles.ic_hr} />
 
               <div className={styles.itemDetails}>
@@ -78,10 +80,10 @@ const VaultPage = () => {
             className={styles.cardGradient}
             style={{ backgroundImage: `url(${bg.src})` }}
           >
-            <h2 className="ic_text_36 ic_white fw_400">Resumes</h2>
+            <h2 className="ic_text2_36 ic_white fw_400">Resumes</h2>
 
             <div className={styles.cardBottom}>
-              <h3 className="ic_text_36 ic_white fw_400">
+              <h3 className="ic_text2_36 ic_white fw_400">
                 Last Updated Resume
               </h3>
               <hr className={styles.ic_hr} />
