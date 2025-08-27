@@ -5,9 +5,9 @@ import React from "react";
 
 const StudentDashboar = () => {
   return (
-    <div>
+    <>
       <ProfileInfo />
-    </div>
+    </>
   );
 };
 

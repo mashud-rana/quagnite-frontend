@@ -1,11 +1,8 @@
-"use client";
-import React, { useState } from "react";
+import React from "react";
 import { FaAnglesUp } from "react-icons/fa6";
-import styles from "./CertificationSearch.module.css";
-import FilterModal from "./FilterModal";
+import styles from "./searchebook.module.css";
 
-const CertificationSearch = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const SearchEbook = () => {
   return (
     <div className={styles.ic_search_container}>
       <div className={styles.ic_search_wrapper}>
@@ -19,15 +16,12 @@ const CertificationSearch = () => {
         <button
           className={styles.ic_scroll_top_button}
           aria-label="Scroll to top"
-          onClick={() => setIsModalOpen(true)}
         >
           <FaAnglesUp className={styles.ic_scroll_top_icon} />
         </button>
       </div>
-
-      <FilterModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };
 
-export default CertificationSearch;
+export default SearchEbook;

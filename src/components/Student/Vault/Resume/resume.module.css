@@ -1,0 +1,195 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ic_back_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: var(--white);
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.ic_btn {
+  text-transform: uppercase;
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+
+.ic_btn:hover {
+  background-color: var(--primary-color);
+  box-shadow: 0px 2px 20px #5c81f7;
+}
+
+.resumesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.resumeCard {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.resumeTitle {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.shareButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+  flex-shrink: 0;
+}
+
+.shareButton:hover {
+  background-color: var(--primary-color);
+  box-shadow: 0px 2px 6px #5c81f7;
+}
+
+.shareIcon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.ic_hr {
+  border: 1px solid #e2e2e2;
+  margin: 16px 0;
+}
+
+.resumePreview {
+  width: 100%;
+}
+
+.previewImage {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+.actionButtons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 1650px) {
+  .ic_btn {
+    padding: 6px 12px;
+    font-size: 15px;
+  }
+
+  .resumesGrid {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 1499px) {
+  .resumesGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+}
+@media (max-width: 1399px) {
+  .ic_back_button {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 1299px) {
+  .ic_back_button {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .resumesGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+}
+
+@media (max-width: 991px) {
+  .ic_btn {
+    padding: 5px 12px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 767px) {
+  .ic_back_button {
+    width: 26px;
+    height: 26px;
+  }
+
+  .headerLeft {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 575px) {
+  .resumesGrid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ic_back_button {
+    width: 25px;
+    height: 25px;
+  }
+
+  .ic_btn {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+
+  .headerLeft {
+    gap: 10px;
+  }
+}
