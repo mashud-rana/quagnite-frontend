@@ -69,11 +69,11 @@
   background-color: rgba(107, 107, 107, 0.1);
   /* background-color: #e5e7eb; */
   cursor: pointer;
-  transition: 0.2s all;
+  transition: 0.4s all ease-in-out;
 }
 
 .iconButton:hover {
-  background-color: #9795b5;
+  background-color: var(--primary-color);
   /* color: var(--white); */
 }
 
@@ -133,7 +133,7 @@
   }
 }
 
-@media (max-width: 769px) {
+@media (max-width: 991px) {
   .mobileMenuButton {
     display: inline-flex;
     margin-right: 8px;
@@ -159,7 +159,6 @@
   }
 
   /* Hide inline search on mobile, show search icon near favorites */
-
 }
 
 @media (max-width: 480px) {
@@ -205,8 +204,6 @@
   .mobileSearchWrapper {
     margin: 10px 10px 12px 10px;
   }
-
-
 
   .searchContainer {
     display: none;

@@ -1,29 +1,24 @@
 "use client";
 
 import React, { useState } from "react";
-import { Table, Space } from "antd";
-import styles from "./ebooklist.module.css";
+import { Space } from "antd";
 import { GoEye } from "react-icons/go";
 import { MdOutlineDownload } from "react-icons/md";
+import IcTable from "@/components/Share/IcTable/IcTable";
 
 const EbookList = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const columns = [
     {
-      title: "Invoice ID",
-      dataIndex: "invoiceId",
-      key: "invoiceId",
+      title: "Date",
+      dataIndex: "date",
+      key: "date",
     },
     {
       title: "Title / Plan",
       dataIndex: "title",
       key: "title",
-    },
-    {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
     },
     {
       title: "Amount",
@@ -32,33 +27,19 @@ const EbookList = () => {
       render: (text) => `$${text}`,
     },
     {
-      title: "Payment Method",
-      dataIndex: "paymentMethod",
-      key: "paymentMethod",
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-      render: (status) => (
-        <span
-          className={
-            status === "Paid" ? styles.ic_status_paid : styles.ic_status_pending
-          }
-        >
-          {status}
-        </span>
-      ),
+      title: "Invoice No",
+      dataIndex: "invoiceNo",
+      key: "invoiceNo",
     },
     {
       title: "Action",
       key: "action",
       render: () => (
         <Space>
-          <button className={styles.ic_action_btn}>
+          <button className="ic_action_btn">
             <MdOutlineDownload />
           </button>
-          <button className={styles.ic_action_btn}>
+          <button className="ic_action_btn">
             <GoEye />
           </button>
         </Space>
@@ -69,57 +50,47 @@ const EbookList = () => {
   const data = [
     {
       key: "1",
-      invoiceId: "INV-1001",
-      title: "Personal Membership",
       date: "2025-08-01",
+      title: "Personal Membership",
       amount: 200,
-      paymentMethod: "Credit Card",
-      status: "Paid",
+      invoiceNo: "INV-1001",
     },
     {
       key: "2",
-      invoiceId: "INV-1002",
-      title: "Premium Package",
       date: "2025-08-05",
+      title: "Premium Package",
       amount: 350,
-      paymentMethod: "PayPal",
-      status: "Pending",
+      invoiceNo: "INV-1002",
     },
     {
       key: "3",
-      invoiceId: "INV-1003",
-      title: "Basic Subscription",
       date: "2025-08-10",
+      title: "Basic Subscription",
       amount: 100,
-      paymentMethod: "Credit Card",
-      status: "Paid",
+      invoiceNo: "INV-1003",
     },
     {
       key: "4",
-      invoiceId: "INV-1004",
-      title: "Gold Package",
       date: "2025-08-12",
+      title: "Gold Package",
       amount: 500,
-      paymentMethod: "Bank Transfer",
-      status: "Paid",
+      invoiceNo: "INV-1004",
     },
   ];
 
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   return (
-    <div className={styles.ic_wrapper}>
-      <Table
-        columns={columns}
-        dataSource={data}
-        bordered
-        pagination={{
-          current: currentPage,
-          pageSize: 2,
-          total: data.length,
-          onChange: (page) => setCurrentPage(page),
-        }}
-        scroll={{ x: 1000 }} // responsive horizontal scroll
-      />
-    </div>
+    <IcTable
+      columns={columns}
+      data={data}
+      total={data.length}
+      currentPage={currentPage}
+      pageSize={2}
+      handlePageChange={handlePageChange}
+    />
   );
 };
 

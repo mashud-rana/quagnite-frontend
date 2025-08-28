@@ -4,16 +4,17 @@ import React from "react";
 
 const EbookPage = () => {
   return (
-    <div>
-      <h1 className="ic_text_36 mb-12">E-Books</h1>
-      <p className="mb-24">
-        All The Classes that you are watching all over the time
-      </p>
+    <>
+      <div>
+        <h1 className="ic_text_36 mb-12">E-Books</h1>
+        <p className="mb-24">
+          All The Classes that you are watching all over the time
+        </p>
+      </div>
 
       <SearchEbook />
-
       <EbookList />
-    </div>
+    </>
   );
 };
 

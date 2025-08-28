@@ -128,10 +128,7 @@
 
 .menuLink.active {
   background: rgba(92, 129, 247, 0.3);
-
 }
-
-
 
 .menuIcon {
   width: 20px;
@@ -202,7 +199,7 @@
   } */
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991px) {
   .sidebar {
     position: fixed;
     top: 0;
@@ -216,7 +213,7 @@
 
   .expanded,
   .collapsed {
-    width: 50vw;
+    width: 30vw;
   }
 
   .open {
@@ -233,6 +230,20 @@
   .collapsed {
     width: 240px !important;
   } */
+}
+
+@media (max-width: 775px) {
+  .expanded,
+  .collapsed {
+    width: 45vw;
+  }
+}
+
+@media (max-width: 575px) {
+  .expanded,
+  .collapsed {
+    width: 50vw;
+  }
 }
 
 @media (max-width: 480px) {

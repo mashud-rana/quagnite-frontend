@@ -511,8 +511,25 @@ h6 {
   border-inline-end: none !important;
 }
 
+.ant-table-content th {
+  white-space: nowrap;
+  border-inline-end: none !important;
+}
+
 .ant-table-content {
   font-size: 16px;
+}
+
+.ic_action_btn {
+  border: 1px solid var(--black);
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  font-size: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
 }
 
 /* editor design modified...........................  */
@@ -693,6 +710,12 @@ h6 {
     font-size: 14px;
     border-radius: 10px;
   }
+
+  .ic_action_btn {
+    height: 35px;
+    width: 35px;
+    font-size: 18px;
+  }
 }
 
 @media (max-width: 1299px) {
@@ -797,6 +820,12 @@ h6 {
   .ic_common_primary_btn {
     font-size: 13px;
     padding: 4px 16px;
+  }
+
+  .ic_action_btn {
+    height: 30px;
+    width: 30px;
+    font-size: 16px;
   }
 }
 

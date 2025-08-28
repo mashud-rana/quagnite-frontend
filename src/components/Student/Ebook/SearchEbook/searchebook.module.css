@@ -1,3 +1,55 @@
+/* Existing styles keep same */
+
+.ic_filter_wrapper {
+  position: relative;
+}
+
+.ic_filter_box {
+  position: absolute;
+  top: 55px; /* button er niche */
+  right: 0;
+  width: 200px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  z-index: 10;
+}
+
+.ic_filter_title {
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 600;
+  color: #111827;
+  padding-bottom: 8px;
+}
+
+.ic_filter_line {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 12px 0;
+}
+
+.ic_filter_list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ic_filter_list li {
+  padding: 6px 0;
+  color: #374151;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.ic_filter_list li:hover {
+  color: var(--primary-color);
+}
+
+/* ..........................................  */
+
 .ic_search_container {
   display: flex;
   align-items: center;

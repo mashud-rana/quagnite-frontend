@@ -14,6 +14,7 @@ import {
   MdOutlineFavoriteBorder,
 } from "react-icons/md";
 import { IoIosSearch } from "react-icons/io";
+import Link from "next/link";
 
 const DashboardHeader = ({ onOpenSidebar }) => {
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
@@ -49,9 +50,13 @@ const DashboardHeader = ({ onOpenSidebar }) => {
           <button className={styles.iconButton} aria-label="Favorites">
             <MdOutlineFavoriteBorder className={styles.actionIcon} />
           </button>
-          <button className={styles.iconButton} aria-label="Shopping Cart">
+          <Link
+            href="/student/cart"
+            className={styles.iconButton}
+            aria-label="Shopping Cart"
+          >
             <MdAddShoppingCart className={styles.actionIcon} />
-          </button>
+          </Link>
           <button className={styles.iconButton} aria-label="Notifications">
             <MdNotificationsNone className={styles.actionIcon} />
           </button>
