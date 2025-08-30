@@ -1,0 +1,132 @@
+.ic_header_container {
+  display: flex;
+  align-items: center;
+  gap: 5%;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.ic_tabs_wrapper {
+  width: 130px;
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ic_tabs_wrapper {
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+
+  -ms-overflow-style: none;
+
+  scrollbar-width: thin;
+}
+
+.ic_tabs_wrapper::-webkit-scrollbar {
+  height: 4px;
+}
+
+.ic_tabs_wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ic_tabs_wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.ic_tabs {
+  display: flex;
+  /* justify-content: space-between; */
+  flex-wrap: nowrap;
+  gap: 8px;
+  border-bottom: 2px solid #e2e2e2;
+}
+
+.ic_tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.ic_tab_item {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  padding: 12px 24px;
+  color: #353535;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  cursor: pointer;
+  transition: color 0.2s;
+  font-size: 16px;
+}
+
+.ic_tab_item:hover {
+  color: #333333;
+}
+
+.ic_active {
+  color: #333333;
+}
+
+.ic_active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #1e3a8a;
+}
+
+.ic_arrow {
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  font-size: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ic_arrow:hover {
+  background: #f3f3f3;
+}
+
+@media (max-width: 1399px) {
+  .ic_header_container {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 575px) {
+  .ic_tab_item {
+    padding: 8px 12px;
+    font-size: 15px;
+  }
+
+  .ic_header_container {
+    gap: 10px;
+  }
+
+  .ic_arrow {
+    padding: 4px;
+    border-radius: 50%;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ic_tab_item {
+    padding: 8px 8px;
+  }
+
+  .ic_header_container {
+    gap: 4px;
+  }
+}

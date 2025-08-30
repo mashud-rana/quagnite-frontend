@@ -1,0 +1,152 @@
+.examsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.examCard {
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.examCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.cardImageContainer {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Card Content */
+.cardContent {
+  padding: 20px;
+}
+
+.ic_text_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px 0;
+}
+
+.examTitle {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.statusBadge {
+  font-size: 14px;
+  color: #f69745;
+}
+
+/* Description */
+.examDescription {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #6c757d;
+  margin: 0 0 20px 0;
+}
+
+/* Exam Details Container */
+.examDetailsContainer {
+  margin-bottom: 20px;
+}
+
+.examDetailsRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.examDetail {
+  font-size: 13px;
+  color: #495057;
+  font-weight: 500;
+}
+
+/* Time Details Row */
+.timeDetailsRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.timeDetail {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #6c757d;
+}
+
+.timeIcon {
+  width: 14px;
+  height: 14px;
+  color: #6c757d;
+  margin-right: 6px;
+  font-size: 12px;
+}
+
+/* Start Exam Button */
+.startExamButton {
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.startExamButton:hover {
+  background-color: #0056b3;
+}
+
+.startExamButton:active {
+  transform: translateY(1px);
+}
+
+/* Empty State */
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6c757d;
+}
+
+.emptyState h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: #495057;
+}
+
+.emptyState p {
+  font-size: 16px;
+  margin: 0;
+}
+
+@media (max-width: 1299px) {
+  .examsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 0 20px;
+  }
+}
