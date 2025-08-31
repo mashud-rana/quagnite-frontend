@@ -84,7 +84,7 @@ const InvoiceTable = () => {
           total: data.length,
           onChange: (page) => setCurrentPage(page),
         }}
-        scroll={{ x: 1500 }}
+        scroll={{ x: 'max-content' }}
       />
     </div>
   );

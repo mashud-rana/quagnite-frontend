@@ -76,8 +76,7 @@ const otherMenu = [
   },
 ];
 
-const Sidebar = ({ isMobileOpen = false, onClose }) => {
-  const [state, setState] = useState("expanded");
+const Sidebar = ({ isMobileOpen = false, onClose, onToggleCollapse, isCollapsed = false }) => {
   const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
 
@@ -94,10 +93,12 @@ const Sidebar = ({ isMobileOpen = false, onClose }) => {
 
   const toggleSidebar = () => {
     if (isMobile) return;
-    setState((prev) => (prev === "expanded" ? "collapsed" : "expanded"));
+    if (onToggleCollapse) {
+      onToggleCollapse();
+    }
   };
 
-  const isExpanded = state === "expanded";
+  const isExpanded = !isCollapsed;
   const isExpandedEffective = isMobile ? true : isExpanded;
   const handleLinkClick = () => {
     if (onClose) onClose();

@@ -1,5 +1,4 @@
-import { FaClock, FaCalendarAlt } from "react-icons/fa";
-import styles from "./exam.module.css";
+import ExamCard from "@/components/Student/Exam/ExamCard";
 
 const Exam = () => {
   const filteredExams = [
@@ -65,59 +64,10 @@ const Exam = () => {
     },
   ];
   return (
-    <div>
-      <div className={styles.examsGrid}>
-        {filteredExams.map((exam) => (
-          <div key={exam.id} className={styles.examCard}>
-            {/* Card Image */}
-            <div className={styles.cardImageContainer}>
-              <img
-                src={exam.image || "/placeholder.svg"}
-                alt={exam.title}
-                className={styles.cardImage}
-              />
-            </div>
-
-            {/* Card Content */}
-            <div className={styles.cardContent}>
-              {/* Title */}
-              <div className={styles.ic_text_container}>
-                <h4 className={styles.examTitle}>{exam.title}</h4>
-                <span className={styles.statusBadge}>Upcoming exam</span>
-              </div>
-
-              {/* Description */}
-              <p className={styles.examDescription}>{exam.description}</p>
-
-              {/* Exam Details */}
-              <div className={styles.examDetailsContainer}>
-                <div className={styles.examDetailsRow}>
-                  <span className={styles.examDetail}>
-                    Exam Id - {exam.examId}
-                  </span>
-                  <span className={styles.examDetail}>
-                    No of Attempts - {exam.attempts}
-                  </span>
-                </div>
-
-                <div className={styles.timeDetailsRow}>
-                  <div className={styles.timeDetail}>
-                    <FaClock className={styles.timeIcon} />
-                    <span>{exam.time}</span>
-                  </div>
-                  <div className={styles.timeDetail}>
-                    <FaCalendarAlt className={styles.timeIcon} />
-                    <span>{exam.date}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Start Exam Button */}
-              <button className={styles.startExamButton}>start exam</button>
-            </div>
-          </div>
-        ))}
-      </div>
+    <div className="examsGrid">
+      {filteredExams.map((exam) => (
+        <ExamCard key={exam.id} exam={exam} />
+      ))}
     </div>
   );
 };

@@ -5,11 +5,13 @@
   color: var(--white);
   overflow: hidden;
   transition: width 0.3s ease, transform 0.3s ease;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
   height: 100vh;
   height: 100dvh;
-  align-self: flex-start;
+  z-index: 100;
+  will-change: width;
 }
 
 .expanded {
@@ -17,11 +19,15 @@
 }
 
 .collapsed {
-  /* width: 150px; */
+  width: 100px;
 }
 
 .ic_header_container {
   padding: 40px 40px 20px 40px;
+}
+
+.collapsed .ic_header_container {
+  padding: 40px 20px 20px 20px;
 }
 
 .header {
@@ -43,6 +49,11 @@
   justify-content: center;
   transition: opacity 0.2s, width 0.2s;
   width: 40px;
+  height: auto;
+}
+
+.collapsed .smallLogo {
+  width: 35px;
   height: auto;
 }
 
@@ -71,6 +82,10 @@
   flex-direction: column;
   min-height: 0;
   padding: 0 40px;
+}
+
+.collapsed .content {
+  padding: 0 20px;
 }
 
 .menuGroup {
@@ -122,6 +137,16 @@
   gap: 12px;
 }
 
+.collapsed .menuLink {
+  justify-content: center;
+  padding: 12px 8px;
+  min-height: 48px;
+}
+
+.collapsed .menuIcon {
+  margin: 0 auto;
+}
+
 .menuLink:hover {
   background-color: #2a2a2a;
 }
@@ -169,13 +194,17 @@
 .collapsedLogoWrapper {
   gap: 8px;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .collapseIcon {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: 0%;
+  right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -187,6 +216,7 @@
   color: var(--black);
   cursor: pointer;
   transition: background-color 0.2s;
+  z-index: 10;
 }
 
 .collapseIcon:hover {
