@@ -1,4 +1,4 @@
-import ExamCard from "@/components/Student/Exam/ExamCard";
+import ExamCard from "@/components/Student/Exams/Exam/ExamCard";
 
 const Exam = () => {
   const filteredExams = [

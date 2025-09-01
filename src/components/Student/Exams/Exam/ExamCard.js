@@ -1,11 +1,25 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 import { FaRegClock } from "react-icons/fa6";
 import { PiCalendarBlankBold } from "react-icons/pi";
 import img from "@/assets/images/all/exams.png";
 import styles from "./examCard.module.css";
+import ExamStartModal from "./ExamStartModal";
 
 const ExamCard = ({ exam }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOk = () => {
+    console.log("Exam Started ✅");
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div key={exam.id} className={styles.examCard}>
       {/* Card Image */}
@@ -40,8 +54,19 @@ const ExamCard = ({ exam }) => {
           </div>
         </div>
 
-        <button className="ic_common_primary_btn">start exam</button>
+        <button
+          className="ic_common_primary_btn"
+          onClick={() => setIsModalOpen(true)}
+        >
+          start exam
+        </button>
       </div>
+
+      <ExamStartModal
+        open={isModalOpen}
+        onCancel={handleCancel}
+        onOk={handleOk} // ✅ Pass OK handler
+      />
     </div>
   );
 };

@@ -13,7 +13,7 @@ const ProfileHeader = () => {
       {/* Title Section */}
       <div className={styles.ic_title_section}>
         <Link href="#" className={styles.ic_back_button} aria-label="Go back">
-          <FaArrowLeft className={styles.ic_back_icon} />
+          <FaArrowLeft />
         </Link>
         <h1 className="ic_text_36">Profile Management</h1>
       </div>

@@ -1,7 +1,9 @@
-import { FaEnvelope } from "react-icons/fa";
+import { FaArrowLeft, FaEnvelope } from "react-icons/fa";
 import styles from "./academe.module.css";
 import img from "@/assets/images/all/case-studies.png";
 import Image from "next/image";
+import { MdOutlineEmail } from "react-icons/md";
+import Link from "next/link";
 
 const coaches = [
   {
@@ -56,21 +58,22 @@ const coaches = [
 
 export default function AcademePage() {
   return (
-    <div className={styles.coachesGrid}>
-      {coaches.map((coach) => (
-        <div key={coach.id} className={styles.coachCard}>
-          <div className={styles.coachImage}>
-            <Image src={img} alt={coach.name} className={styles.coachPhoto} />
+    <div>
+      <div className={styles.coachesGrid}>
+        {coaches.map((coach) => (
+          <div key={coach.id} className={styles.coachCard}>
+            <div className={styles.coachImage}>
+              <Image src={img} alt={coach.name} className={styles.coachPhoto} />
+            </div>
+            <div className={styles.coachInfo}>
+              <h3 className={styles.coachName}>{coach.name}</h3>
+              <p className={styles.coachDescription}>{coach.description}</p>
+
+              <MdOutlineEmail className={styles.contactIcon} />
+            </div>
           </div>
-          <div className={styles.coachInfo}>
-            <h3 className={styles.coachName}>{coach.name}</h3>
-            <p className={styles.coachDescription}>{coach.description}</p>
-            <button className={styles.contactButton} title="Contact Coach">
-              <FaEnvelope className={styles.contactIcon} />
-            </button>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

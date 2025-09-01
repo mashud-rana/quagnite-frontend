@@ -4,7 +4,7 @@ import img from "@/assets/images/all/exams.png";
 import img2 from "@/assets/images/scholarship/work-img1.png";
 import Image from "next/image";
 import FiltersSidebar from "@/components/Student/Courses/Course/FiltersSidebar";
-import ExamCard from "@/components/Student/Exam/ExamCard";
+import ExamCard from "@/components/Student/Exams/Exam/ExamCard";
 
 const SuggestedPage = () => {
   const filterData = [
