@@ -11,6 +11,11 @@ const ScheduleModal = ({ open, onCancel, onOk }) => {
     { id: 3, time: "12:30 PM", date: "Friday 17 Jan" },
     { id: 4, time: "02:00 PM", date: "Saturday 18 Jan" },
     { id: 5, time: "03:30 PM", date: "Sunday 19 Jan" },
+    { id: 6, time: "10:30 AM", date: "Wednesday 15 Jan" },
+    { id: 7, time: "11:30 AM", date: "Thursday 16 Jan" },
+    { id: 8, time: "12:30 PM", date: "Friday 17 Jan" },
+    { id: 9, time: "02:00 PM", date: "Saturday 18 Jan" },
+    { id: 10, time: "03:30 PM", date: "Sunday 19 Jan" },
   ];
 
   return (
