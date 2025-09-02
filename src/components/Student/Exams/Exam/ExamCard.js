@@ -12,7 +12,6 @@ const ExamCard = ({ exam }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOk = () => {
-    console.log("Exam Started ✅");
     setIsModalOpen(false);
   };
 
@@ -65,7 +64,7 @@ const ExamCard = ({ exam }) => {
       <ExamStartModal
         open={isModalOpen}
         onCancel={handleCancel}
-        onOk={handleOk} // ✅ Pass OK handler
+        onOk={handleOk}
       />
     </div>
   );

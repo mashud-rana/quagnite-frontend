@@ -1,0 +1,74 @@
+.examCard {
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid #e2e2e2;
+}
+
+.ic_heading_title {
+  margin: 24px 0;
+}
+
+.cardImageContainer {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.examTitle {
+  margin: 16px 0;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.ic_btn_review_container {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ic_icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ic_star {
+  font-size: 18px;
+  color: #f69745;
+}
+
+.ic_start_color {
+  color: #d9d9d9;
+}
+
+@media (max-width: 1650px) {
+  .examTitle {
+    font-size: 18px;
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: 1399px) {
+  .examCard {
+    padding: 16px;
+  }
+
+  .examTitle {
+    margin: 14px 0;
+  }
+}
+
+@media (max-width: 775px) {
+  .examTitle {
+    margin: 12px 0;
+  }
+}

@@ -6,7 +6,7 @@ import { FaArrowLeft } from "react-icons/fa";
 const AcademeLayout = ({ children }) => {
   const academeTabs = [
     { href: "/student/academe", label: "Coaches", exact: true },
-    { href: "/student/account", label: "Sessions" },
+    { href: "/student/academe/sessions", label: "Sessions" },
   ];
 
   return (
