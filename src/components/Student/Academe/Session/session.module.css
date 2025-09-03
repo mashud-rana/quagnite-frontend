@@ -95,19 +95,34 @@
 }
 
 /* modal ...........................  */
+
+.ic_hr {
+  border: 1px solid #e2e2e2;
+  margin: 16px 0;
+}
+
+.ic_title {
+  font-size: 20px;
+  font-weight: 400;
+  text-transform: capitalize;
+  margin-bottom: 26px;
+}
+
 .gridContainer {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 12px;
+  padding-bottom: 5px;
 }
 
 .optionBox {
   border: 2px solid #353535;
   border-radius: 8px;
-  padding: 16px;
+  padding: 12px;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
+  color: #353535;
 }
 
 .optionBox:hover {
@@ -121,15 +136,9 @@
 }
 
 .time {
-  font-size: 16px;
-  font-weight: 600;
-  color: #000;
-}
-
-.date {
-  font-size: 14px;
-  color: #555;
-  margin-top: 4px;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 4px;
 }
 
 @media (max-width: 1650px) {
@@ -157,6 +166,12 @@
   }
 }
 
+@media (max-width: 991px) {
+  .gridContainer {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 @media (max-width: 775px) {
   .ic_today_card {
     flex-direction: column;
@@ -166,5 +181,29 @@
 
   .ic_heading_Wrapper {
     margin-bottom: 20px;
+  }
+
+  .gridContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .time {
+    margin-bottom: 2px;
+  }
+
+  .ic_title {
+    font-size: 18px;
+    margin-bottom: 16px;
+    line-height: 20px;
+  }
+
+  .ic_hr {
+    margin: 12px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .gridContainer {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

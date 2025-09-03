@@ -1,0 +1,87 @@
+.academeSection {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.column {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.imageWrapper {
+  position: relative;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.4s ease;
+}
+
+.column:hover .image {
+  transform: scale(1.05);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 12px;
+  transition: background 0.3s ease;
+}
+
+.column:hover .overlay {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.title {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #fff;
+  font-size: 36px;
+  line-height: 1.4;
+  font-weight: 400;
+  z-index: 2;
+}
+
+@media (max-width: 1650px) {
+  .title {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 1399px) {
+  .title {
+    font-size: 30px;
+  }
+
+  .academeSection {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .title {
+    font-size: 24px;
+    top: 16px;
+    left: 16px;
+  }
+}
+
+@media (max-width: 991px) {
+  .academeSection {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .academeSection {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

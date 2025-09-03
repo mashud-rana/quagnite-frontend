@@ -29,6 +29,9 @@ const ScheduleModal = ({ open, onCancel, onOk }) => {
       okText="Start Exam"
       cancelText="Cancel"
     >
+      <hr className={styles.ic_hr} />
+
+      <p className={styles.ic_title}>Available sessions timings</p>
       <div className={styles.gridContainer}>
         {options.map((opt) => (
           <div
@@ -39,10 +42,12 @@ const ScheduleModal = ({ open, onCancel, onOk }) => {
             onClick={() => setSelected(opt.id)}
           >
             <div className={styles.time}>{opt.time}</div>
-            <div className={styles.date}>{opt.date}</div>
+            <p>{opt.date}</p>
           </div>
         ))}
       </div>
+
+      <hr className={styles.ic_hr} />
     </Modal>
   );
 };

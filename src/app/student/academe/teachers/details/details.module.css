@@ -1,0 +1,288 @@
+.heroSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  position: relative;
+}
+
+.heroContent {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+/* Left Side - Image */
+.imageSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.floatingElements {
+  position: absolute;
+  width: 70%;
+  right: 1%;
+  height: 80%;
+  pointer-events: none;
+}
+
+.floatingElement {
+  position: absolute;
+  animation: float 6s ease-in-out infinite;
+}
+
+.circle1 {
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(108.98deg, #917ffb 27.06%, #441889 90.91%),
+    #d9d9d9;
+  filter: blur(3.39077px);
+  border-radius: 50%;
+  top: 20%;
+  right: 10%;
+  animation-delay: 0s;
+}
+
+.circle2 {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(108.98deg, #917ffb 27.06%, #441889 90.91%),
+    #d9d9d9;
+  filter: blur(3.39077px);
+  border-radius: 50%;
+  top: 2%;
+  left: 20%;
+  animation-delay: 2s;
+}
+
+.triangle1 {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 17px solid #ff6b35;
+  top: 30%;
+  left: 15%;
+  animation-delay: 1s;
+}
+
+.triangle2 {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 20px solid #45b7fd;
+  filter: blur(4);
+  bottom: 30%;
+  right: 10%;
+  animation-delay: 3s;
+}
+
+.line1 {
+  width: 40px;
+  height: 8px;
+  background: #ff6b35;
+  border-radius: 24px;
+  top: 50%;
+  left: 15%;
+  animation-delay: 1.5s;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.professorImage {
+  width: 300px;
+  /* border: 1px solid white; */
+  object-fit: cover;
+  border-radius: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Right Side - Content */
+.contentSection {
+  color: white;
+}
+
+.professorName {
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.professorDescription {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
+  max-width: 500px;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+}
+
+.startChatButton,
+.scheduleCallButton {
+  padding: 1rem 2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.startChatButton {
+  background: #4f46e5;
+  color: white;
+}
+
+.startChatButton:hover {
+  background: #4338ca;
+  transform: translateY(-2px);
+}
+
+.scheduleCallButton {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.scheduleCallButton:hover {
+  background: white;
+  color: #1a1a2e;
+  transform: translateY(-2px);
+}
+
+.sessionTitle {
+  margin: 24px 0;
+}
+
+.sessionGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.sessionCard {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid #e5e7eb;
+  padding: 20px;
+}
+
+.sessionCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.sessionImage {
+  width: 100%;
+  height: auto;
+  /* height: 100%; */
+  object-fit: cover;
+}
+
+.sessionCardTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.sessionCardDescription {
+  font-size: 0.9rem;
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .heroContent {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .sessionGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .professorName {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    padding: 2rem 1rem;
+  }
+
+  .sessionSection {
+    padding: 2rem 1rem;
+  }
+
+  .sessionGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .professorName {
+    font-size: 1.8rem;
+  }
+
+  .professorDescription {
+    font-size: 1rem;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .startChatButton,
+  .scheduleCallButton {
+    width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .professorImage {
+    width: 250px;
+    height: 320px;
+  }
+
+  .professorName {
+    font-size: 1.5rem;
+  }
+
+  .professorDescription {
+    font-size: 0.9rem;
+  }
+
+  .sessionTitle {
+    font-size: 1.5rem;
+  }
+}

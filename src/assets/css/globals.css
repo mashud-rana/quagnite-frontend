@@ -608,6 +608,10 @@ h6 {
   text-transform: uppercase;
 }
 
+.ant-modal-title {
+  font-size: 24px !important;
+}
+
 /* dashboard header title and back button ......................  */
 .ic_title_section {
   display: flex;
@@ -1275,6 +1279,10 @@ h6 {
   .ic_back_button {
     width: 26px;
     height: 26px;
+  }
+
+  .ant-modal-title {
+    font-size: 22px !important;
   }
 }
 

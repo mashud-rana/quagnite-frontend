@@ -85,7 +85,7 @@ const Team = () => {
       </div>
     </section>
   );
-  memberImage;
+  // memberImage;
 };
 
 export default Team;

@@ -7,6 +7,7 @@ const AcademeLayout = ({ children }) => {
   const academeTabs = [
     { href: "/student/academe", label: "Coaches", exact: true },
     { href: "/student/academe/sessions", label: "Sessions" },
+    { href: "/student/academe/all", label: "All" },
   ];
 
   return (
