@@ -1,13 +1,9 @@
 import React from "react";
-import {
-  FaStar,
-  FaThumbsUp,
-  FaThumbsDown,
-  FaChevronDown,
-} from "react-icons/fa";
+import { FaStar, FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 import styles from "./reviews.module.css";
 import img from "@/assets/images/all/instractor.png";
 import Image from "next/image";
+import { MdArrowDownward } from "react-icons/md";
 
 const mockReviews = [
   {
@@ -93,7 +89,7 @@ const Reviews = () => {
             <p>Filter ratings</p>
             <button className={styles.recentButton}>
               RECENT REVIEWS
-              <FaChevronDown className={styles.dropdownIcon} />
+              <MdArrowDownward className={styles.dropdownIcon} />
             </button>
           </div>
         </div>

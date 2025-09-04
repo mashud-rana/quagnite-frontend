@@ -565,6 +565,8 @@ h6 {
   /* border: none !important; */
   border-radius: 12px 12px 0 0 !important;
   border-bottom: none !important;
+
+  flex-wrap: nowrap !important;
 }
 
 .jodit-wysiwyg {
@@ -595,6 +597,12 @@ h6 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+}
+
+.jodit-toolbar-editor-collection_mode_horizontal {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow: hidden !important;
 }
 
 /* ant design modal ............................................  */
@@ -1218,9 +1226,6 @@ h6 {
   .mb-35 {
     margin-bottom: 22px;
   }
-  .mb-24 {
-    margin-bottom: 14px;
-  }
 
   .mb_20 {
     margin-bottom: 10px;
@@ -1348,9 +1353,7 @@ h6 {
   .mt_30 {
     margin-top: 20px;
   }
-  .mb-24 {
-    margin-bottom: 12px;
-  }
+
   .mb-18 {
     margin-bottom: 13px;
   }
@@ -1434,7 +1437,7 @@ h6 {
     margin-bottom: 6px;
   }
   .mb-24 {
-    margin-bottom: 10px;
+    margin-bottom: 14px;
   }
   .mb-18 {
     margin-bottom: 12px;

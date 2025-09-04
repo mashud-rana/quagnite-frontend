@@ -1,6 +1,6 @@
+import ScrollableNavbar from "@/components/Share/ScrollableNavbar/ScrollableNavbar";
 import FiltersSidebar from "@/components/Student/Courses/Course/FiltersSidebar";
 import SearchInput from "@/components/Student/Courses/Course/SearchInput";
-import CoursesHeader from "@/components/Student/Courses/CoursesHeader/CoursesHeader";
 import React from "react";
 
 const CoursesLayout = ({ children }) => {
@@ -26,9 +26,17 @@ const CoursesLayout = ({ children }) => {
     },
   ];
 
+  const courseTabs = [
+    { href: "/student/courses", label: "Enrolled courses", exact: true },
+    { href: "/student/courses/inprogress", label: "Inprogress courses" },
+    { href: "/student/courses/completed", label: "Completed Courses" },
+  ];
+
   return (
     <div>
-      <CoursesHeader />
+      <h1 className="ic_text_36 mb-24">My Courses</h1>
+      <ScrollableNavbar tabs={courseTabs} />
+
       <SearchInput />
 
       <div className="ic_content_wrapper">

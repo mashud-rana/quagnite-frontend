@@ -35,7 +35,7 @@ const ProfileInfo = () => {
       <div className={styles.infoHeader}>
         <p className={styles.infoTitle}>Profile Info</p>
         <button
-          className={styles.editButton}
+          className="ic_common_primary_btn"
           onClick={() => setIsEditing((prev) => !prev)}
         >
           {isEditing ? "SAVE" : "EDIT"}

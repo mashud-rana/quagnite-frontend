@@ -1,6 +1,5 @@
 import ScrollableNavbar from "@/components/Share/ScrollableNavbar/ScrollableNavbar";
 import ProfileBanner from "@/components/Student/Profile/ProfileBanner/ProfileBanner";
-import ProfileHeader from "@/components/Student/Profile/ProfileHeader/ProfileHeader";
 import Link from "next/link";
 import React from "react";
 import { FaArrowLeft } from "react-icons/fa";
@@ -24,7 +23,7 @@ const ProfileLayout = ({ children }) => {
       </div>
 
       <ScrollableNavbar tabs={profileTabs} />
-      {/* <ProfileHeader /> */}
+
       <ProfileBanner />
       <div>{children}</div>
     </>

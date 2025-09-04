@@ -3,7 +3,7 @@
 }
 
 .ic_hr {
-  border: 1px solid #e2e2e2;
+  /* border: 1px solid #e2e2e2; */
 }
 
 /* Rich Text Editor */
@@ -101,6 +101,8 @@
   justify-content: flex-end;
   gap: 16px;
   margin: 16px 0;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e2e2e2;
 }
 
 .ic_btn {
@@ -173,7 +175,7 @@
   width: 32px;
   height: 32px;
   background-color: var(--primary-color);
-  color: white;
+  color: var(--white);
   border: none;
   border-radius: 100%;
   cursor: pointer;
@@ -200,58 +202,8 @@
 }
 
 /* Responsive Design */
-/* @media (max-width: 768px) {
-  .notesContainer {
-    padding: 1.5rem;
-    gap: 1.5rem;
-  }
-
-  .editorToolbar {
-    flex-wrap: wrap;
-    gap: 0.25rem;
-  }
-
-  .toolbarButton {
-    width: 1.75rem;
-    height: 1.75rem;
-    font-size: 0.75rem;
-  }
-
+@media (max-width: 480px) {
   .notesGrid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .noteCard {
-    padding: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 }
-
-@media (max-width: 480px) {
-  .notesContainer {
-    padding: 1rem;
-  }
-
-  .editorContent {
-    padding: 0.75rem;
-  }
-
-  .editorTextarea {
-    min-height: 150px;
-    font-size: 0.8125rem;
-  }
-
-  .noteImage {
-    max-width: 100%;
-  }
-
-  .noteHeader {
-    flex-direction: column;
-    gap: 0.75rem;
-    align-items: flex-start;
-  }
-
-  .noteActions {
-    align-self: flex-end;
-  }
-} */
