@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Table, Tag, Button, Tabs, Timeline, Pagination } from "antd";
-import { FaArrowLeft, FaChevronRight, FaTimes } from "react-icons/fa";
+import { Table, Tag, Button, Timeline, Pagination } from "antd";
+import { FaChevronRight, FaTimes } from "react-icons/fa";
 import styles from "./support.module.css";
 
 const mockTickets = [
@@ -17,11 +17,11 @@ const mockTickets = [
         id: "1",
         type: "problem",
         title:
-          "Problem related - Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "Problem related - Lorem ipsum dolor sit amet, consectetur adipiscing elit",
         date: "10/10/2024",
         remark: "Your Remark",
         description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       },
       {
         id: "2",
@@ -41,7 +41,7 @@ const mockTickets = [
       {
         id: "1",
         type: "problem",
-        title: "User cannot log in due to invalid credentials error.",
+        title: "User cannot log in due to invalid credentials error",
         date: "15/10/2024",
         remark: "Customer tried resetting password",
       },
@@ -56,7 +56,6 @@ const mockTickets = [
 ];
 
 export default function SupportPage() {
-  const [activeTab, setActiveTab] = useState("1");
   const [currentPage, setCurrentPage] = useState(1);
   const [expandedRowKeys, setExpandedRowKeys] = useState([]);
 
@@ -102,95 +101,40 @@ export default function SupportPage() {
     },
   ];
 
-  const tabItems = [
-    {
-      key: "1",
-      label: "Your Ticket",
-      children: (
-        <>
-          <Table
-            columns={columns}
-            dataSource={mockTickets}
-            rowKey="id"
-            pagination={false}
-            expandable={{
-              expandedRowRender: (record) => (
-                <div style={{ margin: 0 }}>
-                  <h4>Ticket Details</h4>
-                  <Timeline>
-                    {record.timeline.map((item) => (
-                      <Timeline.Item
-                        key={item.id}
-                        color={item.type === "problem" ? "red" : "blue"}
-                      >
-                        <h4>{item.title}</h4>
-                        <small>{item.date}</small>
-                        {item.remark && (
-                          <p>
-                            <b>Remark:</b> {item.remark}
-                          </p>
-                        )}
-                        {item.description && <p>{item.description}</p>}
-                      </Timeline.Item>
-                    ))}
-                  </Timeline>
-                </div>
-              ),
-              expandedRowKeys,
-              onExpand: (expanded, record) => handleExpandToggle(record.id),
-            }}
-          />
-
-          <div style={{ textAlign: "center", marginTop: 20 }}>
-            <Pagination
-              current={currentPage}
-              total={68}
-              pageSize={10}
-              onChange={(page) => setCurrentPage(page)}
-            />
-          </div>
-        </>
-      ),
-    },
-    {
-      key: "2",
-      label: "Community",
-      children: <p>Community support content will be displayed here.</p>,
-    },
-    {
-      key: "3",
-      label: "Coaching Support",
-      children: <p>Coaching support content will be displayed here.</p>,
-    },
-  ];
-
   return (
-    <div style={{ padding: 20 }}>
-      {/* Header */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginBottom: 20,
-        }}
-      >
-        <Button
-          type="text"
-          icon={<FaArrowLeft />}
-          onClick={() => console.log("Back clicked")}
-        >
-          Back
-        </Button>
-        <Button
-          type="primary"
-          onClick={() => console.log("Create new ticket clicked")}
-        >
-          CREATE NEW TICKET
-        </Button>
-      </div>
+    <Table
+      columns={columns}
+      dataSource={mockTickets}
+      rowKey="id"
+      pagination={false}
+      expandable={{
+        expandedRowRender: (record) => (
+          <div style={{ margin: 0 }}>
+            <Timeline>
+              {record.timeline.map((item) => (
+                <Timeline.Item
+                  key={item.id}
+                  color={item.type === "problem" ? "red" : "blue"}
+                >
+                  <h6 className="ic_text_transfrom">
+                    {item.title} {`(${item.date})`}
+                  </h6>
 
-      {/* Tabs */}
-      <Tabs activeKey={activeTab} onChange={setActiveTab} items={tabItems} />
-    </div>
+                  {item.remark && <p>{item.remark}</p>}
+                  {item.description && (
+                    <p className="ic_flex_warp">{item.description}</p>
+                  )}
+                </Timeline.Item>
+              ))}
+            </Timeline>
+          </div>
+        ),
+        expandedRowKeys,
+        onExpand: (expanded, record) => handleExpandToggle(record.id),
+
+        // 👇 THIS LINE removes the default left-side expand icon
+        expandIcon: () => null,
+      }}
+    />
   );
 }

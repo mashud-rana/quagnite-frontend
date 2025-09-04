@@ -646,6 +646,16 @@ h6 {
   justify-content: space-between;
 }
 
+.ic_flex_warp {
+  text-wrap: wrap !important;
+}
+
+.ic_text_transfrom {
+  text-transform: capitalize;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
 /* Responsive Design */
 
 @media (max-width: 1650px) {
