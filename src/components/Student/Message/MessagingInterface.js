@@ -392,7 +392,7 @@ export default function MessagingInterface() {
               {mediaItems.map((item) => (
                 <Image
                   key={item.id}
-                  src={img2}
+                  src={item.thumbnail || "/placeholder.svg"}
                   alt="Shared media"
                   className={styles.mediaThumbnail}
                 />

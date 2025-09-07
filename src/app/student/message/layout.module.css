@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  gap: 16px;
+  height: 100vh;
+  /* background-color: #f8f9fa; */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.leftSidebar {
+  width: 360px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 0;
+}
+
+.mainChat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.rightSidebar {
+  width: 360px;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  overflow-y: auto;
+  padding: 14px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .leftSidebar,
+  .rightSidebar {
+    width: 100%;
+    height: auto;
+  }
+
+  .rightSidebar {
+    display: none;
+  }
+}
