@@ -1,222 +1,75 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  background: white;
+.ic_grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.ic_section_wrapper {
+  border: 1px solid #e2e2e2;
+  padding: 16px;
   border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.leftContent {
+.ic_text_container {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  max-width: 400px;
-}
-
-.textContent {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.performanceText {
-  color: #666;
-  font-size: 14px;
-  line-height: 1.5;
-  margin: 0;
-}
-
-.questionText {
-  color: #333;
-  font-size: 16px;
-  font-weight: 500;
-  margin: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .buttonGroup {
   display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.retakeButton {
-  background: #6366f1;
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.retakeButton:hover {
-  background: #5856eb;
-}
-
-.checkButton {
-  background: #8b5cf6;
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.checkButton:hover {
-  background: #7c3aed;
-}
-
-.chancesText {
-  color: #999;
-  font-size: 12px;
-  margin: 0;
-}
-
-.chartSection {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  flex: 1;
-}
-
-.chartHeader {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1rem;
-  background: #f8f9fa;
-  border-radius: 8px;
-  border: 1px solid #e9ecef;
-}
-
-.chartDescription {
-  color: #666;
-  font-size: 13px;
-  margin: 0;
-  line-height: 1.4;
-}
-
-.legendContainer {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.legendItem {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.legendDot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.legendDot.novice {
-  background: #ff8c42;
-}
-
-.legendDot.emerging {
-  background: #4caf50;
-}
-
-.legendDot.average {
-  background: #2196f3;
-}
-
-.legendDot.aboveAvg {
-  background: #9c27b0;
-}
-
-.legendDot.expert {
-  background: #f44336;
-}
-
-.legendText {
-  color: #666;
-  font-size: 12px;
-  font-weight: 500;
+  gap: 16px;
 }
 
 .chartContainer {
-  background: white;
+  width: 100%;
   border-radius: 8px;
-  padding: 1rem;
-  border: 1px solid #e9ecef;
-  min-height: 320px;
+  padding: 16px;
+  border: 1px solid black;
+  overflow: hidden;
 }
 
-.nextSection {
-  margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid #e9ecef;
+.ic_heading_containr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.nextTitle {
-  color: #333;
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0;
+.ic_heading {
+  margin: 24px 0;
 }
 
-/* Responsive Design */
-@media (min-width: 768px) {
-  .container {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 3rem;
+@media (max-width: 1040px) {
+  .ic_grid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 16px;
   }
 
-  .leftContent {
-    flex-shrink: 0;
-    width: 300px;
-  }
-
-  .chartSection {
-    flex: 1;
-  }
-
-  .nextSection {
-    position: absolute;
-    bottom: 2rem;
-    left: 2rem;
-    margin-top: 0;
-    padding-top: 0;
-    border-top: none;
+  .ic_heading {
+    margin: 20px 0;
   }
 }
 
-@media (max-width: 767px) {
-  .container {
-    padding: 1rem;
+@media (max-width: 480px) {
+  .ic_heading_containr {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
   }
 
   .buttonGroup {
+    gap: 10px;
     flex-direction: column;
   }
 
-  .retakeButton,
-  .checkButton {
-    width: 100%;
-    text-align: center;
+  .chartContainer {
+    padding: 10px;
   }
 
-  .legendContainer {
-    gap: 1rem;
+  .ic_heading {
+    margin: 16px 0;
   }
 }
