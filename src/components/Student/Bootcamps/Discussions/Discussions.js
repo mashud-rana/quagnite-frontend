@@ -12,6 +12,9 @@ import {
   FaChevronUp,
 } from "react-icons/fa";
 import styles from "./discussion.module.css";
+import img from "@/assets/images/all/instractor.png";
+import Image from "next/image";
+import { IoArrowDown } from "react-icons/io5";
 
 // Dynamically import Jodit to avoid SSR issues
 const JoditEditor = dynamic(() => import("jodit-react"), {
@@ -131,11 +134,7 @@ const Discussions = () => {
     <div className={styles.discussionsContainer}>
       {/* Top Input Area */}
       <div className={styles.topInputContainer}>
-        <img
-          src="/placeholder.svg?height=40&width=40"
-          alt="Your avatar"
-          className={styles.userAvatar}
-        />
+        <Image src={img} alt="Your avatar" className={styles.userAvatar} />
         <input
           type="text"
           placeholder="What's on your mind?"
@@ -143,21 +142,24 @@ const Discussions = () => {
           onChange={(e) => setNewPost(e.target.value)}
           className={styles.topInput}
         />
-        <button className={styles.sortButton}>
+      </div>
+
+      <div className={styles.ic_btn_container}>
+        <button className={`ic_common_primary_btn ${styles.ic_flex}`}>
           SORT BY LATEST
-          <FaChevronDown className={styles.sortIcon} />
+          <IoArrowDown className={styles.sortIcon} />
         </button>
       </div>
 
       {/* Discussions List */}
       <div className={styles.discussionsList}>
         {discussions.map((discussion) => (
-          <div key={discussion.id} className={styles.discussionCard}>
+          <div key={discussion.id}>
             {/* Discussion Header */}
             <div className={styles.discussionHeader}>
               <div className={styles.authorInfo}>
-                <img
-                  src={discussion.author.avatar || "/placeholder.svg"}
+                <Image
+                  src={img}
                   alt={discussion.author.name}
                   className={styles.authorAvatar}
                 />

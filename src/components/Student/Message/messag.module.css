@@ -546,6 +546,12 @@
   color: #6c757d;
 }
 
+
+.ic_link{
+    text-decoration: none;
+  color: inherit;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .container {

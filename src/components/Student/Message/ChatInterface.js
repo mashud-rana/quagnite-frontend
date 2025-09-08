@@ -5,6 +5,7 @@ import { FaSearch } from "react-icons/fa";
 import styles from "./messag.module.css";
 import img from "@/assets/images/all/boy.png";
 import img2 from "@/assets/images/all/webinar.png";
+import Link from "next/link";
 
 const ChatInterface = () => {
   const conversations = [
@@ -91,34 +92,37 @@ const ChatInterface = () => {
 
       <div className={styles.section}>
         <h5 className={styles.sectionTitle}>Individual</h5>
-        <div className={styles.conversationList}>
-          {conversations.map((conv) => (
-            <div key={conv.id} className={styles.conversation}>
-              <div className={styles.avatarContainer}>
-                <Image
-                  height={100}
-                  width={100}
-                  src={img}
-                  alt={conv.name}
-                  className={styles.avatar}
-                />
-                {conv.isOnline && <div className={styles.onlineIndicator} />}
-              </div>
-              <div className={styles.conversationContent}>
-                <div className={styles.conversationHeader}>
-                  <span className={styles.conversationName}>{conv.name}</span>
-                  <span className={styles.conversationTime}>{conv.time}</span>
+
+        <Link className={styles.ic_link} href="/student/message/5">
+          <div className={styles.conversationList}>
+            {conversations.map((conv) => (
+              <div key={conv.id} className={styles.conversation}>
+                <div className={styles.avatarContainer}>
+                  <Image
+                    height={100}
+                    width={100}
+                    src={img}
+                    alt={conv.name}
+                    className={styles.avatar}
+                  />
+                  {conv.isOnline && <div className={styles.onlineIndicator} />}
                 </div>
-                <div className={styles.ic_flex}>
-                  <p className={styles.conversationMessage}>{conv.message}</p>
-                  {conv.unread > 0 && (
-                    <div className={styles.unreadBadge}>{conv.unread}</div>
-                  )}
+                <div className={styles.conversationContent}>
+                  <div className={styles.conversationHeader}>
+                    <span className={styles.conversationName}>{conv.name}</span>
+                    <span className={styles.conversationTime}>{conv.time}</span>
+                  </div>
+                  <div className={styles.ic_flex}>
+                    <p className={styles.conversationMessage}>{conv.message}</p>
+                    {conv.unread > 0 && (
+                      <div className={styles.unreadBadge}>{conv.unread}</div>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </Link>
       </div>
 
       <div className={styles.section}>
