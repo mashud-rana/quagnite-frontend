@@ -1,95 +1,53 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaBars, FaRegQuestionCircle } from "react-icons/fa";
-import { LuGraduationCap } from "react-icons/lu";
-import { PiMonitorBold, PiCirclesThreeBold } from "react-icons/pi";
-import { GrPlay } from "react-icons/gr";
-import { BiBookContent, BiMoneyWithdraw } from "react-icons/bi";
-import { RiGraduationCapLine } from "react-icons/ri";
-import { MdLockOutline } from "react-icons/md";
-import { GiFeather } from "react-icons/gi";
-
+import { FaBars } from "react-icons/fa";
 import styles from "./sidebar.module.css";
-
 import logo from "@/assets/images/auth/logo.png";
 import logo2 from "@/assets/images/auth/small-logo.png";
 import Image from "next/image";
 import { IoIosArrowForward } from "react-icons/io";
 
-// Menu items
-const mainMenu = [
-  {
-    title: "Explore",
-    url: "/student",
-    icon: GiFeather,
-  },
-  {
-    title: "Courses",
-    url: "/student/courses",
-    icon: LuGraduationCap,
-  },
-  {
-    title: "Bootcamps",
-    url: "/student/bootcamps",
-    icon: PiMonitorBold,
-  },
-  {
-    title: "Exams",
-    url: "/student/exams",
-    icon: PiCirclesThreeBold,
-  },
-  {
-    title: "Playground",
-    url: "/student/playground",
-    icon: GrPlay,
-  },
-  {
-    title: "E-book",
-    url: "/student/ebook",
-    icon: BiBookContent,
-  },
-  {
-    title: "Academe",
-    url: "/student/academe",
-    icon: RiGraduationCapLine,
-  },
-  {
-    title: "Vault",
-    url: "/student/vault",
-    icon: MdLockOutline,
-  },
-];
-
-const otherMenu = [
-  {
-    title: "Billings",
-    url: "/student/billings",
-    icon: BiMoneyWithdraw,
-  },
-  {
-    title: "Support",
-    url: "/student/support",
-    icon: FaRegQuestionCircle,
-  },
-];
-
-const Sidebar = ({ isMobileOpen = false, onClose, onToggleCollapse, isCollapsed = false }) => {
+const Sidebar = ({
+  otherMenu,
+  mainMenu,
+  isMobileOpen = false,
+  onClose,
+  onToggleCollapse,
+  isCollapsed = false,
+}) => {
   const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
 
   // Function to check if a menu item is active
   const isMenuActive = (menuUrl) => {
-    // For the main dashboard page - only active when exactly on /student
-    if (menuUrl === "/student") {
-      return pathname === "/student";
+    if (!menuUrl) return false;
+
+    // URL-এর শেষে থাকা "/" সরাই
+    const normalizePath = (url) => url.replace(/\/+$/, "");
+
+    const current = normalizePath(pathname);
+    const target = normalizePath(menuUrl);
+
+    // panel root detect (যেমন "/student", "/teacher", "/admin")
+    const isRootLevel = /^\/[^/]+$/.test(target);
+
+    if (isRootLevel) {
+      return current === target; // শুধু exact match এ active
     }
-    
-    // For other pages, check if the current path starts with the menu URL
-    return pathname.startsWith(menuUrl);
+
+    // অন্য সবগুলোর জন্য: exact বা nested match
+    return current === target || current.startsWith(target + "/");
   };
+
+  // const isMenuActive = (menuUrl) => {
+  //   if (menuUrl === "/student") {
+  //     return pathname === "/student";
+  //   }
+  //   return pathname.startsWith(menuUrl);
+  // };
 
   const toggleSidebar = () => {
     if (isMobile) return;
@@ -169,6 +127,9 @@ const Sidebar = ({ isMobileOpen = false, onClose, onToggleCollapse, isCollapsed 
                     className={`${styles.menuLink} ${
                       isMenuActive(item.url) ? styles.active : ""
                     } ${isExpanded ? "g-15" : ""}`}
+                    // className={`${styles.menuLink} ${
+                    //   isMenuActive(item.url) ? styles.active : ""
+                    // } ${isExpanded ? "g-15" : ""}`}
                     title={!isExpandedEffective ? item.title : undefined}
                     onClick={handleLinkClick}
                   >

@@ -15,6 +15,7 @@ import {
 } from "react-icons/md";
 import { IoIosSearch } from "react-icons/io";
 import Link from "next/link";
+import img from "@/assets/images/all/instractor.png";
 
 const DashboardHeader = ({ onOpenSidebar }) => {
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
@@ -61,11 +62,11 @@ const DashboardHeader = ({ onOpenSidebar }) => {
             <MdNotificationsNone className={styles.actionIcon} />
           </button>
 
-          <div className={styles.avatar}>
+          <div>
             <Image
-              src="/placeholder.svg?height=36&width=36"
+              src={img}
               alt="avater"
-              className={styles.image}
+              className={styles.avatar}
               width={500}
               height={200}
             />

@@ -10,11 +10,14 @@ import {
   FaHeart,
   FaReply,
   FaChevronUp,
+  FaUser,
 } from "react-icons/fa";
 import styles from "./discussion.module.css";
 import img from "@/assets/images/all/instractor.png";
 import Image from "next/image";
 import { IoArrowDown } from "react-icons/io5";
+import { RiReplyLine } from "react-icons/ri";
+import { TiUser } from "react-icons/ti";
 
 // Dynamically import Jodit to avoid SSR issues
 const JoditEditor = dynamic(() => import("jodit-react"), {
@@ -200,98 +203,86 @@ const Discussions = () => {
               ))}
             </div>
 
+            {/* reaction  */}
+            <div className={styles.reviewActions}>
+              <button className={styles.helpfulButton}>
+                <FaThumbsUp />
+                Helpful
+              </button>
+              <button className={styles.notHelpfulButton}>
+                <FaUser />
+                20 Flowers
+              </button>
+
+              <button className={styles.notHelpfulButton}>
+                <RiReplyLine size={20} />
+                Reply
+              </button>
+            </div>
+
             {/* Discussion Content */}
             <div className={styles.discussionContent}>
               <h3 className={styles.discussionTitle}>{discussion.title}</h3>
-              {discussion.content && (
-                <p className={styles.discussionText}>{discussion.content}</p>
-              )}
+
               {discussion.codeSnippet && (
                 <div className={styles.codeBlock}>
-                  <pre className={styles.codeContent}>
+                  <span className={styles.codeContent}>
                     {discussion.codeSnippet}
-                  </pre>
+                  </span>
                 </div>
               )}
             </div>
 
-            {/* Discussion Footer */}
-            <div className={styles.discussionFooter}>
-              <button className={styles.likeButton}>
-                <FaThumbsUp className={styles.footerIcon} />
-                Like
-              </button>
-              <button className={styles.followButton}>
-                <FaHeart className={styles.footerIcon} />
-                {discussion.followers} Flowers
-              </button>
-              <button className={styles.replyButton}>
-                <FaReply className={styles.footerIcon} />
-                Reply
-              </button>
+            <div className={styles.ic_reply_container}>
+              <span>4 Replies</span>
+              <span>See Replies</span>
             </div>
 
             {/* Replies Section */}
             {discussion.replies.length > 0 && (
               <div className={styles.repliesSection}>
-                <div className={styles.repliesHeader}>
-                  <span className={styles.repliesCount}>
-                    {discussion.replies.length} Replies
-                  </span>
-                  <button
-                    className={styles.seeRepliesButton}
-                    onClick={() => toggleReplies(discussion.id)}
-                  >
-                    {discussion.showReplies ? "Hide Replies" : "See Replies"}
-                  </button>
-                </div>
-
-                {discussion.showReplies && (
-                  <div className={styles.repliesList}>
-                    {discussion.replies.map((reply) => (
-                      <div key={reply.id} className={styles.replyCard}>
-                        <div className={styles.replyHeader}>
-                          <img
-                            src={reply.author.avatar || "/placeholder.svg"}
-                            alt={reply.author.name}
-                            className={styles.replyAvatar}
-                          />
-                          <div className={styles.replyAuthorInfo}>
-                            <h5 className={styles.replyAuthorName}>
-                              {reply.author.name}
-                            </h5>
-                            <div className={styles.replyMeta}>
-                              <div className={styles.rating}>
-                                <FaStar className={styles.starIcon} />
-                                <span>{reply.author.rating}</span>
-                              </div>
-                              <span className={styles.publishTime}>
-                                Published {reply.publishedTime}
-                              </span>
-                            </div>
+                {discussion.replies.map((reply) => (
+                  <div key={reply.id} className={styles.replyCard}>
+                    <div className={styles.replyHeader}>
+                      <Image
+                        src={img}
+                        alt={reply.author.name}
+                        className={styles.authorAvatar}
+                      />
+                      <div className={styles.replyAuthorInfo}>
+                        <h5 className={styles.replyAuthorName}>
+                          {reply.author.name}
+                        </h5>
+                        <div className={styles.replyMeta}>
+                          <div className={styles.rating}>
+                            <FaStar className={styles.starIcon} />
+                            <span>{reply.author.rating}</span>
                           </div>
-                        </div>
-                        <p className={styles.replyContent}>{reply.content}</p>
-                        <div className={styles.replyActions}>
-                          <button
-                            className={styles.voteButton}
-                            onClick={() => handleVote(reply.id, "helpful")}
-                          >
-                            <FaThumbsUp className={styles.voteIcon} />
-                            Helpful
-                          </button>
-                          <button
-                            className={styles.voteButton}
-                            onClick={() => handleVote(reply.id, "notHelpful")}
-                          >
-                            <FaThumbsDown className={styles.voteIcon} />
-                            Not helpful
-                          </button>
+                          <span className={styles.publishTime}>
+                            Published {reply.publishedTime}
+                          </span>
                         </div>
                       </div>
-                    ))}
+                    </div>
+                    <p className={styles.replyContent}>{reply.content}</p>
+                    <div className={styles.replyActions}>
+                      <button
+                        className={styles.voteButton}
+                        onClick={() => handleVote(reply.id, "helpful")}
+                      >
+                        <FaThumbsUp className={styles.voteIcon} />
+                        Helpful
+                      </button>
+                      <button
+                        className={styles.voteButton}
+                        onClick={() => handleVote(reply.id, "notHelpful")}
+                      >
+                        <FaThumbsDown className={styles.voteIcon} />
+                        Not helpful
+                      </button>
+                    </div>
                   </div>
-                )}
+                ))}
               </div>
             )}
           </div>
@@ -301,12 +292,38 @@ const Discussions = () => {
       {/* Rich Text Reply Editor - Always Visible */}
       <div className={styles.replyEditor}>
         <div className={styles.replyInputContainer}>
-          <img
-            src="/placeholder.svg?height=40&width=40"
-            alt="Your avatar"
-            className={styles.replyUserAvatar}
-          />
-          <div className={styles.editorWrapper}>
+          <Image src={img} alt="Your avatar" className={styles.userAvatar} />
+
+          <div className=" w_100">
+            <div>
+              <JoditEditor
+                ref={editor}
+                value={replyContent}
+                config={editorConfig}
+                tabIndex={2}
+                onChange={(newContent) => setReplyContent(newContent)}
+              />
+            </div>
+
+            {replyContent.trim() && (
+              <div className={styles.ic_btn_container}>
+                <button
+                  className={`${styles.ic_btn} ${styles.ic_cencel}`}
+                  onClick={handleCancelReply}
+                >
+                  Cancel
+                </button>
+                <button
+                  className={`${styles.ic_btn} ${styles.ic_save}`}
+                  onClick={handleSubmitReply}
+                >
+                  Save note
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* <div className={styles.editorWrapper}>
             <JoditEditor
               ref={editor}
               value={replyContent}
@@ -315,6 +332,7 @@ const Discussions = () => {
               onBlur={(newContent) => setReplyContent(newContent)}
               onChange={(newContent) => setReplyContent(newContent)}
             />
+
             <div className={styles.editorActions}>
               <button
                 className={styles.cancelButton}
@@ -329,7 +347,7 @@ const Discussions = () => {
                 SUBMIT
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

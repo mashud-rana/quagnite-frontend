@@ -95,7 +95,7 @@ const Reviews = () => {
         </div>
 
         {/* Review Input */}
-        {/* <div className={styles.reviewInput}>
+        <div className={styles.reviewInput}>
           <Image
             src={img}
             width={50}
@@ -108,7 +108,7 @@ const Reviews = () => {
             placeholder="Type Your Reviews and Press Enter..."
             className={styles.reviewTextInput}
           />
-        </div> */}
+        </div>
 
         {/* Reviews List */}
         <div className={styles.reviewsList}>

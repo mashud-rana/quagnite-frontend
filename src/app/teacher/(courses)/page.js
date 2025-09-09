@@ -1,7 +1,11 @@
-import styles from "./academe.module.css";
+import { FaArrowLeft, FaEnvelope } from "react-icons/fa";
+import styles from "./courses.module.css";
 import img from "@/assets/images/all/case-studies.png";
 import Image from "next/image";
 import { MdOutlineEmail } from "react-icons/md";
+import Link from "next/link";
+import { BiEditAlt } from "react-icons/bi";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const coaches = [
   {
@@ -54,9 +58,20 @@ const coaches = [
   },
 ];
 
-export default function AcademePage() {
+const TeacherDashboardPage = () => {
   return (
     <div>
+      <div className="mb-24 ic_flex">
+        <div className="ic_title_section">
+          <Link href="#" className="ic_back_button" aria-label="Go back">
+            <FaArrowLeft />
+          </Link>
+          <h1 className="ic_text_36">Courses</h1>
+        </div>
+
+        <button className="ic_common_primary_btn">+ create course</button>
+      </div>
+
       <div className={styles.coachesGrid}>
         {coaches.map((coach) => (
           <div key={coach.id} className={styles.coachCard}>
@@ -67,11 +82,16 @@ export default function AcademePage() {
               <h3 className={styles.coachName}>{coach.name}</h3>
               <p className={styles.coachDescription}>{coach.description}</p>
 
-              <MdOutlineEmail className={styles.contactIcon} />
+              <div className={styles.ic_icon_container}>
+                <BiEditAlt className={styles.contactIcon} />
+                <RiDeleteBin6Line className={styles.contactIcon} />
+              </div>
             </div>
           </div>
         ))}
       </div>
     </div>
   );
-}
+};
+
+export default TeacherDashboardPage;
