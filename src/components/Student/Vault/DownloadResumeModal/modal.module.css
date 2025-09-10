@@ -1,0 +1,30 @@
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.modalTitle {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  line-height: 1.4;
+  margin-bottom: 16px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+@media (max-width: 575px) {
+  .modalHeader {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .sectionTitle {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+}

@@ -6,10 +6,21 @@ import styles from "./skillchart.module.css";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
 import CourseCard from "../../Courses/Course/CourseCard";
+import DownloadResumeModal from "../../Vault/DownloadResumeModal/DownloadResumeModal";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const SkillChart = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -89,7 +100,12 @@ const SkillChart = () => {
       <div className={styles.ic_section_wrapper}>
         <div className={`${styles.ic_heading_containr} mb-24`}>
           <h1 className="ic_text_36 fw_600">Track your progress</h1>
-          <button className="ic_common_primary_btn">See certificate</button>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="ic_common_primary_btn"
+          >
+            See certificate
+          </button>
         </div>
 
         <div className={styles.ic_grid}>
@@ -126,6 +142,12 @@ const SkillChart = () => {
           <CourseCard key={course.id} course={course} />
         ))}
       </div>
+
+      <DownloadResumeModal
+        open={isModalOpen}
+        onCancel={handleCancel}
+        onOk={handleOk}
+      />
     </div>
   );
 };
