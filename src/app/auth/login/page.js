@@ -1,31 +1,75 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Image from "next/image";
 import styles from "./login.module.css";
 import bg from "@/assets/images/auth/register.png";
 import google from "@/assets/images/auth/google.png";
 import logo from "@/assets/images/auth/logo.png";
+import { useLoginMutation } from "@/redux/features/auth/authApi";
+import { antIcon, toastError, toastSuccess } from "@/utils/helper";
+import { Spin } from "antd";
+
+//schema validation
+
+const schema = yup
+  .object({
+    email: yup.string().email("Invalid email").required("Email is required"),
+    password: yup
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .required("Password is required"),
+  })
+  .required();
 
 const LoginPage = () => {
+  //component state
   const [showPassword, setShowPassword] = useState(false);
+
+  //react hook form
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  //handle login mutation
+
+  const [login, { data: loginData, isLoading, isSuccess, isError, error }] =
+    useLoginMutation(); //useLoginMutation();
+
+  //handle form submit
 
   const onSubmit = (data) => {
     console.log("Login submitted:", data);
+    login(data);
     // Handle login here
   };
+
+  //handle google login
 
   const handleGoogleLogin = () => {
     console.log("Login with Google clicked");
     // Handle Google login here
   };
+
+  //login success or error handling can be done here
+
+  useEffect(() => {
+    if (isSuccess) {
+      toastSuccess(loginData?.message || "Login successful");
+    }
+    if (isError) {
+      toastError(error?.data?.message || "Login failed. Please try again.");
+    }
+  }, [isSuccess, isError, error, loginData]);
 
   return (
     <div className={styles.ic_container}>
@@ -57,13 +101,7 @@ const LoginPage = () => {
                   className={`${styles.input} ${
                     errors.email ? styles.inputError : ""
                   }`}
-                  {...register("email", {
-                    required: "Email is required",
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: "Invalid email address",
-                    },
-                  })}
+                  {...register("email")}
                 />
                 {errors.email && (
                   <span className={styles.errorMessage}>
@@ -81,9 +119,7 @@ const LoginPage = () => {
                     className={`${styles.input} ${styles.passwordInput} ${
                       errors.password ? styles.inputError : ""
                     }`}
-                    {...register("password", {
-                      required: "Password is required",
-                    })}
+                    {...register("password")}
                   />
                   <button
                     type="button"
@@ -100,8 +136,12 @@ const LoginPage = () => {
                 )}
               </div>
 
-              <button type="submit" className={styles.registerButton}>
-                Login
+              <button
+                type="submit"
+                className={styles.registerButton}
+                disabled={isLoading}
+              >
+                Login {isLoading && <Spin indicator={antIcon} />}
               </button>
 
               <div className={styles.divider}>

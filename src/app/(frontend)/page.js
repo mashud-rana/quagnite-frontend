@@ -11,7 +11,15 @@ import TestimonialSlider from "@/components/Frontend/Home/TestimonialSlide/Testi
 import WhyQuagniteSection from "@/components/Frontend/Home/WhyQuagnite/WhyQuagnite";
 import Companys from "@/components/Share/Frontend/Companys/Companys";
 
-export default function Home() {
+export default async function Home() {
+  //base url
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+  //get home data
+  // const resHome = await fetch(`${baseUrl}/home`, {
+  //   cache: "no-store",
+  // });
+  // const homeData = await resHome.json();
+
   return (
     <>
       <Hero />
