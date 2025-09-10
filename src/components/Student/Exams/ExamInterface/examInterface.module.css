@@ -1,16 +1,13 @@
-/* Exam Header */
+.examContent {
+  border: 1px solid #e2e2e2;
+  border-radius: 16px;
+  padding: 16px;
+}
+
 .examHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid #e2e2e2;
-}
-
-.examTitle {
-  font-size: 24px;
-  font-weight: 600;
-  color: #212529;
-  margin: 0;
 }
 
 .examInfo {
@@ -19,46 +16,26 @@
   gap: 24px;
 }
 
-.questionCounter {
-  font-size: 16px;
-  color: #6c757d;
-  font-weight: 500;
-}
-
 .timer {
   background-color: var(--primary-color);
-  color: white;
+  color: var(--white);
   padding: 8px 16px;
   border-radius: 6px;
   font-size: 20px;
-  font-weight: 600;
-  min-width: 60px;
-  text-align: center;
-}
-
-/* Question Section */
-.questionSection {
-  margin-top: 24px;
-  background-color: white;
-  padding: 32px;
-  border-radius: 12px;
-  border: 1px solid #e2e2e2;
+  font-weight: 500;
 }
 
 .questionText {
-  font-size: 16px;
-  color: #212529;
-  margin-bottom: 24px;
-  line-height: 1.5;
+  margin-bottom: 16px;
 }
 
-/* Options */
 .optionsContainer {
-  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .optionItem {
-  margin-bottom: 16px;
   padding: 16px;
   background-color: #f8f9fa;
   border-radius: 8px;
@@ -112,40 +89,112 @@
   line-height: 1.4;
 }
 
-/* Submit Button */
-.submitContainer {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.submitButton {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 12px 24px;
+.progressBarWrapper {
+  width: 100%;
+  height: 8px;
+  background-color: #e5e7eb;
   border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  overflow: hidden;
+  margin: 20px 0;
 }
 
-.submitButton:hover {
-  background-color: #0056b3;
+.progressBarFill {
+  height: 100%;
+  background-color: #3b82f6;
+  transition: width 0.3s ease-in-out;
+}
+
+.statusBoxContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin: 15px 0;
+  justify-content: center;
+}
+
+.ic_box_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.statusBox {
+  width: 46px;
+  height: 46px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 16px;
+  color: #111827;
+  border: 1px solid var(--black);
+}
+
+.correct {
+  color: #14ae5c;
+}
+
+.incorrect {
+  color: #ef4444;
+}
+
+.ic_score {
+  text-transform: capitalize;
+  margin-top: 16px;
+  text-align: center;
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-  .examContent {
-    padding: 16px 20px;
+@media (max-width: 1299px) {
+  .timer {
+    padding: 8px 12px;
+    font-size: 16px;
   }
 
+  .statusBoxContainer {
+    gap: 18px;
+  }
+
+  .statusBox {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .statusBoxContainer {
+    gap: 16px;
+  }
+
+  .ic_box_container {
+    gap: 8px;
+  }
+
+  .statusBox {
+    width: 36px;
+    height: 36px;
+  }
+
+  .optionItem {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 768px) {
   .examHeader {
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
+  }
+
+  .statusBoxContainer {
+    gap: 12px;
+  }
+
+  .ic_box_container {
+    gap: 4px;
   }
 
   .examTitle {
@@ -155,23 +204,23 @@
   .questionSection {
     padding: 20px;
   }
+
+  .timer {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+
+  .optionItem {
+    padding: 9px 12px;
+  }
 }
 
 @media (max-width: 480px) {
-  .examContent {
-    padding: 12px 16px;
-  }
-
   .questionSection {
     padding: 16px;
   }
 
   .examTitle {
     font-size: 18px;
-  }
-
-  .timer {
-    padding: 6px 12px;
-    font-size: 14px;
   }
 }

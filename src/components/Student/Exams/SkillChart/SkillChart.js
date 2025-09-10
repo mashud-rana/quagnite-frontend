@@ -88,7 +88,7 @@ const SkillChart = () => {
     <div>
       <div className={styles.ic_section_wrapper}>
         <div className={`${styles.ic_heading_containr} mb-24`}>
-          <h1 className="ic_text_36 fw_600">Profile Management</h1>
+          <h1 className="ic_text_36 fw_600">Track your progress</h1>
           <button className="ic_common_primary_btn">See certificate</button>
         </div>
 

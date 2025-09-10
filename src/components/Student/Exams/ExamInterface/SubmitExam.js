@@ -1,11 +1,17 @@
-import React from "react";
-import styles from "./examInterface.module.css";
-import Link from "next/link";
+"use client";
 
-const ExamInterface = () => {
-  const totalQuestions = 3;
+import React, { useState } from "react";
+import styles from "./examInterface.module.css";
+import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa6";
+
+const SubmitExam = () => {
+  const totalQuestions = 12;
   const currentQuestion = 1;
   const progress = (currentQuestion / totalQuestions) * 100;
+
+  const [submitted, setSubmitted] = useState(false);
+  const [results, setResults] = useState(Array(totalQuestions).fill(null));
 
   const question = {
     id: 1,
@@ -16,8 +22,17 @@ const ExamInterface = () => {
       "32768 to 32767",
       "Out Heart Choker Necklace Heart",
     ],
-    selectedAnswers: [0],
+    correctAnswers: [2],
     type: "multiple",
+  };
+
+  const handleSubmit = () => {
+    const isCorrect = question.correctAnswers.includes(2);
+
+    const newResults = [...results];
+    newResults[currentQuestion - 1] = isCorrect;
+    setResults(newResults);
+    setSubmitted(true);
   };
 
   return (
@@ -26,7 +41,9 @@ const ExamInterface = () => {
       <div className={styles.examHeader}>
         <h5>Active Directory and Entra ID Administration</h5>
         <div className={styles.examInfo}>
-          <span className="fw_500">Question 1/3</span>
+          <span className="fw_500">
+            Question {currentQuestion}/{totalQuestions}
+          </span>
           <div className={styles.timer}>24 : 37</div>
         </div>
       </div>
@@ -39,12 +56,24 @@ const ExamInterface = () => {
         ></div>
       </div>
 
+      {/* Question Status Boxes */}
+      <div className={styles.statusBoxContainer}>
+        {Array.from({ length: totalQuestions }).map((_, index) => (
+          <div className={styles.ic_box_container} key={index}>
+            <FaCheck size={20} className={`${styles.correct}`} />
+            <div className={styles.statusBox}>
+              <span>{index + 1}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
       {/* Question Section */}
       <div>
-        <div className={styles.questionText}>1. {question.question} </div>
+        <div className={styles.questionText}>1. {question.question}</div>
 
         {/* Answer Options */}
-        <div className={`${styles.optionsContainer} mb-24`}>
+        <div className={styles.optionsContainer}>
           {question.options.map((option, index) => (
             <div key={index} className={styles.optionItem}>
               <label className={styles.optionLabel}>
@@ -61,17 +90,11 @@ const ExamInterface = () => {
         </div>
 
         {/* Submit Button */}
-        <div className={`${styles.submitContainer} ic_text_end`}>
-          <Link
-            href="/student/exams/submit-exam"
-            className="ic_common_primary_btn"
-          >
-            SUBMIT ANSWER
-          </Link>
-        </div>
+
+        <h6 className={styles.ic_score}> Score: 88% - Keep Pushing!</h6>
       </div>
     </div>
   );
 };
 
-export default ExamInterface;
+export default SubmitExam;
