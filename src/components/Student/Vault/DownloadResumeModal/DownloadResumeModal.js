@@ -34,7 +34,7 @@ const DownloadResumeModal = ({ open, onCancel }) => {
     >
       <hr className={styles.ic_hr} />
 
-      <h6 className={styles.sectionTitle}>Select Camera & Microphone</h6>
+      <h6 className={styles.sectionTitle}>Share on social Media</h6>
 
       <hr className={styles.ic_hr} />
     </Modal>
