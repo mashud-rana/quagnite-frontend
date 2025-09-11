@@ -1,0 +1,673 @@
+.progressContainer {
+  padding: 25px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.progressSteps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.stepContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex: 1;
+}
+
+/* Updated step circle to match exact orange color and size */
+.stepCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 2;
+  border: 2px solid #e9ecef;
+}
+
+.stepCircle.active {
+  background-color: #ff8c42;
+  border-color: #ff8c42;
+  color: white;
+}
+
+.stepCircle.completed {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: white;
+}
+
+.stepLabel {
+  text-align: center;
+}
+
+.stepName {
+  font-size: 12px;
+  font-weight: 500;
+  color: #495057;
+  line-height: 1.2;
+}
+
+.stepSubname {
+  font-size: 12px;
+  font-weight: 500;
+  color: #495057;
+  line-height: 1.2;
+}
+
+.stepConnector {
+  position: absolute;
+  top: 20px;
+  left: 55%;
+  right: -55%;
+  height: 2px;
+  background-color: #e9ecef;
+  z-index: 1;
+}
+
+.connectorActive {
+  background-color: #ff8c42;
+}
+
+.section {
+  margin-bottom: 35px;
+  border: 1px solid #e2e2e2;
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.sectionTitle {
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.formGrid {
+  display: grid;
+  /* grid-template-columns: repeat(2, 1fr); */
+  gap: 16px;
+}
+
+.formGroup {
+  border: 1px solid red;
+  /* display: flex; */
+  display: grid;
+  grid-template-columns: 0.5fr 1.5fr;
+  /* display: flex;
+  flex-direction: column; */
+}
+
+.formGroupWide {
+  grid-column: 1 / -1;
+}
+
+.formGroupWithButton {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  border: 1px solid red;
+}
+
+/* Updated input styling to match exact gray background and border */
+.input,
+.select {
+  padding: 12px 14px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  font-size: 14px;
+  color: #495057;
+  transition: all 0.2s;
+}
+
+.input:focus,
+.select:focus {
+  outline: none;
+  border-color: #6c5ce7;
+  background-color: white;
+  box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.1);
+}
+
+.input::placeholder {
+  color: #6c757d;
+}
+
+.keyPointsContainer {
+  display: flex;
+  gap: 12px;
+  align-items: end;
+  flex-wrap: wrap;
+}
+
+.keyPointsContainer .input {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* Updated button styling to match exact blue color */
+.addButton {
+  background-color: #6c5ce7;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s;
+}
+
+.addButton:hover {
+  background-color: #5a54d6;
+}
+
+.subscriptionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 140px;
+}
+
+.subscriptionLabel {
+  font-size: 12px;
+  color: #6c757d;
+  font-weight: 400;
+}
+
+.enableSelect {
+  padding: 10px 12px;
+  font-size: 13px;
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.inputWithButton {
+  display: flex;
+  gap: 12px;
+  align-items: end;
+}
+
+.inputWithButton .input,
+.inputWithButton .select {
+  flex: 1;
+}
+
+.addButtonSmall {
+  background-color: #6c5ce7;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s;
+}
+
+.addButtonSmall:hover {
+  background-color: #5a54d6;
+}
+
+.helperText {
+  font-size: 12px;
+  color: #6c757d;
+  margin-top: 4px;
+  font-style: normal;
+}
+
+.uploadSection {
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 1px solid #dee2e6;
+}
+
+.uploadTitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: #212529;
+  margin-bottom: 20px;
+}
+
+.radioGroup {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 20px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #495057;
+  cursor: pointer;
+}
+
+.radioLabel input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #6c5ce7;
+}
+
+.radioText {
+  font-weight: 400;
+}
+
+/* Updated upload area to match design with proper dashed border */
+.uploadArea {
+  border: 2px dashed #ced4da;
+  border-radius: 8px;
+  padding: 40px;
+  text-align: center;
+  background-color: #f8f9fa;
+  transition: border-color 0.2s;
+}
+
+.uploadArea:hover {
+  border-color: #6c5ce7;
+}
+
+.uploadIcon {
+  color: #6c757d;
+  margin-bottom: 16px;
+}
+
+.uploadText {
+  font-size: 14px;
+  color: #495057;
+  margin-bottom: 4px;
+  font-weight: 400;
+}
+
+.uploadSubtext {
+  font-size: 13px;
+  color: #6c757d;
+  margin-bottom: 20px;
+}
+
+.chooseFileButton {
+  background-color: #6c5ce7;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.chooseFileButton:hover {
+  background-color: #5a54d6;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #dee2e6;
+}
+
+.saveButton {
+  background-color: #6c5ce7;
+  color: white;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: background-color 0.2s;
+}
+
+.saveButton:hover {
+  background-color: #5a54d6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .progressSteps {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .stepContainer {
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .stepConnector {
+    display: none;
+  }
+
+  .keyPointsContainer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .inputWithButton {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .radioGroup {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .uploadArea {
+    padding: 25px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sectionTitle {
+    font-size: 16px;
+  }
+
+  .stepName,
+  .stepSubname {
+    font-size: 11px;
+  }
+
+  .stepCircle {
+    width: 35px;
+    height: 35px;
+  }
+
+  .progressContainer {
+    padding: 20px 15px;
+  }
+}
+
+.lessonsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.lessonCard {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.lessonTitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: #212529;
+  margin: 0 0 16px 0;
+}
+
+.lessonInfo {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #6c757d;
+}
+
+.infoIcon {
+  color: #6c5ce7;
+  font-size: 12px;
+}
+
+.durationIcon {
+  font-size: 14px;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.actionBtn {
+  background: #6c5ce7;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: background-color 0.2s;
+}
+
+.actionBtn:hover {
+  background: #5a54d6;
+}
+
+.lessonThumbnail {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background: #1a1a1a;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  background-image: url("/javascript-code-editor-dark-theme.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.thumbnailImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.playOverlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.playOverlay:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.lessonFooterButtons {
+  display: flex;
+  gap: 12px;
+}
+
+.uploadBtn,
+.previewBtn {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.uploadBtn {
+  background: #6c5ce7;
+  color: white;
+}
+
+.uploadBtn:hover {
+  background: #5a54d6;
+}
+
+.previewBtn {
+  background: #6c5ce7;
+  color: white;
+}
+
+.previewBtn:hover {
+  background: #5a54d6;
+}
+
+.bottomNavigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #dee2e6;
+}
+
+.addSectionButton {
+  background: #6c5ce7;
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: background-color 0.2s;
+}
+
+.addSectionButton:hover {
+  background: #5a54d6;
+}
+
+/* Responsive updates for lesson cards */
+@media (max-width: 768px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .progressSteps {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .stepContainer {
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .stepConnector {
+    display: none;
+  }
+
+  .keyPointsContainer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .inputWithButton {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .radioGroup {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .uploadArea {
+    padding: 25px 15px;
+  }
+
+  .lessonsGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .lessonCard {
+    padding: 16px;
+  }
+
+  .actionButtons {
+    gap: 6px;
+  }
+
+  .actionBtn {
+    padding: 6px 10px;
+    font-size: 10px;
+  }
+
+  .lessonThumbnail {
+    height: 160px;
+  }
+
+  .bottomNavigation {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .saveButton,
+  .addSectionButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .sectionTitle {
+    font-size: 16px;
+  }
+
+  .stepName,
+  .stepSubname {
+    font-size: 11px;
+  }
+
+  .stepCircle {
+    width: 35px;
+    height: 35px;
+  }
+
+  .progressContainer {
+    padding: 20px 15px;
+  }
+}

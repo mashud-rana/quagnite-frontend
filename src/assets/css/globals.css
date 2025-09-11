@@ -14,6 +14,14 @@
 }
 /* common class */
 
+.ic_primary {
+  background-color: var(--primary-color);
+}
+
+.ic_color_primary {
+  color: var(--primary-color);
+}
+
 .ic_purple {
   color: var(--purple);
 }
@@ -638,11 +646,12 @@ h6 {
   justify-content: center;
   width: 32px;
   height: 32px;
-  border-radius: 50%;
+  border-radius: 100%;
   background-color: var(--primary-color);
   color: var(--white);
   text-decoration: none;
   transition: background-color 0.2s;
+  border: none;
 }
 
 .ic_flex {

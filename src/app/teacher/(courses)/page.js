@@ -69,7 +69,12 @@ const TeacherDashboardPage = () => {
           <h1 className="ic_text_36">Courses</h1>
         </div>
 
-        <button className="ic_common_primary_btn">+ create course</button>
+        <Link
+          href="/teacher/course/create-course"
+          className="ic_common_primary_btn"
+        >
+          + create course
+        </Link>
       </div>
 
       <div className={styles.coachesGrid}>
