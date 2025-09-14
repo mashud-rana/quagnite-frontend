@@ -160,6 +160,10 @@
   transform: translateY(-1px);
   box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
 }
+.registerButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
 
 .divider {
   display: flex;
