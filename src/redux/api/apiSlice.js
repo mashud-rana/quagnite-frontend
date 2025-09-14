@@ -18,9 +18,11 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
   
   if (result?.error?.status === 401) {
+    // get refresh token from state
+    const refresh_token = api.getState().auth.refresh_token;
     // try refresh
     const refreshResult = await baseQuery(
-      { url: "/user-auth/refresh", method: "POST" },
+      { url: "/user-auth/refresh", method: "POST", body: { refresh_token } },
       api,
       extraOptions
     );
