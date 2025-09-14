@@ -11,7 +11,7 @@ import { BiBookContent, BiMoneyWithdraw } from "react-icons/bi";
 import { RiGraduationCapLine } from "react-icons/ri";
 import { MdLockOutline } from "react-icons/md";
 import { GiFeather } from "react-icons/gi";
-import withAuthStudent from "@/utils/withAuthStudent";
+import withAuth from "@/utils/withAuth";
 
 const StudentLayout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -107,4 +107,4 @@ const StudentLayout = ({ children }) => {
 };
 
 // export default StudentLayout;
-export default withAuthStudent(StudentLayout);
+export default withAuth(StudentLayout,['student']);

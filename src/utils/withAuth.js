@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-const withAuthStudent = (Component) => {
+const withAuth = (Component, allowedRoles) => {
   const Auth = (props) => {
     const [loading, setLoading] = useState(true);
     const [userData, setUserData] = useState(null);
@@ -29,8 +29,8 @@ const withAuthStudent = (Component) => {
       router.push("/auth/login");
       return null;
     }
-    const userType = userData?.user_type === "student";
-    if (!userType) {
+
+    if (!allowedRoles.includes(userData?.user_type)) {
       router.push("/not-found");
       return null;
     }
@@ -44,4 +44,4 @@ const withAuthStudent = (Component) => {
   return Auth;
 };
 
-export default withAuthStudent;
+export default withAuth;
