@@ -1,21 +1,10 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
-import {
-  FaBold,
-  FaItalic,
-  FaUnderline,
-  FaLink,
-  FaPaperclip,
-  FaTrash,
-  FaEdit,
-  FaEllipsisV,
-  FaChevronDown,
-} from "react-icons/fa";
+import { FaTrash, FaEdit, FaEllipsisV } from "react-icons/fa";
 import styles from "./note.module.css";
-import dynamic from "next/dynamic"; // 👈 import dynamic
+import dynamic from "next/dynamic";
 
-// 👇 Dynamically load JoditEditor (no SSR)
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
 const mockNotes = [
@@ -121,7 +110,7 @@ const Notes = () => {
   return (
     <div className={styles.notesContainer}>
       {/* Rich Text Editor */}
-      <div className="mb-24">
+      <div className="mb-24 ic_text_editor">
         <div className={styles.ic_note_text_editor_wrapper}>
           <JoditEditor
             ref={editor}

@@ -590,12 +590,12 @@ h6 {
 
 /* editor design modified...........................  */
 
-.jodit-container:not(.jodit_inline) {
+.ic_text_editor .jodit-container:not(.jodit_inline) {
   border: none !important;
   border-radius: 12px !important;
 }
 
-.jodit-toolbar__box:not(:empty) {
+.ic_text_editor .jodit-toolbar__box:not(:empty) {
   background: #f1f1f1 !important;
   padding: 10px 10px 0 10px;
   /* border: none !important; */
@@ -605,26 +605,26 @@ h6 {
   flex-wrap: nowrap !important;
 }
 
-.jodit-wysiwyg {
+.ic_text_editor .jodit-wysiwyg {
   background: #f1f1f1 !important;
   /* border: none !important; */
   padding: 10px 15px !important;
   border-radius: 0 0 12px 12px !important;
 }
 
-.jodit-toolbar-button {
+.ic_text_editor .jodit-toolbar-button {
   background-color: #f8f8fa;
   margin: 6px !important;
   border: 1px solid #dcdada !important;
   /* background-color: #f7f7fa; */
 }
 
-.jodit-ui-separator {
+.ic_text_editor .jodit-ui-separator {
   border-right: 0px !important;
   margin: 0px !important;
 }
 
-.jodit-toolbar-collection_mode_horizontal,
+.ic_text_editor .jodit-toolbar-collection_mode_horizontal,
 .jodit-toolbar-editor-collection_mode_horizontal {
   background-image: none !important;
 }
@@ -635,7 +635,7 @@ h6 {
   gap: 24px;
 }
 
-.jodit-toolbar-editor-collection_mode_horizontal {
+.ic_text_editor .jodit-toolbar-editor-collection_mode_horizontal {
   display: flex !important;
   flex-wrap: nowrap !important;
   overflow: hidden !important;

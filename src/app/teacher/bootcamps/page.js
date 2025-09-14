@@ -65,10 +65,10 @@ const BootcampsPage = () => {
           <h1 className="ic_text_36">List of all Bootcamps</h1>
         </div>
 
-        <button className="ic_icn_btn">
+        <Link href="/teacher/bootcamps/create" className="ic_icn_btn">
           <FaPlus />
           create bootcamp
-        </button>
+        </Link>
       </div>
 
       <div className={styles.ic_grid}>
