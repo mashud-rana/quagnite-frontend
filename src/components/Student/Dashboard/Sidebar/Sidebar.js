@@ -25,20 +25,17 @@ const Sidebar = ({
   const isMenuActive = (menuUrl) => {
     if (!menuUrl) return false;
 
-    // URL-এর শেষে থাকা "/" সরাই
     const normalizePath = (url) => url.replace(/\/+$/, "");
 
     const current = normalizePath(pathname);
     const target = normalizePath(menuUrl);
 
-    // panel root detect (যেমন "/student", "/teacher", "/admin")
     const isRootLevel = /^\/[^/]+$/.test(target);
 
     if (isRootLevel) {
-      return current === target; // শুধু exact match এ active
+      return current === target;
     }
 
-    // অন্য সবগুলোর জন্য: exact বা nested match
     return current === target || current.startsWith(target + "/");
   };
 

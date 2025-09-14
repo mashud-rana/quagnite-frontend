@@ -26,7 +26,7 @@ const StudentLayout = ({ children }) => {
   const mainMenu = [
     {
       title: "Explore",
-      url: "/student",
+      url: "design/student",
       icon: GiFeather,
     },
     {
@@ -36,32 +36,32 @@ const StudentLayout = ({ children }) => {
     },
     {
       title: "Bootcamps",
-      url: "/student/bootcamps",
+      url: "design/student/bootcamps",
       icon: PiMonitorBold,
     },
     {
       title: "Exams",
-      url: "/student/exams",
+      url: "design/student/exams",
       icon: PiCirclesThreeBold,
     },
     {
       title: "Playground",
-      url: "/student/playground",
+      url: "design/student/playground",
       icon: GrPlay,
     },
     {
       title: "E-book",
-      url: "/student/ebook",
+      url: "design/student/ebook",
       icon: BiBookContent,
     },
     {
       title: "Academe",
-      url: "/student/academe",
+      url: "design/student/academe",
       icon: RiGraduationCapLine,
     },
     {
       title: "Vault",
-      url: "/student/vault",
+      url: "design/student/vault",
       icon: MdLockOutline,
     },
   ];
