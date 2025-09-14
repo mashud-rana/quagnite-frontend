@@ -13,6 +13,7 @@ import logo from "@/assets/images/auth/logo.png";
 import { useLoginMutation } from "@/redux/features/auth/authApi";
 import { antIcon, toastError, toastSuccess } from "@/utils/helper";
 import { Spin } from "antd";
+import { useRouter } from 'next/navigation'
 
 //schema validation
 
@@ -29,7 +30,7 @@ const schema = yup
 const LoginPage = () => {
   //component state
   const [showPassword, setShowPassword] = useState(false);
-
+  const router = useRouter();
   //react hook form
 
   const {
@@ -65,6 +66,9 @@ const LoginPage = () => {
   useEffect(() => {
     if (isSuccess) {
       toastSuccess(loginData?.message || "Login successful");
+      if(loginData?.user?.user_type === "student"){
+        router.push('/student');
+      }
     }
     if (isError) {
       toastError(error?.data?.message || "Login failed. Please try again.");
