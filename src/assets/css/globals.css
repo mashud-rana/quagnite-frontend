@@ -402,11 +402,34 @@ h6 {
   text-decoration: none;
 }
 
+.ic_icn_btn {
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 8px 16px;
+  font-size: 15px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .ic_text_end {
   text-align: end;
 }
 
 .ic_common_primary_btn:hover {
+  background-color: var(--primary-color);
+  box-shadow: 0px 2px 8px #5c81f7;
+  transform: translateY(-1px);
+}
+
+.ic_icn_btn:hover {
   background-color: var(--primary-color);
   box-shadow: 0px 2px 8px #5c81f7;
   transform: translateY(-1px);
@@ -655,6 +678,12 @@ h6 {
 }
 
 .ic_flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ic_flex2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -930,6 +959,11 @@ h6 {
   }
 
   .ic_common_primary_btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .ic_icn_btn {
     font-size: 14px;
     padding: 8px 16px;
   }
@@ -1425,12 +1459,24 @@ h6 {
   }
 
   .ic_common_primary_btn {
-    /* font-size: 12px; */
+    font-size: 12px;
+    padding: 6px 14px;
+  }
+
+  .ic_icn_btn {
+    font-size: 12px;
     padding: 6px 14px;
   }
 
   .ant-table-content {
     font-size: 14px;
+  }
+
+  .ic_flex2 {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 12px;
   }
 }
 
