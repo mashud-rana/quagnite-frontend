@@ -1,20 +1,70 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import React, {useEffect} from "react";
 import Image from "next/image";
 import styles from "./forget.module.css"; // Reuse the same CSS
 import bg from "@/assets/images/auth/register.png";
 import logo from "@/assets/images/auth/logo.png";
+import * as yup from "yup";
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
+import {useForgetPasswordMutation} from "@/redux/features/auth/authApi";
+import { antIcon, toastError, toastSuccess } from "@/utils/helper";
+import { Spin } from "antd";
+
+const schema = yup
+  .object({
+    email: yup
+      .string()
+      .email("Invalid email")
+      .required("Email is required")
+      .matches(
+        /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+        "Invalid email address"
+      ),
+  })
+  .required();
 
 const ForgotPasswordPage = () => {
+
+    const [
+      forgetPassword,
+      {
+        data: forgetPasswordData,
+        isLoading: isForgetPasswordLoading,
+        isSuccess: isForgetPasswordSuccess,
+        isError: isForgetPasswordError,
+        error: forgetPasswordError,
+      },
+    ] = useForgetPasswordMutation();
   const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+      register,
+      handleSubmit,
+      formState: { errors },
+      setValue,
+      setError,
+    } = useForm({
+      mode: "onBlur",
+      resolver: yupResolver(schema),
+      defaultValues:{
+        email:"",
+      }
+    });
+
+    useEffect(()=>{
+      if (isForgetPasswordSuccess && forgetPasswordData && forgetPasswordData.success) {
+        // Handle successful update
+        toastSuccess(forgetPasswordData?.message || "Password reset link sent successfully.");
+      }
+      if (isForgetPasswordError) {
+        console.log('update password error',forgetPasswordError)
+        toastError(forgetPasswordError?.data?.message || "Profile update failed. Please try again.");
+      }
+    }, [isForgetPasswordSuccess, forgetPasswordData, isForgetPasswordError, forgetPasswordError]);
 
   const onSubmit = (data) => {
-    console.log("Reset link requested for:", data.email);
+    forgetPassword({email:data.email});
+    // console.log("Reset link requested for:", data.email);
     // Handle password reset logic here
   };
 
@@ -49,13 +99,7 @@ const ForgotPasswordPage = () => {
                   className={`${styles.input} ${
                     errors.email ? styles.inputError : ""
                   }`}
-                  {...register("email", {
-                    required: "Email is required",
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: "Invalid email address",
-                    },
-                  })}
+                  {...register("email")}
                 />
 
                 {errors.email && (
@@ -66,7 +110,7 @@ const ForgotPasswordPage = () => {
               </div>
 
               <button type="submit" className={styles.ic_btn}>
-                Send Password Reset Link
+                Send Password Reset Link {isForgetPasswordLoading && <Spin indicator={antIcon} />}
               </button>
             </form>
           </div>
