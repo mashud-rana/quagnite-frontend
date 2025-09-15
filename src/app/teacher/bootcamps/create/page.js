@@ -1,6 +1,6 @@
 "use client";
 
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useMemo, useRef, useState } from "react";
@@ -13,6 +13,8 @@ import { IoMdArrowDropdown } from "react-icons/io";
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 import dynamic from "next/dynamic";
 import { RiUploadCloud2Line } from "react-icons/ri";
+import ProgressStepper from "@/components/Teacher/Courses/ProgressStepper/ProgressStepper";
+import Link from "next/link";
 
 const schema = yup.object({
   bootcampTitle: yup.string().required("Bootcamp title is required"),
@@ -20,29 +22,29 @@ const schema = yup.object({
   bootcampSubCategory: yup
     .string()
     .required("Bootcamp sub category is required"),
-  whatYoullLearn: yup.string().required("What student learn is required"),
-  whoShouldAttend: yup.string().required("Target audience is required"),
+  // whatYoullLearn: yup.string().required("What student learn is required"),
+  // whoShouldAttend: yup.string().required("Target audience is required"),
   bootCampTags: yup.string().required("Boot camp tags are required"),
   bootCampPrice: yup
     .number()
     .required("Boot camp price is required")
     .positive("Price must be positive"),
-  bootcampOverview: yup.string().required("Bootcamp overview is required"),
+  // bootcampOverview: yup.string().required("Bootcamp overview is required"),
   bootcampAnnouncements: yup
     .string()
     .required("Bootcamp announcements are required"),
   bootcampBenefits: yup.string().required("Bootcamp benefits are required"),
-  videoType: yup.string().oneOf(["upload", "youtube"]).required(),
-  youtubeId: yup.string().when("videoType", {
-    is: "youtube",
-    then: (schema) => schema.required("YouTube ID is required"),
-    otherwise: (schema) => schema.notRequired(),
-  }),
-  videoFile: yup.mixed().when("videoType", {
-    is: "upload",
-    then: (schema) => schema.required("Video file is required"),
-    otherwise: (schema) => schema.notRequired(),
-  }),
+  // videoType: yup.string().oneOf(["upload", "youtube"]).required(),
+  // youtubeId: yup.string().when("videoType", {
+  //   is: "youtube",
+  //   then: (schema) => schema.required("YouTube ID is required"),
+  //   otherwise: (schema) => schema.notRequired(),
+  // }),
+  // videoFile: yup.mixed().when("videoType", {
+  //   is: "upload",
+  //   then: (schema) => schema.required("Video file is required"),
+  //   otherwise: (schema) => schema.notRequired(),
+  // }),
 });
 
 const CreateBootcampPage = () => {
@@ -110,12 +112,13 @@ const CreateBootcampPage = () => {
 
   return (
     <div>
+      <ProgressStepper currentStep={1} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1 className="ic_text_36 mb-24">Bootcamp Course Details</h1>
 
         <div className={styles.section}>
           <div className={styles.ic_details_wrapper}>
-            <div className={styles.formRow1}>
+            <div className={styles.formRow}>
               <label className={styles.label}>Bootcamp Title</label>
               <div className={styles.inputContainer}>
                 <input
@@ -131,107 +134,124 @@ const CreateBootcampPage = () => {
               </div>
             </div>
 
-            <div className={styles.formRow}>
-              <label className={styles.label}>Bootcamp Category</label>
-              <div className={styles.inputContainer}>
-                <div className={styles.selectWrapper}>
-                  <select
-                    {...register("bootcampCategory")}
-                    className={styles.select}
-                  >
-                    <option value="">Select category</option>
-                    <option value="programming">Programming</option>
-                    <option value="design">Design</option>
-                    <option value="marketing">Marketing</option>
-                  </select>
-                  <BiChevronDown className={styles.selectIcon} />
+            <div className={styles.ic_grid}>
+              <div className={styles.formRow}>
+                <label className={styles.label}>Bootcamp Category</label>
+                <div className={styles.inputContainer}>
+                  <div className={styles.selectWrapper}>
+                    <select
+                      {...register("bootcampCategory")}
+                      className={styles.select}
+                    >
+                      <option value="">Select category</option>
+                      <option value="programming">Programming</option>
+                      <option value="design">Design</option>
+                      <option value="marketing">Marketing</option>
+                    </select>
+                    <BiChevronDown className={styles.selectIcon} />
+                  </div>
+                  {errors.bootcampCategory && (
+                    <span className={styles.error}>
+                      {errors.bootcampCategory.message}
+                    </span>
+                  )}
                 </div>
-                {errors.bootcampCategory && (
-                  <span className={styles.error}>
-                    {errors.bootcampCategory.message}
-                  </span>
-                )}
               </div>
-              <label className={styles.label}>Bootcamp Sub Category</label>
-              <div className={styles.inputContainer}>
-                <div className={styles.selectWrapper}>
-                  <select
-                    {...register("bootcampSubCategory")}
-                    className={styles.select}
-                  >
-                    <option value="">Enable</option>
-                    <option value="web-development">Web Development</option>
-                    <option value="mobile-development">
-                      Mobile Development
-                    </option>
-                    <option value="data-science">Data Science</option>
-                  </select>
-                  <BiChevronDown className={styles.selectIcon} />
-                </div>
-                {errors.bootcampSubCategory && (
-                  <span className={styles.error}>
-                    {errors.bootcampSubCategory.message}
-                  </span>
-                )}
-              </div>
-            </div>
 
-            <div className={styles.formRow}>
-              <label className={styles.label}>What You will Learn</label>
-              <div className={styles.inputContainer}>
-                <div className={styles.textareaWithButton}>
-                  <input
-                    className={styles.input}
-                    placeholder="Enter what students will learn"
-                  />
-                  <button type="button" className={styles.addButton}>
-                    ADD
-                  </button>
-                </div>
-              </div>
-              <label className={styles.label}>
-                Who All Should Attend The Bootcamp
-              </label>
-              <div className={styles.inputContainer}>
-                <div className={styles.textareaWithButton}>
-                  <input
-                    className={styles.input}
-                    placeholder="Enter target audience"
-                  />
-                  <button type="button" className={styles.addButton}>
-                    ADD
-                  </button>
+              <div className={styles.formRow}>
+                <label className={styles.label}>Bootcamp Sub Category</label>
+                <div className={styles.inputContainer}>
+                  <div className={styles.selectWrapper}>
+                    <select
+                      {...register("bootcampSubCategory")}
+                      className={styles.select}
+                    >
+                      <option value="">Enable</option>
+                      <option value="web-development">Web Development</option>
+                      <option value="mobile-development">
+                        Mobile Development
+                      </option>
+                      <option value="data-science">Data Science</option>
+                    </select>
+                    <BiChevronDown className={styles.selectIcon} />
+                  </div>
+                  {errors.bootcampSubCategory && (
+                    <span className={styles.error}>
+                      {errors.bootcampSubCategory.message}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
 
-            <div className={styles.formRow}>
-              <label className={styles.label}>Boot Camp Tags</label>
-              <div className={styles.inputContainer}>
-                <input
-                  {...register("bootCampTags")}
-                  className={styles.input}
-                  placeholder="Enter tags separated by commas"
-                />
-                {errors.bootCampTags && (
-                  <span className={styles.error}>
-                    {errors.bootCampTags.message}
-                  </span>
-                )}
+            <div className={styles.ic_grid}>
+              <div className={styles.formRow}>
+                <label className={styles.label}>What You will Learn</label>
+                <div className={styles.inputContainer}>
+                  <div className={styles.textareaWithButton}>
+                    <input
+                      // {...register("whatYoullLearn")}
+                      className={styles.input}
+                      placeholder="Enter what students will learn"
+                    />
+
+                    <button type="button" className="ic_common_primary_btn">
+                      ADD
+                    </button>
+                  </div>
+                </div>
               </div>
-              <label className={styles.label}>Boot Camp Price</label>
-              <div className={styles.inputContainer}>
-                <input
-                  {...register("bootCampPrice")}
-                  type="number"
-                  className={styles.input}
-                  placeholder="Enter price"
-                />
-                {errors.bootCampPrice && (
-                  <span className={styles.error}>
-                    {errors.bootCampPrice.message}
-                  </span>
-                )}
+
+              <div className={styles.formRow}>
+                <label className={styles.label}>
+                  Who All Should Attend The Bootcamp
+                </label>
+                <div className={styles.inputContainer}>
+                  <div className={styles.textareaWithButton}>
+                    <input
+                      className={styles.input}
+                      placeholder="Enter target audience"
+                    />
+                    <button type="button" className="ic_common_primary_btn">
+                      ADD
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.ic_grid}>
+              <div className={styles.formRow}>
+                <label className={styles.label}>Boot Camp Tags</label>
+                <div className={styles.inputContainer}>
+                  <input
+                    {...register("bootCampTags")}
+                    className={styles.input}
+                    placeholder="Enter tags separated by commas"
+                  />
+                  {errors.bootCampTags && (
+                    <span className={styles.error}>
+                      {errors.bootCampTags.message}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div className={styles.formRow}>
+                <label className={styles.label}>Boot Camp Price</label>
+                <div className={styles.inputContainer}>
+                  <input
+                    {...register("bootCampPrice")}
+                    type="number"
+                    className={styles.input}
+                    placeholder="Enter price"
+                  />
+                  {errors.bootCampPrice && (
+                    <span className={styles.error}>
+                      {errors.bootCampPrice.message}
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -247,58 +267,63 @@ const CreateBootcampPage = () => {
             onChange={(newContent) => setReplyContent(newContent)}
           />
 
-          {errors.bootcampOverview && (
+          {/* {errors.bootcampOverview && (
             <span className={styles.error}>
               {errors.bootcampOverview.message}
             </span>
-          )}
+          )} */}
         </div>
 
         <div className={styles.section}>
           <h5 className={styles.sectionTitle}>Bootcamp Course Details</h5>
           <div className={styles.ic_details_container}>
-            <div className={styles.formRow}>
-              <label className={styles.label}>
-                Select Bootcamp Announcements
-              </label>
-              <div className={styles.inputContainer}>
-                <div className={styles.selectWrapper}>
-                  <select
-                    {...register("bootcampAnnouncements")}
-                    className={styles.select}
-                  >
-                    <option value="">Select announcements</option>
-                    <option value="email">Email Notifications</option>
-                    <option value="sms">SMS Notifications</option>
-                    <option value="both">Both Email & SMS</option>
-                  </select>
-                  <IoMdArrowDropdown className={styles.selectIcon} />
+            <div className={styles.ic_grid}>
+              <div className={styles.formRow}>
+                <label className={styles.label}>
+                  Select Bootcamp Announcements
+                </label>
+                <div className={styles.inputContainer}>
+                  <div className={styles.selectWrapper}>
+                    <select
+                      {...register("bootcampAnnouncements")}
+                      className={styles.select}
+                    >
+                      <option value="">Select announcements</option>
+                      <option value="email">Email Notifications</option>
+                      <option value="sms">SMS Notifications</option>
+                      <option value="both">Both Email & SMS</option>
+                    </select>
+                    <IoMdArrowDropdown className={styles.selectIcon} />
+                  </div>
+                  {errors.bootcampAnnouncements && (
+                    <span className={styles.error}>
+                      {errors.bootcampAnnouncements.message}
+                    </span>
+                  )}
                 </div>
-                {errors.bootcampAnnouncements && (
-                  <span className={styles.error}>
-                    {errors.bootcampAnnouncements.message}
-                  </span>
-                )}
               </div>
-              <label className={styles.label}>Select Bootcamp Benefits</label>
-              <div className={styles.inputContainer}>
-                <div className={styles.selectWrapper}>
-                  <select
-                    {...register("bootcampBenefits")}
-                    className={styles.select}
-                  >
-                    <option value="">Enable</option>
-                    <option value="certificate">Certificate</option>
-                    <option value="job-assistance">Job Assistance</option>
-                    <option value="lifetime-access">Lifetime Access</option>
-                  </select>
-                  <IoMdArrowDropdown className={styles.selectIcon} />
+
+              <div className={styles.formRow}>
+                <label className={styles.label}>Select Bootcamp Benefits</label>
+                <div className={styles.inputContainer}>
+                  <div className={styles.selectWrapper}>
+                    <select
+                      {...register("bootcampBenefits")}
+                      className={styles.select}
+                    >
+                      <option value="">Enable</option>
+                      <option value="certificate">Certificate</option>
+                      <option value="job-assistance">Job Assistance</option>
+                      <option value="lifetime-access">Lifetime Access</option>
+                    </select>
+                    <IoMdArrowDropdown className={styles.selectIcon} />
+                  </div>
+                  {errors.bootcampBenefits && (
+                    <span className={styles.error}>
+                      {errors.bootcampBenefits.message}
+                    </span>
+                  )}
                 </div>
-                {errors.bootcampBenefits && (
-                  <span className={styles.error}>
-                    {errors.bootcampBenefits.message}
-                  </span>
-                )}
               </div>
             </div>
           </div>
@@ -308,44 +333,39 @@ const CreateBootcampPage = () => {
           <h5 className={styles.sectionTitle}>Bootcamp Introduction Video</h5>
 
           <div className={styles.videoSection}>
-            <div className={styles.uploadArea}>
-              <input
-                {...register("bootcampThumbnail")}
-                type="file"
-                accept="image/png, image/jpeg, image/jpg"
-                id="bootcampThumbnail"
-                className={styles.fileInput} // hidden input (CSS e display:none / hidden korte paren)
-              />
-              <label htmlFor="bootcampThumbnail" className={styles.uploadLabel}>
-                <RiUploadCloud2Line className={styles.uploadIcon} />
-                <p className={styles.uploadText}>
-                  Accepted Image format & size: 575px X 450px (1MB)
-                </p>
-                <p className={styles.uploadSubtext}>
-                  Accepted Image filetypes: jpg, jpeg, png
-                </p>
-              </label>
-              {errors.bootcampThumbnail && (
-                <span className={styles.error}>
-                  {errors.bootcampThumbnail.message}
-                </span>
-              )}
+            <div className={styles.ic_file_input_container}>
+              <div className={styles.uploadArea}>
+                <input
+                  {...register("bootcampThumbnail")}
+                  type="file"
+                  accept="image/png, image/jpeg, image/jpg"
+                  id="bootcampThumbnail"
+                  className={styles.fileInput} // hidden input (CSS e display:none / hidden korte paren)
+                />
+                <label
+                  htmlFor="bootcampThumbnail"
+                  className={styles.uploadLabel}
+                >
+                  <RiUploadCloud2Line className={styles.uploadIcon} />
+                  <p className={styles.uploadText}>
+                    Accepted Image format & size: 575px X 450px (1MB)
+                  </p>
+                  <p className={styles.uploadSubtext}>
+                    Accepted Image filetypes: jpg, jpeg, png
+                  </p>
+                </label>
+                {errors.bootcampThumbnail && (
+                  <span className={styles.error}>
+                    {errors.bootcampThumbnail.message}
+                  </span>
+                )}
+              </div>
             </div>
 
-            {/* <div className={styles.uploadArea}>
-              <BiUpload className={styles.uploadIcon} />
-              <p className={styles.uploadText}>
-                Accepted Image format & size: 575px X 450px (1MB)
-              </p>
-              <p className={styles.uploadSubtext}>
-                Accepted Image filetypes: jpg, jpeg, png
-              </p>
-            </div> */}
-
             <div className={styles.videoOptions}>
-              <h3 className={styles.videoTitle}>
+              <h6 className={styles.videoTitle}>
                 Introduction Video (Optional)
-              </h3>
+              </h6>
 
               <div className={styles.radioGroup}>
                 <label className={styles.radioLabel}>
@@ -395,13 +415,17 @@ const CreateBootcampPage = () => {
           </div>
         </div>
 
-        <div className={styles.actions}>
+        <div className="ic_flex">
           <button type="button" className="ic_btn">
             BACK
           </button>
-          <button type="submit" className="ic_btn">
+          <Link
+            href="/teacher/bootcamps/upload-video"
+            type="submit"
+            className="ic_btn"
+          >
             SAVE AND CONTINUE
-          </button>
+          </Link>
         </div>
       </form>
     </div>

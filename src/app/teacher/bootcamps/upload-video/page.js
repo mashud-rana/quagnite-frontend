@@ -1,26 +1,11 @@
-"use client";
-
-import { useState } from "react";
-import { IoArrowBack } from "react-icons/io5";
-import {
-  FaPlay,
-  FaEye,
-  FaTrash,
-  FaEdit,
-  FaUpload,
-  FaRegEdit,
-} from "react-icons/fa";
-import { useRouter } from "next/navigation";
-import styles from "./upload.module.css";
 import ProgressStepper from "@/components/Teacher/Courses/ProgressStepper/ProgressStepper";
 import Link from "next/link";
-import { FaArrowLeft } from "react-icons/fa6";
-import { GoVideo } from "react-icons/go";
-import { MdDeleteOutline, MdOutlineAccessTime } from "react-icons/md";
-import { BiSolidEdit } from "react-icons/bi";
+import React from "react";
+import { FaArrowLeft } from "react-icons/fa";
+import styles from "./upload.module.css";
 import UploadVideo from "@/components/Teacher/UploadVideo/UploadVideo";
 
-const UploadCoursePage = () => {
+const UploadVideoPage = () => {
   const lessons = [
     {
       id: 1,
@@ -42,7 +27,6 @@ const UploadCoursePage = () => {
     <div>
       <ProgressStepper currentStep={2} />
 
-      {/* Header */}
       <div className="mb-24 ic_flex">
         <div className="ic_title_section">
           <Link href="#" className="ic_back_button">
@@ -52,11 +36,19 @@ const UploadCoursePage = () => {
         </div>
       </div>
 
-      <div className="mb-24">
+      <div>
         <div className={styles.lessonsGrid}>
           {lessons.map((lesson) => (
             <UploadVideo lesson={lesson} key={lesson.id} />
           ))}
+        </div>
+
+        <div className={styles.ic_input_title_container}>
+          <label className={styles.ic_label}>
+            Section title of the Bootcamp “Section Title”
+          </label>
+
+          <input className={styles.ic_input} type="text" />
         </div>
       </div>
 
@@ -68,4 +60,4 @@ const UploadCoursePage = () => {
   );
 };
 
-export default UploadCoursePage;
+export default UploadVideoPage;
