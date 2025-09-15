@@ -1,11 +1,14 @@
+"use client";
 import { FaPencilAlt } from "react-icons/fa";
 import styles from "./profileBanner.module.css";
 import Image from "next/image";
 import profile from "@/assets/images/all/profile.png";
 import bgGradient from "@/assets/images/all/bg-gradient.png"; // Import the image
 import { MdOutlineEdit } from "react-icons/md";
+import { useSelector } from "react-redux";
 
 const ProfileBanner = () => {
+  const { user } = useSelector((state) => state.auth);
   return (
     <div className={styles.bannerContainer}>
       <div
@@ -39,8 +42,8 @@ const ProfileBanner = () => {
         </div>
 
         <div className={styles.userInfo}>
-          <h5 className={styles.userName}>Amalia fox</h5>
-          <p className={styles.userId}>User ID -1234567890</p>
+          <h5 className={styles.userName}>{user?.full_name}</h5>
+          <p className={styles.userId}>User ID -{user?.details?.student_code}</p>
         </div>
       </div>
     </div>
