@@ -21,7 +21,6 @@ export const authSlice = createSlice({
       state.refresh_token = undefined;
     },
     updateUser: (state, action) => {
-      console.log("Updating user in auth slice with:", action.payload);
       state.user = { ...state.user, ...action.payload };
     },
   },
