@@ -83,7 +83,7 @@ const ProfileInfo = () => {
       toastSuccess(updateData?.message || "Profile updated successfully");
     }
     if (isUpdateDataError) {
-      toastError(updateDataResponseError?.message || "Profile update failed. Please try again.");
+      toastError(updateDataResponseError?.data?.message || "Profile update failed. Please try again.");
     }
   }, [isUpdateDataSuccess, updateData, isUpdateDataError, updateDataResponseError])
 
@@ -98,24 +98,18 @@ const ProfileInfo = () => {
     }
   };
 
-    const onSubmit = async (data) => {
-      const formData = new FormData();
-      Object.entries(data).forEach(([key, value]) => {
-        formData.append(key, value);
-      });
-      formData.append("_method", "PUT");
-
-      try {
-        await updateUser({
-          data: formData,
-          userId: user?.id,
-        }).unwrap();
-        setIsEditing(false);
-      } catch (error) {
-        // Optionally handle error here
-        toastError(error?.message || "Update failed. Please try again.");
-      }
-    }
+  const onSubmit = async (data) => {
+    const formData = new FormData();
+    Object.entries(data).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+    formData.append("_method", "PUT");
+    await updateUser({
+        data: formData,
+        userId: user?.id,
+      }).unwrap();
+      setIsEditing(false);
+  }
   return (
     <div className={styles.infoContainer}>
       <div className={styles.infoHeader}>

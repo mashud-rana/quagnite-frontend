@@ -50,7 +50,27 @@ export const profileApi = apiSlice.injectEndpoints({
             } catch (error) { }
         },
       }),
+      profileUpdatePassword:builder.mutation({
+        query: ({data,userId}) => {
+            return {
+                url: `/student/password/update/${userId}`,
+                method: "POST",
+                body: data
+            }
+        },
+        invalidatesTags:['auth-user'],
+          async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+            try {
+                const result = await queryFulfilled;
+              
+                if(result?.data?.success) {
+                  dispatch(updateUser(result?.data?.data));
+                }
+            } catch (error) { }
+        },
+  
+      }),
   }),
 });
 
-export const { useGetProfileDetailsQuery, useProfileUpdateMutation, useProfileUpdatePhotoMutation } = profileApi;
+export const { useGetProfileDetailsQuery, useProfileUpdateMutation, useProfileUpdatePhotoMutation, useProfileUpdatePasswordMutation } = profileApi;

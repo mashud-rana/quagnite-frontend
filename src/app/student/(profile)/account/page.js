@@ -1,25 +1,116 @@
 "use client";
 
-import React from "react";
-import { useForm } from "react-hook-form";
+import React,{useEffect} from "react";
 import styles from "./acoount.module.css";
+import {useGetProfileDetailsQuery, useProfileUpdatePasswordMutation} from "@/redux/features/student/profileInto/profileApi"
+import * as yup from "yup";
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
+import { antIcon, toastError, toastSuccess } from "@/utils/helper";
+import { Spin } from "antd";
+import { useSelector } from "react-redux";
+import { data } from "framer-motion/client";
+//schema validation
+
+const schema = yup.object({
+  email: yup
+    .string()
+    .matches(/^\S+@\S+$/i, "Invalid email address")
+    .email("Invalid email address")
+    .required("Email is required"),
+  current_password: yup
+    .string()
+    .required("Current password is required"),
+  new_password: yup
+    .string()
+    .required("New password is required")
+    .min(6, "Password must be at least 6 characters")
+    .matches(/[a-z]/, "Password must contain at least one lowercase letter")
+    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .matches(/[0-9]/, "Password must contain at least one number")
+    .matches(/[^a-zA-Z0-9]/, "Password must contain at least one symbol"),
+  new_password_confirmation: yup
+    .string()
+    .oneOf([yup.ref("new_password")], "Passwords do not match")
+    .min(6, "Password must be at least 6 characters")
+    .required("Please confirm your password"),
+});
 
 const AccountPage = () => {
+  const { user } = useSelector((state) => state.auth);
+    // Get user profile details
   const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      email: "amiliafox2727127@gmail.com",
-      currentPassword: "",
-      newPassword: "",
-      confirmPassword: "",
-    },
-  });
+    data: profileQueryData,
+    isSuccess: profileQuerySuccess,
+    isLoading: profileQueryLoading,
+    error: profileQueryError,
+    refetch: profileQueryRefetch,
+    isFetching: profileQueryFetching
+  } = useGetProfileDetailsQuery();
+  
+    // Update  User
+    const [
+      updatePassword,
+      {
+        data: updatePasswordData,
+        isLoading: isUpdatePasswordDataLoading,
+        isSuccess: isUpdatePasswordDataSuccess,
+        isError: isUpdatePasswordDataError,
+        error: updatePasswordDataResponseError,
+      },
+    ] = useProfileUpdatePasswordMutation();
 
-  const onSubmit = (data) => {
+    const {
+      register,
+      handleSubmit,
+      formState: { errors },
+      setValue,
+      setError,
+    } = useForm({
+      mode: "onBlur",
+      resolver: yupResolver(schema),
+      defaultValues: {
+        email: "",
+        current_password: "",
+        new_password: "",
+        new_password_confirmation: "",
+      },
+    });
+
+    useEffect(() => {
+      
+      if (profileQueryData?.success && profileQueryData.data) {
+        const d = profileQueryData.data;
+        setValue("email", d.email || "");
+        setValue("current_password", '');
+        setValue("new_password", "");
+        setValue("new_password_confirmation",  "");
+      }
+    }, [profileQueryData]);
+
+    useEffect(()=>{
+      if (isUpdatePasswordDataSuccess && updatePasswordData && updatePasswordData.success) {
+        // Handle successful update
+        toastSuccess(updatePasswordData?.message || "Profile password updated successfully");
+      }
+      if (isUpdatePasswordDataError) {
+        console.log('update password error',updatePasswordDataResponseError)
+        toastError(updatePasswordDataResponseError?.data?.message || "Profile update failed. Please try again.");
+      }
+    }, [isUpdatePasswordDataSuccess, updatePasswordData, isUpdatePasswordDataError, updatePasswordDataResponseError]);
+
+  const onSubmit = async (data) => {
     console.log("Form submitted:", data);
+    const formData = new FormData();
+    Object.entries(data).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+    formData.append("_method", "PUT");
+
+    await updatePassword({
+        data: formData,
+        userId: user?.id,
+      }).unwrap();
     // You can make API call here
   };
 
@@ -29,7 +120,7 @@ const AccountPage = () => {
         <div className={styles.ic_info_header}>
           <p className={styles.ic_info_title}>Account Settings</p>
           <button type="submit" className={styles.ic_edit_button}>
-            SAVE
+            SAVE {isUpdatePasswordDataLoading && <Spin indicator={antIcon} />}
           </button>
         </div>
 
@@ -40,13 +131,7 @@ const AccountPage = () => {
             <div>
               <input
                 type="email"
-                {...register("email", {
-                  required: "Email is required",
-                  pattern: {
-                    value: /^\S+@\S+$/i,
-                    message: "Invalid email address",
-                  },
-                })}
+                {...register("email")}
                 className={styles.ic_info_value}
               />
               {errors.email && (
@@ -64,14 +149,12 @@ const AccountPage = () => {
               <input
                 type="password"
                 placeholder="Enter your current password"
-                {...register("currentPassword", {
-                  required: "Current password is required",
-                })}
+                {...register("current_password")}
                 className={styles.ic_info_value}
               />
-              {errors.currentPassword && (
+              {errors.current_password && (
                 <span className={styles.ic_error_msg}>
-                  {errors.currentPassword.message}
+                  {errors.current_password.message}
                 </span>
               )}
             </div>
@@ -84,18 +167,12 @@ const AccountPage = () => {
               <input
                 type="password"
                 placeholder="Enter your new password"
-                {...register("newPassword", {
-                  required: "New password is required",
-                  minLength: {
-                    value: 6,
-                    message: "Password must be at least 6 characters",
-                  },
-                })}
+                {...register("new_password")}
                 className={styles.ic_info_value}
               />
-              {errors.newPassword && (
+              {errors.new_password && (
                 <span className={styles.ic_error_msg}>
-                  {errors.newPassword.message}
+                  {errors.new_password.message}
                 </span>
               )}
             </div>
@@ -108,17 +185,12 @@ const AccountPage = () => {
               <input
                 type="password"
                 placeholder="Confirm your new password"
-                {...register("confirmPassword", {
-                  required: "Please confirm your password",
-                  validate: (value, formValues) =>
-                    value === formValues.newPassword ||
-                    "Passwords do not match",
-                })}
+                {...register("new_password_confirmation")}
                 className={styles.ic_info_value}
               />
-              {errors.confirmPassword && (
+              {errors.new_password_confirmation && (
                 <span className={styles.ic_error_msg}>
-                  {errors.confirmPassword.message}
+                  {errors.new_password_confirmation.message}
                 </span>
               )}
             </div>

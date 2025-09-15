@@ -16,9 +16,11 @@ import {
 import { IoIosSearch } from "react-icons/io";
 import Link from "next/link";
 import img from "@/assets/images/all/instractor.png";
+import { useSelector } from "react-redux";
 
 const DashboardHeader = ({ onOpenSidebar }) => {
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
+    const { user } = useSelector((state) => state.auth);
 
   return (
     <>
@@ -64,7 +66,7 @@ const DashboardHeader = ({ onOpenSidebar }) => {
 
           <div>
             <Image
-              src={img}
+              src={user?.avatar_url || img}
               alt="avater"
               className={styles.avatar}
               width={500}
