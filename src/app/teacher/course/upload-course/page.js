@@ -1,23 +1,7 @@
-"use client";
-
-import { useState } from "react";
-import { IoArrowBack } from "react-icons/io5";
-import {
-  FaPlay,
-  FaEye,
-  FaTrash,
-  FaEdit,
-  FaUpload,
-  FaRegEdit,
-} from "react-icons/fa";
-import { useRouter } from "next/navigation";
 import styles from "./upload.module.css";
 import ProgressStepper from "@/components/Teacher/Courses/ProgressStepper/ProgressStepper";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa6";
-import { GoVideo } from "react-icons/go";
-import { MdDeleteOutline, MdOutlineAccessTime } from "react-icons/md";
-import { BiSolidEdit } from "react-icons/bi";
 import UploadVideo from "@/components/Teacher/UploadVideo/UploadVideo";
 
 const UploadCoursePage = () => {

@@ -14,12 +14,13 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { RiUploadCloud2Line } from "react-icons/ri";
 
 const schema = yup.object({
-  courseTitle: yup.string().required("Bootcamp title is required"),
-  bootcampCategory: yup.string().required("Bootcamp category is required"),
-  bootcampSubCategory: yup
+  // courseType: yup.string().required("Course type is required"),
+  // courseTitle: yup.string().required("Course title is required"),
+  coursesubTitle: yup.string().required("Course sub title is required"),
+  courseDescription: yup.string().required("Course key point name is required"),
+  courseSubDescription: yup
     .string()
-    .required("Bootcamp sub category is required"),
-  bootCampTags: yup.string().required("Boot camp tags are required"),
+    .required("Course sub description is required"),
 });
 
 const CreateCoursePage = () => {
@@ -59,21 +60,14 @@ const CreateCoursePage = () => {
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)}>
+        {/* 1st section  */}
         <div className={styles.section}>
+          <h5 className={styles.sectionTitle}>Course Details</h5>
           <div className={styles.ic_details_wrapper}>
             <div className={styles.formRow}>
               <label className={styles.label}>Bootcamp Title</label>
               <div className={styles.inputContainer}>
-                <input
-                  {...register("courseTitle")}
-                  className={styles.input}
-                  placeholder="Enter bootcamp title"
-                />
-                {errors.courseTitle && (
-                  <span className={styles.error}>
-                    {errors.courseTitle.message}
-                  </span>
-                )}
+                <input className={styles.input} placeholder="Course Type" />
               </div>
             </div>
 
@@ -81,48 +75,57 @@ const CreateCoursePage = () => {
               <label className={styles.label}>Bootcamp subtitle</label>
               <div className={styles.inputContainer}>
                 <input
-                  {...register("bootcampTitle")}
+                  {...register("coursesubTitle")}
                   className={styles.input}
-                  placeholder="Enter bootcamp title"
+                  placeholder="Course Subtitle"
                 />
-                {errors.bootcampTitle && (
+                {errors.coursesubTitle && (
                   <span className={styles.error}>
-                    {errors.bootcampTitle.message}
+                    {errors.coursesubTitle.message}
                   </span>
                 )}
               </div>
             </div>
 
+            <div className={styles.formRow}>
+              <label className={styles.label}>Bootcamp Title</label>
+              <div className={styles.inputContainer}>
+                <input className={styles.input} placeholder="Course Title" />
+              </div>
+            </div>
+
             <div className={styles.ic_grid}>
               <div className={styles.formRow}>
-                <label className={styles.label}>Bootcamp Category</label>
+                <label className={styles.label}>
+                  Course Description Key Points *
+                </label>
                 <div className={styles.inputContainer}>
-                  <div className={styles.selectWrapper}>
-                    <select
-                      {...register("bootcampCategory")}
-                      className={styles.select}
-                    >
-                      <option value="">Select category</option>
-                      <option value="programming">Programming</option>
-                      <option value="design">Design</option>
-                      <option value="marketing">Marketing</option>
-                    </select>
-                    <BiChevronDown className={styles.selectIcon} />
+                  <div className={styles.textareaWithButton}>
+                    <input
+                      {...register("courseDescription")}
+                      className={styles.input}
+                      placeholder="type key point name"
+                    />
+
+                    <button type="button" className="ic_common_primary_btn">
+                      ADD
+                    </button>
                   </div>
-                  {errors.bootcampCategory && (
+
+                  {errors.courseDescription && (
                     <span className={styles.error}>
-                      {errors.bootcampCategory.message}
+                      {errors.courseDescription.message}
                     </span>
                   )}
                 </div>
               </div>
 
               <div className={styles.formRow}>
-                <label className={styles.label}>Bootcamp Sub Category</label>
+                <label className={styles.label}>Enable For Subscription</label>
                 <div className={styles.inputContainer}>
                   <div className={styles.selectWrapper}>
                     <select
-                      {...register("bootcampSubCategory")}
+                      {...register("courseSubDescription")}
                       className={styles.select}
                     >
                       <option value="">Enable</option>
@@ -134,80 +137,9 @@ const CreateCoursePage = () => {
                     </select>
                     <BiChevronDown className={styles.selectIcon} />
                   </div>
-                  {errors.bootcampSubCategory && (
+                  {errors.courseSubDescription && (
                     <span className={styles.error}>
-                      {errors.bootcampSubCategory.message}
-                    </span>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.ic_grid}>
-              <div className={styles.formRow}>
-                <label className={styles.label}>What You will Learn</label>
-                <div className={styles.inputContainer}>
-                  <div className={styles.textareaWithButton}>
-                    <input
-                      // {...register("whatYoullLearn")}
-                      className={styles.input}
-                      placeholder="Enter what students will learn"
-                    />
-
-                    <button type="button" className="ic_common_primary_btn">
-                      ADD
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className={styles.formRow}>
-                <label className={styles.label}>
-                  Who All Should Attend The Bootcamp
-                </label>
-                <div className={styles.inputContainer}>
-                  <div className={styles.textareaWithButton}>
-                    <input
-                      className={styles.input}
-                      placeholder="Enter target audience"
-                    />
-                    <button type="button" className="ic_common_primary_btn">
-                      ADD
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.ic_grid}>
-              <div className={styles.formRow}>
-                <label className={styles.label}>Boot Camp Tags</label>
-                <div className={styles.inputContainer}>
-                  <input
-                    {...register("bootCampTags")}
-                    className={styles.input}
-                    placeholder="Enter tags separated by commas"
-                  />
-                  {errors.bootCampTags && (
-                    <span className={styles.error}>
-                      {errors.bootCampTags.message}
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              <div className={styles.formRow}>
-                <label className={styles.label}>Boot Camp Price</label>
-                <div className={styles.inputContainer}>
-                  <input
-                    {...register("bootCampPrice")}
-                    type="number"
-                    className={styles.input}
-                    placeholder="Enter price"
-                  />
-                  {errors.bootCampPrice && (
-                    <span className={styles.error}>
-                      {errors.bootCampPrice.message}
+                      {errors.courseSubDescription.message}
                     </span>
                   )}
                 </div>
@@ -216,53 +148,271 @@ const CreateCoursePage = () => {
           </div>
         </div>
 
+        {/* 2nd section  */}
         <div className={styles.section}>
-          <h5 className={styles.sectionTitle}>Bootcamp Course Details</h5>
-          <div className={styles.ic_details_container}>
+          <h5 className={styles.sectionTitle}>Category & Features</h5>
+          <div className={styles.ic_details_wrapper}>
+            <div className={styles.formRow}>
+              <label className={styles.label}>Bootcamp Category</label>
+              <div className={styles.inputContainer}>
+                <div className={styles.selectWrapper}>
+                  <select
+                    {...register("bootcampCategory")}
+                    className={styles.select}
+                  >
+                    <option value="">Select category</option>
+                    <option value="programming">Programming</option>
+                    <option value="design">Design</option>
+                    <option value="marketing">Marketing</option>
+                  </select>
+                  <BiChevronDown className={styles.selectIcon} />
+                </div>
+                {errors.bootcampCategory && (
+                  <span className={styles.error}>
+                    {errors.bootcampCategory.message}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <div className={styles.formRow}>
+              <label className={styles.label}>Course Subcategory</label>
+              <div className={styles.inputContainer}>
+                <div className={styles.selectWrapper}>
+                  <select className={styles.select}>
+                    <option value="">Select Subcategory</option>
+                    <option value="programming">Programming</option>
+                    <option value="design">Design</option>
+                    <option value="marketing">Marketing</option>
+                  </select>
+                  <BiChevronDown className={styles.selectIcon} />
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.formRow}>
+              <label className={styles.label}>What You will Learn</label>
+              <div className={styles.inputContainer}>
+                <div className={styles.textareaWithButton}>
+                  <input
+                    className={styles.input}
+                    placeholder="Enter what students will learn"
+                  />
+
+                  <button type="button" className="ic_common_primary_btn">
+                    ADD
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.formRow}>
+              <label className={styles.label}>
+                Who All Should Attend The Course
+              </label>
+              <div className={styles.inputContainer}>
+                <div className={styles.textareaWithButton}>
+                  <input
+                    className={styles.input}
+                    placeholder="Enter target audience"
+                  />
+                  <button type="button" className="ic_common_primary_btn">
+                    ADD
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 3rd section  */}
+        <div className={styles.section}>
+          <h5 className={styles.sectionTitle}>
+            Learners Accessibility & others
+          </h5>
+          <div className={styles.ic_details_wrapper}>
+            <div className={styles.formRow}>
+              <label className={styles.label}>Learners Accessibility</label>
+              <div className={styles.inputContainer}>
+                <div className={styles.selectWrapper}>
+                  <select
+                    {...register("bootcampCategory")}
+                    className={styles.select}
+                  >
+                    <option value="">Select option</option>
+                    <option value="programming">Programming</option>
+                    <option value="design">Design</option>
+                    <option value="marketing">Marketing</option>
+                  </select>
+                  <BiChevronDown className={styles.selectIcon} />
+                </div>
+                {errors.bootcampCategory && (
+                  <span className={styles.error}>
+                    {errors.bootcampCategory.message}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <div className={styles.formRow}>
+              <label className={styles.label}>Course Price</label>
+              <div className={styles.inputContainer}>
+                <div className={styles.selectWrapper}>
+                  <select className={styles.select}>
+                    <option value="">Select price</option>
+                    <option value="45">$45</option>
+                    <option value="45">$55</option>
+                    <option value="80">$80</option>
+                  </select>
+                  <BiChevronDown className={styles.selectIcon} />
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.formRow}>
+              <label className={styles.label}>Old Price</label>
+              <div className={styles.inputContainer}>
+                <div className={styles.selectWrapper}>
+                  <select className={styles.select}>
+                    <option value="">Select old price</option>
+                    <option value="45">$45</option>
+                    <option value="45">$55</option>
+                    <option value="80">$80</option>
+                  </select>
+                  <BiChevronDown className={styles.selectIcon} />
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.formRow}>
+              <label className={styles.label}>Language</label>
+              <div className={styles.inputContainer}>
+                <div className={styles.selectWrapper}>
+                  <select className={styles.select}>
+                    <option value="">Select language</option>
+                    <option value="english">English</option>
+                    <option value="bangla">Bangladesh</option>
+                    <option value="hindi">Hindi</option>
+                  </select>
+                  <BiChevronDown className={styles.selectIcon} />
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.formRow}>
+              <label className={styles.label}>Course Difficulty Level</label>
+              <div className={styles.inputContainer}>
+                <div className={styles.selectWrapper}>
+                  <select className={styles.select}>
+                    <option value="">Select Course Difficulty Level</option>
+                    <option value="english">English</option>
+                    <option value="bangla">Bangladesh</option>
+                    <option value="hindi">Hindi</option>
+                  </select>
+                  <BiChevronDown className={styles.selectIcon} />
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.formRow}>
+              <label className={styles.label}>Course Tags</label>
+              <div className={styles.inputContainer}>
+                <div className={styles.selectWrapper}>
+                  <select className={styles.select}>
+                    <option value="">Select</option>
+                    <option value="english">English</option>
+                    <option value="bangla">Bangladesh</option>
+                    <option value="hindi">Hindi</option>
+                  </select>
+                  <BiChevronDown className={styles.selectIcon} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 4th section  */}
+        <div className={styles.section}>
+          <h5 className={styles.sectionTitle}>
+            Course Thumbnail Or Introduction Video
+          </h5>
+          <div className={styles.ic_details_wrapper}>
+            <div className={styles.formRow}>
+              <label className={styles.label}>Course Type</label>
+              <div className={styles.inputContainer}>
+                <input className={styles.input} placeholder="Course Type" />
+              </div>
+            </div>
+
+            <div className={styles.formRow}>
+              <label className={styles.label}>Course subtitle</label>
+              <div className={styles.inputContainer}>
+                <input
+                  {...register("coursesubTitle")}
+                  className={styles.input}
+                  placeholder="Course Subtitle"
+                />
+                {errors.coursesubTitle && (
+                  <span className={styles.error}>
+                    {errors.coursesubTitle.message}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <div className={styles.formRow}>
+              <label className={styles.label}>Course Title</label>
+              <div className={styles.inputContainer}>
+                <input className={styles.input} placeholder="Course Title" />
+              </div>
+            </div>
+
             <div className={styles.ic_grid}>
               <div className={styles.formRow}>
                 <label className={styles.label}>
-                  Select Bootcamp Announcements
+                  Course Description Key Points *
                 </label>
                 <div className={styles.inputContainer}>
-                  <div className={styles.selectWrapper}>
-                    <select
-                      {...register("bootcampAnnouncements")}
-                      className={styles.select}
-                    >
-                      <option value="">Select announcements</option>
-                      <option value="email">Email Notifications</option>
-                      <option value="sms">SMS Notifications</option>
-                      <option value="both">Both Email & SMS</option>
-                    </select>
-                    <IoMdArrowDropdown className={styles.selectIcon} />
+                  <div className={styles.textareaWithButton}>
+                    <input
+                      {...register("courseDescription")}
+                      className={styles.input}
+                      placeholder="type key point name"
+                    />
+
+                    <button type="button" className="ic_common_primary_btn">
+                      ADD
+                    </button>
                   </div>
-                  {errors.bootcampAnnouncements && (
+
+                  {errors.courseDescription && (
                     <span className={styles.error}>
-                      {errors.bootcampAnnouncements.message}
+                      {errors.courseDescription.message}
                     </span>
                   )}
                 </div>
               </div>
 
               <div className={styles.formRow}>
-                <label className={styles.label}>Select Bootcamp Benefits</label>
+                <label className={styles.label}>Enable For Subscription</label>
                 <div className={styles.inputContainer}>
                   <div className={styles.selectWrapper}>
                     <select
-                      {...register("bootcampBenefits")}
+                      {...register("courseSubDescription")}
                       className={styles.select}
                     >
                       <option value="">Enable</option>
-                      <option value="certificate">Certificate</option>
-                      <option value="job-assistance">Job Assistance</option>
-                      <option value="lifetime-access">Lifetime Access</option>
+                      <option value="web-development">Web Development</option>
+                      <option value="mobile-development">
+                        Mobile Development
+                      </option>
+                      <option value="data-science">Data Science</option>
                     </select>
-                    <IoMdArrowDropdown className={styles.selectIcon} />
+                    <BiChevronDown className={styles.selectIcon} />
                   </div>
-                  {errors.bootcampBenefits && (
+                  {errors.courseSubDescription && (
                     <span className={styles.error}>
-                      {errors.bootcampBenefits.message}
+                      {errors.courseSubDescription.message}
                     </span>
                   )}
                 </div>
@@ -271,6 +421,7 @@ const CreateCoursePage = () => {
           </div>
         </div>
 
+        {/* video section  */}
         <div className={styles.section}>
           <h5 className={styles.sectionTitle}>Bootcamp Introduction Video</h5>
 
@@ -361,13 +512,13 @@ const CreateCoursePage = () => {
           <button type="button" className="ic_btn">
             BACK
           </button>
-          <Link
-            href="/teacher/bootcamps/upload-video"
+          <button
+            // href="/teacher/bootcamps/upload-video"
             type="submit"
             className="ic_btn"
           >
             SAVE AND CONTINUE
-          </Link>
+          </button>
         </div>
       </form>
     </div>

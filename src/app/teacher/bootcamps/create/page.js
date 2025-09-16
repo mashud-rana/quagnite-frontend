@@ -419,13 +419,13 @@ const CreateBootcampPage = () => {
           <button type="button" className="ic_btn">
             BACK
           </button>
-          <Link
-            href="/teacher/bootcamps/upload-video"
+          <button
+            // href="/teacher/bootcamps/upload-video"
             type="submit"
             className="ic_btn"
           >
             SAVE AND CONTINUE
-          </Link>
+          </button>
         </div>
       </form>
     </div>
