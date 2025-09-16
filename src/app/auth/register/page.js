@@ -116,7 +116,6 @@ const RegisterPage = () => {
         <div className={styles.ic_form_container}>
           <div className={styles.ic_form_card}>
             <div className={styles.header}>
-              {/* <h1 className={styles.title}>Create an Account 👋</h1> */}
               <h1 className={styles.title}>
                 Create an Account <span className={styles.handEmoji}>👋</span>
               </h1>
@@ -127,7 +126,7 @@ const RegisterPage = () => {
 
             <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
               <div className={styles.ic_input_group}>
-                <label className={styles.label}>Your fullname*</label>
+                <label className={styles.label}>Your full name*</label>
                 <input
                   type="text"
                   placeholder="Enter your full name"
@@ -220,6 +219,16 @@ const RegisterPage = () => {
                 Register with Google
               </button>
             </form>
+
+            <div className={styles.loginPrompt} style={{ textAlign: "center", marginTop: "20px" }}>
+              Already have an Account?{" "}
+              <span
+                style={{ color: "#0070f3", cursor: "pointer", textDecoration: "underline" }}
+                onClick={() => router.push("/auth/login")}
+              >
+                Log In
+              </span>
+            </div>
           </div>
         </div>
       </div>
