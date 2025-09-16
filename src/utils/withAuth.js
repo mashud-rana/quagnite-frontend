@@ -8,29 +8,24 @@ import { useSelector } from "react-redux";
 const withAuth = (Component, allowedRoles) => {
   const Auth = (props) => {
     const [loading, setLoading] = useState(true);
-    const [userData, setUserData] = useState(null);
-    const [userAccessToken, setUserAccessToken] = useState(null);
-    const [userRefreshToken, setUserRefreshToken] = useState(null);
+  
     const router = useRouter();
-    const { user, access_token, refresh_token } = useSelector((state) => state.auth);
+    const { user} = useSelector((state) => state.auth);
 
     useEffect(() => {
-        
-      setUserData(user);
-      setUserAccessToken(access_token);
-      setUserRefreshToken(refresh_token);
+      
       setLoading(false);
-    }, [user, access_token, refresh_token]);
+    }, [user]);
     if (loading) {
       return <Spin spinning={true} fullscreen />;
     }
     // If user is not logged in, return login component
-    if (!userData || !userAccessToken || !userRefreshToken) {
+    if (!user) {
       router.push("/auth/login");
-      return null;
+      return ;
     }
 
-    if (!allowedRoles.includes(userData?.user_type)) {
+    if (user && !allowedRoles.includes(user?.user_type)) {
       router.push("/not-found");
       return null;
     }

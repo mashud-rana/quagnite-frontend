@@ -5,6 +5,7 @@ import {
   FaHeart,
   FaBell,
   FaBars,
+
 } from "react-icons/fa";
 import styles from "./header.module.css";
 import Image from "next/image";
@@ -17,10 +18,11 @@ import { IoIosSearch } from "react-icons/io";
 import Link from "next/link";
 import img from "@/assets/images/all/instractor.png";
 import { useSelector } from "react-redux";
+import Logout from "@/components/Student/Auth/Logout";
 
 const DashboardHeader = ({ onOpenSidebar }) => {
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
-    const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
   return (
     <>
@@ -49,7 +51,8 @@ const DashboardHeader = ({ onOpenSidebar }) => {
           >
             <IoIosSearch className={styles.actionIcon} />
           </button>
-
+          <Logout />
+        
           <button className={styles.iconButton} aria-label="Favorites">
             <MdOutlineFavoriteBorder className={styles.actionIcon} />
           </button>

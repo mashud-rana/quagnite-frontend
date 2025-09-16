@@ -1,5 +1,5 @@
 import { apiSlice } from "@/redux/api/apiSlice";
-import { userLoggedIn } from "./authSlice";
+import { userLoggedIn, userLoggedOut } from "./authSlice";
 
 export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -53,8 +53,16 @@ export const authApi = apiSlice.injectEndpoints({
       }),
     
     }),
+    logout: builder.mutation({
+      query: (data) => ({
+        url: "/auth/logout",
+        method: "POST"
+      }),
+    
+    
+    }),
     
   }),
 });
 
-export const { useLoginMutation, useLogOutQuery, useForgetPasswordMutation, useVerifyTokenQuery, useResetPasswordMutation } = authApi;
+export const { useLoginMutation, useLogOutQuery, useForgetPasswordMutation, useVerifyTokenQuery, useResetPasswordMutation, useLogoutMutation } = authApi;

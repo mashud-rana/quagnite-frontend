@@ -82,7 +82,7 @@ const ProfileBanner = () => {
         <div className={styles.avatarWrapper}>
           <div className={styles.ic_img_wrapper}>
             <Image
-              src={user.avatar_url || profile}
+              src={user ? user.avatar_url : profile}
               alt=""
               className={styles.profileAvatar}
               width={105}
