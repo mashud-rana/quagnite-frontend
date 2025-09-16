@@ -25,12 +25,12 @@ export const authApi = apiSlice.injectEndpoints({
       },
     }),
 
-    logOut: builder.query({
-      query: () => ({
-        url: "/logout",
-        method: "GET",
-      }),
-    }),
+    // logOut: builder.query({
+    //   query: () => ({
+    //     url: "/logout",
+    //     method: "GET",
+    //   }),
+    // }),
     forgetPassword: builder.mutation({
       query: (data) => ({
         url: "/forget-password",
@@ -54,15 +54,35 @@ export const authApi = apiSlice.injectEndpoints({
     
     }),
     logout: builder.mutation({
-      query: (data) => ({
+      query: () => ({
         url: "/auth/logout",
         method: "POST"
       }),
-    
+    }),
+    registerUser: builder.mutation({
+      query: (data) => ({
+        url: "/user-auth/register",
+        method: "POST",
+        body: data,
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const result = await queryFulfilled;
+          
+          dispatch(
+            userLoggedIn({
+              user: result?.data?.user,
+              access_token: result?.data?.access_token,
+              refresh_token: result?.data?.refresh_token,
+            })
+          );
+        
+        } catch (error) {}
+      },
     
     }),
     
   }),
 });
 
-export const { useLoginMutation, useLogOutQuery, useForgetPasswordMutation, useVerifyTokenQuery, useResetPasswordMutation, useLogoutMutation } = authApi;
+export const { useLoginMutation, useForgetPasswordMutation, useVerifyTokenQuery, useResetPasswordMutation, useLogoutMutation, useRegisterUserMutation } = authApi;

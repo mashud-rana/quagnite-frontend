@@ -171,6 +171,19 @@ const LoginPage = () => {
                 Login with Google
               </button>
             </form>
+
+            {/* New user? Create an Account */}
+            <div style={{ textAlign: "center", marginTop: "18px" }}>
+              <span style={{ color: "#fff" }}>
+                New user?{" "}
+                <span
+                  style={{ color: "#1890ff", cursor: "pointer", fontWeight: 500 }}
+                  onClick={() => router.push('/auth/register')}
+                >
+                  Create an Account
+                </span>
+              </span>
+            </div>
           </div>
         </div>
       </div>

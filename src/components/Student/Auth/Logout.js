@@ -30,7 +30,7 @@ export default function Logout() {
         if (isLogoutSuccess) {
             toastSuccess("Logged out successfully");
             dispatch(userLoggedOut());
-            // router.push("/auth/login");
+            router.push("/auth/login");
         }
         if (LogoutResponseError) {
             toastError(LogoutResponseError?.data?.message || "Logout failed. Please try again.");
