@@ -174,6 +174,10 @@
   height: auto;
 }
 
+.ic_margin_top_10 {
+  margin-top: 10px;
+}
+
 /* Small tablets and below */
 @media (max-width: 768px) {
   .ic_input_group {

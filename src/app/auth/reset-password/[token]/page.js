@@ -13,6 +13,7 @@ import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import { useRouter } from 'next/navigation'
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Link from 'next/link';
 
 const schema = yup.object({
 
@@ -176,6 +177,11 @@ const ResetPasswordPage = () => {
                 Reset Password {isVerifying && <Spin indicator={antIcon} />}
               </button>
             </form>
+              {/* Back to Login link */}
+              <div className={styles.ic_back_to_login + " " + styles.ic_margin_top_10}>
+                <span>Remember your password? </span>
+                <Link href="/auth/login" className={styles.ic_login_link}>Go to Login</Link>
+              </div>
           </div>
         </div>
       </div>

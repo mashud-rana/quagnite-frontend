@@ -11,6 +11,7 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {useForgetPasswordMutation} from "@/redux/features/auth/authApi";
 import { antIcon, toastError, toastSuccess } from "@/utils/helper";
 import { Spin } from "antd";
+import Link from "next/link";
 
 const schema = yup
   .object({
@@ -113,6 +114,11 @@ const ForgotPasswordPage = () => {
                 Send Password Reset Link {isForgetPasswordLoading && <Spin indicator={antIcon} />}
               </button>
             </form>
+            {/* Back to Login link */}
+            <div className={styles.ic_back_to_login + " " + styles.ic_margin_top_10}>
+              <span>Remember your password? </span>
+              <Link href="/auth/login" className={styles.ic_login_link}>Go to Login</Link>
+            </div>
           </div>
         </div>
       </div>
