@@ -138,6 +138,16 @@ const LoginPage = () => {
                     {errors.password.message}
                   </span>
                 )}
+                {/* Forget Password Link */}
+                <div className={styles.forgetPasswordContainer} style={{ textAlign: "right", marginTop: "6px" }}>
+                  <span
+                    className={styles.forgetPassword}
+                    style={{ color: "#1890ff", cursor: "pointer", fontSize: "0.95em" }}
+                    onClick={() => router.push('/auth/forget-password')}
+                  >
+                    Forgot password?
+                  </span>
+                </div>
               </div>
 
               <button

@@ -108,7 +108,7 @@ const Header = () => {
 
             <FaSearch className={styles.icon} />
             <FaShoppingCart className={styles.icon} />
-            <button className={styles.loginBtn}>Login</button>
+            <Link href="/auth/login" className={styles.loginBtn}>Login</Link>
             <button className={styles.mobileToggle} onClick={toggleMobileMenu}>
               {mobileMenuOpen ? <FaTimes /> : <FaBars />}
             </button>

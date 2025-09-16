@@ -43,6 +43,7 @@ const ForgotPasswordPage = () => {
       formState: { errors },
       setValue,
       setError,
+      reset,
     } = useForm({
       mode: "onBlur",
       resolver: yupResolver(schema),
@@ -55,16 +56,15 @@ const ForgotPasswordPage = () => {
       if (isForgetPasswordSuccess && forgetPasswordData && forgetPasswordData.success) {
         // Handle successful update
         toastSuccess(forgetPasswordData?.message || "Password reset link sent successfully.");
+        reset({ email: "" }); // Reset the email field
       }
       if (isForgetPasswordError) {
-        console.log('update password error',forgetPasswordError)
         toastError(forgetPasswordError?.data?.message || "Profile update failed. Please try again.");
       }
-    }, [isForgetPasswordSuccess, forgetPasswordData, isForgetPasswordError, forgetPasswordError]);
+    }, [isForgetPasswordSuccess, forgetPasswordData, isForgetPasswordError, forgetPasswordError, reset]);
 
-  const onSubmit = (data) => {
-    forgetPassword({email:data.email});
-    // console.log("Reset link requested for:", data.email);
+  const onSubmit = async (data) => {
+    await forgetPassword({email:data.email});
     // Handle password reset logic here
   };
 

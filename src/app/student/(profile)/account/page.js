@@ -94,13 +94,13 @@ const AccountPage = () => {
         toastSuccess(updatePasswordData?.message || "Profile password updated successfully");
       }
       if (isUpdatePasswordDataError) {
-        console.log('update password error',updatePasswordDataResponseError)
+      
         toastError(updatePasswordDataResponseError?.data?.message || "Profile update failed. Please try again.");
       }
     }, [isUpdatePasswordDataSuccess, updatePasswordData, isUpdatePasswordDataError, updatePasswordDataResponseError]);
 
   const onSubmit = async (data) => {
-    console.log("Form submitted:", data);
+  
     const formData = new FormData();
     Object.entries(data).forEach(([key, value]) => {
       formData.append(key, value);

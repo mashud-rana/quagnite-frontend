@@ -12,6 +12,7 @@ import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import { useRouter } from 'next/navigation'
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const schema = yup.object({
 
@@ -82,23 +83,22 @@ const ResetPasswordPage = () => {
       }
     }, [isVerifySuccess, verifyTokenData, verifyTokenError]);
 
-  useEffect(()=>{
+  useEffect(() => {
     if (isResetPasswordDataSuccess && resetPasswordData && resetPasswordData.success) {
-      // Handle successful update
       toastSuccess(resetPasswordData?.message || "Password has been reset successfully");
-      setTimeout(() => {
-        router.push('/auth/login');
-      }, 100);
+      router.replace('/auth/login');
     }
     if (isResetPasswordDataError) {
-      console.log('reset password error',resetPasswordDataResponseError)
       toastError(resetPasswordDataResponseError?.data?.message || "Password Reset failed. Please try again.");
     }
   }, [isResetPasswordDataSuccess, resetPasswordData, isResetPasswordDataError, resetPasswordDataResponseError]);
 
   const onSubmit =async (data) => {
     
-    console.log("Form submitted:", data);
+    if(!isVerified){
+      toastError("Token is invalid or expired. Please try again.");
+      return;
+    }
     const formData = new FormData();
     formData.append("password", data.password);
     formData.append("password_confirmation", data.password_confirmation);
