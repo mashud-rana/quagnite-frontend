@@ -1,7 +1,30 @@
+"use client";
+import { useSearchParams } from "next/navigation";
 import CourseCard from "@/components/Student/Courses/Course/CourseCard";
-import React from "react";
+import React, {useEffect} from "react";
+import {useGetCoursesQuery} from '@/redux/features/student/course/courseApi';
+import { useSelector, useDispatch } from "react-redux";
+import { setFilters } from "@/redux/features/student/course/courseSlice";
+
+
 
 const DashboardCoursesPage = () => {
+   const searchParams = useSearchParams();
+   const dispatch = useDispatch();
+   const page = useSelector((state) => state.course.page);
+   const {filters} = useSelector((state) => state.course);
+
+
+   // ✅ Extract filters/search from URL
+   const filtersGetParams = {
+     category_ids: searchParams.get("category_ids") || "",
+     difficulty_level_ids: searchParams.get("difficulty_level_ids") || "",
+     search: searchParams.get("search") || "",
+    };
+  //   console.log("Current Page:", page, filters);
+
+  const { data, isFetching } = useGetCoursesQuery({ page, ...filters });
+
   const mockCourses = [
     {
       id: "1",
@@ -41,8 +64,13 @@ const DashboardCoursesPage = () => {
     },
   ];
 
+  useEffect(()=>{
+    dispatch(setFilters(filtersGetParams));
+  },[])
+
   return (
     <div className="ic_courses_list">
+  
       {mockCourses.map((course) => (
         <CourseCard key={course.id} course={course} />
       ))}

@@ -34,13 +34,14 @@ const CoursesLayout = ({ children }) => {
 
   return (
     <div>
+    
       <h1 className="ic_text_36 mb-24">My Courses</h1>
       <ScrollableNavbar tabs={courseTabs} />
 
       <SearchInput />
 
       <div className="ic_content_wrapper">
-        <FiltersSidebar sections={filterData} />
+        <FiltersSidebar  />
         <div>{children}</div>
       </div>
     </div>
