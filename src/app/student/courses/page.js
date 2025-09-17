@@ -18,6 +18,7 @@ const DashboardCoursesPage = () => {
   const filtersGetParams = {
     category_ids: searchParams.get("category_ids") || "",
     difficulty_level_ids: searchParams.get("difficulty_level_ids") || "",
+    course_subjects_ids: searchParams.get("course_subjects_ids") || "",
     search: searchParams.get("search") || "",
   };
     
@@ -29,6 +30,8 @@ const DashboardCoursesPage = () => {
     refetch,
     isFetching 
     } = useGetCoursesQuery({ page, ...filtersGetParams });
+
+    console.log('filtersGetParams',filtersGetParams, coursesData)
     
   
   // ✅ Keep filters in Redux store synced
@@ -36,15 +39,13 @@ const DashboardCoursesPage = () => {
     dispatch(setFilters(filtersGetParams));
   }, [filtersGetParams]);
 
-  // // ✅ Handle API response: update Redux store and show errors
-  // useEffect(() => {
-  //   if (isSuccess && coursesData) {
-  //     dispatch(setAllCourses(coursesData.data.data || []));
-  //   }
-  //   if (error) {
-  //     toastError(error?.data?.message || "Token is invalid or expired. Please try again.");
-  //   }
-  // }, [isSuccess, coursesData, error, dispatch]);
+  useEffect(() => {
+    if(isSuccess){
+      dispatch(setAllCourses(coursesData?.data?.data || []));
+    }
+  }, [isSuccess, coursesData]);
+
+
 
   return (
     <div className="ic_courses_list">

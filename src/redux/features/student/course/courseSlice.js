@@ -7,6 +7,7 @@ const initialState = {
   filters: {
     category_ids: '',
     difficulty_level_ids: '',
+    course_subjects_ids: '',
     search: '',
   },
   allCourses:[]
