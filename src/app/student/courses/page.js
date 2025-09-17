@@ -5,6 +5,7 @@ import React, {useEffect} from "react";
 import {useGetCoursesQuery} from '@/redux/features/student/course/courseApi';
 import { useSelector, useDispatch } from "react-redux";
 import { setFilters } from "@/redux/features/student/course/courseSlice";
+import { Spin } from "antd";  // ✅ Import Spin from AntD
 
 const DashboardCoursesPage = () => {
    const searchParams = useSearchParams();
@@ -27,11 +28,10 @@ const DashboardCoursesPage = () => {
       error, 
       refetch,
       isFetching 
-
      } = useGetCoursesQuery({ page, ...filtersGetParams });
     // console.log("Current Page:", page, filtersGetParams);
 
-    console.log("Courses Data:", coursesData);
+  
 
   const mockCourses = [
     {
@@ -72,14 +72,14 @@ const DashboardCoursesPage = () => {
     },
   ];
   
-  //set filters in store from url params
+  // ✅ Keep filters in Redux store synced
   useEffect(() => {
     dispatch(setFilters(filtersGetParams));
   }, [filtersGetParams]);
 
   return (
     <div className="ic_courses_list">
-  
+      <Spin spinning={isLoading || isFetching} fullscreen></Spin>
       {mockCourses.map((course) => (
         <CourseCard key={course.id} course={course} />
       ))}
