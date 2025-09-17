@@ -1,9 +1,12 @@
+"use client";
 import ScrollableNavbar from "@/components/Share/ScrollableNavbar/ScrollableNavbar";
 import FiltersSidebar from "@/components/Student/Courses/Course/FiltersSidebar";
 import SearchInput from "@/components/Student/Courses/Course/SearchInput";
 import React from "react";
 
+
 const CoursesLayout = ({ children }) => {
+
   const filterData = [
     {
       title: "Ways to learn",

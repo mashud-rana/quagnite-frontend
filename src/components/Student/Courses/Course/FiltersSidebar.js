@@ -8,6 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import {useDispatch, useSelector } from "react-redux";
 import { setPage, setFilters } from "@/redux/features/student/course/courseSlice";
 
+
 const FiltersSidebar = () => {
   // Hooks
   const router = useRouter();
@@ -37,7 +38,7 @@ const FiltersSidebar = () => {
     }
     //store update
     const checked = event?.target?.checked || false;
-    console.log("Checked:", checked, values);
+  
     if(key === 'category_ids'){
       dispatch(setFilters({
         ...filters,

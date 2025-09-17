@@ -6,8 +6,6 @@ import {useGetCoursesQuery} from '@/redux/features/student/course/courseApi';
 import { useSelector, useDispatch } from "react-redux";
 import { setFilters } from "@/redux/features/student/course/courseSlice";
 
-
-
 const DashboardCoursesPage = () => {
    const searchParams = useSearchParams();
    const dispatch = useDispatch();
@@ -21,9 +19,19 @@ const DashboardCoursesPage = () => {
      difficulty_level_ids: searchParams.get("difficulty_level_ids") || "",
      search: searchParams.get("search") || "",
     };
-  //   console.log("Current Page:", page, filters);
+    
+    const { 
+      data: coursesData,
+      isSuccess, 
+      isLoading, 
+      error, 
+      refetch,
+      isFetching 
 
-  const { data, isFetching } = useGetCoursesQuery({ page, ...filters });
+     } = useGetCoursesQuery({ page, ...filters });
+    // console.log("Current Page:", page, filtersGetParams);
+
+    console.log("Courses Data:", coursesData);
 
   const mockCourses = [
     {
@@ -63,8 +71,9 @@ const DashboardCoursesPage = () => {
       thumbnail: "/placeholder.svg?height=120&width=200",
     },
   ];
-
+  // dispatch(toggleSpinner(false));
   useEffect(()=>{
+    
     dispatch(setFilters(filtersGetParams));
   },[])
 

@@ -20,6 +20,8 @@ export const authApi = apiSlice.injectEndpoints({
         url: `/student/courses/get-my-courses?page=${page}&${new URLSearchParams(params).toString()}`,
         method: "GET",
       }),
+      
+      
     
     }),
 
