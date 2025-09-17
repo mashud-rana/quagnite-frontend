@@ -7,6 +7,20 @@ import Image from "next/image";
 import img from "@/assets/images/all/subscription.png";
 
 const CourseCard = ({ course }) => {
+  // Helper to render stars based on average_rating
+  const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <FaStar
+          key={i}
+          className={`${styles.ic_star} ${i <= rating ? styles.ic_star_filled : styles.ic_star_empty}`}
+        />
+      );
+    }
+    return stars;
+  };
+
   return (
     <div className={styles.ic_course_card}>
       <div className={styles.ic_img_text_wrapper}>
@@ -35,30 +49,21 @@ const CourseCard = ({ course }) => {
           </div>
 
           <div className={styles.ic_course_rating}>
-            {/* <div className={styles.ic_stars}>{renderStars(course.rating)}</div> */}
             <div className={styles.ic_stars}>
-              <FaStar
-                className={`${styles.ic_star} ${styles.ic_star_filled}`}
-              />
-              <FaStar
-                className={`${styles.ic_star} ${styles.ic_star_filled}`}
-              />
-              <FaStar
-                className={`${styles.ic_star} ${styles.ic_star_filled}`}
-              />
-              <FaStar
-                className={`${styles.ic_star} ${styles.ic_star_filled}`}
-              />
-
-              <FaStar className={`${styles.ic_star} ${styles.ic_star_empty}`} />
+              {renderStars(course.course_review?.average_rating || 0)}
             </div>
-            <span className={styles.ic_student_count}>0</span>
+            <span className={styles.ic_student_count}>
+              {course.course_review?.total_review || 0}
+            </span>
           </div>
         </div>
 
         <div>
           <h3 className={styles.ic_course_title}>{course.course_title}</h3>
-          <p className={styles.ic_course_description}>{course.course_description}</p>
+          <div
+            className={styles.ic_course_description}
+            dangerouslySetInnerHTML={{ __html: course.course_description }}
+          />
           <div className={styles.ic_course_action}>
             <button className={styles.ic_start_button}>
               START YOUR JOURNEY

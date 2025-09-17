@@ -60,9 +60,7 @@ const FiltersSidebar = () => {
 
   const checkedFilterHandler = (existing, id, event) => {
     console.log("Existing:", existing, id, event);
-    // const arr = existing ? existing.split(",") : [];
-    // // return arr.includes(String(id));
-    // console.log("Event:", event.target.checked, arr);
+
   };
 
 
@@ -73,11 +71,25 @@ const FiltersSidebar = () => {
         <hr className={styles.ic_hr} />
         <div className={styles.ic_filter_options}>
           <label className={styles.ic_checkbox_label}>
-            <input
-              type="checkbox"
-              className={styles.ic_checkbox}
-            
-              />
+          <input
+            type="checkbox"
+            className={styles.ic_checkbox}
+            checked={
+              filtersData &&
+              filtersData.data.categories.length > 0 &&
+              filters.category_ids.length > 0 &&
+              filters.category_ids.split(",").length === filtersData.data.categories.length
+            }
+            onChange={() => {
+              const allIds = filtersData.data.categories.map((cat) => String(cat.id));
+              updateQuery(
+                "category_ids",
+                filters.category_ids.split(",").length === filtersData.data.categories.length
+                  ? [] // Uncheck all
+                  : allIds // Check all
+              );
+            }}
+          />
             
             <span className={styles.ic_checkbox_text}>All</span>
           </label>
