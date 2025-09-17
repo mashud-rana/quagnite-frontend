@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { Modal, Checkbox } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
 import styles from "./UploadModal.module.css";
 import { MdFileUpload } from "react-icons/md";
 

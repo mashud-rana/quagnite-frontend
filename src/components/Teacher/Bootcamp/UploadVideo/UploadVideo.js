@@ -9,18 +9,18 @@ import { BiSolidEdit } from "react-icons/bi";
 import { PiQuestionBold } from "react-icons/pi";
 import styles from "./upload.module.css";
 import img from "@/assets/images/all/code.png";
-import CourseUploadModal from "../Courses/CourseUploadModal/CourseUploadModal";
+import CourseUploadModal from "../../Courses/CourseUploadModal/CourseUploadModal";
 
-const UploadVideo = ({ lesson }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const UploadVideo = ({ lesson, setIsModalOpen }) => {
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
+  // const handleOk = () => {
+  //   setIsModalOpen(false);
+  // };
 
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
+  // const handleCancel = () => {
+  //   setIsModalOpen(false);
+  // };
 
   return (
     <div>
@@ -87,11 +87,11 @@ const UploadVideo = ({ lesson }) => {
         </div>
       </div>
 
-      <CourseUploadModal
+      {/* <CourseUploadModal
         open={isModalOpen}
         onCancel={handleCancel}
         onOk={handleOk}
-      />
+      /> */}
     </div>
   );
 };
