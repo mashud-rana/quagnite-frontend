@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { set } from "nprogress";
+
 
 const initialState = {
   page: 1,
@@ -16,7 +16,7 @@ export const courseSlice = createSlice({
   initialState,
   reducers: {
     setPage: (state, action) => {
-      state.page = state.page + action.payload;
+      state.page =  action.payload;
     },
     setFilters: (state, action) => {
       state.filters = action.payload;

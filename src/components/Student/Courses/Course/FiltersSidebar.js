@@ -29,16 +29,14 @@ const FiltersSidebar = () => {
   /**
    * Update URL query params and reset page on filter/search change
    */
-  const updateQuery = (key, values, event) => {
+  const updateQuery = (key, values) => {
     const params = new URLSearchParams(searchParams.toString());
     if (values.length > 0) {
       params.set(key, values.join(","));
     } else {
       params.delete(key);
     }
-    //store update
-    const checked = event?.target?.checked || false;
-  
+    
     if(key === 'category_ids'){
       dispatch(setFilters({
         ...filters,
@@ -51,7 +49,6 @@ const FiltersSidebar = () => {
 
   /**
    * Toggle an ID in a comma-separated string of IDs
-
    */
   function toggleArray(existing, id) {
     const arr = existing && existing != '' ? existing.split(",") : [];
@@ -93,8 +90,7 @@ const FiltersSidebar = () => {
                   onChange={() =>
                     updateQuery(
                       "category_ids",
-                      toggleArray(filters.category_ids, category.id),
-                      event
+                      toggleArray(filters.category_ids, category.id)
                     )
                   }
                 />

@@ -10,7 +10,7 @@ const DashboardCoursesPage = () => {
    const searchParams = useSearchParams();
    const dispatch = useDispatch();
    const page = useSelector((state) => state.course.page);
-   const {filters} = useSelector((state) => state.course);
+  //  const {filters} = useSelector((state) => state.course);
 
 
    // ✅ Extract filters/search from URL
@@ -28,7 +28,7 @@ const DashboardCoursesPage = () => {
       refetch,
       isFetching 
 
-     } = useGetCoursesQuery({ page, ...filters });
+     } = useGetCoursesQuery({ page, ...filtersGetParams });
     // console.log("Current Page:", page, filtersGetParams);
 
     console.log("Courses Data:", coursesData);
@@ -71,11 +71,11 @@ const DashboardCoursesPage = () => {
       thumbnail: "/placeholder.svg?height=120&width=200",
     },
   ];
-  // dispatch(toggleSpinner(false));
-  useEffect(()=>{
-    
+  
+  //set filters in store from url params
+  useEffect(() => {
     dispatch(setFilters(filtersGetParams));
-  },[])
+  }, [filtersGetParams]);
 
   return (
     <div className="ic_courses_list">
