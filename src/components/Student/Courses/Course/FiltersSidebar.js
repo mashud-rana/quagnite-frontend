@@ -6,7 +6,7 @@ import styles from "./course.module.css";
 import {useGetCourseFiltersQuery} from "@/redux/features/student/course/courseApi";
 import { useRouter, useSearchParams } from "next/navigation";
 import {useDispatch, useSelector } from "react-redux";
-import { setPage, setFilters } from "@/redux/features/student/course/courseSlice";
+import { setPage, setFilters, emptyAllCourses } from "@/redux/features/student/course/courseSlice";
 
 
 const FiltersSidebar = () => {
@@ -44,6 +44,7 @@ const FiltersSidebar = () => {
       }));
     }
     dispatch(setPage(1));
+  
     router.push(`/student/courses?${params.toString()}`);
   };
 

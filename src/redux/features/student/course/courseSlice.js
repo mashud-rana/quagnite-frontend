@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { em } from "framer-motion/client";
 
 
 const initialState = {
@@ -8,6 +9,7 @@ const initialState = {
     difficulty_level_ids: '',
     search: '',
   },
+  allCourses:[]
 
 };
 
@@ -21,9 +23,15 @@ export const courseSlice = createSlice({
     setFilters: (state, action) => {
       state.filters = action.payload;
     },
+    setAllCourses: (state, action) => {
+      state.allCourses = [...state.allCourses, ...action.payload];
+    },
+    emptyAllCourses: (state) => {
+      state.allCourses = [];
+    }
   
   },
 });
 
-export const { setPage, setFilters } = courseSlice.actions;
+export const { setPage, setFilters, setAllCourses, emptyAllCourses } = courseSlice.actions;
 export default courseSlice.reducer;

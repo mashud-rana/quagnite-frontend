@@ -1,4 +1,5 @@
 import { apiSlice } from "@/redux/api/apiSlice";
+import { emptyAllCourses, setAllCourses } from "@/redux/features/student/course/courseSlice";
 
 
 export const authApi = apiSlice.injectEndpoints({
@@ -20,13 +21,16 @@ export const authApi = apiSlice.injectEndpoints({
         url: `/student/courses/get-my-courses?page=${page}&${new URLSearchParams(params).toString()}`,
         method: "GET",
       }),
-      
-      
-    
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        dispatch(emptyAllCourses());
+        try {
+          const { data: coursesData } = await queryFulfilled;
+          dispatch(setAllCourses(coursesData.data.data || []));
+        } catch (err) {
+          // handle error if needed
+        }
+      },
     }),
-
-    
-    
   }),
 });
 

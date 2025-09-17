@@ -12,25 +12,25 @@ const CourseCard = ({ course }) => {
       <div className={styles.ic_img_text_wrapper}>
         <div className={styles.ic_course_thumbnail}>
           <Image
-            src={img}
+            src={course.course_image}
             width={300}
             height={100}
-            alt={course.title}
+            alt={course.course_title}
             className={styles.ic_thumbnail_image}
           />
 
           <div className={styles.ic_course_metadata}>
             <div className={styles.ic_metadata_item}>
               <FaChartBar className={styles.ic_metadata_icon} />
-              <span className={styles.ic_metadata_text}>{course.level}</span>
+              <span className={styles.ic_metadata_text}>{course.course_difficulty}</span>
             </div>
             <div className={styles.ic_metadata_item}>
               <FaRegClock className={styles.ic_metadata_icon} />
-              <span className={styles.ic_metadata_text}>{course.duration}</span>
+              <span className={styles.ic_metadata_text}>{course.course_duration}</span>
             </div>
             <div className={styles.ic_metadata_item}>
               <FiCalendar className={styles.ic_metadata_icon} />
-              <span className={styles.ic_metadata_text}>{course.date}</span>
+              <span className={styles.ic_metadata_text}>{course.enroll_date}</span>
             </div>
           </div>
 
@@ -52,13 +52,13 @@ const CourseCard = ({ course }) => {
 
               <FaStar className={`${styles.ic_star} ${styles.ic_star_empty}`} />
             </div>
-            <span className={styles.ic_student_count}>{course.students}</span>
+            <span className={styles.ic_student_count}>0</span>
           </div>
         </div>
 
         <div>
-          <h3 className={styles.ic_course_title}>{course.title}</h3>
-          <p className={styles.ic_course_description}>{course.description}</p>
+          <h3 className={styles.ic_course_title}>{course.course_title}</h3>
+          <p className={styles.ic_course_description}>{course.course_description}</p>
           <div className={styles.ic_course_action}>
             <button className={styles.ic_start_button}>
               START YOUR JOURNEY
