@@ -1,13 +1,14 @@
 "use client";
-import styles from "./upload.module.css";
+
 import ProgressStepper from "@/components/Teacher/Courses/ProgressStepper/ProgressStepper";
 import Link from "next/link";
-import { FaArrowLeft } from "react-icons/fa6";
+import React, { useState } from "react";
+import { FaArrowLeft } from "react-icons/fa";
+import styles from "./upload.module.css";
 import UploadVideo from "@/components/Teacher/Bootcamp/UploadVideo/UploadVideo";
-import { useState } from "react";
-import CourseUploadModal from "@/components/Teacher/Courses/CourseUploadModal/CourseUploadModal";
+import BootcampModal from "@/components/Teacher/Bootcamp/BootcampModal/BootcampModal";
 
-const UploadCoursePage = () => {
+const UploadVideoPage = () => {
   const lessons = [
     {
       id: 1,
@@ -40,7 +41,6 @@ const UploadCoursePage = () => {
       <div>
         <ProgressStepper currentStep={2} />
 
-        {/* Header */}
         <div className="mb-24 ic_flex">
           <div className="ic_title_section">
             <Link href="#" className="ic_back_button">
@@ -50,7 +50,7 @@ const UploadCoursePage = () => {
           </div>
         </div>
 
-        <div className="mb-24">
+        <div>
           <div className={styles.lessonsGrid}>
             {lessons.map((lesson) => (
               <UploadVideo
@@ -60,6 +60,14 @@ const UploadCoursePage = () => {
               />
             ))}
           </div>
+
+          <div className={styles.ic_input_title_container}>
+            <label className={styles.ic_label}>
+              Section title of the Bootcamp “Section Title”
+            </label>
+
+            <input className={styles.ic_input} type="text" />
+          </div>
         </div>
 
         <div className="ic_flex">
@@ -68,7 +76,7 @@ const UploadCoursePage = () => {
         </div>
       </div>
 
-      <CourseUploadModal
+      <BootcampModal
         open={isModalOpen}
         onCancel={handleCancel}
         onOk={handleOk}
@@ -77,4 +85,4 @@ const UploadCoursePage = () => {
   );
 };
 
-export default UploadCoursePage;
+export default UploadVideoPage;

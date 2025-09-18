@@ -12,7 +12,10 @@
     "@ant-design/nextjs-registry": "^1.0.2",
     "@fancyapps/ui": "^6.0.14",
     "@hookform/resolvers": "^5.2.1",
+<<<<<<< HEAD
     "@reduxjs/toolkit": "^2.9.0",
+=======
+>>>>>>> rafia
     "antd": "^5.26.2",
     "framer-motion": "^12.23.0",
     "jodit-react": "^5.2.19",

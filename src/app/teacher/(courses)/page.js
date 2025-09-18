@@ -1,4 +1,4 @@
-import { FaArrowLeft, FaEnvelope } from "react-icons/fa";
+import { FaArrowLeft, FaEnvelope, FaPlus } from "react-icons/fa";
 import styles from "./courses.module.css";
 import img from "@/assets/images/all/case-studies.png";
 import Image from "next/image";
@@ -69,11 +69,9 @@ const TeacherDashboardPage = () => {
           <h1 className="ic_text_36">Courses</h1>
         </div>
 
-        <Link
-          href="/teacher/course/create-course"
-          className="ic_common_primary_btn"
-        >
-          + create course
+        <Link href="/teacher/course/create-course" className="ic_icn_btn">
+          <FaPlus />
+          create bootcamp
         </Link>
       </div>
 
