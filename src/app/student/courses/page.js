@@ -8,6 +8,8 @@ import { setFilters, setAllCourses, appendCourses } from "@/redux/features/stude
 import { Spin } from "antd";  // ✅ Import Spin from AntD
 import { antIcon, toastError, toastSuccess } from "@/utils/helper";
 import AllCourses from "@/components/Student/Courses/Course/AllCourses";
+import FullscreenSpinner from "@/components/Spinner/FullscreenSpinner";
+import {setSpinnerVisible} from "@/redux/features/spinner/spinnerSlice";
 
 const DashboardCoursesPage = () => {
    const searchParams = useSearchParams();
@@ -32,6 +34,7 @@ const DashboardCoursesPage = () => {
     } = useGetCoursesQuery({ page, ...filtersGetParams });
 
     console.log('filtersGetParams',filtersGetParams, coursesData)
+    console.log("--------------------------------------")
     
   
   //✅ Reset filters on URL change
@@ -48,13 +51,14 @@ const DashboardCoursesPage = () => {
         dispatch(appendCourses(coursesData?.data?.data || []));
       }
     }
+    dispatch(setSpinnerVisible(false));
   }, [isSuccess, coursesData]);
 
 
 
   return (
     <div className="ic_courses_list">
-      <Spin spinning={isLoading || isFetching} fullscreen></Spin>
+      <FullscreenSpinner />
       <AllCourses totalPages={coursesData?.data?.meta?.last_page || 1} />
       
     </div>

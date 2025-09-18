@@ -5,6 +5,7 @@ import { FaAnglesUp } from "react-icons/fa6";
 import {useDispatch } from "react-redux";
 import { setPage } from "@/redux/features/student/course/courseSlice";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import {setSpinnerVisible} from "@/redux/features/spinner/spinnerSlice";
 
 const SearchInput = () => {
   const [search, setSearch] = useState("");
@@ -23,10 +24,11 @@ const SearchInput = () => {
       params.delete("search");
     }
     dispatch(setPage(1));
+    dispatch(setSpinnerVisible(true));
   
     const newUrl = `${pathname}?${params.toString()}`;
     if (window.location.search !== `?${params.toString()}`) {
-      router.push(newUrl);
+      router.replace(newUrl);
     }
   };
   return (

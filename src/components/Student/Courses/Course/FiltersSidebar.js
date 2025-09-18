@@ -5,6 +5,7 @@ import {useGetCourseFiltersQuery} from "@/redux/features/student/course/courseAp
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import {useDispatch, useSelector } from "react-redux";
 import { setPage, setFilters } from "@/redux/features/student/course/courseSlice";
+import {setSpinnerVisible} from "@/redux/features/spinner/spinnerSlice";
 
 
 const FiltersSidebar = () => {
@@ -43,24 +44,24 @@ const FiltersSidebar = () => {
         category_ids: values.join(","),
       }));
     }
-    else if(key === 'difficulty_level_ids'){
+     if(key === 'difficulty_level_ids'){
       dispatch(setFilters({
         ...filters,
         difficulty_level_ids: values.join(","),
       }));
     }
-    else if(key === 'course_subjects_ids'){
+     if(key === 'course_subjects_ids'){
       dispatch(setFilters({
         ...filters,
         course_subjects_ids: values.join(","),
       }));
     }
     dispatch(setPage(1));
-    console.log("Updated Params:", params.toString());
+    dispatch(setSpinnerVisible(true));
   
     const newUrl = `${pathname}?${params.toString()}`;
     if (window.location.search !== `?${params.toString()}`) {
-      router.push(newUrl);
+      router.replace(newUrl);
     }
   };
 

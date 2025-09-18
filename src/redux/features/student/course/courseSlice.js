@@ -25,7 +25,7 @@ export const courseSlice = createSlice({
       state.filters = action.payload;
     },
     setAllCourses: (state, action) => {
-      state.allCourses = action.payload; // for first page
+      state.allCourses = [...action.payload]; // for first page
     },
     appendCourses: (state, action) => {
       state.allCourses = [...state.allCourses, ...action.payload]; // add more
