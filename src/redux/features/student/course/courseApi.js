@@ -17,8 +17,8 @@ export const authApi = apiSlice.injectEndpoints({
       }),
     }),
     getCourses: builder.query({
-      query: ({ page = 1, ...params }) => ({
-        url: `/student/courses/get-my-courses?page=${page}&${new URLSearchParams(params).toString()}`,
+      query: ({ page = 1,  type = 'all', ...params }) => ({
+        url: `/student/courses/get-my-courses?page=${page}&type=${type}&${new URLSearchParams(params).toString()}`,
         method: "GET",
       }),
       
