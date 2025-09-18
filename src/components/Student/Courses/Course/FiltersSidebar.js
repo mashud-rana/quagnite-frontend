@@ -4,7 +4,7 @@ import styles from "./course.module.css";
 import {useGetCourseFiltersQuery} from "@/redux/features/student/course/courseApi";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import {useDispatch, useSelector } from "react-redux";
-import { setPage, setFilters } from "@/redux/features/student/course/courseSlice";
+import { setPage, setFilters, setFiltersAndResetPage } from "@/redux/features/student/course/courseSlice";
 import {setSpinnerVisible} from "@/redux/features/spinner/spinnerSlice";
 
 
@@ -26,7 +26,7 @@ const FiltersSidebar = () => {
     refetch: filtersRefetch,
     isFetching: filtersIsFetching,
   } = useGetCourseFiltersQuery();
-  console.log('filtersData', filtersData);
+  // console.log('filtersData', filtersData);
   /**
    * Update URL query params and reset page on filter/search change
    */
@@ -39,24 +39,24 @@ const FiltersSidebar = () => {
     }
     
     if(key === 'category_ids'){
-      dispatch(setFilters({
+      dispatch(setFiltersAndResetPage({
         ...filters,
         category_ids: values.join(","),
       }));
     }
      if(key === 'difficulty_level_ids'){
-      dispatch(setFilters({
+      dispatch(setFiltersAndResetPage({
         ...filters,
         difficulty_level_ids: values.join(","),
       }));
     }
      if(key === 'course_subjects_ids'){
-      dispatch(setFilters({
+      dispatch(setFiltersAndResetPage({
         ...filters,
         course_subjects_ids: values.join(","),
       }));
     }
-    dispatch(setPage(1));
+    // dispatch(setPage(1));
     dispatch(setSpinnerVisible(true));
   
     const newUrl = `${pathname}?${params.toString()}`;

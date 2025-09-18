@@ -33,7 +33,7 @@ const DashboardCoursesPage = () => {
     isFetching 
     } = useGetCoursesQuery({ page, ...filtersGetParams });
 
-    console.log('filtersGetParams',filtersGetParams, coursesData)
+    console.log('filtersGetParams',filtersGetParams, coursesData, page)
     console.log("--------------------------------------")
     
   
@@ -46,9 +46,9 @@ const DashboardCoursesPage = () => {
   useEffect(() => {
     if (isSuccess) {
       if (page === 1) {
-        dispatch(setAllCourses(coursesData?.data?.data || []));
+        dispatch(setAllCourses(coursesData?.data?.data.length > 0 ? coursesData?.data?.data : []));
       } else {
-        dispatch(appendCourses(coursesData?.data?.data || []));
+        dispatch(appendCourses(coursesData?.data?.data.length > 0 ? coursesData?.data?.data : []));
       }
     }
     dispatch(setSpinnerVisible(false));

@@ -32,10 +32,14 @@ export const courseSlice = createSlice({
     },
     emptyAllCourses: (state) => {
       state.allCourses = [];
+    },
+    setFiltersAndResetPage: (state, action) => {
+      state.filters = action.payload;
+      state.page = 1;
     }
   
   },
 });
 
-export const { setPage, setFilters, setAllCourses, emptyAllCourses, appendCourses } = courseSlice.actions;
+export const { setPage, setFilters, setAllCourses, emptyAllCourses, appendCourses, setFiltersAndResetPage } = courseSlice.actions;
 export default courseSlice.reducer;
