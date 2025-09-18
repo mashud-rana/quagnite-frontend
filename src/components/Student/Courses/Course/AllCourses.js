@@ -16,7 +16,7 @@ const AllCourses = () =>{
 
     return (
         <div>
-            {allCourses.map((course) => (
+            {allCourses && allCourses.map((course) => (
                 <CourseCard key={course.id} course={course} />
             ))}
         </div>

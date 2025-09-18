@@ -1,12 +1,10 @@
 "use client";
 import React, {useState, useEffect} from "react";
 import styles from "./course.module.css";
-// import {useGetCategoriesQuery} from "@/redux/features/student/category/categoryApi";
-// import {useGetDifficultyLevelsQuery} from "@/redux/features/student/difficultyLevel/difficultyLevelApi";
 import {useGetCourseFiltersQuery} from "@/redux/features/student/course/courseApi";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import {useDispatch, useSelector } from "react-redux";
-import { setPage, setFilters, emptyAllCourses } from "@/redux/features/student/course/courseSlice";
+import { setPage, setFilters } from "@/redux/features/student/course/courseSlice";
 
 
 const FiltersSidebar = () => {
@@ -15,6 +13,8 @@ const FiltersSidebar = () => {
   const searchParams = useSearchParams();
   const dispatch = useDispatch();
   const {filters} = useSelector((state) => state.course);
+  const pathname = usePathname(); 
+
 
   // Fetch filter data (categories, difficulties, subjects)
   const {
@@ -57,8 +57,8 @@ const FiltersSidebar = () => {
     }
     dispatch(setPage(1));
     console.log("Updated Params:", params.toString());
-    dispatch(emptyAllCourses());
-    const newUrl = `/student/courses?${params.toString()}`;
+  
+    const newUrl = `${pathname}?${params.toString()}`;
     if (window.location.search !== `?${params.toString()}`) {
       router.replace(newUrl);
     }
@@ -110,8 +110,8 @@ const FiltersSidebar = () => {
             <span className={styles.ic_checkbox_text}>All</span>
           </label>
           {
-            filtersData && filtersData.data.categories.length > 0 && filtersData.data.categories.map((category) => (
-              <label key={category?.id} className={styles.ic_checkbox_label}>
+            filtersData && filtersData.data.categories.length > 0 && filtersData.data.categories.map((category, index) => (
+              <label key={`${category?.id}-${index}`} className={styles.ic_checkbox_label}>
                 <input
                   type="checkbox"
                   className={styles.ic_checkbox}
@@ -123,7 +123,7 @@ const FiltersSidebar = () => {
                     )
                   }
                 />
-                <span className={styles.ic_checkbox_text}>{category?.name || "All"} id: {category?.id}</span>
+                <span className={styles.ic_checkbox_text}>{category?.name || "All"} </span>
               </label>
             ))
           }
@@ -157,8 +157,8 @@ const FiltersSidebar = () => {
             <span className={styles.ic_checkbox_text}>All</span>
           </label>
           {
-            filtersData && filtersData.data.difficulties.length > 0 && filtersData.data.difficulties.map((level)=>(
-              <label key={level?.id} className={styles.ic_checkbox_label}>
+            filtersData && filtersData.data.difficulties.length > 0 && filtersData.data.difficulties.map((level, index) => (
+              <label key={`${level?.id}-${index}`} className={styles.ic_checkbox_label}>
                 <input type="checkbox" className={styles.ic_checkbox}
                   checked={filters.difficulty_level_ids.length > 0 && filters.difficulty_level_ids.split(",").includes(String(level?.id))}
                   onChange={() =>
@@ -168,7 +168,7 @@ const FiltersSidebar = () => {
                     )
                   }
                 />
-                <span className={styles.ic_checkbox_text}>{level?.title || ""} id: {level?.id} </span>
+                <span className={styles.ic_checkbox_text}>{level?.title || ""}  </span>
               </label>
             ))
           }
@@ -200,8 +200,8 @@ const FiltersSidebar = () => {
               <span className={styles.ic_checkbox_text}>All</span>
             </label>
           {
-            filtersData && filtersData.data.course_subjects_ids.length > 0 && filtersData.data.course_subjects_ids.map((subject)=>(
-              <label key={subject?.id} className={styles.ic_checkbox_label}>
+            filtersData && filtersData.data.course_subjects_ids.length > 0 && filtersData.data.course_subjects_ids.map((subject, index)=>(
+              <label key={`${subject?.id}-${index}`} className={styles.ic_checkbox_label}>
               <input type="checkbox" className={styles.ic_checkbox}
               checked={filters.course_subjects_ids.length > 0 && filters.course_subjects_ids.split(",").includes(String(subject?.id))}
                   onChange={() =>
@@ -214,7 +214,7 @@ const FiltersSidebar = () => {
               <span className={styles.ic_checkbox_text}>
                   {subject?.course_title?.length > 25
                 ? subject.course_title.slice(0, 25) + "..."
-                : subject.course_title || ""} id: {subject?.id}
+                : subject.course_title || ""} 
               </span>
             </label>
             ))
