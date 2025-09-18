@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import React, {useEffect} from "react";
 import {useGetCoursesQuery} from '@/redux/features/student/course/courseApi';
 import { useSelector, useDispatch } from "react-redux";
-import { setFilters, setAllCourses } from "@/redux/features/student/course/courseSlice";
+import { setFilters, setAllCourses, appendCourses } from "@/redux/features/student/course/courseSlice";
 import { Spin } from "antd";  // ✅ Import Spin from AntD
 import { antIcon, toastError, toastSuccess } from "@/utils/helper";
 import AllCourses from "@/components/Student/Courses/Course/AllCourses";
@@ -34,14 +34,19 @@ const DashboardCoursesPage = () => {
     console.log('filtersGetParams',filtersGetParams, coursesData)
     
   
-  // ✅ Keep filters in Redux store synced
+  //✅ Reset filters on URL change
   useEffect(() => {
     dispatch(setFilters(filtersGetParams));
   }, [filtersGetParams]);
 
+  // ✅ Manage courses list
   useEffect(() => {
-    if(isSuccess){
-      dispatch(setAllCourses(coursesData?.data?.data || []));
+    if (isSuccess) {
+      if (page === 1) {
+        dispatch(setAllCourses(coursesData?.data?.data || []));
+      } else {
+        dispatch(appendCourses(coursesData?.data?.data || []));
+      }
     }
   }, [isSuccess, coursesData]);
 
@@ -50,7 +55,7 @@ const DashboardCoursesPage = () => {
   return (
     <div className="ic_courses_list">
       <Spin spinning={isLoading || isFetching} fullscreen></Spin>
-      <AllCourses />
+      <AllCourses totalPages={coursesData?.data?.meta?.last_page || 1} />
       
     </div>
   );

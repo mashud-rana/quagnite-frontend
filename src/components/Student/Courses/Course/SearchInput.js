@@ -26,7 +26,7 @@ const SearchInput = () => {
   
     const newUrl = `${pathname}?${params.toString()}`;
     if (window.location.search !== `?${params.toString()}`) {
-      router.replace(newUrl);
+      router.push(newUrl);
     }
   };
   return (
