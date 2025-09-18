@@ -12,7 +12,7 @@ const AllCourses = ({totalPages}) =>{
   const page = useSelector((state) => state.course.page);
 
   const fetchMoreData = () => {
-    console.log('fetchMoreData called');
+    
     if (page < totalPages) {
       dispatch(setPage(page + 1));
     }
