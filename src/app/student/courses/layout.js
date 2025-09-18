@@ -45,7 +45,7 @@ const CoursesLayout = ({ children }) => {
 
       <div className="ic_content_wrapper">
         <FiltersSidebar  />
-        <div>{children}</div>
+        <div style={{width:'calc(100% - 300px)'}}>{children}</div>
       </div>
     </div>
   );

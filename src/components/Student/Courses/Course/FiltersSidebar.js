@@ -18,6 +18,16 @@ const FiltersSidebar = () => {
   const debounceRef = React.useRef(null);
 
 
+  let  type = 'all'
+  if(pathname == '/student/courses'){
+    type = 'all'
+  }else if(pathname == '/student/courses/inprogress'){
+    type = 'in_progress'
+  }
+  else if(pathname == '/student/courses/completed'){
+    type = 'complete'
+  }
+
   // Fetch filter data (categories, difficulties, subjects)
   const {
     data: filtersData,
@@ -26,8 +36,12 @@ const FiltersSidebar = () => {
     error: filtersError,
     refetch: filtersRefetch,
     isFetching: filtersIsFetching,
-  } = useGetCourseFiltersQuery();
-  // console.log('filtersData', filtersData);
+  } = useGetCourseFiltersQuery({type:type});
+
+  
+    console.log('filters in sidebar course-type', type);
+    console.log('filters in sidebar filter data', filtersData);
+    console.log('filters in sidebar pathname', pathname);
   /**
    * Update URL query params and reset page on filter/search change
    */

@@ -11,8 +11,8 @@ export const authApi = apiSlice.injectEndpoints({
       }),
     }),
     getCourseFilters: builder.query({
-      query: () => ({
-        url: `/student/courses/get-filters-data`,
+      query: ({type='all'}) => ({
+        url: `/student/courses/get-filters-data?type=${type}`,
         method: "GET",
       }),
     }),

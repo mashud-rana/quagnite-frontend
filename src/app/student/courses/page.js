@@ -5,8 +5,6 @@ import React, {useEffect} from "react";
 import {useGetCoursesQuery} from '@/redux/features/student/course/courseApi';
 import { useSelector, useDispatch } from "react-redux";
 import { setFilters, setAllCourses, appendCourses } from "@/redux/features/student/course/courseSlice";
-import { Spin } from "antd";  // ✅ Import Spin from AntD
-import { antIcon, toastError, toastSuccess } from "@/utils/helper";
 import AllEnrolledCourses from "@/components/Student/Courses/Course/AllEnrolledCourses";
 import FullscreenSpinner from "@/components/Spinner/FullscreenSpinner";
 import {setSpinnerVisible} from "@/redux/features/spinner/spinnerSlice";
@@ -24,14 +22,14 @@ const DashboardCoursesPage = () => {
     course_subjects_ids: searchParams.get("course_subjects_ids") || "",
     search: searchParams.get("search") || "",
   };
-  let  courseType = 'all'
+  let  type = 'all'
   if(pathname == '/student/courses'){
-    courseType = 'all'
+    type = 'all'
   }else if(pathname == '/student/courses/inprogress'){
-    courseType = 'in_progress'
+    type = 'in_progress'
   }
   else if(pathname == '/student/courses/completed'){
-    courseType = 'complete'
+    type = 'complete'
   }
     
   const { 
@@ -41,7 +39,7 @@ const DashboardCoursesPage = () => {
     error, 
     refetch,
     isFetching 
-    } = useGetCoursesQuery({ page, courseType, ...filtersGetParams });
+    } = useGetCoursesQuery({ page, type, ...filtersGetParams });
 
     console.log('filtersGetParams',filtersGetParams, coursesData, page)
     console.log("--------------------------------------")
