@@ -15,6 +15,7 @@ const FiltersSidebar = () => {
   const dispatch = useDispatch();
   const {filters} = useSelector((state) => state.course);
   const pathname = usePathname(); 
+  const debounceRef = React.useRef(null);
 
 
   // Fetch filter data (categories, difficulties, subjects)
@@ -30,6 +31,8 @@ const FiltersSidebar = () => {
   /**
    * Update URL query params and reset page on filter/search change
    */
+
+
   const updateQuery = (key, values) => {
     const params = new URLSearchParams(searchParams.toString());
     if (values.length > 0) {
@@ -57,12 +60,24 @@ const FiltersSidebar = () => {
       }));
     }
     // dispatch(setPage(1));
-    dispatch(setSpinnerVisible(true));
-  
-    const newUrl = `${pathname}?${params.toString()}`;
-    if (window.location.search !== `?${params.toString()}`) {
-      router.replace(newUrl);
+    
+      // ✅ Debounced router.replace
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
     }
+
+     debounceRef.current = setTimeout(() => {
+      dispatch(setSpinnerVisible(true));
+      const newUrl = `${pathname}?${params.toString()}`;
+      if (window.location.search !== `?${params.toString()}`) {
+        router.replace(newUrl);
+      }
+    }, 400); // ⏳ adjust debounce delay (300–500ms works well)
+  
+    // const newUrl = `${pathname}?${params.toString()}`;
+    // if (window.location.search !== `?${params.toString()}`) {
+    //   router.replace(newUrl);
+    // }
   };
 
   /**
