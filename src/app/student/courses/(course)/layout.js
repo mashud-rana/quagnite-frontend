@@ -4,9 +4,7 @@ import FiltersSidebar from "@/components/Student/Courses/Course/FiltersSidebar";
 import SearchInput from "@/components/Student/Courses/Course/SearchInput";
 import React from "react";
 
-
 const CoursesLayout = ({ children }) => {
-
   const filterData = [
     {
       title: "Ways to learn",
@@ -37,15 +35,15 @@ const CoursesLayout = ({ children }) => {
 
   return (
     <div>
-    
       <h1 className="ic_text_36 mb-24">My Courses</h1>
       <ScrollableNavbar tabs={courseTabs} />
 
       <SearchInput />
 
       <div className="ic_content_wrapper">
-        <FiltersSidebar  />
-        <div style={{width:'calc(100% - 300px)'}}>{children}</div>
+        <FiltersSidebar />
+        {/* <div style={{ width: "calc(100% - 300px)" }}>{children}</div> */}
+        <div style={{ width: "100%" }}>{children}</div>
       </div>
     </div>
   );

@@ -239,12 +239,13 @@
   font-weight: 500;
   font-size: 15px;
   text-transform: uppercase;
-  padding: 7px 12px;
+  padding: 10px 12px;
   background: #5c81f7;
   border-radius: 8px;
   cursor: pointer;
   transition: 0.3s all ease-in-out;
   white-space: nowrap;
+  text-decoration: none;
 }
 
 .ic_start_button:hover {
@@ -259,7 +260,7 @@
 
   .ic_start_button {
     font-size: 14px;
-    padding: 6px 12px;
+    /* padding: 8px 12px; */
   }
 
   .ic_metadata_item {
@@ -360,7 +361,7 @@
 
   .ic_start_button {
     font-size: 13px;
-    padding: 5px 12px;
+    /* padding: 5px 12px; */
   }
 
   .ic_filter_section {
@@ -420,6 +421,6 @@
 
   .ic_start_button {
     font-size: 12px;
-    padding: 4px 12px;
+    /* padding: 4px 12px; */
   }
 }
