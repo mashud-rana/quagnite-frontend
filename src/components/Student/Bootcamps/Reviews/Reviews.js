@@ -1,9 +1,10 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 import { FaStar, FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 import styles from "./reviews.module.css";
 import img from "@/assets/images/all/instractor.png";
 import Image from "next/image";
 import { MdArrowDownward } from "react-icons/md";
+import { set } from 'nprogress';
 
 const mockReviews = [
   {
@@ -38,7 +39,12 @@ const ratingBreakdown = [
   { stars: 1, count: 1, percentage: 1.5 },
 ];
 
-const Reviews = () => {
+const Reviews = ({reviewData, reviews}) => {
+  const [allReviewData, setAllReviewData] = useState({});
+  const [allReviews, setAllReviews] = useState([]);
+
+  console.log('Reviews', allReviewData, allReviews)
+
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, index) => (
       <FaStar
@@ -50,6 +56,17 @@ const Reviews = () => {
     ));
   };
 
+    useEffect(() => {
+      if (reviewData) {
+        setAllReviewData(reviewData);
+      }
+      if (reviews) {
+        setAllReviews((prev) => {
+          return [...reviews]
+        });
+      }
+    }, [reviewData, reviews]);
+
   return (
     <div className={styles.reviewsContainer}>
       {/* Header */}
@@ -60,13 +77,13 @@ const Reviews = () => {
       {/* Rating Summary Section */}
       <div className={styles.ratingSummary}>
         <div className={styles.overallRating}>
-          <h4 className={styles.ratingScore}>4.96</h4>
+          <h4 className={styles.ratingScore}>{allReviewData.average_rating}</h4>
           <div className={styles.ratingLabel}>Course Rating</div>
-          <p>3,014 reviews</p>
+          <p>{allReviewData.reviews_count} reviews</p>
         </div>
 
         <div className={styles.ratingBreakdown}>
-          {ratingBreakdown.map((item) => (
+          {allReviewData && allReviewData.percentageRatings && allReviewData.percentageRatings.map((item) => (
             <div key={item.stars} className={styles.ratingRow}>
               <span className={styles.starLabel}>{item.stars} Star</span>
               <div className={styles.progressBar}>
@@ -112,32 +129,35 @@ const Reviews = () => {
 
         {/* Reviews List */}
         <div className={styles.reviewsList}>
-          {mockReviews.map((review) => (
-            <div key={review.id} className={styles.reviewCard}>
+          {allReviews && allReviews.map((review, index) => (
+            <div key={index} className={styles.reviewCard}>
               <div className={styles.reviewHeader}>
                 <Image
-                  src={img}
+                  src={review?.user?.avatar_url}
                   width={40}
                   height={40}
-                  alt={review.userName}
+                  alt={review?.user?.full_name}
                   className={styles.reviewAvatar}
                 />
                 <div className={styles.reviewMeta}>
                   <h4 className={styles.reviewerName}>{review.userName}</h4>
                   <div className={styles.reviewRating}>
                     <div className={styles.stars}>
-                      {renderStars(review.rating)}
+                      {renderStars(review?.rating)}
                     </div>
-                    <span className={styles.ratingValue}>{review.rating}</span>
+                    <span className={styles.ratingValue}>{review?.rating}</span>
                     <span className={styles.publishDate}>
-                      Published {review.publishedDate}
+                      Published {review?.created_at}
                     </span>
                   </div>
                 </div>
               </div>
 
               <div className={styles.reviewContent}>
-                <p className={styles.reviewText}>{review.content}</p>
+                <p
+                  className={styles.reviewText}
+                  dangerouslySetInnerHTML={{ __html: review?.comment }}
+                />
               </div>
 
               <div className={styles.reviewActions}>

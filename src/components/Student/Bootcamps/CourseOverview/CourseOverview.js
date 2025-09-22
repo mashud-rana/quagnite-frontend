@@ -1,23 +1,18 @@
+'use client';
+
+import React, {useState, useEffect} from "react";
 import { FaCircle } from "react-icons/fa";
 import styles from "./CourseOverview.module.css";
 import { FaCircleCheck } from "react-icons/fa6";
 
-export function CourseOverview() {
-  const whatYoullLearn = [
-    "Developer",
-    "Web Development",
-    "Android Development",
-    "Cross Platform Development",
-    "Cross Platform Development",
-    "Web App Development",
-  ];
+export function CourseOverview({ courseDetails }) {
+  const [course, setCourse] = useState(null);
 
-  const whoThisCourseIsFor = [
-    "Beginner",
-    "Web Developers",
-    "Android Development",
-    "Cross Platform Development",
-  ];
+
+  useEffect(()=>{
+      setCourse(courseDetails);
+    },[courseDetails])
+    // console.log('CourseOverview courseDetails', course);
 
   return (
     <div className={styles.overviewContainer}>
@@ -25,7 +20,7 @@ export function CourseOverview() {
       <div className={styles.header}>
         <h2 className={styles.title}>About this course</h2>
         <p className={styles.subtitle}>
-          Learn Web Design from scratch by working on some awesome projects.
+          {course?.subtitle}
         </p>
       </div>
 
@@ -38,26 +33,26 @@ export function CourseOverview() {
             <div className={styles.statsList}>
               <div className={styles.statRow}>
                 <span className={styles.statLabel}>Skill level:</span>
-                <span className={styles.statValue}>All Levels</span>
+                <span className={styles.statValue}>{course?.difficulty?.title}</span>
               </div>
               <div className={styles.statRow}>
                 <span className={styles.statLabel}>Students:</span>
-                <span className={styles.statValue}>10761</span>
+                <span className={styles.statValue}>{course?.total_enrolled_students}</span>
               </div>
               <div className={styles.statRow}>
                 <span className={styles.statLabel}>Lectures:</span>
-                <span className={styles.statValue}>16</span>
+                <span className={styles.statValue}>{course?.lectures_count}</span>
               </div>
               <div className={styles.statRow}>
                 <span className={styles.statLabel}>Video:</span>
-                <span className={styles.statValue}>2 total hours</span>
+                <span className={styles.statValue}>{course?.lectures_video_duration}</span>
               </div>
             </div>
 
             <div className={styles.statsList}>
               <div className={styles.statRow}>
                 <span className={styles.statLabel}>Languages:</span>
-                <span className={styles.statValue}>English</span>
+                <span className={styles.statValue}>{course?.language?.title}</span>
               </div>
               <div className={styles.statRow}>
                 <span className={styles.statLabel}>Captions:</span>
@@ -82,59 +77,25 @@ export function CourseOverview() {
         </div>
       </div>
 
-      {/* Description Section */}
+
       <div className={styles.descriptionSection}>
         <p className={styles.sectionTitle}>Description :</p>
         <div className={styles.descriptionContent}>
-          <p className={styles.descriptionParagraph}>
-            Welcome to Development 101, your ultimate guide for learning Web
-            development.
-          </p>
-          <p className={styles.descriptionParagraph}>
-            Throughout this course, you will be learning various essential
-            things that are mostly used by a flutter developer when he/she is
-            working at some firm.
-          </p>
-          <p className={styles.descriptionParagraph}>
-            This course will help you learn how to create fast and stunning
-            mobile applications with so much ease. The projects/apps which you
-            will be making throughout the course will be working on android as
-            well as iOS. Some changes to the projects make them compatible with
-            web browsers as well.
-          </p>
-          <p className={styles.descriptionParagraph}>
-            You will also be building a large number of apps with the difficulty
-            level ranging from beginner to advanced and these projects/apps will
-            help you get better with the concepts eventually.
-          </p>
-          <p className={styles.descriptionParagraph}>
-            I will also be covering some of the most used flutter packages which
-            are generally used while we are developing a flutter app.
-          </p>
-          <p className={styles.descriptionParagraph}>
-            Flutter is Google&#39;s UI toolkit for building beautiful, natively
-            compiled applications for mobile, web, and desktop from a single
-            codebase. Delight your users with Flutter&#39;s built-in beautiful
-            Material Design. Flutter&#39;s hot reload helps you quickly and
-            easily experiment, build UIs, add features, and fix bugs faster.
-            Cross-platform development with Flutter. Flutter&#39;s widgets
-            incorporate all critical platform differences such as scrolling,
-            navigation, icons, and fonts to provide full native performance on
-            both iOS and Android.
-          </p>
-          <p className={styles.descriptionParagraph}>Happy Learning!!</p>
-        </div>
+          <div
+          className={styles.descriptionParagraph}
+          dangerouslySetInnerHTML={{ __html: course?.description }}
+            />
+          </div>
       </div>
 
-      {/* Learning Outcomes Section - Two Column Layout */}
       <div className={styles.bottomSection}>
         <div className={styles.leftColumn2}>
           <h3 className={styles.sectionTitle}>What you&#39;ll learn</h3>
           <div className={styles.learningList}>
-            {whatYoullLearn.map((item, index) => (
+            {course && course.course_tags.length > 0 && course.course_tags.map((item, index) => (
               <div key={index} className={styles.learningItem}>
                 <FaCircleCheck className={styles.bulletPoint} />
-                <span className={styles.learningText}>{item}</span>
+                <span className={styles.learningText}>{item?.name}</span>
               </div>
             ))}
           </div>
@@ -143,12 +104,16 @@ export function CourseOverview() {
         <div className={styles.rightColumn}>
           <h3 className={styles.sectionTitle}>Who this course is for</h3>
           <div className={styles.learningList}>
-            {whoThisCourseIsFor.map((item, index) => (
+            {/* {whoThisCourseIsFor.map((item, index) => (
               <div key={index} className={styles.learningItem}>
                 <FaCircle className={styles.bulletPoint} />
                 <span className={styles.learningText}>{item}</span>
               </div>
-            ))}
+            ))} */}
+            <div className={styles.learningItem}>
+                <FaCircle className={styles.bulletPoint} />
+                <span className={styles.learningText}>{course?.difficulty?.title}</span>
+              </div>
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { FaRegClock, FaStar } from "react-icons/fa6";
 import { FiCalendar } from "react-icons/fi";
 import styles from "./course.module.css";
 import img from "@/assets/images/all/subscription.png";
+import Link from "next/link";
 
 const ProgressCard = ({ course }) => {
     const renderStars = (rating) => {
@@ -75,7 +76,7 @@ const ProgressCard = ({ course }) => {
               </div>
             </div>
 
-            <button className={styles.ic_start_button}>Finish</button>
+            <Link href={`/student/courses/${course.course_slug}`} className={styles.ic_start_button}>Finish</Link>
           </div>
         </div>
       </div>

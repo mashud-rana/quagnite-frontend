@@ -1,61 +1,16 @@
 "use client";
 
 import { FaPlay } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./courseContent.module.css";
 import { IoIosArrowDown } from "react-icons/io";
-import { PiMonitorPlayBold } from "react-icons/pi";
+import { PiMonitorPlayBold, PiFilePdfFill , PiImage ,PiFileAudio, PiVideo , PiSlideshow, PiCircle, PiCheckCircleFill        } from "react-icons/pi";
+import { MdOutlinePlayLesson } from "react-icons/md";
 
-const courseModules = [
-  {
-    id: "1",
-    title: "Orientation",
-    duration: "3:36",
-    videos: [
-      { id: "1.1", title: "Welcome to the Course", duration: "2:15" },
-      { id: "1.2", title: "Course Overview", duration: "1:21" },
-    ],
-  },
-  {
-    id: "2",
-    title: "Getting Started",
-    duration: "5:42",
-    videos: [
-      { id: "2.1", title: "Setup Your Environment", duration: "3:18" },
-      { id: "2.2", title: "First Steps", duration: "2:24" },
-    ],
-  },
-  {
-    id: "3",
-    title: "Core Concepts",
-    duration: "8:15",
-    videos: [
-      { id: "3.1", title: "Understanding Basics", duration: "4:32" },
-      { id: "3.2", title: "Advanced Techniques", duration: "3:43" },
-    ],
-  },
-  {
-    id: "4",
-    title: "Practical Examples",
-    duration: "12:30",
-    videos: [
-      { id: "4.1", title: "Example 1", duration: "6:15" },
-      { id: "4.2", title: "Example 2", duration: "6:15" },
-    ],
-  },
-  {
-    id: "5",
-    title: "Final Project",
-    duration: "15:20",
-    videos: [
-      { id: "5.1", title: "Project Setup", duration: "7:45" },
-      { id: "5.2", title: "Implementation", duration: "7:35" },
-    ],
-  },
-];
 
-const CourseContent = () => {
+const CourseContent = ({lessonsDetails, lessonsTotalDuration}) => {
   const [expandedModules, setExpandedModules] = useState(new Set());
+  const [lessons, setLessons] = useState(null);
 
   const toggleModule = (moduleId) => {
     const newExpanded = new Set(expandedModules);
@@ -67,68 +22,108 @@ const CourseContent = () => {
     setExpandedModules(newExpanded);
   };
 
+  useEffect(() => {
+    setLessons(lessonsDetails);
+    // console.log("Lessons details in CourseContent:", lessonsDetails);
+  }, [lessonsDetails]);
+
+  // Helper: Map lecture format to icon component
+  const formatIconMap = {
+    video: PiMonitorPlayBold,
+    pdf: PiFilePdfFill,
+    image: PiImage,
+    audio: PiFileAudio,
+    slide: PiSlideshow,
+  };
+
   return (
     <div className={styles.ic_content_section}>
       <div className={styles.ic_content_header}>
         <div className={styles.ic_duration_info}>
           <span className={styles.ic_total_duration}>
-            Total duration- 4h 35 min
+            Total duration - {lessonsTotalDuration || "0:00"}
           </span>
         </div>
       </div>
 
       <div className={styles.ic_modules_list}>
-        {courseModules.map((module) => (
-          <div key={module.id} className={styles.ic_module_item}>
-            {/* Module Header - Clickable */}
-            <div
-              className={styles.ic_module_header}
-              onClick={() => toggleModule(module.id)}
-            >
-              <div className={styles.ic_module_content}>
-                <button className={styles.ic_play_button}>
-                  <PiMonitorPlayBold className={styles.ic_play_icon} />
-                </button>
-                <span className={styles.ic_module_title}>{module.title}</span>
-              </div>
-              <div className={styles.ic_module_right}>
-                <span className={styles.ic_module_duration}>
-                  ({module.duration})
-                </span>
+        {lessons &&
+          lessons.map((module) => {
+            const isExpanded = expandedModules.has(module.id);
+            return (
+              <div key={module.id} className={styles.ic_module_item}>
+                {/* Module Header */}
                 <div
-                  className={`${styles.ic_arrow_icon} ${
-                    expandedModules.has(module.id)
-                      ? styles.ic_arrow_rotated
-                      : ""
+                  className={styles.ic_module_header}
+                  onClick={() => toggleModule(module.id)}
+                  tabIndex={0}
+                  role="button"
+                  aria-expanded={isExpanded}
+                >
+                  <div className={styles.ic_module_content}>
+                    <button
+                      className={styles.ic_play_button}
+                      tabIndex={-1}
+                      aria-label={`Play ${module.title}`}
+                    >
+                      <MdOutlinePlayLesson className={styles.ic_play_icon} />
+                    </button>
+                    <span className={styles.ic_module_title}>{module.title}</span>
+                  </div>
+                  <div className={styles.ic_module_right}>
+                    <span className={styles.ic_module_duration}>
+                      ({module.file_duration})
+                    </span>
+                    <div
+                      className={`${styles.ic_arrow_icon} ${
+                        isExpanded ? styles.ic_arrow_rotated : ""
+                      }`}
+                    >
+                      <IoIosArrowDown />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Lectures List */}
+                <div
+                  className={`${styles.ic_videos_container} ${
+                    isExpanded ? styles.ic_videos_expanded : ""
                   }`}
                 >
-                  <IoIosArrowDown />
+                  {module.lectures.length > 0 &&
+                    module.lectures.map((lecture) => {
+                      const Icon = formatIconMap[lecture.lecture_format] || PiMonitorPlayBold;
+                            return (
+                              <div key={lecture.id} className={styles.ic_video_item}>
+                                <div className={styles.ic_video_content}>
+                                  {
+                                    lecture.completed ? <PiCheckCircleFill className={styles.ic_play_icon} /> : <PiCircle className={styles.ic_play_icon} />
+                                  }
+                                      
+                                  <button
+                                    className={styles.ic_play_button}
+                                    tabIndex={-1}
+                                    aria-label={`Open ${lecture.title}`}
+                                  >
+                                
+                                    <Icon className={styles.ic_play_icon} />
+                                  </button>
+                                  <span className={styles.ic_video_title}>
+                                    {lecture.title}
+                                  </span>
+                                </div>
+                                {lecture.lecture_format === "video" && (
+                                  <span className={styles.ic_video_duration}>
+                                    ({lecture.file_duration_formatted})
+                                  </span>
+                                )}
+                              </div>
+                            );
+                    })}
                 </div>
               </div>
-            </div>
-
-            {/* Videos List - Expandable */}
-            <div
-              className={`${styles.ic_videos_container} ${
-                expandedModules.has(module.id) ? styles.ic_videos_expanded : ""
-              }`}
-            >
-              {module.videos.map((video) => (
-                <div key={video.id} className={styles.ic_video_item}>
-                  <div className={styles.ic_video_content}>
-                    <button className={styles.ic_play_button}>
-                      <PiMonitorPlayBold className={styles.ic_play_icon} />
-                    </button>
-                    <span className={styles.ic_video_title}>{video.title}</span>
-                  </div>
-                  <span className={styles.ic_video_duration}>
-                    ({video.duration})
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
+            );
+          })}
       </div>
     </div>
   );

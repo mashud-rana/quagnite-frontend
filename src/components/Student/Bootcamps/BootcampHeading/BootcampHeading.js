@@ -1,35 +1,31 @@
-// "use client";
+"use client";
 
-// import React, { useRef, useState } from "react";
+import React,{useState,useEffect} from "react";
 import { FaCalendarAlt, FaMapMarkerAlt, FaPlay, FaPause } from "react-icons/fa";
 import styles from "./heading.module.css";
 import img from "@/assets/images/all/instractor.png";
 import img2 from "@/assets/images/all/poster.png";
 import Image from "next/image";
+import logo from "@/assets/images/auth/logo.png";
 
-const BootcampHeading = () => {
-  // const videoRef = useRef(null);
-  // const [isPlaying, setIsPlaying] = useState(false);
+const BootcampHeading = ({courseDetails, activeLectureDetails}) => {
 
-  // const handleResume = () => {
-  //   if (videoRef.current) {
-  //     if (videoRef.current.paused) {
-  //       videoRef.current.play();
-  //       setIsPlaying(true);
-  //     } else {
-  //       videoRef.current.pause();
-  //       setIsPlaying(false);
-  //     }
-  //   }
-  // };
+  const [course, setCourse] = useState(null);
+  const [activeLecture, setActiveLecture] = useState(null);
 
+  // console.log('BootcampHeading', course, activeLecture);
+
+  useEffect(()=>{
+    setCourse(courseDetails);
+    setActiveLecture(activeLectureDetails);
+  },[courseDetails, activeLectureDetails])
   return (
     <div>
       <div className={styles.ic_course_info}>
-        <h1 className="ic_text_36">Introduction to Product Development</h1>
+        <h1 className="ic_text_36">{course?.title}</h1>
         <div className={styles.ic_instructor_info}>
-          <span className={styles.ic_instructor_name}>John Smith</span>
-          <span className={styles.ic_instructor_role}>Sr. Web Designer</span>
+          <span className={styles.ic_instructor_name}>{course?.teacher?.full_name}</span>
+          <span className={styles.ic_instructor_role}>{course?.teacher?.teacher_details?.professional_title}</span>
         </div>
       </div>
 
@@ -38,15 +34,50 @@ const BootcampHeading = () => {
         {/* Video Section */}
         <div className={styles.ic_video_section}>
           <div className={styles.ic_video_container}>
-            <video
-              // ref={videoRef}
-              className={styles.ic_video_thumbnail}
-              controls
-              poster={img2.src}
-            >
-              <source src="/videos/coding.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            {/* {
+              activeLecture == "null" ? (
+                course && (
+                  <Image
+                    src={logo}
+                    alt={course?.title || "Course image"}
+                    fill
+                    className={styles.ic_video_thumbnail}
+                  />
+                )
+              ) : (
+                <video
+                  className={styles.ic_video_thumbnail}
+                  controls
+                  poster={img2.src}
+                >
+                  <source src="/videos/coding.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              )
+            } */}
+
+            {
+              activeLecture ? (
+                  <video
+                  className={styles.ic_video_thumbnail}
+                  controls
+                  poster={img2.src}
+                >
+                  <source src="/videos/coding.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              ) : (
+                course&& <Image
+                    src={course?.image_url || logo}
+                    alt={course?.title || "Course image"}
+                    width={800}
+                    height={450}
+                    className={styles.ic_video_thumbnail}
+                  />
+              )
+            }
+            
+          
 
             {/* <button className={styles.ic_resume_button} onClick={handleResume}>
               {isPlaying ? "PAUSE COURSE" : "RESUME COURSE"}
@@ -66,30 +97,34 @@ const BootcampHeading = () => {
             <hr className={styles.ic_hr} />
             <div className={styles.ic_instructor_profile}>
               <Image
-                src={img}
-                alt="Leslie Alexander"
+                src={course?.teacher?.avatar_url || img}
+                alt={course?.teacher?.full_name || "Instructor"}
+                width={80}
+                height={80}
                 className={styles.ic_instructor_avatar}
               />
               <div className={styles.ic_instructor_details}>
                 <h6 className={styles.ic_instructor_name_main}>
-                  Leslie Alexander
+                  {course?.teacher?.full_name}
                 </h6>
                 <div className={styles.ic_text_content}>
                   <p className={styles.ic_instructor_title}>
-                    Web Developer | Founder, Hex hybrids
+                      {course?.teacher?.teacher_details?.professional_title}
                   </p>
                   <div className={styles.ic_instructor_meta}>
                     <div className={styles.ic_meta_item}>
                       <FaMapMarkerAlt className={styles.ic_meta_icon} />
-                      <span>London, UK</span>
+                      <span>{course?.teacher?.teacher_details?.address}</span>
                     </div>
                     <div className={styles.ic_meta_item}>
                       <FaCalendarAlt className={styles.ic_meta_icon} />
-                      <span>Since April 1, 2022</span>
+                      <span>{course?.teacher?.since_from}</span>
                     </div>
                   </div>
                   <div>
-                    <span>Level: Beginner</span>
+                    <span>Level: {course?.teacher?.teacher_details?.teacher_category?.name}</span>
+                      
+                      {/* Beginner</span> */}
                   </div>
                 </div>
               </div>

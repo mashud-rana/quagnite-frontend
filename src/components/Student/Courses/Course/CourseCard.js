@@ -75,7 +75,7 @@ const CourseCard = ({ course }) => {
           />
           <div className={styles.ic_course_action}>
             <Link
-              href="http://localhost:3000/student/courses/1"
+              href={`/student/courses/${course.course_slug}`}
               className={styles.ic_start_button}
             >
               START YOUR JOURNEY

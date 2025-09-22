@@ -23,7 +23,13 @@ export const authApi = apiSlice.injectEndpoints({
       }),
       
     }),
+    getCourseDetailsBySlug: builder.query({
+      query: (slug) => ({
+        url: `/student/courses/${slug}/show`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useGetCourseSubjectsQuery, useGetCourseFiltersQuery, useGetCoursesQuery } = authApi;
+export const { useGetCourseSubjectsQuery, useGetCourseFiltersQuery, useGetCoursesQuery, useGetCourseDetailsBySlugQuery } = authApi;
