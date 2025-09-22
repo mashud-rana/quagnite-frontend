@@ -1,81 +1,56 @@
-import React from "react";
-import Link from "next/link";
-import { FaArrowLeft, FaPlus } from "react-icons/fa";
 import IcCard from "@/components/Share/IcCard/IcCard";
+import React from "react";
 
-const BootcampsPage = () => {
+const CompletedPage = () => {
   const smallCards = [
     {
-      // img: img2,
       title: "Lorem Ipsum Dolar Sit Amet",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
-      buttonText: "Schedule now",
+      buttonText: "start bootcamp",
     },
     {
-      // img: img2,
       title: "Lorem Ipsum Dolar Sit Amet",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
-      buttonText: "Schedule now",
+      buttonText: "start bootcamp",
     },
 
     {
-      // img: img2,
       title: "Lorem Ipsum Dolar Sit Amet",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
-      buttonText: "Schedule now",
+      buttonText: "start bootcamp",
     },
 
     {
-      // img: img2,
       title: "Lorem Ipsum Dolar Sit Amet",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
-      buttonText: "Schedule now",
+      buttonText: "start bootcamp",
     },
 
     {
-      // img: img2,
       title: "Lorem Ipsum Dolar Sit Amet",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
-      buttonText: "Schedule now",
+      buttonText: "start bootcamp",
     },
 
     {
-      // img: img2,
       title: "Lorem Ipsum Dolar Sit Amet",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
-      buttonText: "Schedule now",
+      buttonText: "start bootcamp",
     },
   ];
-
   return (
-    <div>
-      <div className="mb-24 ic_flex2">
-        <div className="ic_title_section">
-          <Link href="#" className="ic_back_button" aria-label="Go back">
-            <FaArrowLeft />
-          </Link>
-          <h1 className="ic_text_36">List of all Bootcamps</h1>
-        </div>
-
-        <Link href="/teacher/bootcamps/create" className="ic_icn_btn">
-          <FaPlus />
-          create bootcamp
-        </Link>
-      </div>
-
-      <div className="ic_grid2">
-        {smallCards.map((card, index) => (
-          <IcCard card={card} key={index} />
-        ))}
-      </div>
+    <div className="ic_grid2">
+      {smallCards.map((card, index) => (
+        <IcCard card={card} key={index} />
+      ))}
     </div>
   );
 };
 
-export default BootcampsPage;
+export default CompletedPage;
