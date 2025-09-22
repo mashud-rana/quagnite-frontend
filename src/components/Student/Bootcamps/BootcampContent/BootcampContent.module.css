@@ -54,6 +54,10 @@
   /* color: #6b7280; */
 }
 
+.ic_video_title {
+  font-size: 16px;
+}
+
 .ic_module_header {
   display: flex;
   align-items: center;
@@ -120,6 +124,21 @@
 
 .ic_video_duration {
   font-size: 13px;
+}
+
+.ic_flex {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ic_hr {
+  height: 14px;
+  border: 1px solid #e2e2ea;
+}
+
+.ic_point_icon {
+  color: var(--primary-color);
 }
 
 @media (max-width: 1299px) {

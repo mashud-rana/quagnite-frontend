@@ -5,6 +5,7 @@ import { useState } from "react";
 import styles from "./BootcampContent.module.css";
 import { IoIosArrowDown } from "react-icons/io";
 import { MdVideocam } from "react-icons/md";
+import { FaRegCircleCheck, FaRegCircleRight } from "react-icons/fa6";
 
 const courseModules = [
   {
@@ -105,7 +106,50 @@ const BootcampContent = () => {
                 expandedModules.has(module.id) ? styles.ic_videos_expanded : ""
               }`}
             >
-              {module.videos.map((video) => (
+              <div className={`${styles.ic_flex} mb-12`}>
+                <MdVideocam
+                  className={`${styles.ic_play_icon} ic_color_primary`}
+                />
+                <span className={styles.ic_video_title}>
+                  Learn and Explore HTML as a Beginner
+                </span>
+              </div>
+
+              <div className={`${styles.ic_flex} mb-12 ic_color_primary`}>
+                {/* Date */}
+                <div className="text-sm ">30/06/2323</div>
+                <hr className={styles.ic_hr} />
+
+                {/* Time */}
+                <div className="text-sm ">13:09 PM</div>
+                <hr className={styles.ic_hr} />
+
+                {/* Left for */}
+                <div className="text-sm">Left for 2 hours 20 minutes</div>
+              </div>
+
+              <p>
+                Throughout this course, you will be learning various essential
+                things that are mostly used by a flutter developer when he/she
+                is working at some firm. This course will help you learn how to
+                create fast and stunning mobile applications with so much ease.
+                The projects/apps which you will be making throughout the course
+                will be working on android as well as ios. Some changes to the
+                projects make them compatible will web browsers as well.
+              </p>
+
+              <ul className={styles.ic_video_points}>
+                <li className={styles.ic_flex}>
+                  <FaRegCircleCheck className={styles.ic_point_icon} />
+                  Live, interactive class
+                </li>
+                <li className={styles.ic_flex}>
+                  <FaRegCircleCheck className={styles.ic_point_icon} />
+                  Experienced instructor teaching over Zoom
+                </li>
+              </ul>
+
+              {/* {module.videos.map((video) => (
                 <div key={video.id} className={styles.ic_video_item}>
                   <div className={styles.ic_video_content}>
                     <button className={styles.ic_play_button}>
@@ -119,7 +163,7 @@ const BootcampContent = () => {
                     ({video.duration})
                   </span>
                 </div>
-              ))}
+              ))} */}
             </div>
           </div>
         ))}
