@@ -482,6 +482,12 @@ h6 {
   gap: 20px;
 }
 
+.ic_grid2 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
 /* dashboard layout css for student ........................ */
 
 .student-layout {
@@ -714,6 +720,11 @@ h6 {
   text-shadow: 0 0 0.25px currentcolor;
 }
 
+.ic_img {
+  height: auto;
+  width: 100%;
+}
+
 /* Responsive Design */
 
 @media (max-width: 1650px) {
@@ -871,6 +882,10 @@ h6 {
   .ic_back_button {
     width: 30px;
     height: 30px;
+  }
+
+  .ic_grid2 {
+    gap: 16px;
   }
 }
 
@@ -1116,6 +1131,10 @@ h6 {
 
   .ic_title_section {
     gap: 10px;
+  }
+
+  .ic_grid2 {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -1492,6 +1511,10 @@ h6 {
     flex-direction: column;
     align-items: start;
     gap: 12px;
+  }
+
+  .ic_grid2 {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 
