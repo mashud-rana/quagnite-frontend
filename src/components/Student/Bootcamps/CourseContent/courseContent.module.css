@@ -97,7 +97,9 @@
 }
 
 .ic_videos_expanded {
-  max-height: 300px;
+  max-height: 350px;
+  overflow-y: auto;
+  padding-bottom: 16px;
 }
 
 .ic_videos_list {
@@ -112,6 +114,12 @@
   justify-content: space-between;
   padding: 12px 0px 12px 28px;
   border-bottom: 1px solid #f1f5f9;
+  cursor: pointer;
+  color: var(--black);
+}
+
+.ic_video_item:hover {
+  color: var(--black);
 }
 
 .ic_video_item:last-child {
@@ -126,6 +134,28 @@
 
 .ic_video_duration {
   font-size: 13px;
+}
+
+.ic_btn {
+  font-size: 15px;
+  background-color: var(--primary-color);
+  border: none;
+  color: var(--white);
+  padding: 4px 12px;
+  border-radius: 8px;
+  margin-left: 28px;
+  transition: 0.3s all ease-in-out;
+}
+
+.ic_btn:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+  box-shadow: 0px 2px 8px #5c81f7;
+  transform: translateY(-1px);
+}
+
+.ic_lesson_container {
+  padding-bottom: 8px;
 }
 
 @media (max-width: 575px) {
@@ -143,5 +173,11 @@
 
   .ic_video_item {
     padding: 8px 0px 8px 28px;
+  }
+
+  .ic_btn {
+    font-size: 13px;
+    padding: 2px 12px;
+    margin-left: 28px;
   }
 }

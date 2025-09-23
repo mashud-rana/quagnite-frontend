@@ -7,6 +7,7 @@ import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
 import CourseCard from "../../Courses/Course/CourseCard";
 import DownloadResumeModal from "../../Vault/DownloadResumeModal/DownloadResumeModal";
+import ProgressInfo from "./ProgressInfo";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
@@ -109,7 +110,7 @@ const SkillChart = () => {
         </div>
 
         <div className={styles.ic_grid}>
-          <div className={styles.ic_text_container}>
+          {/* <div className={styles.ic_text_container}>
             <p className={styles.performanceText}>
               Last time, you did better than 7% of your peers.
             </p>
@@ -122,7 +123,8 @@ const SkillChart = () => {
               </button>
             </div>
             <p className={styles.chancesText}>2 of 3 chances remaining</p>
-          </div>
+          </div> */}
+          <ProgressInfo />
 
           <div className={styles.chartContainer}>
             <Chart

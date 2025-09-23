@@ -4,13 +4,26 @@ import { FaPlay } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import styles from "./courseContent.module.css";
 import { IoIosArrowDown } from "react-icons/io";
-import { PiMonitorPlayBold, PiFilePdfFill , PiImage ,PiFileAudio, PiVideo , PiSlideshow, PiCircle, PiCheckCircleFill        } from "react-icons/pi";
+import {
+  PiMonitorPlayBold,
+  PiFilePdfFill,
+  PiImage,
+  PiFileAudio,
+  PiVideo,
+  PiSlideshow,
+  PiCircle,
+  PiCheckCircleFill,
+} from "react-icons/pi";
 import { MdOutlinePlayLesson } from "react-icons/md";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 
-
-const CourseContent = ({lessonsDetails, lessonsTotalDuration}) => {
+const CourseContent = ({ lessonsDetails, lessonsTotalDuration }) => {
   const [expandedModules, setExpandedModules] = useState(new Set());
   const [lessons, setLessons] = useState(null);
+
+  const params = useParams();
+  const slug = params.slug;
 
   const toggleModule = (moduleId) => {
     const newExpanded = new Set(expandedModules);
@@ -68,7 +81,9 @@ const CourseContent = ({lessonsDetails, lessonsTotalDuration}) => {
                     >
                       <MdOutlinePlayLesson className={styles.ic_play_icon} />
                     </button>
-                    <span className={styles.ic_module_title}>{module.title}</span>
+                    <span className={styles.ic_module_title}>
+                      {module.title}
+                    </span>
                   </div>
                   <div className={styles.ic_module_right}>
                     <span className={styles.ic_module_duration}>
@@ -90,36 +105,55 @@ const CourseContent = ({lessonsDetails, lessonsTotalDuration}) => {
                     isExpanded ? styles.ic_videos_expanded : ""
                   }`}
                 >
-                  {module.lectures.length > 0 &&
-                    module.lectures.map((lecture) => {
-                      const Icon = formatIconMap[lecture.lecture_format] || PiMonitorPlayBold;
-                            return (
-                              <div key={lecture.id} className={styles.ic_video_item}>
-                                <div className={styles.ic_video_content}>
-                                  {
-                                    lecture.completed ? <PiCheckCircleFill className={styles.ic_play_icon} /> : <PiCircle className={styles.ic_play_icon} />
-                                  }
-                                      
-                                  <button
-                                    className={styles.ic_play_button}
-                                    tabIndex={-1}
-                                    aria-label={`Open ${lecture.title}`}
-                                  >
-                                
-                                    <Icon className={styles.ic_play_icon} />
-                                  </button>
-                                  <span className={styles.ic_video_title}>
-                                    {lecture.title}
-                                  </span>
-                                </div>
-                                {lecture.lecture_format === "video" && (
-                                  <span className={styles.ic_video_duration}>
-                                    ({lecture.file_duration_formatted})
-                                  </span>
-                                )}
-                              </div>
-                            );
-                    })}
+                  <div className={styles.ic_lesson_container}>
+                    {module.lectures.length > 0 &&
+                      module.lectures.map((lecture) => {
+                        const Icon =
+                          formatIconMap[lecture.lecture_format] ||
+                          PiMonitorPlayBold;
+                        return (
+                          <Link
+                            href="#"
+                            key={lecture.id}
+                            className={styles.ic_video_item}
+                          >
+                            <div className={styles.ic_video_content}>
+                              {lecture.completed ? (
+                                <PiCheckCircleFill
+                                  className={styles.ic_play_icon}
+                                />
+                              ) : (
+                                <PiCircle className={styles.ic_play_icon} />
+                              )}
+
+                              <button
+                                className={styles.ic_play_button}
+                                tabIndex={-1}
+                                aria-label={`Open ${lecture.title}`}
+                              >
+                                <Icon className={styles.ic_play_icon} />
+                              </button>
+                              <span className={styles.ic_video_title}>
+                                {lecture.title}
+                              </span>
+                            </div>
+
+                            {lecture.lecture_format === "video" && (
+                              <span className={styles.ic_video_duration}>
+                                ({lecture.file_duration_formatted})
+                              </span>
+                            )}
+                          </Link>
+                        );
+                      })}
+                  </div>
+
+                  <Link
+                    href={`/student/courses/${slug}/abc/quiz`}
+                    className={styles.ic_btn}
+                  >
+                    Start Quize
+                  </Link>
                 </div>
               </div>
             );
