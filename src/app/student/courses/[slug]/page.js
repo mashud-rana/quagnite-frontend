@@ -113,7 +113,7 @@ const CourseDetailsPage = () => {
           </TabPane>
 
           <TabPane tab="Notes" key="6">
-            <Notes />
+            <Notes noteData={course?.course_notes} courseDetails={course} />
           </TabPane>
         </Tabs>
       </div>

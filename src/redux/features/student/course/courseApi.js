@@ -29,7 +29,20 @@ export const authApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    deleteCourseNote: builder.mutation({
+      query: (noteId) => ({
+        url: `/student/courses/delete-note/${noteId}`,
+        method: "DELETE",
+      }),
+    
+    }),
   }),
 });
 
-export const { useGetCourseSubjectsQuery, useGetCourseFiltersQuery, useGetCoursesQuery, useGetCourseDetailsBySlugQuery } = authApi;
+export const { 
+  useGetCourseSubjectsQuery, 
+  useGetCourseFiltersQuery, 
+  useGetCoursesQuery, 
+  useGetCourseDetailsBySlugQuery,
+  useDeleteCourseNoteMutation
+} = authApi;

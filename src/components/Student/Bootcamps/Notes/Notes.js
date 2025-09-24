@@ -1,9 +1,12 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import { FaTrash, FaEdit, FaEllipsisV } from "react-icons/fa";
 import styles from "./note.module.css";
 import dynamic from "next/dynamic";
+import {useDeleteCourseNoteMutation} from '@/redux/features/student/course/courseApi';
+import Swal from 'sweetalert2'
+import {confirmDelete} from '@/utils/helper';
 
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
@@ -31,7 +34,7 @@ const mockNotes = [
   },
 ];
 
-const Notes = () => {
+const Notes = ({ noteData, courseDetails }) => {
   const editor = useRef(null);
   const [replyContent, setReplyContent] = useState("");
   const editorConfig = useMemo(
@@ -91,6 +94,19 @@ const Notes = () => {
     }),
     []
   );
+  const [notes, setNotes] = useState( []);
+  const [course, setCourse] = useState({});
+
+  const [
+      deleteCourseNote,
+      {
+        data ,
+        isLoading,
+        isSuccess,
+        isError,
+        error,
+      },
+    ] = useDeleteCourseNoteMutation();
 
   const handleSubmitReply = () => {
     if (replyContent.trim()) {
@@ -104,8 +120,29 @@ const Notes = () => {
   };
 
   const handleNoteAction = (action, noteId) => {
-    console.log(`${action} note:`, noteId);
+
+    confirmDelete().then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+      }
+    });
   };
+
+  
+  useEffect(() => {
+    if(noteData){
+      setNotes(noteData);
+    }
+    if(courseDetails){
+      setCourse(courseDetails);
+    }
+  }, [noteData, courseDetails]);
+
+  console.log("noteData prop:", notes, course);
 
   return (
     <div className={styles.notesContainer}>
@@ -143,10 +180,10 @@ const Notes = () => {
       <div className={styles.notesSection}>
         <h5 className="fw_500">Your Notes</h5>
         <div className={styles.notesGrid}>
-          {mockNotes.map((note) => (
+          {notes.map((note) => (
             <div key={note.id} className={styles.noteCard}>
               <div className={styles.noteHeader}>
-                <h5 className={styles.noteTitle}>{note.title}</h5>
+                <h5 className={styles.noteTitle}>{note?.title}</h5>
                 <div className={styles.noteActions}>
                   <button
                     className={styles.noteActionButton}
@@ -172,7 +209,10 @@ const Notes = () => {
                 </div>
               </div>
               <div className={styles.noteContent}>
-                <p className={styles.notePreview}>{note.content}</p>
+                <div
+                  className={styles.notePreview}
+                  dangerouslySetInnerHTML={{ __html: note?.note  || "" }}
+                />
               </div>
             </div>
           ))}
