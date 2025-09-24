@@ -53,8 +53,8 @@ const Notes = () => {
         "fontsize",
         "|",
         "link",
-        "image", // 👈 image button
-        "file", // 👈 file attach button
+        "image",
+        "file",
       ],
       removeButtons: [
         "source",
@@ -72,15 +72,12 @@ const Notes = () => {
       buttonsSM: 4,
       buttonsXS: 2,
 
-      /* 👇 Image uploader config */
       uploader: {
-        insertImageAsBase64URI: true, // local image will be inserted as base64
+        insertImageAsBase64URI: true,
         imagesExtensions: ["jpg", "png", "jpeg", "gif", "svg", "webp"],
-        // alternative: server upload (example endpoint)
         url: "https://your-server.com/upload",
         method: "POST",
         process: (resp) => {
-          // server theke image url peye return dite hobe
           return {
             files: [resp.url],
             path: resp.url,

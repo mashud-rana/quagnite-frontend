@@ -25,6 +25,11 @@ const TeacherLayout = ({ children }) => {
 
   const mainMenu = [
     {
+      title: "Overview",
+      url: "/teacher/overview",
+      icon: GiFeather,
+    },
+    {
       title: "Courses",
       url: "/teacher",
       icon: GiFeather,
@@ -46,7 +51,7 @@ const TeacherLayout = ({ children }) => {
     },
     {
       title: "E-book",
-      url: "/student/ebook",
+      url: "/teacher/ebook",
       icon: BiBookContent,
     },
     {
