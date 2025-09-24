@@ -141,16 +141,29 @@ const Notes = ({ noteData, courseDetails }) => {
     });
   };
 
+  const isHtmlEmpty = (html) => {
+    // Remove all tags like <br>, <p>, etc.
+    const text = html
+      .replace(/<br\s*\/?>/gi, '') // remove <br>
+      .replace(/<\/?p[^>]*>/gi, '') // remove <p> and </p>
+      .trim(); // trim whitespace
+
+    return text.length === 0;
+  };
+
+
   const handleSubmitReply = () => {
-    if (replyContent.trim()) {
-      // console.log("New reply:", replyContent);
+    if (replyContent.trim() && !isHtmlEmpty(replyContent)) {
+      console.log("New reply:", replyContent);  
       setReplyContent("");
       handleSubmit(onSubmit)();
+    } else {
+      setError("note", { type: 'manual', message: 'Note content is required' });
     }
   };
 
   const onSubmit =  (data) => {
-    console.log("Form data to submit:", data);
+    
     const formData = new FormData();
     Object.entries(data).forEach(([key, value]) => {
       formData.append(key, value);
