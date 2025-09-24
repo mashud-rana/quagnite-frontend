@@ -7,7 +7,6 @@ import {
   FaThumbsUp,
   FaThumbsDown,
   FaStar,
-  FaHeart,
   FaReply,
   FaChevronUp,
   FaUser,
@@ -17,9 +16,7 @@ import img from "@/assets/images/all/instractor.png";
 import Image from "next/image";
 import { IoArrowDown } from "react-icons/io5";
 import { RiReplyLine } from "react-icons/ri";
-import { TiUser } from "react-icons/ti";
 
-// Dynamically import Jodit to avoid SSR issues
 const JoditEditor = dynamic(() => import("jodit-react"), {
   ssr: false,
 });
@@ -40,21 +37,7 @@ is not working`,
     tags: ["data science", "programming", "data visualization"],
     likes: 0,
     followers: 20,
-    replies: [
-      {
-        id: "1",
-        author: {
-          name: "Jane Cooper",
-          avatar: "/placeholder.svg?height=40&width=40",
-          rating: 4.98,
-        },
-        publishedTime: "2 months ago",
-        content:
-          "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.",
-        helpful: 0,
-        notHelpful: 0,
-      },
-    ],
+    replies: [],
     showReplies: true,
   },
 ];
@@ -64,6 +47,7 @@ const Discussions = () => {
   const [discussions, setDiscussions] = useState(mockDiscussions);
   const [newPost, setNewPost] = useState("");
   const [replyContent, setReplyContent] = useState("");
+  const [activeReplyDiscussionId, setActiveReplyDiscussionId] = useState(null);
 
   const editorConfig = useMemo(
     () => ({
@@ -108,25 +92,37 @@ const Discussions = () => {
     []
   );
 
-  const toggleReplies = (discussionId) => {
-    setDiscussions((prev) =>
-      prev.map((discussion) =>
-        discussion.id === discussionId
-          ? { ...discussion, showReplies: !discussion.showReplies }
-          : discussion
-      )
-    );
-  };
-
   const handleSubmitReply = () => {
-    if (replyContent.trim()) {
-      console.log("New reply:", replyContent);
+    if (replyContent.trim() && activeReplyDiscussionId) {
+      const newReply = {
+        id: Date.now().toString(),
+        author: {
+          name: "You",
+          avatar: "/placeholder.svg?height=40&width=40",
+          rating: 5.0,
+        },
+        publishedTime: "Just now",
+        content: replyContent,
+        helpful: 0,
+        notHelpful: 0,
+      };
+
+      setDiscussions((prevDiscussions) =>
+        prevDiscussions.map((discussion) =>
+          discussion.id === activeReplyDiscussionId
+            ? { ...discussion, replies: [...discussion.replies, newReply] }
+            : discussion
+        )
+      );
+
       setReplyContent("");
+      setActiveReplyDiscussionId(null);
     }
   };
 
   const handleCancelReply = () => {
     setReplyContent("");
+    setActiveReplyDiscussionId(null);
   };
 
   const handleVote = (replyId, type) => {
@@ -203,7 +199,7 @@ const Discussions = () => {
               ))}
             </div>
 
-            {/* reaction  */}
+            {/* Reactions */}
             <div className={styles.reviewActions}>
               <button className={styles.helpfulButton}>
                 <FaThumbsUp />
@@ -211,19 +207,66 @@ const Discussions = () => {
               </button>
               <button className={styles.notHelpfulButton}>
                 <FaUser />
-                20 Flowers
+                {discussion.followers} Followers
               </button>
-
-              <button className={styles.notHelpfulButton}>
+              <button
+                className={styles.notHelpfulButton}
+                onClick={() =>
+                  setActiveReplyDiscussionId(
+                    activeReplyDiscussionId === discussion.id
+                      ? null
+                      : discussion.id
+                  )
+                }
+              >
                 <RiReplyLine size={20} />
                 Reply
               </button>
             </div>
 
+            {/* Reply Editor */}
+            {activeReplyDiscussionId === discussion.id && (
+              <div className={styles.replyEditor}>
+                <div className={styles.replyInputContainer}>
+                  <Image
+                    src={img}
+                    alt="Your avatar"
+                    className={styles.userAvatar}
+                  />
+
+                  <div className="w_100">
+                    <JoditEditor
+                      ref={editor}
+                      value={replyContent}
+                      config={editorConfig}
+                      tabIndex={2}
+                      onChange={(newContent) => setReplyContent(newContent)}
+                    />
+
+                    {replyContent.trim() && (
+                      <div className={styles.ic_btn_container}>
+                        <button
+                          className={`${styles.ic_btn} ${styles.ic_cencel}`}
+                          onClick={handleCancelReply}
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          className={`${styles.ic_btn} ${styles.ic_save}`}
+                          onClick={handleSubmitReply}
+                        >
+                          Save note
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Discussion Content */}
             <div className={styles.discussionContent}>
               <h3 className={styles.discussionTitle}>{discussion.title}</h3>
-
               {discussion.codeSnippet && (
                 <div className={styles.codeBlock}>
                   <span className={styles.codeContent}>
@@ -234,7 +277,7 @@ const Discussions = () => {
             </div>
 
             <div className={styles.ic_reply_container}>
-              <span>4 Replies</span>
+              <span>{discussion.replies.length} Replies</span>
               <span>See Replies</span>
             </div>
 
@@ -287,68 +330,6 @@ const Discussions = () => {
             )}
           </div>
         ))}
-      </div>
-
-      {/* Rich Text Reply Editor - Always Visible */}
-      <div className={styles.replyEditor}>
-        <div className={styles.replyInputContainer}>
-          <Image src={img} alt="Your avatar" className={styles.userAvatar} />
-
-          <div className=" w_100">
-            <div>
-              <JoditEditor
-                ref={editor}
-                value={replyContent}
-                config={editorConfig}
-                tabIndex={2}
-                onChange={(newContent) => setReplyContent(newContent)}
-              />
-            </div>
-
-            {replyContent.trim() && (
-              <div className={styles.ic_btn_container}>
-                <button
-                  className={`${styles.ic_btn} ${styles.ic_cencel}`}
-                  onClick={handleCancelReply}
-                >
-                  Cancel
-                </button>
-                <button
-                  className={`${styles.ic_btn} ${styles.ic_save}`}
-                  onClick={handleSubmitReply}
-                >
-                  Save note
-                </button>
-              </div>
-            )}
-          </div>
-
-          {/* <div className={styles.editorWrapper}>
-            <JoditEditor
-              ref={editor}
-              value={replyContent}
-              config={editorConfig}
-              tabIndex={1}
-              onBlur={(newContent) => setReplyContent(newContent)}
-              onChange={(newContent) => setReplyContent(newContent)}
-            />
-
-            <div className={styles.editorActions}>
-              <button
-                className={styles.cancelButton}
-                onClick={handleCancelReply}
-              >
-                CANCEL
-              </button>
-              <button
-                className={styles.submitButton}
-                onClick={handleSubmitReply}
-              >
-                SUBMIT
-              </button>
-            </div>
-          </div> */}
-        </div>
       </div>
     </div>
   );
