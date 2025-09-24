@@ -44,6 +44,23 @@ export const authApi = apiSlice.injectEndpoints({
       }),
     
     }),
+    getCourseNote: builder.query({
+      query: (noteId) => ({
+        url: `/student/courses/note/${noteId}`,
+        method: "GET",
+      }),
+    }),
+    updateCourseNote: builder.mutation({
+      query: ({noteData, noteId}) => ({
+        url: `/student/courses/note/${noteId}/update`,
+        method: "POST",
+         body: {
+          ...noteData,
+          _method: "PUT",
+        },
+      }),
+    
+    }),
   }),
 });
 
@@ -54,4 +71,6 @@ export const {
   useGetCourseDetailsBySlugQuery,
   useDeleteCourseNoteMutation,
   useCreateCourseNoteMutation,
+  useGetCourseNoteQuery,
+  useUpdateCourseNoteMutation,
 } = authApi;
