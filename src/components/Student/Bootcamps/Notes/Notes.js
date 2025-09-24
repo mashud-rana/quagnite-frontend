@@ -5,34 +5,15 @@ import { FaTrash, FaEdit, FaEllipsisV } from "react-icons/fa";
 import styles from "./note.module.css";
 import dynamic from "next/dynamic";
 import {useDeleteCourseNoteMutation} from '@/redux/features/student/course/courseApi';
-import Swal from 'sweetalert2'
 import {confirmDelete} from '@/utils/helper';
+import { antIcon, toastError, toastSuccess } from "@/utils/helper";
+import { Spin } from "antd";
+import NotDataFound from "@/components/Empty/NotDataFound";
+
 
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
-const mockNotes = [
-  {
-    id: "1",
-    title: "UX Design",
-    content:
-      "There are many variations of passages of Lorem Ipsum available...",
-    createdAt: "2024-01-15",
-  },
-  {
-    id: "2",
-    title: "AR/VR",
-    content:
-      "There are many variations of passages of Lorem Ipsum available...",
-    createdAt: "2024-01-14",
-  },
-  {
-    id: "3",
-    title: "AI Tools",
-    content:
-      "There are many variations of passages of Lorem Ipsum available...",
-    createdAt: "2024-01-13",
-  },
-];
+
 
 const Notes = ({ noteData, courseDetails }) => {
   const editor = useRef(null);
@@ -96,6 +77,7 @@ const Notes = ({ noteData, courseDetails }) => {
   );
   const [notes, setNotes] = useState( []);
   const [course, setCourse] = useState({});
+  const [targetId, setTargetId] = useState(null);
 
   const [
       deleteCourseNote,
@@ -122,17 +104,27 @@ const Notes = ({ noteData, courseDetails }) => {
   const handleNoteAction = (action, noteId) => {
 
     confirmDelete().then((result) => {
+      
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success"
-        });
+        setTargetId(noteId);
+        deleteCourseNote(noteId); 
       }
     });
   };
 
-  
+  useEffect(()=>{
+    if(isSuccess && data?.success){
+      let filteredNotes = notes.filter(note => note.id !== data?.data?.id);
+      setNotes(filteredNotes);
+      toastSuccess(data?.message || "Note deleted successfully.");
+    }
+    if (isError) {
+
+      toastError(error?.data?.message || "Something went wrong. Please try again.");
+    }
+    setTargetId(null);
+  },[isSuccess, data,isError, error])
+
   useEffect(() => {
     if(noteData){
       setNotes(noteData);
@@ -180,7 +172,7 @@ const Notes = ({ noteData, courseDetails }) => {
       <div className={styles.notesSection}>
         <h5 className="fw_500">Your Notes</h5>
         <div className={styles.notesGrid}>
-          {notes.map((note) => (
+          {notes.length >0 && notes.map((note) => (
             <div key={note.id} className={styles.noteCard}>
               <div className={styles.noteHeader}>
                 <h5 className={styles.noteTitle}>{note?.title}</h5>
@@ -190,21 +182,28 @@ const Notes = ({ noteData, courseDetails }) => {
                     onClick={() => handleNoteAction("delete", note.id)}
                     title="Delete"
                   >
-                    <FaTrash />
+                  {
+                    targetId === note.id && isLoading ? <Spin indicator={antIcon} /> : <FaTrash />
+                  }
                   </button>
                   <button
                     className={styles.noteActionButton}
                     onClick={() => handleNoteAction("edit", note.id)}
                     title="Edit"
                   >
-                    <FaEdit />
+                    {
+                      targetId === note.id && isLoading ? <Spin indicator={antIcon} /> : <FaEdit />
+                    }
                   </button>
                   <button
                     className={styles.noteActionButton}
                     onClick={() => handleNoteAction("more", note.id)}
                     title="More options"
                   >
-                    <FaEllipsisV />
+                    
+                    {
+                      targetId === note.id && isLoading ? <Spin indicator={antIcon} /> : <FaEllipsisV />
+                    }
                   </button>
                 </div>
               </div>
@@ -216,6 +215,11 @@ const Notes = ({ noteData, courseDetails }) => {
               </div>
             </div>
           ))}
+          {
+            notes.length === 0 && (
+              <NotDataFound message={`No notes found for ${course?.title || 'this course'}.`} />
+            )
+          }
         </div>
       </div>
     </div>
