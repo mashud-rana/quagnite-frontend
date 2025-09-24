@@ -46,7 +46,7 @@ const TeacherLayout = ({ children }) => {
     },
     {
       title: "E-book",
-      url: "/teacher/ebook",
+      url: "/student/ebook",
       icon: BiBookContent,
     },
     {
