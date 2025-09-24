@@ -13,7 +13,7 @@ import * as yup from "yup";
 import {Controller, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useCreateCourseNoteMutation, useUpdateCourseNoteMutation} from '@/redux/features/student/course/courseApi';
-import {Modal, Button, Form, Input} from "antd";
+
 const JoditEditor = dynamic(() => import ("@/components/Share/Editor/JoditEditor/JoditEditor"), {ssr: false});
 
 const schema = yup.object({
@@ -34,10 +34,6 @@ const Notes = ({noteData, courseDetails}) => {
   const editor = useRef(null);
   const updateEditor = useRef(null);
 
-  const [replyContent,
-    setReplyContent] = useState("");
-  const [updateReplyContent,
-    setUpdateReplyContent] = useState("");
   const editorConfig = useMemo(() => ({
     readonly: false,
     placeholder: "What are your thoughts? (Type '/' to add images, files, or links)",
@@ -104,7 +100,7 @@ const Notes = ({noteData, courseDetails}) => {
     setCourse] = useState({});
   const [noteDataId,
     setNoteDataId] = useState(null);
-  // const [selectedNote, setSelectedNote] = useState(null);
+
 
   const [mode, setMode] = useState("create"); // "create" or "edit"
 
@@ -149,11 +145,7 @@ const Notes = ({noteData, courseDetails}) => {
       error : updateDataResponseError
     }
   ] = useUpdateCourseNoteMutation();
-
-  const handleCancelReply = () => {
-    setReplyContent("");
-  };
-
+  //handle note action
   const handleNoteAction = (action, noteId) => {
     if (action === "edit") {
       
@@ -181,10 +173,9 @@ const Notes = ({noteData, courseDetails}) => {
 
   };
 
-
+//onSubmit function
   const onSubmit = (data) => {
 
-    console.log("New note data:", data);
     if(mode == 'create'){
       createCourseNote(data);
     }else{
@@ -375,16 +366,7 @@ const Notes = ({noteData, courseDetails}) => {
                       : <FaEdit/>
 }
                   </button>
-                  <button
-                    className={styles.noteActionButton}
-                    onClick={() => handleNoteAction("more", note.id)}
-                    title="More options">
-
-                    {noteDataId === note.id && isLoading
-                      ? <Spin indicator={antIcon}/>
-                      : <FaEllipsisV/>
-}
-                  </button>
+                
                 </div>
               </div>
               <div className={styles.noteContent}>
