@@ -36,6 +36,14 @@ export const authApi = apiSlice.injectEndpoints({
       }),
     
     }),
+    createCourseNote: builder.mutation({
+      query: (noteData) => ({
+        url: `/student/courses/post-note`,
+        method: "POST",
+        body: noteData,
+      }),
+    
+    }),
   }),
 });
 
@@ -44,5 +52,6 @@ export const {
   useGetCourseFiltersQuery, 
   useGetCoursesQuery, 
   useGetCourseDetailsBySlugQuery,
-  useDeleteCourseNoteMutation
+  useDeleteCourseNoteMutation,
+  useCreateCourseNoteMutation,
 } = authApi;

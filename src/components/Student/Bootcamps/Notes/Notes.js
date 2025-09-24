@@ -9,9 +9,19 @@ import {confirmDelete} from '@/utils/helper';
 import { antIcon, toastError, toastSuccess } from "@/utils/helper";
 import { Spin } from "antd";
 import NotDataFound from "@/components/Empty/NotDataFound";
+import * as yup from "yup";
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
+import {useCreateCourseNoteMutation, } from '@/redux/features/student/course/courseApi';
 
 
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
+
+const schema = yup.object({
+  course_id: yup.string().required("Course ID is required"),
+  title: yup.string().required("Title is required").max(100, "Title must be at most 100 characters"),
+  note: yup.string().required("Note content is required").min(10, "Note content must be at least 10 characters"),
+});
 
 
 
@@ -79,6 +89,19 @@ const Notes = ({ noteData, courseDetails }) => {
   const [course, setCourse] = useState({});
   const [targetId, setTargetId] = useState(null);
 
+
+    // Form Validation
+    const {
+      register,
+      handleSubmit,
+      formState: { errors },
+      setValue,
+      setError,
+    } = useForm({
+      mode: "onBlur",
+      resolver: yupResolver(schema),
+    });
+
   const [
       deleteCourseNote,
       {
@@ -90,12 +113,18 @@ const Notes = ({ noteData, courseDetails }) => {
       },
     ] = useDeleteCourseNoteMutation();
 
-  const handleSubmitReply = () => {
-    if (replyContent.trim()) {
-      console.log("New reply:", replyContent);
-      setReplyContent("");
-    }
-  };
+    
+  const [
+      createCourseNote,
+      {
+        data: createData,
+        isLoading: isCreateDataLoading,
+        isSuccess: isCreateDataSuccess,
+        isError: isCreateDataError,
+        error: createDataResponseError,
+      },
+    ] = useCreateCourseNoteMutation();
+
 
   const handleCancelReply = () => {
     setReplyContent("");
@@ -112,6 +141,25 @@ const Notes = ({ noteData, courseDetails }) => {
     });
   };
 
+  const handleSubmitReply = () => {
+    if (replyContent.trim()) {
+      // console.log("New reply:", replyContent);
+      setReplyContent("");
+      handleSubmit(onSubmit)();
+    }
+  };
+
+  const onSubmit =  (data) => {
+    console.log("Form data to submit:", data);
+    const formData = new FormData();
+    Object.entries(data).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
+     createCourseNote(formData).unwrap();
+    
+  }
+
   useEffect(()=>{
     if(isSuccess && data?.success){
       let filteredNotes = notes.filter(note => note.id !== data?.data?.id);
@@ -125,12 +173,28 @@ const Notes = ({ noteData, courseDetails }) => {
     setTargetId(null);
   },[isSuccess, data,isError, error])
 
+  useEffect(() =>{
+    if(isCreateDataSuccess && createData?.success){
+      setNotes((prevNotes) => [createData?.data, ...prevNotes]);
+      toastSuccess(createData?.message || "Note created successfully.");
+      setValue("title", "");
+      setValue("note", "");
+      setReplyContent("");
+    }
+      if (isCreateDataError) {
+
+      toastError(createDataResponseError?.data?.message || "Something went wrong. Please try again.");
+    }
+
+    },[isCreateDataSuccess, createData, isCreateDataError, createDataResponseError])
+
   useEffect(() => {
     if(noteData){
       setNotes(noteData);
     }
     if(courseDetails){
       setCourse(courseDetails);
+      setValue("course_id", courseDetails?.id || "");
     }
   }, [noteData, courseDetails]);
 
@@ -141,13 +205,36 @@ const Notes = ({ noteData, courseDetails }) => {
       {/* Rich Text Editor */}
       <div className="mb-24 ic_text_editor">
         <div className={styles.ic_note_text_editor_wrapper}>
+          <div>
+            <div className={styles.topInputContainer}>
+            
+              <input
+                type="text"
+                placeholder="Enter title"
+                {...register("title")}
+                className={styles.topInput}
+              />
+              
+            </div>
+            <small className="text-danger" style={{color: "red"}}>
+              {errors.title?.message}
+              
+            </small>
+          </div>
           <JoditEditor
             ref={editor}
             value={replyContent}
             config={editorConfig}
             tabIndex={2}
-            onChange={(newContent) => setReplyContent(newContent)}
+            onChange={(newContent) => {
+              setValue("note", newContent)
+              setReplyContent(newContent)
+            }}
           />
+            <small className="text-danger" style={{color: "red"}}>
+              {errors.note?.message}
+              
+            </small>
         </div>
 
         {replyContent.trim() && (

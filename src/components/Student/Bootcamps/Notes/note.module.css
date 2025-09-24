@@ -201,6 +201,28 @@
   overflow: hidden;
 }
 
+.topInputContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.topInput {
+  padding: 8px 16px;
+  background-color: red;
+  background: none;
+  background-color: #e2e2e2b9;
+  border-radius: 12px;
+  outline: none;
+  border: none;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.topInput::placeholder {
+  color: #9ca3af;
+}
+
+
 /* Responsive Design */
 
 @media (max-width: 768px) {
