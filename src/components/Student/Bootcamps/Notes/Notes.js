@@ -1,13 +1,13 @@
 "use client";
 
-import { useMemo, useRef, useState, useEffect } from "react";
-import { FaTrash, FaEdit, FaEllipsisV } from "react-icons/fa";
+import {useMemo, useRef, useState, useEffect} from "react";
+import {FaTrash, FaEdit, FaEllipsisV} from "react-icons/fa";
 import styles from "./note.module.css";
 import dynamic from "next/dynamic";
-import { useDeleteCourseNoteMutation } from "@/redux/features/student/course/courseApi";
-import { confirmDelete } from "@/utils/helper";
-import { antIcon, toastError, toastSuccess } from "@/utils/helper";
-import { Spin } from "antd";
+import {useDeleteCourseNoteMutation} from '@/redux/features/student/course/courseApi';
+import {confirmDelete} from '@/utils/helper';
+import {antIcon, toastError, toastSuccess} from "@/utils/helper";
+import {Spin} from "antd";
 import NotDataFound from "@/components/Empty/NotDataFound";
 import * as yup from "yup";
 import {Controller, useForm} from "react-hook-form";
@@ -15,13 +15,12 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {useCreateCourseNoteMutation, useUpdateCourseNoteMutation} from '@/redux/features/student/course/courseApi';
 import { useSelector } from "react-redux";
 
-const JoditEditor = dynamic(
-  () => import("@/components/Share/Editor/JoditEditor/JoditEditor"),
-  { ssr: false }
-);
+const JoditEditor = dynamic(() => import ("@/components/Share/Editor/JoditEditor/JoditEditor"), {ssr: false});
 
 const schema = yup.object({
-  course_id: yup.string().required("Course ID is required"),
+  course_id: yup
+    .string()
+    .required("Course ID is required"),
   title: yup
     .string()
     .required("Title is required")
@@ -29,10 +28,10 @@ const schema = yup.object({
   note: yup
     .string()
     .required("Note content is required")
-    .min(10, "Note content must be at least 10 characters"),
+    .min(10, "Note content must be at least 10 characters")
 });
 
-const Notes = ({ noteData, courseDetails }) => {
+const Notes = ({noteData, courseDetails}) => {
   const editor = useRef(null);
 
   // Get user information from Redux store
@@ -45,9 +44,6 @@ const Notes = ({ noteData, courseDetails }) => {
   const [noteDataId,
     setNoteDataId] = useState(null);
 
-  const [notes, setNotes] = useState([]);
-  const [course, setCourse] = useState({});
-  const [noteDataId, setNoteDataId] = useState(null);
 
   const [mode, setMode] = useState("create"); // "create" or "edit"
 
@@ -55,48 +51,57 @@ const Notes = ({ noteData, courseDetails }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: {
+      errors
+    },
     setValue,
     setError,
     control,
     watch,
-    reset,
-  } = useForm({ resolver: yupResolver(schema) });
+    reset
+  } = useForm({resolver: yupResolver(schema)});
 
-  const [deleteCourseNote, { data, isLoading, isSuccess, isError, error }] =
-    useDeleteCourseNoteMutation();
+
+  const [deleteCourseNote, {
+      data,
+      isLoading,
+      isSuccess,
+      isError,
+      error
+    }
+  ] = useDeleteCourseNoteMutation();
   //create note
-  const [
-    createCourseNote,
-    {
-      data: createData,
-      isLoading: isCreateDataLoading,
-      isSuccess: isCreateDataSuccess,
-      isError: isCreateDataError,
-      error: createDataResponseError,
-    },
+  const [createCourseNote, {
+      data : createData,
+      isLoading : isCreateDataLoading,
+      isSuccess : isCreateDataSuccess,
+      isError : isCreateDataError,
+      error : createDataResponseError
+    }
   ] = useCreateCourseNoteMutation();
   //update note
-  const [
-    updateCourseNote,
-    {
-      data: updateData,
-      isLoading: isUpdateDataLoading,
-      isSuccess: isUpdateDataSuccess,
-      isError: isUpdateDataError,
-      error: updateDataResponseError,
-    },
+  const [updateCourseNote, {
+      data : updateData,
+      isLoading : isUpdateDataLoading,
+      isSuccess : isUpdateDataSuccess,
+      isError : isUpdateDataError,
+      error : updateDataResponseError
+    }
   ] = useUpdateCourseNoteMutation();
   //handle note action
   const handleNoteAction = (action, noteId) => {
     if (action === "edit") {
-      let note = notes.find((n) => n.id === noteId);
-
+      
+      let note = notes.find(n => n.id === noteId);
+  
       if (note) {
         setMode("edit");
-        setValue("title", note?.title || "");
-        setValue("note", note?.note || "");
-        setValue("course_id", course?.id || "");
+        setValue("title", note
+          ?.title || "");
+        setValue("note", note
+          ?.note || "");
+        setValue("course_id", course
+          ?.id || "");
 
         setNoteDataId(noteId);
       }
@@ -107,93 +112,89 @@ const Notes = ({ noteData, courseDetails }) => {
           deleteCourseNote(noteId);
         }
       });
-    } else if (action === "more") {
-    }
+    } else if (action === "more") {}
+
   };
 
-  //onSubmit function
+//onSubmit function
   const onSubmit = (data) => {
-    if (mode == "create") {
+
+    if(mode == 'create'){
       createCourseNote(data);
-    } else {
-      updateCourseNote({ noteData: data, noteId: noteDataId });
+    }else{
+      updateCourseNote({noteData: data, noteId: noteDataId});
     }
-  };
+
+  }
 
   //for delete note
   useEffect(() => {
-    if (isSuccess && data?.success) {
-      let filteredNotes = notes.filter((note) => note.id !== data?.data?.id);
+    if (isSuccess && data
+      ?.success) {
+      let filteredNotes = notes.filter(note => note.id !== data
+        ?.data
+          ?.id);
       setNotes(filteredNotes);
-      toastSuccess(data?.message || "Note deleted successfully.");
+      toastSuccess(data
+        ?.message || "Note deleted successfully.");
     }
     if (isError) {
-      toastError(
-        error?.data?.message || "Something went wrong. Please try again."
-      );
+
+      toastError(error
+        ?.data
+          ?.message || "Something went wrong. Please try again.");
     }
     setNoteDataId(null);
-  }, [isSuccess, data, isError, error]);
+  }, [isSuccess, data, isError, error])
 
   //for create note
   useEffect(() => {
-    if (isCreateDataSuccess && createData?.success) {
-      setNotes((prevNotes) => [createData?.data, ...prevNotes]);
-      toastSuccess(createData?.message || "Note created successfully.");
-      reset(
-        { title: "", note: "", course_id: course.id },
-        { keepValues: false }
-      );
+    if (isCreateDataSuccess && createData
+      ?.success) {
+      setNotes((prevNotes) => [
+        createData
+          ?.data,
+        ...prevNotes
+      ]);
+      toastSuccess(createData
+        ?.message || "Note created successfully.");
+       reset({ title: "", note: "",course_id:course.id }, { keepValues: false });
     }
     if (isCreateDataError) {
-      toastError(
-        createDataResponseError?.data?.message ||
-          "Something went wrong. Please try again."
-      );
+      toastError(createDataResponseError
+        ?.data
+          ?.message || "Something went wrong. Please try again.");
     }
-  }, [
-    isCreateDataSuccess,
-    createData,
-    isCreateDataError,
-    createDataResponseError,
-  ]);
+
+  }, [isCreateDataSuccess, createData, isCreateDataError, createDataResponseError])
 
   //for update note
-  useEffect(() => {
-    if (isUpdateDataSuccess && updateData?.success) {
+  useEffect(()=>{
+  
+    if(isUpdateDataSuccess && updateData?.success){
       let updatedNote = updateData?.data;
-      setNotes((prevNotes) =>
-        prevNotes.map((note) => {
-          if (note.id === updatedNote.id) {
-            return {
-              ...note,
-              title: updatedNote.title,
-              note: updatedNote.note,
-            };
-          }
-          return note;
-        })
-      );
+      setNotes((prevNotes) => prevNotes.map(note => {
+        if (note.id === updatedNote.id) {
+          return {
+            ...note,
+            title: updatedNote.title,
+            note: updatedNote.note,
+          };
+        }
+        return note;
+      }));
       toastSuccess(updateData?.message || "Note updated successfully.");
       setMode("create");
       setNoteDataId(null);
-      reset(
-        { title: "", note: "", course_id: course.id },
-        { keepValues: false }
-      );
+      reset({ title: "", note: "",course_id:course.id }, { keepValues: false });
     }
     if (isUpdateDataError) {
-      toastError(
-        updateDataResponseError?.data?.message ||
-          "Something went wrong. Please try again."
-      );
+      toastError(updateDataResponseError
+        ?.data
+          ?.message || "Something went wrong. Please try again.");
     }
-  }, [
-    isUpdateDataSuccess,
-    updateData,
-    isUpdateDataError,
-    updateDataResponseError,
-  ]);
+
+    },[isUpdateDataSuccess, updateData, isUpdateDataError, updateDataResponseError])
 
   //set note data to state
   useEffect(() => {
@@ -202,7 +203,8 @@ const Notes = ({ noteData, courseDetails }) => {
     }
     if (courseDetails) {
       setCourse(courseDetails);
-      setValue("course_id", courseDetails?.id || "");
+      setValue("course_id", courseDetails
+        ?.id || "");
     }
   }, [noteData, courseDetails]);
 
@@ -219,46 +221,41 @@ const Notes = ({ noteData, courseDetails }) => {
           <div className={styles.ic_note_text_editor_wrapper}>
             <div>
               <div className={styles.topInputContainer}>
+
                 <input
                   type="text"
                   placeholder="Enter title"
                   {...register("title")}
-                  className={styles.topInput}
-                />
+                  className={styles.topInput}/>
+
               </div>
               <small
                 className="text-danger"
                 style={{
-                  color: "red",
-                }}
-              >
-                {errors.title?.message}
+                color: "red"
+              }}>
+                {errors.title
+                  ?.message}
+
               </small>
             </div>
-            {/* <Controller
+            <Controller
               name="note"
               control={control}
               render={({field}) => (<JoditEditor
               {...field}
               editorRef={editor}
               editorValue={field.value}
-              setEditorValue={field.onChange}/>)}/> */}
-
-            <Controller
-              name="note"
-              control={control}
-              render={({ field: { value, onChange } }) => (
-                <JoditEditor ref={editor} value={value} onChange={onChange} />
-              )}
-            />
+              setEditorValue={field.onChange}/>)}/>
 
             <small
               className="text-danger"
               style={{
-                color: "red",
-              }}
-            >
-              {errors.note?.message}
+              color: "red"
+            }}>
+              {errors.note
+                ?.message}
+
             </small>
           </div>
 
@@ -285,20 +282,12 @@ const Notes = ({ noteData, courseDetails }) => {
                     (isCreateDataLoading || isUpdateDataLoading) ? <Spin indicator={antIcon}/> : null
                   }
                 </button>
-              )}
-
-              <button
-                className={`${styles.ic_btn} ${styles.ic_save}`}
-                type="submit"
-              >
-                {mode === "edit" ? "Update note" : "Save note"}
-              </button>
-            </div>
-          )}
+              </div>
+            )}
         </div>
       </form>
       {/* Notes Section */}
-
+      
       <div className={styles.notesSection}>
         <h5 className="fw_500">Your Notes</h5>
         <div className={styles.notesGrid}>
@@ -334,14 +323,25 @@ const Notes = ({ noteData, courseDetails }) => {
                     }
               
               </div>
-            ))}
-          {notes.length === 0 && (
-            <NotDataFound
-              message={`No notes found for ${course?.title || "this course"}.`}
-            />
-          )}
+              <div className={styles.noteContent}>
+                <div
+                  className={styles.notePreview}
+                  dangerouslySetInnerHTML={{
+                  __html: note
+                    ?.note || ""
+                }}/>
+              </div>
+            </div>
+          ))}
+          {notes.length === 0 && (<NotDataFound
+            message={`No notes found for ${course
+            ?.title || 'this course'}.`}/>)
+}
         </div>
+
       </div>
+
+
     </div>
   );
 };
