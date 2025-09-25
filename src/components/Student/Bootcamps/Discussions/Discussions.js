@@ -49,16 +49,13 @@ const createReplySchema = yup.object({
 });
 const Discussions = ({discussionsData, courseDetails}) => {
   const editor = useRef(null);
-  const [newPost,
-    setNewPost] = useState("");
-  const [replyContent,
-    setReplyContent] = useState("");
-  const [activeReplyDiscussionId,
-    setActiveReplyDiscussionId] = useState(null);
+
+
   const [discussions,
     setDiscussions] = useState({});
   const [course,
     setCourse] = useState({});
+  const [orderBy, setOrderBy] = useState("latest");
   //create discussion mutation
   const [createCourseDiscussion, {
       data : createData,
@@ -112,10 +109,6 @@ const Discussions = ({discussionsData, courseDetails}) => {
   const watchReplyComment = replyWatch("comment", "");
   const watchReplyDiscussionId = replyWatch("discussion_id", "");
 
-  const handleCancelReply = () => {
-    setReplyContent("");
-    setActiveReplyDiscussionId(null);
-  };
 
   const handleVote = (replyId, type) => {
     console.log(`Vote ${type} for reply:`, replyId);
@@ -140,6 +133,31 @@ const Discussions = ({discussionsData, courseDetails}) => {
         ?.id
     }, {keepValues: false});
   }
+
+  //reset reply form
+  const resetReplyForm = () => {
+    replyReset({
+      comment: "",
+      discussion_id: ""
+    }, {keepValues: false});
+  }
+
+  const sortByHandler = () => {
+    if (orderBy === "latest") {
+      // sort by id ASC
+      const sorted = [...discussions].sort((a, b) => a.id - b.id);
+      setDiscussions(sorted);
+    } else {
+      // sort by id DESC
+      const sorted = [...discussions].sort((a, b) => b.id - a.id);
+      setDiscussions(sorted);
+    }
+
+    // toggle state
+    setOrderBy((prev) => (prev === "latest" ? "oldest" : "latest"));
+  };
+
+
 
   //initialize data when props change
   useEffect(() => {
@@ -194,10 +212,7 @@ const Discussions = ({discussionsData, courseDetails}) => {
         })
       });
       //reset reply form
-      replyReset({
-        comment: "",
-        discussion_id: ""
-      }, {keepValues: false});
+      resetReplyForm();
       toastSuccess(createCommentData
         ?.message || "Discussion created successfully");
     }
@@ -253,8 +268,8 @@ const Discussions = ({discussionsData, courseDetails}) => {
       </form>
 
       <div className={styles.ic_btn_container}>
-        <button className={`ic_common_primary_btn ${styles.ic_flex}`}>
-          SORT BY LATEST
+        <button className={`ic_common_primary_btn ${styles.ic_flex}`} onClick={sortByHandler}>
+          SORT BY {orderBy === "latest" ? "OLDEST" : "LATEST"}
           <IoArrowDown className={styles.sortIcon}/>
         </button>
       </div>
@@ -373,7 +388,7 @@ const Discussions = ({discussionsData, courseDetails}) => {
                           <div className={styles.ic_btn_container}>
                             <button
                               className={`${styles.ic_btn} ${styles.ic_cencel}`}
-                              onClick={handleCancelReply}>
+                              onClick={resetReplyForm}>
                               Cancel
                             </button>
                             <button className={`${styles.ic_btn} ${styles.ic_save}`} type="submit">
