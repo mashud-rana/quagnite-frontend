@@ -22,8 +22,8 @@ const JoditEditor = ({editorValue, setEditorValue, editorRef}) => {
       "fontsize",
       "|",
       "link",
-      "image", // 👈 image button
-      "file", // 👈 file attach button
+      // "image", // 👈 image button
+      // "file", // 👈 file attach button
     ],
     removeButtons: [
       "source",
@@ -71,7 +71,7 @@ const JoditEditor = ({editorValue, setEditorValue, editorRef}) => {
         ref={editorRef}
         value={editorValue}
         config={editorConfig}
-        tabIndex={2}
+        tabIndex={10}
         onChange={(newContent) => {
         setEditorValue(newContent)
       }}/>

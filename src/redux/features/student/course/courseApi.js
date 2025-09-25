@@ -69,6 +69,14 @@ export const authApi = apiSlice.injectEndpoints({
       }),
     
     }),
+    createDiscussionComment: builder.mutation({
+      query: (discussionData) => ({
+        url: `/student/courses/submit-discussion-comment`,
+        method: "POST",
+        body: discussionData,
+      }),
+    
+    }),
   }),
 });
 
@@ -82,4 +90,5 @@ export const {
   useGetCourseNoteQuery,
   useUpdateCourseNoteMutation,
   useCreateCourseDiscussionMutation,
+  useCreateDiscussionCommentMutation,
 } = authApi;

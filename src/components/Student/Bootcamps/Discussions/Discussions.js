@@ -16,7 +16,7 @@ import img from "@/assets/images/all/instractor.png";
 import Image from "next/image";
 import {IoArrowDown} from "react-icons/io5";
 import {RiReplyLine} from "react-icons/ri";
-import {useCreateCourseDiscussionMutation} from '@/redux/features/student/course/courseApi';
+import {useCreateCourseDiscussionMutation, useCreateDiscussionCommentMutation} from '@/redux/features/student/course/courseApi';
 import {antIcon, toastError, toastSuccess} from "@/utils/helper";
 import {Spin} from "antd";
 import NotDataFound from "@/components/Empty/NotDataFound";
@@ -24,7 +24,8 @@ import * as yup from "yup";
 import {Controller, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 
-const JoditEditor = dynamic(() => import ("jodit-react"), {ssr: false});
+// const JoditEditor = dynamic(() => import ("jodit-react"), {ssr: false});
+const JoditEditor = dynamic(() => import ("@/components/Share/Editor/JoditEditor/JoditEditor"), {ssr: false});
 
 //schema for form create validation
 const createSchema = yup.object({
@@ -36,7 +37,16 @@ const createSchema = yup.object({
     .required("Discussion content is required")
     .min(5, "Discussion content must be at least 5 characters")
 });
-
+//reply discussion schema
+const createReplySchema = yup.object({
+  discussion_id: yup
+    .string()
+    .required("Discussion ID is required"),
+  comment: yup
+    .string()
+    .required("Comment content is required")
+    .min(5, "Comment content must be at least 5 characters")
+});
 const Discussions = ({discussionsData, courseDetails}) => {
   const editor = useRef(null);
   const [newPost,
@@ -58,6 +68,15 @@ const Discussions = ({discussionsData, courseDetails}) => {
       error : createDataResponseError
     }
   ] = useCreateCourseDiscussionMutation();
+  //create discussion comment mutation
+  const [createDiscussionComment, {
+      data : createCommentData,
+      isLoading : createCommentIsLoading,
+      isSuccess : createCommentIsSuccess,
+      isError : createCommentIsError,
+      error : createCommentResponseError
+    }
+  ] = useCreateDiscussionCommentMutation();
 
   //Create Form Validation
   const {
@@ -72,84 +91,26 @@ const Discussions = ({discussionsData, courseDetails}) => {
     watch,
     reset
   } = useForm({resolver: yupResolver(createSchema)});
-
-  const editorConfig = useMemo(() => ({
-    readonly: false,
-    placeholder: "What are your thoughts? (Type '/' to add images, files, or links)",
-    height: 120,
-    toolbar: true,
-    toolbarSticky: false,
-    showCharsCounter: false,
-    showWordsCounter: false,
-    showXPathInStatusbar: false,
-    buttons: [
-      "bold",
-      "italic",
-      "underline",
-      "|",
-      "fontsize",
-      "|",
-      "link",
-      "image",
-      "file"
-    ],
-    removeButtons: [
-      "source",
-      "fullsize",
-      "about",
-      "outdent",
-      "indent",
-      "video",
-      "table"
-    ],
-    uploader: {
-      insertImageAsBase64URI: true,
-      imagesExtensions: [
-        "jpg",
-        "png",
-        "jpeg",
-        "gif",
-        "svg",
-        "webp"
-      ]
+  //reply form validation
+  const {
+    register: replyRegister,
+    handleSubmit: replyHandleSubmit,
+    formState: {
+      errors: replyErrors
     },
-    style: {
-      background: "#ffffff",
-      color: "#374151"
-    }
-  }), []);
+    setValue: replySetValue,
+    setError: replySetError,
+    control: replyControl,
+    watch: replyWatch,
+    reset: replyReset
+  } = useForm({resolver: yupResolver(createReplySchema)});
 
-  const handleSubmitReply = () => {
-    if (replyContent.trim() && activeReplyDiscussionId) {
-      const newReply = {
-        id: Date
-          .now()
-          .toString(),
-        author: {
-          name: "You",
-          avatar: "/placeholder.svg?height=40&width=40",
-          rating: 5.0
-        },
-        publishedTime: "Just now",
-        content: replyContent,
-        helpful: 0,
-        notHelpful: 0
-      };
+  //watch for create description
 
-      setDiscussions((prevDiscussions) => prevDiscussions.map((discussion) => discussion.id === activeReplyDiscussionId
-        ? {
-          ...discussion,
-          replies: [
-            ...discussion.replies,
-            newReply
-          ]
-        }
-        : discussion));
-
-      setReplyContent("");
-      setActiveReplyDiscussionId(null);
-    }
-  };
+  const watchDescription = watch("description", "");
+  //watch reply comment
+  const watchReplyComment = replyWatch("comment", "");
+  const watchReplyDiscussionId = replyWatch("discussion_id", "");
 
   const handleCancelReply = () => {
     setReplyContent("");
@@ -164,6 +125,11 @@ const Discussions = ({discussionsData, courseDetails}) => {
   const onSubmit = (data) => {
     createCourseDiscussion(data);
     // console.log("Create discussion data:", data); createCourseDiscussion(data);
+
+  }
+  const onSubmitReply = (data) => {
+    createDiscussionComment(data);
+    // console.log("Create discussion reply data:", data);
 
   }
 
@@ -191,9 +157,12 @@ const Discussions = ({discussionsData, courseDetails}) => {
       resetCreateForm();
       toastSuccess(createData
         ?.message || "Discussion created successfully");
-        //set created discussion data to top of the list
-      setDiscussions((prevDiscussions) => [createData
-        ?.data, ...prevDiscussions]);
+      //set created discussion data to top of the list
+      setDiscussions((prevDiscussions) => [
+        createData
+          ?.data,
+        ...prevDiscussions
+      ]);
     }
     if (isCreateDataError) {
 
@@ -204,11 +173,44 @@ const Discussions = ({discussionsData, courseDetails}) => {
 
   }, [isCreateDataSuccess, createData, isCreateDataError, createDataResponseError])
 
-  //watch for create description
+  //create discussion comment success
 
-  const watchDescription = watch("description", "");
+  useEffect(() => {
+    if (createCommentIsSuccess && createCommentData
+      ?.success) {
+      setDiscussions((prevDiscussions) => {
+        return prevDiscussions.map(discussion => {
+          if (discussion.id === watchReplyDiscussionId) {
+            return {
+              ...discussion,
+              comments: [
+                createCommentData
+                  ?.data,
+                ...discussion.comments
+              ]
+            }
+          }
+          return discussion;
+        })
+      });
+      //reset reply form
+      replyReset({
+        comment: "",
+        discussion_id: ""
+      }, {keepValues: false});
+      toastSuccess(createCommentData
+        ?.message || "Discussion created successfully");
+    }
+    if (createCommentIsError) {
 
-  console.log("discussionsData prop:", discussions, course);
+      toastError(createCommentResponseError
+        ?.data
+          ?.message || "Something went wrong. Please try again.");
+    }
+  }, [createCommentIsSuccess, createCommentData, createCommentIsError, createCommentResponseError])
+
+  // console.log("discussionsData prop:", discussions, course); console.log('reply
+  // comment:', watchReplyComment, 'discussion id:', watchReplyDiscussionId);
 
   return (
     <div className={styles.discussionsContainer}>
@@ -326,46 +328,67 @@ const Discussions = ({discussionsData, courseDetails}) => {
                 </button>
                 <button
                   className={styles.notHelpfulButton}
-                  onClick={() => setActiveReplyDiscussionId(activeReplyDiscussionId === discussion.id
-                  ? null
-                  : discussion.id)}>
+                  onClick={() => {
+                  replySetValue("discussion_id", watchReplyDiscussionId == discussion.id
+                    ? null
+                    : discussion.id);
+                }}>
                   <RiReplyLine size={20}/>
                   Reply
                 </button>
               </div>
 
-              {activeReplyDiscussionId === discussion.id && (
-                <div className={styles.replyEditor}>
-                  <div className={styles.replyInputContainer}>
-                    {/* <Image
-                    src={img}
-                    alt="Your avatar"
-                    className={styles.userAvatar}
-                  /> */}
+              {watchReplyDiscussionId === discussion.id && (
+                <form onSubmit={replyHandleSubmit(onSubmitReply)}>
+                  <div className={styles.replyEditor}>
+                    <div className={styles.replyInputContainer}>
+                      {/* <Image
+                      src={img}
+                      alt="Your avatar"
+                      className={styles.userAvatar}
+                    /> */}
 
-                    <div className="w_100">
-                      <JoditEditor
-                        ref={editor}
-                        value={replyContent}
-                        config={editorConfig}
-                        tabIndex={2}
-                        onChange={(newContent) => setReplyContent(newContent)}/> {replyContent.trim() && (
-                        <div className={styles.ic_btn_container}>
-                          <button
-                            className={`${styles.ic_btn} ${styles.ic_cencel}`}
-                            onClick={handleCancelReply}>
-                            Cancel
-                          </button>
-                          <button
-                            className={`${styles.ic_btn} ${styles.ic_save}`}
-                            onClick={handleSubmitReply}>
-                            Save note
-                          </button>
-                        </div>
-                      )}
+                      <div className="w_100">
+
+                        <Controller
+                          name="comment"
+                          control={replyControl}
+                          render={({field}) => (<JoditEditor
+                          {...field}
+                          editorRef={editor}
+                          editorValue={field.value}
+                          setEditorValue={field.onChange}/>)}/>
+
+                        <small
+                          className="text-danger"
+                          style={{
+                          color: "red"
+                        }}>
+                          {replyErrors.comment
+                            ?.message}
+
+                        </small>
+
+                        {watchReplyComment && (
+                          <div className={styles.ic_btn_container}>
+                            <button
+                              className={`${styles.ic_btn} ${styles.ic_cencel}`}
+                              onClick={handleCancelReply}>
+                              Cancel
+                            </button>
+                            <button className={`${styles.ic_btn} ${styles.ic_save}`} type="submit">
+                              Save Comment {
+                                createCommentIsLoading
+                                  ? <Spin indicator={antIcon} />
+                                  : ""
+                              }
+                            </button>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
+                </form>
               )}
 
               <div className={styles.discussionContent}>
@@ -385,7 +408,9 @@ const Discussions = ({discussionsData, courseDetails}) => {
               </div>
 
               <div className={styles.ic_reply_container}>
-                <span>{discussion?.comments.length}
+                <span>{discussion
+                    ?.comments.length}  
+                    &nbsp;
                   Replies</span>
                 <span>See Replies</span>
               </div>
@@ -399,7 +424,7 @@ const Discussions = ({discussionsData, courseDetails}) => {
                           <div key={reply.id} className={styles.replyCard}>
                             <div className={styles.replyHeader}>
                               <Image
-                                src={img}
+                                src={reply?.user?.avatar_url}
                                 alt={reply
                                 ?.user
                                   ?.full_name}
