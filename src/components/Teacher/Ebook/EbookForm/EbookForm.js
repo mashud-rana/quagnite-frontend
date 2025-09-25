@@ -4,7 +4,13 @@ import Image from "next/image";
 import React, { useMemo, useRef, useState } from "react";
 import { RiUploadCloud2Line } from "react-icons/ri";
 import styles from "./ebookform.module.css";
-import JoditEditor from "jodit-react";
+// import JoditEditor from "jodit-react";
+
+import dynamic from "next/dynamic";
+
+const JoditEditor = dynamic(() => import("jodit-react"), {
+  ssr: false,
+});
 
 const EbookForm = () => {
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
