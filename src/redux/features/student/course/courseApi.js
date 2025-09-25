@@ -77,6 +77,14 @@ export const authApi = apiSlice.injectEndpoints({
       }),
     
     }),
+    createReview: builder.mutation({
+      query: (reviewData) => ({
+        url: `/student/courses/submit-review`,
+        method: "POST",
+        body: reviewData,
+      }),
+    
+    }),
   }),
 });
 
@@ -91,4 +99,5 @@ export const {
   useUpdateCourseNoteMutation,
   useCreateCourseDiscussionMutation,
   useCreateDiscussionCommentMutation,
+  useCreateReviewMutation,
 } = authApi;

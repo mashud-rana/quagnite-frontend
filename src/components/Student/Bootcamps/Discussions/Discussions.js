@@ -276,6 +276,7 @@ const Discussions = ({discussionsData, courseDetails}) => {
 
       {/* Discussions List */}
       <div className={styles.discussionsList}>
+        {discussions.length === 0 && <NotDataFound message="No discussions found." />}
 
         {discussions.length > 0 && discussions
           ?.map((discussion) => (
@@ -315,7 +316,13 @@ const Discussions = ({discussionsData, courseDetails}) => {
                   <button className={styles.actionButton}>
                     <FaChevronUp/>
                   </button>
-                  <button className={styles.actionButton}>
+                  <button className={styles.actionButton}
+                    onClick={() => {
+                      replySetValue("discussion_id", watchReplyDiscussionId == discussion.id
+                        ? null
+                        : discussion.id);
+                    }}
+                  >
                     <FaReply/>
                   </button>
                   <button className={styles.actionButton}>

@@ -291,6 +291,9 @@ const Notes = ({noteData, courseDetails}) => {
       <div className={styles.notesSection}>
         <h5 className="fw_500">Your Notes</h5>
         <div className={styles.notesGrid}>
+          {
+            notes.length == 0 && <NotDataFound message="No notes found." />
+          }
           {notes.length > 0 && notes.map((note) => (
             <div key={note.id} className={styles.noteCard}>
               <div className={styles.noteHeader}>

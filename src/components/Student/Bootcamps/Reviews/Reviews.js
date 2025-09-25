@@ -1,71 +1,154 @@
-import React,{useState, useEffect} from "react";
-import { FaStar, FaThumbsUp, FaThumbsDown } from "react-icons/fa";
+import React, {useState, useEffect} from "react";
+import {FaStar, FaThumbsUp, FaThumbsDown} from "react-icons/fa";
 import styles from "./reviews.module.css";
 import img from "@/assets/images/all/instractor.png";
 import Image from "next/image";
-import { MdArrowDownward } from "react-icons/md";
-import { set } from 'nprogress';
+import {MdArrowDownward} from "react-icons/md";
+import {set} from 'nprogress';
+import {useSelector} from "react-redux";
+import RatingComponent from "@/components/Share/Rating/RatingComponent";
+import NotDataFound from "@/components/Empty/NotDataFound";
+import * as yup from "yup";
+import {Controller, useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
+import {antIcon, toastError, toastSuccess} from "@/utils/helper";
+import {Spin} from "antd";
+import {useCreateReviewMutation} from "@/redux/features/student/course/courseApi";
 
-const mockReviews = [
-  {
-    id: "1",
-    userName: "Jane Cooper",
-    avatar: "/placeholder.svg?height=40&width=40",
-    rating: 4.98,
-    publishedDate: "2 months ago",
-    content:
-      "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.",
-    helpful: 0,
-    notHelpful: 0,
-  },
-  {
-    id: "2",
-    userName: "Jane Cooper",
-    avatar: "/placeholder.svg?height=40&width=40",
-    rating: 4.98,
-    publishedDate: "2 months ago",
-    content:
-      "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.",
-    helpful: 0,
-    notHelpful: 0,
-  },
-];
+//validation schema
+const schema = yup.object({
+  course_id: yup
+    .string()
+    .required("Course ID is required"),
+  rating: yup
+    .number()
+    .required("Rating is required")
+    .min(1, "Rating must be at least 1")
+    .max(5, "Rating must be at most 5"),
+  comment: yup
+    .string()
+    .required("Note content is required")
+    .min(5, "Note content must be at least 5 characters")
+});
 
-const ratingBreakdown = [
-  { stars: 5, count: 58, percentage: 85 },
-  { stars: 4, count: 20, percentage: 30 },
-  { stars: 3, count: 15, percentage: 22 },
-  { stars: 2, count: 2, percentage: 3 },
-  { stars: 1, count: 1, percentage: 1.5 },
-];
+const Reviews = ({reviewData, reviews, courseDetails}) => {
+  const [allReviewData,
+    setAllReviewData] = useState({});
+  const [allReviews,
+    setAllReviews] = useState([]);
+  const [course,
+    setCourse] = useState({});
+  const {user} = useSelector((state) => state.auth);
+  const [orderBy, setOrderBy] = useState("latest");
 
-const Reviews = ({reviewData, reviews}) => {
-  const [allReviewData, setAllReviewData] = useState({});
-  const [allReviews, setAllReviews] = useState([]);
+  //create review mutation
+  const [createReview, {
+      data : createData,
+      isLoading : isCreateDataLoading,
+      isSuccess : isCreateDataSuccess,
+      isError : isCreateDataError,
+      error : createDataResponseError
+    }
+  ] = useCreateReviewMutation();
 
-  console.log('Reviews', allReviewData, allReviews)
+  //create review form
+  const {
+    register,
+    handleSubmit,
+    formState: {
+      errors
+    },
+    setValue,
+    setError,
+    control,
+    watch,
+    reset
+  } = useForm({resolver: yupResolver(schema)});
+
+  console.log('Reviews', allReviewData, allReviews, user)
 
   const renderStars = (rating) => {
-    return Array.from({ length: 5 }, (_, index) => (
-      <FaStar
-        key={index}
-        className={`${styles.star} ${
-          index < Math.floor(rating) ? styles.starFilled : styles.starEmpty
-        }`}
-      />
-    ));
+    return Array.from({
+      length: 5
+    }, (_, index) => (<FaStar
+      key={index}
+      className={`${styles.star} ${index < Math.floor(rating)
+      ? styles.starFilled
+      : styles.starEmpty}`}/>));
+  };
+  //reset form
+  const resetForm = () => {
+    reset({
+      rating: "",
+      comment: "",
+      course_id: course
+        ?.id || ""
+    }, {keepValues: false});
+  }
+  //create review submit
+  const onSubmit = (data) => {
+    createReview(data);
+    // console.log("Review submit data", data);
+
+  }
+  const sortByHandler = () => {
+    if (orderBy === "latest") {
+      // sort by id ASC
+      const sorted = [...allReviews].sort((a, b) => a.id - b.id);
+      setAllReviews(sorted);
+    } else {
+      // sort by id DESC
+      const sorted = [...allReviews].sort((a, b) => b.id - a.id);
+      setAllReviews(sorted);
+    }
+
+    // toggle state
+    setOrderBy((prev) => (prev === "latest" ? "oldest" : "latest"));
   };
 
-    useEffect(() => {
-      if (reviewData) {
-        setAllReviewData(reviewData);
-      }
-      if (reviews) {
-        setAllReviews((prev) => {
-          return [...reviews]
-        });
-      }
-    }, [reviewData, reviews]);
+  //create review useEffect
+  useEffect(() => {
+    if (isCreateDataSuccess && createData
+      ?.success) {
+      resetForm();
+      toastSuccess(createData
+        ?.message || "Discussion created successfully");
+      //set created discussion data to top of the list
+      setAllReviews(prev => [
+        createData
+          ?.data,
+        ...prev
+      ]);
+    }
+    if (isCreateDataError) {
+
+      toastError(createDataResponseError
+        ?.data
+          ?.message || "Something went wrong. Please try again.");
+    }
+
+  }, [isCreateDataSuccess, createData, isCreateDataError, createDataResponseError])
+
+  //set data
+  useEffect(() => {
+    if (reviewData) {
+      setAllReviewData(reviewData);
+    }
+    if (reviews) {
+      setAllReviews((prev) => {
+        return [...reviews]
+      });
+    }
+    if (courseDetails) {
+      setCourse(courseDetails);
+      setValue("course_id", courseDetails.id);
+    }
+  }, [reviewData, reviews, courseDetails]);
+
+  //watch review input
+  const watchRating = watch("rating");
+  const watchComment = watch("comment");
+  console.log("watch review input", watchRating, watchComment);
 
   return (
     <div className={styles.reviewsContainer}>
@@ -79,22 +162,25 @@ const Reviews = ({reviewData, reviews}) => {
         <div className={styles.overallRating}>
           <h4 className={styles.ratingScore}>{allReviewData.average_rating}</h4>
           <div className={styles.ratingLabel}>Course Rating</div>
-          <p>{allReviewData.reviews_count} reviews</p>
+          <p>{allReviewData.reviews_count}&nbsp;reviews</p>
         </div>
 
         <div className={styles.ratingBreakdown}>
-          {allReviewData && allReviewData.percentageRatings && allReviewData.percentageRatings.map((item) => (
-            <div key={item.stars} className={styles.ratingRow}>
-              <span className={styles.starLabel}>{item.stars} Star</span>
-              <div className={styles.progressBar}>
-                <div
-                  className={styles.progressFill}
-                  style={{ width: `${item.percentage}%` }}
-                ></div>
+          {allReviewData && allReviewData.percentageRatings && allReviewData
+            .percentageRatings
+            .map((item) => (
+              <div key={item.stars} className={styles.ratingRow}>
+                <span className={styles.starLabel}>{item.stars}&nbsp;Star</span>
+                <div className={styles.progressBar}>
+                  <div
+                    className={styles.progressFill}
+                    style={{
+                    width: `${item.percentage}%`
+                  }}></div>
+                </div>
+                <span className={styles.ratingCount}>{item.count}</span>
               </div>
-              <span className={styles.ratingCount}>{item.count}</span>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
 
@@ -104,50 +190,113 @@ const Reviews = ({reviewData, reviews}) => {
           <p className={styles.reviewsTitle}>Reviews</p>
           <div className={styles.reviewsControls}>
             <p>Filter ratings</p>
-            <button className={styles.recentButton}>
-              RECENT REVIEWS
-              <MdArrowDownward className={styles.dropdownIcon} />
+            <button className={styles.recentButton} onClick={sortByHandler}>
+              {
+                orderBy === "latest" ? "OLDEST" : "RECENT"
+              }
+              &nbsp; REVIEWS
+              <MdArrowDownward className={styles.dropdownIcon}/>
             </button>
           </div>
         </div>
+        {
+          !reviewData.is_reviewed && (
+          
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <div className={styles.reviewInput}>
+                  {/* <RatingComponent ratingValue={3} /> */}
+                  <div>
+                    <Controller
+                      name="rating"
+                      control={control}
+                      render={({field}) => (<RatingComponent ratingValue={field.value} setRatingValue={field.onChange}/>)}/>
+                    <small
+                      className="text-danger"
+                      style={{
+                      color: "red"
+                    }}>
+                      {errors.rating
+                        ?.message}
 
-        {/* Review Input */}
-        <div className={styles.reviewInput}>
-          <Image
-            src={img}
-            width={50}
-            height={50}
-            alt="Your avatar"
-            className={styles.inputAvatar}
-          />
-          <input
-            type="text"
-            placeholder="Type Your Reviews and Press Enter..."
-            className={styles.reviewTextInput}
-          />
-        </div>
+                    </small>
+                  </div>
+                  <br/>
+                  <div style={{
+                    display: "flex",
+                  }}>
+                    <Image
+                      src={user
+                      ?.avatar_url}
+                      width={50}
+                      height={50}
+                      alt="Your avatar"
+                      className={styles.inputAvatar}/>
+                    <input
+                      type="text"
+                      placeholder="Type Your Reviews and Press Enter..."
+                      className={styles.reviewTextInput}
+                      {...register("comment")}/>
+                    
+                  </div>
+                  <small
+                      className="text-danger"
+                      style={{
+                      color: "red"
+                    }}>
+                      {errors.comment
+                        ?.message}
+
+                    </small>
+
+                </div>
+                {watchComment && (
+                  <div className={styles.ic_btn_container}>
+                    <button className={`${styles.ic_btn} ${styles.ic_cencel}`} onClick={resetForm}>
+                      Cancel
+                    </button>
+                    <button className={`${styles.ic_btn} ${styles.ic_save}`} type="submit">
+                      Save Review {isCreateDataLoading
+                        ? <Spin indicator={antIcon}/>
+                        : ""
+      }
+                    </button>
+                  </div>
+                )}
+              </form>
+          )
+        }
+        
 
         {/* Reviews List */}
         <div className={styles.reviewsList}>
-          {allReviews && allReviews.map((review, index) => (
+          {
+            allReviews.length === 0 && (<NotDataFound message="No reviews found." />)
+          }
+          {allReviews.length > 0 && allReviews.map((review, index) => (
             <div key={index} className={styles.reviewCard}>
               <div className={styles.reviewHeader}>
                 <Image
-                  src={review?.user?.avatar_url}
+                  src={review
+                  ?.user
+                    ?.avatar_url}
                   width={40}
                   height={40}
-                  alt={review?.user?.full_name}
-                  className={styles.reviewAvatar}
-                />
+                  alt={review
+                  ?.user
+                    ?.full_name}
+                  className={styles.reviewAvatar}/>
                 <div className={styles.reviewMeta}>
                   <h4 className={styles.reviewerName}>{review.userName}</h4>
                   <div className={styles.reviewRating}>
                     <div className={styles.stars}>
-                      {renderStars(review?.rating)}
+                      {renderStars(review
+                        ?.rating)}
                     </div>
-                    <span className={styles.ratingValue}>{review?.rating}</span>
+                    <span className={styles.ratingValue}>{review
+                        ?.rating}</span>
                     <span className={styles.publishDate}>
-                      Published {review?.created_at}
+                      Published {review
+                        ?.created_at}
                     </span>
                   </div>
                 </div>
@@ -156,17 +305,19 @@ const Reviews = ({reviewData, reviews}) => {
               <div className={styles.reviewContent}>
                 <p
                   className={styles.reviewText}
-                  dangerouslySetInnerHTML={{ __html: review?.comment }}
-                />
+                  dangerouslySetInnerHTML={{
+                  __html: review
+                    ?.comment
+                }}/>
               </div>
 
               <div className={styles.reviewActions}>
                 <button className={styles.helpfulButton}>
-                  <FaThumbsUp className={styles.actionIcon} />
+                  <FaThumbsUp className={styles.actionIcon}/>
                   Helpful
                 </button>
                 <button className={styles.notHelpfulButton}>
-                  <FaThumbsDown className={styles.actionIcon} />
+                  <FaThumbsDown className={styles.actionIcon}/>
                   Not helpful
                 </button>
               </div>
