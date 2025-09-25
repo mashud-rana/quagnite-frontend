@@ -26,7 +26,7 @@ const CourseUploadModal = ({ open, onCancel }) => {
     setVideoFile(null);
     setVideoUrl(null);
     setSelectedOptions([]);
-    onCancel(); // modal বন্ধ করবে
+    onCancel();
   };
 
   const handleCheckboxChange = (checkedValues) => {

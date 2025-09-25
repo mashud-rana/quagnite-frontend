@@ -78,7 +78,7 @@ const EbookForm = () => {
       <div>
         <h5 className={styles.sectionTitle}>Ebook Upload</h5>
 
-        <div className={styles}>
+        <div className={styles.ic_grid}>
           {/* ZIP Upload */}
           <div className={styles.ic_file_input_container}>
             <div className={styles.uploadArea}>

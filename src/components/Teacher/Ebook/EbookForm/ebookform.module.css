@@ -20,7 +20,7 @@
   margin: 10px;
   text-align: center;
   position: relative;
-  min-height: 200px; /* যাতে height fix থাকে */
+  min-height: 200px;
 }
 
 .fileInput {
