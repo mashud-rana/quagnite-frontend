@@ -4,10 +4,6 @@ import React, {useMemo, useRef} from 'react';
 const JoditEditorEditor = dynamic(() => import ("jodit-react"), {ssr: false});
 
 const JoditEditor = ({editorValue, setEditorValue, editorRef}) => {
- 
-  const [content, setContent] = React.useState('aaaa');
-
-  console.log( "editorValue", editorValue )
 
   const editorConfig = useMemo(() => ({
     readonly: false,

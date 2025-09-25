@@ -109,7 +109,7 @@ const CourseDetailsPage = () => {
           </TabPane>
 
           <TabPane tab="Discussions" key="5">
-            <Discussions />
+            <Discussions discussionsData={course?.discussions} courseDetails={course} />
           </TabPane>
 
           <TabPane tab="Notes" key="6">

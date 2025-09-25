@@ -13,6 +13,7 @@ import * as yup from "yup";
 import {Controller, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useCreateCourseNoteMutation, useUpdateCourseNoteMutation} from '@/redux/features/student/course/courseApi';
+import { useSelector } from "react-redux";
 
 const JoditEditor = dynamic(() => import ("@/components/Share/Editor/JoditEditor/JoditEditor"), {ssr: false});
 
@@ -32,68 +33,10 @@ const schema = yup.object({
 
 const Notes = ({noteData, courseDetails}) => {
   const editor = useRef(null);
-  const updateEditor = useRef(null);
 
-  const editorConfig = useMemo(() => ({
-    readonly: false,
-    placeholder: "What are your thoughts? (Type '/' to add images, files, or links)",
-    height: 120,
-    toolbar: true,
-    toolbarSticky: false,
-    showCharsCounter: false,
-    showWordsCounter: false,
-    showXPathInStatusbar: false,
-    buttons: [
-      "bold",
-      "italic",
-      "underline",
-      "|",
-      "fontsize",
-      "|",
-      "link",
-      "image", // 👈 image button
-      "file", // 👈 file attach button
-    ],
-    removeButtons: [
-      "source",
-      "fullsize",
-      "about",
-      "outdent",
-      "indent",
-      "video",
-      "table"
-    ],
+  // Get user information from Redux store
+  const {user} = useSelector((state) => state.auth) || {};
 
-    toolbarAdaptive: true,
-    toolbarStickyOffset: 0,
-    buttonsMD: 7,
-    buttonsSM: 4,
-    buttonsXS: 2,
-
-    /* 👇 Image uploader config */
-    uploader: {
-      insertImageAsBase64URI: true, // local image will be inserted as base64
-      imagesExtensions: [
-        "jpg",
-        "png",
-        "jpeg",
-        "gif",
-        "svg",
-        "webp"
-      ],
-      // alternative: server upload (example endpoint)
-      url: "https://your-server.com/upload",
-      method: "POST",
-      process: (resp) => {
-        // server theke image url peye return dite hobe
-        return {
-          files: [resp.url],
-          path: resp.url,
-          baseurl: resp.url
-        };
-      }
-    }
-  }), []);
   const [notes,
     setNotes] = useState([]);
   const [course,
@@ -253,6 +196,7 @@ const Notes = ({noteData, courseDetails}) => {
 
     },[isUpdateDataSuccess, updateData, isUpdateDataError, updateDataResponseError])
 
+  //set note data to state
   useEffect(() => {
     if (noteData) {
       setNotes(noteData);
@@ -264,7 +208,7 @@ const Notes = ({noteData, courseDetails}) => {
     }
   }, [noteData, courseDetails]);
 
-  console.log("noteData prop:", notes, course);
+
 
   //watch note input
   const noteContent = watch("note");
@@ -321,16 +265,21 @@ const Notes = ({noteData, courseDetails}) => {
                 {
                   mode === "edit" &&   <button
                     className={`${styles.ic_btn} ${styles.ic_cencel}`}
-                    onClick={()=> { setMode("create");  reset({ title: "", note: "",course_id:course?.id }, { keepValues: false }); }}>
+                    onClick={()=> { setMode("create");  reset({ title: "", note: "",course_id:course?.id }, { keepValues: false }); }}
+                    
+                    >
                     Cancel
                   </button>
                 }
-              
+                
                 <button className={`${styles.ic_btn} ${styles.ic_save}`} type="submit">
                   {
                     mode === "edit"
                       ? "Update note"
                       : "Save note"
+                  }
+                  {
+                    (isCreateDataLoading || isUpdateDataLoading) ? <Spin indicator={antIcon}/> : null
                   }
                 </button>
               </div>
@@ -347,27 +296,32 @@ const Notes = ({noteData, courseDetails}) => {
               <div className={styles.noteHeader}>
                 <h5 className={styles.noteTitle}>{note
                     ?.title}</h5>
-                <div className={styles.noteActions}>
-                  <button
-                    className={styles.noteActionButton}
-                    onClick={() => handleNoteAction("delete", note.id)}
-                    title="Delete">
-                    {noteDataId === note.id && isLoading
-                      ? <Spin indicator={antIcon}/>
-                      : <FaTrash/>
-}
-                  </button>
-                  <button
-                    className={styles.noteActionButton}
-                    onClick={() => handleNoteAction("edit", note.id)}
-                    title="Edit">
-                    {noteDataId === note.id && isLoading
-                      ? <Spin indicator={antIcon}/>
-                      : <FaEdit/>
-}
-                  </button>
-                
-                </div>
+                    {
+                      note.user_id === user?.id && ( 
+                        <div className={styles.noteActions}>
+                          <button
+                            className={styles.noteActionButton}
+                            onClick={() => handleNoteAction("delete", note.id)}
+                            title="Delete">
+                            {noteDataId === note.id && isLoading
+                              ? <Spin indicator={antIcon}/>
+                              : <FaTrash/>
+                            }
+                          </button>
+                          <button
+                            className={styles.noteActionButton}
+                            onClick={() => handleNoteAction("edit", note.id)}
+                            title="Edit">
+                            {noteDataId === note.id && isLoading
+                              ? <Spin indicator={antIcon}/>
+                              : <FaEdit/>
+                        }
+                          </button>
+                        
+                        </div>
+                      )  
+                    }
+              
               </div>
               <div className={styles.noteContent}>
                 <div

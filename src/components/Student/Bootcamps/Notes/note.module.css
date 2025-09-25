@@ -112,6 +112,7 @@
   border-radius: 8px;
   text-transform: uppercase;
   font-weight: 500;
+  cursor: pointer;
 }
 
 .ic_cencel {
