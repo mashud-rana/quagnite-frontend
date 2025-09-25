@@ -8,6 +8,7 @@ import { setFilters, setAllCourses, appendCourses } from "@/redux/features/stude
 import AllEnrolledCourses from "@/components/Student/Courses/Course/AllEnrolledCourses";
 import FullscreenSpinner from "@/components/Spinner/FullscreenSpinner";
 import {setSpinnerVisible} from "@/redux/features/spinner/spinnerSlice";
+import SectionSpinner from "@/components/Spinner/SectionSpinner";
 
 const DashboardCoursesPage = () => {
    const searchParams = useSearchParams();
@@ -66,8 +67,15 @@ const DashboardCoursesPage = () => {
 
   return (
     <div className="ic_courses_list">
-      <FullscreenSpinner />
-      <AllEnrolledCourses totalPages={coursesData?.data?.meta?.last_page || 1} />
+      {/* <FullscreenSpinner /> */}
+      {
+        isLoading || isFetching ? <SectionSpinner message={
+          `Loading ${
+          type === 'all' ? 'enrolled' : type === 'in_progress' ? 'inprogress' : 'completed'
+          } courses...`
+        } /> : <AllEnrolledCourses totalPages={coursesData?.data?.meta?.last_page || 1} />
+      }
+      
       
     </div>
   );

@@ -12,6 +12,7 @@ import TabPane from "antd/es/tabs/TabPane";
 import React, { useState, useEffect } from "react";
 import {useGetCourseDetailsBySlugQuery} from '@/redux/features/student/course/courseApi';
 import { useParams } from 'next/navigation'
+import SectionSpinner from "@/components/Spinner/SectionSpinner";
 
 const CourseDetailsPage = () => {
    const { slug } = useParams()
@@ -64,6 +65,9 @@ const CourseDetailsPage = () => {
   const activeLectureHandler = (lecture) => {
     console.log("Active lecture from parent:", lecture);
     setActiveLecture(lecture);
+  }
+  if(isLoading || isFetching){
+    return <SectionSpinner message="Loading course details..." />
   }
   return (
     <div>
