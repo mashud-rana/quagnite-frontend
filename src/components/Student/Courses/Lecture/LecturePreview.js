@@ -11,7 +11,7 @@ const LecturePreview = ({ lecture }) => {
     case "pdf":
       return (
         <iframe
-          src={lecture.pdf_url}
+          src={le
           width="100%"
           height="600px"
           style={{ border: "none" }}
