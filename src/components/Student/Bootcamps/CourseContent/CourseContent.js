@@ -66,6 +66,7 @@ const CourseContent = ({ lessonsDetails, lessonsTotalDuration }) => {
 
   // Call API
   await lessonLecturePreview(selectedLecture.uuid);
+ 
 
   // Update lessons state so UI reflects "completed = true"
   setLessons((prevLessons) =>

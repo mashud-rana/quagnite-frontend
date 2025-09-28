@@ -6,12 +6,13 @@ const LecturePreview = ({ lecture }) => {
   if (!lecture) {
     return <div>No lecture selected</div>;
   }
+  console.log("LecturePreview", lecture);
 
   switch (lecture.lecture_format) {
     case "pdf":
       return (
         <iframe
-          src={le
+          src={lecture.pdf_url}
           width="100%"
           height="600px"
           style={{ border: "none" }}
