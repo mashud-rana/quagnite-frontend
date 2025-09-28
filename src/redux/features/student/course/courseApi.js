@@ -85,6 +85,14 @@ export const authApi = apiSlice.injectEndpoints({
       }),
     
     }),
+     lessonLecturePreview: builder.mutation({
+      query: (lectureUuid) => ({
+        url: `/student/courses/lesson-lecture-preview`,
+        method: "POST",
+        body: { lecture_uuid: lectureUuid },
+      }),
+    
+    }),
   }),
 });
 
@@ -100,4 +108,5 @@ export const {
   useCreateCourseDiscussionMutation,
   useCreateDiscussionCommentMutation,
   useCreateReviewMutation,
+  useLessonLecturePreviewMutation,
 } = authApi;

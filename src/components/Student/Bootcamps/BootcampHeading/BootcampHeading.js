@@ -7,13 +7,14 @@ import img from "@/assets/images/all/instractor.png";
 import img2 from "@/assets/images/all/poster.png";
 import Image from "next/image";
 import logo from "@/assets/images/auth/logo.png";
+import LecturePreview from "@/components/Student/Courses/Lecture/LecturePreview";
 
 const BootcampHeading = ({courseDetails, activeLectureDetails}) => {
 
   const [course, setCourse] = useState(null);
   const [activeLecture, setActiveLecture] = useState(null);
 
-  // console.log('BootcampHeading', course, activeLecture);
+  console.log('BootcampHeading', course, activeLecture);
 
   useEffect(()=>{
     setCourse(courseDetails);
@@ -58,14 +59,15 @@ const BootcampHeading = ({courseDetails, activeLectureDetails}) => {
 
             {
               activeLecture ? (
-                  <video
-                  className={styles.ic_video_thumbnail}
-                  controls
-                  poster={img2.src}
-                >
-                  <source src="/videos/coding.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                //   <video
+                //   className={styles.ic_video_thumbnail}
+                //   controls
+                //   poster={img2.src}
+                // >
+                //   <source src="/videos/coding.mp4" type="video/mp4" />
+                //   Your browser does not support the video tag.
+                // </video>
+                <LecturePreview lecture={activeLecture} />
               ) : (
                 course&& <Image
                     src={course?.image_url || logo}

@@ -11,7 +11,7 @@ import { Tabs, Button } from "antd";
 import TabPane from "antd/es/tabs/TabPane";
 import React, { useState, useEffect } from "react";
 import {useGetCourseDetailsBySlugQuery} from '@/redux/features/student/course/courseApi';
-import { useParams } from 'next/navigation'
+import { useParams, useSearchParams } from 'next/navigation'
 import SectionSpinner from "@/components/Spinner/SectionSpinner";
 
 const CourseDetailsPage = () => {
@@ -21,6 +21,11 @@ const CourseDetailsPage = () => {
   const [course, setCourse] = useState(null);
   // const [skip, setSkip] = useState(false);
   const [activeLecture, setActiveLecture] = useState(null);
+  const searchParams = useSearchParams();
+  // Get lectureUuid from URL query params
+  const lectureUuid = searchParams.get("lectureUuid") || null;
+  const lessonUuid = searchParams.get("lessonUuid") || null;
+
   const { 
     data,
     isSuccess, 
@@ -28,8 +33,10 @@ const CourseDetailsPage = () => {
     error, 
     refetch,
     isFetching ,
-  } = useGetCourseDetailsBySlugQuery(slug);
+  } = useGetCourseDetailsBySlugQuery(slug,{refetchOnMountOrArgChange: true });
   // ,{skip:skip, refetchOnMountOrArgChange: true }
+
+ 
 
   // Responsive gutter
   useEffect(() => {
@@ -62,10 +69,27 @@ const CourseDetailsPage = () => {
   }, 
   [data, isSuccess]);
 
-  const activeLectureHandler = (lecture) => {
-    console.log("Active lecture from parent:", lecture);
-    setActiveLecture(lecture);
-  }
+  // const activeLectureHandler = (lecture) => {
+  //   console.log("Active lecture from parent:", lecture);
+  //   setActiveLecture(lecture);
+  // }
+  //set active lecture if lectureUuid changes
+  useEffect(() => {
+    if(lessonUuid && lectureUuid && course?.lessons && course?.lessons.length > 0){
+      let findLessonLecture = course.lessons.find(lesson => lesson.uuid === lessonUuid);
+      if(findLessonLecture){
+        let findLecture = findLessonLecture.lectures.find(lecture => lecture.uuid === lectureUuid);
+        if(findLecture){
+          setActiveLecture(findLecture);
+        }
+      }
+    }
+  }, [lectureUuid, course, lessonUuid]);
+
+  //
+
+  console.log("course details", course);
+
   if(isLoading || isFetching){
     return <SectionSpinner message="Loading course details..." />
   }
@@ -97,7 +121,11 @@ const CourseDetailsPage = () => {
           }
         >
           <TabPane tab="Course Content" key="1">
-            <CourseContent lessonsDetails={course?.lessons} lessonsTotalDuration={course?.lessons_total_duration} />
+            <CourseContent 
+            lessonsDetails={course?.lessons} 
+            lessonsTotalDuration={course?.lessons_total_duration}
+           
+            />
           </TabPane>
 
           <TabPane tab="Course Overview" key="2">
