@@ -19,7 +19,7 @@ import Link from "next/link";
 import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useLessonLecturePreviewMutation } from "@/redux/features/student/course/courseApi";
 
-const CourseContent = ({ lessonsDetails, lessonsTotalDuration }) => {
+const CourseContent = ({ lessonsDetails, lessonsTotalDuration, activeLectureHandler }) => {
   const [expandedModules, setExpandedModules] = useState(new Set());
   const [lessons, setLessons] = useState(null);
   const searchParams = useSearchParams();
@@ -63,11 +63,12 @@ const CourseContent = ({ lessonsDetails, lessonsTotalDuration }) => {
   //preview lecture handler
  const previewLessonLectureHandler = async (lesson, lecture) => {
   let selectedLecture = { ...lecture };
-
-  // Call API
-  await lessonLecturePreview(selectedLecture.uuid);
+ ;
+  // // Call API
+  if(!lecture.completed){
+    await lessonLecturePreview(selectedLecture.uuid);
+  }
  
-
   // Update lessons state so UI reflects "completed = true"
   setLessons((prevLessons) =>
     prevLessons.map((mod) =>
@@ -83,14 +84,15 @@ const CourseContent = ({ lessonsDetails, lessonsTotalDuration }) => {
         : mod
     )
   );
-
+  activeLectureHandler(selectedLecture);
   // Update URL query params
   const params = new URLSearchParams(searchParams.toString());
   params.set("lessonUuid", lesson.uuid);
   params.set("lectureUuid", selectedLecture.uuid);
   router.push(`${pathname}?${params.toString()}`, { scroll: false });
 
-  console.log("Preview lecture UUID:", selectedLecture.uuid);
+  // console.log("2. on course content js- previewLessonLectureHandler click")
+ 
 };
 
 

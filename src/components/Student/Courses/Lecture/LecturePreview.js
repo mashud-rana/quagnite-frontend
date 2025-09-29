@@ -1,11 +1,15 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React,{useEffect, useRef } from "react";
+
 
 const LecturePreview = ({ lecture }) => {
+
   if (!lecture) {
     return <div>No lecture selected</div>;
   }
+
+ 
   console.log("LecturePreview", lecture);
 
   switch (lecture.lecture_format) {
@@ -49,6 +53,10 @@ const LecturePreview = ({ lecture }) => {
           <source src={lecture.video_url} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+        
+          // <>
+          // <VideoPlayer src={lecture.video_url} />;
+          // </>
       );
 
     case "slide":

@@ -19,7 +19,7 @@ const CourseDetailsPage = () => {
   const [activeKey, setActiveKey] = useState("1");
   const [tabGutter, setTabGutter] = useState(16);
   const [course, setCourse] = useState(null);
-  // const [skip, setSkip] = useState(false);
+
   const [activeLecture, setActiveLecture] = useState(null);
   const searchParams = useSearchParams();
   // Get lectureUuid from URL query params
@@ -64,15 +64,15 @@ const CourseDetailsPage = () => {
   useEffect(() => {
     if(isSuccess && data?.success){
       setCourse(data?.data);
-      console.log("course details data", data?.data)
+    
     }
   }, 
   [data, isSuccess]);
 
-  // const activeLectureHandler = (lecture) => {
-  //   console.log("Active lecture from parent:", lecture);
-  //   setActiveLecture(lecture);
-  // }
+  const activeLectureHandler = (lecture) => {
+    // console.log("Active lecture from parent:", lecture);
+    setActiveLecture(lecture);
+  }
   //set active lecture if lectureUuid changes
   useEffect(() => {
     if(lessonUuid && lectureUuid && course?.lessons && course?.lessons.length > 0){
@@ -124,7 +124,7 @@ const CourseDetailsPage = () => {
             <CourseContent 
             lessonsDetails={course?.lessons} 
             lessonsTotalDuration={course?.lessons_total_duration}
-           
+            activeLectureHandler={activeLectureHandler}
             />
           </TabPane>
 

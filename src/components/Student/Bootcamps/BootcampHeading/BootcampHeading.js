@@ -14,7 +14,7 @@ const BootcampHeading = ({courseDetails, activeLectureDetails}) => {
   const [course, setCourse] = useState(null);
   const [activeLecture, setActiveLecture] = useState(null);
 
-  // console.log('BootcampHeading', course, activeLecture);
+  console.log('3. BootcampHeading loaded', course, activeLecture);
 
   useEffect(()=>{
     setCourse(courseDetails);
