@@ -54,8 +54,8 @@ const CoachLayout = ({ children }) => {
       icon: BiBookContent,
     },
     {
-      title: "My E arnings",
-      url: "/student/academe",
+      title: "My Earnings",
+      url: "/coach/earnings",
       icon: RiGraduationCapLine,
     },
     {
