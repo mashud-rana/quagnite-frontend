@@ -14,7 +14,7 @@ const BootcampHeading = ({courseDetails, activeLectureDetails}) => {
   const [course, setCourse] = useState(null);
   const [activeLecture, setActiveLecture] = useState(null);
 
-  console.log('3. BootcampHeading loaded', course, activeLecture);
+  console.log('3. BootcampHeading loaded', activeLecture);
 
   useEffect(()=>{
     setCourse(courseDetails);
@@ -39,15 +39,9 @@ const BootcampHeading = ({courseDetails, activeLectureDetails}) => {
 
             {
               activeLecture ? (
-                //   <video
-                //   className={styles.ic_video_thumbnail}
-                //   controls
-                //   poster={img2.src}
-                // >
-                //   <source src="/videos/coding.mp4" type="video/mp4" />
-                //   Your browser does not support the video tag.
-                // </video>
-                <LecturePreview lecture={activeLecture} />
+                
+                <LecturePreview key={`${activeLecture?.uuid}-${activeLecture?.lecture_format}`} lecture={activeLecture} />
+
               ) : (
                 course&& <Image
                     src={course?.image_url || logo}
