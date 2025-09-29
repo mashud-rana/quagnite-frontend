@@ -93,6 +93,12 @@ export const authApi = apiSlice.injectEndpoints({
       }),
     
     }),
+    courseEnrolledCheck: builder.query({
+      query: (slug) => ({
+        url: `/student/courses/${slug}/enrolled-check`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -109,4 +115,5 @@ export const {
   useCreateDiscussionCommentMutation,
   useCreateReviewMutation,
   useLessonLecturePreviewMutation,
+  useCourseEnrolledCheckQuery,
 } = authApi;

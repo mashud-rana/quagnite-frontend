@@ -13,12 +13,15 @@ import React, { useState, useEffect } from "react";
 import {useGetCourseDetailsBySlugQuery} from '@/redux/features/student/course/courseApi';
 import { useParams, useSearchParams } from 'next/navigation'
 import SectionSpinner from "@/components/Spinner/SectionSpinner";
+import NotDataFound from "@/components/Empty/NotDataFound";
 
 const CourseDetailsPage = () => {
    const { slug } = useParams()
   const [activeKey, setActiveKey] = useState("1");
   const [tabGutter, setTabGutter] = useState(16);
   const [course, setCourse] = useState(null);
+  const [requestError, setRequestError] = useState(false);
+
 
   const [activeLecture, setActiveLecture] = useState(null);
   const searchParams = useSearchParams();
@@ -33,6 +36,7 @@ const CourseDetailsPage = () => {
     error, 
     refetch,
     isFetching ,
+    isError
   } = useGetCourseDetailsBySlugQuery(slug,{refetchOnMountOrArgChange: true });
   // ,{skip:skip, refetchOnMountOrArgChange: true }
 
@@ -64,10 +68,13 @@ const CourseDetailsPage = () => {
   useEffect(() => {
     if(isSuccess && data?.success){
       setCourse(data?.data);
+    }
+    if(isError){
+      setRequestError(true);
     
     }
   }, 
-  [data, isSuccess]);
+  [data, isSuccess, error,isError]);
 
   const activeLectureHandler = (lecture) => {
     // console.log("Active lecture from parent:", lecture);
@@ -92,6 +99,9 @@ const CourseDetailsPage = () => {
 
   if(isLoading || isFetching){
     return <SectionSpinner message="Loading course details..." />
+  }
+  if(requestError){
+    return <NotDataFound message="Course details not found" />
   }
   return (
     <div>
