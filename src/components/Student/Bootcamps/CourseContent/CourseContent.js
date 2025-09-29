@@ -201,12 +201,12 @@ const CourseContent = ({ lessonsDetails, lessonsTotalDuration, activeLectureHand
                       })}
                   </div>
 
-                  <Link
+                  {/* <Link
                     href={`/student/courses/${slug}/abc/quiz`}
                     className={styles.ic_btn}
                   >
                     Start Quize
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             );
