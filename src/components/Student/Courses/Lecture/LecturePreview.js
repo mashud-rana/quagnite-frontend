@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import React,{useEffect, useRef } from "react";
+import PlyrReact from "@/components/Share/VideoPlayer/PlyrReact/PlyrReact";
 
 
 const LecturePreview = ({ lecture }) => {
@@ -9,6 +10,32 @@ const LecturePreview = ({ lecture }) => {
     return <div>No lecture selected</div>;
   }
 
+  
+  const options = {
+    controls: [
+      "rewind", // ⏪ back 10s
+      "play-large",
+      "play",
+      "progress",
+      "current-time",
+      "duration",
+      "mute",
+      "volume",
+      "settings",
+      "fullscreen",
+    ],
+    seekTime: 10, // how many seconds to skip
+    invertTime: false, // show remaining time normally
+   
+    listeners: {
+        seek: event => {
+            const seekTime = event.detail.plyr.currentTime;
+            if (seekTime > player.currentTime) {
+                player.currentTime = seekTime; // Prevent seeking forward
+            }
+        }
+    }
+  };
  
   console.log("LecturePreview", lecture);
 
@@ -42,21 +69,23 @@ const LecturePreview = ({ lecture }) => {
       );
 
     case "video":
-      return (
-        <video
-          controls
-          width="100%"
-          height="auto"
-          style={{ maxHeight: "500px" }}
-          
-        >
-          <source src={lecture.video_url} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+      const videoSrc = {
+        type: "video",
+        sources: [
+          {
+            src: lecture.video_url, // use your local video file from public folder
+            type: "video/mp4",
+          }
+        ],
+        // poster: "https://plus.unsplash.com/premium_photo-1666672388644-2d99f3feb9f1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8anBnfGVufDB8fDB8fHww", // optional thumbnail
         
-          // <>
-          // <VideoPlayer src={lecture.video_url} />;
-          // </>
+      };
+      return (
+      
+        <>
+        <PlyrReact options={options} source={videoSrc} />
+        </>
+        
       );
 
     case "slide":

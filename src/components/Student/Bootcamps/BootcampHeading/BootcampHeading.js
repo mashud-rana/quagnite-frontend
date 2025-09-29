@@ -35,27 +35,7 @@ const BootcampHeading = ({courseDetails, activeLectureDetails}) => {
         {/* Video Section */}
         <div className={styles.ic_video_section}>
           <div className={styles.ic_video_container}>
-            {/* {
-              activeLecture == "null" ? (
-                course && (
-                  <Image
-                    src={logo}
-                    alt={course?.title || "Course image"}
-                    fill
-                    className={styles.ic_video_thumbnail}
-                  />
-                )
-              ) : (
-                <video
-                  className={styles.ic_video_thumbnail}
-                  controls
-                  poster={img2.src}
-                >
-                  <source src="/videos/coding.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              )
-            } */}
+            
 
             {
               activeLecture ? (
