@@ -40,7 +40,7 @@ const CoachLayout = ({ children }) => {
     },
     {
       title: "Community",
-      url: "/student/exams",
+      url: "/coach/community",
       icon: PiCirclesThreeBold,
     },
     {
