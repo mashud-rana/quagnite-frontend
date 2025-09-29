@@ -5,6 +5,7 @@ import {useGetBootcampQuery} from '@/redux/features/student/bootcamp/bootcampApi
 import { pre } from "framer-motion/client";
 import SectionSpinner from "@/components/Spinner/SectionSpinner";
 import InfiniteScroll from "react-infinite-scroll-component";
+import NotDataFound from "@/components/Empty/NotDataFound";
 
 const BootcampsPage = () => {
   const [bootcamps, setBootcamps] = useState([]);
@@ -18,7 +19,7 @@ const BootcampsPage = () => {
   error, 
   refetch,
   isFetching 
-  } = useGetBootcampQuery({ page, type:'upcoming', params: {per_page:2} });
+  } = useGetBootcampQuery({ page, type:'upcoming', params: {per_page:10} });
  //scroll fetch
  const fetchMoreData = () => {
     if (page < totalPages) {
@@ -30,63 +31,65 @@ const BootcampsPage = () => {
     if(isSuccess && data?.data?.data){
       if(page === 1){
         setBootcamps([...data?.data?.data])
+        setTotalPages(data?.data?.meta?.last_page || 1)
       }else{
         setBootcamps((prevBootcamps) => [...prevBootcamps, ...data?.data?.data])
       }
-      setTotalPages(data?.data?.meta?.last_page || 1)
     }
-  },[isSuccess, data, page])
+  },[isSuccess, data])
 
-  const smallCards = [
-    {
-      // img: img2,
-      title: "Lorem Ipsum Dolar Sit Amet",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
-      buttonText: "start bootcamp",
-    },
-    {
-      // img: img2,
-      title: "Lorem Ipsum Dolar Sit Amet",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
-      buttonText: "start bootcamp",
-    },
+  console.log('bootcamps data', bootcamps)
 
-    {
-      // img: img2,
-      title: "Lorem Ipsum Dolar Sit Amet",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
-      buttonText: "start bootcamp",
-    },
+  // const smallCards = [
+  //   {
+  //     // img: img2,
+  //     title: "Lorem Ipsum Dolar Sit Amet",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
+  //     buttonText: "start bootcamp",
+  //   },
+  //   {
+  //     // img: img2,
+  //     title: "Lorem Ipsum Dolar Sit Amet",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
+  //     buttonText: "start bootcamp",
+  //   },
 
-    {
-      // img: img2,
-      title: "Lorem Ipsum Dolar Sit Amet",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
-      buttonText: "start bootcamp",
-    },
+  //   {
+  //     // img: img2,
+  //     title: "Lorem Ipsum Dolar Sit Amet",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
+  //     buttonText: "start bootcamp",
+  //   },
 
-    {
-      // img: img2,
-      title: "Lorem Ipsum Dolar Sit Amet",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
-      buttonText: "start bootcamp",
-    },
+  //   {
+  //     // img: img2,
+  //     title: "Lorem Ipsum Dolar Sit Amet",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
+  //     buttonText: "start bootcamp",
+  //   },
 
-    {
-      // img: img2,
-      title: "Lorem Ipsum Dolar Sit Amet",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
-      buttonText: "start bootcamp",
-    },
-  ];
+  //   {
+  //     // img: img2,
+  //     title: "Lorem Ipsum Dolar Sit Amet",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
+  //     buttonText: "start bootcamp",
+  //   },
+
+  //   {
+  //     // img: img2,
+  //     title: "Lorem Ipsum Dolar Sit Amet",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
+  //     buttonText: "start bootcamp",
+  //   },
+  // ];
   return (
-    <div className="ic_grid2">
+    <div >
       {
         isLoading && page === 1 ? 
         (
@@ -94,7 +97,7 @@ const BootcampsPage = () => {
         )
         : error ? (
           <div style={{ textAlign: "center", marginTop: "20px" }}>
-            <p>Error loading bootcamps. Please try again.</p>
+            <NotDataFound message='Error loading bootcamps. Please try again' />
             <button onClick={() => refetch()} className="ic_common_primary_btn">
               Retry
             </button>
@@ -112,17 +115,17 @@ const BootcampsPage = () => {
                   </p>
               }
               >
-                  
-                     {
-                       bootcamps.length > 0 ? bootcamps.map((bootcamp) => (
-                        <IcCard card={bootcamp} key={bootcamp.id} />
-                      ))
-                      : !isLoading && (
-                        <p style={{ textAlign: "center", marginTop: "20px" }}>
-                          No bootcamps available at the moment.
-                        </p>
-                      )
-                     }
+                <div className="ic_grid2">
+                    {
+                      bootcamps.length > 0 ? bootcamps.map((bootcamp) => (
+                      <IcCard card={bootcamp} key={bootcamp.id} />
+                    ))
+                    : !isLoading && (
+                     
+                      <NotDataFound message=' No bootcamps available at the moment.' />
+                    )
+                    }
+                </div>
                 
               </InfiniteScroll>
          
