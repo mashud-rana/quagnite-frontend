@@ -38,108 +38,69 @@ const BootcampsPage = () => {
     }
   },[isSuccess, data])
 
-  console.log('bootcamps data', bootcamps)
 
-  // const smallCards = [
-  //   {
-  //     // img: img2,
-  //     title: "Lorem Ipsum Dolar Sit Amet",
-  //     description:
-  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
-  //     buttonText: "start bootcamp",
-  //   },
-  //   {
-  //     // img: img2,
-  //     title: "Lorem Ipsum Dolar Sit Amet",
-  //     description:
-  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
-  //     buttonText: "start bootcamp",
-  //   },
 
-  //   {
-  //     // img: img2,
-  //     title: "Lorem Ipsum Dolar Sit Amet",
-  //     description:
-  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
-  //     buttonText: "start bootcamp",
-  //   },
-
-  //   {
-  //     // img: img2,
-  //     title: "Lorem Ipsum Dolar Sit Amet",
-  //     description:
-  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
-  //     buttonText: "start bootcamp",
-  //   },
-
-  //   {
-  //     // img: img2,
-  //     title: "Lorem Ipsum Dolar Sit Amet",
-  //     description:
-  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
-  //     buttonText: "start bootcamp",
-  //   },
-
-  //   {
-  //     // img: img2,
-  //     title: "Lorem Ipsum Dolar Sit Amet",
-  //     description:
-  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ",
-  //     buttonText: "start bootcamp",
-  //   },
-  // ];
+  
   return (
-    <div >
-      {
-        isLoading && page === 1 ? 
-        (
-          <SectionSpinner message="Loading Upcoming Bootcamp" />
-        )
-        : error ? (
-          <div style={{ textAlign: "center", marginTop: "20px" }}>
-            <NotDataFound message='Error loading bootcamps. Please try again' />
-            <button onClick={() => refetch()} className="ic_common_primary_btn">
-              Retry
-            </button>
-          </div>
-        )
-        : (
-           <InfiniteScroll
-              dataLength={bootcamps.length}
-              next={fetchMoreData}
-              hasMore={page < totalPages}
-              loader={<p className="text-center">Loading more...</p>}
-              endMessage={
-                  <p style={{ textAlign: "center", marginTop: "10px" }}>
-                  <b>No more upcoming bootcamp</b>
-                  </p>
-              }
-              >
-                <div className="ic_grid2">
-                    {
-                      bootcamps.length > 0 ? bootcamps.map((bootcamp) => (
-                      <IcCard card={bootcamp} key={bootcamp.id} />
-                    ))
-                    : !isLoading && (
-                     
-                      <NotDataFound message=' No bootcamps available at the moment.' />
-                    )
-                    }
-                </div>
-                
-              </InfiniteScroll>
-         
-        )
-      }
-
-      
-      {/* {bootcamps.length > 0 && bootcamps.map((bootcamp, index) => (
-        <IcCard card={bootcamp} key={bootcamp.id} />
-      ))} */}
-      {/* {smallCards.map((card, index) => (
-        <IcCard card={card} key={index} />
-      ))} */}
-    </div>
+     <div >
+          {
+            isLoading && page === 1 ? 
+            (
+              <SectionSpinner message="Loading upcoming Bootcamp" />
+            )
+            : error ? (
+              <div style={{ textAlign: "center", marginTop: "20px" }}>
+                <NotDataFound message='Error loading bootcamps. Please try again' />
+                <button onClick={() => refetch()} className="ic_common_primary_btn">
+                  Retry
+                </button>
+              </div>
+            )
+            : (
+               <InfiniteScroll
+                  dataLength={bootcamps.length}
+                  next={fetchMoreData}
+                  hasMore={page < totalPages}
+                  loader={<p className="text-center">Loading more...</p>}
+                  endMessage={
+                      <p style={{ textAlign: "center", marginTop: "10px" }}>
+                       {
+                         bootcamps.length > 0 &&   <b>No more upcoming bootcamp</b>
+                       }
+                    
+                      </p>
+                  }
+                  >
+                   {
+                      bootcamps.length > 0 ? (
+                       <div className="ic_grid2">
+                         {
+                           bootcamps.map((bootcamp) => (
+                             <IcCard card={bootcamp} key={bootcamp.id} />
+                           ))
+                         }
+                       </div>
+   
+                      ) : !isLoading && (
+                         
+                          <NotDataFound message=' No bootcamps available at the moment.' />
+                        )
+                   }
+                   
+                    
+                  </InfiniteScroll>
+             
+            )
+          }
+    
+          
+          {/* {bootcamps.length > 0 && bootcamps.map((bootcamp, index) => (
+            <IcCard card={bootcamp} key={bootcamp.id} />
+          ))} */}
+          {/* {smallCards.map((card, index) => (
+            <IcCard card={card} key={index} />
+          ))} */}
+        </div>
   );
 };
 
