@@ -1,17 +1,17 @@
 "use client";
 
-import Sidebar from "@/components/Student/Dashboard/Sidebar/Sidebar";
 import React, { useCallback, useState } from "react";
 import { FaRegQuestionCircle } from "react-icons/fa";
 import { PiMonitorBold, PiCirclesThreeBold } from "react-icons/pi";
 import { GrPlay } from "react-icons/gr";
 import { BiBookContent, BiMoneyWithdraw } from "react-icons/bi";
-import { RiGraduationCapLine } from "react-icons/ri";
+import { RiDashboardFill, RiGraduationCapLine } from "react-icons/ri";
 import { MdLockOutline } from "react-icons/md";
 import { GiFeather } from "react-icons/gi";
 import DashboardHeader from "@/components/Student/Dashboard/DashboardHeader/DashboardHeader";
+import Sidebar from "@/components/Student/Dashboard/Sidebar/Sidebar";
 
-const TeacherLayout = ({ children }) => {
+const CoachLayout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
@@ -24,38 +24,38 @@ const TeacherLayout = ({ children }) => {
 
   const mainMenu = [
     {
-      title: "Overview",
-      url: "/teacher/overview",
+      title: "Dashboard",
+      url: "/coach",
+      icon: RiDashboardFill,
+    },
+    {
+      title: "Coaching",
+      url: "/coach/coaching",
       icon: GiFeather,
     },
     {
-      title: "Courses",
-      url: "/teacher",
-      icon: GiFeather,
-    },
-    {
-      title: "Bootcamps",
+      title: "Students",
       url: "/teacher/bootcamps",
       icon: PiMonitorBold,
     },
     {
-      title: "Exams",
-      url: "/student/exams",
+      title: "Community",
+      url: "/coach/community",
       icon: PiCirclesThreeBold,
     },
     {
-      title: "Playground",
+      title: "My account",
       url: "/student/playground",
       icon: GrPlay,
     },
     {
-      title: "E-book",
+      title: "Chatroom",
       url: "/teacher/ebook",
       icon: BiBookContent,
     },
     {
-      title: "Academe",
-      url: "/student/academe",
+      title: "My Earnings",
+      url: "/coach/earnings",
       icon: RiGraduationCapLine,
     },
     {
@@ -68,16 +68,15 @@ const TeacherLayout = ({ children }) => {
   const otherMenu = [
     {
       title: "Billings",
-      url: "/student/billings",
+      url: "/coach/billings",
       icon: BiMoneyWithdraw,
     },
     {
       title: "Support",
-      url: "/student/support",
+      url: "/coach/support",
       icon: FaRegQuestionCircle,
     },
   ];
-
   return (
     <div className="student-layout">
       <div>
@@ -104,4 +103,4 @@ const TeacherLayout = ({ children }) => {
   );
 };
 
-export default TeacherLayout;
+export default CoachLayout;
