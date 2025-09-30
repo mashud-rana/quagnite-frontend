@@ -1,0 +1,26 @@
+.ic_card {
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid #e2e2e2;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  margin:10px 0;
+}
+
+
+@media (max-width: 1399px) {
+  .ic_card {
+    padding: 16px;
+  }
+
+  .ic_card_description {
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 1040px) {
+  .ic_card_description {
+    margin-bottom: 16px;
+  }
+}

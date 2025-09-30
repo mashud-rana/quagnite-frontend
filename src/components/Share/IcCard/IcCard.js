@@ -20,7 +20,7 @@ const IcCard = ({ card }) => {
       <p className={styles.ic_card_description} 
        dangerouslySetInnerHTML={{ __html: card?.bootcamp?.description || '' }}></p>
       <div>
-        <Link href={`/student/bootcamps/${card?.bootcamp?.id}`} className="ic_common_primary_btn">
+        <Link href={`/student/bootcamps/${card?.bootcamp?.slug}`} className="ic_common_primary_btn">
           Start Bootcamp
         </Link>
       </div>

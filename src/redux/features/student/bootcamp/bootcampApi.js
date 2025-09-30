@@ -12,10 +12,17 @@ export const bootcampApi = apiSlice.injectEndpoints({
         url: `/student/bootcamp/get-my-bootcamps?page=${page}&type=${type}&${new URLSearchParams(params).toString()}`,
         method: "GET"
       })
-    })
+    }),
+    getBootcampDetailsBySlug: builder.query({
+      query: (slug) => ({
+        url: `/student/bootcamp/${slug}/show`,
+        method: "GET",
+      }),
+    }),
   })
 });
 
 export const {
-  useGetBootcampQuery
+  useGetBootcampQuery,
+  useGetBootcampDetailsBySlugQuery
 } = bootcampApi;

@@ -1,11 +1,13 @@
 "use client";
 
 import { FaPlay } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./BootcampContent.module.css";
 import { IoIosArrowDown } from "react-icons/io";
 import { MdVideocam } from "react-icons/md";
 import { FaRegCircleCheck, FaRegCircleRight } from "react-icons/fa6";
+import { set } from 'nprogress';
+import Card from "@/components/Share/Card/Card";
 
 const courseModules = [
   {
@@ -55,8 +57,10 @@ const courseModules = [
   },
 ];
 
-const BootcampContent = () => {
+const BootcampContent = ({bootcampData}) => {
   const [expandedModules, setExpandedModules] = useState(new Set());
+  const [bootcamp, setBootcamp] = useState( {});
+  const [lessons, setLessons] = useState([]);
 
   const toggleModule = (moduleId) => {
     const newExpanded = new Set(expandedModules);
@@ -68,10 +72,22 @@ const BootcampContent = () => {
     setExpandedModules(newExpanded);
   };
 
+  //set bootcamp data from props
+  useEffect(()=>{
+    if(bootcampData){
+      setBootcamp({...bootcampData});
+    }
+    if(bootcampData?.lessons){
+      setLessons([...bootcampData.lessons]);
+    }
+  },[bootcampData])
+
+  console.log('2. bootcamp content', lessons)
+
   return (
     <div className={styles.ic_content_section}>
       <div className={styles.ic_modules_list}>
-        {courseModules.map((module) => (
+        {lessons.length > 0 && lessons.map((module) => (
           <div key={module.id} className={styles.ic_module_item}>
             {/* Module Header - Clickable */}
             <div
@@ -86,7 +102,7 @@ const BootcampContent = () => {
               </div>
               <div className={styles.ic_module_right}>
                 <span className={styles.ic_module_duration}>
-                  ({module.duration})
+                  ({module?.lessons_total_duration})
                 </span>
                 <div
                   className={`${styles.ic_arrow_icon} ${
@@ -101,70 +117,65 @@ const BootcampContent = () => {
             </div>
 
             {/* Videos List - Expandable */}
-            <div
-              className={`${styles.ic_videos_container} ${
-                expandedModules.has(module.id) ? styles.ic_videos_expanded : ""
-              }`}
-            >
-              <div className={`${styles.ic_flex} mb-12`}>
-                <MdVideocam
-                  className={`${styles.ic_play_icon} ic_color_primary`}
-                />
-                <span className={styles.ic_video_title}>
-                  Learn and Explore HTML as a Beginner
-                </span>
-              </div>
+            {
+              module.lectures.length > 0 && module.lectures.map((lecture)=>(
+               
+                  <div
+                    className={`${styles.ic_videos_container} ${
+                      expandedModules.has(module.id) ? styles.ic_videos_expanded : ""
+                    }`}
+                    key={`${module.id}-${lecture.id}-${lecture.uuid}`}
+                  >
+                     <Card >
+                      <div className={`${styles.ic_flex} mb-12`}>
+                        <MdVideocam
+                          className={`${styles.ic_play_icon} ic_color_primary`}
+                        />
+                        <span className={styles.ic_video_title}>
+                          {lecture?.title}
+                        </span>
+                      </div>
 
-              <div className={`${styles.ic_flex} mb-12 ic_color_primary`}>
-                {/* Date */}
-                <div className="text-sm ">30/06/2323</div>
-                <hr className={styles.ic_hr} />
+                      <div className={`${styles.ic_flex} mb-12 ic_color_primary`}>
+                        {/* Date */}
+                        <div className="text-sm ">{lecture?.formatted_start_date}</div>
+                        <hr className={styles.ic_hr} />
 
-                {/* Time */}
-                <div className="text-sm ">13:09 PM</div>
-                <hr className={styles.ic_hr} />
+                        {/* Time */}
+                        <div className="text-sm ">{lecture?.formatted_start_time}</div>
+                        <hr className={styles.ic_hr} />
 
-                {/* Left for */}
-                <div className="text-sm">Left for 2 hours 20 minutes</div>
-              </div>
+                        {/* Left for */}
+                        <div className="text-sm">Left for {lecture?.lesson_duration_formatted}</div>
+                      </div>
 
-              <p>
-                Throughout this course, you will be learning various essential
-                things that are mostly used by a flutter developer when he/she
-                is working at some firm. This course will help you learn how to
-                create fast and stunning mobile applications with so much ease.
-                The projects/apps which you will be making throughout the course
-                will be working on android as well as ios. Some changes to the
-                projects make them compatible will web browsers as well.
-              </p>
+                      <p dangerouslySetInnerHTML={{ __html: lecture?.description }}>
+                      </p>
 
-              <ul className={styles.ic_video_points}>
-                <li className={styles.ic_flex}>
-                  <FaRegCircleCheck className={styles.ic_point_icon} />
-                  Live, interactive class
-                </li>
-                <li className={styles.ic_flex}>
-                  <FaRegCircleCheck className={styles.ic_point_icon} />
-                  Experienced instructor teaching over Zoom
-                </li>
-              </ul>
+                      <ul className={styles.ic_video_points}>
+                        <li className={styles.ic_flex}>
+                          <FaRegCircleCheck className={styles.ic_point_icon} />
+                          Live, interactive class
+                        </li>
+                        <li className={styles.ic_flex}>
+                          <FaRegCircleCheck className={styles.ic_point_icon} />
+                          Experienced instructor teaching over Zoom
+                        </li>
+                      </ul>
+                      <button
+                        href='#'
+                        className={styles.ic_btn}
+                        type="button"
+                      >
+                        Join Live Class
+                      </button>
 
-              {/* {module.videos.map((video) => (
-                <div key={video.id} className={styles.ic_video_item}>
-                  <div className={styles.ic_video_content}>
-                    <button className={styles.ic_play_button}>
-                      <MdVideocam
-                        className={`${styles.ic_play_icon} ic_color_primary`}
-                      />
-                    </button>
-                    <span className={styles.ic_video_title}>{video.title}</span>
+                 
+                  </Card>
                   </div>
-                  <span className={styles.ic_video_duration}>
-                    ({video.duration})
-                  </span>
-                </div>
-              ))} */}
-            </div>
+              ))
+            }
+          
           </div>
         ))}
       </div>
