@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Table, Tag, Button, Timeline, Pagination } from "antd";
+import { Table, Tag, Button, Timeline } from "antd";
 import { FaChevronRight, FaTimes } from "react-icons/fa";
 
 const mockTickets = [
@@ -54,7 +54,7 @@ const mockTickets = [
   },
 ];
 
-export default function SupportPage() {
+const CoachSupportPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [expandedRowKeys, setExpandedRowKeys] = useState([]);
 
@@ -99,7 +99,6 @@ export default function SupportPage() {
       ),
     },
   ];
-
   return (
     <Table
       columns={columns}
@@ -135,4 +134,6 @@ export default function SupportPage() {
       }}
     />
   );
-}
+};
+
+export default CoachSupportPage;

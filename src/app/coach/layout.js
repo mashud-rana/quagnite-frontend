@@ -68,12 +68,12 @@ const CoachLayout = ({ children }) => {
   const otherMenu = [
     {
       title: "Billings",
-      url: "/student/billings",
+      url: "/coach/billings",
       icon: BiMoneyWithdraw,
     },
     {
       title: "Support",
-      url: "/student/support",
+      url: "/coach/support",
       icon: FaRegQuestionCircle,
     },
   ];

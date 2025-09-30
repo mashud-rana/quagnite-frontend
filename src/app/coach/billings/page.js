@@ -1,11 +1,10 @@
 "use client";
-
 import BillingDetails from "@/components/Student/Billings/BillingDetails/BillingDetails";
 import React from "react";
 
-const BillingsPage = () => {
+const BillingsDetails = () => {
   const billingData = [
-    { label: "Name", value: "Student Amiliafox" },
+    { label: "Name", value: "Amiliafox" },
     { label: "Email address", value: "amiliafox2727127@gmail.com" },
     {
       label: "Billing address",
@@ -19,14 +18,14 @@ const BillingsPage = () => {
   };
 
   return (
-    <>
+    <div>
       <BillingDetails
         title="Billing Info"
         fields={billingData}
         onSave={handleSave}
       />
-    </>
+    </div>
   );
 };
 
-export default BillingsPage;
+export default BillingsDetails;
