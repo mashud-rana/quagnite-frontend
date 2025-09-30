@@ -19,10 +19,19 @@ export const bootcampApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+     createBootcampReview: builder.mutation({
+      query: (reviewData) => ({
+        url: `/student/bootcamp/submit-review`,
+        method: "POST",
+        body: reviewData,
+      }),
+    
+    }),
   })
 });
 
 export const {
   useGetBootcampQuery,
-  useGetBootcampDetailsBySlugQuery
+  useGetBootcampDetailsBySlugQuery,
+  useCreateBootcampReviewMutation
 } = bootcampApi;

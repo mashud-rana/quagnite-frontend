@@ -14,6 +14,8 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {antIcon, toastError, toastSuccess} from "@/utils/helper";
 import {Spin} from "antd";
 import {useCreateReviewMutation} from "@/redux/features/student/course/courseApi";
+import {useCreateBootcampReviewMutation} from "@/redux/features/student/bootcamp/bootcampApi";
+
 
 //validation schema
 const schema = yup.object({
@@ -31,17 +33,33 @@ const schema = yup.object({
     .min(5, "Note content must be at least 5 characters")
 });
 
-const Reviews = ({reviewData, reviews, courseDetails}) => {
+const bootcampSchema = yup.object({
+  bootcamp_id: yup
+    .string()
+    .required("Bootcamp ID is required"),
+  rating: yup
+    .number()
+    .required("Rating is required")
+    .min(1, "Rating must be at least 1")
+    .max(5, "Rating must be at most 5"),
+  comment: yup
+    .string()
+    .required("Note content is required")
+    .min(5, "Note content must be at least 5 characters")
+});
+
+const Reviews = ({reviewData, reviews, data_id, type}) => {
   const [allReviewData,
     setAllReviewData] = useState({});
   const [allReviews,
     setAllReviews] = useState([]);
-  const [course,
-    setCourse] = useState({});
+  // const [course,
+  //   setCourse] = useState({});
   const {user} = useSelector((state) => state.auth);
   const [orderBy, setOrderBy] = useState("latest");
 
-  //create review mutation
+
+  //create review mutation for course
   const [createReview, {
       data : createData,
       isLoading : isCreateDataLoading,
@@ -50,22 +68,30 @@ const Reviews = ({reviewData, reviews, courseDetails}) => {
       error : createDataResponseError
     }
   ] = useCreateReviewMutation();
+   //create review mutation for bootcamp
+  const [createBootcampReview, {
+      data : createBootcampData,
+      isLoading : isCreateBootcampDataLoading,
+      isSuccess : isCreateBootcampDataSuccess,
+      isError : isCreateBootcampDataError,
+      error : createBootcampDataResponseError
+    }
+  ] = useCreateBootcampReviewMutation();
 
   //create review form
-  const {
-    register,
-    handleSubmit,
-    formState: {
-      errors
-    },
-    setValue,
-    setError,
-    control,
-    watch,
-    reset
-  } = useForm({resolver: yupResolver(schema)});
+    const {
+      register,
+      handleSubmit,
+      formState: {
+        errors
+      },
+      setValue,
+      setError,
+      control,
+      watch,
+      reset
+    } = useForm({resolver: yupResolver(type =='course'? schema: bootcampSchema)});
 
-  console.log('Reviews', allReviewData, allReviews, user)
 
   const renderStars = (rating) => {
     return Array.from({
@@ -78,16 +104,28 @@ const Reviews = ({reviewData, reviews, courseDetails}) => {
   };
   //reset form
   const resetForm = () => {
-    reset({
-      rating: "",
-      comment: "",
-      course_id: course
-        ?.id || ""
-    }, {keepValues: false});
+    if(type =='course'){
+       reset({
+        rating: "",
+        comment: "",
+        course_id: data_id
+      }, {keepValues: false});
+    }else if(type == 'bootcamp'){
+       reset({
+        rating: "",
+        comment: "",
+        bootcamp_id: data_id
+      }, {keepValues: false});
+    }
+   
   }
   //create review submit
   const onSubmit = (data) => {
-    createReview(data);
+    if(type == 'course'){
+      createReview(data);
+    }else if(type == 'bootcamp'){
+      createBootcampReview(data);
+    }
     // console.log("Review submit data", data);
 
   }
@@ -106,7 +144,7 @@ const Reviews = ({reviewData, reviews, courseDetails}) => {
     setOrderBy((prev) => (prev === "latest" ? "oldest" : "latest"));
   };
 
-  //create review useEffect
+  //create review useEffect for course
   useEffect(() => {
     if (isCreateDataSuccess && createData
       ?.success) {
@@ -114,11 +152,15 @@ const Reviews = ({reviewData, reviews, courseDetails}) => {
       toastSuccess(createData
         ?.message || "Discussion created successfully");
       //set created discussion data to top of the list
-      setAllReviews(prev => [
+     
+       setAllReviews(prev => [
         createData
-          ?.data,
+          ?.data.review,
         ...prev
       ]);
+      setAllReviewData({
+        ...createData?.data?.data?.review_data
+      });
     }
     if (isCreateDataError) {
 
@@ -128,6 +170,33 @@ const Reviews = ({reviewData, reviews, courseDetails}) => {
     }
 
   }, [isCreateDataSuccess, createData, isCreateDataError, createDataResponseError])
+
+
+    //create review useEffect for bootcamp
+  useEffect(() => {
+    if (isCreateBootcampDataSuccess && createBootcampData
+      ?.success) {
+      resetForm();
+      toastSuccess(createBootcampData
+        ?.message || "Discussion created successfully");
+      //set created discussion data to top of the list
+      setAllReviews(prev => [
+        createBootcampData
+          ?.data.review,
+        ...prev
+      ]);
+       setAllReviewData({
+        ...createBootcampData?.data?.data?.review_data
+      });
+    }
+    if (isCreateBootcampDataError) {
+
+      toastError(createBootcampDataResponseError
+        ?.data
+          ?.message || "Something went wrong. Please try again.");
+    }
+
+  }, [isCreateBootcampDataSuccess, createBootcampData, isCreateBootcampDataError, createBootcampDataResponseError])
 
   //set data
   useEffect(() => {
@@ -139,11 +208,13 @@ const Reviews = ({reviewData, reviews, courseDetails}) => {
         return [...reviews]
       });
     }
-    if (courseDetails) {
-      setCourse(courseDetails);
-      setValue("course_id", courseDetails.id);
+    if(type == 'course'){
+      setValue("course_id", data_id);
+    }else if(type == 'bootcamp'){
+      setValue("bootcamp_id", data_id);
     }
-  }, [reviewData, reviews, courseDetails]);
+
+  }, [reviewData, reviews]);
 
   //watch review input
   const watchRating = watch("rating");
@@ -204,7 +275,7 @@ const Reviews = ({reviewData, reviews, courseDetails}) => {
           
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className={styles.reviewInput}>
-                  {/* <RatingComponent ratingValue={3} /> */}
+                  
                   <div>
                     <Controller
                       name="rating"
@@ -255,10 +326,10 @@ const Reviews = ({reviewData, reviews, courseDetails}) => {
                       Cancel
                     </button>
                     <button className={`${styles.ic_btn} ${styles.ic_save}`} type="submit">
-                      Save Review {isCreateDataLoading
+                      Save Review {isCreateDataLoading || isCreateBootcampDataLoading
                         ? <Spin indicator={antIcon}/>
                         : ""
-      }
+                        }
                     </button>
                   </div>
                 )}
@@ -286,7 +357,7 @@ const Reviews = ({reviewData, reviews, courseDetails}) => {
                     ?.full_name}
                   className={styles.reviewAvatar}/>
                 <div className={styles.reviewMeta}>
-                  <h4 className={styles.reviewerName}>{review.userName}</h4>
+                  <h4 className={styles.reviewerName}>{review?.user?.full_name}</h4>
                   <div className={styles.reviewRating}>
                     <div className={styles.stars}>
                       {renderStars(review
@@ -328,5 +399,6 @@ const Reviews = ({reviewData, reviews, courseDetails}) => {
     </div>
   );
 };
+
 
 export default Reviews;

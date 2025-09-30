@@ -6,7 +6,7 @@ export default function RatingComponent({ ratingValue, setRatingValue }) {
   return (
     <Rating
       style={{ maxWidth: 180 }}
-      value={ratingValue || 5} // default to 5 if null
+      value={ratingValue || ''} // default to '' if null
       onChange={setRatingValue}
     />
   );

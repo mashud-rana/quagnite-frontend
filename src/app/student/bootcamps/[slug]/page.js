@@ -116,7 +116,7 @@ const BootcampDetailsPage = () => {
           </TabPane>
 
           <TabPane tab="Reviews" key="4">
-            <Reviews />
+            <Reviews reviewData={bootcamp?.review_data} reviews={bootcamp?.reviews} data_id={bootcamp?.id} type="bootcamp"/>
           </TabPane>
 
           <TabPane tab="Discussions" key="5">
