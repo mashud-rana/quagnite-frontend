@@ -17,6 +17,7 @@ import { useParams } from "next/navigation";
 import SectionSpinner from "@/components/Spinner/SectionSpinner";
 import NotDataFound from "@/components/Empty/NotDataFound";
 import styles from './details.module.css';
+import { BootcampOverview } from "@/components/Student/Bootcamps/BootcampOverview/BootcampOverview";
 
 const BootcampDetailsPage = () => {
   const [activeKey, setActiveKey] = useState("1");
@@ -110,7 +111,8 @@ const BootcampDetailsPage = () => {
           </TabPane>
 
           <TabPane tab="Course Overview" key="2">
-            <CourseOverview />
+            <BootcampOverview  bootcampData={bootcamp}   />
+            {/* <CourseOverview  /> */}
           </TabPane>
 
           <TabPane tab="Reviews" key="4">

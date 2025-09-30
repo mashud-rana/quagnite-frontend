@@ -9,53 +9,6 @@ import { FaRegCircleCheck, FaRegCircleRight } from "react-icons/fa6";
 import { set } from 'nprogress';
 import Card from "@/components/Share/Card/Card";
 
-const courseModules = [
-  {
-    id: "1",
-    title: "Orientation",
-    duration: "3:36",
-    videos: [
-      { id: "1.1", title: "Welcome to the Course", duration: "2:15" },
-      { id: "1.2", title: "Course Overview", duration: "1:21" },
-    ],
-  },
-  {
-    id: "2",
-    title: "Getting Started",
-    duration: "5:42",
-    videos: [
-      { id: "2.1", title: "Setup Your Environment", duration: "3:18" },
-      { id: "2.2", title: "First Steps", duration: "2:24" },
-    ],
-  },
-  {
-    id: "3",
-    title: "Core Concepts",
-    duration: "8:15",
-    videos: [
-      { id: "3.1", title: "Understanding Basics", duration: "4:32" },
-      { id: "3.2", title: "Advanced Techniques", duration: "3:43" },
-    ],
-  },
-  {
-    id: "4",
-    title: "Practical Examples",
-    duration: "12:30",
-    videos: [
-      { id: "4.1", title: "Example 1", duration: "6:15" },
-      { id: "4.2", title: "Example 2", duration: "6:15" },
-    ],
-  },
-  {
-    id: "5",
-    title: "Final Project",
-    duration: "15:20",
-    videos: [
-      { id: "5.1", title: "Project Setup", duration: "7:45" },
-      { id: "5.2", title: "Implementation", duration: "7:35" },
-    ],
-  },
-];
 
 const BootcampContent = ({bootcampData}) => {
   const [expandedModules, setExpandedModules] = useState(new Set());
@@ -82,7 +35,6 @@ const BootcampContent = ({bootcampData}) => {
     }
   },[bootcampData])
 
-  console.log('2. bootcamp content', lessons)
 
   return (
     <div className={styles.ic_content_section}>
