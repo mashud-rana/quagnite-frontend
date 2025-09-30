@@ -12,32 +12,22 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import img2 from "@/assets/images/all/img1.png";
-import {useGetBootcampDetailsBySlugQuery} from '@/redux/features/student/bootcamp/bootcampApi';
+import { useGetBootcampDetailsBySlugQuery } from "@/redux/features/student/bootcamp/bootcampApi";
 import { useParams } from "next/navigation";
 import SectionSpinner from "@/components/Spinner/SectionSpinner";
 import NotDataFound from "@/components/Empty/NotDataFound";
-import styles from './details.module.css';
+import styles from "./details.module.css";
 import { BootcampOverview } from "@/components/Student/Bootcamps/BootcampOverview/BootcampOverview";
 
 const BootcampDetailsPage = () => {
   const [activeKey, setActiveKey] = useState("1");
   const [tabGutter, setTabGutter] = useState(16);
-  const { slug } = useParams()
+  const { slug } = useParams();
   const [bootcamp, setBootcamp] = useState({});
 
   //get bootcamp by slug
-  const { 
-      data,
-      isSuccess, 
-      isLoading, 
-      error, 
-      refetch,
-      isFetching ,
-      isError
-    } = useGetBootcampDetailsBySlugQuery(slug);
-
-
-  
+  const { data, isSuccess, isLoading, error, refetch, isFetching, isError } =
+    useGetBootcampDetailsBySlugQuery(slug);
 
   // Responsive gutter
   useEffect(() => {
@@ -61,20 +51,19 @@ const BootcampDetailsPage = () => {
   }, []);
 
   //set bootcamp
-  useEffect(()=>{
-    if(isSuccess && data.success){
+  useEffect(() => {
+    if (isSuccess && data.success) {
       setBootcamp({
-        ...data.data
+        ...data.data,
       });
     }
-  },[data, isSuccess])
+  }, [data, isSuccess]);
 
-
-  if(isLoading || isFetching){
-    return <SectionSpinner message="Loading bootcamp details..." />
+  if (isLoading || isFetching) {
+    return <SectionSpinner message="Loading bootcamp details..." />;
   }
-  if(isError){
-    return <NotDataFound message="Bootacamp details not found" />
+  if (isError) {
+    return <NotDataFound message="Bootacamp details not found" />;
   }
 
   console.log("1 bootcamp", bootcamp);
@@ -83,19 +72,23 @@ const BootcampDetailsPage = () => {
     <div>
       <div className="mb-24">
         <div className="ic_title_section mb-24">
-          <Link href="/student/bootcamps" className="ic_back_button" aria-label="Go back">
+          <Link
+            href="/student/bootcamps"
+            className="ic_back_button"
+            aria-label="Go back"
+          >
             <FaArrowLeft />
           </Link>
-          <h1 className="ic_text_36">
-            {bootcamp?.title}
-          </h1>
+          <h1 className="ic_text_36">{bootcamp?.title}</h1>
         </div>
 
-        <Image src={bootcamp?.image_url} 
-        className={styles.ic_banner_img} 
-        alt={bootcamp?.title} 
-        width={600} 
-        height={100} />
+        <Image
+          src={bootcamp?.image_url}
+          className={styles.ic_banner_img}
+          alt={bootcamp?.title}
+          width={600}
+          height={100}
+        />
       </div>
 
       <div className="ic_layout_border ic_course">
@@ -111,7 +104,9 @@ const BootcampDetailsPage = () => {
           </TabPane>
 
           <TabPane tab="Course Overview" key="2">
-            <BootcampOverview  bootcampData={bootcamp}   />
+            <BootcampOverview
+            // bootcampData={bootcamp}
+            />
             {/* <CourseOverview  /> */}
           </TabPane>
 
