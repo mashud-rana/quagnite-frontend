@@ -14,6 +14,7 @@ import {Controller, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useCreateCourseNoteMutation, useUpdateCourseNoteMutation} from '@/redux/features/student/course/courseApi';
 import { useSelector } from "react-redux";
+import { useCreateBootcampNoteMutation, useDeleteBootcampNoteMutation, useUpdateBootcampNoteMutation } from "@/redux/features/student/bootcamp/bootcampApi";
 
 const JoditEditor = dynamic(() => import ("@/components/Share/Editor/JoditEditor/JoditEditor"), {ssr: false});
 
@@ -31,7 +32,22 @@ const schema = yup.object({
     .min(10, "Note content must be at least 10 characters")
 });
 
-const Notes = ({noteData, courseDetails}) => {
+//bootcamp schema
+const bootcampSchema = yup.object({
+  bootcamp_id: yup
+    .string()
+    .required("Course ID is required"),
+  title: yup
+    .string()
+    .required("Title is required")
+    .max(100, "Title must be at most 100 characters"),
+  note: yup
+    .string()
+    .required("Note content is required")
+    .min(10, "Note content must be at least 10 characters")
+});
+
+const Notes = ({noteData, data_id, type}) => {
   const editor = useRef(null);
 
   // Get user information from Redux store
@@ -39,8 +55,8 @@ const Notes = ({noteData, courseDetails}) => {
 
   const [notes,
     setNotes] = useState([]);
-  const [course,
-    setCourse] = useState({});
+  // const [course,
+  //   setCourse] = useState({});
   const [noteDataId,
     setNoteDataId] = useState(null);
 
@@ -59,9 +75,9 @@ const Notes = ({noteData, courseDetails}) => {
     control,
     watch,
     reset
-  } = useForm({resolver: yupResolver(schema)});
+  } = useForm({resolver: yupResolver(type === "course" ? schema : bootcampSchema)});
 
-
+  //delete course note
   const [deleteCourseNote, {
       data,
       isLoading,
@@ -70,7 +86,17 @@ const Notes = ({noteData, courseDetails}) => {
       error
     }
   ] = useDeleteCourseNoteMutation();
-  //create note
+
+   //delete bootcamp note
+  const [deleteBootcampNote, {
+      data: bootcampDeleteData,
+      isLoading: bootcampDeleteIsLoading,
+      isSuccess: bootcampDeleteIsSuccess,
+      isError: bootcampDeleteIsError,
+      error: bootcampDeleteError
+    }
+  ] = useDeleteBootcampNoteMutation();
+  //create course note
   const [createCourseNote, {
       data : createData,
       isLoading : isCreateDataLoading,
@@ -79,7 +105,18 @@ const Notes = ({noteData, courseDetails}) => {
       error : createDataResponseError
     }
   ] = useCreateCourseNoteMutation();
-  //update note
+
+   //create bootcamp note
+  const [createBootcampNote, {
+      data : createBootcampData,
+      isLoading : isCreateBootcampLoading,
+      isSuccess : isCreateBootcampSuccess,
+      isError : isCreateBootcampError,
+      error : createBootcampResponseError
+    }
+  ] = useCreateBootcampNoteMutation();
+
+  //update course note
   const [updateCourseNote, {
       data : updateData,
       isLoading : isUpdateDataLoading,
@@ -88,6 +125,17 @@ const Notes = ({noteData, courseDetails}) => {
       error : updateDataResponseError
     }
   ] = useUpdateCourseNoteMutation();
+
+  //update bootcamp note
+  const [updateBootcampNote, {
+      data : updateBootcampData,
+      isLoading : isUpdateBootcampLoading,
+      isSuccess : isUpdateBootcampSuccess,
+      isError : isUpdateBootcampError,
+      error : updateBootcampResponseError
+    }
+  ] = useUpdateBootcampNoteMutation();
+
   //handle note action
   const handleNoteAction = (action, noteId) => {
     if (action === "edit") {
@@ -100,8 +148,14 @@ const Notes = ({noteData, courseDetails}) => {
           ?.title || "");
         setValue("note", note
           ?.note || "");
-        setValue("course_id", course
-          ?.id || "");
+        // setValue("course_id", course
+        //   ?.id || "");
+
+        if(type === "course"){
+          setValue("course_id", data_id);
+        }else  if(type === "bootcamp"){
+          setValue("bootcamp_id", data_id);
+        }
 
         setNoteDataId(noteId);
       }
@@ -109,7 +163,14 @@ const Notes = ({noteData, courseDetails}) => {
       confirmDelete().then((result) => {
         if (result.isConfirmed) {
           setNoteDataId(noteId);
-          deleteCourseNote(noteId);
+          // deleteCourseNote(noteId);
+           if(type === "course"){
+             deleteCourseNote(noteId);
+           }
+          else if(type === "bootcamp"){
+            deleteBootcampNote(noteId);
+          }
+            
         }
       });
     } else if (action === "more") {}
@@ -117,17 +178,28 @@ const Notes = ({noteData, courseDetails}) => {
   };
 
 //onSubmit function
-  const onSubmit = (data) => {
+ const onSubmit = (data) => {
+    const isBootcamp = type === "bootcamp";
+    const isCourse = type === "course";
 
-    if(mode == 'create'){
-      createCourseNote(data);
-    }else{
-      updateCourseNote({noteData: data, noteId: noteDataId});
+    if (mode === 'create') {
+      if (isCourse) {
+        createCourseNote(data);
+      } else if (isBootcamp) {
+        createBootcampNote(data);
+      }
+    } else if (mode === 'edit') {
+      const payload = { noteData: data, noteId: noteDataId };
+      
+      if (isCourse) {
+        updateCourseNote(payload);
+      } else if (isBootcamp) {
+        updateBootcampNote(payload);
+      }
     }
+  };
 
-  }
-
-  //for delete note
+  //for delete course note
   useEffect(() => {
     if (isSuccess && data
       ?.success) {
@@ -147,7 +219,27 @@ const Notes = ({noteData, courseDetails}) => {
     setNoteDataId(null);
   }, [isSuccess, data, isError, error])
 
-  //for create note
+   //for delete bootcamp note
+  useEffect(() => {
+    if (bootcampDeleteIsSuccess && bootcampDeleteData
+      ?.success) {
+      let filteredNotes = notes.filter(note => note.id !== bootcampDeleteData
+        ?.data
+          ?.id);
+      setNotes(filteredNotes);
+      toastSuccess(bootcampDeleteData
+        ?.message || "Note deleted successfully.");
+    }
+    if (bootcampDeleteIsError) {
+
+      toastError(bootcampDeleteError
+        ?.data
+          ?.message || "Something went wrong. Please try again.");
+    }
+    setNoteDataId(null);
+  }, [bootcampDeleteIsSuccess, bootcampDeleteData, bootcampDeleteIsError, bootcampDeleteError])
+
+  //for create course note
   useEffect(() => {
     if (isCreateDataSuccess && createData
       ?.success) {
@@ -158,7 +250,12 @@ const Notes = ({noteData, courseDetails}) => {
       ]);
       toastSuccess(createData
         ?.message || "Note created successfully.");
-       reset({ title: "", note: "",course_id:course.id }, { keepValues: false });
+      if(type === "course"){
+        reset({ title: "", note: "", course_id: data_id }, { keepValues: false });
+      }else  if(type === "bootcamp"){
+        reset({ title: "", note: "", bootcamp_id: data_id }, { keepValues: false });
+      }
+      
     }
     if (isCreateDataError) {
       toastError(createDataResponseError
@@ -168,7 +265,35 @@ const Notes = ({noteData, courseDetails}) => {
 
   }, [isCreateDataSuccess, createData, isCreateDataError, createDataResponseError])
 
-  //for update note
+
+   //for create bootcamp note
+  useEffect(() => {
+    if (isCreateBootcampSuccess && createBootcampData
+      ?.success) {
+      setNotes((prevNotes) => [
+        createBootcampData
+          ?.data,
+        ...prevNotes
+      ]);
+      toastSuccess(createBootcampData
+        ?.message || "Note created successfully.");
+      // Reset form fields
+      if(type === "course"){
+        reset({ title: "", note: "", course_id: data_id }, { keepValues: false });
+      }else  if(type === "bootcamp"){
+        reset({ title: "", note: "", bootcamp_id: data_id }, { keepValues: false });
+      }
+      
+    } 
+    if (isCreateBootcampError) {
+      toastError(createBootcampResponseError
+        ?.data
+          ?.message || "Something went wrong. Please try again.");
+    }
+
+  }, [isCreateBootcampSuccess, createBootcampData, isCreateBootcampError, createBootcampResponseError])
+
+  //for update course note
   useEffect(()=>{
   
     if(isUpdateDataSuccess && updateData?.success){
@@ -186,7 +311,11 @@ const Notes = ({noteData, courseDetails}) => {
       toastSuccess(updateData?.message || "Note updated successfully.");
       setMode("create");
       setNoteDataId(null);
-      reset({ title: "", note: "",course_id:course.id }, { keepValues: false });
+       if(type === "course"){
+        reset({ title: "", note: "", course_id: data_id }, { keepValues: false });
+      }else  if(type === "bootcamp"){
+        reset({ title: "", note: "", bootcamp_id: data_id }, { keepValues: false });
+      }
     }
     if (isUpdateDataError) {
       toastError(updateDataResponseError
@@ -196,17 +325,52 @@ const Notes = ({noteData, courseDetails}) => {
 
     },[isUpdateDataSuccess, updateData, isUpdateDataError, updateDataResponseError])
 
+    //for update bootcamp note
+  useEffect(()=>{
+    
+    if(isUpdateBootcampSuccess && updateBootcampData?.success){
+      let updatedNote = updateBootcampData?.data;
+      setNotes((prevNotes) => prevNotes.map(note => {
+        if (note.id === updatedNote.id) {
+          return {
+            ...note,
+            title: updatedNote.title,
+            note: updatedNote.note,
+          };
+        }
+        return note;
+      }));
+      toastSuccess(updateBootcampData?.message || "Note updated successfully.");
+      setMode("create");
+      setNoteDataId(null);
+     
+        // Reset form fields
+      if(type === "course"){
+        reset({ title: "", note: "", course_id: data_id }, { keepValues: false });
+      }else  if(type === "bootcamp"){
+        reset({ title: "", note: "", bootcamp_id: data_id }, { keepValues: false });
+      }
+    }
+    if (isUpdateBootcampError) {
+      toastError(updateBootcampResponseError
+        ?.data
+          ?.message || "Something went wrong. Please try again.");
+    }
+
+    },[isUpdateBootcampSuccess, updateBootcampData, isUpdateBootcampError, updateBootcampResponseError])
+
   //set note data to state
   useEffect(() => {
     if (noteData) {
       setNotes(noteData);
     }
-    if (courseDetails) {
-      setCourse(courseDetails);
-      setValue("course_id", courseDetails
-        ?.id || "");
+  
+    if(type === "course"){
+      setValue("course_id", data_id);
+    }else  if(type === "bootcamp"){
+      setValue("bootcamp_id", data_id);
     }
-  }, [noteData, courseDetails]);
+  }, [noteData, data_id]);
 
 
 
@@ -279,7 +443,7 @@ const Notes = ({noteData, courseDetails}) => {
                       : "Save note"
                   }
                   {
-                    (isCreateDataLoading || isUpdateDataLoading) ? <Spin indicator={antIcon}/> : null
+                    (isCreateDataLoading || isUpdateDataLoading || isCreateBootcampLoading || isUpdateBootcampLoading) ? <Spin indicator={antIcon}/> : null
                   }
                 </button>
               </div>
@@ -306,7 +470,7 @@ const Notes = ({noteData, courseDetails}) => {
                             className={styles.noteActionButton}
                             onClick={() => handleNoteAction("delete", note.id)}
                             title="Delete">
-                            {noteDataId === note.id && isLoading
+                            {noteDataId === note.id && (isLoading || bootcampDeleteIsLoading)
                               ? <Spin indicator={antIcon}/>
                               : <FaTrash/>
                             }
@@ -315,7 +479,7 @@ const Notes = ({noteData, courseDetails}) => {
                             className={styles.noteActionButton}
                             onClick={() => handleNoteAction("edit", note.id)}
                             title="Edit">
-                            {noteDataId === note.id && isLoading
+                            {noteDataId === note.id && (isLoading || bootcampDeleteIsLoading)
                               ? <Spin indicator={antIcon}/>
                               : <FaEdit/>
                         }
@@ -337,8 +501,7 @@ const Notes = ({noteData, courseDetails}) => {
             </div>
           ))}
           {notes.length === 0 && (<NotDataFound
-            message={`No notes found for ${course
-            ?.title || 'this course'}.`}/>)
+            message={`No notes found for  'this course'}.`}/>)
 }
         </div>
 

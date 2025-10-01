@@ -124,7 +124,7 @@ const BootcampDetailsPage = () => {
           </TabPane>
 
           <TabPane tab="Notes" key="6">
-            <Notes />
+            <Notes noteData={bootcamp?.notes} data_id={bootcamp?.id} type="bootcamp" />
           </TabPane>
         </Tabs>
       </div>

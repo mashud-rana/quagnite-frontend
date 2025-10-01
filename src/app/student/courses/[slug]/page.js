@@ -156,7 +156,8 @@ const CourseDetailsPage = () => {
           </TabPane>
 
           <TabPane tab="Notes" key="6">
-            <Notes noteData={course?.course_notes} courseDetails={course} />
+            <Notes noteData={course?.course_notes} data_id={course?.id} type="course" />
+             {/* <Notes noteData={course?.course_notes} courseDetails={course} /> */}
           </TabPane>
         </Tabs>
       </div>

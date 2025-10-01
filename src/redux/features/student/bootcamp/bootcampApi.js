@@ -43,6 +43,32 @@ export const bootcampApi = apiSlice.injectEndpoints({
       }),
     
     }),
+    deleteBootcampNote: builder.mutation({
+      query: (noteId) => ({
+        url: `/student/bootcamp/delete-note/${noteId}`,
+        method: "DELETE",
+      }),
+    
+    }),
+    createBootcampNote: builder.mutation({
+      query: (noteData) => ({
+        url: `/student/bootcamp/post-note`,
+        method: "POST",
+        body: noteData,
+      }),
+    
+    }),
+    updateBootcampNote: builder.mutation({
+      query: ({noteData, noteId}) => ({
+        url: `/student/bootcamp/note/${noteId}/update`,
+        method: "POST",
+         body: {
+          ...noteData,
+          _method: "PUT",
+        },
+      }),
+    
+    }),
   })
 });
 
@@ -51,5 +77,8 @@ export const {
   useGetBootcampDetailsBySlugQuery,
   useCreateBootcampReviewMutation,
   useCreateBootcampDiscussionMutation,
-  useCreateBootcampDiscussionCommentMutation
+  useCreateBootcampDiscussionCommentMutation,
+  useDeleteBootcampNoteMutation,
+  useCreateBootcampNoteMutation,
+  useUpdateBootcampNoteMutation
 } = bootcampApi;
