@@ -7,7 +7,8 @@ import { FaCircleCheck } from "react-icons/fa6";
 import img from "@/assets/images/all/instractor.png";
 import Image from "next/image";
 
-export function BootcampOverview() {
+export default function BootcampOverview({bootcampData}) {
+  const [bootcamp, setBootcamp] = useState(null);
   const course = {
     id: 1,
     title: "Full Stack Web Development",
@@ -25,43 +26,33 @@ export function BootcampOverview() {
     ],
   };
 
+  useEffect(()=>{
+    if(bootcampData){
+      setBootcamp(bootcampData)
+    }
+  },[bootcampData])
+
+  console.log("bootcamp overview data", bootcamp, bootcampData);
+
   return (
     <div className={styles.overviewContainer}>
       <div className={styles.ic_flex}>
         <h3 className={styles.sectionTitle}>Description :</h3>
-        <div className={styles.descriptionContent}>
-          Throughout this course, you will be learning various essential things
-          that are mostly used by a flutter developer when he/she is working at
-          some firm. This course will help you learn how to create fast and
-          stunning mobile applications with so much ease. The projects/apps
-          which you will be making throughout the course will be working on
-          android as well as ios. Some changes to the projects make them
-          compatible will web browsers as well. You will also be building a
-          large number of apps with the difficulty level ranging from beginner
-          to advanced and these projects/apps will help you get better with the
-          concepts eventually. I will also be covering some of the most used
-          flutter packages which are generally used while we are developing a
-          flutter app. Flutter is Google’s UI toolkit for building beautiful,
-          natively compiled applications for mobile, web, and desktop from a
-          single codebase. Delight your users with Flutters built-in beautiful
-          Material Design. Flutters hot reload helps you quickly and easily
-          experiment, build UIs, add features, and fix bugs faster.
-          Cross-platform development with Flutter. Flutter’s widgets incorporate
-          all critical platform differences such as scrolling, navigation,
-          icons, and fonts to provide full native performance on both iOS and
-          Android. Happy Learning!!
-        </div>
+        <div 
+          className={styles.descriptionContent}
+          dangerouslySetInnerHTML={{ __html: bootcamp?.description }}
+        />
       </div>
 
       <div className={styles.ic_flex}>
         <h3 className={styles.sectionTitle}>What you&#39;ll learn</h3>
         <div className={styles.learningList}>
-          {course &&
-            course.course_tags.length > 0 &&
-            course.course_tags.map((item, index) => (
+          {bootcamp &&
+            bootcamp?.tags.length > 0 &&
+            bootcamp?.tags.map((item, index) => (
               <div key={index} className={styles.learningItem}>
                 <FaCircleCheck className={styles.bulletPoint} />
-                <span className={styles.learningText}>{item?.name}</span>
+                <span className={styles.learningText}>{item?.tag_name}</span>
               </div>
             ))}
         </div>
@@ -70,14 +61,18 @@ export function BootcampOverview() {
       <div className={styles.ic_flex}>
         <h3 className={styles.sectionTitle}>Who this course is for</h3>
         <div className={styles.learningList}>
-          {course &&
+          {/* {course &&
             course.course_tags.length > 0 &&
             course.course_tags.map((item, index) => (
               <div key={index} className={styles.learningItem}>
                 <FaCircleCheck className={styles.bulletPoint} />
                 <span className={styles.learningText}>{item?.name}</span>
               </div>
-            ))}
+            ))} */}
+            <div className={styles.learningItem}>
+                <FaCircleCheck className={styles.bulletPoint} />
+                <span className={styles.learningText}>{bootcamp?.category?.name}</span>
+              </div>
         </div>
       </div>
 
@@ -86,23 +81,26 @@ export function BootcampOverview() {
         <h3 className={styles.sectionTitle}>Instructor</h3>
         <div className={styles.instructorContent}>
           <Image
-            src={img}
+            src={bootcamp && bootcamp?.teacher?.avatar_url}
             alt="Instructor"
+            width={100}
+            height={100}
             className={styles.instructorImage}
           />
           <div className={styles.instructorInfo}>
-            <h4 className={styles.instructorName}>Leslie Alexander</h4>
+            <h4 className={styles.instructorName}>{bootcamp?.teacher?.full_name}</h4>
             <p className={styles.ic_instractor_title}>
-              Web Developer | Founder, Hex Hybrids
+             
+              {bootcamp?.teacher?.teacher_details?.professional_title}
             </p>
             <div className={styles.instructorMeta}>
               <div className={styles.metaItem}>
                 <FaMapMarkerAlt className={styles.metaIcon} />
-                <span>London, UK</span>
+                <span>       {bootcamp?.teacher?.teacher_details?.address}</span>
               </div>
               <div className={styles.metaItem}>
                 <FaCalendarAlt className={styles.metaIcon} />
-                <span>Since April 1, 2022</span>
+                <span>{bootcamp?.teacher?.since_from}</span>
               </div>
             </div>
           </div>
