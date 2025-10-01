@@ -27,11 +27,29 @@ export const bootcampApi = apiSlice.injectEndpoints({
       }),
     
     }),
+     createBootcampDiscussion: builder.mutation({
+      query: (discussionData) => ({
+        url: `/student/bootcamp/submit-discussion`,
+        method: "POST",
+        body: discussionData,
+      }),
+    
+    }),
+    createBootcampDiscussionComment: builder.mutation({
+      query: (discussionData) => ({
+        url: `/student/bootcamp/submit-discussion-comment`,
+        method: "POST",
+        body: discussionData,
+      }),
+    
+    }),
   })
 });
 
 export const {
   useGetBootcampQuery,
   useGetBootcampDetailsBySlugQuery,
-  useCreateBootcampReviewMutation
+  useCreateBootcampReviewMutation,
+  useCreateBootcampDiscussionMutation,
+  useCreateBootcampDiscussionCommentMutation
 } = bootcampApi;

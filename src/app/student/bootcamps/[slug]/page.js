@@ -120,7 +120,7 @@ const BootcampDetailsPage = () => {
           </TabPane>
 
           <TabPane tab="Discussions" key="5">
-            <Discussions />
+            <Discussions discussionsData={bootcamp?.discussions} data_id={bootcamp?.id} type="bootcamp" />
           </TabPane>
 
           <TabPane tab="Notes" key="6">
