@@ -32,8 +32,13 @@ const LecturePreview = ({ lecture }) => {
          
           src={lecture.image_url}
           alt={lecture.title}
-          width={800}
-            height={450}
+          width={600}
+          height={450}
+          style={
+            {
+              width:'100%'
+            }
+          }
         />
         </div>
       );

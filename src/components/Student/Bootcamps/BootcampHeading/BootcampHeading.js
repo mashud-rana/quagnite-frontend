@@ -14,7 +14,6 @@ const BootcampHeading = ({courseDetails, activeLectureDetails}) => {
   const [course, setCourse] = useState(null);
   const [activeLecture, setActiveLecture] = useState(null);
 
-  console.log('3. BootcampHeading loaded', activeLecture);
 
   useEffect(()=>{
     setCourse(courseDetails);
@@ -23,7 +22,7 @@ const BootcampHeading = ({courseDetails, activeLectureDetails}) => {
   return (
     <div>
       <div className={styles.ic_course_info}>
-        <h1 className="ic_text_36">{course?.title}</h1>
+        <h1 className="ic_text_36">{!activeLecture ? course?.title : activeLecture?.title}</h1>
         <div className={styles.ic_instructor_info}>
           <span className={styles.ic_instructor_name}>{course?.teacher?.full_name}</span>
           <span className={styles.ic_instructor_role}>{course?.teacher?.teacher_details?.professional_title}</span>
