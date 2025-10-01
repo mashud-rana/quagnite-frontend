@@ -9,22 +9,7 @@ import Image from "next/image";
 
 export default function BootcampOverview({bootcampData}) {
   const [bootcamp, setBootcamp] = useState(null);
-  const course = {
-    id: 1,
-    title: "Full Stack Web Development",
-    description:
-      "Learn HTML, CSS, JavaScript, React, Node.js, and more to become a full-stack web developer.",
-    course_tags: [
-      { id: 1, name: "HTML & CSS Basics" },
-      { id: 2, name: "JavaScript Fundamentals" },
-      { id: 3, name: "React.js with Hooks" },
-      { id: 4, name: "Node.js & Express.js" },
-      { id: 5, name: "MongoDB Database" },
-      { id: 6, name: "REST API Development" },
-      { id: 7, name: "Authentication & JWT" },
-      { id: 8, name: "Deployment & Hosting" },
-    ],
-  };
+ 
 
   useEffect(()=>{
     if(bootcampData){
@@ -32,7 +17,7 @@ export default function BootcampOverview({bootcampData}) {
     }
   },[bootcampData])
 
-  console.log("bootcamp overview data", bootcamp, bootcampData);
+ 
 
   return (
     <div className={styles.overviewContainer}>
