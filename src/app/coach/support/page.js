@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import { Table, Tag, Button, Timeline } from "antd";
-import { FaChevronRight, FaTimes } from "react-icons/fa";
+import { FaArrowLeft, FaChevronRight, FaTimes } from "react-icons/fa";
+import Link from "next/link";
 
 const mockTickets = [
   {
@@ -100,39 +101,52 @@ const CoachSupportPage = () => {
     },
   ];
   return (
-    <Table
-      columns={columns}
-      dataSource={mockTickets}
-      rowKey="id"
-      pagination={false}
-      expandable={{
-        expandedRowRender: (record) => (
-          <div style={{ margin: 0 }}>
-            <Timeline>
-              {record.timeline.map((item) => (
-                <Timeline.Item
-                  key={item.id}
-                  color={item.type === "problem" ? "red" : "blue"}
-                >
-                  <h6 className="ic_text_transfrom">
-                    {item.title} {`(${item.date})`}
-                  </h6>
+    <div>
+      <div className="mb-24 ic_flex">
+        <div className="ic_title_section">
+          <Link href="#" className="ic_back_button" aria-label="Go back">
+            <FaArrowLeft />
+          </Link>
+          <h1 className="ic_text_36">Support </h1>
+        </div>
 
-                  {item.remark && <p>{item.remark}</p>}
-                  {item.description && (
-                    <p className="ic_flex_warp">{item.description}</p>
-                  )}
-                </Timeline.Item>
-              ))}
-            </Timeline>
-          </div>
-        ),
-        expandedRowKeys,
-        onExpand: (expanded, record) => handleExpandToggle(record.id),
+        <button className="ic_common_primary_btn">create new ticket</button>
+      </div>
 
-        expandIcon: () => null,
-      }}
-    />
+      <Table
+        columns={columns}
+        dataSource={mockTickets}
+        rowKey="id"
+        pagination={false}
+        expandable={{
+          expandedRowRender: (record) => (
+            <div style={{ margin: 0 }}>
+              <Timeline>
+                {record.timeline.map((item) => (
+                  <Timeline.Item
+                    key={item.id}
+                    color={item.type === "problem" ? "red" : "blue"}
+                  >
+                    <h6 className="ic_text_transfrom">
+                      {item.title} {`(${item.date})`}
+                    </h6>
+
+                    {item.remark && <p>{item.remark}</p>}
+                    {item.description && (
+                      <p className="ic_flex_warp">{item.description}</p>
+                    )}
+                  </Timeline.Item>
+                ))}
+              </Timeline>
+            </div>
+          ),
+          expandedRowKeys,
+          onExpand: (expanded, record) => handleExpandToggle(record.id),
+
+          expandIcon: () => null,
+        }}
+      />
+    </div>
   );
 };
 

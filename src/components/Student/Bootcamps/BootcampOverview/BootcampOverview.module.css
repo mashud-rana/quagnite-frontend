@@ -5,59 +5,29 @@
   border-radius: 8px;
 }
 
-.header {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.title {
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 32px;
-}
-
-.subtitle {
-  color: #6b7280;
-  margin: 0;
-  line-height: 1.5;
-}
-
-.topSection,
-.bottomSection {
-  margin-top: 16px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-
-.leftColumn {
-  display: flex;
-  border: 1px solid #e2e2e2;
-  padding: 15px;
-  border-radius: 8px;
-  gap: 36px;
-}
-
-.leftColumn2 {
-  border: 1px solid #e2e2e2;
-  padding: 15px;
-  border-radius: 8px;
-  gap: 36px;
-}
-
-.rightColumn {
-  border: 1px solid #e2e2e2;
-  padding: 15px;
-  border-radius: 8px;
-}
-
 .sectionTitle {
-  font-size: 20px;
+  font-size: 18px;
   line-height: 22px;
   font-weight: 400;
   color: #111827;
   margin: 0 0 16px 0;
+  flex: 0 0 200px;
+  margin: 0;
+}
+
+.ic_flex {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.ic_flex:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .ic_list_container {
@@ -65,56 +35,17 @@
   gap: 36px;
 }
 
-.statsList {
-  display: flex;
-  flex-direction: column;
-}
-
-.statRow {
-  display: flex;
-  align-items: flex-start;
-  gap: 6px;
-}
-
-.statLabel {
-  min-width: 80px;
-  flex-shrink: 0;
-}
-
-.featureLink {
-  color: #3b82f6;
-  text-decoration: none;
-}
-
-.featureLink:hover {
-  text-decoration: underline;
-}
-
-.descriptionSection {
-  border: 1px solid #e2e2e2;
-  padding: 15px;
-  border-radius: 8px;
-  margin-top: 16px;
-  display: flex;
-  flex-direction: column;
-}
-
 .descriptionContent {
+  font-size: 16px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  flex: 1;
 }
 
-.descriptionParagraph {
-  line-height: 1.6;
-  margin: 0;
-}
-
-/* Learning Lists */
 .learningList {
   display: flex;
   flex-wrap: wrap;
-  /* flex-direction: column; */
   gap: 20px;
 }
 
@@ -135,6 +66,60 @@
   text-wrap: nowrap;
 }
 
+.instructorContent {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.instructorImage {
+  width: 120px;
+  height: 120px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.instructorInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.instructorName {
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.ic_instractor_title,
+.instructorLocation,
+.instructorSince {
+  font-size: 16px;
+  line-height: 1.4;
+  color: #6b7280;
+  margin: 0;
+}
+
+.instructorMeta {
+  display: flex;
+  gap: 20px;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.metaIcon {
+  color: var(--primary-color);
+}
+
 /* Responsive Design */
 @media (max-width: 1650px) {
   .ic_list_container {
@@ -144,58 +129,55 @@
 }
 
 @media (max-width: 1199px) {
-  .leftColumn {
-    flex-direction: column;
-    gap: 0px;
+  .sectionTitle {
+    font-size: 16px;
+    line-height: 22px;
+    flex: 0 0 170px;
+    margin: 0;
   }
-}
-@media (max-width: 991px) {
-  .topSection,
-  .bottomSection {
-    grid-template-columns: repeat(1, 1fr);
+
+  .learningList {
+    gap: 16px;
   }
 }
 
 @media (max-width: 768px) {
-  .topSection,
-  .bottomSection {
-    grid-template-columns: 1fr; /* stack columns */
-  }
-
-  .leftColumn,
-  .leftColumn2,
-  .rightColumn {
-    gap: 0px;
-  }
-
-  .title {
-    font-size: 20px;
-    line-height: 28px;
-  }
+  /* .sectionTitle {
+    flex: 0 0 140px;
+  } */
 
   .sectionTitle {
-    font-size: 18px;
+    flex: 0 0 0px;
+  }
+
+  .learningList {
+    gap: 10px;
+  }
+
+  .ic_flex {
+    flex-direction: column;
+  }
+}
+@media (max-width: 550px) {
+  .instructorMeta {
+    flex-direction: column;
+    gap: 0px;
   }
 }
 
-/* Mobile */
 @media (max-width: 480px) {
   .overviewContainer {
     padding: 12px;
   }
 
-  .title {
-    font-size: 18px;
-    line-height: 24px;
+  .ic_instractor_title,
+  .instructorLocation,
+  .instructorSince {
+    font-size: 14px;
   }
 
-  .sectionTitle {
-    font-size: 16px;
-  }
-
-  .ic_list_container {
-    flex-direction: column;
-    gap: 20px;
+  .metaItem span {
+    font-size: 14px;
   }
 
   .learningList {
@@ -204,6 +186,6 @@
   }
 
   .learningText {
-    white-space: normal; /* allow wrapping */
+    white-space: normal;
   }
 }
