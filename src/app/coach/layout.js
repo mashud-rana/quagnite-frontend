@@ -35,7 +35,7 @@ const CoachLayout = ({ children }) => {
     },
     {
       title: "Students",
-      url: "/teacher/bootcamps",
+      url: "/coach/students",
       icon: PiMonitorBold,
     },
     {

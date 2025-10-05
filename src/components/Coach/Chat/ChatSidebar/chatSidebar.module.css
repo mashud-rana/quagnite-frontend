@@ -1,0 +1,127 @@
+.sidebar {
+  background: white;
+  border-left: 1px solid #e5e5e5;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.section {
+  padding: 20px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.listItem {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.listItem:hover {
+  background: #f5f5f5;
+}
+
+.itemAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.itemAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.onlineIndicator {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  background: #4ade80;
+  border: 2px solid white;
+  border-radius: 50%;
+}
+
+.itemContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.itemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.itemName {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+}
+
+.itemTime {
+  font-size: 11px;
+  color: #999;
+  flex-shrink: 0;
+}
+
+.itemFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.itemMessage {
+  font-size: 13px;
+  color: #666;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.unreadBadge {
+  background: #6b8aff;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  min-width: 24px;
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: flex;
+  }
+}
