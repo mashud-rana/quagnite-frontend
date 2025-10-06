@@ -8,12 +8,21 @@ import { MdVideocam } from "react-icons/md";
 import { FaRegCircleCheck, FaRegCircleRight } from "react-icons/fa6";
 import { set } from 'nprogress';
 import Card from "@/components/Share/Card/Card";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
+
+// Import LectureJoinImpl dynamically, disable SSR
+const LectureJoin = dynamic(() => import("./LectureJoinImpl"), { ssr: false });
+
 
 
 const BootcampContent = ({bootcampData}) => {
   const [expandedModules, setExpandedModules] = useState(new Set());
-  const [bootcamp, setBootcamp] = useState( {});
-  const [lessons, setLessons] = useState([]);
+  const [bootcamp, setBootcamp] = useState(null);
+  const [lessons, setLessons] = useState(null);
+  const router = useRouter();
+
 
   const toggleModule = (moduleId) => {
     const newExpanded = new Set(expandedModules);
@@ -39,7 +48,7 @@ const BootcampContent = ({bootcampData}) => {
   return (
     <div className={styles.ic_content_section}>
       <div className={styles.ic_modules_list}>
-        {lessons.length > 0 && lessons.map((module) => (
+        {lessons && lessons.length > 0 && lessons.map((module) => (
           <div key={module.id} className={styles.ic_module_item}>
             {/* Module Header - Clickable */}
             <div
@@ -98,7 +107,7 @@ const BootcampContent = ({bootcampData}) => {
                         <hr className={styles.ic_hr} />
 
                         {/* Left for */}
-                        <div className="text-sm">Left for {lecture?.lesson_duration_formatted}</div>
+                        <div className="text-sm">Left for {lecture?.left_for}</div>
                       </div>
 
                       <p dangerouslySetInnerHTML={{ __html: lecture?.description }}>
@@ -114,8 +123,12 @@ const BootcampContent = ({bootcampData}) => {
                           Experienced instructor teaching over Zoom
                         </li>
                       </ul>
+                      
                       <button
-                        href='#'
+                        href="#"
+                        onClick={()=>{
+                          router.push(`/student/bootcamps/lecture-join/${lecture?.uuid}`);
+                        }}
                         className={styles.ic_btn}
                         type="button"
                       >

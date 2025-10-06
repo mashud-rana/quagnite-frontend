@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^5.2.1",
     "@reduxjs/toolkit": "^2.9.0",
     "@smastrom/react-rating": "^1.5.0",
+    "@zoom/meetingsdk": "^4.0.7",
     "antd": "^5.26.2",
     "framer-motion": "^12.23.0",
     "jodit-react": "^5.2.19",

@@ -69,6 +69,12 @@ export const bootcampApi = apiSlice.injectEndpoints({
       }),
     
     }),
+     joinBootcampLecture: builder.query({
+      query: (lectureUuid) => ({
+        url: `/student/bootcamp/join/lecture/${lectureUuid}`,
+        method: "GET",
+      }),
+    }),
   })
 });
 
@@ -80,5 +86,6 @@ export const {
   useCreateBootcampDiscussionCommentMutation,
   useDeleteBootcampNoteMutation,
   useCreateBootcampNoteMutation,
-  useUpdateBootcampNoteMutation
+  useUpdateBootcampNoteMutation,
+  useJoinBootcampLectureQuery
 } = bootcampApi;
