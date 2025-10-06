@@ -1,8 +1,9 @@
 import React from "react";
 import styles from "./chatarea.module.css";
-import { BiPhone, BiSend } from "react-icons/bi";
-import { Video } from "@fancyapps/ui";
+import { BiPhone, BiSend, BiVideo } from "react-icons/bi";
 import { FiMoreVertical } from "react-icons/fi";
+import img from "@/assets/images/all/instractor.png";
+import Image from "next/image";
 
 const ChatArea = () => {
   const stories = [
@@ -56,6 +57,13 @@ const ChatArea = () => {
       sender: "other",
       time: null,
     },
+
+    {
+      id: 8,
+      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      sender: "other",
+      time: null,
+    },
   ];
 
   return (
@@ -64,7 +72,7 @@ const ChatArea = () => {
         <div className={styles.stories}>
           {stories.map((story) => (
             <div key={story.id} className={styles.storyAvatar}>
-              <img src={story.image || "/placeholder.svg"} alt={story.name} />
+              <Image src={img} alt={story.name} />
             </div>
           ))}
         </div>
@@ -83,10 +91,10 @@ const ChatArea = () => {
         </div>
       </div>
 
-      {/* <div className={styles.chatHeader}>
+      <div className={styles.chatHeader}>
         <div className={styles.contactInfo}>
           <div className={styles.contactAvatar}>
-            <img src="/diverse-woman-avatar.png" alt="Jenny Wilson" />
+            <Image src={img} alt="Jenny Wilson" />
           </div>
           <span className={styles.contactName}>Jenny Wilson</span>
         </div>
@@ -96,13 +104,13 @@ const ChatArea = () => {
             <BiPhone size={20} />
           </button>
           <button className={styles.actionButton}>
-            <Video size={20} />
+            <BiVideo size={20} />
           </button>
           <button className={styles.actionButton}>
             <FiMoreVertical size={20} />
           </button>
         </div>
-      </div> */}
+      </div>
 
       <div className={styles.messagesContainer}>
         {messages.map((message, index) => (

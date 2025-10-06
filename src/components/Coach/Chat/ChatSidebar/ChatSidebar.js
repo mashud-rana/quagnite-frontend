@@ -110,10 +110,7 @@ const ChatSidebar = () => {
           {groups.map((group) => (
             <div key={group.id} className={styles.listItem}>
               <div className={styles.itemAvatar}>
-                <img
-                  src={group.avatar || "/placeholder.svg"}
-                  alt={group.name}
-                />
+                <Image src={img} alt={group.name} />
               </div>
               <div className={styles.itemContent}>
                 <div className={styles.itemHeader}>
