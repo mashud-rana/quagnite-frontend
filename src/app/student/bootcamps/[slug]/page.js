@@ -12,10 +12,22 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import img2 from "@/assets/images/all/img1.png";
+import { useGetBootcampDetailsBySlugQuery } from "@/redux/features/student/bootcamp/bootcampApi";
+import { useParams } from "next/navigation";
+import SectionSpinner from "@/components/Spinner/SectionSpinner";
+import NotDataFound from "@/components/Empty/NotDataFound";
+import styles from "./details.module.css";
+import BootcampOverview from "@/components/Student/Bootcamps/BootcampOverview/BootcampOverview";
 
 const BootcampDetailsPage = () => {
   const [activeKey, setActiveKey] = useState("1");
   const [tabGutter, setTabGutter] = useState(16);
+  const { slug } = useParams();
+  const [bootcamp, setBootcamp] = useState({});
+
+  //get bootcamp by slug
+  const { data, isSuccess, isLoading, error, refetch, isFetching, isError } =
+    useGetBootcampDetailsBySlugQuery(slug);
 
   // Responsive gutter
   useEffect(() => {
@@ -38,19 +50,45 @@ const BootcampDetailsPage = () => {
     return () => window.removeEventListener("resize", updateGutter);
   }, []);
 
+  //set bootcamp
+  useEffect(() => {
+    if (isSuccess && data.success) {
+      setBootcamp({
+        ...data.data,
+      });
+    }
+  }, [data, isSuccess]);
+
+  if (isLoading || isFetching) {
+    return <SectionSpinner message="Loading bootcamp details..." />;
+  }
+  if (isError) {
+    return <NotDataFound message="Bootacamp details not found" />;
+  }
+
+  console.log("1 bootcamp", bootcamp);
+
   return (
     <div>
       <div className="mb-24">
         <div className="ic_title_section mb-24">
-          <Link href="#" className="ic_back_button" aria-label="Go back">
+          <Link
+            href="/student/bootcamps"
+            className="ic_back_button"
+            aria-label="Go back"
+          >
             <FaArrowLeft />
           </Link>
-          <h1 className="ic_text_36">
-            Fullstack Academy Part-Time Software Engineering Bootcamp
-          </h1>
+          <h1 className="ic_text_36">{bootcamp?.title}</h1>
         </div>
 
-        <Image src={img2} className="ic_img" alt="" />
+        <Image
+          src={bootcamp?.image_url}
+          className={styles.ic_banner_img}
+          alt={bootcamp?.title}
+          width={600}
+          height={100}
+        />
       </div>
 
       <div className="ic_layout_border ic_course">
@@ -62,23 +100,26 @@ const BootcampDetailsPage = () => {
           animated
         >
           <TabPane tab="Course Content" key="1">
-            <BootcampContent />
+            <BootcampContent bootcampData={bootcamp} />
           </TabPane>
 
           <TabPane tab="Course Overview" key="2">
-            <CourseOverview />
+            <BootcampOverview
+              bootcampData={bootcamp}
+            />
+            {/* <CourseOverview  /> */}
           </TabPane>
 
           <TabPane tab="Reviews" key="4">
-            <Reviews />
+            <Reviews reviewData={bootcamp?.review_data} reviews={bootcamp?.reviews} data_id={bootcamp?.id} type="bootcamp"/>
           </TabPane>
 
           <TabPane tab="Discussions" key="5">
-            <Discussions />
+            <Discussions discussionsData={bootcamp?.discussions} data_id={bootcamp?.id} type="bootcamp" />
           </TabPane>
 
           <TabPane tab="Notes" key="6">
-            <Notes />
+            <Notes noteData={bootcamp?.notes} data_id={bootcamp?.id} type="bootcamp" />
           </TabPane>
         </Tabs>
       </div>

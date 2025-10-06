@@ -3,7 +3,6 @@
 import Sidebar from "@/components/Student/Dashboard/Sidebar/Sidebar";
 import React, { useCallback, useState } from "react";
 import { FaRegQuestionCircle } from "react-icons/fa";
-import { LuGraduationCap } from "react-icons/lu";
 import { PiMonitorBold, PiCirclesThreeBold } from "react-icons/pi";
 import { GrPlay } from "react-icons/gr";
 import { BiBookContent, BiMoneyWithdraw } from "react-icons/bi";

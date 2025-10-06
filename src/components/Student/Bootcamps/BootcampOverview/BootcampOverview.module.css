@@ -1,0 +1,191 @@
+.overviewContainer {
+  border: 1px solid #e2e2e2;
+  padding: 16px;
+  margin-top: 16px;
+  border-radius: 8px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 400;
+  color: #111827;
+  margin: 0 0 16px 0;
+  flex: 0 0 200px;
+  margin: 0;
+}
+
+.ic_flex {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.ic_flex:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.ic_list_container {
+  display: flex;
+  gap: 36px;
+}
+
+.descriptionContent {
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.learningList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.learningItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bulletPoint {
+  font-size: 14px;
+  color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+.learningText {
+  color: #374151;
+  text-wrap: nowrap;
+}
+
+.instructorContent {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.instructorImage {
+  width: 120px;
+  height: 120px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.instructorInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.instructorName {
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.ic_instractor_title,
+.instructorLocation,
+.instructorSince {
+  font-size: 16px;
+  line-height: 1.4;
+  color: #6b7280;
+  margin: 0;
+}
+
+.instructorMeta {
+  display: flex;
+  gap: 20px;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.metaIcon {
+  color: var(--primary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 1650px) {
+  .ic_list_container {
+    flex-direction: column;
+    gap: 0px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .sectionTitle {
+    font-size: 16px;
+    line-height: 22px;
+    flex: 0 0 170px;
+    margin: 0;
+  }
+
+  .learningList {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* .sectionTitle {
+    flex: 0 0 140px;
+  } */
+
+  .sectionTitle {
+    flex: 0 0 0px;
+  }
+
+  .learningList {
+    gap: 10px;
+  }
+
+  .ic_flex {
+    flex-direction: column;
+  }
+}
+@media (max-width: 550px) {
+  .instructorMeta {
+    flex-direction: column;
+    gap: 0px;
+  }
+}
+
+@media (max-width: 480px) {
+  .overviewContainer {
+    padding: 12px;
+  }
+
+  .ic_instractor_title,
+  .instructorLocation,
+  .instructorSince {
+    font-size: 14px;
+  }
+
+  .metaItem span {
+    font-size: 14px;
+  }
+
+  .learningList {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .learningText {
+    white-space: normal;
+  }
+}

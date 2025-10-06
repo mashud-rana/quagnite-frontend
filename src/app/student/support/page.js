@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { Table, Tag, Button, Timeline, Pagination } from "antd";
 import { FaChevronRight, FaTimes } from "react-icons/fa";
-import styles from "./support.module.css";
 
 const mockTickets = [
   {
@@ -132,7 +131,6 @@ export default function SupportPage() {
         expandedRowKeys,
         onExpand: (expanded, record) => handleExpandToggle(record.id),
 
-        // 👇 THIS LINE removes the default left-side expand icon
         expandIcon: () => null,
       }}
     />

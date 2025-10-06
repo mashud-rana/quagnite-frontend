@@ -4,7 +4,13 @@ import Image from "next/image";
 import React, { useMemo, useRef, useState } from "react";
 import { RiUploadCloud2Line } from "react-icons/ri";
 import styles from "./ebookform.module.css";
-import JoditEditor from "jodit-react";
+// import JoditEditor from "jodit-react";
+
+import dynamic from "next/dynamic";
+
+const JoditEditor = dynamic(() => import("jodit-react"), {
+  ssr: false,
+});
 
 const EbookForm = () => {
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
@@ -72,7 +78,7 @@ const EbookForm = () => {
       <div>
         <h5 className={styles.sectionTitle}>Ebook Upload</h5>
 
-        <div className={styles}>
+        <div className={styles.ic_grid}>
           {/* ZIP Upload */}
           <div className={styles.ic_file_input_container}>
             <div className={styles.uploadArea}>

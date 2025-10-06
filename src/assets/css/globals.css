@@ -689,6 +689,24 @@ h6 {
   border: none;
 }
 
+.ic_gap_flex {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.availability-calendar {
+  max-width: 928px;
+  margin: 0 auto;
+}
+
+.available-date {
+  background: #2563eb !important; /* Tailwind এর blue-600 */
+  color: white !important;
+  border-radius: 6px;
+}
+
 .ic_flex {
   display: flex;
   align-items: center;

@@ -23,6 +23,7 @@ import NotDataFound from "@/components/Empty/NotDataFound";
 import * as yup from "yup";
 import {Controller, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
+import {useCreateBootcampDiscussionMutation, useCreateBootcampDiscussionCommentMutation} from '@/redux/features/student/bootcamp/bootcampApi';
 
 // const JoditEditor = dynamic(() => import ("jodit-react"), {ssr: false});
 const JoditEditor = dynamic(() => import ("@/components/Share/Editor/JoditEditor/JoditEditor"), {ssr: false});
@@ -37,6 +38,18 @@ const createSchema = yup.object({
     .required("Discussion content is required")
     .min(5, "Discussion content must be at least 5 characters")
 });
+
+//schema for form create validation
+const createBootcampSchema = yup.object({
+  bootcamp_id: yup
+    .string()
+    .required("Bootcamp ID is required"),
+  description: yup
+    .string()
+    .required("Discussion content is required")
+    .min(5, "Discussion content must be at least 5 characters")
+});
+
 //reply discussion schema
 const createReplySchema = yup.object({
   discussion_id: yup
@@ -47,18 +60,26 @@ const createReplySchema = yup.object({
     .required("Comment content is required")
     .min(5, "Comment content must be at least 5 characters")
 });
-const Discussions = ({discussionsData, courseDetails}) => {
+//reply discussion schema
+const createBootcampReplySchema = yup.object({
+  discussion_id: yup
+    .string()
+    .required("Discussion ID is required"),
+  comment: yup
+    .string()
+    .required("Comment content is required")
+    .min(5, "Comment content must be at least 5 characters")
+});
+
+const Discussions = ({discussionsData, data_id, type}) => {
   const editor = useRef(null);
-  const [newPost,
-    setNewPost] = useState("");
-  const [replyContent,
-    setReplyContent] = useState("");
-  const [activeReplyDiscussionId,
-    setActiveReplyDiscussionId] = useState(null);
+
+
   const [discussions,
     setDiscussions] = useState({});
-  const [course,
-    setCourse] = useState({});
+  // const [course,
+  //   setCourse] = useState({});
+  const [orderBy, setOrderBy] = useState("latest");
   //create discussion mutation
   const [createCourseDiscussion, {
       data : createData,
@@ -68,6 +89,16 @@ const Discussions = ({discussionsData, courseDetails}) => {
       error : createDataResponseError
     }
   ] = useCreateCourseDiscussionMutation();
+  //create bootcamp discussion mutation
+  const [createBootcampDiscussion, {
+      data : createBootcampData,
+      isLoading : isCreateBootcampLoading,
+      isSuccess : isCreateBootcampSuccess,
+      isError : isCreateBootcampError,
+      error : createBootcampResponseError
+    }
+  ] = useCreateBootcampDiscussionMutation();
+
   //create discussion comment mutation
   const [createDiscussionComment, {
       data : createCommentData,
@@ -77,6 +108,15 @@ const Discussions = ({discussionsData, courseDetails}) => {
       error : createCommentResponseError
     }
   ] = useCreateDiscussionCommentMutation();
+  //create discussion bootcamp comment mutation
+  const [createBootcampDiscussionComment, {
+      data : createBootcampCommentData,
+      isLoading : createBootcampCommentIsLoading,
+      isSuccess : createBootcampCommentIsSuccess,
+      isError : createBootcampCommentIsError,
+      error : createBootcampCommentResponseError
+    }
+  ] = useCreateBootcampDiscussionCommentMutation();
 
   //Create Form Validation
   const {
@@ -90,7 +130,7 @@ const Discussions = ({discussionsData, courseDetails}) => {
     control,
     watch,
     reset
-  } = useForm({resolver: yupResolver(createSchema)});
+  } = useForm({resolver: yupResolver(type == 'course' ? createSchema : createBootcampSchema)});
   //reply form validation
   const {
     register: replyRegister,
@@ -103,7 +143,7 @@ const Discussions = ({discussionsData, courseDetails}) => {
     control: replyControl,
     watch: replyWatch,
     reset: replyReset
-  } = useForm({resolver: yupResolver(createReplySchema)});
+  } = useForm({resolver: yupResolver(type == 'course' ? createReplySchema : createBootcampReplySchema)});
 
   //watch for create description
 
@@ -112,10 +152,6 @@ const Discussions = ({discussionsData, courseDetails}) => {
   const watchReplyComment = replyWatch("comment", "");
   const watchReplyDiscussionId = replyWatch("discussion_id", "");
 
-  const handleCancelReply = () => {
-    setReplyContent("");
-    setActiveReplyDiscussionId(null);
-  };
 
   const handleVote = (replyId, type) => {
     console.log(`Vote ${type} for reply:`, replyId);
@@ -123,32 +159,74 @@ const Discussions = ({discussionsData, courseDetails}) => {
 
   //submit create discussion
   const onSubmit = (data) => {
-    createCourseDiscussion(data);
-    // console.log("Create discussion data:", data); createCourseDiscussion(data);
+    if(type == 'course'){
+      createCourseDiscussion(data);
+    }else if(type == 'bootcamp'){
+      createBootcampDiscussion(data);
 
+    }
   }
   const onSubmitReply = (data) => {
-    createDiscussionComment(data);
+    if(type == 'course'){
+      createDiscussionComment(data);
+    }else if(type == 'bootcamp'){
+      createBootcampDiscussionComment(data);
+    }
     // console.log("Create discussion reply data:", data);
 
   }
 
   const resetCreateForm = () => {
-    reset({
-      description: "",
-      course_id: course
-        ?.id
+     if(type == 'course'){
+      reset({
+        description: "",
+        course_id: data_id
+      }, {keepValues: false});
+     }else if(type == 'bootcamp'){
+      reset({
+        description: "",
+        bootcamp_id: data_id
+      }, {keepValues: false});
+     }
+    
+  }
+
+  //reset reply form
+  const resetReplyForm = () => {
+    replyReset({
+      comment: "",
+      discussion_id: ""
     }, {keepValues: false});
   }
+
+  const sortByHandler = () => {
+    if (orderBy === "latest") {
+      // sort by id ASC
+      const sorted = [...discussions].sort((a, b) => a.id - b.id);
+      setDiscussions(sorted);
+    } else {
+      // sort by id DESC
+      const sorted = [...discussions].sort((a, b) => b.id - a.id);
+      setDiscussions(sorted);
+    }
+
+    // toggle state
+    setOrderBy((prev) => (prev === "latest" ? "oldest" : "latest"));
+  };
+
+
 
   //initialize data when props change
   useEffect(() => {
     setDiscussions(discussionsData);
-    setCourse(courseDetails);
     //set course id for create discussion form
-    setValue("course_id", courseDetails
-      ?.id || "");
-  }, [discussionsData, courseDetails])
+    if(type == 'course'){
+      setValue("course_id", data_id);
+    }else if(type == 'bootcamp'){
+      setValue("bootcamp_id", data_id);
+    }
+
+  }, [discussionsData])
 
   //crete discussion success
   useEffect(() => {
@@ -173,6 +251,29 @@ const Discussions = ({discussionsData, courseDetails}) => {
 
   }, [isCreateDataSuccess, createData, isCreateDataError, createDataResponseError])
 
+  //crete bootcamp discussion success
+  useEffect(() => {
+    if (isCreateBootcampSuccess && createBootcampData
+      ?.success) {
+      resetCreateForm();
+      toastSuccess(createBootcampData
+        ?.message || "Discussion created successfully");
+      //set created discussion data to top of the list
+      setDiscussions((prevDiscussions) => [
+        createBootcampData
+          ?.data,
+        ...prevDiscussions
+      ]);
+    }
+    if (isCreateBootcampError) {
+
+      toastError(createBootcampResponseError
+        ?.data
+          ?.message || "Something went wrong. Please try again.");
+    }
+
+  }, [isCreateBootcampSuccess, createBootcampData, isCreateBootcampError, createBootcampResponseError])
+
   //create discussion comment success
 
   useEffect(() => {
@@ -194,10 +295,7 @@ const Discussions = ({discussionsData, courseDetails}) => {
         })
       });
       //reset reply form
-      replyReset({
-        comment: "",
-        discussion_id: ""
-      }, {keepValues: false});
+      resetReplyForm();
       toastSuccess(createCommentData
         ?.message || "Discussion created successfully");
     }
@@ -209,8 +307,41 @@ const Discussions = ({discussionsData, courseDetails}) => {
     }
   }, [createCommentIsSuccess, createCommentData, createCommentIsError, createCommentResponseError])
 
-  // console.log("discussionsData prop:", discussions, course); console.log('reply
-  // comment:', watchReplyComment, 'discussion id:', watchReplyDiscussionId);
+
+   //create bootcamp discussion comment success
+
+  useEffect(() => {
+    if (createBootcampCommentIsSuccess && createBootcampCommentData
+      ?.success) {
+      setDiscussions((prevDiscussions) => {
+        return prevDiscussions.map(discussion => {
+          if (discussion.id === watchReplyDiscussionId) {
+            return {
+              ...discussion,
+              comments: [
+                createBootcampCommentData
+                  ?.data,
+                ...discussion.comments
+              ]
+            }
+          }
+          return discussion;
+        })
+      });
+      //reset reply form
+      resetReplyForm();
+      toastSuccess(createBootcampCommentData
+        ?.message || "Discussion created successfully");
+    }
+    if (createBootcampCommentIsError) {
+
+      toastError(createBootcampCommentResponseError
+        ?.data
+          ?.message || "Something went wrong. Please try again.");
+    }
+  }, [createBootcampCommentIsSuccess, createBootcampCommentData, createBootcampCommentIsError, createBootcampCommentResponseError])
+
+  
 
   return (
     <div className={styles.discussionsContainer}>
@@ -234,17 +365,27 @@ const Discussions = ({discussionsData, courseDetails}) => {
         {watchDescription.trim() && (
           <div className={styles.ic_btn_container}>
             <button type="button" className={`${styles.ic_btn} ${styles.ic_cencel}`} onClick={() => {
-              reset({
-                description: "",
-                course_id: course
-                  ?.id
-              });
+              if(type == 'course'){
+                  reset({
+                    description: "",
+                    course_id: data_id
+                  });
+              } else if(type == 'bootcamp'){
+                  reset({
+                    description: "",
+                    bootcamp_id: data_id
+                  });
+              }
+            
             }} // optional, clear form
             >
               Cancel
             </button>
             <button className={`${styles.ic_btn} ${styles.ic_save}`} type="submit">
-              Submit
+              Submit {isCreateDataLoading || isCreateBootcampLoading
+                                      ? <Spin indicator={antIcon}/>
+                                      : ""
+                                      }
             </button>
           </div>
         )
@@ -253,14 +394,15 @@ const Discussions = ({discussionsData, courseDetails}) => {
       </form>
 
       <div className={styles.ic_btn_container}>
-        <button className={`ic_common_primary_btn ${styles.ic_flex}`}>
-          SORT BY LATEST
+        <button className={`ic_common_primary_btn ${styles.ic_flex}`} onClick={sortByHandler}>
+          SORT BY {orderBy === "latest" ? "OLDEST" : "LATEST"}
           <IoArrowDown className={styles.sortIcon}/>
         </button>
       </div>
 
       {/* Discussions List */}
       <div className={styles.discussionsList}>
+        {discussions.length === 0 && <NotDataFound message="No discussions found." />}
 
         {discussions.length > 0 && discussions
           ?.map((discussion) => (
@@ -300,7 +442,13 @@ const Discussions = ({discussionsData, courseDetails}) => {
                   <button className={styles.actionButton}>
                     <FaChevronUp/>
                   </button>
-                  <button className={styles.actionButton}>
+                  <button className={styles.actionButton}
+                    onClick={() => {
+                      replySetValue("discussion_id", watchReplyDiscussionId == discussion.id
+                        ? null
+                        : discussion.id);
+                    }}
+                  >
                     <FaReply/>
                   </button>
                   <button className={styles.actionButton}>
@@ -373,12 +521,12 @@ const Discussions = ({discussionsData, courseDetails}) => {
                           <div className={styles.ic_btn_container}>
                             <button
                               className={`${styles.ic_btn} ${styles.ic_cencel}`}
-                              onClick={handleCancelReply}>
+                              onClick={resetReplyForm}>
                               Cancel
                             </button>
                             <button className={`${styles.ic_btn} ${styles.ic_save}`} type="submit">
                               Save Comment {
-                                createCommentIsLoading
+                                createCommentIsLoading || createBootcampCommentIsLoading
                                   ? <Spin indicator={antIcon} />
                                   : ""
                               }

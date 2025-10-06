@@ -16,11 +16,25 @@ import {
 } from "react-icons/pi";
 import { MdOutlinePlayLesson } from "react-icons/md";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useLessonLecturePreviewMutation } from "@/redux/features/student/course/courseApi";
 
-const CourseContent = ({ lessonsDetails, lessonsTotalDuration }) => {
+const CourseContent = ({ lessonsDetails, lessonsTotalDuration, activeLectureHandler }) => {
   const [expandedModules, setExpandedModules] = useState(new Set());
   const [lessons, setLessons] = useState(null);
+  const searchParams = useSearchParams();
+  const pathname = usePathname(); // current path (without query)
+  const router = useRouter();
+
+  //Preview Lesson Lecture
+   const [lessonLecturePreview, {
+        data:previewData,
+        isLoading:previewIsLoading,
+        isSuccess:previewIsSuccess,
+        isError:previewIsError,
+        error:previewError
+      }
+    ] = useLessonLecturePreviewMutation();
 
   const params = useParams();
   const slug = params.slug;
@@ -35,10 +49,7 @@ const CourseContent = ({ lessonsDetails, lessonsTotalDuration }) => {
     setExpandedModules(newExpanded);
   };
 
-  useEffect(() => {
-    setLessons(lessonsDetails);
-    // console.log("Lessons details in CourseContent:", lessonsDetails);
-  }, [lessonsDetails]);
+
 
   // Helper: Map lecture format to icon component
   const formatIconMap = {
@@ -48,6 +59,47 @@ const CourseContent = ({ lessonsDetails, lessonsTotalDuration }) => {
     audio: PiFileAudio,
     slide: PiSlideshow,
   };
+
+  //preview lecture handler
+ const previewLessonLectureHandler = async (lesson, lecture) => {
+  let selectedLecture = { ...lecture };
+ ;
+  // // Call API
+  if(!lecture.completed){
+    await lessonLecturePreview(selectedLecture.uuid);
+  }
+ 
+  // Update lessons state so UI reflects "completed = true"
+  setLessons((prevLessons) =>
+    prevLessons.map((mod) =>
+      mod.uuid === lesson.uuid
+        ? {
+            ...mod,
+            lectures: mod.lectures.map((lec) =>
+              lec.uuid === selectedLecture.uuid
+                ? { ...lec, completed: true } // mark this lecture completed
+                : lec
+            ),
+          }
+        : mod
+    )
+  );
+  activeLectureHandler(selectedLecture);
+  // Update URL query params
+  const params = new URLSearchParams(searchParams.toString());
+  params.set("lessonUuid", lesson.uuid);
+  params.set("lectureUuid", selectedLecture.uuid);
+  router.push(`${pathname}?${params.toString()}`, { scroll: false });
+
+  // console.log("2. on course content js- previewLessonLectureHandler click")
+ 
+};
+
+
+  useEffect(() => {
+    setLessons(lessonsDetails);
+    // console.log("Lessons details in CourseContent:", lessonsDetails);
+  }, [lessonsDetails]);
 
   return (
     <div className={styles.ic_content_section}>
@@ -107,7 +159,7 @@ const CourseContent = ({ lessonsDetails, lessonsTotalDuration }) => {
                 >
                   <div className={styles.ic_lesson_container}>
                     {module.lectures.length > 0 &&
-                      module.lectures.map((lecture) => {
+                      module?.lectures.map((lecture) => {
                         const Icon =
                           formatIconMap[lecture.lecture_format] ||
                           PiMonitorPlayBold;
@@ -116,6 +168,7 @@ const CourseContent = ({ lessonsDetails, lessonsTotalDuration }) => {
                             href="#"
                             key={lecture.id}
                             className={styles.ic_video_item}
+                            onClick={() => previewLessonLectureHandler(module, lecture)}
                           >
                             <div className={styles.ic_video_content}>
                               {lecture.completed ? (
@@ -148,12 +201,12 @@ const CourseContent = ({ lessonsDetails, lessonsTotalDuration }) => {
                       })}
                   </div>
 
-                  <Link
+                  {/* <Link
                     href={`/student/courses/${slug}/abc/quiz`}
                     className={styles.ic_btn}
                   >
                     Start Quize
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             );
