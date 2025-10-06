@@ -11,9 +11,8 @@ import Card from "@/components/Share/Card/Card";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+import { useJoinBootcampLectureQuery } from "@/redux/features/student/bootcamp/bootcampApi";
 
-// Import LectureJoinImpl dynamically, disable SSR
-const LectureJoin = dynamic(() => import("./LectureJoinImpl"), { ssr: false });
 
 
 
@@ -22,6 +21,13 @@ const BootcampContent = ({bootcampData}) => {
   const [bootcamp, setBootcamp] = useState(null);
   const [lessons, setLessons] = useState(null);
   const router = useRouter();
+  const [enabled, setEnabled] = useState(false);
+  const [lectureUuid, setLectureUuid] = useState(null);
+
+  
+  // query runs only when enabled = true
+  const { data, isSuccess, isLoading, error } =
+    useJoinBootcampLectureQuery(lectureUuid, { skip: !enabled });
 
 
   const toggleModule = (moduleId) => {
@@ -33,6 +39,33 @@ const BootcampContent = ({bootcampData}) => {
     }
     setExpandedModules(newExpanded);
   };
+
+  const joinLiveClassHandler = (lectureUuid) => {
+    // router.push(`/student/bootcamps/lecture-join/${lectureUuid}`);
+    setLectureUuid(lectureUuid);
+    setEnabled(!enabled);
+  }
+
+  //redirect zoom  meeting page
+  
+  useEffect(() => {
+    if (isSuccess) {
+     
+      const params = new URLSearchParams({
+        signature: data?.data?.signature,
+        meetingNumber: data?.data?.meetingNumber,
+        passWord: data?.data?.password,
+        userName: data?.data?.userName,
+        userEmail: data?.data?.userEmail,
+        zak: data?.data?.zak,
+        leaveUrl: data?.data?.leaveUrl,
+      });
+       setEnabled(!enabled);
+      setLectureUuid(null);
+
+      window.open(`/zoom-meeting/join?${params.toString()}`, "_blank");
+    }
+  }, [isSuccess, data]);
 
   //set bootcamp data from props
   useEffect(()=>{
@@ -124,10 +157,20 @@ const BootcampContent = ({bootcampData}) => {
                         </li>
                       </ul>
                       
-                      <button
+                      {/* <button
                         href="#"
                         onClick={()=>{
                           router.push(`/student/bootcamps/lecture-join/${lecture?.uuid}`);
+                        }}
+                        className={styles.ic_btn}
+                        type="button"
+                      >
+                        Join Live Class
+                      </button> */}
+                        <button
+                        href="#"
+                        onClick={()=>{
+                          joinLiveClassHandler(lecture?.uuid);
                         }}
                         className={styles.ic_btn}
                         type="button"

@@ -68,21 +68,16 @@ export default function ZoomMeeting() {
     };
 
     loadZoomSDK();
-  
+    setTimeout(()=>{
+        startMeeting();
+    },1000)
   }, []);
-
-   // 🚀 Auto start meeting once SDK is loaded
-  useEffect(() => {
-    if (isSDKLoaded) {
-      startMeeting();
-    }
-  }, [isSDKLoaded]);
 
 
   const startMeeting = async () => {
-    if (!isSDKLoaded ) return;
+    if (!isSDKLoaded || isJoining) return;
 
-    // setIsJoining(true);
+    setIsJoining(true);
 
     try {
       // Get signature from your backend
@@ -114,28 +109,28 @@ export default function ZoomMeeting() {
             zak: "eyJ0eXAiOiJKV1QiLCJzdiI6IjAwMDAwMiIsInptX3NrbSI6InptX28ybSIsImFsZyI6IkhTMjU2In0.eyJhdWQiOiJjbGllbnRzbSIsInVpZCI6IlRtNnNKVTUyUWotR0lYZTJzME5HUGciLCJ6aWQiOiJkZjgwMzI0MTk4Nzk0MzM1YjI1M2YyNTgxN2ExYmU3YSIsImlzcyI6IndlYiIsInNrIjoiMCIsInN0eSI6MSwid2NkIjoidXMwNSIsImNsdCI6MCwiZXhwIjoxNzU5NzU4NjUxLCJpYXQiOjE3NTk3NTE0NTEsImFpZCI6IkFQVDMwblI5UVlDdkdHYnZVS0hYZHciLCJjaWQiOiIifQ.Vb5dqhSg97H09xq56E74vB8IaSJLMSmNUvVHQZWf5Yc",
             success: (success) => {
               console.log('Join success:', success);
-            //   setIsJoining(false);
+              setIsJoining(false);
             },
             error: (error) => {
               console.error('Join error:', error);
-            //   setIsJoining(false);
+              setIsJoining(false);
             },
           });
         },
         error: (error) => {
           console.error('Init error:', error);
-        //   setIsJoining(false);
+          setIsJoining(false);
         },
       });
     } catch (error) {
       console.error('Error starting meeting:', error);
-    //   setIsJoining(false);
+      setIsJoining(false);
     }
   };
 
   return (
     <div className="max-w-2xl mx-auto">
-      {/* <h1 className="text-3xl font-bold mb-8">Zoom Meeting SDK - Next.js 15</h1>
+      <h1 className="text-3xl font-bold mb-8">Zoom Meeting SDK - Next.js 15</h1>
       
       <div className="bg-white shadow rounded-lg p-6">
         <div className="mb-4">
@@ -155,7 +150,7 @@ export default function ZoomMeeting() {
         <p className="text-xs text-gray-500 mt-4">
           Make sure your backend server is running at {authEndpoint || 'your-server-url'}
         </p>
-      </div> */}
+      </div>
 
       {/* Zoom SDK will render here */}
       <div id="zmmtg-root"></div>
