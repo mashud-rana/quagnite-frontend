@@ -10,10 +10,6 @@ import { set } from 'nprogress';
 import Card from "@/components/Share/Card/Card";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import dynamic from "next/dynamic";
-import { useJoinBootcampLectureQuery } from "@/redux/features/student/bootcamp/bootcampApi";
-
-
 
 
 const BootcampContent = ({bootcampData}) => {
@@ -24,10 +20,6 @@ const BootcampContent = ({bootcampData}) => {
   const [enabled, setEnabled] = useState(false);
   const [lectureUuid, setLectureUuid] = useState(null);
 
-  
-  // // query runs only when enabled = true
-  // const { data, isSuccess, isLoading, error } =
-  //   useJoinBootcampLectureQuery(lectureUuid, { skip: !enabled });
 
 
   const toggleModule = (moduleId) => {
