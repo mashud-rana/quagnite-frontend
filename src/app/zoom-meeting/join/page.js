@@ -23,10 +23,10 @@ export default function ZoomMeeting() {
       if (typeof window === 'undefined') return;
 
       // Load CSS
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = 'https://source.zoom.us/4.0.0/css/bootstrap.css';
-      document.head.appendChild(link);
+      const customZoomLink = document.createElement('link');
+      customZoomLink.rel = 'stylesheet';
+      customZoomLink.href = '../../../assets/css/zoom.css';
+      document.head.appendChild(customZoomLink);
 
       const link2 = document.createElement('link');
       link2.rel = 'stylesheet';
@@ -61,6 +61,9 @@ export default function ZoomMeeting() {
         if (window.ZoomMtg) {
           window.ZoomMtg.preLoadWasm();
           window.ZoomMtg.prepareWebSDK();
+           // loads language files, also passes any error messages to the ui
+          window.ZoomMtg.i18n.load('en-US')
+          window.ZoomMtg.i18n.reload('en-US')
           setIsSDKLoaded(true);
         }
       };
