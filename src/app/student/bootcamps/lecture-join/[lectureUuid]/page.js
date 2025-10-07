@@ -7,7 +7,7 @@ import SectionSpinner from "@/components/Spinner/SectionSpinner";
 import NotDataFound from "@/components/Empty/NotDataFound";
 
 // Dynamically import the Zoom component with no SSR
-const ZoomMeeting = dynamic(() => import('@/components/Share/Zoom/ZoomMeeting'), {
+const ZoomMeeting = dynamic(() => import('@/components/Share/Zoom/ZoomMeetingSDK'), {
   ssr: false,
   loading: () => <div>Loading Zoom SDK...</div>
 });

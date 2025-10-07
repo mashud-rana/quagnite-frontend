@@ -25,9 +25,9 @@ const BootcampContent = ({bootcampData}) => {
   const [lectureUuid, setLectureUuid] = useState(null);
 
   
-  // query runs only when enabled = true
-  const { data, isSuccess, isLoading, error } =
-    useJoinBootcampLectureQuery(lectureUuid, { skip: !enabled });
+  // // query runs only when enabled = true
+  // const { data, isSuccess, isLoading, error } =
+  //   useJoinBootcampLectureQuery(lectureUuid, { skip: !enabled });
 
 
   const toggleModule = (moduleId) => {
@@ -41,32 +41,13 @@ const BootcampContent = ({bootcampData}) => {
   };
 
   const joinLiveClassHandler = (lectureUuid) => {
-    // router.push(`/student/bootcamps/lecture-join/${lectureUuid}`);
     setLectureUuid(lectureUuid);
     setEnabled(!enabled);
+    // router.push(`/zoom-meeting/student-join/${lectureUuid}`);
+    window.open(`/zoom-meeting/student-join/${lectureUuid}`, "_blank");
   }
 
-  //redirect zoom  meeting page
   
-  useEffect(() => {
-    if (isSuccess) {
-     
-      const params = new URLSearchParams({
-        signature: data?.data?.signature,
-        meetingNumber: data?.data?.meetingNumber,
-        passWord: data?.data?.password,
-        userName: data?.data?.userName,
-        userEmail: data?.data?.userEmail,
-        zak: data?.data?.zak,
-        leaveUrl: data?.data?.leaveUrl,
-      });
-       setEnabled(!enabled);
-      setLectureUuid(null);
-
-      window.open(`/zoom-meeting/join?${params.toString()}`, "_blank");
-    }
-  }, [isSuccess, data]);
-
   //set bootcamp data from props
   useEffect(()=>{
     if(bootcampData){
