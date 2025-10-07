@@ -1,0 +1,137 @@
+.ic_info_container {
+  width: 100%;
+}
+
+.ic_info_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.ic_info_title {
+  font-size: 18px;
+  margin: 0;
+}
+
+.ic_edit_button {
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 9px 16px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s all ease-in;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.ic_edit_button:hover {
+  background-color: var(--primary-color);
+  box-shadow: 0px 2px 10px #5c81f7;
+  transform: translateY(-2px);
+}
+
+.ic_info_grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.ic_info_row {
+  display: grid;
+  grid-template-columns: minmax(100px, 200px) 1fr;
+  border-bottom: 1px solid #e0e0e0;
+  align-items: flex-start;
+}
+
+.ic_info_row:last-child {
+  border-bottom: none;
+}
+
+.ic_info_label {
+  font-weight: 500;
+  font-size: 18px;
+  align-content: center;
+  height: 100%;
+}
+
+.ic_info_value {
+  width: 100%;
+  background-color: var(--white);
+  border: none;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 16px;
+  color: #353535;
+  outline: none;
+  background-color: #d9d9d9 !important;
+  cursor: text;
+}
+
+.ic_edit_mode_row {
+  border-bottom: none !important;
+}
+
+.ic_edit_mode_grid {
+  gap: 14px;
+}
+
+.ic_error_msg {
+  font-size: 14px;
+  line-height: 0px !important;
+  color: rgba(227, 2, 2, 0.901);
+}
+
+@media (max-width: 1299px) {
+  .ic_edit_button {
+    padding: 7px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+
+  .ic_info_value {
+    padding: 10px 16px;
+    border-radius: 10px;
+  }
+
+  .ic_info_row {
+    grid-template-columns: minmax(100px, 180px) 1fr;
+  }
+
+  .ic_edit_mode_grid {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 991px) {
+  .ic_info_label {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ic_edit_button {
+    padding: 4px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+  }
+
+  .ic_info_label {
+    font-size: 16px;
+  }
+
+  .ic_info_row {
+    grid-template-columns: minmax(100px, 140px) 1fr;
+  }
+
+  .ic_info_value {
+    font-size: 14px;
+    padding: 6px 14px;
+    border-radius: 8px;
+  }
+
+  .ic_edit_mode_grid {
+    gap: 8px;
+  }
+}

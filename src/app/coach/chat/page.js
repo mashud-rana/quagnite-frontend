@@ -6,9 +6,7 @@ import React from "react";
 const MessagePage = () => {
   return (
     <div className="chat_container">
-      <div>
-        <ChatUserProfile />
-      </div>
+      <ChatUserProfile />
       <ChatArea />
       <ChatSidebar />
     </div>

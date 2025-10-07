@@ -1,10 +1,9 @@
 .sidebar {
-  /* background: white;
-  border-left: 1px solid #e5e5e5; */
+  background-color: #f9f9f9;
+  border-radius: 16px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
 }
 
 .section {

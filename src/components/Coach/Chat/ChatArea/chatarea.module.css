@@ -1,10 +1,12 @@
 .chat_area {
   background: #f9f9f9;
-  /* display: flex;
-  flex-direction: column; */
   border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
+/* ---------- HEADER ---------- */
 .header {
   display: flex;
   align-items: center;
@@ -16,6 +18,7 @@
 .stories {
   display: flex;
   gap: 12px;
+  overflow-x: auto;
 }
 
 .storyAvatar {
@@ -52,12 +55,14 @@
   font-size: 14px;
 }
 
+/* ---------- CHAT HEADER ---------- */
 .chatHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 16px 24px;
   border-bottom: 1px solid #e5e5e5;
+  background: white;
 }
 
 .contactInfo {
@@ -107,6 +112,7 @@
   background: #5a7aef;
 }
 
+/* ---------- MESSAGES ---------- */
 .messagesContainer {
   flex: 1;
   overflow-y: auto;
@@ -114,6 +120,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  background: #f4f5fb;
 }
 
 .dateLabel {
@@ -124,43 +131,56 @@
   font-weight: 500;
 }
 
+/* Base message style */
 .message {
   max-width: 60%;
   padding: 12px 16px;
-  border-radius: 12px;
+  border-radius: 18px;
   font-size: 14px;
   line-height: 1.5;
+  position: relative;
+  word-wrap: break-word;
 }
 
+/* Messages from others (left side) */
 .messageOther {
-  background: #f0f0f0;
+  background: #e9ecef;
   color: #000;
   align-self: flex-start;
-  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
 }
 
+/* Your replies (right side) */
 .messageMe {
   background: #6b8aff;
   color: white;
   align-self: flex-end;
-  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
+  text-align: right; /* text also right-aligned */
 }
 
+/* spacing like Messenger */
+.messageOther + .messageOther,
+.messageMe + .messageMe {
+  margin-top: 4px;
+}
+
+/* ---------- INPUT AREA ---------- */
 .inputArea {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 16px 24px;
   border-top: 1px solid #e5e5e5;
-  background: #f9f9f9;
+  background: #fff;
 }
 
 .inputArea input {
   flex: 1;
   padding: 12px 16px;
   border: none;
-  background: white;
-  border-radius: 8px;
+  background: #f5f5f5;
+  border-radius: 20px;
   outline: none;
   font-size: 14px;
 }
@@ -168,7 +188,7 @@
 .sendButton {
   width: 44px;
   height: 44px;
-  border-radius: 8px;
+  border-radius: 50%;
   background: #6b8aff;
   color: white;
   border: none;
@@ -183,6 +203,7 @@
   background: #5a7aef;
 }
 
+/* ---------- RESPONSIVE ---------- */
 @media (max-width: 768px) {
   .header {
     flex-direction: column;
@@ -190,11 +211,14 @@
   }
 
   .stories {
-    overflow-x: auto;
     padding-bottom: 8px;
   }
 
   .message {
     max-width: 80%;
+  }
+
+  .inputArea {
+    padding: 12px 16px;
   }
 }

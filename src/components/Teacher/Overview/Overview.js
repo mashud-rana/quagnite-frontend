@@ -323,7 +323,7 @@ const Overview = () => {
               >
                 E-Book
               </div>
-              <button className={styles.viewAllButton}>VIEW ALL</button>
+              <button className="ic_btn">VIEW ALL</button>
             </div>
             <table className={styles.table}>
               <thead>
