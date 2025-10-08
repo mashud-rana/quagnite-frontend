@@ -5,7 +5,9 @@ import { Space, Table } from "antd";
 import { GoEye } from "react-icons/go";
 import { MdOutlineDownload } from "react-icons/md";
 import IcTable from "@/components/Share/IcTable/IcTable";
-import { useGetEbooksQuery } from "@/redux/features/student/ebook/ebookApi";
+import { useGetEbooksQuery, useDownloadEbookQuery, useDownloadEbookMutation } from "@/redux/features/student/ebook/ebookApi";
+import { antIcon, toastError, toastSuccess } from "@/utils/helper";
+import { Spin } from "antd";
 
 
 // convert object → query string
@@ -47,22 +49,31 @@ const getRandomuserParams = (params) => {
 };
 
 const EbookList = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+ 
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [tableParams, setTableParams] = useState({
     pagination: {
-      current: 1,
-      pageSize: 2,
+      current: process.env.CURRENT_PAGE ? parseInt(process.env.CURRENT_PAGE) : 1,
+      pageSize: process.env.PAGE_SIZE ? parseInt(process.env.PAGE_SIZE) : 10,
     },
   });
+  const [selectUuid, setSelectUuid] = useState(null);
 
   // Build params for API call
   const params = useMemo(() => {
     return toURLSearchParams(getRandomuserParams(tableParams)).toString();
   }, [tableParams]);
 
+  //get ebooks
   const { data: ebookData, isSuccess, isLoading, isFetching, refetch } = useGetEbooksQuery(params);
+  //download ebook
+  const [downloadEbook, 
+    { isLoading: downloadIsLoading, 
+      isSuccess: downloadIsSuccess,
+      isError: downloadIsError,
+      error: downloadError }] = useDownloadEbookMutation();
+
 
   // Table columns
   const tableColumns = [
@@ -86,10 +97,15 @@ const EbookList = () => {
       key: "action",
       render: (_, record) => (
         <Space>
-          <button className="ic_action_btn" style={{
-            cursor: 'pointer'
-          }}>
-            <MdOutlineDownload />
+          <button
+            className="ic_action_btn"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              downloadEbook(record?.ebook?.uuid);
+              setSelectUuid(record?.ebook?.uuid);
+            }}
+          >
+            {selectUuid === record?.ebook?.uuid && downloadIsLoading ? <Spin indicator={antIcon} /> : <MdOutlineDownload />}
           </button>
           <button className="ic_action_btn" style={{
             cursor: 'pointer'
@@ -100,6 +116,27 @@ const EbookList = () => {
       ),
     },
   ];
+
+  const handleTableChange = (pagination, filters, sorter) => {
+  
+    setTableParams({
+      pagination,
+      // filters,
+      // sortOrder: Array.isArray(sorter) ? undefined : sorter.order,
+      // sortField: Array.isArray(sorter) ? undefined : sorter.field,
+    });
+
+    if (pagination.pageSize !== tableParams.pagination?.pageSize) {
+      setTableData([]);
+    }
+  };
+
+  useEffect(() => {
+    if (downloadIsSuccess) {
+      // Handle successful download
+      setSelectUuid(null);
+    }
+  }, [downloadIsSuccess]);
 
   // Set data when fetch success
   useEffect(() => {
@@ -119,22 +156,8 @@ const EbookList = () => {
     }
   }, [isSuccess, ebookData]);
 
-   const handleTableChange = (pagination, filters, sorter) => {
-    console.log('3. handlerTableChange',"pagination:",pagination)
-    setTableParams({
-      pagination,
-      // filters,
-      // sortOrder: Array.isArray(sorter) ? undefined : sorter.order,
-      // sortField: Array.isArray(sorter) ? undefined : sorter.field,
-    });
+ 
 
-    if (pagination.pageSize !== tableParams.pagination?.pageSize) {
-      setTableData([]);
-    }
-  };
-
-  console.log('tableParams:',tableParams)
-  console.log('tableData:',tableData)
 
   return (
     <>
@@ -147,23 +170,7 @@ const EbookList = () => {
         onChange={handleTableChange}
       />
 
-      {/* Example static table (you can remove if not needed) */}
-      {/* <IcTable
-        columns={[
-          { title: "Date", dataIndex: "date", key: "date" },
-          { title: "Title", dataIndex: "title", key: "title" },
-          { title: "Amount", dataIndex: "amount", key: "amount" },
-          { title: "Invoice No", dataIndex: "invoiceNo", key: "invoiceNo" },
-        ]}
-        data={[
-          { key: "1", date: "2025-08-01", title: "Personal Membership", amount: 200, invoiceNo: "INV-1001" },
-          { key: "2", date: "2025-08-05", title: "Premium Package", amount: 350, invoiceNo: "INV-1002" },
-        ]}
-        total={2}
-        currentPage={currentPage}
-        pageSize={2}
-        handlePageChange={setCurrentPage}
-      /> */}
+     
     </>
   );
 };
