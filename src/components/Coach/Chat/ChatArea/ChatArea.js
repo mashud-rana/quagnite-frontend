@@ -113,17 +113,36 @@ const ChatArea = () => {
       </div>
 
       <div className={styles.messagesContainer}>
-        {messages.map((message, index) => (
+        {messages.map((message) => (
           <div key={message.id}>
             {message.time && (
               <div className={styles.dateLabel}>{message.time}</div>
             )}
+
             <div
-              className={`${styles.message} ${
-                message.sender === "me" ? styles.messageMe : styles.messageOther
+              className={`${styles.messageRow} ${
+                message.sender === "me" ? styles.rowMe : styles.rowOther
               }`}
             >
-              {message.text}
+              {/* {message.sender === "other" && (
+                <div className={styles.messageAvatar}>
+                  <Image src={img} alt="User" />
+                </div>
+              )} */}
+
+              <div
+                className={`${styles.message} ${
+                  message.sender === "me"
+                    ? styles.messageMe
+                    : styles.messageOther
+                }`}
+              >
+                {message.text}
+              </div>
+
+              {/* {message.sender === "me" && (
+                <div className={styles.messageSpacer} />
+              )} */}
             </div>
           </div>
         ))}
