@@ -5,9 +5,10 @@ import { Space, Table } from "antd";
 import { GoEye } from "react-icons/go";
 import { MdOutlineDownload } from "react-icons/md";
 import IcTable from "@/components/Share/IcTable/IcTable";
-import { useGetEbooksQuery, useDownloadEbookQuery, useDownloadEbookMutation } from "@/redux/features/student/ebook/ebookApi";
+import { useGetEbooksQuery, useDownloadEbookMutation } from "@/redux/features/student/ebook/ebookApi";
 import { antIcon, toastError, toastSuccess } from "@/utils/helper";
 import { Spin } from "antd";
+import SearchEbook from "../SearchEbook/SearchEbook";
 
 
 // convert object → query string
@@ -23,17 +24,28 @@ const toURLSearchParams = (record) => {
 const getRandomuserParams = (params) => {
   const { pagination, filters, sortField, sortOrder, ...restParams } = params;
   const result = {};
-  // result.limit = pagination?.pageSize;
-  result.per_page = pagination?.pageSize;
-  result.page = pagination?.current;
+  result.per_page = params.pagination?.pageSize;
+  result.page = params.pagination?.current;
 
-  if (filters) {
-    Object.entries(filters).forEach(([key, value]) => {
-      if (value !== undefined && value !== null) {
+  if (params.search) {
+    result.search = params.search;
+  }
+
+  if (params.searchFilter) {
+    Object.entries(params.searchFilter).forEach(([key, value]) => {
+      if (value !== undefined && value !== null && value !== "") {
         result[key] = value;
       }
     });
   }
+
+  // if (filters) {
+  //   Object.entries(filters).forEach(([key, value]) => {
+  //     if (value !== undefined && value !== null) {
+  //       result[key] = value;
+  //     }
+  //   });
+  // }
   // if (sortField) {
   //   result.orderby = sortField;
   //   result.order = sortOrder === "ascend" ? "asc" : "desc";
@@ -54,19 +66,29 @@ const EbookList = () => {
   const [loading, setLoading] = useState(false);
   const [tableParams, setTableParams] = useState({
     pagination: {
-      current: process.env.CURRENT_PAGE ? parseInt(process.env.CURRENT_PAGE) : 1,
-      pageSize: process.env.PAGE_SIZE ? parseInt(process.env.PAGE_SIZE) : 10,
+      current: process.env.NEXT_PUBLIC_CURRENT_PAGE ? parseInt(process.env.NEXT_PUBLIC_CURRENT_PAGE) : 1,
+      pageSize: process.env.NEXT_PUBLIC_PAGE_SIZE ? parseInt(process.env.NEXT_PUBLIC_PAGE_SIZE) : 10,
     },
+    search: "",
+    searchFilter: {
+      highest: "",
+      newest: "",
+      bookAZ: ""
+    }
   });
+
   const [selectUuid, setSelectUuid] = useState(null);
 
-  // Build params for API call
-  const params = useMemo(() => {
-    return toURLSearchParams(getRandomuserParams(tableParams)).toString();
-  }, [tableParams]);
 
-  //get ebooks
+  // Build params for API call
+  // const params = useMemo(() => {
+  //   return toURLSearchParams(getRandomuserParams(tableParams)).toString();
+  // }, [tableParams]);
+   const params =toURLSearchParams(getRandomuserParams(tableParams)).toString();
+
+  // API hook
   const { data: ebookData, isSuccess, isLoading, isFetching, refetch } = useGetEbooksQuery(params);
+
   //download ebook
   const [downloadEbook, 
     { isLoading: downloadIsLoading, 
@@ -79,18 +101,19 @@ const EbookList = () => {
   const tableColumns = [
     {
       title: "Date",
-      dataIndex: "created_at_formatted",
+      // dataIndex: "created_at_formatted",
       key: "date",
+      render: (_, record) => record?.enroll_ebook?.created_at_formatted || "N/A",
     },
     {
       title: "Title / Plan",
       key: "title",
-      render: (_, record) => record?.ebook?.title || "N/A",
+      render: (_, record) => record?.title || "N/A",
     },
     {
       title: "Amount",
       key: "amount",
-      render: (_, record) => record?.ebook?.price ? `$${record.ebook.price}` : "-",
+      render: (_, record) => record?.price ? `$${record?.price}` : "-",
     },
     {
       title: "Action",
@@ -101,15 +124,15 @@ const EbookList = () => {
             className="ic_action_btn"
             style={{ cursor: "pointer" }}
             onClick={() => {
-              downloadEbook(record?.ebook?.uuid);
-              setSelectUuid(record?.ebook?.uuid);
+              downloadEbook(record?.uuid);
+              setSelectUuid(record?.uuid);
             }}
           >
-            {selectUuid === record?.ebook?.uuid && downloadIsLoading ? <Spin indicator={antIcon} /> : <MdOutlineDownload />}
+            {selectUuid === record?.uuid && downloadIsLoading ? <Spin indicator={antIcon} /> : <MdOutlineDownload />}
           </button>
           <button className="ic_action_btn" style={{
             cursor: 'pointer'
-          }} onClick={()=> window.open(record?.ebook?.ebook_file_url, '_blank')} >
+          }} onClick={()=> window.open(record?.ebook_file_url, '_blank')} >
             <GoEye />
           </button>
         </Space>
@@ -129,6 +152,26 @@ const EbookList = () => {
     if (pagination.pageSize !== tableParams.pagination?.pageSize) {
       setTableData([]);
     }
+  };
+
+  // search input change
+  const handleSearchChange = (value) => {
+    setTableParams((prev) => ({
+      ...prev,
+      search: value,
+    }));
+  };
+
+ 
+  // filter change
+  const handleSearchFilterChange = (filter) => {
+    setTableParams((prev) => ({
+      ...prev,
+      searchFilter: {
+        ...prev.searchFilter,
+        ...filter,
+      },
+    }));
   };
 
   useEffect(() => {
@@ -156,11 +199,16 @@ const EbookList = () => {
     }
   }, [isSuccess, ebookData]);
 
+  //when table params change then query refresh
+  // useEffect(()=>{
+  //   refetch();
+  // },[tableParams])
  
-
+  console.log("Main tableParams", tableParams);
 
   return (
     <>
+      <SearchEbook onSearchChange={handleSearchChange} onSearchFilterChange={handleSearchFilterChange} />
       <Table
         columns={tableColumns}
         rowKey={(record) => record.id}
