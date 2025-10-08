@@ -521,21 +521,27 @@ h6 {
 /* chat design csss.........................  */
 .chat_container {
   display: grid;
-  grid-template-columns: 280px 1fr 320px;
+  grid-template-columns: 1fr 2fr 1fr;
   gap: 16px;
-  height: 100vh;
-  padding: 16px;
-  box-sizing: border-box;
 }
 
-/* ✅ Tablet view (medium screens) */
-@media (max-width: 1024px) {
+@media (max-width: 1650px) {
   .chat_container {
-    grid-template-columns: 260px 1fr;
+    display: grid;
+    grid-template-columns: 1.2fr 1.6fr 1.2fr;
+    gap: 16px;
   }
 }
 
-/* ✅ Mobile view (small screens) */
+@media (max-width: 1499px) {
+  .chat_container {
+    display: grid;
+    grid-template-columns: 1.3fr 1.3fr 1.6fr;
+    gap: 16px;
+  }
+}
+
+/*  Mobile view (small screens) */
 @media (max-width: 768px) {
   .chat_container {
     display: flex;
