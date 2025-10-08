@@ -81,9 +81,6 @@ const EbookList = () => {
 
 
   // Build params for API call
-  // const params = useMemo(() => {
-  //   return toURLSearchParams(getRandomuserParams(tableParams)).toString();
-  // }, [tableParams]);
    const params =toURLSearchParams(getRandomuserParams(tableParams)).toString();
 
   // API hook
@@ -199,10 +196,7 @@ const EbookList = () => {
     }
   }, [isSuccess, ebookData]);
 
-  //when table params change then query refresh
-  // useEffect(()=>{
-  //   refetch();
-  // },[tableParams])
+
  
   console.log("Main tableParams", tableParams);
 

@@ -13,7 +13,6 @@ const SearchEbook = ({onSearchChange, onSearchFilterChange}) => {
   });
   //lifting up data
   useEffect(()=>{
-    console.log('Chield: update select filter:', searchFilter)
     onSearchFilterChange({...searchFilter})
   },[searchFilter])
 
