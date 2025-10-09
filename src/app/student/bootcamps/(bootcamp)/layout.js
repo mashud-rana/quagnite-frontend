@@ -1,8 +1,12 @@
+"use client";
 import ScrollableNavbar from "@/components/Share/ScrollableNavbar/ScrollableNavbar";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FaArrowLeft } from "react-icons/fa";
 
+
 const BootcampLayout = ({ children }) => {
+  const router = useRouter();
   const profileTabs = [
     { href: "/student/bootcamps", label: "Upcoming", exact: true },
     { href: "/student/bootcamps/ongoing", label: "Ongoing" },
@@ -13,7 +17,8 @@ const BootcampLayout = ({ children }) => {
     <div>
       <div className="mb-24">
         <div className="ic_title_section">
-          <Link href="#" className="ic_back_button" aria-label="Go back">
+         
+          <Link href="#"  onClick={() => router.back()} className="ic_back_button" aria-label="Go back">
             <FaArrowLeft />
           </Link>
           <h1 className="ic_text_36">My Bootcamps</h1>

@@ -11,15 +11,24 @@ import { Tabs, Button } from "antd";
 import TabPane from "antd/es/tabs/TabPane";
 import React, { useState, useEffect } from "react";
 import {useGetCourseDetailsBySlugQuery} from '@/redux/features/student/course/courseApi';
-import { useParams } from 'next/navigation'
+import { useParams, useSearchParams } from 'next/navigation'
+import SectionSpinner from "@/components/Spinner/SectionSpinner";
+import NotDataFound from "@/components/Empty/NotDataFound";
 
 const CourseDetailsPage = () => {
    const { slug } = useParams()
   const [activeKey, setActiveKey] = useState("1");
   const [tabGutter, setTabGutter] = useState(16);
   const [course, setCourse] = useState(null);
-  // const [skip, setSkip] = useState(false);
+  const [requestError, setRequestError] = useState(false);
+
+
   const [activeLecture, setActiveLecture] = useState(null);
+  const searchParams = useSearchParams();
+  // Get lectureUuid from URL query params
+  const lectureUuid = searchParams.get("lectureUuid") || null;
+  const lessonUuid = searchParams.get("lessonUuid") || null;
+
   const { 
     data,
     isSuccess, 
@@ -27,8 +36,11 @@ const CourseDetailsPage = () => {
     error, 
     refetch,
     isFetching ,
-  } = useGetCourseDetailsBySlugQuery(slug);
+    isError
+  } = useGetCourseDetailsBySlugQuery(slug,{refetchOnMountOrArgChange: true });
   // ,{skip:skip, refetchOnMountOrArgChange: true }
+
+ 
 
   // Responsive gutter
   useEffect(() => {
@@ -56,14 +68,40 @@ const CourseDetailsPage = () => {
   useEffect(() => {
     if(isSuccess && data?.success){
       setCourse(data?.data);
-      console.log("course details data", data?.data)
+    }
+    if(isError){
+      setRequestError(true);
+    
     }
   }, 
-  [data, isSuccess]);
+  [data, isSuccess, error,isError]);
 
   const activeLectureHandler = (lecture) => {
-    console.log("Active lecture from parent:", lecture);
+    // console.log("Active lecture from parent:", lecture);
     setActiveLecture(lecture);
+  }
+  //set active lecture if lectureUuid changes
+  useEffect(() => {
+    if(lessonUuid && lectureUuid && course?.lessons && course?.lessons.length > 0){
+      let findLessonLecture = course.lessons.find(lesson => lesson.uuid === lessonUuid);
+      if(findLessonLecture){
+        let findLecture = findLessonLecture.lectures.find(lecture => lecture.uuid === lectureUuid);
+        if(findLecture){
+          setActiveLecture(findLecture);
+        }
+      }
+    }
+  }, [lectureUuid, course, lessonUuid]);
+
+  //
+
+  console.log("course details", course);
+
+  if(isLoading || isFetching){
+    return <SectionSpinner message="Loading course details..." />
+  }
+  if(requestError){
+    return <NotDataFound message="Course details not found" />
   }
   return (
     <div>
@@ -93,7 +131,11 @@ const CourseDetailsPage = () => {
           }
         >
           <TabPane tab="Course Content" key="1">
-            <CourseContent lessonsDetails={course?.lessons} lessonsTotalDuration={course?.lessons_total_duration} />
+            <CourseContent 
+            lessonsDetails={course?.lessons} 
+            lessonsTotalDuration={course?.lessons_total_duration}
+            activeLectureHandler={activeLectureHandler}
+            />
           </TabPane>
 
           <TabPane tab="Course Overview" key="2">
@@ -105,15 +147,17 @@ const CourseDetailsPage = () => {
           </TabPane>
 
           <TabPane tab="Reviews" key="4">
-            <Reviews reviewData={course?.review_data} reviews={course?.reviews} />
+            <Reviews reviewData={course?.review_data} reviews={course?.reviews} data_id={course?.id} type="course"/>
+           
           </TabPane>
 
           <TabPane tab="Discussions" key="5">
-            <Discussions discussionsData={course?.discussions} courseDetails={course} />
+            <Discussions discussionsData={course?.discussions} data_id={course?.id} type="course" />
           </TabPane>
 
           <TabPane tab="Notes" key="6">
-            <Notes noteData={course?.course_notes} courseDetails={course} />
+            <Notes noteData={course?.course_notes} data_id={course?.id} type="course" />
+             {/* <Notes noteData={course?.course_notes} courseDetails={course} /> */}
           </TabPane>
         </Tabs>
       </div>

@@ -7,13 +7,13 @@ import img from "@/assets/images/all/instractor.png";
 import img2 from "@/assets/images/all/poster.png";
 import Image from "next/image";
 import logo from "@/assets/images/auth/logo.png";
+import LecturePreview from "@/components/Student/Courses/Lecture/LecturePreview";
 
 const BootcampHeading = ({courseDetails, activeLectureDetails}) => {
 
   const [course, setCourse] = useState(null);
   const [activeLecture, setActiveLecture] = useState(null);
 
-  // console.log('BootcampHeading', course, activeLecture);
 
   useEffect(()=>{
     setCourse(courseDetails);
@@ -22,7 +22,7 @@ const BootcampHeading = ({courseDetails, activeLectureDetails}) => {
   return (
     <div>
       <div className={styles.ic_course_info}>
-        <h1 className="ic_text_36">{course?.title}</h1>
+        <h1 className="ic_text_36">{!activeLecture ? course?.title : activeLecture?.title}</h1>
         <div className={styles.ic_instructor_info}>
           <span className={styles.ic_instructor_name}>{course?.teacher?.full_name}</span>
           <span className={styles.ic_instructor_role}>{course?.teacher?.teacher_details?.professional_title}</span>
@@ -34,38 +34,13 @@ const BootcampHeading = ({courseDetails, activeLectureDetails}) => {
         {/* Video Section */}
         <div className={styles.ic_video_section}>
           <div className={styles.ic_video_container}>
-            {/* {
-              activeLecture == "null" ? (
-                course && (
-                  <Image
-                    src={logo}
-                    alt={course?.title || "Course image"}
-                    fill
-                    className={styles.ic_video_thumbnail}
-                  />
-                )
-              ) : (
-                <video
-                  className={styles.ic_video_thumbnail}
-                  controls
-                  poster={img2.src}
-                >
-                  <source src="/videos/coding.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              )
-            } */}
+            
 
             {
               activeLecture ? (
-                  <video
-                  className={styles.ic_video_thumbnail}
-                  controls
-                  poster={img2.src}
-                >
-                  <source src="/videos/coding.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                
+                <LecturePreview key={`${activeLecture?.uuid}-${activeLecture?.lecture_format}`} lecture={activeLecture} />
+
               ) : (
                 course&& <Image
                     src={course?.image_url || logo}

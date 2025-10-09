@@ -64,6 +64,13 @@
   font-size: 12px;
 }
 
+.ic_coaching_icon_text_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
 /* modal ............................  */
 
 .modalHeader {

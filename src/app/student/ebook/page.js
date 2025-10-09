@@ -12,7 +12,7 @@ const EbookPage = () => {
         </p>
       </div>
 
-      <SearchEbook />
+      {/* <SearchEbook /> */}
       <EbookList />
     </>
   );

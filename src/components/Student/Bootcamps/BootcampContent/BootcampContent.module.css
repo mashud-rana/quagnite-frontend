@@ -141,6 +141,26 @@
   color: var(--primary-color);
 }
 
+.ic_btn {
+  font-size: 15px;
+  background-color: var(--primary-color);
+  border: none;
+  color: var(--white);
+  padding: 4px 12px;
+  border-radius: 8px;
+  transition: 0.3s all ease-in-out;
+  margin-top: 10px;
+  width: 150px;
+  cursor: pointer;
+}
+
+.ic_btn:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+  box-shadow: 0px 2px 8px #5c81f7;
+  transform: translateY(-1px);
+}
+
 @media (max-width: 1299px) {
   .ic_module_title {
     font-size: 18px;

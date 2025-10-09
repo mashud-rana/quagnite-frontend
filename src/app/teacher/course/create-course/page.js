@@ -1,12 +1,24 @@
+"use client";
+
 import ProgressStepper from "@/components/Teacher/Courses/ProgressStepper/ProgressStepper";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa6";
 import CreateCourseForm from "@/components/Teacher/Courses/CreateCourseForm/CreateCourseForm";
+import { useState } from "react";
 
 const CreateCoursePage = () => {
+  const [currentStep, setCurrentStep] = useState(1);
+  const handleStepChange = (step) => {
+    setCurrentStep(step);
+  };
+
   return (
     <div>
       <ProgressStepper currentStep={1} />
+      {/* <ProgressStepper
+        currentStep={currentStep}
+        onStepChange={handleStepChange}
+      /> */}
 
       <div className="mb-24">
         <div className="ic_title_section">
@@ -18,6 +30,8 @@ const CreateCoursePage = () => {
       </div>
 
       <CreateCourseForm />
+
+      {/* {currentStep === 1 && <CreateCourseForm />} */}
     </div>
   );
 };

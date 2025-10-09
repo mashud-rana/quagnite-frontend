@@ -77,6 +77,28 @@ export const authApi = apiSlice.injectEndpoints({
       }),
     
     }),
+    createReview: builder.mutation({
+      query: (reviewData) => ({
+        url: `/student/courses/submit-review`,
+        method: "POST",
+        body: reviewData,
+      }),
+    
+    }),
+     lessonLecturePreview: builder.mutation({
+      query: (lectureUuid) => ({
+        url: `/student/courses/lesson-lecture-preview`,
+        method: "POST",
+        body: { lecture_uuid: lectureUuid },
+      }),
+    
+    }),
+    courseEnrolledCheck: builder.query({
+      query: (slug) => ({
+        url: `/student/courses/${slug}/enrolled-check`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -91,4 +113,7 @@ export const {
   useUpdateCourseNoteMutation,
   useCreateCourseDiscussionMutation,
   useCreateDiscussionCommentMutation,
+  useCreateReviewMutation,
+  useLessonLecturePreviewMutation,
+  useCourseEnrolledCheckQuery,
 } = authApi;
