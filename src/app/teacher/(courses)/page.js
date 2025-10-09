@@ -71,7 +71,7 @@ const TeacherDashboardPage = () => {
 
         <Link href="/teacher/course/create-course" className="ic_icn_btn">
           <FaPlus />
-          create bootcamp
+          create course
         </Link>
       </div>
 

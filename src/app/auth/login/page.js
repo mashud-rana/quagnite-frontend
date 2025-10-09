@@ -14,6 +14,7 @@ import { useLoginMutation } from "@/redux/features/auth/authApi";
 import { antIcon, toastError, toastSuccess } from "@/utils/helper";
 import { Spin } from "antd";
 import { useRouter } from 'next/navigation'
+import firebase from './../../lib/firebase';
 
 //schema validation
 
@@ -56,9 +57,24 @@ const LoginPage = () => {
 
   //handle google login
 
-  const handleGoogleLogin = () => {
+  const  handleGoogleLogin = async () => {
     console.log("Login with Google clicked");
-    // Handle Google login here
+    try {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      const response = await firebase.auth().signInWithPopup(provider);
+      if (response) {
+        const socialLoginData = {
+          social_id: response?.additionalUserInfo?.profile?.id,
+          social_provider: response?.additionalUserInfo?.providerId,
+          email: response?.additionalUserInfo?.profile?.email,
+          first_name: response?.additionalUserInfo?.profile?.name,
+          avatar_url: response?.additionalUserInfo?.profile?.picture,
+        };
+
+        console.log("Google login response:", socialLoginData);
+        // socialLogin(socialLoginData);
+      }
+    } catch (error) {}
   };
 
   //login success or error handling can be done here
@@ -68,10 +84,12 @@ const LoginPage = () => {
       toastSuccess(loginData?.message || "Login successful");
       if(loginData?.user?.user_type === "student"){
         router.push('/student');
+      }else if(loginData?.user?.user_type === "teacher"){
+        router.push('/teacher');
       }
     }
     if (isError) {
-      toastError(error?.data?.message || "Login failed. Please try again.");
+      toastError(error?.message || "Login failed. Please try again.");
     }
   }, [isSuccess, isError, error, loginData]);
 
