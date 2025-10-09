@@ -1,0 +1,23 @@
+.ic_img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.ic_publish {
+  text-wrap: nowrap;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ic_text {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.ic_text_container {
+  display: flex;
+  gap: 30px;
+  margin-top: 16px;
+}

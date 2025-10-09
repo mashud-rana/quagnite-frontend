@@ -1,7 +1,7 @@
 import Account from "@/components/Student/Profile/Account/Account";
 import React from "react";
 
-const AccountPage = () => {
+const TeacherAccountPage = () => {
   return (
     <>
       <Account />
@@ -9,4 +9,4 @@ const AccountPage = () => {
   );
 };
 
-export default AccountPage;
+export default TeacherAccountPage;
