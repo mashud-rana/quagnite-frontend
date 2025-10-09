@@ -55,14 +55,14 @@ const CreateCourseForm = () => {
         <h5 className={styles.sectionTitle}>Course Details</h5>
         <div className={styles.ic_details_wrapper}>
           <div className={styles.formRow}>
-            <label className={styles.label}>Bootcamp Title</label>
+            <label className={styles.label}>Course Type</label>
             <div className={styles.inputContainer}>
               <input className={styles.input} placeholder="Course Type" />
             </div>
           </div>
 
           <div className={styles.formRow}>
-            <label className={styles.label}>Bootcamp subtitle</label>
+            <label className={styles.label}>Course subtitle</label>
             <div className={styles.inputContainer}>
               <input
                 {...register("coursesubTitle")}
@@ -78,7 +78,7 @@ const CreateCourseForm = () => {
           </div>
 
           <div className={styles.formRow}>
-            <label className={styles.label}>Bootcamp Title</label>
+            <label className={styles.label}>Course Title</label>
             <div className={styles.inputContainer}>
               <input className={styles.input} placeholder="Course Title" />
             </div>
@@ -143,7 +143,7 @@ const CreateCourseForm = () => {
         <h5 className={styles.sectionTitle}>Category & Features</h5>
         <div className={styles.ic_details_wrapper}>
           <div className={styles.formRow}>
-            <label className={styles.label}>Bootcamp Category</label>
+            <label className={styles.label}>Course Category</label>
             <div className={styles.inputContainer}>
               <div className={styles.selectWrapper}>
                 <select
@@ -181,7 +181,7 @@ const CreateCourseForm = () => {
           </div>
 
           <div className={styles.formRow}>
-            <label className={styles.label}>What You will Learn</label>
+            <label className={styles.label}>What You will Learn Course</label>
             <div className={styles.inputContainer}>
               <div className={styles.textareaWithButton}>
                 <input
@@ -220,7 +220,7 @@ const CreateCourseForm = () => {
         <h5 className={styles.sectionTitle}>Learners Accessibility & others</h5>
         <div className={styles.ic_details_wrapper}>
           <div className={styles.formRow}>
-            <label className={styles.label}>Learners Accessibility</label>
+            <label className={styles.label}>Select Course Announcements</label>
             <div className={styles.inputContainer}>
               <div className={styles.selectWrapper}>
                 <select
@@ -241,6 +241,67 @@ const CreateCourseForm = () => {
               )}
             </div>
           </div>
+
+          <div className={styles.formRow}>
+            <label className={styles.label}>Select Course Benefits</label>
+            <div className={styles.inputContainer}>
+              <div className={styles.selectWrapper}>
+                <select
+                  {...register("bootcampCategory")}
+                  className={styles.select}
+                >
+                  <option value="">Select Course Benefits</option>
+                  <option value="programming">Programming</option>
+                  <option value="design">Design</option>
+                  <option value="marketing">Marketing</option>
+                </select>
+                <BiChevronDown className={styles.selectIcon} />
+              </div>
+              {errors.bootcampCategory && (
+                <span className={styles.error}>
+                  {errors.bootcampCategory.message}
+                </span>
+              )}
+            </div>
+          </div>
+
+
+          <div className={styles.formRow}>
+            <label className={styles.label}>Course Access Period</label>
+            <div className={styles.inputContainer}>
+              <div className={styles.selectWrapper}>
+                <input
+                    type="number"
+                    {...register("courseDescription")}
+                    className={styles.input}
+                    placeholder="Course Access Period"
+                />
+              </div>
+              {errors.bootcampCategory && (
+                <span className={styles.error}>
+                  {errors.bootcampCategory.message}
+                </span>
+              )}
+            </div>
+          </div>
+          <small>Enrollment will expire after this number of days. Set 0 for no expiration</small>
+
+          <div className={styles.formRow}>
+            <label className={styles.label}>Learners Accessibility</label>
+            <div className={styles.inputContainer}>
+              <div className={styles.selectWrapper}>
+                <select className={styles.select}>
+                  <option value="">Learners Accessibility</option>
+                  <option value="45">$45</option>
+                  <option value="45">$55</option>
+                  <option value="80">$80</option>
+                </select>
+                <BiChevronDown className={styles.selectIcon} />
+              </div>
+            </div>
+          </div>
+
+
 
           <div className={styles.formRow}>
             <label className={styles.label}>Course Price</label>

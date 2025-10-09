@@ -68,10 +68,12 @@ const LoginPage = () => {
       toastSuccess(loginData?.message || "Login successful");
       if(loginData?.user?.user_type === "student"){
         router.push('/student');
+      }else if(loginData?.user?.user_type === "teacher"){
+        router.push('/teacher');
       }
     }
     if (isError) {
-      toastError(error?.data?.message || "Login failed. Please try again.");
+      toastError(error?.message || "Login failed. Please try again.");
     }
   }, [isSuccess, isError, error, loginData]);
 
