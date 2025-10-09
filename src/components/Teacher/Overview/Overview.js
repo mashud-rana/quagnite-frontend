@@ -4,10 +4,7 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import styles from "./overview.module.css";
 import { IoArrowDown } from "react-icons/io5";
-<<<<<<< HEAD
-=======
 import { TbCircleDashed } from "react-icons/tb";
->>>>>>> baad3ad508ab57bf0f0940164da3d9697f8c7668
 
 // Dynamically import ApexCharts to avoid SSR issues
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
@@ -260,57 +257,6 @@ const Overview = () => {
       </div>
 
       <div className={styles.ic_overview_wrapper}>
-<<<<<<< HEAD
-        <div className={styles.overview}>
-          <h2 className={styles.sectionTitle}>Overview</h2>
-
-          {/* প্রথম Row (4 cards) */}
-          <div className={styles.metricsGridFour}>
-            {metrics.slice(0, 4).map((metric, index) => (
-              <div key={index} className={styles.metricCard}>
-                <div className={styles.metricHeader}>
-                  <div
-                    className={`${styles.metricIcon} ${styles[metric.icon]}`}
-                  >
-                    ○
-                  </div>
-                  <span className={styles.metricLabel}>{metric.label}</span>
-                </div>
-                <div className={styles.metricValue}>{metric.value}</div>
-                <div
-                  className={`${styles.metricChange} ${
-                    styles[metric.changeType]
-                  }`}
-                >
-                  {metric.change} {metric.period}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* দ্বিতীয় Row (3 cards) */}
-          <div className={styles.metricsGridThree}>
-            {metrics.slice(4).map((metric, index) => (
-              <div key={index} className={styles.metricCard}>
-                <div className={styles.metricHeader}>
-                  <div
-                    className={`${styles.metricIcon} ${styles[metric.icon]}`}
-                  >
-                    ○
-                  </div>
-                  <span className={styles.metricLabel}>{metric.label}</span>
-                </div>
-                <div className={styles.metricValue}>{metric.value}</div>
-                <div
-                  className={`${styles.metricChange} ${
-                    styles[metric.changeType]
-                  }`}
-                >
-                  {metric.change} {metric.period}
-                </div>
-              </div>
-            ))}
-=======
         <div>
           <div className={styles.overview}>
             <h2 className={styles.sectionTitle}>Overview</h2>
@@ -448,77 +394,10 @@ const Overview = () => {
                 ))}
               </tbody>
             </table>
->>>>>>> baad3ad508ab57bf0f0940164da3d9697f8c7668
           </div>
         </div>
 
         {/* Content Grid */}
-<<<<<<< HEAD
-        <div className={styles.contentGrid}>
-          {/* Hours Spent Chart */}
-          <div className={styles.chartSection}>
-            <div className={styles.chartHeader}>
-              <h3 className={styles.sectionTitle}>Hours Spent</h3>
-              <button className="ic_icn_btn">
-                LAST WEEK
-                <IoArrowDown />
-              </button>
-            </div>
-            <div style={{ height: "200px" }}>
-              <Chart
-                options={chartOptions}
-                series={chartSeries}
-                type="area"
-                height="100%"
-              />
-            </div>
-          </div>
-
-          {/* Chat Management */}
-          <div className={styles.chatSection}>
-            <div className={styles.sectionHeader}>
-              <h3 className={styles.sectionTitle}>Chat Management</h3>
-              <button className={styles.viewAllButton}>SEE ALL</button>
-            </div>
-            <div className={styles.chatTabs}>
-              <div
-                className={`${styles.chatTab} ${
-                  activeChatTab === "Read" ? styles.active : ""
-                }`}
-                onClick={() => setActiveChatTab("Read")}
-              >
-                Read
-              </div>
-              <div
-                className={`${styles.chatTab} ${
-                  activeChatTab === "Unread" ? styles.active : ""
-                }`}
-                onClick={() => setActiveChatTab("Unread")}
-              >
-                Unread
-              </div>
-              <div
-                className={`${styles.chatTab} ${
-                  activeChatTab === "Pinned" ? styles.active : ""
-                }`}
-                onClick={() => setActiveChatTab("Pinned")}
-              >
-                Pinned
-              </div>
-            </div>
-            <div>
-              {chatMessages.map((message, index) => (
-                <div key={index} className={styles.chatMessage}>
-                  <img
-                    src={message.avatar || "/placeholder.svg"}
-                    alt="Avatar"
-                    className={styles.avatar}
-                  />
-                  <div className={styles.messageContent}>
-                    <div className={styles.messageName}>{message.name}</div>
-                    <div className={styles.messageText}>{message.message}</div>
-                  </div>
-=======
         <div>
           <div className={styles.contentGrid}>
             {/* Hours Spent Chart */}
@@ -602,135 +481,12 @@ const Overview = () => {
                 <div key={index} className={styles.eventItem}>
                   <div className={styles.eventTitle}>{event.title}</div>
                   <div className={styles.eventDate}>{event.date}</div>
->>>>>>> baad3ad508ab57bf0f0940164da3d9697f8c7668
                 </div>
               ))}
             </div>
           </div>
         </div>
       </div>
-<<<<<<< HEAD
-
-      {/* Course Management Table */}
-      <div className={styles.tableSection}>
-        <div className={styles.tableTabs}>
-          <div
-            className={`${styles.tableTab} ${
-              activeTab === "Course Management" ? styles.active : ""
-            }`}
-            onClick={() => setActiveTab("Course Management")}
-          >
-            Course Management
-          </div>
-          <div
-            className={`${styles.tableTab} ${
-              activeTab === "Bootcamp" ? styles.active : ""
-            }`}
-            onClick={() => setActiveTab("Bootcamp")}
-          >
-            Bootcamp
-          </div>
-          <div
-            className={`${styles.tableTab} ${
-              activeTab === "E-Book" ? styles.active : ""
-            }`}
-            onClick={() => setActiveTab("E-Book")}
-          >
-            E-Book
-          </div>
-          <button className={styles.viewAllButton}>VIEW ALL</button>
-        </div>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>Course Name</th>
-              <th>Enrolled Students</th>
-              <th>Completion Rate</th>
-              <th>Total Videos</th>
-              <th>Avg Rating</th>
-              <th>Issued Certificate</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {courseData.map((course, index) => (
-              <tr key={index}>
-                <td>{course.name}</td>
-                <td>{course.enrolled}</td>
-                <td>{course.completion}</td>
-                <td>{course.videos}</td>
-                <td>{course.rating}</td>
-                <td>{course.certificate}</td>
-                <td>
-                  <a href="#" className={styles.editLink}>
-                    Edit/View
-                  </a>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Bottom Grid */}
-      <div className={styles.contentGrid}>
-        {/* Upcoming Tasks */}
-        <div className={styles.tasksSection}>
-          <div className={styles.sectionHeader}>
-            <h3 className={styles.sectionTitle}>Upcoming Tasks List</h3>
-            <button className={styles.viewAllButton}>VIEW ALL</button>
-          </div>
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>Task Name</th>
-                <th>Course/Bootcamp</th>
-                <th>Due Date</th>
-                <th>Priority</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tasks.map((task, index) => (
-                <tr key={index}>
-                  <td>{task.name}</td>
-                  <td>{task.course}</td>
-                  <td>{task.dueDate}</td>
-                  <td>
-                    <span className={`${styles.priorityBadge} ${styles.high}`}>
-                      {task.priority}
-                    </span>
-                  </td>
-                  <td>
-                    <a href="#" className={styles.taskAction}>
-                      Mark as Done
-                      {/* done  */}
-                    </a>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Events */}
-        <div className={styles.eventsSection}>
-          <div className={styles.sectionHeader}>
-            <h3 className={styles.sectionTitle}>Events</h3>
-            <button className={styles.viewAllButton}>VIEW ALL</button>
-          </div>
-          <div>
-            {events.map((event, index) => (
-              <div key={index} className={styles.eventItem}>
-                <div className={styles.eventTitle}>{event.title}</div>
-                <div className={styles.eventDate}>{event.date}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-=======
->>>>>>> baad3ad508ab57bf0f0940164da3d9697f8c7668
     </div>
   );
 };

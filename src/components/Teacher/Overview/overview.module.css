@@ -47,13 +47,6 @@
   background: #5856eb;
 }
 
-<<<<<<< HEAD
-/* .overview {
-  margin-bottom: 3px;
-} */
-
-=======
->>>>>>> baad3ad508ab57bf0f0940164da3d9697f8c7668
 .sectionTitle {
   font-size: 20px;
   line-height: 1.4;
@@ -62,16 +55,6 @@
   margin-bottom: 16px;
 }
 
-<<<<<<< HEAD
-/* .metricsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  margin-bottom: 24px;
-} */
-
-=======
->>>>>>> baad3ad508ab57bf0f0940164da3d9697f8c7668
 .metricCard {
   background: var(--white);
   padding: 24px;
@@ -112,32 +95,8 @@
   margin-bottom: 4px;
 }
 
-<<<<<<< HEAD
-.metricChange {
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.metricChange.positive {
-  color: #16a34a;
-}
-
-.metricChange.negative {
-  color: #dc2626;
-}
-
-.metricChange.neutral {
-  color: #6b7280;
-}
-
-.contentGrid {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 16px;
-=======
 .metricChange span {
   color: #f69745;
->>>>>>> baad3ad508ab57bf0f0940164da3d9697f8c7668
 }
 
 .chartSection {
