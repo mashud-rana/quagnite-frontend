@@ -15,7 +15,7 @@ import {antIcon, toastError, toastSuccess} from "@/utils/helper";
 import {Spin} from "antd";
 import {useCreateReviewMutation} from "@/redux/features/student/course/courseApi";
 import {useCreateBootcampReviewMutation} from "@/redux/features/student/bootcamp/bootcampApi";
-import { useReviewVoteMutation } from "@/redux/features/student/review/reviewApi";
+import {useMakeVoteMutation} from "@/redux/features/student/vote/voteApi";
 
 
 //validation schema
@@ -87,7 +87,7 @@ const Reviews = ({reviewData, reviews, data_id, type}) => {
       isError : isReviewVoteError,
       error : reviewVoteResponseError
     }
-  ] = useReviewVoteMutation();
+  ] = useMakeVoteMutation();
   
 
   //create review form
@@ -235,10 +235,10 @@ const Reviews = ({reviewData, reviews, data_id, type}) => {
 
     setAllReviews((prevReviews) =>
       prevReviews.map((r) => {
-        if (r.id === reviewVoteData?.data?.id) {
+        if (r.id === reviewVoteData?.votable?.id) {
           return {
             ...r,
-            ...reviewVoteData.data
+            ...reviewVoteData.votable
           };
         }
         return r; // must return the unchanged review
@@ -428,7 +428,8 @@ const Reviews = ({reviewData, reviews, data_id, type}) => {
                   ) : styles.notHelpfulButton  } onClick={() => {
 
                     reviewVote({
-                      reviewId: review?.id,
+                      votable_id: review?.id,
+                      votable_type: 'review',
                       type: 'helpful'
                     })
 
@@ -442,7 +443,8 @@ const Reviews = ({reviewData, reviews, data_id, type}) => {
                      review?.my_vote?.type == 'unhelpful' ? styles.helpfulButton : styles.notHelpfulButton 
                   ) : styles.notHelpfulButton  } onClick={() => {
                     reviewVote({
-                      reviewId: review?.id,
+                      votable_id: review?.id,
+                      votable_type: 'review',
                       type: 'unhelpful'
                     })
 
