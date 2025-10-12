@@ -356,7 +356,7 @@ const Discussions = ({discussionsData, data_id, type}) => {
    useEffect(() => {
     if (isVoteSuccess && voteData) {
       if (discussionComment) {
-        console.log("Discussion vote data useEffect", voteData);
+        // console.log("Discussion vote data useEffect", voteData);
 
         setDiscussions((prevDiscussion) =>
           prevDiscussion.map((discussion) => {
