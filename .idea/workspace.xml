@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d079e12f-27cf-42d7-900a-11a1310fc74f" name="Changes" comment="" />
+    <list default="true" id="d079e12f-27cf-42d7-900a-11a1310fc74f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +16,7 @@
     <execution />
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="origin/dev_rafia" />
+    <option name="BRANCH" value="mashud_dev" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -130,6 +132,7 @@
       <workItem from="1759895568797" duration="7214000" />
       <workItem from="1760002506954" duration="552000" />
       <workItem from="1760003093622" duration="1292000" />
+      <workItem from="1760240813233" duration="135000" />
     </task>
     <servers />
   </component>
