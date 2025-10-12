@@ -24,9 +24,11 @@ import * as yup from "yup";
 import {Controller, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useCreateBootcampDiscussionMutation, useCreateBootcampDiscussionCommentMutation} from '@/redux/features/student/bootcamp/bootcampApi';
+import {useMakeVoteMutation} from "@/redux/features/student/vote/voteApi";
 
 // const JoditEditor = dynamic(() => import ("jodit-react"), {ssr: false});
 const JoditEditor = dynamic(() => import ("@/components/Share/Editor/JoditEditor/JoditEditor"), {ssr: false});
+import { set } from 'nprogress';
 
 //schema for form create validation
 const createSchema = yup.object({
@@ -80,6 +82,7 @@ const Discussions = ({discussionsData, data_id, type}) => {
   // const [course,
   //   setCourse] = useState({});
   const [orderBy, setOrderBy] = useState("latest");
+  const [discussionComment, setDiscussionComment] = useState(null);
   //create discussion mutation
   const [createCourseDiscussion, {
       data : createData,
@@ -117,6 +120,15 @@ const Discussions = ({discussionsData, data_id, type}) => {
       error : createBootcampCommentResponseError
     }
   ] = useCreateBootcampDiscussionCommentMutation();
+  //review vote mutation
+  const [giveVote, {
+    data : voteData,
+    isLoading : isVoteLoading,
+    isSuccess : isVoteSuccess,
+    isError : isVoteError,
+    error : voteResponseError
+  }
+  ] = useMakeVoteMutation();
 
   //Create Form Validation
   const {
@@ -341,7 +353,62 @@ const Discussions = ({discussionsData, data_id, type}) => {
     }
   }, [createBootcampCommentIsSuccess, createBootcampCommentData, createBootcampCommentIsError, createBootcampCommentResponseError])
 
-  
+   useEffect(() => {
+    if (isVoteSuccess && voteData) {
+      if (discussionComment) {
+        console.log("Discussion vote data useEffect", voteData);
+
+        setDiscussions((prevDiscussion) =>
+          prevDiscussion.map((discussion) => {
+            // Match the discussion
+            if (discussion.id === discussionComment.discussion_id) {
+              return {
+                ...discussion, // create a new discussion object
+                comments: discussion.comments?.map((comment) => {
+                  // Match the comment
+                  if (comment.id === discussionComment.comment_id) {
+                    return {
+                      ...comment,
+                      ...voteData.votable, // updated comment data from API
+                    };
+                  }
+                  return comment;
+                }),
+              };
+            }
+
+            // return untouched discussion
+            return discussion;
+          })
+        );
+
+        setDiscussionComment(null);
+      } else {
+        // Handle discussion vote (not comment)
+        setDiscussions((prevDiscussions) =>
+          prevDiscussions.map((discussion) => {
+            if (discussion.id === voteData?.votable?.id) {
+              return {
+                ...discussion,
+                ...voteData.votable,
+              };
+            }
+            return discussion;
+          })
+        );
+      }
+
+      toastSuccess("Discussion vote submitted successfully");
+    }
+
+    if (isVoteError) {
+      toastError(
+        voteResponseError?.data?.message ||
+          "Something went wrong. Please try again."
+      );
+    }
+  }, [isVoteSuccess, voteData, isVoteError, voteResponseError]);
+
 
   return (
     <div className={styles.discussionsContainer}>
@@ -466,9 +533,24 @@ const Discussions = ({discussionsData, data_id, type}) => {
             </div> */}
 
               <div className={styles.reviewActions}>
-                <button className={styles.helpfulButton}>
+                
+                 <button  className={ discussion?.my_vote ? (
+                     discussion?.my_vote?.type == 'helpful' ? styles.helpfulButton : styles.notHelpfulButton
+                  ) : styles.notHelpfulButton}
+                    onClick={() => {
+
+                      giveVote({
+                        votable_id: discussion?.id,
+                        votable_type: 'discussion',
+                        type:  discussion?.my_vote?.type == 'helpful' ? 'unhelpful' : 'helpful'
+                      })
+
+                    }}
+                  >
                   <FaThumbsUp/>
-                  Helpful
+                  Helpful {
+                    discussion?.helpful_votes_count > 0 ? `(${discussion?.helpful_votes_count})` : ''
+                  }
                 </button>
                 <button className={styles.notHelpfulButton}>
                   <FaUser/>
@@ -603,18 +685,59 @@ const Discussions = ({discussionsData, data_id, type}) => {
                               __html: reply.comment || ""
                             }}></p>
                             <div className={styles.replyActions}>
+                                <button
+                                className={ reply?.my_vote ? (
+                                  reply?.my_vote?.type == 'helpful' ? styles.helpfulButton : styles.notHelpfulButton
+                                ) : styles.notHelpfulButton}
+                                onClick={() => {
+                                  setDiscussionComment({
+                                    'discussion_id': discussion?.id,
+                                    'comment_id': reply?.id
+                                  })
+                             
+                                  giveVote({
+                                    votable_id: reply?.id,
+                                    votable_type: 'discussion_comment',
+                                    type: 'helpful'
+                                  });
+                                }}>
+                                <FaThumbsUp className={styles.voteIcon}/>
+                                Helpful {
+                                  reply?.helpful_votes_count > 0 ? `(${reply?.helpful_votes_count})` : ''
+                                }
+                              </button>
                               <button
+                                  className={ reply?.my_vote ? (
+                                  reply?.my_vote?.type == 'unhelpful' ? styles.helpfulButton : styles.notHelpfulButton
+                                ) : styles.notHelpfulButton}
+                                onClick={() => {
+                                 setDiscussionComment({
+                                    'discussion_id': discussion?.id,
+                                    'comment_id': reply?.id
+                                  });
+                                  giveVote({
+                                    votable_id: reply?.id,
+                                    votable_type: 'discussion_comment',
+                                    type: 'unhelpful'
+                                  });
+                                }}
+                                >
+                                <FaThumbsDown className={styles.voteIcon}/>
+                                Not helpful
+                              </button>
+                              {/* <button
                                 className={styles.voteButton}
                                 onClick={() => handleVote(reply.id, "helpful")}>
                                 <FaThumbsUp className={styles.voteIcon}/>
                                 Helpful
-                              </button>
-                              <button
+                              </button> */}
+                              {/* <button
                                 className={styles.voteButton}
                                 onClick={() => handleVote(reply.id, "notHelpful")}>
                                 <FaThumbsDown className={styles.voteIcon}/>
                                 Not helpful
-                              </button>
+                              </button> */}
+                              
                             </div>
                           </div>
                         ))}
