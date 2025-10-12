@@ -7,7 +7,12 @@ import * as yup from "yup";
 import { BiChevronDown } from "react-icons/bi";
 import { RiUploadCloud2Line } from "react-icons/ri";
 import Image from "next/image";
-import { useState } from "react";
+import {useEffect, useState} from "react";
+import {useCourseCategoriesQuery, useCourseSubCategoriesQuery} from "@/redux/features/teacher/course/courseApi";
+
+
+
+
 const schema = yup.object({
   coursesubTitle: yup.string().required("Course sub title is required"),
   courseDescription: yup.string().required("Course key point name is required"),
@@ -18,6 +23,54 @@ const schema = yup.object({
 
 const CreateCourseForm = () => {
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
+  const [courseCategory, setCourseCategory] = useState([]);
+  const [courseSubCategory, setCourseSubCategory] = useState([]);
+  const [selectCourseCategoryId, setSelectCourseCategoryId] = useState(null);
+
+
+    // Fetch course categories
+    const {
+      data: categoriesData,
+      isLoading: categoriesLoading,
+      isError: categoriesError
+    }
+    = useCourseCategoriesQuery();
+
+  const {
+    data: subCategoriesData,
+    isLoading: subCategoriesLoading,
+    isError: subCategoriesError
+  } = useCourseSubCategoriesQuery({
+        id: selectCourseCategoryId
+      },
+      {
+        skip: !selectCourseCategoryId
+      });
+
+  console.log(subCategoriesData)
+
+
+  useEffect(() => {
+    setCourseCategory([]);
+    if(categoriesData?.data?.data && !categoriesLoading && !categoriesError)
+    {
+      categoriesData?.data?.data.map((item) => {
+        setCourseCategory((prev) => [...prev, {label: item?.name, value: item?.id}])
+      })
+    }
+  },[categoriesLoading, categoriesData])
+
+  useEffect(() => {
+    setCourseSubCategory([]);
+    if(subCategoriesData?.data && !subCategoriesLoading && !subCategoriesError)
+    {
+      subCategoriesData?.data.subcategories.map((item) => {
+        console.log('item', item)
+        setCourseSubCategory((prev) => [...prev, {label: item?.name, value: item?.id}])
+      })
+    }
+  },[subCategoriesData, subCategoriesLoading, subCategoriesError])
+
 
   const {
     register,
@@ -40,6 +93,11 @@ const CreateCourseForm = () => {
   const onSubmit = (data) => {
     console.log("Form submitted:", data);
   };
+
+  const selectCourseCategory = (categoryId) => {
+    setCourseSubCategory([]);
+    setSelectCourseCategoryId(categoryId);
+  }
 
   const handleThumbnailChange = (e) => {
     const file = e.target.files?.[0];
@@ -147,13 +205,15 @@ const CreateCourseForm = () => {
             <div className={styles.inputContainer}>
               <div className={styles.selectWrapper}>
                 <select
-                  {...register("bootcampCategory")}
                   className={styles.select}
+                  onChange={(e) => {
+                    selectCourseCategory(e.target.value);
+                  }}
                 >
                   <option value="">Select category</option>
-                  <option value="programming">Programming</option>
-                  <option value="design">Design</option>
-                  <option value="marketing">Marketing</option>
+                  {courseCategory?.map((item) => (
+                      <option key={'courseCategory'+item?.value} value={item?.value}>{item?.label}</option>
+                  ))}
                 </select>
                 <BiChevronDown className={styles.selectIcon} />
               </div>
@@ -171,9 +231,9 @@ const CreateCourseForm = () => {
               <div className={styles.selectWrapper}>
                 <select className={styles.select}>
                   <option value="">Select Subcategory</option>
-                  <option value="programming">Programming</option>
-                  <option value="design">Design</option>
-                  <option value="marketing">Marketing</option>
+                  {courseSubCategory?.map((item) => (
+                      <option key={'courseCategory'+item?.value} value={item?.value}>{item?.label}</option>
+                  ))}
                 </select>
                 <BiChevronDown className={styles.selectIcon} />
               </div>

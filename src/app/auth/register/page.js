@@ -10,10 +10,11 @@ import logo from "@/assets/images/auth/logo.png";
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {useRegisterUserMutation} from "@/redux/features/auth/authApi";
+import {useRegisterUserMutation, useSocialLoginMutation} from "@/redux/features/auth/authApi";
 import { antIcon, toastError, toastSuccess } from "@/utils/helper";
 import { Spin } from "antd";
 import {useRouter   } from "next/navigation";
+import firebase from './../../lib/firebase';
 
 const schema = yup.object({
   first_name: yup.string().required("Full name is required"),
@@ -54,6 +55,15 @@ const RegisterPage = () => {
     },
   ] = useRegisterUserMutation();
 
+  const [socialLogin,
+    {
+      data: socialLoginData,
+      socialIsLoading,
+      socialIsSuccess,
+      socialIsError,
+      socialError
+    }] = useSocialLoginMutation();
+
   const {
       register,
       handleSubmit,
@@ -67,7 +77,26 @@ const RegisterPage = () => {
     
     });
 
-  
+
+  const  handleGoogleLogin = async () => {
+    console.log("Login with Google clicked");
+    try {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      const response = await firebase.auth().signInWithPopup(provider);
+      if (response) {
+        const socialLoginData = {
+          social_id: response?.additionalUserInfo?.profile?.id,
+          social_provider: response?.additionalUserInfo?.providerId,
+          email: response?.additionalUserInfo?.profile?.email,
+          first_name: response?.additionalUserInfo?.profile?.name,
+          avatar_url: response?.additionalUserInfo?.profile?.picture,
+        };
+
+        console.log("Google login response:", socialLoginData);
+        socialLogin(socialLoginData);
+      }
+    } catch (error) {}
+  };
 
   const onSubmit =  (data) => {
       const payload ={
@@ -80,10 +109,6 @@ const RegisterPage = () => {
 
   };
 
-  const handleGoogleRegister = () => {
-    console.log("Register with Google clicked");
-    // Handle Google registration here
-  };
 
     useEffect(() => {
       if (isSuccess) {
@@ -97,6 +122,26 @@ const RegisterPage = () => {
         toastError(error?.data?.message || "Registration failed. Please try again.");
       }
     }, [isSuccess, data, isError, error, reset, router]);
+
+
+  //  Social login success or error handling can be done here
+  useEffect(() => {
+    console.log("Social login data changed:", socialLoginData);
+    if (socialLoginData) {
+      toastSuccess(socialLoginData?.message || "Login successful");
+      if(socialLoginData?.user?.user_type === "student"){
+        router.push('/student');
+      }else if(socialLoginData?.user?.user_type === "teacher"){
+        router.push('/teacher');
+      }else if(socialLoginData?.user?.user_type === "member")
+      {
+        router.push('/student');
+      }
+    }
+    if (isError) {
+      toastError(error?.message || "Login failed. Please try again.");
+    }
+  }, [socialIsSuccess, socialIsError, socialError, socialLoginData]);
 
   return (
     <div className={styles.ic_container}>
@@ -213,7 +258,7 @@ const RegisterPage = () => {
               <button
                 type="button"
                 className={styles.googleButton}
-                onClick={handleGoogleRegister}
+                onClick={handleGoogleLogin}
               >
                 <Image src={google} alt="google" />
                 Register with Google

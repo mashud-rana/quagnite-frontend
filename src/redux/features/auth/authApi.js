@@ -25,6 +25,28 @@ export const authApi = apiSlice.injectEndpoints({
       },
     }),
 
+    socialLogin: builder.mutation({
+      query: (data) => ({
+        url: "/auth/social-login",
+        method: "POST",
+        body: data,
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const result = await queryFulfilled;
+
+          dispatch(
+            userLoggedIn({
+              user: result?.data?.user,
+              access_token: result?.data?.access_token,
+              refresh_token: result?.data?.refresh_token,
+            })
+          );
+
+        } catch (error) {}
+      },
+    }),
+
     // logOut: builder.query({
     //   query: () => ({
     //     url: "/logout",
@@ -85,4 +107,12 @@ export const authApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useLoginMutation, useForgetPasswordMutation, useVerifyTokenQuery, useResetPasswordMutation, useLogoutMutation, useRegisterUserMutation } = authApi;
+export const {
+  useLoginMutation,
+  useForgetPasswordMutation,
+  useVerifyTokenQuery,
+  useResetPasswordMutation,
+  useLogoutMutation,
+  useRegisterUserMutation,
+    useSocialLoginMutation,
+} = authApi;
