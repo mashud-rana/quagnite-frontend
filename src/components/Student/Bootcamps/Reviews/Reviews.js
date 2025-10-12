@@ -15,6 +15,7 @@ import {antIcon, toastError, toastSuccess} from "@/utils/helper";
 import {Spin} from "antd";
 import {useCreateReviewMutation} from "@/redux/features/student/course/courseApi";
 import {useCreateBootcampReviewMutation} from "@/redux/features/student/bootcamp/bootcampApi";
+import { useReviewVoteMutation } from "@/redux/features/student/review/reviewApi";
 
 
 //validation schema
@@ -59,6 +60,7 @@ const Reviews = ({reviewData, reviews, data_id, type}) => {
   const [orderBy, setOrderBy] = useState("latest");
 
 
+
   //create review mutation for course
   const [createReview, {
       data : createData,
@@ -77,6 +79,16 @@ const Reviews = ({reviewData, reviews, data_id, type}) => {
       error : createBootcampDataResponseError
     }
   ] = useCreateBootcampReviewMutation();
+  //review vote mutation
+  const [reviewVote, {
+      data : reviewVoteData,
+      isLoading : isReviewVoteLoading,
+      isSuccess : isReviewVoteSuccess,
+      isError : isReviewVoteError,
+      error : reviewVoteResponseError
+    }
+  ] = useReviewVoteMutation();
+  
 
   //create review form
     const {
@@ -216,10 +228,38 @@ const Reviews = ({reviewData, reviews, data_id, type}) => {
 
   }, [reviewData, reviews]);
 
+  //review vote useEffect
+  useEffect(() => {
+  if (isReviewVoteSuccess && reviewVoteData) {
+    console.log("Review vote data", reviewVoteData);
+
+    setAllReviews((prevReviews) =>
+      prevReviews.map((r) => {
+        if (r.id === reviewVoteData?.data?.id) {
+          return {
+            ...r,
+            ...reviewVoteData.data
+          };
+        }
+        return r; // must return the unchanged review
+      })
+    );
+
+    toastSuccess("Review vote submitted successfully");
+  }
+
+   if (isReviewVoteError) {
+      toastError(reviewVoteResponseError
+        ?.data
+          ?.message || "Something went wrong. Please try again.");
+    }
+}, [isReviewVoteSuccess, reviewVoteData, isReviewVoteError, reviewVoteResponseError]);
+
+
   //watch review input
   const watchRating = watch("rating");
   const watchComment = watch("comment");
-  console.log("watch review input", watchRating, watchComment);
+  console.log("watch review input",allReviews);
 
   return (
     <div className={styles.reviewsContainer}>
@@ -383,14 +423,34 @@ const Reviews = ({reviewData, reviews, data_id, type}) => {
               </div>
 
               <div className={styles.reviewActions}>
-                <button className={styles.helpfulButton}>
-                  <FaThumbsUp className={styles.actionIcon}/>
-                  Helpful
+                <button className={ review?.my_vote ? (
+                     review?.my_vote?.type == 'helpful' ? styles.helpfulButton : styles.notHelpfulButton 
+                  ) : styles.notHelpfulButton  } onClick={() => {
+
+                    reviewVote({
+                      reviewId: review?.id,
+                      type: 'helpful'
+                    })
+
+                  }}>
+                  <FaThumbsUp className={styles.actionIcon} />
+                  Helpful {
+                    review?.helpful_votes_count > 0 ? `(${review?.helpful_votes_count})` : ''
+                  } 
                 </button>
-                <button className={styles.notHelpfulButton}>
+                <button className={ review?.my_vote ? (
+                     review?.my_vote?.type == 'unhelpful' ? styles.helpfulButton : styles.notHelpfulButton 
+                  ) : styles.notHelpfulButton  } onClick={() => {
+                    reviewVote({
+                      reviewId: review?.id,
+                      type: 'unhelpful'
+                    })
+
+                  }}>
                   <FaThumbsDown className={styles.actionIcon}/>
                   Not helpful
                 </button>
+                
               </div>
             </div>
           ))}
