@@ -80,8 +80,9 @@ const InvoicesPage = () => {
             cursor: 'pointer'
           }} onClick={()=> {
             setViewId(record?.id);
+            viewRefetch();
           }} >
-            {viewId === record?.id && viewIsLoading ? <Spin indicator={antIcon} /> : <GoEye />}
+            {viewId === record?.id && (viewIsLoading || viewIsFetching )? <Spin indicator={antIcon} /> : <GoEye />}
             {/* <GoEye /> */}
           </button>
         </Space>
@@ -104,7 +105,6 @@ const InvoicesPage = () => {
   useEffect(()=>{
     if(viewIsSuccess){
       setViewId(null);
-      // setSelectId(null);
       // Handle successful view
       // The PDF is already opened in a new tab by the query's responseHandler
       toastSuccess("Invoice opened in a new tab");
