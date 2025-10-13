@@ -5,8 +5,10 @@ import React, { useState, useEffect } from "react";
 import { GoEye } from "react-icons/go";
 import { MdOutlineDownload } from "react-icons/md";
 import IcTable from "@/components/Share/IcTable/IcTable";
-import {useGetInvoicesQuery} from "@/redux/features/student/invoice/invoiceApi";
+import {useGetInvoicesQuery, useDownloadInvoiceMutation, useViewInvoiceQuery} from "@/redux/features/student/invoice/invoiceApi";
 import { Space, Table } from "antd";
+import { antIcon, toastError, toastSuccess } from "@/utils/helper";
+import { Spin } from "antd";
 
 const InvoicesPage = () => {
 
@@ -19,6 +21,8 @@ const InvoicesPage = () => {
       pageSize: process.env.NEXT_PUBLIC_PAGE_SIZE ? parseInt(process.env.NEXT_PUBLIC_PAGE_SIZE) : 10,
     },
   });
+  const [selectId, setSelectId] = useState(null);
+  const [viewId, setViewId] = useState(null);
 
   // API hook
   const { data: invoiceData, isSuccess, isLoading, isFetching, refetch } = useGetInvoicesQuery({
@@ -26,6 +30,15 @@ const InvoicesPage = () => {
     per_page: tableParams.pagination?.pageSize,
   });
 
+   //download invoice
+  const [downloadInvoice, 
+    { isLoading: downloadIsLoading, 
+      isSuccess: downloadIsSuccess,
+      isError: downloadIsError,
+      error: downloadError }] = useDownloadInvoiceMutation();
+  //View invoice
+  const { data: viewData, isSuccess: viewIsSuccess, isLoading: viewIsLoading, isFetching: viewIsFetching, refetch: viewRefetch }
+   = useViewInvoiceQuery({ id: viewId }, { skip: !viewId });
 
   // Table columns
   const tableColumns = [
@@ -55,18 +68,21 @@ const InvoicesPage = () => {
           <button
             className="ic_action_btn"
             style={{ cursor: "pointer" }}
-            // onClick={() => {
-            //   downloadEbook(record?.uuid);
-            //   setSelectUuid(record?.uuid);
-            // }}
+            onClick={() => {
+              downloadInvoice(record?.id);
+              setSelectId(record?.id);
+            }}
           >
-            {/* {selectUuid === record?.uuid && downloadIsLoading ? <Spin indicator={antIcon} /> : <MdOutlineDownload />} */}
-            <MdOutlineDownload />
+            {selectId === record?.id && downloadIsLoading ? <Spin indicator={antIcon} /> : <MdOutlineDownload />}
+            {/* <MdOutlineDownload /> */}
           </button>
           <button className="ic_action_btn" style={{
             cursor: 'pointer'
-          }} onClick={()=> window.open(record?.ebook_file_url, '_blank')} >
-            <GoEye />
+          }} onClick={()=> {
+            setViewId(record?.id);
+          }} >
+            {viewId === record?.id && viewIsLoading ? <Spin indicator={antIcon} /> : <GoEye />}
+            {/* <GoEye /> */}
           </button>
         </Space>
       ),
@@ -84,6 +100,23 @@ const InvoicesPage = () => {
     }
   };
 
+  //Handel view success/error
+  useEffect(()=>{
+    if(viewIsSuccess){
+      setViewId(null);
+      // setSelectId(null);
+      // Handle successful view
+      // The PDF is already opened in a new tab by the query's responseHandler
+      toastSuccess("Invoice opened in a new tab");
+    }
+  }, [viewIsSuccess]);
+  // Handle download success/error
+   useEffect(() => {
+      if (downloadIsSuccess) {
+        // Handle successful download
+        setSelectId(null);
+      }
+    }, [downloadIsSuccess]);
   // Set data when fetch success
   useEffect(() => {
     if (isSuccess && invoiceData?.success) {

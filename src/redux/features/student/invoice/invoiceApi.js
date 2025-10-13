@@ -17,17 +17,12 @@ export const invoiceApi = apiSlice.injectEndpoints({
         responseHandler: async (response) => {
           const blob = await response.blob();
 
-          // Extract filename
           const disposition = response.headers.get("Content-Disposition");
           let fileName = "invoice.pdf";
           if (disposition && disposition.includes("filename=")) {
-            fileName = disposition
-              .split("filename=")[1]
-              .replace(/['"]/g, "")
-              .trim();
+            fileName = disposition.split("filename=")[1].replace(/['"]/g, "").trim();
           }
 
-          // Create and trigger download
           const url = window.URL.createObjectURL(blob);
           const a = document.createElement("a");
           a.href = url;
@@ -41,26 +36,30 @@ export const invoiceApi = apiSlice.injectEndpoints({
         },
       }),
     }),
+
     viewInvoice: builder.query({
-      query: (uuid) => ({
-        url: `/student/ebooks/my-ebooks/view/${uuid}`,
+      query: ({ id }) => ({
+        url: `/student/invoices/my-invoices/view/${id}`,
         method: "GET",
         responseHandler: async (response) => {
           const blob = await response.blob();
 
-          // Create an object URL for the blob
-          const fileURL = window.URL.createObjectURL(blob);
+          // Handle 0-byte or missing PDFs
+          if (blob.size === 0) {
+            throw new Error("Empty PDF received from server");
+          }
 
-          // Open PDF in a new browser tab
+          const fileURL = window.URL.createObjectURL(blob);
           window.open(fileURL, "_blank");
 
-          // Optionally revoke URL after some time (cleanup)
+          // Revoke after some delay to free memory
           setTimeout(() => window.URL.revokeObjectURL(fileURL), 10000);
 
           return { success: true, url: fileURL };
         },
       }),
     }),
+
 
 
   }),
