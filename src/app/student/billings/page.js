@@ -32,7 +32,7 @@ const BillingsPage = () => {
 
   const handleSave = (updatedData) => {
     updateUserInfo(updatedData);
-    console.log("Updated billing details:", updatedData);
+   
   };
 
   //set user info when api call success
