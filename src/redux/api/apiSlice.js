@@ -14,34 +14,56 @@ const baseQuery = fetchBaseQuery({
   credentials: "include", // so refresh cookie is sent
 });
 
-const baseQueryWithReauth = async (args, api, extraOptions) => {
-  let result = await baseQuery(args, api, extraOptions);
-  
-  if (result?.error?.status === 401) {
-    // get refresh token from state
-    const refresh_token = api.getState().auth.refresh_token;
-    console.log("Attempting token refresh with refresh token:", refresh_token);
-    // try refresh
-    const refreshResult = await baseQuery(
-      { url: "/user-auth/refresh", method: "POST", body: { refresh_token } },
-      api,
-      extraOptions
-    );
 
-    if (refreshResult?.data) {
-      api.dispatch(
-        userLoggedIn({
-          user: refreshResult.data?.user,
-          access_token: refreshResult.data?.access_token,
-          refresh_token: refreshResult.data?.refresh_token,
-        })
-      );
-      // retry original request
-      result = await baseQuery(args, api, extraOptions);
-    } else {
+
+const baseQueryWithReauth = async (args, api, extraOptions) => {
+  // 🔹 First attempt the request
+  let result = await baseQuery(args, api, extraOptions);
+
+  // 🔸 If 401 (Unauthorized), try refreshing token
+  if (result?.error?.status === 401 || result?.error?.status === "FETCH_ERROR") {
+    const refresh_token = api.getState().auth.refresh_token;
+    console.log("🔁 Token expired, attempting refresh...");
+
+    try {
+      // 🔹 Use fetch() to call refresh endpoint directly
+      const refreshResponse = await fetch(`${baseUrl}/user-auth/refresh`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ refresh_token }),
+      });
+
+      if (!refreshResponse.ok) {
+         api.dispatch(userLoggedOut())
+        throw new Error("Failed to refresh token");
+      }
+
+      const refreshData = await refreshResponse.json();
+
+      // 🔹 If new token received, update store
+      if (refreshData?.access_token) {
+        api.dispatch(
+          userLoggedIn({
+            user: refreshData.user,
+            access_token: refreshData.access_token,
+            refresh_token: refreshData.refresh_token,
+          })
+        );
+
+        // 🔁 Retry the original request with new token
+        result = await baseQuery(args, api, extraOptions);
+      } else {
+        api.dispatch(userLoggedOut());
+      }
+    } catch (error) {
+      console.error("Refresh token error:", error);
       api.dispatch(userLoggedOut());
     }
   }
+
   return result;
 };
 

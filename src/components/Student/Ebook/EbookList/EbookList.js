@@ -103,14 +103,14 @@ const EbookList = () => {
       render: (_, record) => record?.enroll_ebook?.created_at_formatted || "N/A",
     },
     {
-      title: "Title / Plan",
+      title: "e-Book Name",
       key: "title",
       render: (_, record) => record?.title || "N/A",
     },
     {
-      title: "Amount",
-      key: "amount",
-      render: (_, record) => record?.price ? `$${record?.price}` : "-",
+      title: "Author Name",
+      key: "author_name",
+      render: (_, record) => record?.author_name || "N/A",
     },
     {
       title: "Action",
