@@ -5,16 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d079e12f-27cf-42d7-900a-11a1310fc74f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/teacher/course-announcements/create/page.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/teacher/course-announcements/page.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/features/teacher/course/courseApi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/teacher/course-announcements/create/course-announcements.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux/features/teacher/announcements/announcementsApi.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/auth/login/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/login/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/auth/register/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/register/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/lib/firebase.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/lib/firebase.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/teacher/course-announcements/create/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/teacher/course-announcements/create/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/teacher/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/teacher/layout.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Teacher/Courses/CreateCourseForm/CreateCourseForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Teacher/Courses/CreateCourseForm/CreateCourseForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/features/auth/authApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/features/auth/authApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/features/teacher/course/courseApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/features/teacher/course/courseApi.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +90,7 @@
     "git-widget-placeholder": "mashud__dev",
     "js.debugger.nextJs.config.created.client": "true",
     "js.debugger.nextJs.config.created.server": "true",
-    "last_opened_file_path": "D:/React App/quagnite",
+    "last_opened_file_path": "D:/React App/quagnite/src/redux/features/teacher/announcements",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -105,6 +102,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\React App\quagnite\src\redux\features\teacher\announcements" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\React App\quagnite\src\app\teacher\course-announcements\create" />
     </key>
@@ -147,6 +147,7 @@
       <workItem from="1760002506954" duration="552000" />
       <workItem from="1760003093622" duration="1292000" />
       <workItem from="1760240813233" duration="135000" />
+      <workItem from="1760325593162" duration="14565000" />
     </task>
     <servers />
   </component>

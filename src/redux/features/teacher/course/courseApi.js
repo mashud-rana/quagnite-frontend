@@ -17,10 +17,19 @@ export const courseApi = apiSlice.injectEndpoints({
             }),
             // providesTags: ['course-category']
         }),
+        courseBenefits: builder.query({
+            query: () => ({
+                url: `/teacher/benefits`,
+                method: "GET",
+            }),
+            // providesTags: ['course-category']
+        }),
+
     }),
 });
 
 export const {
     useCourseCategoriesQuery,
     useCourseSubCategoriesQuery,
+    useCourseBenefitsQuery,
 } = courseApi;

@@ -39,11 +39,11 @@ const TeacherLayout = ({ children }) => {
       url: "/teacher/bootcamps",
       icon: PiMonitorBold,
     },
-    {
-      title: "Course Announcements",
-      url: "/teacher/course-announcements",
-      icon: TfiAnnouncement,
-    },
+    // {
+    //   title: "Course Announcements",
+    //   url: "/teacher/course-announcements",
+    //   icon: TfiAnnouncement,
+    // },
     {
       title: "Exams",
       url: "/student/exams",

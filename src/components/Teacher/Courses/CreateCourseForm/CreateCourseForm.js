@@ -8,10 +8,8 @@ import { BiChevronDown } from "react-icons/bi";
 import { RiUploadCloud2Line } from "react-icons/ri";
 import Image from "next/image";
 import {useEffect, useState} from "react";
-import {useCourseCategoriesQuery, useCourseSubCategoriesQuery} from "@/redux/features/teacher/course/courseApi";
-
-
-
+import {useCourseCategoriesQuery, useCourseSubCategoriesQuery, useCourseBenefitsQuery} from "@/redux/features/teacher/course/courseApi";
+import {useAnnouncementsQuery} from "@/redux/features/teacher/announcements/announcementsApi";
 
 const schema = yup.object({
   coursesubTitle: yup.string().required("Course sub title is required"),
@@ -26,9 +24,11 @@ const CreateCourseForm = () => {
   const [courseCategory, setCourseCategory] = useState([]);
   const [courseSubCategory, setCourseSubCategory] = useState([]);
   const [selectCourseCategoryId, setSelectCourseCategoryId] = useState(null);
+  const [courseAnnouncements, setCourseAnnouncements] = useState([]);
+  const [courseBenefits, setCourseBenefits] = useState([]);
 
 
-    // Fetch course categories
+    // Fetch API
     const {
       data: categoriesData,
       isLoading: categoriesLoading,
@@ -47,9 +47,24 @@ const CreateCourseForm = () => {
         skip: !selectCourseCategoryId
       });
 
-  console.log(subCategoriesData)
+    const {
+      data: announcementsData,
+      isLoading: announcementsLoading,
+      isError: announcementsError
+    }= useAnnouncementsQuery();
+
+  const {
+    data: courseBenefitsData,
+    isLoading: courseBenefitsLoading,
+    isError: courseBenefitsError
+  }= useCourseBenefitsQuery();
+
+  console.log('courseBenefitsData', courseBenefitsData)
+
+  // End API Fetch
 
 
+  // Course Categories
   useEffect(() => {
     setCourseCategory([]);
     if(categoriesData?.data?.data && !categoriesLoading && !categoriesError)
@@ -58,8 +73,9 @@ const CreateCourseForm = () => {
         setCourseCategory((prev) => [...prev, {label: item?.name, value: item?.id}])
       })
     }
-  },[categoriesLoading, categoriesData])
+  },[categoriesLoading, categoriesData, categoriesError]);
 
+    // Sub Categories
   useEffect(() => {
     setCourseSubCategory([]);
     if(subCategoriesData?.data && !subCategoriesLoading && !subCategoriesError)
@@ -70,6 +86,29 @@ const CreateCourseForm = () => {
       })
     }
   },[subCategoriesData, subCategoriesLoading, subCategoriesError])
+
+
+  // Announcements
+  useEffect(() => {
+    setCourseAnnouncements([]);
+    if(announcementsData?.data?.data && !announcementsLoading && !announcementsError)
+    {
+      announcementsData?.data?.data.map((item) => {
+        setCourseAnnouncements((prev) => [...prev, {label: item?.title, value: item?.id}])
+      })
+    }
+  },[announcementsData, announcementsLoading])
+
+  // benefits
+  useEffect(() => {
+    setCourseBenefits([]);
+    if(courseBenefitsData?.data?.data && !courseBenefitsLoading && !courseBenefitsError)
+    {
+      courseBenefitsData?.data?.data.map((item) => {
+        setCourseBenefits((prev) => [...prev, {label: item?.title, value: item?.id}])
+      })
+    }
+  },[courseBenefitsData, courseBenefitsLoading,courseBenefitsError])
 
 
   const {
@@ -288,9 +327,9 @@ const CreateCourseForm = () => {
                   className={styles.select}
                 >
                   <option value="">Select option</option>
-                  <option value="programming">Programming</option>
-                  <option value="design">Design</option>
-                  <option value="marketing">Marketing</option>
+                  {courseAnnouncements?.map((item) => (
+                      <option key={'announcements'+item?.value} value={item?.value}>{item?.label}</option>
+                  ))}
                 </select>
                 <BiChevronDown className={styles.selectIcon} />
               </div>
@@ -311,9 +350,9 @@ const CreateCourseForm = () => {
                   className={styles.select}
                 >
                   <option value="">Select Course Benefits</option>
-                  <option value="programming">Programming</option>
-                  <option value="design">Design</option>
-                  <option value="marketing">Marketing</option>
+                  {courseBenefits?.map((item) => (
+                      <option key={'announcements'+item?.value} value={item?.value}>{item?.label}</option>
+                  ))}
                 </select>
                 <BiChevronDown className={styles.selectIcon} />
               </div>
@@ -335,6 +374,7 @@ const CreateCourseForm = () => {
                     {...register("courseDescription")}
                     className={styles.input}
                     placeholder="Course Access Period"
+                    onChange={(e) => setValue('courseDescription', e.target.value)}
                 />
               </div>
               {errors.bootcampCategory && (
