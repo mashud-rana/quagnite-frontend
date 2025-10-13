@@ -24,6 +24,13 @@ export const courseApi = apiSlice.injectEndpoints({
             }),
             // providesTags: ['course-category']
         }),
+        courseLanguages: builder.query({
+            query: () => ({
+                url: `/teacher/languages`,
+                method: "GET",
+            }),
+            // providesTags: ['course-category']
+        }),
 
     }),
 });
@@ -32,4 +39,5 @@ export const {
     useCourseCategoriesQuery,
     useCourseSubCategoriesQuery,
     useCourseBenefitsQuery,
+    useCourseLanguagesQuery,
 } = courseApi;

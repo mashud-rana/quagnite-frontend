@@ -8,7 +8,12 @@ import { BiChevronDown } from "react-icons/bi";
 import { RiUploadCloud2Line } from "react-icons/ri";
 import Image from "next/image";
 import {useEffect, useState} from "react";
-import {useCourseCategoriesQuery, useCourseSubCategoriesQuery, useCourseBenefitsQuery} from "@/redux/features/teacher/course/courseApi";
+import {
+  useCourseCategoriesQuery,
+  useCourseSubCategoriesQuery,
+  useCourseBenefitsQuery,
+  useCourseLanguagesQuery,
+} from "@/redux/features/teacher/course/courseApi";
 import {useAnnouncementsQuery} from "@/redux/features/teacher/announcements/announcementsApi";
 
 const schema = yup.object({
@@ -26,6 +31,7 @@ const CreateCourseForm = () => {
   const [selectCourseCategoryId, setSelectCourseCategoryId] = useState(null);
   const [courseAnnouncements, setCourseAnnouncements] = useState([]);
   const [courseBenefits, setCourseBenefits] = useState([]);
+  const [courseLanguage, setCourseLanguage] = useState([]);
 
 
     // Fetch API
@@ -58,6 +64,13 @@ const CreateCourseForm = () => {
     isLoading: courseBenefitsLoading,
     isError: courseBenefitsError
   }= useCourseBenefitsQuery();
+
+
+  const {
+    data: courseLanguagesData,
+    isLoading: courseLanguagesLoading,
+    isError: courseLanguagesError
+  }= useCourseLanguagesQuery();
 
   console.log('courseBenefitsData', courseBenefitsData)
 
@@ -109,6 +122,18 @@ const CreateCourseForm = () => {
       })
     }
   },[courseBenefitsData, courseBenefitsLoading,courseBenefitsError])
+
+
+  // Language
+  useEffect(() => {
+    setCourseLanguage([]);
+    if(courseLanguagesData?.data?.data && !courseLanguagesLoading && !courseLanguagesError)
+    {
+      courseLanguagesData?.data?.data.map((item) => {
+        setCourseLanguage((prev) => [...prev, {label: item?.title, value: item?.id}])
+      })
+    }
+  },[courseLanguagesData, courseLanguagesLoading,courseLanguagesError])
 
 
   const {
@@ -374,7 +399,6 @@ const CreateCourseForm = () => {
                     {...register("courseDescription")}
                     className={styles.input}
                     placeholder="Course Access Period"
-                    onChange={(e) => setValue('courseDescription', e.target.value)}
                 />
               </div>
               {errors.bootcampCategory && (
@@ -390,11 +414,10 @@ const CreateCourseForm = () => {
             <label className={styles.label}>Learners Accessibility</label>
             <div className={styles.inputContainer}>
               <div className={styles.selectWrapper}>
-                <select className={styles.select}>
-                  <option value="">Learners Accessibility</option>
-                  <option value="45">$45</option>
-                  <option value="45">$55</option>
-                  <option value="80">$80</option>
+                <select {...register('learner_accessibility')} className={styles.select} onChange={(e) => setValue('learner_accessibility', e.target.value)}>
+                  <option value="">Select Learners Accessibility</option>
+                  <option value="free">Free</option>
+                  <option value="paid">Paid</option>
                 </select>
                 <BiChevronDown className={styles.selectIcon} />
               </div>
@@ -403,35 +426,36 @@ const CreateCourseForm = () => {
 
 
 
-          <div className={styles.formRow}>
-            <label className={styles.label}>Course Price</label>
-            <div className={styles.inputContainer}>
-              <div className={styles.selectWrapper}>
-                <select className={styles.select}>
-                  <option value="">Select price</option>
-                  <option value="45">$45</option>
-                  <option value="45">$55</option>
-                  <option value="80">$80</option>
-                </select>
-                <BiChevronDown className={styles.selectIcon} />
-              </div>
-            </div>
-          </div>
+          {watch('learner_accessibility') === 'paid' && (
+              <>
+                <div className={styles.formRow}>
+                  <label className={styles.label}>Course Price</label>
+                  <div className={styles.inputContainer}>
+                    <div className={styles.selectWrapper}>
+                      <input
+                          type="number"
+                          {...register("courseDescription")}
+                          className={styles.input}
+                          placeholder="Course Price"
+                      />
+                    </div>
+                  </div>
+                </div>
 
-          <div className={styles.formRow}>
-            <label className={styles.label}>Old Price</label>
-            <div className={styles.inputContainer}>
-              <div className={styles.selectWrapper}>
-                <select className={styles.select}>
-                  <option value="">Select old price</option>
-                  <option value="45">$45</option>
-                  <option value="45">$55</option>
-                  <option value="80">$80</option>
-                </select>
-                <BiChevronDown className={styles.selectIcon} />
-              </div>
-            </div>
-          </div>
+                <div className={styles.formRow}>
+                  <label className={styles.label}>Old Price</label>
+                  <div className={styles.inputContainer}>
+                    <div className={styles.selectWrapper}>
+                      <input
+                          type="number"
+                          {...register("courseDescription")}
+                          className={styles.input}
+                          placeholder="Old Price"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </>)}
 
           <div className={styles.formRow}>
             <label className={styles.label}>Language</label>
@@ -439,9 +463,9 @@ const CreateCourseForm = () => {
               <div className={styles.selectWrapper}>
                 <select className={styles.select}>
                   <option value="">Select language</option>
-                  <option value="english">English</option>
-                  <option value="bangla">Bangladesh</option>
-                  <option value="hindi">Hindi</option>
+                  {courseLanguage?.map((item) => (
+                      <option key={'language'+item?.value} value={item?.value}>{item?.label}</option>
+                  ))}
                 </select>
                 <BiChevronDown className={styles.selectIcon} />
               </div>
