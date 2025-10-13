@@ -1,112 +1,47 @@
-// "use client";
-
-// import React, { useState } from "react";
-// import styles from "./details.module.css";
-
-// const BillingDetails = () => {
-//   const [isEditing, setIsEditing] = useState(false);
-//   const [profileData, setProfileData] = useState([
-//     { label: "Name", value: "Amiliafox" },
-//     { label: "Email address", value: "amiliafox2727127@gmail.com" },
-//     {
-//       label: "Billing address",
-//       value: "23475 Glacier View Dr, Eagle River, Alaska 99577, USA",
-//     },
-//     { label: "Phone Number", value: "+0987654211" },
-//   ]);
-
-//   // Update specific field
-//   const handleChange = (index, newValue) => {
-//     setProfileData((prev) =>
-//       prev.map((item, i) => (i === index ? { ...item, value: newValue } : item))
-//     );
-//   };
-
-//   return (
-//     <div className={styles.infoContainer}>
-//       <div className={styles.infoHeader}>
-//         <p className={styles.infoTitle}>Profile Info</p>
-//         <button
-//           className="ic_common_primary_btn"
-//           //   className={styles.editButton}
-//           onClick={() => setIsEditing((prev) => !prev)}
-//         >
-//           {isEditing ? "SAVE" : "edit billing details"}
-//         </button>
-//       </div>
-//       <div
-//         className={`${styles.infoGrid} ${isEditing ? styles.editModeGrid : ""}`}
-//       >
-//         {profileData.map((item, index) => (
-//           <div
-//             key={index}
-//             className={`${styles.infoRow} ${
-//               isEditing ? styles.editModeRow : ""
-//             }`}
-//           >
-//             <span className={styles.infoLabel}>{item.label}</span>
-
-//             <input
-//               type="text"
-//               value={item.value}
-//               onChange={(e) => handleChange(index, e.target.value)}
-//               disabled={!isEditing}
-//               className={`${styles.infoValue} ${
-//                 isEditing ? styles.editModeInput : ""
-//               }`}
-//             />
-
-//             {/* {item.label === "Bio" ? (
-//               <textarea
-//                 value={item.value}
-//                 onChange={(e) => handleChange(index, e.target.value)}
-//                 disabled={!isEditing}
-//                 className={`${styles.infoValue} ${styles.textArea} ${
-//                   isEditing ? styles.editModeInput : ""
-//                 }`}
-//                 rows={3}
-//               />
-//             ) : (
-//               <input
-//                 type="text"
-//                 value={item.value}
-//                 onChange={(e) => handleChange(index, e.target.value)}
-//                 disabled={!isEditing}
-//                 className={`${styles.infoValue} ${
-//                   isEditing ? styles.editModeInput : ""
-//                 }`}
-//               />
-//             )} */}
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default BillingDetails;
-
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./details.module.css";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { antIcon, toastError, toastSuccess } from "@/utils/helper";
+import { Spin } from "antd";
 
-const BillingDetails = ({ title = "Details", fields = [], onSave }) => {
+// ✅ Schema validation
+const schema = yup.object({
+  billing_name: yup.string().nullable(),
+  billing_email: yup.string().email("Invalid email").nullable(),
+  billing_address: yup.string().nullable(),
+  billing_phone: yup
+    .string()
+    .required("Phone number is required")
+    .max(16, "Phone number must be at most 16 characters"),
+});
+
+const BillingDetails = ({ title = "Details", fields = {}, onSave, buttonIsLoading }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [formData, setFormData] = useState(fields);
 
-  // Update specific field
-  const handleChange = (index, newValue) => {
-    setFormData((prev) =>
-      prev.map((item, i) => (i === index ? { ...item, value: newValue } : item))
-    );
-  };
+  // ✅ Initialize react-hook-form with default values
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: fields, // initial load
+  });
 
-  const handleSave = () => {
+  // ✅ Whenever "fields" prop changes (like after API load), update form values
+  useEffect(() => {
+    if (fields) reset(fields);
+  }, [fields, reset]);
+
+  // ✅ Handle save with validation
+  const onSubmit = (data) => {
+    if (onSave) onSave(data);
     setIsEditing(false);
-    if (onSave) {
-      onSave(formData);
-    }
   };
 
   return (
@@ -114,35 +49,103 @@ const BillingDetails = ({ title = "Details", fields = [], onSave }) => {
       <div className={styles.infoHeader}>
         <p className={styles.infoTitle}>{title}</p>
         <button
+          type="button"
           className="ic_common_primary_btn"
-          onClick={() => (isEditing ? handleSave() : setIsEditing(true))}
+          onClick={() =>
+            isEditing ? handleSubmit(onSubmit)() : setIsEditing(true)
+          }
         >
           {isEditing ? "SAVE" : "Edit"}
+          {buttonIsLoading && <Spin indicator={antIcon} />}
         </button>
       </div>
-      <div
-        className={`${styles.infoGrid} ${isEditing ? styles.editModeGrid : ""}`}
-      >
-        {formData.map((item, index) => (
-          <div
-            key={index}
-            className={`${styles.infoRow} ${
-              isEditing ? styles.editModeRow : ""
-            }`}
-          >
-            <span className={styles.infoLabel}>{item.label}</span>
 
-            <input
-              type="text"
-              value={item.value}
-              onChange={(e) => handleChange(index, e.target.value)}
-              disabled={!isEditing}
-              className={`${styles.infoValue} ${
-                isEditing ? styles.editModeInput : ""
-              }`}
-            />
-          </div>
-        ))}
+      <div
+        className={`${styles.infoGrid} ${
+          isEditing ? styles.editModeGrid : ""
+        }`}
+      >
+        {/* Name */}
+        <div
+          className={`${styles.infoRow} ${
+            isEditing ? styles.editModeRow : ""
+          }`}
+        >
+          <span className={styles.infoLabel}>Name</span>
+          <input
+            type="text"
+            disabled={!isEditing}
+            className={`${styles.infoValue} ${
+              isEditing ? styles.editModeInput : ""
+            }`}
+            {...register("billing_name")}
+          />
+          {errors.billing_name && (
+            <small className="text-danger">{errors.billing_name.message}</small>
+          )}
+        </div>
+
+        {/* Email */}
+        <div
+          className={`${styles.infoRow} ${
+            isEditing ? styles.editModeRow : ""
+          }`}
+        >
+          <span className={styles.infoLabel}>Email Address</span>
+          <input
+            type="text"
+            disabled={!isEditing}
+            className={`${styles.infoValue} ${
+              isEditing ? styles.editModeInput : ""
+            }`}
+            {...register("billing_email")}
+          />
+          {errors.billing_email && (
+            <small className="text-danger">{errors.billing_email.message}</small>
+          )}
+        </div>
+
+        {/* Address */}
+        <div
+          className={`${styles.infoRow} ${
+            isEditing ? styles.editModeRow : ""
+          }`}
+        >
+          <span className={styles.infoLabel}>Billing Address</span>
+          <input
+            type="text"
+            disabled={!isEditing}
+            className={`${styles.infoValue} ${
+              isEditing ? styles.editModeInput : ""
+            }`}
+            {...register("billing_address")}
+          />
+          {errors.billing_address && (
+            <small className="text-danger">
+              {errors.billing_address.message}
+            </small>
+          )}
+        </div>
+
+        {/* Phone */}
+        <div
+          className={`${styles.infoRow} ${
+            isEditing ? styles.editModeRow : ""
+          }`}
+        >
+          <span className={styles.infoLabel}>Phone Number</span>
+          <input
+            type="text"
+            disabled={!isEditing}
+            className={`${styles.infoValue} ${
+              isEditing ? styles.editModeInput : ""
+            }`}
+            {...register("billing_phone")}
+          />
+          {errors.billing_phone && (
+            <small className="text-danger">{errors.billing_phone.message}</small>
+          )}
+        </div>
       </div>
     </div>
   );
