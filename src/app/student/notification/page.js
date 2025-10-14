@@ -1,7 +1,10 @@
+"use client";
 import Notification from "@/components/Share/Notification/Notification";
 import Link from "next/link";
-import React from "react";
+import React,{useState, useEffect} from "react";
 import { FaArrowLeft } from "react-icons/fa";
+import {useGetAnnouncementQuery} from '@/redux/features/announcement/announcementApi';
+import { set } from 'nprogress';
 
 const notifications = [
   {
@@ -31,6 +34,59 @@ const notifications = [
 ];
 
 const NotificationsPage = () => {
+   const [params, setParams] = useState({
+    page: Number(process.env.NEXT_PUBLIC_CURRENT_PAGE) || 1,
+    per_page: Number(process.env.NEXT_PUBLIC_PAGE_SIZE) || 10,
+  });
+  const [announcements, setAnnouncements] = useState([]);
+  const [totalPages, setTotalPages] = useState(1);
+//fetch announcements
+  const { 
+  data,
+  isSuccess, 
+  isLoading, 
+  error, 
+  refetch,
+  isFetching 
+  } = useGetAnnouncementQuery(params);
+
+  //scroll fetch
+ const fetchMoreDataHandler = () => {
+    console.log("Fetching next page...");
+    setParams((prev) => {
+      if (prev.page < totalPages) {
+        return { ...prev, page: prev.page + 1 };
+      }
+      console.log("Reached last page");
+      return prev;
+    });
+  };
+
+
+
+  //set announcements
+    
+ useEffect(() => {
+    if (isSuccess && data?.data?.data) {
+      const newItems = data.data.data;
+
+      if (params.page === 1) {
+        setAnnouncements(newItems);
+      } else {
+        setAnnouncements((prev) => {
+          // avoid duplicates
+          const ids = new Set(prev.map((a) => a.id));
+          const uniqueNew = newItems.filter((a) => !ids.has(a.id));
+          return [...prev, ...uniqueNew];
+        });
+      }
+
+      setTotalPages(data?.data?.meta?.last_page || 1);
+    }
+  }, [isSuccess, data, params.page]);
+
+
+  console.log("1 announcementData", announcements);
   return (
     <div>
       <div className="mb-24">
@@ -42,23 +98,15 @@ const NotificationsPage = () => {
         </div>
       </div>
 
-      {/* <div className={styles.list}>
-        {notifications.map((item) => (
-          <div key={item.id} className={styles.card}>
-            <img src={item.image} alt="Notification" className={styles.image} />
-            <div className={styles.info}>
-              <p>{item.message}</p>
-              <div className={styles.meta}>
-                {item.source && <span>{item.source}</span>}
-                <span>{item.date}</span>
-                <span>{item.time}</span>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div> */}
-
-      <Notification />
+      <Notification 
+      isLoading={isLoading}
+      announcements={announcements}
+      page={params.page}
+      totalPages={totalPages}
+      error={error}
+      refetch={refetch}
+      onFetchMoreData={fetchMoreDataHandler}
+    />
     </div>
   );
 };
