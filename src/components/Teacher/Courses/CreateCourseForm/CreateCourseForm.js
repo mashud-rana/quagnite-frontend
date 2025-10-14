@@ -1,6 +1,7 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
+import {Controller, useForm} from "react-hook-form";
 import styles from "./createform.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -8,6 +9,8 @@ import { BiChevronDown } from "react-icons/bi";
 import { RiUploadCloud2Line } from "react-icons/ri";
 import Image from "next/image";
 import {useEffect, useState} from "react";
+import { Select } from 'antd';
+
 import {
   useCourseCategoriesQuery,
   useCourseSubCategoriesQuery,
@@ -23,19 +26,70 @@ import { FilePond, registerPlugin } from 'react-filepond';
 // Import the plugins you want to use
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
-
 // Register plugins
 registerPlugin(FilePondPluginImagePreview, FilePondPluginFileValidateType);
 
 const schema = yup.object({
-  coursesubTitle: yup.string().required("Course sub title is required"),
-  courseDescription: yup.string().required("Course key point name is required"),
-  courseSubDescription: yup
-    .string()
-    .required("Course sub description is required"),
+  // courseType: yup.string().nullable(true),
+  // title: yup.string().required("Title is required"),
+  // subtitle: yup.string().required("Subtitle is required"),
+  // // description: yup.string().required("Description is required"),
+  // course_category_id: yup.string().required("Course category is required"),
+  // course_subcategory_id: yup.string().nullable(true),
+  // course_announcement_id: yup.string().nullable(true),
+  // access_period: yup.number().typeError('Access period must be a number').required("Access period is required"),
+  // course_language_id: yup.string().required("Course language is required"),
+  // tag_id: yup.array().nullable(true),
+  // difficulty_level_id: yup.string().required("Course difficulty level is required"),
+  // learner_accessibility: yup.string().required("Learner accessibility is required"),
+  // price: yup.number().when('learner_accessibility', ([learner_accessibility]) => {
+  //   if (learner_accessibility === 'paid') {
+  //     return yup.number()
+  //         .typeError('Price must be a number')
+  //         .required('Price is required for paid courses');
+  //   }
+  //   return yup.number().nullable(true);
+  // }),
+  // old_price: yup.number().when('learner_accessibility', ([learner_accessibility]) => {
+  //   if (learner_accessibility === 'paid') {
+  //     return yup.number()
+  //         .typeError('Old price must be a number')
+  //         .nullable(true);
+  //   }
+  //   return yup.number().nullable(true);
+  // }),
+  image: yup
+      .mixed()
+      .test("required", "Course thumbnail is required", (value) => {
+        return value && value.length > 0; // ✅ ensures at least one file
+      })
+      .test("fileSize", "File size is too large", (value) => {
+        if (!value || value.length === 0) return true; // skip if empty
+        return value[0].size <= 2 * 1024 * 1024; // 2MB limit
+      })
+      .test("fileType", "Unsupported file format", (value) => {
+        if (!value || value.length === 0) return true; // skip if empty
+        return ["image/png", "image/jpeg", "image/jpg"].includes(value[0].type);
+      }),
+  thumb_type: yup.string().nullable(true),
+  video: yup.string().when('thumb_type', ([thumb_type]) => {
+    if (thumb_type === 'video') {
+      return yup.string()
+          .required('Course video is required for youtube type');
+    }
+    return yup.string().nullable(true);
+  }),
+  video_link: yup.string().when('thumb_type', ([thumb_type]) => {
+    if (thumb_type === 'youtube') {
+      return yup.string()
+          .required('Course video link is required for youtube type');
+    }
+    return yup.string().nullable(true);
+  }),
 });
 
 const CreateCourseForm = () => {
+  const token = useSelector((state) => state.auth.access_token);
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
   const [courseCategory, setCourseCategory] = useState([]);
   const [courseSubCategory, setCourseSubCategory] = useState([]);
@@ -46,6 +100,22 @@ const CreateCourseForm = () => {
   const [courseDifficulty, setCourseDifficulty] = useState([]);
   const [courseTags, setCourseTags] = useState([]);
   const [files, setFiles] = useState([]);
+
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: 'onSubmit', // or 'onChange' if you want real-time validation
+    reValidateMode: 'onChange'
+  });
+
+  console.log('form errors', errors);
 
     // Fetch API
     const {
@@ -98,7 +168,6 @@ const CreateCourseForm = () => {
     isError: courseTagsError
   }= useCourseTagsQuery();
 
-  console.log('courseTagsData', courseTagsData)
 
   // End API Fetch
 
@@ -185,23 +254,8 @@ const CreateCourseForm = () => {
   },[courseTagsData,courseTagsLoading,courseTagsError])
 
 
-  const {
-    register,
-    handleSubmit,
-    control,
-    watch,
-    setValue,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-    defaultValues: {
-      videoType: "upload",
-      whatYoullLearn: [],
-      whoShouldAttend: [],
-    },
-  });
 
-  const videoType = watch("videoType");
+
 
   const onSubmit = (data) => {
     console.log("Form submitted:", data);
@@ -212,12 +266,7 @@ const CreateCourseForm = () => {
     setSelectCourseCategoryId(categoryId);
   }
 
-  const handleThumbnailChange = (e) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setThumbnailPreview(URL.createObjectURL(file));
-    }
-  };
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -228,32 +277,55 @@ const CreateCourseForm = () => {
           <div className={styles.formRow}>
             <label className={styles.label}>Course Type</label>
             <div className={styles.inputContainer}>
-              <input className={styles.input} placeholder="Course Type" />
-            </div>
-          </div>
-
-          <div className={styles.formRow}>
-            <label className={styles.label}>Course subtitle</label>
-            <div className={styles.inputContainer}>
               <input
-                {...register("coursesubTitle")}
-                className={styles.input}
-                placeholder="Course Subtitle"
+                  {...register("courseType")}
+                  className={styles.input}
+                  placeholder="Course Type"
               />
-              {errors.coursesubTitle && (
-                <span className={styles.error}>
-                  {errors.coursesubTitle.message}
+              {errors.courseType && (
+                  <span className={styles.error}>
+                  {errors.courseType.message}
                 </span>
               )}
             </div>
           </div>
 
+
           <div className={styles.formRow}>
-            <label className={styles.label}>Course Title</label>
+            <label className={styles.label}>Course Title *</label>
             <div className={styles.inputContainer}>
-              <input className={styles.input} placeholder="Course Title" />
+              <input
+                  {...register("title")}
+                  className={styles.input}
+                  placeholder="Course Title"
+              />
+
+              {errors.title && (
+                  <span className={styles.error}>
+                  {errors.title.message}
+                </span>
+              )}
             </div>
           </div>
+
+
+          <div className={styles.formRow}>
+            <label className={styles.label}>Course Subtitle *</label>
+            <div className={styles.inputContainer}>
+              <input
+                {...register("subtitle")}
+                className={styles.input}
+                placeholder="Course Subtitle"
+              />
+              {errors.subtitle && (
+                <span className={styles.error}>
+                  {errors.subtitle.message}
+                </span>
+              )}
+            </div>
+          </div>
+
+
 
           <div className={styles.ic_grid}>
             <div className={styles.formRow}>
@@ -314,10 +386,11 @@ const CreateCourseForm = () => {
         <h5 className={styles.sectionTitle}>Category & Features</h5>
         <div className={styles.ic_details_wrapper}>
           <div className={styles.formRow}>
-            <label className={styles.label}>Course Category</label>
+            <label className={styles.label}>Course Category *</label>
             <div className={styles.inputContainer}>
               <div className={styles.selectWrapper}>
                 <select
+                  {...register("course_category_id")}
                   className={styles.select}
                   onChange={(e) => {
                     selectCourseCategory(e.target.value);
@@ -330,9 +403,9 @@ const CreateCourseForm = () => {
                 </select>
                 <BiChevronDown className={styles.selectIcon} />
               </div>
-              {errors.bootcampCategory && (
+              {errors.course_category_id && (
                 <span className={styles.error}>
-                  {errors.bootcampCategory.message}
+                  {errors.course_category_id.message}
                 </span>
               )}
             </div>
@@ -342,7 +415,9 @@ const CreateCourseForm = () => {
             <label className={styles.label}>Course Subcategory</label>
             <div className={styles.inputContainer}>
               <div className={styles.selectWrapper}>
-                <select className={styles.select}>
+                <select
+                    {...register("course_subcategory_id")}
+                    className={styles.select}>
                   <option value="">Select Subcategory</option>
                   {courseSubCategory?.map((item) => (
                       <option key={'courseCategory'+item?.value} value={item?.value}>{item?.label}</option>
@@ -397,7 +472,7 @@ const CreateCourseForm = () => {
             <div className={styles.inputContainer}>
               <div className={styles.selectWrapper}>
                 <select
-                  {...register("bootcampCategory")}
+                  {...register("course_announcement_id")}
                   className={styles.select}
                 >
                   <option value="">Select option</option>
@@ -407,9 +482,9 @@ const CreateCourseForm = () => {
                 </select>
                 <BiChevronDown className={styles.selectIcon} />
               </div>
-              {errors.bootcampCategory && (
+              {errors.course_announcement_id && (
                 <span className={styles.error}>
-                  {errors.bootcampCategory.message}
+                  {errors.course_announcement_id.message}
                 </span>
               )}
             </div>
@@ -440,19 +515,21 @@ const CreateCourseForm = () => {
 
 
           <div className={styles.formRow}>
-            <label className={styles.label}>Course Access Period</label>
+            <label className={styles.label}>Course Access Period *</label>
             <div className={styles.inputContainer}>
               <div className={styles.selectWrapper}>
                 <input
                     type="number"
-                    {...register("courseDescription")}
+                    min={0}
+                    defaultValue={0}
+                    {...register("access_period")}
                     className={styles.input}
                     placeholder="Course Access Period"
                 />
               </div>
-              {errors.bootcampCategory && (
+              {errors.access_period && (
                 <span className={styles.error}>
-                  {errors.bootcampCategory.message}
+                  {errors.access_period.message}
                 </span>
               )}
             </div>
@@ -460,15 +537,24 @@ const CreateCourseForm = () => {
           <small>Enrollment will expire after this number of days. Set 0 for no expiration</small>
 
           <div className={styles.formRow}>
-            <label className={styles.label}>Learners Accessibility</label>
+            <label className={styles.label}>Learners Accessibility *</label>
             <div className={styles.inputContainer}>
               <div className={styles.selectWrapper}>
-                <select {...register('learner_accessibility')} className={styles.select} onChange={(e) => setValue('learner_accessibility', e.target.value)}>
+                <select
+                    {...register('learner_accessibility')}
+                    className={styles.select}
+                    onChange={(e) => setValue('learner_accessibility', e.target.value)}
+                >
                   <option value="">Select Learners Accessibility</option>
                   <option value="free">Free</option>
                   <option value="paid">Paid</option>
                 </select>
                 <BiChevronDown className={styles.selectIcon} />
+                {errors.learner_accessibility && (
+                    <span className={styles.error}>
+                  {errors.learner_accessibility.message}
+                </span>
+                )}
               </div>
             </div>
           </div>
@@ -478,15 +564,20 @@ const CreateCourseForm = () => {
           {watch('learner_accessibility') === 'paid' && (
               <>
                 <div className={styles.formRow}>
-                  <label className={styles.label}>Course Price</label>
+                  <label className={styles.label}>Course Price *</label>
                   <div className={styles.inputContainer}>
                     <div className={styles.selectWrapper}>
                       <input
                           type="number"
-                          {...register("courseDescription")}
+                          {...register("price")}
                           className={styles.input}
                           placeholder="Course Price"
                       />
+                      {errors.price && (
+                          <span className={styles.error}>
+                          {errors.price.message}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -497,41 +588,56 @@ const CreateCourseForm = () => {
                     <div className={styles.selectWrapper}>
                       <input
                           type="number"
-                          {...register("courseDescription")}
+                          {...register("old_price")}
                           className={styles.input}
                           placeholder="Old Price"
                       />
+                      {errors.old_price && (
+                          <span className={styles.error}>
+                          {errors.old_price.message}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
               </>)}
 
           <div className={styles.formRow}>
-            <label className={styles.label}>Language</label>
+            <label className={styles.label}>Language *</label>
             <div className={styles.inputContainer}>
               <div className={styles.selectWrapper}>
-                <select className={styles.select}>
+                <select
+                    {...register("course_language_id")}
+                    className={styles.select}
+                >
                   <option value="">Select language</option>
                   {courseLanguage?.map((item) => (
-                      <option key={'language'+item?.value} value={item?.value}>{item?.label}</option>
+                      <option key={'language' + item?.value} value={item?.value}>{item?.label}</option>
                   ))}
                 </select>
-                <BiChevronDown className={styles.selectIcon} />
+                <BiChevronDown className={styles.selectIcon}/>
+
+                {errors.course_language_id && (<span className={styles.error}>
+                  {errors.course_language_id.message}
+                </span>)}
               </div>
             </div>
           </div>
 
           <div className={styles.formRow}>
-            <label className={styles.label}>Course Difficulty Level</label>
+            <label className={styles.label}>Course Difficulty Level *</label>
             <div className={styles.inputContainer}>
               <div className={styles.selectWrapper}>
-                <select className={styles.select}>
+                <select {...register('difficulty_level_id')} className={styles.select}>
                   <option value="">Select Course Difficulty Level</option>
                   {courseDifficulty?.map((item) => (
                         <option key={'difficulty'+item?.value} value={item?.value}>{item?.label}</option>
                     ))}
                 </select>
                 <BiChevronDown className={styles.selectIcon} />
+                {errors.difficulty_level_id && (<span className={styles.error}>
+                  {errors.difficulty_level_id.message}
+                </span>)}
               </div>
             </div>
           </div>
@@ -540,189 +646,30 @@ const CreateCourseForm = () => {
             <label className={styles.label}>Course Tags</label>
             <div className={styles.inputContainer}>
               <div className={styles.selectWrapper}>
-                <select className={styles.select}>
-                  <option value="">Select Course Tags</option>
-                  {courseTags?.map((item) => (
-                        <option key={'tags'+item?.value} value={item?.value}>{item?.label}</option>
-                    ))}
-                </select>
-                <BiChevronDown className={styles.selectIcon} />
+                <Controller
+                    name="tag_id"
+                    control={control}
+                    render={({field}) => (
+                        <Select
+                            {...field}
+                            mode="multiple"
+                            allowClear
+                            showSearch
+                            style={{width: '100%', height: '40px'}}
+                      placeholder="Select Course Tags"
+                      optionFilterProp="label"
+                      options={[...courseTags]}
+                    />
+                  )}
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* 4th section  */}
-      {/*<div className={styles.section}>*/}
-      {/*  <h5 className={styles.sectionTitle}>*/}
-      {/*    Course Thumbnail Or Introduction Video*/}
-      {/*  </h5>*/}
-      {/*  <div className={styles.ic_details_wrapper}>*/}
-      {/*    <div className={styles.formRow}>*/}
-      {/*      <label className={styles.label}>Course Type</label>*/}
-      {/*      <div className={styles.inputContainer}>*/}
-      {/*        <input className={styles.input} placeholder="Course Type" />*/}
-      {/*      </div>*/}
-      {/*    </div>*/}
-
-      {/*    <div className={styles.formRow}>*/}
-      {/*      <label className={styles.label}>Course subtitle</label>*/}
-      {/*      <div className={styles.inputContainer}>*/}
-      {/*        <input*/}
-      {/*          {...register("coursesubTitle")}*/}
-      {/*          className={styles.input}*/}
-      {/*          placeholder="Course Subtitle"*/}
-      {/*        />*/}
-      {/*        {errors.coursesubTitle && (*/}
-      {/*          <span className={styles.error}>*/}
-      {/*            {errors.coursesubTitle.message}*/}
-      {/*          </span>*/}
-      {/*        )}*/}
-      {/*      </div>*/}
-      {/*    </div>*/}
-
-      {/*    <div className={styles.formRow}>*/}
-      {/*      <label className={styles.label}>Course Title</label>*/}
-      {/*      <div className={styles.inputContainer}>*/}
-      {/*        <input className={styles.input} placeholder="Course Title" />*/}
-      {/*      </div>*/}
-      {/*    </div>*/}
-
-      {/*    <div className={styles.ic_grid}>*/}
-      {/*      <div className={styles.formRow}>*/}
-      {/*        <label className={styles.label}>*/}
-      {/*          Course Description Key Points **/}
-      {/*        </label>*/}
-      {/*        <div className={styles.inputContainer}>*/}
-      {/*          <div className={styles.textareaWithButton}>*/}
-      {/*            <input*/}
-      {/*              {...register("courseDescription")}*/}
-      {/*              className={styles.input}*/}
-      {/*              placeholder="type key point name"*/}
-      {/*            />*/}
-
-      {/*            <button type="button" className="ic_common_primary_btn">*/}
-      {/*              ADD*/}
-      {/*            </button>*/}
-      {/*          </div>*/}
-
-      {/*          {errors.courseDescription && (*/}
-      {/*            <span className={styles.error}>*/}
-      {/*              {errors.courseDescription.message}*/}
-      {/*            </span>*/}
-      {/*          )}*/}
-      {/*        </div>*/}
-      {/*      </div>*/}
-
-      {/*      <div className={styles.formRow}>*/}
-      {/*        <label className={styles.label}>Enable For Subscription</label>*/}
-      {/*        <div className={styles.inputContainer}>*/}
-      {/*          <div className={styles.selectWrapper}>*/}
-      {/*            <select*/}
-      {/*              {...register("courseSubDescription")}*/}
-      {/*              className={styles.select}*/}
-      {/*            >*/}
-      {/*              <option value="">Enable</option>*/}
-      {/*              <option value="web-development">Web Development</option>*/}
-      {/*              <option value="mobile-development">*/}
-      {/*                Mobile Development*/}
-      {/*              </option>*/}
-      {/*              <option value="data-science">Data Science</option>*/}
-      {/*            </select>*/}
-      {/*            <BiChevronDown className={styles.selectIcon} />*/}
-      {/*          </div>*/}
-      {/*          {errors.courseSubDescription && (*/}
-      {/*            <span className={styles.error}>*/}
-      {/*              {errors.courseSubDescription.message}*/}
-      {/*            </span>*/}
-      {/*          )}*/}
-      {/*        </div>*/}
-      {/*      </div>*/}
-      {/*    </div>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
-
       {/* video section  */}
       <div className={styles.section}>
-        {/*<h5 className={styles.sectionTitle}>Bootcamp Introduction Video</h5>*/}
-
-        {/* <div className={styles.videoSection}>
-          <div className={styles.ic_file_input_container}>
-            <div className={styles.uploadArea}>
-              <input
-                // {...register("bootcampThumbnail")}
-                type="file"
-                accept="image/png, image/jpeg, image/jpg"
-                id="bootcampThumbnail"
-                className={styles.fileInput} // hidden input (CSS e display:none / hidden korte paren)
-              />
-              <label htmlFor="bootcampThumbnail" className={styles.uploadLabel}>
-                <RiUploadCloud2Line className={styles.uploadIcon} />
-                <p className={styles.uploadText}>
-                  Accepted Image format & size: 575px X 450px (1MB)
-                </p>
-                <p className={styles.uploadSubtext}>
-                  Accepted Image filetypes: jpg, jpeg, png
-                </p>
-              </label>
-              {errors.bootcampThumbnail && (
-                <span className={styles.error}>
-                  {errors.bootcampThumbnail.message}
-                </span>
-              )}
-            </div>
-          </div>
-
-          <div className={styles.videoOptions}>
-            <h6 className={styles.videoTitle}>Introduction Video (Optional)</h6>
-
-            <div className={styles.radioGroup}>
-              <label className={styles.radioLabel}>
-                <input
-                  {...register("videoType")}
-                  type="radio"
-                  value="upload"
-                  className={styles.radio}
-                />
-                Video Upload
-              </label>
-
-              <label className={styles.radioLabel}>
-                <input
-                  {...register("videoType")}
-                  type="radio"
-                  value="youtube"
-                  className={styles.radio}
-                />
-                Youtube Video (write only video id)
-              </label>
-            </div>
-
-            {videoType === "youtube" && (
-              <input
-                {...register("youtubeId")}
-                className={styles.input}
-                placeholder="Type your youtube ID"
-              />
-            )}
-
-            {videoType === "upload" && (
-              <div className={styles.fileUpload}>
-                <input
-                  {...register("videoFile")}
-                  type="file"
-                  accept="video/*"
-                  className={styles.fileInput}
-                  id="videoFile"
-                />
-                <label htmlFor="videoFile" className={styles.fileLabel}>
-                  + Choose File
-                </label>
-              </div>
-            )}
-          </div>
-        </div> */}
 
         <div className={styles.videoSection}>
           <div className={styles.ic_file_input_container}>
@@ -742,23 +689,39 @@ const CreateCourseForm = () => {
                 />
               ) : (
                 <>
-                  <input
-                    type="file"
-                    accept="image/png, image/jpeg, image/jpg"
-                    id="bootcampThumbnail"
-                    className={styles.fileInput}
-                    onChange={(e) => {
-                      const file = e.target.files?.[0];
-                      if (file) setThumbnailPreview(URL.createObjectURL(file));
-                    }}
+                  <Controller
+                      name="image"
+                      control={control}
+                      render={({ field: { onChange, ...field } }) => (
+                          <input
+                              {...field}
+                              type="file"
+                              accept="image/png, image/jpeg, image/jpg"
+                              id="bootcampThumbnail"
+                              className={styles.fileInput}
+                              onChange={(e) => {
+                                const files = e.target.files;
+                                if (files && files.length > 0 && files[0] instanceof File) {
+                                  const file = files[0];
+                                  const previewUrl = URL.createObjectURL(file);
+                                  setThumbnailPreview(previewUrl);
+                                  onChange(files); // inform React Hook Form
+                                } else {
+                                  setThumbnailPreview(null);
+                                  onChange([]);
+                                }
+                              }}
+                          />
+                      )}
                   />
+
                   <label
                     htmlFor="bootcampThumbnail"
                     className={styles.uploadLabel}
                   >
                     <RiUploadCloud2Line className={styles.uploadIcon} />
                     <p className={styles.uploadText}>
-                      Accepted Image format & size: 575px X 450px (1MB)
+                      Accepted Image format & size: 575px X 450px (2MB)
                     </p>
                     <p className={styles.uploadSubtext}>
                       Accepted Image filetypes: jpg, jpeg, png
@@ -766,9 +729,9 @@ const CreateCourseForm = () => {
                   </label>
                 </>
               )}
-              {errors.bootcampThumbnail && (
+              {errors.image && (
                 <span className={styles.error}>
-                  {errors.bootcampThumbnail.message}
+                  {errors.image.message}
                 </span>
               )}
             </div>
@@ -780,7 +743,7 @@ const CreateCourseForm = () => {
             <div className={styles.radioGroup}>
               <label className={styles.radioLabel}>
                 <input
-                  {...register("videoType")}
+                  {...register("thumb_type")}
                   type="radio"
                   value="upload"
                   className={styles.radio}
@@ -790,7 +753,7 @@ const CreateCourseForm = () => {
 
               <label className={styles.radioLabel}>
                 <input
-                  {...register("videoType")}
+                  {...register("thumb_type")}
                   type="radio"
                   value="youtube"
                   className={styles.radio}
@@ -799,63 +762,83 @@ const CreateCourseForm = () => {
               </label>
             </div>
 
-            {videoType === "youtube" && (
-              <input
-                {...register("youtubeId")}
-                className={styles.input}
-                placeholder="Type your youtube ID"
-              />
+            {watch('thumb_type') === "youtube" && (
+                <>
+                  <input
+                      {...register("video_link")}
+                      className={styles.input}
+                      placeholder="Type your youtube ID"
+                  />
+
+                  {errors.video_link && (
+                      <span className={styles.error}>
+                    {errors.video_link.message}
+                  </span>
+                  )}
+                </>
             )}
 
-            {/*{videoType === "upload" && (*/}
-            {/*  <div className={styles.fileUpload}>*/}
-            {/*    <input*/}
-            {/*      {...register("videoFile")}*/}
-            {/*      type="file"*/}
-            {/*      accept="video/*"*/}
-            {/*      className={styles.fileInput}*/}
-            {/*      id="videoFile"*/}
-            {/*    />*/}
-            {/*    <label htmlFor="videoFile" className={styles.fileLabel}>*/}
-            {/*      + Choose File*/}
-            {/*    </label>*/}
-            {/*  </div>*/}
-            {/*)}*/}
 
 
-              <div className={styles.fileUpload}>
-                <input
-                  {...register("videoFile")}
-                  type="file"
-                  accept="video/*"
-                  className={styles.fileInput}
-                  id="videoFile"
-                />
-                <label htmlFor="videoFile" className={styles.fileLabel}>
-                  + Choose File
-                </label>
-              </div>
-
-
-            <div className="filepond-wrapper">
+            {watch('thumb_type') === "upload" && <div className="filepond-wrapper">
               <FilePond
+                  {...register("video")}
                   files={files}
                   onupdatefiles={setFiles}
                   allowMultiple={false}
                   acceptedFileTypes={[
                     'video/*',
-                    'video/x-matroska', // ✅ add mkv support
                   ]}
                   labelFileTypeNotAllowed="Only video files are allowed"
                   fileValidateTypeLabelExpectedTypes="Expects video files"
-                  name="file"
+                  name="video"
                   labelIdle='Drag & Drop your video or <span class="filepond--label-action">Browse</span>'
                   server={{
-                    process: `${process.env.NEXT_PUBLIC_API_URL}/teacher/course/chunk-upload`,
-                    revert: null,
+                    process: {
+                      url: `${process.env.NEXT_PUBLIC_API_URL}/teacher/course/chunk-upload`,
+                      method: "POST",
+                      headers: (file) => ({
+                        Authorization: `Bearer ${token}`, // ✅ Dynamic header for all chunks
+                        "Upload-Length": file.size.toString(),
+                      }),
+                      withCredentials: false,
+                      onload: (response) => {
+                        console.log("Upload complete:", response);
+                        return response.key || response; // if your backend returns an ID
+                      },
+                      onerror: (error) => {
+                        console.error("Upload failed:", error);
+                      },
+                    },
+                    // ✅ This handles file removal
+                    revert: (uniqueFileId, load, error) => {
+                      // uniqueFileId is returned from process's onload
+                      fetch(`${process.env.NEXT_PUBLIC_API_URL}/teacher/course/chunk-upload`, {
+                        method: "DELETE",
+                        headers: {
+                          Authorization: `Bearer ${token}`,
+                        },
+                      })
+                          .then((res) => {
+                            if (!res.ok) throw new Error("Failed to delete file");
+                            load(); // signal FilePond the file is removed
+                          })
+                          .catch((err) => {
+                            console.error(err);
+                            error("Could not delete file"); // signal error to FilePond
+                          });
+                    },
                   }}
+                  chunkUploads={true}          // ✅ Enable chunked uploads
+                  chunkSize={5000000}  // ✅ 5MB chunks (you can change this)
+                  chunkForce={true}            // ✅ Always use chunking, even for small files
               />
-            </div>
+              {errors.video && (
+                  <span className={styles.error}>
+                    {errors.video.message}
+                  </span>
+              )}
+            </div>}
 
 
           </div>
