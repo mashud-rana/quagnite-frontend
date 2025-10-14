@@ -18,7 +18,7 @@ const Notification = ({
   onFetchMoreData,
   onMakeAsRead,
   makingAsReadId,
-  makeAsReadIsLoading
+  makeAsReadIsLoading,
 }) => {
   const [expandedItems, setExpandedItems] = useState({});
 
@@ -28,7 +28,6 @@ const Notification = ({
       [id]: !prev[id],
     }));
   };
-
 
   // 🧩 Helper to truncate HTML text safely
   const truncateHtml = (html, limit = 250) => {
@@ -49,7 +48,7 @@ const Notification = ({
 
   return (
     <div className={styles.list}>
-     {isLoading && page === 1 ? (
+      {isLoading && page === 1 ? (
         <SectionSpinner message="Loading for announcements.." />
       ) : error ? (
         <div style={{ textAlign: "center", marginTop: "20px" }}>
@@ -70,59 +69,69 @@ const Notification = ({
             </p>
           }
         >
-          {announcements.length > 0 ? (
-            announcements.map((item) => {
-              const isExpanded = expandedItems[item.id];
-              const shortDescription = truncateHtml(item?.description || "", 250);
+          <div className={styles.ic_grid}>
+            {announcements.length > 0
+              ? announcements.map((item) => {
+                  const isExpanded = expandedItems[item.id];
+                  const shortDescription = truncateHtml(
+                    item?.description || "",
+                    250
+                  );
 
-              return (
-                <div key={item.id} className={`${styles.ic_flex} ${item.read_at == null ? styles.unread : ''}`} onClick={
-                  ()=> onMakeAsRead(item.id)
-                } >
-                  <div className={styles.ic_flex} style={{
-                    padding: "5px"
-                  }}>
-                    <Image src={img} alt="Notification" className={styles.image} />
-                    <div>
-                      <b>{item?.title}</b>
-                    
-                      <p
-                        dangerouslySetInnerHTML={{
-                          __html: isExpanded
-                            ? item?.description || ""
-                            : shortDescription,
-                        }}
-                      />
+                  return (
+                    <div
+                      key={item.id}
+                      className={`${styles.ic_card} ${
+                        item.read_at == null ? styles.unread : ""
+                      }`}
+                      onClick={() => onMakeAsRead(item.id)}
+                    >
+                      <div className={styles.ic_flex}>
+                        <div>
+                          <Image
+                            src={img}
+                            alt="Notification"
+                            className={styles.image}
+                          />
+                          <div>
+                            <b>{item?.title}</b>
 
-                      {item?.description &&
-                        item?.description.replace(/<[^>]+>/g, "").length > 250 && (
-                          <button
-                            onClick={() => toggleExpand(item.id)}
-                            className={styles.seeMoreBtn}
-                          >
-                            {isExpanded ? "See less" : "See more"}
-                            {
-                              makeAsReadIsLoading && makingAsReadId === item.id && (
-                                 ` (Loading...)`
-                               )
-                            
-                            }
-                          </button>
-                        )}
+                            <p
+                              className={styles.ic_despt}
+                              dangerouslySetInnerHTML={{
+                                __html: isExpanded
+                                  ? item?.description || ""
+                                  : shortDescription,
+                              }}
+                            />
+
+                            {item?.description &&
+                              item?.description.replace(/<[^>]+>/g, "").length >
+                                250 && (
+                                <button
+                                  onClick={() => toggleExpand(item.id)}
+                                  className={styles.ic_btn}
+                                >
+                                  {isExpanded ? "See less" : "See more"}
+                                  {makeAsReadIsLoading &&
+                                    makingAsReadId === item.id &&
+                                    ` (Loading...)`}
+                                </button>
+                              )}
+                          </div>
+                        </div>
+
+                        <div className={styles.meta}>
+                          <span>{item?.formatted_date}</span>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-
-                  <div className={styles.meta}>
-                    <span>{item?.formatted_date}</span>
-                  </div>
-                </div>
-              );
-            })
-          ) : (
-            !isLoading && (
-              <NotDataFound message="No announcements available at the moment." />
-            )
-          )}
+                  );
+                })
+              : !isLoading && (
+                  <NotDataFound message="No announcements available at the moment." />
+                )}
+          </div>
         </InfiniteScroll>
       )}
     </div>
