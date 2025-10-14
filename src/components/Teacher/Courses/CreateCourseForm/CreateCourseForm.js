@@ -13,8 +13,19 @@ import {
   useCourseSubCategoriesQuery,
   useCourseBenefitsQuery,
   useCourseLanguagesQuery,
+  useCourseDifficultyQuery,
+  useCourseTagsQuery,
 } from "@/redux/features/teacher/course/courseApi";
 import {useAnnouncementsQuery} from "@/redux/features/teacher/announcements/announcementsApi";
+
+import { FilePond, registerPlugin } from 'react-filepond';
+
+// Import the plugins you want to use
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+
+// Register plugins
+registerPlugin(FilePondPluginImagePreview, FilePondPluginFileValidateType);
 
 const schema = yup.object({
   coursesubTitle: yup.string().required("Course sub title is required"),
@@ -32,7 +43,9 @@ const CreateCourseForm = () => {
   const [courseAnnouncements, setCourseAnnouncements] = useState([]);
   const [courseBenefits, setCourseBenefits] = useState([]);
   const [courseLanguage, setCourseLanguage] = useState([]);
-
+  const [courseDifficulty, setCourseDifficulty] = useState([]);
+  const [courseTags, setCourseTags] = useState([]);
+  const [files, setFiles] = useState([]);
 
     // Fetch API
     const {
@@ -72,7 +85,20 @@ const CreateCourseForm = () => {
     isError: courseLanguagesError
   }= useCourseLanguagesQuery();
 
-  console.log('courseBenefitsData', courseBenefitsData)
+
+  const {
+    data: courseDifficultyData,
+    isLoading: courseDifficultyLoading,
+    isError: courseDifficultyError
+  }= useCourseDifficultyQuery();
+
+  const {
+    data: courseTagsData,
+    isLoading: courseTagsLoading,
+    isError: courseTagsError
+  }= useCourseTagsQuery();
+
+  console.log('courseTagsData', courseTagsData)
 
   // End API Fetch
 
@@ -134,6 +160,29 @@ const CreateCourseForm = () => {
       })
     }
   },[courseLanguagesData, courseLanguagesLoading,courseLanguagesError])
+
+
+  // Difficulty
+  useEffect(() => {
+    setCourseDifficulty([]);
+    if(courseDifficultyData?.data?.data && !courseDifficultyLoading && !courseDifficultyError)
+    {
+      courseDifficultyData?.data?.data.map((item) => {
+        setCourseDifficulty((prev) => [...prev, {label: item?.title, value: item?.id}])
+      })
+    }
+  },[courseDifficultyData, courseDifficultyLoading, courseDifficultyError])
+
+  // Tags
+  useEffect(() => {
+    setCourseTags([]);
+    if(courseTagsData?.data?.data && !courseTagsLoading && !courseTagsError)
+    {
+      courseTagsData?.data?.data.map((item) => {
+        setCourseTags((prev) => [...prev, {label: item?.name, value: item?.id}])
+      })
+    }
+  },[courseTagsData,courseTagsLoading,courseTagsError])
 
 
   const {
@@ -478,9 +527,9 @@ const CreateCourseForm = () => {
               <div className={styles.selectWrapper}>
                 <select className={styles.select}>
                   <option value="">Select Course Difficulty Level</option>
-                  <option value="english">English</option>
-                  <option value="bangla">Bangladesh</option>
-                  <option value="hindi">Hindi</option>
+                  {courseDifficulty?.map((item) => (
+                        <option key={'difficulty'+item?.value} value={item?.value}>{item?.label}</option>
+                    ))}
                 </select>
                 <BiChevronDown className={styles.selectIcon} />
               </div>
@@ -492,10 +541,10 @@ const CreateCourseForm = () => {
             <div className={styles.inputContainer}>
               <div className={styles.selectWrapper}>
                 <select className={styles.select}>
-                  <option value="">Select</option>
-                  <option value="english">English</option>
-                  <option value="bangla">Bangladesh</option>
-                  <option value="hindi">Hindi</option>
+                  <option value="">Select Course Tags</option>
+                  {courseTags?.map((item) => (
+                        <option key={'tags'+item?.value} value={item?.value}>{item?.label}</option>
+                    ))}
                 </select>
                 <BiChevronDown className={styles.selectIcon} />
               </div>
@@ -505,98 +554,98 @@ const CreateCourseForm = () => {
       </div>
 
       {/* 4th section  */}
-      <div className={styles.section}>
-        <h5 className={styles.sectionTitle}>
-          Course Thumbnail Or Introduction Video
-        </h5>
-        <div className={styles.ic_details_wrapper}>
-          <div className={styles.formRow}>
-            <label className={styles.label}>Course Type</label>
-            <div className={styles.inputContainer}>
-              <input className={styles.input} placeholder="Course Type" />
-            </div>
-          </div>
+      {/*<div className={styles.section}>*/}
+      {/*  <h5 className={styles.sectionTitle}>*/}
+      {/*    Course Thumbnail Or Introduction Video*/}
+      {/*  </h5>*/}
+      {/*  <div className={styles.ic_details_wrapper}>*/}
+      {/*    <div className={styles.formRow}>*/}
+      {/*      <label className={styles.label}>Course Type</label>*/}
+      {/*      <div className={styles.inputContainer}>*/}
+      {/*        <input className={styles.input} placeholder="Course Type" />*/}
+      {/*      </div>*/}
+      {/*    </div>*/}
 
-          <div className={styles.formRow}>
-            <label className={styles.label}>Course subtitle</label>
-            <div className={styles.inputContainer}>
-              <input
-                {...register("coursesubTitle")}
-                className={styles.input}
-                placeholder="Course Subtitle"
-              />
-              {errors.coursesubTitle && (
-                <span className={styles.error}>
-                  {errors.coursesubTitle.message}
-                </span>
-              )}
-            </div>
-          </div>
+      {/*    <div className={styles.formRow}>*/}
+      {/*      <label className={styles.label}>Course subtitle</label>*/}
+      {/*      <div className={styles.inputContainer}>*/}
+      {/*        <input*/}
+      {/*          {...register("coursesubTitle")}*/}
+      {/*          className={styles.input}*/}
+      {/*          placeholder="Course Subtitle"*/}
+      {/*        />*/}
+      {/*        {errors.coursesubTitle && (*/}
+      {/*          <span className={styles.error}>*/}
+      {/*            {errors.coursesubTitle.message}*/}
+      {/*          </span>*/}
+      {/*        )}*/}
+      {/*      </div>*/}
+      {/*    </div>*/}
 
-          <div className={styles.formRow}>
-            <label className={styles.label}>Course Title</label>
-            <div className={styles.inputContainer}>
-              <input className={styles.input} placeholder="Course Title" />
-            </div>
-          </div>
+      {/*    <div className={styles.formRow}>*/}
+      {/*      <label className={styles.label}>Course Title</label>*/}
+      {/*      <div className={styles.inputContainer}>*/}
+      {/*        <input className={styles.input} placeholder="Course Title" />*/}
+      {/*      </div>*/}
+      {/*    </div>*/}
 
-          <div className={styles.ic_grid}>
-            <div className={styles.formRow}>
-              <label className={styles.label}>
-                Course Description Key Points *
-              </label>
-              <div className={styles.inputContainer}>
-                <div className={styles.textareaWithButton}>
-                  <input
-                    {...register("courseDescription")}
-                    className={styles.input}
-                    placeholder="type key point name"
-                  />
+      {/*    <div className={styles.ic_grid}>*/}
+      {/*      <div className={styles.formRow}>*/}
+      {/*        <label className={styles.label}>*/}
+      {/*          Course Description Key Points **/}
+      {/*        </label>*/}
+      {/*        <div className={styles.inputContainer}>*/}
+      {/*          <div className={styles.textareaWithButton}>*/}
+      {/*            <input*/}
+      {/*              {...register("courseDescription")}*/}
+      {/*              className={styles.input}*/}
+      {/*              placeholder="type key point name"*/}
+      {/*            />*/}
 
-                  <button type="button" className="ic_common_primary_btn">
-                    ADD
-                  </button>
-                </div>
+      {/*            <button type="button" className="ic_common_primary_btn">*/}
+      {/*              ADD*/}
+      {/*            </button>*/}
+      {/*          </div>*/}
 
-                {errors.courseDescription && (
-                  <span className={styles.error}>
-                    {errors.courseDescription.message}
-                  </span>
-                )}
-              </div>
-            </div>
+      {/*          {errors.courseDescription && (*/}
+      {/*            <span className={styles.error}>*/}
+      {/*              {errors.courseDescription.message}*/}
+      {/*            </span>*/}
+      {/*          )}*/}
+      {/*        </div>*/}
+      {/*      </div>*/}
 
-            <div className={styles.formRow}>
-              <label className={styles.label}>Enable For Subscription</label>
-              <div className={styles.inputContainer}>
-                <div className={styles.selectWrapper}>
-                  <select
-                    {...register("courseSubDescription")}
-                    className={styles.select}
-                  >
-                    <option value="">Enable</option>
-                    <option value="web-development">Web Development</option>
-                    <option value="mobile-development">
-                      Mobile Development
-                    </option>
-                    <option value="data-science">Data Science</option>
-                  </select>
-                  <BiChevronDown className={styles.selectIcon} />
-                </div>
-                {errors.courseSubDescription && (
-                  <span className={styles.error}>
-                    {errors.courseSubDescription.message}
-                  </span>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/*      <div className={styles.formRow}>*/}
+      {/*        <label className={styles.label}>Enable For Subscription</label>*/}
+      {/*        <div className={styles.inputContainer}>*/}
+      {/*          <div className={styles.selectWrapper}>*/}
+      {/*            <select*/}
+      {/*              {...register("courseSubDescription")}*/}
+      {/*              className={styles.select}*/}
+      {/*            >*/}
+      {/*              <option value="">Enable</option>*/}
+      {/*              <option value="web-development">Web Development</option>*/}
+      {/*              <option value="mobile-development">*/}
+      {/*                Mobile Development*/}
+      {/*              </option>*/}
+      {/*              <option value="data-science">Data Science</option>*/}
+      {/*            </select>*/}
+      {/*            <BiChevronDown className={styles.selectIcon} />*/}
+      {/*          </div>*/}
+      {/*          {errors.courseSubDescription && (*/}
+      {/*            <span className={styles.error}>*/}
+      {/*              {errors.courseSubDescription.message}*/}
+      {/*            </span>*/}
+      {/*          )}*/}
+      {/*        </div>*/}
+      {/*      </div>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
 
       {/* video section  */}
       <div className={styles.section}>
-        <h5 className={styles.sectionTitle}>Bootcamp Introduction Video</h5>
+        {/*<h5 className={styles.sectionTitle}>Bootcamp Introduction Video</h5>*/}
 
         {/* <div className={styles.videoSection}>
           <div className={styles.ic_file_input_container}>
@@ -758,7 +807,22 @@ const CreateCourseForm = () => {
               />
             )}
 
-            {videoType === "upload" && (
+            {/*{videoType === "upload" && (*/}
+            {/*  <div className={styles.fileUpload}>*/}
+            {/*    <input*/}
+            {/*      {...register("videoFile")}*/}
+            {/*      type="file"*/}
+            {/*      accept="video/*"*/}
+            {/*      className={styles.fileInput}*/}
+            {/*      id="videoFile"*/}
+            {/*    />*/}
+            {/*    <label htmlFor="videoFile" className={styles.fileLabel}>*/}
+            {/*      + Choose File*/}
+            {/*    </label>*/}
+            {/*  </div>*/}
+            {/*)}*/}
+
+
               <div className={styles.fileUpload}>
                 <input
                   {...register("videoFile")}
@@ -771,7 +835,29 @@ const CreateCourseForm = () => {
                   + Choose File
                 </label>
               </div>
-            )}
+
+
+            <div className="filepond-wrapper">
+              <FilePond
+                  files={files}
+                  onupdatefiles={setFiles}
+                  allowMultiple={false}
+                  acceptedFileTypes={[
+                    'video/*',
+                    'video/x-matroska', // ✅ add mkv support
+                  ]}
+                  labelFileTypeNotAllowed="Only video files are allowed"
+                  fileValidateTypeLabelExpectedTypes="Expects video files"
+                  name="file"
+                  labelIdle='Drag & Drop your video or <span class="filepond--label-action">Browse</span>'
+                  server={{
+                    process: `${process.env.NEXT_PUBLIC_API_URL}/teacher/course/chunk-upload`,
+                    revert: null,
+                  }}
+              />
+            </div>
+
+
           </div>
         </div>
       </div>

@@ -4,6 +4,9 @@ import { AntdRegistry } from "@ant-design/nextjs-registry";
 import NextTopLoader from "nextjs-toploader";
 import Providers from "./lib/Providers";
 import { ToastContainer } from "react-toastify";
+import 'filepond/dist/filepond.min.css';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+
 
 const satoshi = localFont({
   src: [
