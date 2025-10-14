@@ -128,7 +128,7 @@ const NotificationsPage = () => {
           <Link href="#" className="ic_back_button" aria-label="Go back">
             <FaArrowLeft />
           </Link>
-          <h1 className="ic_text_36">Profile Management</h1>
+          <h1 className="ic_text_36">Notifications</h1>
         </div>
       </div>
 
