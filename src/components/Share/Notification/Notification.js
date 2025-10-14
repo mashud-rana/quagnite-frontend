@@ -5,6 +5,8 @@ import Image from "next/image";
 import SectionSpinner from "@/components/Spinner/SectionSpinner";
 import NotDataFound from "@/components/Empty/NotDataFound";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { antIcon, toastError, toastSuccess } from "@/utils/helper";
+import { Spin } from "antd";
 
 const Notification = ({
   isLoading,
@@ -13,7 +15,10 @@ const Notification = ({
   totalPages,
   error,
   refetch,
-  onFetchMoreData
+  onFetchMoreData,
+  onMakeAsRead,
+  makingAsReadId,
+  makeAsReadIsLoading
 }) => {
   const [expandedItems, setExpandedItems] = useState({});
 
@@ -24,7 +29,6 @@ const Notification = ({
     }));
   };
 
-  console.log('isLoading',isLoading)
 
   // 🧩 Helper to truncate HTML text safely
   const truncateHtml = (html, limit = 250) => {
@@ -72,12 +76,16 @@ const Notification = ({
               const shortDescription = truncateHtml(item?.description || "", 250);
 
               return (
-                <div key={item.id} className={styles.ic_flex}>
-                  <div className={styles.ic_flex}>
+                <div key={item.id} className={`${styles.ic_flex} ${item.read_at == null ? styles.unread : ''}`} onClick={
+                  ()=> onMakeAsRead(item.id)
+                } >
+                  <div className={styles.ic_flex} style={{
+                    padding: "5px"
+                  }}>
                     <Image src={img} alt="Notification" className={styles.image} />
                     <div>
                       <b>{item?.title}</b>
-
+                    
                       <p
                         dangerouslySetInnerHTML={{
                           __html: isExpanded
@@ -93,13 +101,19 @@ const Notification = ({
                             className={styles.seeMoreBtn}
                           >
                             {isExpanded ? "See less" : "See more"}
+                            {
+                              makeAsReadIsLoading && makingAsReadId === item.id && (
+                                 ` (Loading...)`
+                               )
+                            
+                            }
                           </button>
                         )}
                     </div>
                   </div>
 
                   <div className={styles.meta}>
-                    <span>01/01/25</span>
+                    <span>{item?.formatted_date}</span>
                   </div>
                 </div>
               );

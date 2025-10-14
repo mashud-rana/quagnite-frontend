@@ -3,8 +3,10 @@ import Notification from "@/components/Share/Notification/Notification";
 import Link from "next/link";
 import React,{useState, useEffect} from "react";
 import { FaArrowLeft } from "react-icons/fa";
-import {useGetAnnouncementQuery} from '@/redux/features/announcement/announcementApi';
+import {useGetAnnouncementQuery, useMakeAsReadAnnouncementMutation} from '@/redux/features/announcement/announcementApi';
 import { set } from 'nprogress';
+import { antIcon, toastError, toastSuccess } from "@/utils/helper";
+import { Spin } from "antd";
 
 const notifications = [
   {
@@ -40,6 +42,7 @@ const NotificationsPage = () => {
   });
   const [announcements, setAnnouncements] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
+  const [selectedId, setSelectedId] = useState(null);
 //fetch announcements
   const { 
   data,
@@ -49,6 +52,15 @@ const NotificationsPage = () => {
   refetch,
   isFetching 
   } = useGetAnnouncementQuery(params);
+
+  //make as read mutation
+    const [makeAsReadAnnouncement, 
+      { 
+        data:makeAsReadData,
+        isLoading: makeAsReadIsLoading, 
+        isSuccess: makeAsReadIsSuccess,
+        isError: makeAsReadIsError,
+        error: makeAsReadError }] = useMakeAsReadAnnouncementMutation();
 
   //scroll fetch
  const fetchMoreDataHandler = () => {
@@ -62,10 +74,32 @@ const NotificationsPage = () => {
     });
   };
 
+  //mark as read
+  const makeAsReadHandler = (announcementId) => {
+    if(!announcementId) return;
+    let find = announcements.find(a => a.id === announcementId);
+    if(!find || find.read_at) return; //already read
+    makeAsReadAnnouncement(announcementId);
+    setSelectedId(announcementId);
+  }
 
+  //make as announcement success
+  useEffect(()=>{
+    console.log("makeAsReadData",makeAsReadData, announcements)
+    if(makeAsReadIsSuccess && makeAsReadData){
+      setAnnouncements((prev) =>{
+        return prev.map(item => {
+          if(item.id === makeAsReadData?.data?.announcement_id){
+            return {...item, read_at: new Date().toISOString()};
+          }
+          return item;
+        });
+      });
+      setSelectedId(null);
+    }
+  },[makeAsReadIsSuccess, makeAsReadData])
 
   //set announcements
-    
  useEffect(() => {
     if (isSuccess && data?.data?.data) {
       const newItems = data.data.data;
@@ -106,6 +140,9 @@ const NotificationsPage = () => {
       error={error}
       refetch={refetch}
       onFetchMoreData={fetchMoreDataHandler}
+      onMakeAsRead={makeAsReadHandler}
+      makingAsReadId={selectedId}
+      makeAsReadIsLoading={makeAsReadIsLoading}
     />
     </div>
   );

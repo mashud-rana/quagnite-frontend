@@ -4,6 +4,8 @@
 .ic_flex {
   display: flex;
   gap: 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .list {
@@ -64,6 +66,11 @@
 .date,
 .time {
   color: #666;
+}
+
+.unread{
+  background-color: #e6f7ff;
+  font-weight: 600;
 }
 
 /* Responsive Design */
