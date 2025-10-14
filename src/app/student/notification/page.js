@@ -1,7 +1,12 @@
+"use client";
 import Notification from "@/components/Share/Notification/Notification";
 import Link from "next/link";
-import React from "react";
+import React,{useState, useEffect} from "react";
 import { FaArrowLeft } from "react-icons/fa";
+import {useGetAnnouncementQuery, useMakeAsReadAnnouncementMutation} from '@/redux/features/announcement/announcementApi';
+import { set } from 'nprogress';
+import { antIcon, toastError, toastSuccess } from "@/utils/helper";
+import { Spin } from "antd";
 
 const notifications = [
   {
@@ -31,6 +36,91 @@ const notifications = [
 ];
 
 const NotificationsPage = () => {
+   const [params, setParams] = useState({
+    page: Number(process.env.NEXT_PUBLIC_CURRENT_PAGE) || 1,
+    per_page: Number(process.env.NEXT_PUBLIC_PAGE_SIZE) || 10,
+  });
+  const [announcements, setAnnouncements] = useState([]);
+  const [totalPages, setTotalPages] = useState(1);
+  const [selectedId, setSelectedId] = useState(null);
+//fetch announcements
+  const { 
+  data,
+  isSuccess, 
+  isLoading, 
+  error, 
+  refetch,
+  isFetching 
+  } = useGetAnnouncementQuery(params);
+
+  //make as read mutation
+    const [makeAsReadAnnouncement, 
+      { 
+        data:makeAsReadData,
+        isLoading: makeAsReadIsLoading, 
+        isSuccess: makeAsReadIsSuccess,
+        isError: makeAsReadIsError,
+        error: makeAsReadError }] = useMakeAsReadAnnouncementMutation();
+
+  //scroll fetch
+ const fetchMoreDataHandler = () => {
+    console.log("Fetching next page...");
+    setParams((prev) => {
+      if (prev.page < totalPages) {
+        return { ...prev, page: prev.page + 1 };
+      }
+      console.log("Reached last page");
+      return prev;
+    });
+  };
+
+  //mark as read
+  const makeAsReadHandler = (announcementId) => {
+    if(!announcementId) return;
+    let find = announcements.find(a => a.id === announcementId);
+    if(!find || find.read_at) return; //already read
+    makeAsReadAnnouncement(announcementId);
+    setSelectedId(announcementId);
+  }
+
+  //make as announcement success
+  useEffect(()=>{
+    console.log("makeAsReadData",makeAsReadData, announcements)
+    if(makeAsReadIsSuccess && makeAsReadData){
+      setAnnouncements((prev) =>{
+        return prev.map(item => {
+          if(item.id === makeAsReadData?.data?.announcement_id){
+            return {...item, read_at: new Date().toISOString()};
+          }
+          return item;
+        });
+      });
+      setSelectedId(null);
+    }
+  },[makeAsReadIsSuccess, makeAsReadData])
+
+  //set announcements
+ useEffect(() => {
+    if (isSuccess && data?.data?.data) {
+      const newItems = data.data.data;
+
+      if (params.page === 1) {
+        setAnnouncements(newItems);
+      } else {
+        setAnnouncements((prev) => {
+          // avoid duplicates
+          const ids = new Set(prev.map((a) => a.id));
+          const uniqueNew = newItems.filter((a) => !ids.has(a.id));
+          return [...prev, ...uniqueNew];
+        });
+      }
+
+      setTotalPages(data?.data?.meta?.last_page || 1);
+    }
+  }, [isSuccess, data, params.page]);
+
+
+  console.log("1 announcementData", announcements);
   return (
     <div>
       <div className="mb-24">
@@ -38,27 +128,22 @@ const NotificationsPage = () => {
           <Link href="#" className="ic_back_button" aria-label="Go back">
             <FaArrowLeft />
           </Link>
-          <h1 className="ic_text_36">Profile Management</h1>
+          <h1 className="ic_text_36">Notifications</h1>
         </div>
       </div>
 
-      {/* <div className={styles.list}>
-        {notifications.map((item) => (
-          <div key={item.id} className={styles.card}>
-            <img src={item.image} alt="Notification" className={styles.image} />
-            <div className={styles.info}>
-              <p>{item.message}</p>
-              <div className={styles.meta}>
-                {item.source && <span>{item.source}</span>}
-                <span>{item.date}</span>
-                <span>{item.time}</span>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div> */}
-
-      <Notification />
+      <Notification 
+      isLoading={isLoading}
+      announcements={announcements}
+      page={params.page}
+      totalPages={totalPages}
+      error={error}
+      refetch={refetch}
+      onFetchMoreData={fetchMoreDataHandler}
+      onMakeAsRead={makeAsReadHandler}
+      makingAsReadId={selectedId}
+      makeAsReadIsLoading={makeAsReadIsLoading}
+    />
     </div>
   );
 };
