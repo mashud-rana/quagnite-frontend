@@ -154,6 +154,57 @@
   border-bottom: 1px solid #e9e7e7;
 }
 
+/* input fild design  */
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.editModeGrid {
+  gap: 14px;
+}
+
+.infoRow {
+  display: grid;
+  grid-template-columns: minmax(100px, 200px) 1fr;
+  /* border-bottom: 1px solid #e0e0e0; */
+  align-items: center;
+}
+
+.infoRow:last-child {
+  border-bottom: none;
+}
+
+.editModeRow {
+  border-bottom: none !important;
+}
+
+.infoValue {
+  width: 100%;
+  /* background-color: var(--white); */
+  border: none;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 16px;
+  color: #353535;
+  outline: none;
+  background-color: #d9d9d9 !important;
+  /* cursor: not-allowed; */
+  /* border: 1px solid black; */
+}
+
+.infoValue:disabled {
+  background-color: var(--white);
+  color: #353535;
+  opacity: 1;
+}
+
+.editModeInput {
+  background-color: #d9d9d9 !important;
+  cursor: text;
+}
+
 /* Responsive Design */
 @media (max-width: 1399px) {
   .cardHeader {
@@ -191,6 +242,19 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
+
+  .editModeGrid {
+    gap: 10px;
+  }
+
+  .infoRow {
+    grid-template-columns: minmax(100px, 180px) 1fr;
+  }
+
+  .infoValue {
+    padding: 10px 16px;
+    border-radius: 10px;
+  }
 }
 
 @media (max-width: 991px) {
@@ -222,5 +286,19 @@
     flex-direction: column;
     gap: 18px;
     align-items: start;
+  }
+
+  .editModeGrid {
+    gap: 8px;
+  }
+
+  .infoRow {
+    grid-template-columns: minmax(100px, 140px) 1fr;
+  }
+
+  .infoValue {
+    font-size: 14px;
+    padding: 6px 14px;
+    border-radius: 8px;
   }
 }
