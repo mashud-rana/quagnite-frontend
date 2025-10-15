@@ -3,7 +3,7 @@
 import { FaCheck } from "react-icons/fa";
 import styles from "./ProgressStepper.module.css";
 
-const ProgressStepper = ({ currentStep }) => {
+const ProgressStepper = ({ currentStep, onStepChange }) => {
   const steps = [
     {
       name: "Bootcamp",
@@ -34,7 +34,22 @@ const ProgressStepper = ({ currentStep }) => {
     <div className={`${styles.progressContainer} mb-24`}>
       <div className={styles.progressSteps}>
         {steps.map((step, index) => (
-          <div key={index} className={styles.stepWrapper}>
+          <div
+            key={index}
+            className={styles.stepWrapper}
+            onClick={() => {
+              if (typeof onStepChange === "function") {
+                onStepChange(index + 1);
+              }
+            }}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if ((e.key === "Enter" || e.key === " ") && typeof onStepChange === "function") {
+                onStepChange(index + 1);
+              }
+            }}
+          >
             <div
               className={`${styles.stepCircle} ${
                 step.completed ? styles.completed : ""

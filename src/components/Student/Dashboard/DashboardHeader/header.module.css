@@ -136,17 +136,17 @@
   top: 48px;
   right: -60px;
   background: #fff;
-  width: 500px;
+  width: 650px;
   /* width: 260px; */
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  padding: 16px;
+  padding: 16px 12px;
   z-index: 999;
   opacity: 0;
   transform: translateY(-10px);
   animation: fadeIn 0.3s forwards;
-  max-height: 400px; /* or whatever fits your UI */
-  overflow-y: auto;  /* must be scrollable */
+  max-height: 500px; /* or whatever fits your UI */
+  overflow-y: auto; /* must be scrollable */
 }
 .unread {
   background-color: #e6f7ff;
@@ -191,11 +191,11 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  max-height: 180px;
+  max-height: 280px;
   overflow-y: auto;
   /* display: flex;
   flex-direction: column;
-  gap: 0px; */
+  gap: 8px; */
 }
 
 .notificationList li {
@@ -203,6 +203,8 @@
   color: #444;
   padding: 10px 0;
   border-bottom: 1px solid #eee;
+  padding: 10px;
+  border-radius: 4px;
 }
 
 .notificationList li:last-child {
@@ -239,6 +241,11 @@
 .ic_time {
   display: flex;
   align-items: end;
+  text-wrap: nowrap;
+}
+
+.ic_flex {
+  display: flex;
 }
 
 @media (max-width: 1199px) {
@@ -278,6 +285,12 @@
   /* .notificationDropdown {
     width: 260px;
   } */
+}
+
+@media (max-width: 675px) {
+  .notificationDropdown {
+    width: 550px;
+  }
 }
 
 @media (max-width: 575px) {

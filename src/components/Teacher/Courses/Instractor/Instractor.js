@@ -3,7 +3,7 @@ import React from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import styles from "./instractor.module.css";
 
-const Instractor = () => {
+const Instractor = ({ setCurrentStep }) => {
   return (
     <div>
       <div className="mb-24">
@@ -22,7 +22,9 @@ const Instractor = () => {
 
       <div className="ic_flex">
         <button className="ic_btn">Back</button>
-        <button className="ic_btn">Save and continue</button>
+        <button className="ic_btn" onClick={() => setCurrentStep(3)}>
+          Save and continue
+        </button>
       </div>
     </div>
   );
