@@ -56,7 +56,9 @@ const UploadVideo = ({ setCurrentStep }) => {
       </div>
 
       <div className="ic_flex">
-        <button className="ic_btn">SAVE & CONTINUE</button>
+        <button className="ic_btn" onClick={() => setCurrentStep(3)}>
+          SAVE & CONTINUE
+        </button>
         <button className="ic_btn">ADD NEW SECTION</button>
       </div>
 
