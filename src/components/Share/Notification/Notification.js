@@ -28,13 +28,13 @@ const Notification = () => {
     } = useGetAnnouncementQuery(params);
   
     //make as read mutation
-      const [makeAsReadAnnouncement, 
-        { 
-          data:makeAsReadData,
-          isLoading: makeAsReadIsLoading, 
-          isSuccess: makeAsReadIsSuccess,
-          isError: makeAsReadIsError,
-          error: makeAsReadError }] = useMakeAsReadAnnouncementMutation();
+    const [makeAsReadAnnouncement, 
+    { 
+    data:makeAsReadData,
+    isLoading: makeAsReadIsLoading, 
+    isSuccess: makeAsReadIsSuccess,
+    isError: makeAsReadIsError,
+    error: makeAsReadError }] = useMakeAsReadAnnouncementMutation();
   
     //scroll fetch
    const fetchMoreData = () => {

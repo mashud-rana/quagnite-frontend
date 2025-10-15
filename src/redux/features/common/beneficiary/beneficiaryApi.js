@@ -1,4 +1,5 @@
 import {apiSlice} from "@/redux/api/apiSlice";
+import { use } from "react";
 
 export const beneficiaryApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -9,11 +10,11 @@ export const beneficiaryApi = apiSlice.injectEndpoints({
         method: "GET"
       })
     }),
-    makeAsReadAnnouncement: builder.mutation({
-      query: (announcement_id) => ({
-        url: `/announcements/read`,
+    createBeneficiary: builder.mutation({
+      query: (formData) => ({
+        url: `/wallet/beneficiaries`,
         method: "POST",
-        body: {announcement_id},
+        body: formData,
       }),
     
     }),
@@ -22,6 +23,6 @@ export const beneficiaryApi = apiSlice.injectEndpoints({
 });
 
 export const {
-  useGetBeneficiariesQuery
-  
+  useGetBeneficiariesQuery,
+  useCreateBeneficiaryMutation
 } = beneficiaryApi;
