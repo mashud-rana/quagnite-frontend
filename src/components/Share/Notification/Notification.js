@@ -7,7 +7,7 @@ import NotDataFound from "@/components/Empty/NotDataFound";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { antIcon, toastError, toastSuccess } from "@/utils/helper";
 import { Spin } from "antd";
-import { useGetAnnouncementQuery, useMakeAsReadAnnouncementMutation } from "@/redux/features/announcement/announcementApi";
+import { useGetAnnouncementQuery, useMakeAsReadAnnouncementMutation } from "@/redux/features/common/announcement/announcementApi";
 
 const Notification = () => {
      const [params, setParams] = useState({

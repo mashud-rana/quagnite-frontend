@@ -112,7 +112,7 @@ import img from "@/assets/images/all/instractor.png";
 import { useSelector } from "react-redux";
 import Logout from "@/components/Student/Auth/Logout";
 import { GrAnnounce } from "react-icons/gr";
-import { useGetAnnouncementQuery, useMakeAsReadAnnouncementMutation } from "@/redux/features/announcement/announcementApi";
+import { useGetAnnouncementQuery, useMakeAsReadAnnouncementMutation } from "@/redux/features/common/announcement/announcementApi";
 import InfiniteScroll from "react-infinite-scroll-component";
 import NotDataFound from "@/components/Empty/NotDataFound";
 

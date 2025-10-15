@@ -3,7 +3,6 @@ import Notification from "@/components/Share/Notification/Notification";
 import Link from "next/link";
 import React,{useState, useEffect} from "react";
 import { FaArrowLeft } from "react-icons/fa";
-import {useGetAnnouncementQuery, useMakeAsReadAnnouncementMutation} from '@/redux/features/announcement/announcementApi';
 import { set } from 'nprogress';
 import { antIcon, toastError, toastSuccess } from "@/utils/helper";
 import { Spin } from "antd";

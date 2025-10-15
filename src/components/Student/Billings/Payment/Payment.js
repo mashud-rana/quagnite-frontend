@@ -151,16 +151,42 @@
 
 "use client";
 
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./payment.module.css";
 import Image from "next/image";
+import {useGetBeneficiariesQuery} from "@/redux/features/common/beneficiary/beneficiaryApi";
+import {getLastTwoDigits} from "@/utils/helper";
+import img from "@/assets/images/all/american.png";
 
 const Payment = ({ title = "Credit Card", cards = [], methods = [] }) => {
   const [showInputs, setShowInputs] = useState(false);
 
+  const [beneficiaries, setBeneficiaries] = useState([]);
+  //fetch beneficiaries
+  const { 
+    data:beneficiaryData,
+    isSuccess, 
+    isLoading, 
+    error, 
+    refetch,
+    isFetching 
+    } = useGetBeneficiariesQuery();
+  
+
   const handleAddNewCard = () => {
     setShowInputs(!showInputs);
   };
+
+  //set beneficiaries when data changes
+  useEffect(()=>{
+    if(isSuccess ){
+      setBeneficiaries([
+        ...beneficiaryData?.data?.data
+      ]);
+    }
+  }, [beneficiaryData, isSuccess]);
+
+  console.log("Beneficiaries:", beneficiaries);
 
   return (
     <div className={styles.paymentMethodsContainer}>
@@ -179,12 +205,12 @@ const Payment = ({ title = "Credit Card", cards = [], methods = [] }) => {
       {/* Credit Cards */}
       <div className={styles.creditCardsSection}>
         <div className={styles.cardsGrid}>
-          {cards.map((card) => (
+          {beneficiaries && beneficiaries.length > 0 && beneficiaries.map((card) => (
             <div key={card.id} className={styles.creditCard}>
               <div className={styles.cardHeader}>
                 <Image
                   className={styles.ic_img}
-                  src={card.img}
+                  src={card?.image ? card?.image_url : img}
                   alt="Card Logo"
                   width={200}
                   height={10}
@@ -194,12 +220,12 @@ const Payment = ({ title = "Credit Card", cards = [], methods = [] }) => {
                 <div className={styles.cardNumber}>
                   <span className={styles.cardLabel}>Card Number</span>
                   <span className={styles.cardValue}>
-                    {card.number || "•••• •••• •••• 0000"}
+                    {card?.mask_card_number || "•••• •••• •••• 0000"}
                   </span>
                 </div>
                 <div className={styles.cardExpiry}>
                   <span className={styles.expiryLabel}>
-                    Expiry - {card.expiry || "00/00"}
+                    Expiry - {`${getLastTwoDigits(card?.expire_month)}/${getLastTwoDigits(card?.expire_year)}` || "00/00"}
                   </span>
                 </div>
               </div>

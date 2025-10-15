@@ -50,3 +50,16 @@ export const confirmDelete = (title="Are you sure?",text="You won't be able to r
       confirmButtonText: confirmButtonText
     })
 }
+
+export const getLastTwoDigits = (num) => {
+  // Ensure the number is positive and an integer
+  num = Math.abs(parseInt(num, 10));
+  
+  if (num < 100) {
+    // If it's already 2 digits, return it as is (with leading 0 if needed)
+    return num.toString().padStart(2, '0');
+  } else {
+    // Otherwise, return the last two digits
+    return (num % 100).toString().padStart(2, '0');
+  }
+}
