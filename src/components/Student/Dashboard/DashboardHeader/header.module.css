@@ -145,6 +145,12 @@
   opacity: 0;
   transform: translateY(-10px);
   animation: fadeIn 0.3s forwards;
+  max-height: 400px; /* or whatever fits your UI */
+  overflow-y: auto;  /* must be scrollable */
+}
+.unread {
+  background-color: #e6f7ff;
+  font-weight: 600;
 }
 
 @keyframes fadeIn {
@@ -178,6 +184,7 @@
   text-transform: uppercase;
   border-radius: 6px;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .notificationList {
@@ -226,6 +233,7 @@
 .notificationItem {
   display: flex;
   gap: 12px;
+  cursor: pointer;
 }
 
 .ic_time {

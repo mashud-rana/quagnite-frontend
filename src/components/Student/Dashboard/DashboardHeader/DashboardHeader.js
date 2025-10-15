@@ -97,7 +97,7 @@
 
 // export default DashboardHeader;
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaSearch, FaBars } from "react-icons/fa";
 import styles from "./header.module.css";
 import Image from "next/image";
@@ -112,11 +112,124 @@ import img from "@/assets/images/all/instractor.png";
 import { useSelector } from "react-redux";
 import Logout from "@/components/Student/Auth/Logout";
 import { GrAnnounce } from "react-icons/gr";
+import { useGetAnnouncementQuery, useMakeAsReadAnnouncementMutation } from "@/redux/features/announcement/announcementApi";
+import InfiniteScroll from "react-infinite-scroll-component";
+import NotDataFound from "@/components/Empty/NotDataFound";
 
 const DashboardHeader = ({ onOpenSidebar }) => {
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const { user } = useSelector((state) => state.auth);
+
+  
+  //notification code
+  const [params, setParams] = useState({
+    page: Number(process.env.NEXT_PUBLIC_CURRENT_PAGE) || 1,
+    per_page: Number(process.env.NEXT_PUBLIC_PAGE_SIZE) || 10,
+  });
+  const [announcements, setAnnouncements] = useState([]);
+      const [totalPages, setTotalPages] = useState(1);
+      const [selectedId, setSelectedId] = useState(null);
+    //fetch announcements
+      const { 
+      data,
+      isSuccess, 
+      isLoading, 
+      error, 
+      refetch,
+      isFetching 
+      } = useGetAnnouncementQuery(params);
+    
+      //make as read mutation
+      const [makeAsReadAnnouncement, 
+        { 
+          data:makeAsReadData,
+          isLoading: makeAsReadIsLoading, 
+          isSuccess: makeAsReadIsSuccess,
+          isError: makeAsReadIsError,
+          error: makeAsReadError }] = useMakeAsReadAnnouncementMutation();
+    
+      //scroll fetch
+     const fetchMoreData = () => {
+        console.log("Fetching next page...");
+        setParams((prev) => {
+          if (prev.page < totalPages) {
+            return { ...prev, page: prev.page + 1 };
+          }
+          console.log("Reached last page");
+          return prev;
+        });
+      };
+    
+      //mark as read
+      const makeAsReadHandler = (announcementId) => {
+        if(!announcementId) return;
+        let find = announcements.find(a => a.id === announcementId);
+        if(!find || find.read_at) return; //already read
+        makeAsReadAnnouncement(announcementId);
+        setSelectedId(announcementId);
+      }
+    
+      //make as announcement success
+      useEffect(()=>{
+        console.log("makeAsReadData",makeAsReadData, announcements)
+        if(makeAsReadIsSuccess && makeAsReadData){
+          setAnnouncements((prev) =>{
+            return prev.map(item => {
+              if(item.id === makeAsReadData?.data?.announcement_id){
+                return {...item, read_at: new Date().toISOString()};
+              }
+              return item;
+            });
+          });
+          setSelectedId(null);
+        }
+      },[makeAsReadIsSuccess, makeAsReadData])
+    
+      //set announcements
+     useEffect(() => {
+        if (isSuccess && data?.data?.data) {
+          const newItems = data.data.data;
+    
+          if (params.page === 1) {
+            setAnnouncements(newItems);
+          } else {
+            setAnnouncements((prev) => {
+              // avoid duplicates
+              const ids = new Set(prev.map((a) => a.id));
+              const uniqueNew = newItems.filter((a) => !ids.has(a.id));
+              return [...prev, ...uniqueNew];
+            });
+          }
+    
+          setTotalPages(data?.data?.meta?.last_page || 1);
+        }
+      }, [isSuccess, data, params.page]);
+    
+    
+      // console.log("1 announcementData", announcements);
+    // const [expandedItems, setExpandedItems] = useState({});
+  
+    // const toggleExpand = (id) => {
+    //   setExpandedItems((prev) => ({
+    //     ...prev,
+    //     [id]: !prev[id],
+    //   }));
+    // };
+  
+    // 🧩 Helper to truncate HTML text safely
+    const truncateHtml = (html, limit = 150) => {
+      // Remove HTML tags to count plain text characters
+      const plainText = html.replace(/<[^>]+>/g, "");
+      if (plainText.length <= limit) return html;
+  
+      // Slice text safely
+      const truncatedText = plainText.slice(0, limit) + "...";
+      return truncatedText;
+    };
+
+   
+  //notification code
 
   return (
     <>
@@ -168,63 +281,72 @@ const DashboardHeader = ({ onOpenSidebar }) => {
           </Link>
 
           {/* Notification with dropdown */}
-          <div
-            className={styles.notificationWrapper}
-            onMouseEnter={() => setShowNotifications(true)}
-            onMouseLeave={() => setShowNotifications(false)}
-          >
-            <button className={styles.iconButton} aria-label="Notifications">
-              <MdNotificationsNone className={styles.actionIcon} />
-            </button>
-
-            {showNotifications && (
-              <div className={styles.notificationDropdown}>
-                <div className={styles.notification_header}>
-                  <h4 className={styles.notificationTitle}>Notifications</h4>
-                  <Link href="/student/notification" className={styles.ic_btn}>
-                    See all
-                  </Link>
-                </div>
-                <ul className={styles.notificationList}>
-                  <li className={styles.notificationItem}>
-                    <Image src={img} alt="" className={styles.ic_img} />
-                    <div>
-                      <p className="fw_600"> Notification title </p>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Aliquam quis venenatis magna.
-                      </p>
-                    </div>
-                    <p className={styles.ic_time}>03.22</p>
-                  </li>
-
-                  <li className={styles.notificationItem}>
-                    <Image src={img} alt="" className={styles.ic_img} />
-                    <div>
-                      <p className="fw_600"> Notification title </p>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Aliquam quis venenatis magna.
-                      </p>
-                    </div>
-                    <p className={styles.ic_time}>03.22</p>
-                  </li>
-
-                  <li className={styles.notificationItem}>
-                    <Image src={img} alt="" className={styles.ic_img} />
-                    <div>
-                      <p className="fw_600"> Notification title </p>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Aliquam quis venenatis magna.
-                      </p>
-                    </div>
-                    <p className={styles.ic_time}>03.22</p>
-                  </li>
-                </ul>
+        <div
+          className={styles.notificationWrapper}
+          onMouseEnter={() => setShowNotifications(true)}
+          onMouseLeave={() => setShowNotifications(false)}
+        >
+          <button className={styles.iconButton} aria-label="Notifications">
+            <MdNotificationsNone className={styles.actionIcon} />
+          </button>
+       
+          { showNotifications && (
+            <div
+            
+              className={styles.notificationDropdown}
+            >
+              <div className={styles.notification_header}>
+                <h4 className={styles.notificationTitle}>Notifications</h4>
+                <Link href="/student/notification" className={styles.ic_btn}>
+                  See all
+                </Link>
               </div>
-            )}
-          </div>
+
+              <ul className={styles.notificationList} id="scrollableDiv">
+                <InfiniteScroll
+                  dataLength={announcements.length}
+                  next={fetchMoreData}
+                  hasMore={params.page < totalPages}
+                  loader={<p className="text-center">Loading more...</p>}
+                  endMessage={
+                    <p style={{ textAlign: "center", marginTop: "10px" }}>
+                      {announcements.length > 0 && <b>No more announcements</b>}
+                    </p>
+                  }
+                   scrollableTarget="scrollableDiv"
+                  
+                >
+                  {announcements.length > 0 ? (
+                    announcements.map((item, index) => {
+                      const shortDescription = truncateHtml(item?.description || "", 150);
+                      return (
+                        <li
+                          key={item.id}
+                          className={`${styles.notificationItem} ${
+                            item.read_at == null ? styles.unread : ""
+                          }`}
+                          onClick={() => makeAsReadHandler(item.id)}
+                        >
+                          <Image src={img} alt="" className={styles.ic_img} />
+                          <div>
+                            <p className="fw_600">
+                              {item?.title}
+                            </p>
+                            <p>{shortDescription}</p>
+                          </div>
+                          <p className={styles.ic_time}>{item?.formatted_date}</p>
+                        </li>
+                      );
+                    })
+                  ) : (
+                    !isLoading && <NotDataFound message="No announcements available at the moment." />
+                  )}
+                </InfiniteScroll>
+              </ul>
+            </div>
+          )}
+        </div>
+
 
           {/* Avatar */}
           <div>
