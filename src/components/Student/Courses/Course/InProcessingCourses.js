@@ -39,6 +39,7 @@ const InProcessingCourses = ({totalPages}) =>{
                     <b>No more inprogress courses</b>
                     </p>
                 }
+                 scrollableTarget="scrollableDiv"
                 >
                       {allCourses && allCourses.map((course) => (
                         <ProgressCard key={course.id} course={course} />

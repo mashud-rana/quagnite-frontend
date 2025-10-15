@@ -5,6 +5,8 @@ import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa6";
 import CreateCourseForm from "@/components/Teacher/Courses/CreateCourseForm/CreateCourseForm";
 import { useState } from "react";
+import Instractor from "@/components/Teacher/Courses/Instractor/Instractor";
+import UploadVideo from "@/components/Teacher/Courses/UploadVideo/UploadVideo";
 
 const CreateCoursePage = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -14,11 +16,11 @@ const CreateCoursePage = () => {
 
   return (
     <div>
-      <ProgressStepper currentStep={1} />
-      {/* <ProgressStepper
+      {/* <ProgressStepper currentStep={1} /> */}
+      <ProgressStepper
         currentStep={currentStep}
         onStepChange={handleStepChange}
-      /> */}
+      />
 
       <div className="mb-24">
         <div className="ic_title_section">
@@ -29,9 +31,13 @@ const CreateCoursePage = () => {
         </div>
       </div>
 
-      <CreateCourseForm />
+      {/* <CreateCourseForm /> */}
 
-      {/* {currentStep === 1 && <CreateCourseForm />} */}
+      {currentStep === 1 && (
+        <CreateCourseForm setCurrentStep={setCurrentStep} />
+      )}
+      {currentStep === 2 && <UploadVideo setCurrentStep={setCurrentStep} />}
+      {currentStep === 3 && <Instractor setCurrentStep={setCurrentStep} />}
     </div>
   );
 };

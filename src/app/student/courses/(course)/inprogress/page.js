@@ -64,7 +64,7 @@ const InprogressPage = () => {
     }, [isSuccess, coursesData]);
 
   return (
-    <div className="ic_courses_list">
+    <div className="ic_courses_list" id="scrollableDiv">
       <FullscreenSpinner />
       <InProcessingCourses totalPages={coursesData?.data?.meta?.last_page || 1} />
       {/* {mockCourses.map((course) => (

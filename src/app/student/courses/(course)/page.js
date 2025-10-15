@@ -66,7 +66,7 @@ const DashboardCoursesPage = () => {
 
 
   return (
-    <div className="ic_courses_list">
+    <div className="ic_courses_list" id="scrollableDiv">
       {/* <FullscreenSpinner /> */}
       {
         isLoading || isFetching ? <SectionSpinner message={
