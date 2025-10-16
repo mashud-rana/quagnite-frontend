@@ -19,10 +19,28 @@ export const beneficiaryApi = apiSlice.injectEndpoints({
     
     }),
     
+    updateBeneficiary: builder.mutation({
+      query: ({ uuid, formData }) => {
+        // ✅ Append Laravel _method override
+        formData.append("_method", "PUT");
+
+        return {
+          url: `/wallet/beneficiaries/${uuid}/update`,
+          method: "POST",
+          body: formData, // ✅ send as FormData directly
+        };
+      },
+    }),
+
+
+  
+    
   })
 });
 
 export const {
   useGetBeneficiariesQuery,
-  useCreateBeneficiaryMutation
+  useCreateBeneficiaryMutation,
+  useUpdateBeneficiaryMutation
+  
 } = beneficiaryApi;

@@ -63,3 +63,16 @@ export const getLastTwoDigits = (num) => {
     return (num % 100).toString().padStart(2, '0');
   }
 }
+
+// appendInFormData.js
+export const appendInFormData = (data) => {
+  const formData = new FormData();
+  Object.keys(data).forEach((key) => {
+    if(data[key] !== undefined && data[key] !== null) // Skip undefined or null values
+    {
+
+      formData.append(key, data[key]);
+    }
+  });
+  return formData;
+};
