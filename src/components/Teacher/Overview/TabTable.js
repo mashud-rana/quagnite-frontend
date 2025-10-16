@@ -1,3 +1,5 @@
+"use client";
+
 import IcTable from "@/components/Share/IcTable/IcTable";
 import React, { useState } from "react";
 import styles from "./overview.module.css";

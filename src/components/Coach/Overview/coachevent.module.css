@@ -1,0 +1,270 @@
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.eventTitle {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* Events Section */
+.eventsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.eventsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sectionTitle {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.viewAllButton {
+  background-color: #6b8aff;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.viewAllButton:hover {
+  background-color: #5a7ae6;
+}
+
+.eventsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.eventCard {
+  background-color: #f0f0f0;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+.eventCard:hover {
+  background-color: #e8e8e8;
+}
+
+.eventContent {
+  flex: 1;
+}
+
+.eventTitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin: 0 0 8px 0;
+}
+
+.eventDateTime {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.eventTime {
+  color: #ff6b35;
+  font-weight: 500;
+}
+
+.expandButton {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.expandButton:hover {
+  color: #1a1a1a;
+}
+
+/* Availability Section */
+.availabilitySection {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.availabilityHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calendarIcon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.ic_flex {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+}
+
+.calendarHeader {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.dayLabel {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b8aff;
+  padding: 8px 0;
+}
+
+.calendarGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.calendarWeek {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.calendarDate {
+  aspect-ratio: 1;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #1a1a1a;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendarDate:hover:not(.emptyDate):not(.selectedDate) {
+  background-color: #f0f0f0;
+}
+
+.selectedDate {
+  background-color: #6b8aff !important;
+  color: white !important;
+  font-weight: 600;
+}
+
+.emptyDate {
+  cursor: default;
+  color: transparent;
+}
+
+/* Availability Stats */
+.availabilityStats {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.statsLabel {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 8px 0;
+}
+
+.statsContent {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.daysCount {
+  font-size: 32px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.statsChange {
+  font-size: 14px;
+  color: #ff4444;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 20px 16px;
+  }
+
+  .sectionTitle {
+    font-size: 20px;
+  }
+
+  .viewAllButton {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .eventCard {
+    padding: 16px;
+  }
+
+  .eventTitle {
+    font-size: 15px;
+  }
+
+  .calendar {
+    padding: 16px;
+  }
+
+  .calendarDate {
+    font-size: 13px;
+  }
+
+  .daysCount {
+    font-size: 28px;
+  }
+}

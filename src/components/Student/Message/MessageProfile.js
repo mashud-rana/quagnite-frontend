@@ -33,7 +33,7 @@ const MessageProfile = () => {
   ];
 
   return (
-    <div className={styles.groupInfo}>
+    <div className={styles.group_container}>
       <h6 className={styles.groupInfoTitle}>Group Information</h6>
       <hr className={styles.ic_hr} />
 
