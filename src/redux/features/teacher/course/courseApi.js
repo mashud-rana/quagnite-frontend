@@ -45,6 +45,22 @@ export const courseApi = apiSlice.injectEndpoints({
             }),
             // providesTags: ['course-category']
         }),
+        courseCreate: builder.mutation({
+            query: (data) => ({
+                url: `/teacher/course/create`,
+                method: "POST",
+                body: data,
+            }),
+            invalidatesTags: ['course']
+        }),
+        courseUpdate: builder.mutation({
+            query: (data) => ({
+                url: `/teacher/course/update`,
+                method: "POST",
+                body: data,
+            }),
+            invalidatesTags: ['course']
+        }),
 
 
     }),
@@ -57,4 +73,6 @@ export const {
     useCourseLanguagesQuery,
     useCourseDifficultyQuery,
     useCourseTagsQuery,
+    useCourseCreateMutation,
+    useCourseUpdateMutation,
 } = courseApi;

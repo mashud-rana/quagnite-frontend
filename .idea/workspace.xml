@@ -5,8 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d079e12f-27cf-42d7-900a-11a1310fc74f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/Teacher/Courses/CreateCourseUploadModuel/CreateCourseUploadModuleForm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Teacher/Courses/CreateCourseUploadModuel/createCourseUploadModuleForm.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/teacher/course/create-course/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/teacher/course/create-course/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Teacher/Courses/CreateCourseForm/CreateCourseForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Teacher/Courses/CreateCourseForm/CreateCourseForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Teacher/Courses/ProgressStepper/ProgressStepper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Teacher/Courses/ProgressStepper/ProgressStepper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/features/teacher/course/courseApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/features/teacher/course/courseApi.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,6 +152,10 @@
       <workItem from="1760240813233" duration="135000" />
       <workItem from="1760325593162" duration="14565000" />
       <workItem from="1760413518529" duration="7537000" />
+      <workItem from="1760498945652" duration="5052000" />
+      <workItem from="1760585882335" duration="8391000" />
+      <workItem from="1760595700881" duration="441000" />
+      <workItem from="1760596371494" duration="15024000" />
     </task>
     <servers />
   </component>

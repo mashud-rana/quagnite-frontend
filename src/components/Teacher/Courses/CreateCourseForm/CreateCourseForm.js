@@ -3,8 +3,7 @@
 import { useSelector } from "react-redux";
 import {Controller, useForm} from "react-hook-form";
 import styles from "./createform.module.css";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+
 import { BiChevronDown } from "react-icons/bi";
 import { RiUploadCloud2Line } from "react-icons/ri";
 import Image from "next/image";
@@ -18,6 +17,8 @@ import {
   useCourseLanguagesQuery,
   useCourseDifficultyQuery,
   useCourseTagsQuery,
+  useCourseCreateMutation,
+  useCourseUpdateMutation,
 } from "@/redux/features/teacher/course/courseApi";
 import {useAnnouncementsQuery} from "@/redux/features/teacher/announcements/announcementsApi";
 
@@ -26,69 +27,18 @@ import { FilePond, registerPlugin } from 'react-filepond';
 // Import the plugins you want to use
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
 // Register plugins
-registerPlugin(FilePondPluginImagePreview, FilePondPluginFileValidateType);
+registerPlugin(FilePondPluginImagePreview, FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
 
-const schema = yup.object({
-  // courseType: yup.string().nullable(true),
-  // title: yup.string().required("Title is required"),
-  // subtitle: yup.string().required("Subtitle is required"),
-  // // description: yup.string().required("Description is required"),
-  // course_category_id: yup.string().required("Course category is required"),
-  // course_subcategory_id: yup.string().nullable(true),
-  // course_announcement_id: yup.string().nullable(true),
-  // access_period: yup.number().typeError('Access period must be a number').required("Access period is required"),
-  // course_language_id: yup.string().required("Course language is required"),
-  // tag_id: yup.array().nullable(true),
-  // difficulty_level_id: yup.string().required("Course difficulty level is required"),
-  // learner_accessibility: yup.string().required("Learner accessibility is required"),
-  // price: yup.number().when('learner_accessibility', ([learner_accessibility]) => {
-  //   if (learner_accessibility === 'paid') {
-  //     return yup.number()
-  //         .typeError('Price must be a number')
-  //         .required('Price is required for paid courses');
-  //   }
-  //   return yup.number().nullable(true);
-  // }),
-  // old_price: yup.number().when('learner_accessibility', ([learner_accessibility]) => {
-  //   if (learner_accessibility === 'paid') {
-  //     return yup.number()
-  //         .typeError('Old price must be a number')
-  //         .nullable(true);
-  //   }
-  //   return yup.number().nullable(true);
-  // }),
-  image: yup
-      .mixed()
-      .test("required", "Course thumbnail is required", (value) => {
-        return value && value.length > 0; // ✅ ensures at least one file
-      })
-      .test("fileSize", "File size is too large", (value) => {
-        if (!value || value.length === 0) return true; // skip if empty
-        return value[0].size <= 2 * 1024 * 1024; // 2MB limit
-      })
-      .test("fileType", "Unsupported file format", (value) => {
-        if (!value || value.length === 0) return true; // skip if empty
-        return ["image/png", "image/jpeg", "image/jpg"].includes(value[0].type);
-      }),
-  thumb_type: yup.string().nullable(true),
-  video: yup.string().when('thumb_type', ([thumb_type]) => {
-    if (thumb_type === 'video') {
-      return yup.string()
-          .required('Course video is required for youtube type');
-    }
-    return yup.string().nullable(true);
-  }),
-  video_link: yup.string().when('thumb_type', ([thumb_type]) => {
-    if (thumb_type === 'youtube') {
-      return yup.string()
-          .required('Course video link is required for youtube type');
-    }
-    return yup.string().nullable(true);
-  }),
-});
 
-const CreateCourseForm = () => {
+
+const CreateCourseForm = ({register,
+                            control,
+                            watch,
+                            setValue,
+                            getValues,
+                            errors}) => {
   const token = useSelector((state) => state.auth.access_token);
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
   const [courseCategory, setCourseCategory] = useState([]);
@@ -102,20 +52,8 @@ const CreateCourseForm = () => {
   const [files, setFiles] = useState([]);
 
 
-  const {
-    register,
-    handleSubmit,
-    control,
-    watch,
-    setValue,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-    mode: 'onSubmit', // or 'onChange' if you want real-time validation
-    reValidateMode: 'onChange'
-  });
+  console.log('learner_accessibility', getValues('learner_accessibility'));
 
-  console.log('form errors', errors);
 
     // Fetch API
     const {
@@ -167,8 +105,6 @@ const CreateCourseForm = () => {
     isLoading: courseTagsLoading,
     isError: courseTagsError
   }= useCourseTagsQuery();
-
-
   // End API Fetch
 
 
@@ -254,22 +190,13 @@ const CreateCourseForm = () => {
   },[courseTagsData,courseTagsLoading,courseTagsError])
 
 
-
-
-
-  const onSubmit = (data) => {
-    console.log("Form submitted:", data);
-  };
-
   const selectCourseCategory = (categoryId) => {
     setCourseSubCategory([]);
     setSelectCourseCategoryId(categoryId);
   }
 
-
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+      <>
       {/* 1st section  */}
       <div className={styles.section}>
         <h5 className={styles.sectionTitle}>Course Details</h5>
@@ -793,6 +720,12 @@ const CreateCourseForm = () => {
                   fileValidateTypeLabelExpectedTypes="Expects video files"
                   name="video"
                   labelIdle='Drag & Drop your video or <span class="filepond--label-action">Browse</span>'
+
+                  /** ✅ File size validation */
+                  maxFileSize="5MB"
+                  labelMaxFileSizeExceeded="File is too large"
+                  labelMaxFileSize="Maximum file size is 5MB"
+
                   server={{
                     process: {
                       url: `${process.env.NEXT_PUBLIC_API_URL}/teacher/course/chunk-upload`,
@@ -803,12 +736,20 @@ const CreateCourseForm = () => {
                       }),
                       withCredentials: false,
                       onload: (response) => {
-                        console.log("Upload complete:", response);
-                        return response.key || response; // if your backend returns an ID
+                        setValue('video', response?.response);
+                        return response?.response; // if your backend returns an ID
                       },
                       onerror: (error) => {
                         console.error("Upload failed:", error);
                       },
+                    },
+                    patch: {
+                      url: `${process.env.NEXT_PUBLIC_API_URL}/teacher/course/chunk-upload?patch=`,
+                      method: "PATCH",
+                      headers: (file) => ({
+                        Authorization: `Bearer ${token}`,
+                      }),
+                      withCredentials: false,
                     },
                     // ✅ This handles file removal
                     revert: (uniqueFileId, load, error) => {
@@ -830,7 +771,7 @@ const CreateCourseForm = () => {
                     },
                   }}
                   chunkUploads={true}          // ✅ Enable chunked uploads
-                  chunkSize={5000000}  // ✅ 5MB chunks (you can change this)
+                  chunkSize={process.env.FILE_CHUNK_SIZE}  // ✅ 5MB chunks (you can change this)
                   chunkForce={true}            // ✅ Always use chunking, even for small files
               />
               {errors.video && (
@@ -845,15 +786,7 @@ const CreateCourseForm = () => {
         </div>
       </div>
 
-      <div className="ic_flex">
-        <button type="button" className="ic_btn">
-          BACK
-        </button>
-        <button type="submit" className="ic_btn">
-          SAVE AND CONTINUE
-        </button>
-      </div>
-    </form>
+      </>
   );
 };
 
