@@ -31,6 +31,15 @@ export const beneficiaryApi = apiSlice.injectEndpoints({
         };
       },
     }),
+    deleteBeneficiary: builder.mutation({
+      query: ({ uuid }) => {
+      
+        return {
+          url: `/wallet/beneficiaries/${uuid}/delete`,
+          method: "DELETE",
+        };
+      },
+    }),
 
 
   
@@ -41,6 +50,7 @@ export const beneficiaryApi = apiSlice.injectEndpoints({
 export const {
   useGetBeneficiariesQuery,
   useCreateBeneficiaryMutation,
-  useUpdateBeneficiaryMutation
+  useUpdateBeneficiaryMutation,
+  useDeleteBeneficiaryMutation
   
 } = beneficiaryApi;

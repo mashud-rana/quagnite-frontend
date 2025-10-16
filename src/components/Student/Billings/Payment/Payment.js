@@ -5,13 +5,13 @@
 import React, { useState, useEffect } from "react";
 import styles from "./payment.module.css";
 import Image from "next/image";
-import {useGetBeneficiariesQuery, useCreateBeneficiaryMutation, useUpdateBeneficiaryMutation} from "@/redux/features/common/beneficiary/beneficiaryApi";
+import {useGetBeneficiariesQuery, useCreateBeneficiaryMutation, useUpdateBeneficiaryMutation, useDeleteBeneficiaryMutation} from "@/redux/features/common/beneficiary/beneficiaryApi";
 import {getLastTwoDigits} from "@/utils/helper";
 import img from "@/assets/images/all/american.png";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { antIcon, toastError, toastSuccess, appendInFormData } from "@/utils/helper";
+import { antIcon, toastError, toastSuccess, appendInFormData, confirmDelete } from "@/utils/helper";
 import { Spin } from "antd";
 import { set } from 'nprogress';
 import { EditOutlined, DeleteOutlined, CloseCircleOutlined } from '@ant-design/icons';
@@ -149,6 +149,14 @@ const Payment = ({ title = "Credit Card", cards = [], methods = [] }) => {
       isSuccess: updateBeneficiaryIsSuccess,
       isError: updateBeneficiaryIsError,
       error: updateBeneficiaryError }] = useUpdateBeneficiaryMutation();
+  //Delete beneficiary mutation
+  const [deleteBeneficiary  , 
+    { 
+      data:deleteBeneficiaryData,
+      isLoading: deleteBeneficiaryIsLoading, 
+      isSuccess: deleteBeneficiaryIsSuccess,
+      isError: deleteBeneficiaryIsError,
+      error: deleteBeneficiaryError }] = useDeleteBeneficiaryMutation();
 
 
   const handleAddNewCard = () => {
@@ -201,8 +209,16 @@ const Payment = ({ title = "Credit Card", cards = [], methods = [] }) => {
     }
   };
 
-
-  //edit beneficiary handler
+  const deleteBeneficiaryHandler = async (uuid) => {
+    if(!uuid) return;
+    confirmDelete().then(async (confirmed) => {
+      if (confirmed) {
+        setSelectedUuid(uuid);
+        await deleteBeneficiary({ uuid }).unwrap();
+      }
+    });
+  }
+    //edit beneficiary handler
   const editBeneficiaryHandler = async (uuid) => {
     if(!uuid) return;
     let find = beneficiaries.find(b => b.uuid === uuid);
@@ -294,6 +310,31 @@ const Payment = ({ title = "Credit Card", cards = [], methods = [] }) => {
     }
   },[updateBeneficiaryIsSuccess,updateBeneficiaryData,updateBeneficiaryIsError,updateBeneficiaryError])
 
+  //delete beneficiary success error
+  useEffect(() => {
+    if (deleteBeneficiaryIsSuccess) {
+      console.log("deleteBeneficiaryData", deleteBeneficiaryData, selectedUuid);
+      toastSuccess(deleteBeneficiaryData?.message || "Card deleted successfully");
+
+      setBeneficiaries((prev) => prev.filter((b) => b.uuid !== selectedUuid));
+
+      // ✅ Reset selected item after deletion
+      setSelectedUuid(null);
+    }
+
+    if (deleteBeneficiaryIsError) {
+      toastError(
+        deleteBeneficiaryError?.data?.message || "Card delete failed. Please try again."
+      );
+    }
+  }, [
+    deleteBeneficiaryIsSuccess,
+    deleteBeneficiaryIsError,
+    deleteBeneficiaryData,
+    deleteBeneficiaryError
+  ]);
+
+
   console.log("Beneficiaries:", beneficiaries);
 
   return (
@@ -343,6 +384,7 @@ const Payment = ({ title = "Credit Card", cards = [], methods = [] }) => {
                     e.stopPropagation();
                     // Handle delete action
                     // Add your delete logic here
+                    deleteBeneficiaryHandler(card?.uuid);
                   }}
                 />
               </div>
@@ -383,6 +425,9 @@ const Payment = ({ title = "Credit Card", cards = [], methods = [] }) => {
           }
           >
             Update Card
+            {
+              updateBeneficiaryIsLoading && selectedUuid && <Spin indicator={antIcon} />
+            }
           </button>
           <div
             
