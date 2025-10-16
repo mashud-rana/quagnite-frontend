@@ -200,7 +200,7 @@ const Payment = ({ title = "Credit Card", cards = [], methods = [] }) => {
 
   // Component
   const onUpdateSubmit = async (data) => {
-    console.log("Update onUpdateSubmit:", data, selectedUuid, appendInFormData(data));
+    
     try {
       const formData = appendInFormData(data);
       await updateBeneficiary({ uuid: selectedUuid, formData }).unwrap();
@@ -376,6 +376,9 @@ const Payment = ({ title = "Credit Card", cards = [], methods = [] }) => {
                       }}
                     />
                   )
+                }
+                {
+                  deleteBeneficiaryIsLoading && selectedUuid == card?.uuid && <Spin indicator={antIcon} />
                 }
                 
                 <DeleteOutlined 
