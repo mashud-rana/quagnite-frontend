@@ -10,9 +10,9 @@ export const resumeApi = apiSlice.injectEndpoints({
       }),
     }),
     
-    downloadMyCertificate: builder.mutation({
+    downloadResume: builder.mutation({
       query: (uuid) => ({
-        url: `/student/certificates/my-certificates/download/${uuid}`,
+        url: `/student/resumes/my-resumes/download/${uuid}`,
         method: "GET",
         responseHandler: async (response) => {
           const blob = await response.blob();
@@ -67,6 +67,6 @@ export const resumeApi = apiSlice.injectEndpoints({
 
 export const {
   useGetMyResumesQuery,
-  useDownloadMyCertificateMutation,
+  useDownloadResumeMutation,
   useViewMyCertificateQuery,
 } = resumeApi;

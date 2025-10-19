@@ -8,11 +8,14 @@ import ResumeModal from "./ResumeModal";
 import React, { useState , useEffect} from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
-import {useGetMyResumesQuery} from "@/redux/features/student/resume/resumeApi";
+import {useDownloadResumeMutation, useGetMyResumesQuery} from "@/redux/features/student/resume/resumeApi";
 import SectionSpinner from "@/components/Spinner/SectionSpinner";
 import NotDataFound from "@/components/Empty/NotDataFound";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { resume } from '@/assets/images/all/resume.png';
+import { antIcon, toastError, toastSuccess } from "@/utils/helper";
+import { Spin } from "antd";
+import { MdOutlineDownload } from "react-icons/md";
 
 const resumes = [
   {
@@ -47,6 +50,7 @@ const Resume = () => {
 
   const [models, setModels] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
+   const [selectUuid, setSelectUuid] = useState(null);
   
 
   //fetch api
@@ -58,6 +62,13 @@ const Resume = () => {
     refetch,
     isFetching 
   } = useGetMyResumesQuery(params);
+
+   //download my resume
+  const [ downloadResume, 
+    { isLoading: downloadIsLoading, 
+      isSuccess: downloadIsSuccess,
+      isError: downloadIsError,
+      error: downloadError }] = useDownloadResumeMutation();
 
    //scroll fetch
   const fetchMoreData = () => {
@@ -72,6 +83,13 @@ const Resume = () => {
   };
 
 
+  // Handle download success/error
+  useEffect(() => {
+    if (downloadIsSuccess) {
+      // Handle successful download
+      setSelectUuid(null);
+    }
+  }, [downloadIsSuccess]);
  //set models
   useEffect(() => {
     if (isSuccess && data?.data?.data) {
@@ -165,7 +183,12 @@ const Resume = () => {
 
                       {/* Action Buttons */}
                       <div className={styles.actionButtons}>
-                        <button className={`${styles.ic_btn}`}>DOWNLOAD</button>
+                        <button className={`${styles.ic_btn}`} onClick={()=>{ 
+                          downloadResume(resume?.uuid)
+                          setSelectUuid(resume?.uuid);
+                          }} >DOWNLOAD 
+                           {selectUuid === resume?.uuid && downloadIsLoading && <Spin indicator={antIcon} /> }
+                          </button>
                         {/* <button className={`${styles.ic_btn}`}>VIEW</button> */}
                         <PhotoProvider maskOpacity={0.7}>
                           <PhotoView src={img.src}>
