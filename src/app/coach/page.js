@@ -98,12 +98,14 @@ const CoachOverview = () => {
             <Management />
             {/* <Event /> */}
 
-            <div>
+            <div className={styles.ic_schedule_container}>
               <div className={styles.eventItem}>
                 <div className={styles.ic_title}>Next Schedule Session</div>
                 <span className={styles.ic_date}>AI Fundamentals | </span>
                 <span className={styles.ic_date2}>12 March 2025, 10:00 AM</span>
               </div>
+
+              <button className={styles.ic_btn}>View</button>
             </div>
           </div>
         </div>

@@ -51,6 +51,17 @@
   font-size: 14px;
 }
 
+.ic_btn {
+  font-size: 14px;
+  border: none;
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 4px 12px;
+  border-radius: 6px;
+  text-wrap: nowrap;
+  text-transform: uppercase;
+}
+
 @media (max-width: 1640px) {
   .metricsGridFour {
     gap: 16px;
