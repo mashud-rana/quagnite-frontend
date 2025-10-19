@@ -7,10 +7,18 @@ import CertificationSearch from "@/components/Student/Vault/CertificationSearch/
 
 const MycertificatesPage = () => {
   const [certifiableTypes, setCertifiableTypes] = useState([]);
+  const [search, setSearch] = useState("");
+  const searchChangeHandler = (search) => {
+    setSearch(search);
+  }
+  const certifiableTypesChangeHandler = (selectedTypes) => {
+    setCertifiableTypes(selectedTypes);
+  }
+
   return (
     <>
-      <CertificationSearch />
-      <CertificateList certifiableTypes={certifiableTypes} />
+      <CertificationSearch  onSearchChange={searchChangeHandler} onCertifiableTypesChange={certifiableTypesChangeHandler} />
+      <CertificateList certifiableTypes={certifiableTypes} search={search} />
     </>
   );
 };

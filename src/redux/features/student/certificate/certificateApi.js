@@ -4,8 +4,8 @@ import { getIn } from "yup";
 export const certificateApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getMyCertificates: builder.query({
-      query: ({ page, per_page, certifiable_types }) => ({
-        url: `/student/certificates/get-my-certificates?page=${page}&per_page=${per_page}&certifiable_types=${certifiable_types}`,
+      query: ({ page, per_page, certifiable_types, search }) => ({
+        url: `/student/certificates/get-my-certificates?page=${page}&per_page=${per_page}&certifiable_types=${certifiable_types}&search=${search}`,
         method: "GET",
       }),
     }),

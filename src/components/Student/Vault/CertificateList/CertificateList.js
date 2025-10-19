@@ -9,8 +9,8 @@ import {useDownloadMyCertificateMutation, useGetMyCertificatesQuery, useViewMyCe
 import { antIcon, toastError, toastSuccess } from "@/utils/helper";
 import { Spin } from "antd";
 
-const CertificateList = ({certifiableTypes}) => {
-  const [currentPage, setCurrentPage] = useState(1);
+const CertificateList = ({certifiableTypes, search}) => {
+
 
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -34,7 +34,8 @@ const CertificateList = ({certifiableTypes}) => {
   const { data: certificateData, isSuccess, isLoading, isFetching, refetch } = useGetMyCertificatesQuery({
     page: tableParams.pagination?.current,
     per_page: tableParams.pagination?.pageSize,
-    certifiable_types: certifiableTypesParam
+    certifiable_types: certifiableTypesParam,
+    search: search || "",
   });
 
   //View invoice
@@ -51,10 +52,28 @@ const CertificateList = ({certifiableTypes}) => {
    // Table columns
   const tableColumns = [
     {
+      title: "SL No",
+      dataIndex: "sl_no",
+      key: "sl_no",
+      render: (_, __, index) => (tableParams.pagination?.current - 1) * tableParams.pagination?.pageSize + index + 1,
+    },
+    {
       title: "Date",
       dataIndex: "date",
       key: "date",
     
+    },
+    {
+      title: "Course / Exam Name ",
+      key: "name",
+      dataIndex: "name",
+      render: (_, record) => {
+        if(record?.certifiable?.type === 'course'){
+          return record?.certifiable?.data?.course?.title || "N/A";
+        } else if(record?.certifiable?.type === 'exam'){
+          return record?.certifiable?.data?.exam?.title || "N/A";
+        }
+      },
     },
     {
       title: "Certificate No",
