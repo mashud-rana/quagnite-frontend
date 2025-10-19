@@ -9,6 +9,9 @@ import { RiUploadCloud2Line } from "react-icons/ri";
 import Image from "next/image";
 import {useEffect, useState} from "react";
 import { Select } from 'antd';
+import Link from "next/link";
+import { FaArrowLeft } from "react-icons/fa6";
+import { useRouter } from "next/navigation";
 
 import {
   useCourseCategoriesQuery,
@@ -39,11 +42,11 @@ const CreateCourseForm = ({register,
                             setValue,
                             getValues,
                             errors}) => {
+  const navigator = useRouter();
   const token = useSelector((state) => state.auth.access_token);
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
   const [courseCategory, setCourseCategory] = useState([]);
   const [courseSubCategory, setCourseSubCategory] = useState([]);
-  const [selectCourseCategoryId, setSelectCourseCategoryId] = useState(null);
   const [courseAnnouncements, setCourseAnnouncements] = useState([]);
   const [courseBenefits, setCourseBenefits] = useState([]);
   const [courseLanguage, setCourseLanguage] = useState([]);
@@ -52,7 +55,8 @@ const CreateCourseForm = ({register,
   const [files, setFiles] = useState([]);
 
 
-  console.log('learner_accessibility', getValues('learner_accessibility'));
+  // console.log('biggner', biggner)
+  // console.log('course and course subcategoyr', courseCategory, courseSubCategory,watch('course_category_id'));
 
 
     // Fetch API
@@ -68,10 +72,10 @@ const CreateCourseForm = ({register,
     isLoading: subCategoriesLoading,
     isError: subCategoriesError
   } = useCourseSubCategoriesQuery({
-        id: selectCourseCategoryId
+        id: watch('course_category_id')
       },
       {
-        skip: !selectCourseCategoryId
+        skip: !watch('course_category_id')
       });
 
     const {
@@ -197,6 +201,16 @@ const CreateCourseForm = ({register,
 
   return (
       <>
+
+        <div className="mb-24">
+          <div className="ic_title_section">
+            <Link href="/teacher" className="ic_back_button" aria-label="Go back">
+              <FaArrowLeft />
+            </Link>
+            <h1 className="ic_text_36">Create New Course</h1>
+          </div>
+        </div>
+
       {/* 1st section  */}
       <div className={styles.section}>
         <h5 className={styles.sectionTitle}>Course Details</h5>
@@ -316,19 +330,25 @@ const CreateCourseForm = ({register,
             <label className={styles.label}>Course Category *</label>
             <div className={styles.inputContainer}>
               <div className={styles.selectWrapper}>
-                <select
-                  {...register("course_category_id")}
-                  className={styles.select}
-                  onChange={(e) => {
-                    selectCourseCategory(e.target.value);
-                  }}
-                >
-                  <option value="">Select category</option>
-                  {courseCategory?.map((item) => (
-                      <option key={'courseCategory'+item?.value} value={item?.value}>{item?.label}</option>
-                  ))}
-                </select>
-                <BiChevronDown className={styles.selectIcon} />
+                <Controller
+                    name="course_category_id"
+                    control={control}
+                    render={({field}) => (
+                        <Select
+                            {...field}
+                            allowClear
+                            showSearch
+                            style={{width: '100%', height: '40px'}}
+                            placeholder="Select category"
+                            optionFilterProp="label"
+                            onChange={(value) => {
+                              field.onChange(value);
+                              selectCourseCategory(value);
+                            }}
+                            options={[...courseCategory]}
+                        />
+                    )}
+                />
               </div>
               {errors.course_category_id && (
                 <span className={styles.error}>
@@ -342,15 +362,21 @@ const CreateCourseForm = ({register,
             <label className={styles.label}>Course Subcategory</label>
             <div className={styles.inputContainer}>
               <div className={styles.selectWrapper}>
-                <select
-                    {...register("course_subcategory_id")}
-                    className={styles.select}>
-                  <option value="">Select Subcategory</option>
-                  {courseSubCategory?.map((item) => (
-                      <option key={'courseCategory'+item?.value} value={item?.value}>{item?.label}</option>
-                  ))}
-                </select>
-                <BiChevronDown className={styles.selectIcon} />
+                <Controller
+                    name="course_subcategory_id"
+                    control={control}
+                    render={({field}) => (
+                        <Select
+                            {...field}
+                            allowClear
+                            showSearch
+                            style={{width: '100%', height: '40px'}}
+                            placeholder="Select Subcategory"
+                            optionFilterProp="label"
+                            options={[...courseSubCategory]}
+                        />
+                    )}
+                />
               </div>
             </div>
           </div>
@@ -398,16 +424,21 @@ const CreateCourseForm = ({register,
             <label className={styles.label}>Select Course Announcements</label>
             <div className={styles.inputContainer}>
               <div className={styles.selectWrapper}>
-                <select
-                  {...register("course_announcement_id")}
-                  className={styles.select}
-                >
-                  <option value="">Select option</option>
-                  {courseAnnouncements?.map((item) => (
-                      <option key={'announcements'+item?.value} value={item?.value}>{item?.label}</option>
-                  ))}
-                </select>
-                <BiChevronDown className={styles.selectIcon} />
+                <Controller
+                    name="course_announcement_id"
+                    control={control}
+                    render={({field}) => (
+                        <Select
+                            {...field}
+                            allowClear
+                            showSearch
+                            style={{width: '100%', height: '40px'}}
+                            placeholder="Select Course Announcements"
+                            optionFilterProp="label"
+                            options={[...courseAnnouncements]}
+                        />
+                    )}
+                />
               </div>
               {errors.course_announcement_id && (
                 <span className={styles.error}>
@@ -421,16 +452,21 @@ const CreateCourseForm = ({register,
             <label className={styles.label}>Select Course Benefits</label>
             <div className={styles.inputContainer}>
               <div className={styles.selectWrapper}>
-                <select
-                  {...register("bootcampCategory")}
-                  className={styles.select}
-                >
-                  <option value="">Select Course Benefits</option>
-                  {courseBenefits?.map((item) => (
-                      <option key={'announcements'+item?.value} value={item?.value}>{item?.label}</option>
-                  ))}
-                </select>
-                <BiChevronDown className={styles.selectIcon} />
+                <Controller
+                    name="bootcampCategory"
+                    control={control}
+                    render={({field}) => (
+                        <Select
+                            {...field}
+                            allowClear
+                            showSearch
+                            style={{width: '100%', height: '40px'}}
+                            placeholder="Select Course Benefits"
+                            optionFilterProp="label"
+                            options={[...courseBenefits]}
+                        />
+                    )}
+                />
               </div>
               {errors.bootcampCategory && (
                 <span className={styles.error}>
@@ -467,16 +503,24 @@ const CreateCourseForm = ({register,
             <label className={styles.label}>Learners Accessibility *</label>
             <div className={styles.inputContainer}>
               <div className={styles.selectWrapper}>
-                <select
-                    {...register('learner_accessibility')}
-                    className={styles.select}
-                    onChange={(e) => setValue('learner_accessibility', e.target.value)}
-                >
-                  <option value="">Select Learners Accessibility</option>
-                  <option value="free">Free</option>
-                  <option value="paid">Paid</option>
-                </select>
-                <BiChevronDown className={styles.selectIcon} />
+                <Controller
+                    name="learner_accessibility"
+                    control={control}
+                    render={({field}) => (
+                        <Select
+                            {...field}
+                            allowClear
+                            showSearch
+                            style={{width: '100%', height: '40px'}}
+                            placeholder="Select Learners Accessibility"
+                            optionFilterProp="label"
+                            options={[
+                                {label: 'Free', value: 'free'},
+                                {label: 'Paid', value: 'paid'}
+                            ]}
+                        />
+                    )}
+                />
                 {errors.learner_accessibility && (
                     <span className={styles.error}>
                   {errors.learner_accessibility.message}
@@ -533,16 +577,21 @@ const CreateCourseForm = ({register,
             <label className={styles.label}>Language *</label>
             <div className={styles.inputContainer}>
               <div className={styles.selectWrapper}>
-                <select
-                    {...register("course_language_id")}
-                    className={styles.select}
-                >
-                  <option value="">Select language</option>
-                  {courseLanguage?.map((item) => (
-                      <option key={'language' + item?.value} value={item?.value}>{item?.label}</option>
-                  ))}
-                </select>
-                <BiChevronDown className={styles.selectIcon}/>
+                <Controller
+                    name="course_language_id"
+                    control={control}
+                    render={({field}) => (
+                        <Select
+                            {...field}
+                            allowClear
+                            showSearch
+                            style={{width: '100%', height: '40px'}}
+                            placeholder="Select language"
+                            optionFilterProp="label"
+                            options={[...courseLanguage]}
+                        />
+                    )}
+                />
 
                 {errors.course_language_id && (<span className={styles.error}>
                   {errors.course_language_id.message}
@@ -555,13 +604,21 @@ const CreateCourseForm = ({register,
             <label className={styles.label}>Course Difficulty Level *</label>
             <div className={styles.inputContainer}>
               <div className={styles.selectWrapper}>
-                <select {...register('difficulty_level_id')} className={styles.select}>
-                  <option value="">Select Course Difficulty Level</option>
-                  {courseDifficulty?.map((item) => (
-                        <option key={'difficulty'+item?.value} value={item?.value}>{item?.label}</option>
-                    ))}
-                </select>
-                <BiChevronDown className={styles.selectIcon} />
+                <Controller
+                    name="difficulty_level_id"
+                    control={control}
+                    render={({field}) => (
+                        <Select
+                            {...field}
+                            allowClear
+                            showSearch
+                            style={{width: '100%', height: '40px'}}
+                            placeholder="Select Course Difficulty Level"
+                            optionFilterProp="label"
+                            options={[...courseDifficulty]}
+                        />
+                    )}
+                />
                 {errors.difficulty_level_id && (<span className={styles.error}>
                   {errors.difficulty_level_id.message}
                 </span>)}
@@ -607,6 +664,7 @@ const CreateCourseForm = ({register,
                   alt="Thumbnail Preview"
                   width={400}
                   height={100}
+                  unoptimized
                   style={{
                     objectFit: "cover",
                     borderRadius: "8px",
@@ -619,24 +677,24 @@ const CreateCourseForm = ({register,
                   <Controller
                       name="image"
                       control={control}
-                      render={({ field: { onChange, ...field } }) => (
+                      defaultValue={null}
+                      render={({ field: { onChange } }) => (
                           <input
-                              {...field}
                               type="file"
                               accept="image/png, image/jpeg, image/jpg"
                               id="bootcampThumbnail"
                               className={styles.fileInput}
                               onChange={(e) => {
-                                const files = e.target.files;
-                                if (files && files.length > 0 && files[0] instanceof File) {
-                                  const file = files[0];
+                                const file = e.target.files?.[0] ?? null;
+
+                                if (file) {
                                   const previewUrl = URL.createObjectURL(file);
                                   setThumbnailPreview(previewUrl);
-                                  onChange(files); // inform React Hook Form
                                 } else {
                                   setThumbnailPreview(null);
-                                  onChange([]);
                                 }
+
+                                onChange(file); // store single File object
                               }}
                           />
                       )}
@@ -786,6 +844,15 @@ const CreateCourseForm = ({register,
         </div>
       </div>
 
+
+        <div className="ic_flex">
+          <button onClick={(e) => navigator.push('/teacher')} type="button" className="ic_btn">
+            BACK
+          </button>
+          <button type="submit" className="ic_btn">
+            SAVE AND CONTINUE
+          </button>
+        </div>
       </>
   );
 };

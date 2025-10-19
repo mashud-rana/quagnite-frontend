@@ -61,6 +61,12 @@ export const courseApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['course']
         }),
+        courseList:builder.query({
+            query: () => ({
+                url: `/teacher/course`,
+                method: "GET",
+                }),
+        }),
 
 
     }),
@@ -75,4 +81,5 @@ export const {
     useCourseTagsQuery,
     useCourseCreateMutation,
     useCourseUpdateMutation,
+    useCourseListQuery,
 } = courseApi;

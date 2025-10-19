@@ -7,7 +7,7 @@ import UploadVideo from "@/components/Teacher/Bootcamp/UploadVideo/UploadVideo";
 import { useState } from "react";
 import CourseUploadModal from "@/components/Teacher/Courses/CourseUploadModal/CourseUploadModal";
 
-const CreateCourseUploadModuleForm = () => {
+const CreateCourseUploadModuleForm = ({goToStep}) => {
     const lessons = [
         {
             id: 1,
@@ -38,17 +38,16 @@ const CreateCourseUploadModuleForm = () => {
     return (
         <div>
             <div>
-                {/*<ProgressStepper currentStep={2} />*/}
 
                 {/*/!* Header *!/*/}
-                {/*<div className="mb-24 ic_flex">*/}
-                {/*    <div className="ic_title_section">*/}
-                {/*        <Link href="#" className="ic_back_button">*/}
-                {/*            <FaArrowLeft />*/}
-                {/*        </Link>*/}
-                {/*        <h1 className="ic_text_36">Upload Course Video</h1>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
+                <div className="mb-24 ic_flex">
+                    <div className="ic_title_section">
+                        <span onClick={(e) => goToStep(1)} className="ic_back_button">
+                            <FaArrowLeft />
+                        </span>
+                        <h1 className="ic_text_36">Upload Course Video</h1>
+                    </div>
+                </div>
 
                 <div className="mb-24">
                     <div className={styles.lessonsGrid}>

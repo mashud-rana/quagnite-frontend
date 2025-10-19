@@ -2,12 +2,12 @@
 
 import ProgressStepper from "@/components/Teacher/Courses/ProgressStepper/ProgressStepper";
 import Link from "next/link";
-import { FaArrowLeft } from "react-icons/fa6";
 import CreateCourseForm from "@/components/Teacher/Courses/CreateCourseForm/CreateCourseForm";
 import {useEffect, useState} from "react";
 import {Controller, useForm} from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useRouter } from "next/navigation";
 
 import {
     useCourseCreateMutation,
@@ -49,16 +49,14 @@ const schema = yup.object({
     }),
     image: yup
         .mixed()
-        .test("required", "Course thumbnail is required", (value) => {
-            return value && value.length > 0; // ✅ ensures at least one file
-        })
+        .required("Course thumbnail is required")
         .test("fileSize", "File size is too large", (value) => {
-            if (!value || value.length === 0) return true; // skip if empty
-            return value[0].size <= 2 * 1024 * 1024; // 2MB limit
+            if (!value) return false;
+            return value.size <= 2 * 1024 * 1024; // 2MB limit
         })
         .test("fileType", "Unsupported file format", (value) => {
-            if (!value || value.length === 0) return true; // skip if empty
-            return ["image/png", "image/jpeg", "image/jpg"].includes(value[0].type);
+            if (!value) return false;
+            return ["image/png", "image/jpeg", "image/jpg"].includes(value.type);
         }),
     thumb_type: yup.string().nullable(true),
     video: yup.string().when('thumb_type', ([thumb_type]) => {
@@ -80,7 +78,8 @@ const schema = yup.object({
 const CreateCoursePage = () => {
   const [currentStep, setCurrentStep] = useState(1);
     // Course store step submit id
-    const [courseFirstStepUUId, setCourseFirstStepUUId] = useState(null);
+    const [courseId, setCourseId] = useState(null);
+    const navigator = useRouter();
 
     const {
         register,
@@ -95,6 +94,8 @@ const CreateCoursePage = () => {
         mode: 'onSubmit', // or 'onChange' if you want real-time validation
         reValidateMode: 'onChange'
     });
+
+    console.log('yup wathc', watch('difficulty_level_id'))
 
     // RTK Query Start
     // course create mutation
@@ -130,9 +131,9 @@ const CreateCoursePage = () => {
             }
         });
 
-        if(courseFirstStepUUId !== null)
+        if(courseId !== null)
         {
-            formData.append('course_id', courseFirstStepUUId);
+            formData.append('course_id', courseId);
             courseUpdate(formData);
         }else{
             courseCreate(formData);
@@ -146,7 +147,7 @@ const CreateCoursePage = () => {
         {
             if(courseCreateData?.data?.id)
             {
-                setCourseFirstStepUUId(courseCreateData?.data?.id);
+                setCourseId(courseCreateData?.data?.id);
             }
 
             setCurrentStep(2);
@@ -154,7 +155,7 @@ const CreateCoursePage = () => {
         }else if(courseUpdateData?.data){
             if(courseUpdateData?.data?.id)
             {
-                setCourseFirstStepUUId(courseUpdateData?.data?.id);
+                setCourseId(courseUpdateData?.data?.id);
             }
 
             setCurrentStep(2);
@@ -168,23 +169,22 @@ const CreateCoursePage = () => {
         courseUpdateErrors,
         courseUpdateData]);
 
+
+  //   Go To Step
+    const goToStep = (step) => {
+        setCurrentStep(step);
+    }
+
+
+
   return (
     <div>
 
       <ProgressStepper currentStep={currentStep} />
 
-      <div className="mb-24">
-        <div className="ic_title_section">
-          <Link href="#" className="ic_back_button" aria-label="Go back">
-            <FaArrowLeft />
-          </Link>
-          <h1 className="ic_text_36">Create New Course</h1>
-        </div>
-      </div>
-
         <form onSubmit={handleSubmit(onSubmit)}>
-            {/* Course Overview Component */}
 
+            {/* Course Overview Component */}
             {currentStep === 1 && <>
                 <CreateCourseForm
                     register={register}
@@ -194,22 +194,13 @@ const CreateCoursePage = () => {
                     getValues={getValues}
                     errors={errors}
                 />
-
-                <div className="ic_flex">
-                    <button type="button" className="ic_btn">
-                        BACK
-                    </button>
-                    <button type="submit" className="ic_btn">
-                        SAVE AND CONTINUE
-                    </button>
-                </div>
             </>}
 
-            {currentStep === 2 && <CreateCourseUploadModuleForm/>}
-
-
-
-
+            {currentStep === 2 &&
+                <CreateCourseUploadModuleForm
+                    goToStep={goToStep}
+                />
+            }
         </form>
       {/* {currentStep === 1 && <CreateCourseForm />} */}
     </div>
