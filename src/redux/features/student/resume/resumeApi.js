@@ -37,27 +37,14 @@ export const resumeApi = apiSlice.injectEndpoints({
       }),
     }),
 
-    viewMyCertificate: builder.query({
-      query: ({ uuid }) => ({
-        url: `/student/certificates/my-certificates/view/${uuid}`,
-        method: "GET",
-        responseHandler: async (response) => {
-          const blob = await response.blob();
-
-          // Handle 0-byte or missing PDFs
-          if (blob.size === 0) {
-            throw new Error("Empty PDF received from server");
-          }
-
-          const fileURL = window.URL.createObjectURL(blob);
-          window.open(fileURL, "_blank");
-
-          // Revoke after some delay to free memory
-          setTimeout(() => window.URL.revokeObjectURL(fileURL), 10000);
-
-          return { success: true, url: fileURL };
-        },
-      }),
+    deleteResume: builder.mutation({
+      query: ({ uuid }) => {
+      
+        return {
+          url: `/student/resumes/my-resumes/${uuid}/delete`,
+          method: "DELETE",
+        };
+      },
     }),
 
 
@@ -68,5 +55,5 @@ export const resumeApi = apiSlice.injectEndpoints({
 export const {
   useGetMyResumesQuery,
   useDownloadResumeMutation,
-  useViewMyCertificateQuery,
+  useDeleteResumeMutation,
 } = resumeApi;

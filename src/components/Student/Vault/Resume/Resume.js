@@ -8,14 +8,16 @@ import ResumeModal from "./ResumeModal";
 import React, { useState , useEffect} from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
-import {useDownloadResumeMutation, useGetMyResumesQuery} from "@/redux/features/student/resume/resumeApi";
+import {useDownloadResumeMutation, useGetMyResumesQuery, useDeleteResumeMutation} from "@/redux/features/student/resume/resumeApi";
 import SectionSpinner from "@/components/Spinner/SectionSpinner";
 import NotDataFound from "@/components/Empty/NotDataFound";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { resume } from '@/assets/images/all/resume.png';
-import { antIcon, toastError, toastSuccess } from "@/utils/helper";
+import { antIcon, confirmDelete, toastError, toastSuccess } from "@/utils/helper";
 import { Spin } from "antd";
 import { MdOutlineDownload } from "react-icons/md";
+import { DeleteOutlined } from '@ant-design/icons';
+import { useDeleteBeneficiaryMutation } from "@/redux/features/common/beneficiary/beneficiaryApi";
 
 const resumes = [
   {
@@ -69,6 +71,25 @@ const Resume = () => {
       isSuccess: downloadIsSuccess,
       isError: downloadIsError,
       error: downloadError }] = useDownloadResumeMutation();
+  //Delete resume mutation
+  const [deleteResume, 
+    { 
+      data:deleteData,
+      isLoading: deleteIsLoading, 
+      isSuccess: deleteIsSuccess,
+      isError: deleteIsError,
+      error: deleteError }] = useDeleteResumeMutation();
+
+  //delete handler
+  const deleteHandler = async (uuid) => {
+      if(!uuid) return;
+      confirmDelete().then(async (confirmed) => {
+        if (confirmed) {
+          setSelectUuid(uuid);
+          await deleteResume({ uuid }).unwrap();
+        }
+      });
+    }
 
    //scroll fetch
   const fetchMoreData = () => {
@@ -82,6 +103,19 @@ const Resume = () => {
     });
   };
 
+  //handle delete success/error
+  useEffect(()=>{
+    if(deleteIsSuccess){
+      toastSuccess(deleteData?.message || "Resume deleted successfully");
+      setModels((prev)=> prev.filter((item)=> item.uuid !== selectUuid));
+      setSelectUuid(null);
+    }
+    if (deleteIsError) {
+        toastError(
+          deleteError?.data?.message || "Resume delete failed. Please try again."
+        );
+      }
+  },[deleteIsSuccess, deleteIsError,deleteData, deleteError]);
 
   // Handle download success/error
   useEffect(() => {
@@ -153,7 +187,6 @@ const Resume = () => {
           <div className={styles.resumesGrid}>
             {models.length > 0
               ? models.map((resume) => {
-                 
                   return (
                     <div key={resume.id} className={styles.resumeCard}>
                       {/* Card Header */}
@@ -177,19 +210,38 @@ const Resume = () => {
                           width={300}
                           height={400}
                         />
+                        {/* Delete Button */}
+                       {
+                        <button
+                          onClick={() => deleteHandler(resume?.uuid)}
+                          className={styles.deleteButton}
+                          title="Delete Resume"
+                        >
+                          {
+                            selectUuid === resume?.uuid && deleteIsLoading ? <Spin indicator={antIcon} /> : <DeleteOutlined className={styles.deleteIcon} />
+                          }
+                          
+                        </button>
+                       }
+                        
                       </div>
 
                       <hr className={styles.ic_hr} />
 
                       {/* Action Buttons */}
                       <div className={styles.actionButtons}>
-                        <button className={`${styles.ic_btn}`} onClick={()=>{ 
-                          downloadResume(resume?.uuid)
-                          setSelectUuid(resume?.uuid);
-                          }} >DOWNLOAD 
-                           {selectUuid === resume?.uuid && downloadIsLoading && <Spin indicator={antIcon} /> }
-                          </button>
-                        {/* <button className={`${styles.ic_btn}`}>VIEW</button> */}
+                        <button
+                          className={`${styles.ic_btn}`}
+                          onClick={() => {
+                            downloadResume(resume?.uuid);
+                            setSelectUuid(resume?.uuid);
+                          }}
+                        >
+                          DOWNLOAD
+                          {selectUuid === resume?.uuid && downloadIsLoading && (
+                            <Spin indicator={antIcon} />
+                          )}
+                        </button>
                         <PhotoProvider maskOpacity={0.7}>
                           <PhotoView src={img.src}>
                             <button className={`${styles.ic_btn}`}>VIEW</button>
