@@ -14,10 +14,11 @@ import NotDataFound from "@/components/Empty/NotDataFound";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { resume } from '@/assets/images/all/resume.png';
 import { antIcon, confirmDelete, toastError, toastSuccess } from "@/utils/helper";
-import { Spin } from "antd";
+import { Modal, Spin } from "antd";
 import { MdOutlineDownload } from "react-icons/md";
 import { DeleteOutlined } from '@ant-design/icons';
 import { useDeleteBeneficiaryMutation } from "@/redux/features/common/beneficiary/beneficiaryApi";
+import ResumePreviewModal from "./ResumePreviewModal";
 
 const resumes = [
   {
@@ -44,6 +45,7 @@ const resumes = [
 
 const Resume = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
 
   const [params, setParams] = useState({
     page: Number(process.env.NEXT_PUBLIC_CURRENT_PAGE) || 1,
@@ -53,6 +55,7 @@ const Resume = () => {
   const [models, setModels] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
    const [selectUuid, setSelectUuid] = useState(null);
+   const [selectedModel, setSelectedModel] = useState(null);
   
 
   //fetch api
@@ -103,6 +106,17 @@ const Resume = () => {
     });
   };
 
+  const showPdfModal = (uuid) => {
+    setIsPdfModalOpen(true);
+    setSelectedModel(models.find((item) => item.uuid === uuid));
+  };
+
+  const handlePdfModalCancel = () => {
+    setIsPdfModalOpen(false);
+    setSelectedModel(null);
+   
+  };
+
   //handle delete success/error
   useEffect(()=>{
     if(deleteIsSuccess){
@@ -145,7 +159,9 @@ const Resume = () => {
   }, [isSuccess, data, params.page]);
 
 
+
   console.log("resumes models", models);
+  console.log('selectedModel', selectedModel);
 
   return (
     <div>
@@ -237,16 +253,18 @@ const Resume = () => {
                             setSelectUuid(resume?.uuid);
                           }}
                         >
-                          DOWNLOAD
-                          {selectUuid === resume?.uuid && downloadIsLoading && (
+                          
+                          {selectUuid === resume?.uuid && downloadIsLoading ? (
                             <Spin indicator={antIcon} />
+                          ) : (
+                            "DOWNLOAD"
                           )}
                         </button>
-                        <PhotoProvider maskOpacity={0.7}>
-                          <PhotoView src={img.src}>
-                            <button className={`${styles.ic_btn}`}>VIEW</button>
-                          </PhotoView>
-                        </PhotoProvider>
+                        {/* <PhotoProvider maskOpacity={0.7}>
+                          <PhotoView src={img.src}> */}
+                            <button className={`${styles.ic_btn}`} onClick={()=> showPdfModal(resume?.uuid)}>VIEW</button>
+                          {/* </PhotoView>
+                        </PhotoProvider> */}
                       </div>
                     </div>
                   );
@@ -260,6 +278,17 @@ const Resume = () => {
       </div>
 
       <ResumeModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
+
+
+    <ResumePreviewModal
+      open={isPdfModalOpen}
+      onClose={handlePdfModalCancel}
+      resume={selectedModel}
+      onDownload={downloadResume}
+      isDownloading={selectUuid === selectedModel?.uuid && downloadIsLoading}
+    />
+        
     </div>
   );
 };
