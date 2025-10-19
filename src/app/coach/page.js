@@ -96,7 +96,15 @@ const CoachOverview = () => {
           <div className={styles.contentGrid}>
             <ChartSection />
             <Management />
-            <Event />
+            {/* <Event /> */}
+
+            <div>
+              <div className={styles.eventItem}>
+                <div className={styles.ic_title}>Next Schedule Session</div>
+                <span className={styles.ic_date}>AI Fundamentals | </span>
+                <span className={styles.ic_date2}>12 March 2025, 10:00 AM</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

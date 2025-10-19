@@ -34,7 +34,7 @@ const CoachEvent = () => {
         <div className={styles.eventsSection}>
           <div className={styles.eventsHeader}>
             <h2 className={styles.sectionTitle}>Events</h2>
-            <button className={styles.viewAllButton}>VIEW ALL</button>
+            <button className={styles.ic_btn}>VIEW ALL</button>
           </div>
 
           <div className={styles.eventsList}>
@@ -63,10 +63,10 @@ const CoachEvent = () => {
         </div>
 
         {/* Availability Section */}
-        <div className={styles.availabilitySection}>
+        <div className={styles.eventsSection}>
           <div>
             <div className={styles.availabilityHeader}>
-              <h2 className={styles.eventTitle}>Availability</h2>
+              <h2 className={styles.sectionTitle}>Availability</h2>
               <button className={styles.calendarIcon}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <rect

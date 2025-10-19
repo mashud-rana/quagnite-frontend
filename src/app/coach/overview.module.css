@@ -38,6 +38,19 @@
   margin-bottom: 24px;
 }
 
+.ic_title {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.ic_date {
+  font-size: 14px;
+}
+
+.ic_date2 {
+  font-size: 14px;
+}
+
 @media (max-width: 1640px) {
   .metricsGridFour {
     gap: 16px;
