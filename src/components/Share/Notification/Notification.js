@@ -28,10 +28,10 @@ const Notification = () => {
     } = useGetAnnouncementQuery(params);
   
     //make as read mutation
-    const [makeAsReadAnnouncement, 
-    { 
+    const [makeAsReadAnnouncement,
+    {
     data:makeAsReadData,
-    isLoading: makeAsReadIsLoading, 
+    isLoading: makeAsReadIsLoading,
     isSuccess: makeAsReadIsSuccess,
     isError: makeAsReadIsError,
     error: makeAsReadError }] = useMakeAsReadAnnouncementMutation();
@@ -115,8 +115,6 @@ const Notification = () => {
     return truncatedText;
   };
 
- 
-
   return (
     <div className={styles.list}>
       {isLoading && params.page === 1 ? (
@@ -158,7 +156,7 @@ const Notification = () => {
                       onClick={() => makeAsReadHandler(item.id)}
                     >
                       <div className={styles.ic_flex}>
-                        <div>
+                        <div className={styles.ic_flex}>
                           <Image
                             src={img}
                             alt="Notification"

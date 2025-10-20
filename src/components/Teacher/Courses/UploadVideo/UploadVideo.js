@@ -3,8 +3,9 @@ import CourseUploadModal from "../CourseUploadModal/CourseUploadModal";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
 import styles from "./uploadvideo.module.css";
+import UploadVideo from "../../Bootcamp/UploadVideo/UploadVideo";
 
-const UploadVideo = ({ setCurrentStep }) => {
+const UploadVideos = ({ onStepChange, currentStep }) => {
   const lessons = [
     {
       id: 1,
@@ -32,6 +33,9 @@ const UploadVideo = ({ setCurrentStep }) => {
     setIsModalOpen(false);
   };
 
+  const handleContinue = () => {
+    onStepChange(currentStep + 1);
+  };
   return (
     <div>
       <div className="mb-24 ic_flex">
@@ -56,7 +60,12 @@ const UploadVideo = ({ setCurrentStep }) => {
       </div>
 
       <div className="ic_flex">
-        <button className="ic_btn">SAVE & CONTINUE</button>
+        <button
+          className="ic_btn"
+          onClick={() => onStepChange(currentStep + 1)}
+        >
+          SAVE & CONTINUE
+        </button>
         <button className="ic_btn">ADD NEW SECTION</button>
       </div>
 
@@ -69,4 +78,4 @@ const UploadVideo = ({ setCurrentStep }) => {
   );
 };
 
-export default UploadVideo;
+export default UploadVideos;

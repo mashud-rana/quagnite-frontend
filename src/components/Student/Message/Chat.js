@@ -61,59 +61,19 @@ const Chat = () => {
       isOwn: false,
       isTyping: true,
     },
-
-    {
-      id: 6,
-      sender: "Tina Brook",
-      message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      time: "Friday 3:56 Pm",
-      avatar: "/tina2.jpg",
-      isOwn: false,
-      isTyping: true,
-    },
-
-    {
-      id: 6,
-      sender: "Tina Brook",
-      message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      time: "Friday 3:56 Pm",
-      avatar: "/tina2.jpg",
-      isOwn: false,
-      isTyping: true,
-    },
-
-    {
-      id: 6,
-      sender: "Tina Brook",
-      message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      time: "Friday 3:56 Pm",
-      avatar: "/tina2.jpg",
-      isOwn: false,
-      isTyping: true,
-    },
-
-    {
-      id: 6,
-      sender: "Tina Brook",
-      message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      time: "Friday 3:56 Pm",
-      avatar: "/tina2.jpg",
-      isOwn: false,
-      isTyping: true,
-    },
   ];
 
   return (
     <div className={styles.mainChat_wrapper}>
       <div className={styles.chatHeader}>
         <div className={styles.chatHeaderLeft}>
-          <Image
+          {/* <Image
             height={100}
             width={100}
             src={img}
             alt="Coding Team"
             className={styles.chatAvatar}
-          />
+          /> */}
           <h6 className={styles.chatTitle}>Coding Team</h6>
         </div>
         <div className={styles.chatHeaderActions}>
