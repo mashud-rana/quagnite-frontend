@@ -1714,3 +1714,6 @@ h6 {
   border: 1px solid white;
 }
 
+.text-danger{
+  color: red;
+}

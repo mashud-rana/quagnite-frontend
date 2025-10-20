@@ -1,0 +1,206 @@
+/* resumeModal.module.css */
+
+.resumeModal :global(.ant-modal-content) {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.resumeModal :global(.ant-modal-header) {
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  padding: 16px 24px;
+}
+
+.resumeModal :global(.ant-modal-body) {
+  padding: 0;
+  background: #f8f9fa;
+  max-height: calc(100vh - 180px);
+  overflow: auto;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.modalTitleSection {
+  flex: 1;
+  min-width: 200px;
+}
+
+.modalTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.modalActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.zoomButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #d9d9d9;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 20px;
+  color: #595959;
+}
+
+.zoomButton:hover:not(:disabled) {
+  border-color: #1890ff;
+  color: #1890ff;
+  background: #e6f7ff;
+}
+
+.zoomButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.zoomLevel {
+  font-size: 14px;
+  font-weight: 500;
+  color: #595959;
+  min-width: 45px;
+  text-align: center;
+}
+
+.downloadButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #1890ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.downloadButton:hover:not(:disabled) {
+  background: #40a9ff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.3);
+}
+
+.downloadButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.downloadButton svg {
+  font-size: 18px;
+}
+
+.modalContent {
+  position: relative;
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.loadingContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.iframeContainer {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  overflow: auto;
+  transition: transform 0.3s ease;
+}
+
+.iframeContainer iframe {
+  display: block;
+  border-radius: 8px;
+}
+
+.noPreview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  width: 100%;
+  color: #8c8c8c;
+  font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modalHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .modalActions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .modalTitle {
+    font-size: 16px;
+  }
+
+  .downloadButton span {
+    display: none;
+  }
+
+  .resumeModal :global(.ant-modal-body) {
+    max-height: calc(100vh - 200px);
+  }
+
+  .modalContent {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .zoomButton {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+
+  .zoomLevel {
+    font-size: 12px;
+    min-width: 40px;
+  }
+
+  .downloadButton {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,234 @@
+/* uploadResumeModal.module.css */
+
+.uploadModal :global(.ant-modal-content) {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.uploadModal :global(.ant-modal-header) {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-bottom: none;
+  padding: 20px 24px;
+}
+
+.uploadModal :global(.ant-modal-title) {
+  color: white;
+}
+
+.uploadModal :global(.ant-modal-close) {
+  color: white;
+}
+
+.uploadModal :global(.ant-modal-close:hover) {
+  color: #f0f0f0;
+}
+
+.uploadModal :global(.ant-modal-body) {
+  padding: 30px 24px;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.headerIcon {
+  font-size: 24px;
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #262626;
+}
+
+.required {
+  color: #ff4d4f;
+  margin-left: 4px;
+}
+
+.titleInput {
+  border-radius: 8px;
+}
+
+.uploadDragger {
+  border-radius: 8px !important;
+  border: 2px dashed #d9d9d9 !important;
+  background: #fafafa !important;
+  transition: all 0.3s ease !important;
+}
+
+.uploadDragger:hover {
+  border-color: #667eea !important;
+  background: #f5f3ff !important;
+}
+
+.uploadContent {
+  padding: 20px;
+  text-align: center;
+}
+
+.uploadIcon {
+  font-size: 48px;
+  color: #667eea;
+  margin-bottom: 16px;
+}
+
+.uploadText {
+  font-size: 16px;
+  color: #262626;
+  margin: 0 0 8px 0;
+  font-weight: 500;
+}
+
+.uploadHint {
+  font-size: 13px;
+  color: #8c8c8c;
+  margin: 0;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.cancelButton {
+  padding: 10px 24px;
+  border: 1px solid #d9d9d9;
+  background: white;
+  color: #595959;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancelButton:hover:not(:disabled) {
+  border-color: #667eea;
+  color: #667eea;
+}
+
+.cancelButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.uploadButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.uploadButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.uploadButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+.uploadButton svg {
+  font-size: 18px;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ffffff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* File list styling */
+.uploadModal :global(.ant-upload-list-item) {
+  border-radius: 8px;
+  padding: 12px;
+  background: #f0f5ff;
+  border: 1px solid #d6e4ff;
+}
+
+.uploadModal :global(.ant-upload-list-item-name) {
+  color: #262626;
+  font-weight: 500;
+}
+
+.uploadModal :global(.ant-upload-list-item-card-actions) {
+  top: 12px;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .uploadModal :global(.ant-modal-body) {
+    padding: 20px 16px;
+  }
+
+  .modalContent {
+    gap: 20px;
+  }
+
+  .uploadContent {
+    padding: 16px;
+  }
+
+  .uploadIcon {
+    font-size: 40px;
+    margin-bottom: 12px;
+  }
+
+  .uploadText {
+    font-size: 14px;
+  }
+
+  .uploadHint {
+    font-size: 12px;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cancelButton,
+  .uploadButton {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -16,7 +16,7 @@ const schema = yup.object({
     .required("Course sub description is required"),
 });
 
-const CreateCourseForm = () => {
+const CreateCourseForm = ({ setCurrentStep }) => {
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
 
   const {
@@ -39,6 +39,7 @@ const CreateCourseForm = () => {
 
   const onSubmit = (data) => {
     console.log("Form submitted:", data);
+    setCurrentStep(2);
   };
 
   const handleThumbnailChange = (e) => {
@@ -265,16 +266,15 @@ const CreateCourseForm = () => {
             </div>
           </div>
 
-
           <div className={styles.formRow}>
             <label className={styles.label}>Course Access Period</label>
             <div className={styles.inputContainer}>
               <div className={styles.selectWrapper}>
                 <input
-                    type="number"
-                    {...register("courseDescription")}
-                    className={styles.input}
-                    placeholder="Course Access Period"
+                  type="number"
+                  {...register("courseDescription")}
+                  className={styles.input}
+                  placeholder="Course Access Period"
                 />
               </div>
               {errors.bootcampCategory && (
@@ -284,7 +284,10 @@ const CreateCourseForm = () => {
               )}
             </div>
           </div>
-          <small>Enrollment will expire after this number of days. Set 0 for no expiration</small>
+          <small>
+            Enrollment will expire after this number of days. Set 0 for no
+            expiration
+          </small>
 
           <div className={styles.formRow}>
             <label className={styles.label}>Learners Accessibility</label>
@@ -300,8 +303,6 @@ const CreateCourseForm = () => {
               </div>
             </div>
           </div>
-
-
 
           <div className={styles.formRow}>
             <label className={styles.label}>Course Price</label>
@@ -653,7 +654,11 @@ const CreateCourseForm = () => {
       </div>
 
       <div className="ic_flex">
-        <button type="button" className="ic_btn">
+        <button
+          type="button"
+          className="ic_btn"
+          onClick={() => setCurrentStep(1)}
+        >
           BACK
         </button>
         <button type="submit" className="ic_btn">
