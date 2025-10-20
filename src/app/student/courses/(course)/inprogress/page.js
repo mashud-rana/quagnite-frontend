@@ -10,6 +10,7 @@ import { setFilters, setAllCourses, appendCourses } from "@/redux/features/stude
 import InProcessingCourses from "@/components/Student/Courses/Course/InProcessingCourses";
 import FullscreenSpinner from "@/components/Spinner/FullscreenSpinner";
 import {setSpinnerVisible} from "@/redux/features/spinner/spinnerSlice";
+import CourseCardListSkeleton from "@/components/Student/Courses/Skeleton/CourseCardListSkeleton";
 
 const InprogressPage = () => {
    const searchParams = useSearchParams();
@@ -65,11 +66,11 @@ const InprogressPage = () => {
 
   return (
     <div className="ic_courses_list" id="scrollableDiv">
-      <FullscreenSpinner />
-      <InProcessingCourses totalPages={coursesData?.data?.meta?.last_page || 1} />
-      {/* {mockCourses.map((course) => (
-        <ProgressCard key={course.id} course={course} />
-      ))} */}
+      {/* <FullscreenSpinner /> */}
+      {
+        isLoading ? <CourseCardListSkeleton />: <InProcessingCourses totalPages={coursesData?.data?.meta?.last_page || 1} />
+      }
+    
     </div>
   );
 };

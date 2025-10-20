@@ -8,6 +8,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { antIcon, toastError, toastSuccess } from "@/utils/helper";
 import { Spin } from "antd";
 import { useGetAnnouncementQuery, useMakeAsReadAnnouncementMutation } from "@/redux/features/common/announcement/announcementApi";
+import NotificationSkeleton from "./Skeleton/NotificationSkeleton";
 
 const Notification = () => {
      const [params, setParams] = useState({
@@ -94,7 +95,6 @@ const Notification = () => {
     }, [isSuccess, data, params.page]);
   
   
-    console.log("1 announcementData", announcements);
   const [expandedItems, setExpandedItems] = useState({});
 
   const toggleExpand = (id) => {
@@ -118,7 +118,8 @@ const Notification = () => {
   return (
     <div className={styles.list}>
       {isLoading && params.page === 1 ? (
-        <SectionSpinner message="Loading for announcements.." />
+        // <SectionSpinner message="Loading for announcements.." />
+        <NotificationSkeleton />
       ) : error ? (
         <div style={{ textAlign: "center", marginTop: "20px" }}>
           <NotDataFound message="Error loading announcements. Please try again" />
