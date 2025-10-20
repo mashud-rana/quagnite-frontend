@@ -1,4 +1,4 @@
-/* 
+
 .progressContainer {
   display: flex;
   justify-content: center;
@@ -59,8 +59,8 @@
 }
 
 .stepSubname {
-  font-size: 0.75rem;
-  color: #666;
+  font-size: 0.875rem;
+  /* color: #666; */
   margin-top: 0.125rem;
 }
 
@@ -117,9 +117,9 @@
     left: 42px;
     width: 48px;
   }
-} */
+}
 
-.stepper {
+/* .stepper {
   max-width: 1200px;
   margin: 0 auto 60px;
   padding: 0 20px;
@@ -239,4 +239,4 @@
   .connector {
     top: 20px;
   }
-}
+} */

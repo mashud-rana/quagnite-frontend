@@ -51,7 +51,7 @@
   line-height: 1.4;
   font-weight: 600;
   color: #333;
-  margin-bottom: 16px;
+  /* margin-bottom: 16px; */
 }
 
 .metricCard {
@@ -437,8 +437,35 @@
 }
 
 @media (max-width: 1399px) {
+  .metricValue {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 4px;
+  }
+
+  .ic_btn {
+    font-size: 11px;
+    padding: 1px 8px;
+  }
+
+  .sectionHeader {
+    margin-bottom: 8px;
+  }
+
+  .ic_chart_btn {
+    gap: 6px;
+    font-size: 11px;
+    padding: 1px 8px;
+  }
+
   .metricHeader {
     gap: 3px;
+    margin-bottom: 8px;
+  }
+
+  .sectionTitle {
+    font-size: 16px;
   }
 
   .metricsGridFour {
