@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { IoArrowDown } from "react-icons/io5";
 import styles from "./overview.module.css";

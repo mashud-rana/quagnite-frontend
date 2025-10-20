@@ -9,11 +9,20 @@ export const announcementApi = apiSlice.injectEndpoints({
         method: "GET"
       })
     }),
+    makeAsReadAnnouncement: builder.mutation({
+      query: (announcement_id) => ({
+        url: `/announcements/read`,
+        method: "POST",
+        body: {announcement_id},
+      }),
+    
+    }),
     
   })
 });
 
 export const {
   useGetAnnouncementQuery,
+  useMakeAsReadAnnouncementMutation
   
 } = announcementApi;

@@ -1,10 +1,13 @@
+"use client";
 import styles from "./vaultCardList.module.css";
 import certificate from "@/assets/images/all/certificate.png";
 import resume from "@/assets/images/all/resume.png";
 import Image from "next/image";
 import bg from "@/assets/images/all/community-bg.png";
+import { useRouter } from "next/navigation";
 
 const VaultCardList = () => {
+  const router = useRouter();
   return (
     <div className={styles.vaultContainer}>
       {/* Page Header */}
@@ -13,7 +16,7 @@ const VaultCardList = () => {
       {/* Main Content */}
       <div className={styles.mainContent}>
         {/* Certificates Card */}
-        <div className={styles.vaultCard}>
+        <div className={styles.vaultCard} onClick={() => router.push('/student/vault/certificates')}>
           <div
             className={styles.cardGradient}
             style={{ backgroundImage: `url(${bg.src})` }}
@@ -48,7 +51,7 @@ const VaultCardList = () => {
         </div>
 
         {/* Resumes Card */}
-        <div className={styles.vaultCard}>
+        <div className={styles.vaultCard} onClick={() => router.push('/student/vault/resumes')}>
           <div
             className={styles.cardGradient}
             style={{ backgroundImage: `url(${bg.src})` }}

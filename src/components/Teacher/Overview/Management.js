@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import styles from "./overview.module.css";
 import img from "@/assets/images/all/instractor.png";

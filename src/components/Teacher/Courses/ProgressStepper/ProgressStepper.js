@@ -65,3 +65,49 @@ const ProgressStepper = ({ currentStep }) => {
 };
 
 export default ProgressStepper;
+
+
+// import React from "react";
+// import { FiCheck } from "react-icons/fi";
+// import styles from "./ProgressStepper.module.css";
+//
+// const ProgressStepper = ({ steps, currentStep }) => {
+//     return (
+//         <div className={styles.stepper}>
+//             <div className={styles.stepsContainer}>
+//                 {steps.map((step, index) => (
+//                     <div key={step.id} className={styles.stepWrapper}>
+//                         {/* Connector Line - positioned before circle */}
+//                         {index < steps.length - 1 && (
+//                             <div
+//                                 className={`${styles.connector} ${
+//                                     index < currentStep
+//                                         ? styles.connectorActive
+//                                         : styles.connectorInactive
+//                                 }`}
+//                             />
+//                         )}
+//
+//                         {/* Step Circle */}
+//                         <div
+//                             className={`${styles.stepCircle} ${
+//                                 index <= currentStep ? styles.active : styles.inactive
+//                             }`}
+//                         >
+//                             {index < currentStep && (
+//                                 <FiCheck size={24} className={styles.checkIcon} />
+//                             )}
+//                         </div>
+//
+//                         {/* Step Label */}
+//                         <div className={styles.stepLabel}>
+//                             <p className={styles.labelText}>{step.label}</p>
+//                         </div>
+//                     </div>
+//                 ))}
+//             </div>
+//         </div>
+//     );
+// };
+//
+// export default ProgressStepper;

@@ -2,6 +2,8 @@
 .ic_leftSidebar_wrapper {
   display: flex;
   flex-direction: column;
+  padding: 14px 0;
+  overflow: hidden;
 }
 
 .searchContainer {
@@ -187,16 +189,33 @@
 .mainChat_wrapper {
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  height: 100vh;
+  /* background-color: #fdfdfd; */
+  position: relative;
 }
+/* .mainChat_wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+} */
 
 .chatHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding: 20px; */
   border-bottom: 1px solid #e9ecef;
+  position: sticky;
+  padding: 16px 0;
+  top: 0;
+  z-index: 10;
 }
+
+/* .chatHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e9ecef;
+} */
 
 .chatHeaderLeft {
   display: flex;
@@ -233,10 +252,30 @@
   cursor: pointer;
 }
 
-.messagesContainer {
+/* .messagesContainer {
   flex: 1;
   overflow-y: auto;
   padding: 20px;
+} */
+
+.messagesContainer {
+  flex: 1;
+  overflow-y: auto;
+  background-color: #f9fafb;
+  scroll-behavior: smooth;
+}
+
+.messagesContainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.messagesContainer::-webkit-scrollbar-thumb {
+  background-color: #c5c5c5;
+  border-radius: 4px;
+}
+
+.messagesContainer::-webkit-scrollbar-thumb:hover {
+  background-color: #a0a0a0;
 }
 
 .dateLabel {
@@ -345,6 +384,7 @@
 .messageBubbleOwn {
   background-color: #4285f4;
   color: white;
+  margin-right: 10px;
 }
 
 .messageReactions {
@@ -364,18 +404,28 @@
 .messageInput {
   display: flex;
   align-items: center;
-  padding: 20px;
+  padding: 14px 20px;
   border-top: 1px solid #e9ecef;
+  background-color: white;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
   gap: 12px;
 }
 
 .textInput {
   flex: 1;
   padding: 12px 16px;
-  border: 1px solid #e9ecef;
+  border: 1px solid #e0e0e0;
   border-radius: 24px;
   font-size: 14px;
   outline: none;
+  background-color: #f8f9fa;
+  transition: border-color 0.2s ease;
+}
+
+.textInput:focus {
+  border-color: #4285f4;
 }
 
 .attachBtn,
@@ -383,13 +433,16 @@
   width: 40px;
   height: 40px;
   border: none;
-  background-color: #6c757d;
-  color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.attachBtn {
+  background-color: #6c757d;
+  color: white;
 }
 
 .ic_hr {
@@ -399,6 +452,15 @@
 
 .sendBtn {
   background-color: #4285f4;
+  color: white;
+}
+
+.sendBtn:hover {
+  background-color: #2c6de9;
+}
+
+.group_container {
+  padding: 16px;
 }
 
 .groupInfoTitle {
@@ -546,25 +608,94 @@
   color: #6c757d;
 }
 
-
-.ic_link{
-    text-decoration: none;
+.ic_link {
+  text-decoration: none;
   color: inherit;
 }
 
-/* Responsive Design */
+/* Mobile Responsive Styles */
 @media (max-width: 768px) {
-  .container {
-    flex-direction: column;
+  .ic_leftSidebar_wrapper {
+    padding: 0;
+    overflow-y: auto;
   }
 
-  .leftSidebar,
-  .rightSidebar {
-    width: 100%;
-    height: auto;
+  .searchContainer {
+    margin: 14px;
   }
 
-  .rightSidebar {
-    display: none;
+  .tabs {
+    margin: 16px 14px;
+  }
+
+  .createGroupBtn {
+    margin: 0 14px;
+  }
+
+  .sectionTitle {
+    margin: 28px 14px 16px 14px;
+  }
+
+  .conversation {
+    padding: 14px;
+  }
+
+  /* Make conversation list more touch-friendly */
+  .conversation {
+    min-height: 60px;
+  }
+
+  .avatar {
+    width: 44px;
+    height: 44px;
+  }
+
+  .conversationName {
+    font-size: 15px;
+  }
+
+  .conversationMessage {
+    font-size: 13px;
+  }
+
+  /* Group info responsive */
+  .groupActions {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .mediaGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .searchInput {
+    padding: 12px 14px 10px 36px;
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+
+  .createGroupBtn {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .conversation {
+    padding: 12px;
+  }
+
+  .groupActions {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .mediaGrid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

@@ -37,6 +37,7 @@ const AllCourses = ({totalPages}) =>{
                     <b>No more courses</b>
                     </p>
                 }
+                 scrollableTarget="scrollableDiv"
                 >
                     <div>
                         {allCourses && allCourses.map((course) => (
