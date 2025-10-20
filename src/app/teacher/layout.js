@@ -4,6 +4,7 @@ import Sidebar from "@/components/Student/Dashboard/Sidebar/Sidebar";
 import React, { useCallback, useState } from "react";
 import { FaRegQuestionCircle } from "react-icons/fa";
 import { PiMonitorBold, PiCirclesThreeBold } from "react-icons/pi";
+import { TfiAnnouncement } from "react-icons/tfi";
 import { GrPlay } from "react-icons/gr";
 import { BiBookContent, BiMoneyWithdraw } from "react-icons/bi";
 import { RiGraduationCapLine } from "react-icons/ri";
@@ -38,6 +39,11 @@ const TeacherLayout = ({ children }) => {
       url: "/teacher/bootcamps",
       icon: PiMonitorBold,
     },
+    // {
+    //   title: "Course Announcements",
+    //   url: "/teacher/course-announcements",
+    //   icon: TfiAnnouncement,
+    // },
     {
       title: "Exams",
       url: "/student/exams",

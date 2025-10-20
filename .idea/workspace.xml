@@ -6,6 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="d079e12f-27cf-42d7-900a-11a1310fc74f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/teacher/(courses)/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/teacher/(courses)/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/teacher/course/create-course/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/teacher/course/create-course/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Teacher/Courses/CreateCourseForm/CreateCourseForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Teacher/Courses/CreateCourseForm/CreateCourseForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Teacher/Courses/CreateCourseUploadModuel/CreateCourseUploadModuleForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Teacher/Courses/CreateCourseUploadModuel/CreateCourseUploadModuleForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/features/teacher/course/courseApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/features/teacher/course/courseApi.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,12 +23,12 @@
     <execution />
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="mashud_dev" />
+    <option name="BRANCH" value="master" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="mashud_dev" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -51,12 +58,12 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="master" />
-                    <option name="lastUsedInstant" value="1760002516" />
+                    <option name="branchName" value="mashud_dev" />
+                    <option name="lastUsedInstant" value="1760352831" />
                   </RecentBranch>
                   <RecentBranch>
-                    <option name="branchName" value="mashud_dev" />
-                    <option name="lastUsedInstant" value="1759917381" />
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1760352776" />
                   </RecentBranch>
                 </list>
               </option>
@@ -81,10 +88,10 @@
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;mashud__dev&quot;,
     &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
     &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/React App/quagnite&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/React App/quagnite/src/redux/features/teacher/announcements&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -95,6 +102,14 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\React App\quagnite\src\redux\features\teacher\announcements" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\React App\quagnite\src\app\teacher\course-announcements\create" />
+    </key>
+  </component>
   <component name="RunManager" selected="npm.Next.js: server-side">
     <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
       <method v="2" />
@@ -133,6 +148,13 @@
       <workItem from="1760002506954" duration="552000" />
       <workItem from="1760003093622" duration="1292000" />
       <workItem from="1760240813233" duration="135000" />
+      <workItem from="1760325593162" duration="14565000" />
+      <workItem from="1760413518529" duration="7537000" />
+      <workItem from="1760498945652" duration="5052000" />
+      <workItem from="1760585882335" duration="8391000" />
+      <workItem from="1760595700881" duration="441000" />
+      <workItem from="1760596371494" duration="15440000" />
+      <workItem from="1760848329744" duration="22370000" />
     </task>
     <servers />
   </component>

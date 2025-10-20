@@ -6,8 +6,8 @@ import styles from "./ProgressStepper.module.css";
 const ProgressStepper = ({ currentStep }) => {
   const steps = [
     {
-      name: "Bootcamp",
-      subname: "Overview",
+      name: "Course Overview",
+      subname: "",
       completed: currentStep > 1,
       active: currentStep === 1,
     },

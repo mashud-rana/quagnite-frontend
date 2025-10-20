@@ -10,7 +10,7 @@ import styles from "./login.module.css";
 import bg from "@/assets/images/auth/register.png";
 import google from "@/assets/images/auth/google.png";
 import logo from "@/assets/images/auth/logo.png";
-import { useLoginMutation } from "@/redux/features/auth/authApi";
+import { useLoginMutation, useSocialLoginMutation } from "@/redux/features/auth/authApi";
 import { antIcon, toastError, toastSuccess } from "@/utils/helper";
 import { Spin } from "antd";
 import { useRouter } from 'next/navigation'
@@ -47,6 +47,9 @@ const LoginPage = () => {
   const [login, { data: loginData, isLoading, isSuccess, isError, error }] =
     useLoginMutation(); //useLoginMutation();
 
+  const [socialLogin, { data: socialLoginData, socialIsLoading, socialIsSuccess, socialIsError, socialError }] =
+  useSocialLoginMutation();
+
   //handle form submit
 
   const onSubmit = (data) => {
@@ -72,7 +75,7 @@ const LoginPage = () => {
         };
 
         console.log("Google login response:", socialLoginData);
-        // socialLogin(socialLoginData);
+        socialLogin(socialLoginData);
       }
     } catch (error) {}
   };
@@ -92,6 +95,25 @@ const LoginPage = () => {
       toastError(error?.message || "Login failed. Please try again.");
     }
   }, [isSuccess, isError, error, loginData]);
+
+  //  Social login success or error handling can be done here
+  useEffect(() => {
+    console.log("Social login data changed:", socialLoginData);
+    if (socialLoginData) {
+      toastSuccess(socialLoginData?.message || "Login successful");
+      if(socialLoginData?.user?.user_type === "student"){
+        router.push('/student');
+      }else if(socialLoginData?.user?.user_type === "teacher"){
+        router.push('/teacher');
+      }else if(socialLoginData?.user?.user_type === "member")
+      {
+        router.push('/student');
+      }
+    }
+    if (isError) {
+      toastError(error?.message || "Login failed. Please try again.");
+    }
+  }, [socialIsSuccess, socialIsError, socialError, socialLoginData]);
 
   return (
     <div className={styles.ic_container}>
