@@ -85,10 +85,8 @@ const CoachOverview = () => {
             </div>
           </div>
 
-          <TabTable />
-          {/* <UpcomingTask /> */}
-
-          <CoachEvent />
+          {/* <TabTable />
+          <CoachEvent /> */}
         </div>
 
         {/* Content Grid */}
@@ -96,7 +94,6 @@ const CoachOverview = () => {
           <div className={styles.contentGrid}>
             <ChartSection />
             <Management />
-            {/* <Event /> */}
 
             <div className={styles.ic_schedule_container}>
               <div className={styles.eventItem}>
