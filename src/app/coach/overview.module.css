@@ -62,7 +62,24 @@
   text-transform: uppercase;
 }
 
+.ic_schedule_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f9f9f9;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+
 @media (max-width: 1640px) {
+    .ic_overview_wrapper {
+    grid-template-columns: 65% 35%;
+    gap: 16px;
+  }
+
+
+
   .metricsGridFour {
     gap: 16px;
     margin-bottom: 16px;
@@ -70,6 +87,21 @@
 }
 
 @media (max-width: 1399px) {
+    .ic_overview_wrapper {
+    gap: 12px;
+  }
+
+    .ic_btn {
+    font-size: 11px;
+    padding: 1px 8px;
+  }
+
+  .sectionTitle {
+    font-size: 18px;
+  }
+
+
+
   .metricsGridFour {
     /* grid-template-columns: repeat(3, 1fr); */
     gap: 10px;
@@ -81,4 +113,9 @@
   .ic_overview_wrapper {
     grid-template-columns: repeat(1, 1fr);
   }
+
+    .metricsGridFour {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
 }

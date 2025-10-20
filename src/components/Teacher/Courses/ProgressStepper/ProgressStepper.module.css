@@ -1,4 +1,4 @@
-/* 
+
 .progressContainer {
   display: flex;
   justify-content: center;
@@ -59,8 +59,7 @@
 }
 
 .stepSubname {
-  font-size: 0.75rem;
-  color: #666;
+  font-size: 0.875rem;
   margin-top: 0.125rem;
 }
 
@@ -117,126 +116,7 @@
     left: 42px;
     width: 48px;
   }
-} */
-
-.stepper {
-  max-width: 1200px;
-  margin: 0 auto 60px;
-  padding: 0 20px;
 }
 
-.stepsContainer {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  position: relative;
-  gap: 0;
-}
 
-.stepWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
-  position: relative;
-}
 
-.stepCircle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: 3px solid #ff9500;
-  background-color: white;
-  font-weight: 600;
-  font-size: 16px;
-  transition: all 0.3s ease;
-  z-index: 2;
-  flex-shrink: 0;
-}
-
-.stepCircle.active {
-  background-color: #ff9500;
-  border-color: #ff9500;
-  color: white;
-}
-
-.stepCircle.inactive {
-  background-color: white;
-  border-color: #ff9500;
-  color: #999;
-}
-
-.checkIcon {
-  color: white;
-}
-
-.stepLabel {
-  margin-top: 16px;
-  text-align: center;
-}
-
-.labelText {
-  font-size: 14px;
-  color: #333;
-  margin: 0;
-  font-weight: 500;
-  line-height: 1.5;
-}
-
-.connector {
-  position: absolute;
-  top: 28px;
-  left: calc(50% + 28px);
-  right: calc(-50% + 28px);
-  height: 3px;
-  z-index: 1;
-}
-
-.connector.connectorActive {
-  background-color: #ff9500;
-}
-
-.connector.connectorInactive {
-  background-color: #ff9500;
-}
-
-@media (max-width: 768px) {
-  .stepCircle {
-    width: 48px;
-    height: 48px;
-    border-width: 2px;
-    font-size: 14px;
-  }
-
-  .labelText {
-    font-size: 12px;
-  }
-
-  .stepLabel {
-    margin-top: 12px;
-  }
-
-  .connector {
-    top: 24px;
-  }
-}
-
-@media (max-width: 480px) {
-  .stepCircle {
-    width: 40px;
-    height: 40px;
-    border-width: 2px;
-    font-size: 12px;
-  }
-
-  .labelText {
-    font-size: 10px;
-  }
-
-  .connector {
-    top: 20px;
-  }
-}

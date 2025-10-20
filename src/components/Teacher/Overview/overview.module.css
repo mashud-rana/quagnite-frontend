@@ -13,6 +13,7 @@
 
 .header {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 32px;
@@ -25,10 +26,7 @@
   margin: 0;
 }
 
-.actionButtons {
-  display: flex;
-  gap: 12px;
-}
+
 
 .actionButton {
   background: #6366f1;
@@ -56,7 +54,7 @@
 
 .metricCard {
   background: var(--white);
-  padding: 24px;
+  padding: 18px;
   border-radius: 8px;
 }
 
@@ -421,6 +419,17 @@
   padding: 0;
 }
 
+.ic_btn_container{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+
+.ic_wrapper{
+  overflow: hidden;
+}
+
 @media (max-width: 1640px) {
   .metricsGridFour {
     gap: 16px;
@@ -437,9 +446,37 @@
 }
 
 @media (max-width: 1399px) {
+    .metricValue {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 4px;
+  }
+
+  .ic_btn {
+    font-size: 11px;
+    padding: 1px 8px;
+  }
+
+  .sectionHeader {
+    margin-bottom: 8px;
+  }
+
+  .ic_chart_btn {
+    gap: 6px;
+    font-size: 11px;
+    padding: 1px 8px;
+  }
+
   .metricHeader {
     gap: 3px;
+       margin-bottom: 8px;
   }
+
+    .sectionTitle {
+    font-size: 16px;
+  }
+
 
   .metricsGridFour {
     /* grid-template-columns: repeat(3, 1fr); */
@@ -452,6 +489,36 @@
   .ic_overview_wrapper {
     grid-template-columns: repeat(1, 1fr);
   }
+
+.header {
+  flex-direction: column;
+  align-items: start;
+  margin-bottom: 24px;
 }
 
-/* all  */
+}
+
+@media (max-width: 775px) {
+.metricsGridFour {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+
+.ic_btn_container{
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.metricsGridThree {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+}
+
+
