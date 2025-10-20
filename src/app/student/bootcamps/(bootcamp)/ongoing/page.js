@@ -6,6 +6,7 @@ import { pre } from "framer-motion/client";
 import SectionSpinner from "@/components/Spinner/SectionSpinner";
 import InfiniteScroll from "react-infinite-scroll-component";
 import NotDataFound from "@/components/Empty/NotDataFound";
+import  BootcampCardSkeleton from "@/components/Student/Bootcamps/Skeleton/ListCard/BootcampCardSkeleton ";
 
 const OngoingPage = () => {
    const [bootcamps, setBootcamps] = useState([]);
@@ -44,7 +45,8 @@ const OngoingPage = () => {
        {
          isLoading && page === 1 ? 
          (
-           <SectionSpinner message="Loading ongoing Bootcamp" />
+          //  <SectionSpinner message="Loading ongoing Bootcamp" />
+           <BootcampCardSkeleton />
          )
          : error ? (
            <div style={{ textAlign: "center", marginTop: "20px" }}>

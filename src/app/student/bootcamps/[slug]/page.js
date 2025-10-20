@@ -18,6 +18,7 @@ import SectionSpinner from "@/components/Spinner/SectionSpinner";
 import NotDataFound from "@/components/Empty/NotDataFound";
 import styles from "./details.module.css";
 import BootcampOverview from "@/components/Student/Bootcamps/BootcampOverview/BootcampOverview";
+import BootcampDetailSkeleton from "@/components/Student/Bootcamps/Skeleton/Details/BootcampDetailSkeleton";
 
 const BootcampDetailsPage = () => {
   const [activeKey, setActiveKey] = useState("1");
@@ -59,8 +60,10 @@ const BootcampDetailsPage = () => {
     }
   }, [data, isSuccess]);
 
+
   if (isLoading || isFetching) {
-    return <SectionSpinner message="Loading bootcamp details..." />;
+    // return <SectionSpinner message="Loading bootcamp details..." />;
+    return <BootcampDetailSkeleton />;
   }
   if (isError) {
     return <NotDataFound message="Bootacamp details not found" />;

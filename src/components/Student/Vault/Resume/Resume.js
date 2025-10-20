@@ -20,6 +20,7 @@ import { DeleteOutlined } from '@ant-design/icons';
 import { useDeleteBeneficiaryMutation } from "@/redux/features/common/beneficiary/beneficiaryApi";
 import ResumePreviewModal from "./ResumePreviewModal";
 import UploadResumeModal from "./UploadResumeModal"
+import ResumeCardSkeleton from "./Skeleton/ResumeCardSkeleton";
 
 const resumes = [
   {
@@ -209,9 +210,6 @@ const handleUploadResume = async (formData) => {
 
 
 
-  console.log("resumes models", models);
-  console.log('selectedModel', selectedModel);
-
   return (
     <div>
       {/* Header */}
@@ -228,7 +226,8 @@ const handleUploadResume = async (formData) => {
       {/* Resumes Grid */}
       <div>
         {isLoading && params.page === 1 ? (
-        <SectionSpinner message="Loading for resumes.." />
+        // <SectionSpinner message="Loading for resumes.." />
+        <ResumeCardSkeleton />
       ) : error ? (
         <div style={{ textAlign: "center", marginTop: "20px" }}>
           <NotDataFound message="Error loading resumes. Please try again" />
