@@ -46,6 +46,16 @@ export const resumeApi = apiSlice.injectEndpoints({
         };
       },
     }),
+    uploadResume: builder.mutation({
+      query: (formData) => {
+      
+        return {
+          url: `/student/resumes/resume-upload`,
+          method: "POST",
+          body: formData,
+        };
+      },
+    }),
 
 
 
@@ -56,4 +66,5 @@ export const {
   useGetMyResumesQuery,
   useDownloadResumeMutation,
   useDeleteResumeMutation,
+  useUploadResumeMutation
 } = resumeApi;

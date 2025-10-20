@@ -8,7 +8,7 @@ import ResumeModal from "./ResumeModal";
 import React, { useState , useEffect} from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
-import {useDownloadResumeMutation, useGetMyResumesQuery, useDeleteResumeMutation} from "@/redux/features/student/resume/resumeApi";
+import {useDownloadResumeMutation, useGetMyResumesQuery, useDeleteResumeMutation, useUploadResumeMutation} from "@/redux/features/student/resume/resumeApi";
 import SectionSpinner from "@/components/Spinner/SectionSpinner";
 import NotDataFound from "@/components/Empty/NotDataFound";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -19,6 +19,7 @@ import { MdOutlineDownload } from "react-icons/md";
 import { DeleteOutlined } from '@ant-design/icons';
 import { useDeleteBeneficiaryMutation } from "@/redux/features/common/beneficiary/beneficiaryApi";
 import ResumePreviewModal from "./ResumePreviewModal";
+import UploadResumeModal from "./UploadResumeModal"
 
 const resumes = [
   {
@@ -54,8 +55,13 @@ const Resume = () => {
 
   const [models, setModels] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
-   const [selectUuid, setSelectUuid] = useState(null);
-   const [selectedModel, setSelectedModel] = useState(null);
+  const [selectUuid, setSelectUuid] = useState(null);
+  const [selectedModel, setSelectedModel] = useState(null);
+
+  // Inside the Resume component, add:
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+
+
   
 
   //fetch api
@@ -67,6 +73,15 @@ const Resume = () => {
     refetch,
     isFetching 
   } = useGetMyResumesQuery(params);
+
+  // Add upload mutation
+  const [uploadResume, { 
+    data:uploadData,
+    isLoading: uploadIsLoading, 
+    isSuccess: uploadIsSuccess,
+    isError: uploadIsError,
+    error: uploadError 
+  }] = useUploadResumeMutation();
 
    //download my resume
   const [ downloadResume, 
@@ -82,6 +97,20 @@ const Resume = () => {
       isSuccess: deleteIsSuccess,
       isError: deleteIsError,
       error: deleteError }] = useDeleteResumeMutation();
+
+
+// Add upload handler
+const handleUploadResume = async (formData) => {
+  try {
+    await uploadResume(formData).unwrap();
+    setIsUploadModalOpen(false);
+    // // Refresh the list
+    // setParams({ page: 1, per_page: 8 });
+    // refetch();
+  } catch (error) {
+    toastError(error?.data?.message || "Upload failed. Please try again.");
+  }
+};
 
   //delete handler
   const deleteHandler = async (uuid) => {
@@ -116,6 +145,26 @@ const Resume = () => {
     setSelectedModel(null);
    
   };
+
+  // Handle upload success/error
+  useEffect(()=>{
+    if(uploadIsSuccess){
+      toastSuccess(uploadData?.message || "Resume uploaded successfully");
+      setSelectUuid(null);
+      //updated data store
+      setModels((prev)=> {
+        return [
+          {...uploadData.data},
+          ...prev
+        ]
+      })
+    }
+    if (uploadIsError) {
+        toastError(
+          uploadError?.data?.message || "Resume upload failed. Please try again."
+        );
+      }
+  },[uploadIsSuccess, uploadData, uploadIsError, uploadError]);
 
   //handle delete success/error
   useEffect(()=>{
@@ -173,7 +222,7 @@ const Resume = () => {
           </Link>
           <h1 className="ic_text_36">My Resume</h1>
         </div>
-        <button className={styles.ic_btn}>upload resume</button>
+        <button className={styles.ic_btn} onClick={() => setIsUploadModalOpen(true)}>upload resume</button>
       </div>
 
       {/* Resumes Grid */}
@@ -288,6 +337,15 @@ const Resume = () => {
       onDownload={downloadResume}
       isDownloading={selectUuid === selectedModel?.uuid && downloadIsLoading}
     />
+
+ 
+      <UploadResumeModal
+        open={isUploadModalOpen}
+        onClose={() => setIsUploadModalOpen(false)}
+        onUpload={handleUploadResume}
+        isUploading={uploadIsLoading}
+        isSuccess={uploadIsSuccess}
+      />
         
     </div>
   );
