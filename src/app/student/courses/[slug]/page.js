@@ -14,6 +14,7 @@ import {useGetCourseDetailsBySlugQuery} from '@/redux/features/student/course/co
 import { useParams, useSearchParams } from 'next/navigation'
 import SectionSpinner from "@/components/Spinner/SectionSpinner";
 import NotDataFound from "@/components/Empty/NotDataFound";
+import CourseDetailsSkeleton from "@/components/Student/Courses/Skeleton/CourseDetailsSkeleton";
 
 const CourseDetailsPage = () => {
    const { slug } = useParams()
@@ -98,7 +99,8 @@ const CourseDetailsPage = () => {
   console.log("course details", course);
 
   if(isLoading || isFetching){
-    return <SectionSpinner message="Loading course details..." />
+    // return <SectionSpinner message="Loading course details..." />
+    return <CourseDetailsSkeleton/>
   }
   if(requestError){
     return <NotDataFound message="Course details not found" />
