@@ -76,3 +76,13 @@ export const appendInFormData = (data) => {
   });
   return formData;
 };
+
+export const truncateHtml = (html, limit = 250) => {
+    // Remove HTML tags to count plain text characters
+    const plainText = html.replace(/<[^>]+>/g, "");
+    if (plainText.length <= limit) return html;
+
+    // Slice text safely
+    const truncatedText = plainText.slice(0, limit) + "...";
+    return truncatedText;
+  };

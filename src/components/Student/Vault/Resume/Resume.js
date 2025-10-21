@@ -22,29 +22,6 @@ import ResumePreviewModal from "./ResumePreviewModal";
 import UploadResumeModal from "./UploadResumeModal"
 import ResumeCardSkeleton from "./Skeleton/ResumeCardSkeleton";
 
-const resumes = [
-  {
-    id: "1",
-    title: "Amilia fox resume 2024",
-    createdDate: "2024-01-15",
-  },
-  {
-    id: "2",
-    title: "Amilia fox resume 2024",
-    createdDate: "2024-01-14",
-  },
-  {
-    id: "3",
-    title: "Amilia fox resume 2024",
-    createdDate: "2024-01-13",
-  },
-  {
-    id: "4",
-    title: "Amilia fox resume 2024",
-    createdDate: "2024-01-12",
-  },
-];
-
 const Resume = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
@@ -62,8 +39,6 @@ const Resume = () => {
   // Inside the Resume component, add:
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
 
-
-  
 
   //fetch api
   const { 
