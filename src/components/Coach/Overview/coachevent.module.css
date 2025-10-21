@@ -1,6 +1,6 @@
 .content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 }
 
@@ -8,8 +8,6 @@
   font-size: 20px;
   line-height: 1.4;
   font-weight: 600;
-  color: #333;
-  margin-bottom: 16px;
 }
 
 .ic_btn {
@@ -26,7 +24,6 @@
 .eventTitle {
   line-height: 1.4;
   font-weight: 600;
-  margin-bottom: 8px;
 }
 
 /* Events Section */
@@ -45,12 +42,12 @@
   align-items: center;
 }
 
-.sectionTitle {
+/* .sectionTitle {
   font-size: 24px;
   font-weight: 600;
   color: #1a1a1a;
   margin: 0;
-}
+} */
 
 .eventsList {
   display: flex;
@@ -236,20 +233,31 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
-  .content {
+@media (max-width: 1399px) {
+  .sectionTitle {
+    font-size: 18px;
+  }
+
+    .ic_btn {
+    font-size: 11px;
+    padding: 1px 8px;
+  }
+
+    .content {
     grid-template-columns: 1fr;
   }
+
 }
+
 
 @media (max-width: 768px) {
   .container {
     padding: 20px 16px;
   }
 
-  .sectionTitle {
+  /* .sectionTitle {
     font-size: 20px;
-  }
+  } */
 
   .eventCard {
     padding: 16px;
@@ -270,4 +278,13 @@
   .daysCount {
     font-size: 28px;
   }
+}
+
+
+@media (max-width: 575px) {
+
+.ic_flex {
+  grid-template-columns: repeat(1, 1fr);
+  gap: 12px;
+}
 }

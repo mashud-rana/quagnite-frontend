@@ -603,7 +603,7 @@ h6 {
 .main {
   width: 100%;
   padding: 20px;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   flex: 1;
   height: calc(100vh - 80px);
   min-height: 0;
@@ -1739,4 +1739,11 @@ h6 {
 
 .text-danger{
   color: red;
+}
+
+
+
+
+.ic_overflow_auto{
+  overflow: auto;
 }

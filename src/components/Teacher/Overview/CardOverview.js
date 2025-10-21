@@ -85,7 +85,7 @@ const CardOverview = () => {
 
   return (
     <div className={styles.overview}>
-      <h2 className={styles.sectionTitle}>Overview</h2>
+      <h2 className={`${styles.sectionTitle} mb_16`}>Overview</h2>
       <div>
         <div className={styles.metricsGridFour}>
           {metrics.slice(0, 4).map((metric, index) => (
