@@ -10,6 +10,7 @@ import { useStartExamQuery, useSubmitExamMutation } from "@/redux/features/stude
 import { Modal, Spin } from "antd";
 import SkillChart from "@/components/Student/Exams/SkillChart/SkillChart";
 import Timer from "./Timer";
+import ExamQuestionSkeleton from "./Skeleton/ExamQuestionSkeleton";
 
 const ExamInterface = () => {
 
@@ -220,7 +221,9 @@ const ExamInterface = () => {
 
   console.log('questions', questions);
   console.log('selectedAnswer', selectedAnswer);
-
+  if(isLoading || isFetching){
+    return <ExamQuestionSkeleton />
+  }
   
   return (
     <>
