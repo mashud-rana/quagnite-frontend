@@ -1,7 +1,10 @@
+'use client';
 import React from "react";
 import styles from "./skillchart.module.css";
+import { useRouter } from "next/navigation";
 
-const ProgressInfo = () => {
+const ProgressInfo = ({attempt, examUuid, enrollUuid}) => {
+  const router = useRouter();
   return (
     <div className={styles.ic_text_container}>
       <p className={styles.performanceText}>
@@ -10,10 +13,15 @@ const ProgressInfo = () => {
       <p>Where do you stand now?</p>
 
       <div className={styles.buttonGroup}>
-        <button className="ic_common_primary_btn">RETAKE NOW</button>
+        {
+          attempt < 3 &&   <button className="ic_common_primary_btn"
+          onClick={() => router.push(`/student/exams/start-exam/${examUuid}/${enrollUuid}/retake`)}
+          >RETAKE NOW</button>
+        }
+     
         <button className="ic_common_primary_btn">CHECK YOUR ANSWERS</button>
       </div>
-      <p className={styles.chancesText}>2 of 3 chances remaining</p>
+      <p className={styles.chancesText}>{attempt} of 3 chances remaining</p>
     </div>
   );
 };

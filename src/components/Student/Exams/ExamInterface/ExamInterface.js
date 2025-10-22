@@ -11,6 +11,7 @@ import { Modal, Spin } from "antd";
 import SkillChart from "@/components/Student/Exams/SkillChart/SkillChart";
 import Timer from "./Timer";
 import ExamQuestionSkeleton from "./Skeleton/ExamQuestionSkeleton";
+import NotDataFound from "@/components/Empty/NotDataFound";
 
 const ExamInterface = () => {
 
@@ -58,21 +59,6 @@ const ExamInterface = () => {
       error: submitExamError 
     }] = useSubmitExamMutation();
   
-
-  // // ✅ Timer countdown
-  //  useEffect(() => {
-  //   let interval;
-  //   // if (recording && timer > 0) {
-  //   if ( timer > 0) {
-  //     interval = setInterval(() => setTimer(t => t - 1), 1000);
-  //   }
-  //   if (timer <= 0 ) {
-  //     // stop and auto submit
-  //     stopRecordingAndSubmit();
-  //   }
-  //   return () => clearInterval(interval);
-  // }, [timer]);
-  // // }, [recording, timer]);
 
   //ans submit
   const submitAnswer = () => {
@@ -193,12 +179,6 @@ const ExamInterface = () => {
   // // };
   // // }, [cameraId, micId]);
 
-  // // auto submit answer when time is over
-  // useEffect(()=>{
-  //   if(parseInt(currentQusIndex + 1) == parseInt(qusCount) ){
-  //     stopRecordingAndSubmit();
-  //   }
-  // },[currentQusIndex, qusCount])
 
   //score calculate
   useEffect(()=>{
@@ -223,6 +203,10 @@ const ExamInterface = () => {
   console.log('selectedAnswer', selectedAnswer);
   if(isLoading || isFetching){
     return <ExamQuestionSkeleton />
+  }
+
+  if(startExamData?.data?.enrollExam?.attempt >= 3){
+    return <NotDataFound message="You have exceeded the maximum number of attempts." />
   }
   
   return (
@@ -291,7 +275,10 @@ const ExamInterface = () => {
           </div>
         </div>
         :
-        <SkillChart />
+        <SkillChart attempt={startExamData?.data?.enrollExam?.attempt}
+        examUuid={startExamData?.data?.exam?.uuid}
+        enrollUuid={startExamData?.data?.enrollExam?.uuid}
+        />
       }
     </>
    
