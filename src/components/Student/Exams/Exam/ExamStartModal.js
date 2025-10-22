@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import styles from "./examCard.module.css";
 import { toastError, toastSuccess } from "@/utils/helper";
 
-const ExamStartModal = ({ open, onCancel }) => {
+const ExamStartModal = ({ open, onCancel, enrollExam }) => {
   const router = useRouter();
 
   // State
@@ -95,7 +95,8 @@ const ExamStartModal = ({ open, onCancel }) => {
       return;
     }
     onCancel?.();
-    router.push("/student/exams/start-exam");
+    router.push(`/student/exams/start-exam/${enrollExam?.exam?.uuid}/${enrollExam?.uuid}?camera=${selectedCamera}&mic=${selectedMic}`);
+    // router.push("/student/exams/start-exam");
   };
 
   console.log('device cameraDevices & micDevices',cameraDevices, micDevices)

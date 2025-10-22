@@ -89,9 +89,9 @@ const Exam = () => {
           >
             <div className="examsGrid">
               {models.length > 0
-                ? models.map((exam) => {
+                ? models.map((enrollExam) => {
                     return (
-                       <ExamCard key={exam.id} exam={exam} />
+                       <ExamCard key={enrollExam.id} enrollExam={enrollExam} />
                     );
                   })
                 : !isLoading && (

@@ -9,7 +9,7 @@ import styles from "./examCard.module.css";
 import ExamStartModal from "./ExamStartModal";
 import {truncateHtml} from "@/utils/helper";
 
-const ExamCard = ({ exam }) => {
+const ExamCard = ({ enrollExam }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOk = () => {
@@ -21,42 +21,42 @@ const ExamCard = ({ exam }) => {
   };
 
   const shortDescription = truncateHtml(
-            exam?.exam?.description || "",
+            enrollExam?.exam?.description || "",
             250
           );
 
   return (
-    <div key={exam.id} className={styles.examCard}>
+    <div key={enrollExam.id} className={styles.examCard}>
       {/* Card Image */}
       <div className={styles.cardImageContainer}>
-        <Image src={exam?.exam?.image_url} alt={exam?.exam?.title} className={styles.cardImage}
+        <Image src={enrollExam?.exam?.image_url} alt={enrollExam?.exam?.title} className={styles.cardImage}
          width={200} height={100} />
       </div>
 
       {/* Card Content */}
       <div>
         <div className={styles.ic_text_container}>
-          <h4 className={styles.examTitle}>{exam?.exam?.title}</h4>
+          <h4 className={styles.examTitle}>{enrollExam?.exam?.title}</h4>
           <span className={styles.statusBadge}>Upcoming exam</span>
         </div>
 
         <div dangerouslySetInnerHTML={{ __html: shortDescription }} />
 
         <div className={styles.examDetailsRow}>
-          <span className={styles.examDetail}>Exam Id - {exam?.id}</span>
+          <span className={styles.examDetail}>Exam Id - {enrollExam?.id}</span>
           <span className={styles.examDetail}>
-            No of Attempts - {exam?.attempt}
+            No of Attempts - {enrollExam?.attempt}
           </span>
         </div>
 
         <div className={styles.timeDetailsRow}>
           <div className={styles.timeDetail}>
             <FaRegClock className={styles.timeIcon} />
-            <span>{exam?.formatted_time}</span>
+            <span>{enrollExam?.formatted_time}</span>
           </div>
           <div className={styles.timeDetail}>
             <PiCalendarBlankBold className={styles.timeIcon} />
-            <span>{exam?.formatted_created_at}</span>
+            <span>{enrollExam?.formatted_created_at}</span>
           </div>
         </div>
 
@@ -72,6 +72,7 @@ const ExamCard = ({ exam }) => {
         open={isModalOpen}
         onCancel={handleCancel}
         onOk={handleOk}
+        enrollExam={enrollExam}
       />
     </div>
   );
