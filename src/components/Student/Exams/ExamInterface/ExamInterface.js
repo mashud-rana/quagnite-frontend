@@ -2,11 +2,14 @@
 
 import { useParams, useSearchParams } from "next/navigation";
 import React,{ useEffect, useRef, useState } from "react";
-import { toastError, toastSuccess } from "@/utils/helper";
+import { appendInFormData, toastError, toastSuccess, antIcon } from "@/utils/helper";
 
 import styles from "./examInterface.module.css";
 import Link from "next/link";
-import { useStartExamQuery } from "@/redux/features/student/exam/examApi";
+import { useStartExamQuery, useSubmitExamMutation } from "@/redux/features/student/exam/examApi";
+import { Modal, Spin } from "antd";
+import SkillChart from "@/components/Student/Exams/SkillChart/SkillChart";
+import Timer from "./Timer";
 
 const ExamInterface = () => {
 
@@ -30,6 +33,7 @@ const ExamInterface = () => {
   const [passMark, setPassMark] = useState(0);
   const [score, setScore] = useState(0);
   const [correctAnswer, setCorrectAnswer] = useState(0);
+  const [wrongAnswer, setWrongAnswer] = useState(0);
   const [examStart, setExamStart] = useState(true);
   const [examEnd, setExamEnd] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState("");
@@ -45,64 +49,155 @@ const ExamInterface = () => {
     isFetching 
   } = useStartExamQuery({examUuid, enrollUuid});
 
-  // ✅ Timer countdown
-   useEffect(() => {
-    let interval;
-    // if (recording && timer > 0) {
-    if ( timer > 0) {
-      interval = setInterval(() => setTimer(t => t - 1), 1000);
+   const [submitExam, { 
+      data:submitExamData,
+      isLoading: submitExamIsLoading, 
+      isSuccess: submitExamIsSuccess,
+      isError: submitExamIsError,
+      error: submitExamError 
+    }] = useSubmitExamMutation();
+  
+
+  // // ✅ Timer countdown
+  //  useEffect(() => {
+  //   let interval;
+  //   // if (recording && timer > 0) {
+  //   if ( timer > 0) {
+  //     interval = setInterval(() => setTimer(t => t - 1), 1000);
+  //   }
+  //   if (timer <= 0 ) {
+  //     // stop and auto submit
+  //     stopRecordingAndSubmit();
+  //   }
+  //   return () => clearInterval(interval);
+  // }, [timer]);
+  // // }, [recording, timer]);
+
+  //ans submit
+  const submitAnswer = () => {
+    if(!selectedAnswer){
+      //select ans first before submit ans
+      toastError('Select option first before submit ansewer')
+      return;
     }
-    if (timer <= 0 ) {
-      // stop and auto submit
-      // stopRecordingAndSubmit();
+
+    //check answer
+    if(selectedAnswer === questions[currentQusIndex]?.correctAnswer){
+      setCorrectAnswer(correctAnswer + 1);
+    }else{
+      setWrongAnswer(wrongAnswer + 1);
     }
-    return () => clearInterval(interval);
-  }, [timer]);
-  // }, [recording, timer]);
+    if(parseInt(currentQusIndex + 1) == parseInt(qusCount) ){
+      stopRecordingAndSubmit();
+    }else{
 
-  // // ✅ Start camera and recording when page loads
-  // useEffect(() => {
-  // const startRecording = async () => {
-  //   try {
-  //     const constraints = {
-  //       video: cameraId ? { deviceId: { exact: cameraId } } : true,
-  //       audio: micId ? { deviceId: { exact: micId } } : true,
-  //     };
+      setCurrentQusIndex(currentQusIndex + 1);
+    }
+    setSelectedAnswer("");
+  }
 
-  //     const stream = await navigator.mediaDevices.getUserMedia(constraints);
-  //     if (videoRef.current) {
-  //       videoRef.current.srcObject = stream;
-  //     }
+  
+  const stopRecordingAndSubmit = async () => {
+    // if (recorderRef.current?.state !== 'inactive') {
+    //   recorderRef.current.stop();
+    // }
 
-  //     const recorder = new MediaRecorder(stream, { mimeType: "video/webm" });
-  //     recorderRef.current = recorder;
+    // // create blob
+    // const blob = new Blob(chunks, { type: 'video/webm' });
+    let examId = startExamData?.data?.exam?.id;
+    const formData = appendInFormData(
+      {
+        exam_id: startExamData?.data?.exam?.id,
+        enroll_id: startExamData?.data?.enrollExam?.id,
+        score: score,
+        correct_ans:correctAnswer,
+        wrong_ans:wrongAnswer,
+        total_qus:qusCount,
+      }
+    );
 
-  //     recorder.ondataavailable = (e) => {
-  //       if (e.data.size > 0) setChunks((prev) => [...prev, e.data]);
-  //     };
+    // formData.append('video', blob, `exam_${examId}_user.webm`);
+    await submitExam(formData).unwrap();
+    // try {
+    //   message.loading({ content: 'Uploading video...', key: 'upload' });
+    //   await uploadExamVideo(formData).unwrap();
+    //   message.success({ content: 'Video uploaded', key: 'upload', duration: 2 });
+
+    //   // submit answers (example)
+    //   await submitAnswers({ examId, answers }).unwrap();
+    //   message.success('Answers submitted');
+    // } catch (err) {
+    //   console.error(err);
+    //   message.error('Upload failed. Please try again or contact admin.');
+    // } finally {
+    //   // stop media tracks
+    //   mediaStreamRef.current?.getTracks().forEach(t => t.stop());
+    // }
+  };
+
+  //Response examSubmit action
+  useEffect(()=>{
+    if(submitExamIsSuccess){
+      toastSuccess('Exam submitted successfully');
+      setExamStart(false);
+      setExamEnd(true);
+    }
+    if (submitExamIsError) {
+        toastError(
+          submitExamError?.message || "Something is wrong. Please try again."
+        );
+      }
+  },[submitExamIsSuccess, submitExamIsError, submitExamError])
+  // // // ✅ Start camera and recording when page loads
+  // // useEffect(() => {
+  // // const startRecording = async () => {
+  // //   try {
+  // //     const constraints = {
+  // //       video: cameraId ? { deviceId: { exact: cameraId } } : true,
+  // //       audio: micId ? { deviceId: { exact: micId } } : true,
+  // //     };
+
+  // //     const stream = await navigator.mediaDevices.getUserMedia(constraints);
+  // //     if (videoRef.current) {
+  // //       videoRef.current.srcObject = stream;
+  // //     }
+
+  // //     const recorder = new MediaRecorder(stream, { mimeType: "video/webm" });
+  // //     recorderRef.current = recorder;
+
+  // //     recorder.ondataavailable = (e) => {
+  // //       if (e.data.size > 0) setChunks((prev) => [...prev, e.data]);
+  // //     };
 
       
-  //     recorder.start(1000); // collect 1 second chunks
-  //     // recorder.start();
-  //     setRecording(true);
-  //     toastSuccess("Exam recording started.");
-  //   } catch (error) {
-  //     toastError("Failed to access selected camera or mic.");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  // //     recorder.start(1000); // collect 1 second chunks
+  // //     // recorder.start();
+  // //     setRecording(true);
+  // //     toastSuccess("Exam recording started.");
+  // //   } catch (error) {
+  // //     toastError("Failed to access selected camera or mic.");
+  // //   } finally {
+  // //     setLoading(false);
+  // //   }
+  // // };
 
-  // startRecording();
+  // // startRecording();
 
-  // // 🧹 Cleanup on page leave
-  // return () => {
-  //   recorderRef.current?.stop();
-  //   if (videoRef.current?.srcObject) {
-  //     videoRef.current.srcObject.getTracks().forEach((t) => t.stop());
+  // // // 🧹 Cleanup on page leave
+  // // return () => {
+  // //   recorderRef.current?.stop();
+  // //   if (videoRef.current?.srcObject) {
+  // //     videoRef.current.srcObject.getTracks().forEach((t) => t.stop());
+  // //   }
+  // // };
+  // // }, [cameraId, micId]);
+
+  // // auto submit answer when time is over
+  // useEffect(()=>{
+  //   if(parseInt(currentQusIndex + 1) == parseInt(qusCount) ){
+  //     stopRecordingAndSubmit();
   //   }
-  // };
-  // }, [cameraId, micId]);
+  // },[currentQusIndex, qusCount])
 
   //score calculate
   useEffect(()=>{
@@ -128,62 +223,75 @@ const ExamInterface = () => {
 
   
   return (
-    <div className={styles.examContent}>
-       <div style={{ position: 'fixed', bottom: 12, left: 12, width: 220, zIndex: 999 }}>
-        <video ref={videoRef} autoPlay muted playsInline style={{ width: '100%', borderRadius: 6, border: '1px solid #ddd' }} />
-      </div>
-      {/* Exam Title and Info */}
-      <div className={styles.examHeader}>
-        <h5>{startExamData?.data?.exam?.title || "Untitled Exam"}</h5>
-        <div className={styles.examInfo}>
-          <span className="fw_500">Question {currentQusIndex + 1}/{qusCount}</span>
-          <div className={styles.timer}>{Math.floor(timer / 60)} : {timer % 60}</div>
-        </div>
-      </div>
-
-      {/* Progress Bar */}
-      <div className={styles.progressBarWrapper}>
-        <div
-          className={styles.progressBarFill}
-          style={{ width: `${progress}%` }}
-        ></div>
-      </div>
-
-      {/* Question Section */}
-      <div>
-        <div className={styles.questionText}>{currentQusIndex + 1}. {questions[currentQusIndex]?.question} </div>
-
-        {/* Answer Options */}
-        <div className={`${styles.optionsContainer} mb-24`}>
-          {questions[currentQusIndex]?.answers && Object.entries(questions[currentQusIndex]?.answers).map(([key, value]) => (
-            <div key={key} className={styles.optionItem}>
-              <label className={styles.optionLabel}>
-                    <input
-                      type="radio"
-                      name="answer"
-                      className={styles.optionInput}
-                      value={key}
-                      checked={String(selectedAnswer) === String(key)}
-                      onChange={(e) => setSelectedAnswer(e.target.value)}
-                    />
-                <span className={styles.customCheckbox}></span>
-                <span className={styles.optionText}>{key.toUpperCase()}. {value}</span>
-              </label>
+    <>
+      {
+        examStart ?  
+        <div className={styles.examContent}>
+          <div style={{ position: 'fixed', bottom: 12, left: 12, width: 220, zIndex: 999 }}>
+            <video ref={videoRef} autoPlay muted playsInline style={{ width: '100%', borderRadius: 6, border: '1px solid #ddd' }} />
+          </div>
+          {/* Exam Title and Info */}
+          <div className={styles.examHeader}>
+            <h5>{startExamData?.data?.exam?.title || "Untitled Exam"}</h5>
+            <div className={styles.examInfo}>
+              <span className="fw_500">Question {currentQusIndex + 1}/{qusCount}</span>
+              {/* <div className={styles.timer}>{Math.floor(timer / 60)} : {timer % 60}</div> */}
+              <Timer duration={timer} onSubmit={stopRecordingAndSubmit} />
             </div>
-          ))}
-        </div>
+          </div>
 
-        {/* Submit Button */}
-        <div className={`${styles.submitContainer} ic_text_end`}>
-          <Link
-            href="/student/exams/submit-exam"
-            className="ic_common_primary_btn"
-          >
-            SUBMIT ANSWER
-          </Link>
+          {/* Progress Bar */}
+          <div className={styles.progressBarWrapper}>
+            <div
+              className={styles.progressBarFill}
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
+
+          {/* Question Section */}
+          <div>
+            <div className={styles.questionText}>{currentQusIndex + 1}. {questions[currentQusIndex]?.question} </div>
+
+            {/* Answer Options */}
+            <div className={`${styles.optionsContainer} mb-24`}>
+              {questions[currentQusIndex]?.answers && Object.entries(questions[currentQusIndex]?.answers).map(([key, value]) => (
+                <div key={key} className={styles.optionItem}>
+                  <label className={styles.optionLabel}>
+                        <input
+                          type="radio"
+                          name="answer"
+                          className={styles.optionInput}
+                          value={key}
+                          checked={String(selectedAnswer) === String(key)}
+                          onChange={(e) => setSelectedAnswer(e.target.value)}
+                        />
+                    <span className={styles.customCheckbox}></span>
+                    <span className={styles.optionText}>{key.toUpperCase()}. {value}</span>
+                  </label>
+                </div>
+              ))}
+            </div>
+
+            {/* Submit Button */}
+            <div className={`${styles.submitContainer} ic_text_end`}>
+              <button
+                className="ic_common_primary_btn"
+                disabled={!selectedAnswer || submitExamIsLoading}
+                onClick={submitAnswer}
+              >
+                SUBMIT ANSWER 
+                {
+                  submitExamIsLoading && <Spin indicator={antIcon} /> 
+                }
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+        :
+        <SkillChart />
+      }
+    </>
+   
   );
 };
 
