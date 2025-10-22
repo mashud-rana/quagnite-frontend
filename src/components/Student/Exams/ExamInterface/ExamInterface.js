@@ -85,12 +85,12 @@ const ExamInterface = () => {
 
   
   const stopRecordingAndSubmit = async () => {
-    // if (recorderRef.current?.state !== 'inactive') {
-    //   recorderRef.current.stop();
-    // }
+    if (recorderRef.current?.state !== 'inactive') {
+      recorderRef.current.stop();
+    }
 
-    // // create blob
-    // const blob = new Blob(chunks, { type: 'video/webm' });
+    // create blob
+    const blob = new Blob(chunks, { type: 'video/webm' });
     let examId = startExamData?.data?.exam?.id;
     const formData = appendInFormData(
       {
@@ -103,7 +103,7 @@ const ExamInterface = () => {
       }
     );
 
-    // formData.append('video', blob, `exam_${examId}_user.webm`);
+    formData.append('video', blob, `exam_${examId}_user.webm`);
     await submitExam(formData).unwrap();
     // try {
     //   message.loading({ content: 'Uploading video...', key: 'upload' });
@@ -135,49 +135,49 @@ const ExamInterface = () => {
         );
       }
   },[submitExamIsSuccess, submitExamIsError, submitExamError])
-  // // // ✅ Start camera and recording when page loads
-  // // useEffect(() => {
-  // // const startRecording = async () => {
-  // //   try {
-  // //     const constraints = {
-  // //       video: cameraId ? { deviceId: { exact: cameraId } } : true,
-  // //       audio: micId ? { deviceId: { exact: micId } } : true,
-  // //     };
+  // ✅ Start camera and recording when page loads
+  useEffect(() => {
+  const startRecording = async () => {
+    try {
+      const constraints = {
+        video: cameraId ? { deviceId: { exact: cameraId } } : true,
+        audio: micId ? { deviceId: { exact: micId } } : true,
+      };
 
-  // //     const stream = await navigator.mediaDevices.getUserMedia(constraints);
-  // //     if (videoRef.current) {
-  // //       videoRef.current.srcObject = stream;
-  // //     }
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
 
-  // //     const recorder = new MediaRecorder(stream, { mimeType: "video/webm" });
-  // //     recorderRef.current = recorder;
+      const recorder = new MediaRecorder(stream, { mimeType: "video/webm" });
+      recorderRef.current = recorder;
 
-  // //     recorder.ondataavailable = (e) => {
-  // //       if (e.data.size > 0) setChunks((prev) => [...prev, e.data]);
-  // //     };
+      recorder.ondataavailable = (e) => {
+        if (e.data.size > 0) setChunks((prev) => [...prev, e.data]);
+      };
 
       
-  // //     recorder.start(1000); // collect 1 second chunks
-  // //     // recorder.start();
-  // //     setRecording(true);
-  // //     toastSuccess("Exam recording started.");
-  // //   } catch (error) {
-  // //     toastError("Failed to access selected camera or mic.");
-  // //   } finally {
-  // //     setLoading(false);
-  // //   }
-  // // };
+      recorder.start(1000); // collect 1 second chunks
+      // recorder.start();
+      setRecording(true);
+      toastSuccess("Exam recording started.");
+    } catch (error) {
+      toastError("Failed to access selected camera or mic.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  // // startRecording();
+  startRecording();
 
-  // // // 🧹 Cleanup on page leave
-  // // return () => {
-  // //   recorderRef.current?.stop();
-  // //   if (videoRef.current?.srcObject) {
-  // //     videoRef.current.srcObject.getTracks().forEach((t) => t.stop());
-  // //   }
-  // // };
-  // // }, [cameraId, micId]);
+  // 🧹 Cleanup on page leave
+  return () => {
+    recorderRef.current?.stop();
+    if (videoRef.current?.srcObject) {
+      videoRef.current.srcObject.getTracks().forEach((t) => t.stop());
+    }
+  };
+  }, [cameraId, micId]);
 
 
   //score calculate
@@ -199,8 +199,7 @@ const ExamInterface = () => {
   const currentQuestion = currentQusIndex + 1;
   const progress = (currentQuestion / totalQuestions) * 100;
 
-  console.log('questions', questions);
-  console.log('selectedAnswer', selectedAnswer);
+ 
   if(isLoading || isFetching){
     return <ExamQuestionSkeleton />
   }
