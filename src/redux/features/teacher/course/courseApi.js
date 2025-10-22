@@ -62,10 +62,18 @@ export const courseApi = apiSlice.injectEndpoints({
             invalidatesTags: ['course']
         }),
         courseList:builder.query({
-            query: () => ({
-                url: `/teacher/course`,
+            query: ({page,limit}) => ({
+                url: `/teacher/course?page=${page}&limit=${limit}`,
                 method: "GET",
                 }),
+            providesTags: ['course']
+        }),
+        deleteCourse: builder.mutation({
+            query: (id) => ({
+                url: `/teacher/course/delete/${id}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: ['course']
         }),
         singleCourse:builder.query({
             query: ({id:uuid}) => ({
@@ -87,4 +95,5 @@ export const {
     useCourseUpdateMutation,
     useCourseListQuery,
     useSingleCourseQuery,
+    useDeleteCourseMutation,
 } = courseApi;
