@@ -7,11 +7,13 @@ import styles from "./editform.module.css";
 import { BiChevronDown } from "react-icons/bi";
 import { RiUploadCloud2Line } from "react-icons/ri";
 import Image from "next/image";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useRef} from "react";
 import { Select } from 'antd';
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
+import { Button} from 'antd';
+import  SubmitButton  from "@/components/Share/SubmitButton/SubmitButton";
 
 import {
   useCourseCategoriesQuery,
@@ -31,6 +33,9 @@ import { FilePond, registerPlugin } from 'react-filepond';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
+import {CloseOutlined} from "@ant-design/icons";
+import { Flex, Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 // Register plugins
 registerPlugin(FilePondPluginImagePreview, FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
 
@@ -42,10 +47,12 @@ const EditCourseForm = ({register,
                             setValue,
                             getValues,
                             errors,
-                          courseData}) => {
+                          courseData,
+                          courseUpdateLoading
+}) => {
   const navigator = useRouter();
   const token = useSelector((state) => state.auth.access_token);
-  const [thumbnailPreview, setThumbnailPreview] = useState(null);
+  const [thumbnailPreview, setThumbnailPreview] = useState("");
   const [courseCategory, setCourseCategory] = useState([]);
   const [courseSubCategory, setCourseSubCategory] = useState([]);
   const [courseAnnouncements, setCourseAnnouncements] = useState([]);
@@ -54,6 +61,7 @@ const EditCourseForm = ({register,
   const [courseDifficulty, setCourseDifficulty] = useState([]);
   const [courseTags, setCourseTags] = useState([]);
   const [files, setFiles] = useState([]);
+  const thumbnailInputRef =  useRef(null);
 
   console.log('courseData', courseData)
 
@@ -200,6 +208,17 @@ const EditCourseForm = ({register,
     setCourseSubCategory([]);
     setSelectCourseCategoryId(categoryId);
   }
+
+  //  Preview Thumbnail
+  useEffect(() => {
+      if(courseData)
+      {
+          if(courseData?.image !== null)
+          {
+            setThumbnailPreview(courseData?.image);
+          }
+      }
+  }, [courseData]);
 
   return (
       <>
@@ -663,19 +682,51 @@ const EditCourseForm = ({register,
           <div className={styles.ic_file_input_container}>
             <div className={styles.uploadArea}>
               {thumbnailPreview ? (
-                <Image
-                  src={thumbnailPreview}
-                  alt="Thumbnail Preview"
-                  width={400}
-                  height={100}
-                  unoptimized
-                  style={{
-                    objectFit: "cover",
-                    borderRadius: "8px",
-                    height: "100%",
-                    width: "100%",
-                  }}
-                />
+                 <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                    <Image
+                      src={thumbnailPreview}
+                      alt="Thumbnail Preview"
+                      width={400}
+                      height={100}
+                      unoptimized
+                      style={{
+                        objectFit: "cover",
+                        borderRadius: "8px",
+                        height: "100%",
+                        width: "100%",
+                      }}
+                    />
+                   <button
+                       type="button"
+                       onClick={() => {
+                         setThumbnailPreview(null);
+                         // onChange(null);
+                         if (thumbnailInputRef.current) {
+                           thumbnailInputRef.current.value = ""; // 👈 clears the input
+                         }
+                         control._formValues.image = null; // 👈 ensures RHF knows it's cleared
+                       }}
+                       style={{
+                         position: 'absolute',
+                         top: '8px',
+                         right: '8px',
+                         background: 'rgba(0, 0, 0, 0.6)',
+                         border: 'none',
+                         borderRadius: '50%',
+                         width: '32px',
+                         height: '32px',
+                         display: 'flex',
+                         alignItems: 'center',
+                         justifyContent: 'center',
+                         cursor: 'pointer',
+                         transition: 'background 0.2s',
+                       }}
+                       onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(0, 0, 0, 0.8)'}
+                       onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(0, 0, 0, 0.6)'}
+                   >
+                     <CloseOutlined style={{ color: 'white', fontSize: '16px' }} />
+                   </button>
+               </div>
               ) : (
                 <>
                   <Controller
@@ -684,6 +735,7 @@ const EditCourseForm = ({register,
                       defaultValue={null}
                       render={({ field: { onChange } }) => (
                           <input
+                              ref={thumbnailInputRef}
                               type="file"
                               accept="image/png, image/jpeg, image/jpg"
                               id="bootcampThumbnail"
@@ -853,9 +905,10 @@ const EditCourseForm = ({register,
           <button onClick={(e) => navigator.push('/teacher')} type="button" className="ic_btn">
             BACK
           </button>
-          <button type="submit" className="ic_btn">
-            SAVE AND CONTINUE
-          </button>
+
+          <SubmitButton
+              isLoading={ courseUpdateLoading }
+          />
         </div>
       </>
   );

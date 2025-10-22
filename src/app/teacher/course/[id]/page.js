@@ -16,7 +16,7 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import CreateCourseForm from "@/components/Teacher/Courses/CreateCourseForm/CreateCourseForm";
 import EditCourseForm from "@/components/Teacher/Courses/EditCourseForm/EditCourseForm";
-import {useSingleCourseQuery} from "@/redux/features/teacher/course/courseApi";
+import {useSingleCourseQuery, useCourseUpdateMutation} from "@/redux/features/teacher/course/courseApi";
 
 const schema = yup.object({
   courseType: yup.string().nullable(true),
@@ -49,16 +49,16 @@ const schema = yup.object({
     }).nullable()
   }),
   image: yup
-      .mixed()
-      .required("Course thumbnail is required")
-      .test("fileSize", "File size is too large", (value) => {
-        if (!value) return false;
-        return value.size <= 2 * 1024 * 1024; // 2MB limit
-      })
-      .test("fileType", "Unsupported file format", (value) => {
-        if (!value) return false;
-        return ["image/png", "image/jpeg", "image/jpg"].includes(value.type);
-      }),
+    .mixed()
+    .nullable(true)
+    .test("fileSize", "File size is too large (max 2MB)", (value) => {
+      if (!value) return true; // allow empty
+      return value.size <= 2 * 1024 * 1024; // 2MB
+    })
+    .test("fileType", "Unsupported file format", (value) => {
+      if (!value) return true; // allow empty
+      return ["image/png", "image/jpeg", "image/jpg"].includes(value.type);
+    }),
   thumb_type: yup.string().nullable(true),
   video: yup.string().when('thumb_type', ([thumb_type]) => {
     if (thumb_type === 'video') {
@@ -98,10 +98,17 @@ const CourseEditPage = () => {
   });
 
 
+  console.log('course update errors', errors)
+
   // API Call Start
   const { data: courseData, isLoading: isCourseLoading } = useSingleCourseQuery({id});
 
-
+  const [courseUpdate, {
+    isLoading: courseUpdateLoading,
+    isError: courseUpdateIsError,
+    error: courseUpdateErrors,
+    data: courseUpdateData
+  }] = useCourseUpdateMutation();
 
 
 // API Call End
@@ -135,6 +142,19 @@ const CourseEditPage = () => {
     let formData = new FormData();
     console.log(data);
 
+    Object.entries(data).forEach(([key, value]) => {
+      console.log(key, value);
+      if(key === 'image' && value !== null && value.length > 0)
+      {
+        formData.append(key, value[0]);
+      } else {
+        formData.append(key, value);
+      }
+    });
+
+    formData.append('course_id', courseData?.data?.id);
+    courseUpdate(formData);
+
   };
 
 
@@ -155,6 +175,8 @@ const CourseEditPage = () => {
               setValue={setValue}
               getValues={getValues}
               errors={errors}
+              courseData = {courseData?.data}
+              courseUpdateLoading = {courseUpdateLoading}
           />
         </>}
 

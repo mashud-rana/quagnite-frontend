@@ -5,23 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d079e12f-27cf-42d7-900a-11a1310fc74f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/teacher/exams/page.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Teacher/Courses/EditCourseForm/EditCourseForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Teacher/Courses/EditCourseForm/editform.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Share/SubmitButton/SubmitButton.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/coach/coaching/all-coaching/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/coach/coaching/all-coaching/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/student/exams/(exams)/completed/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/student/exams/(exams)/completed/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/student/exams/(exams)/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/student/exams/(exams)/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/student/exams/(exams)/suggested/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/student/exams/(exams)/suggested/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/teacher/(courses)/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/teacher/(courses)/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/teacher/course/[id]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/teacher/course/[id]/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/teacher/course/create-course/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/teacher/course/create-course/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/teacher/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/teacher/layout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Student/Academe/PastSession/PastSession.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Student/Academe/PastSession/PastSession.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Student/Exams/Exam/CoachingCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Student/Exams/Exam/CoachingCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Student/Vault/DownloadResumeModal/DownloadResumeModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Student/Vault/DownloadResumeModal/DownloadResumeModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Teacher/Courses/CreateCourseForm/CreateCourseForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Teacher/Courses/CreateCourseForm/CreateCourseForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/features/teacher/course/courseApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/features/teacher/course/courseApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Teacher/Courses/EditCourseForm/EditCourseForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Teacher/Courses/EditCourseForm/EditCourseForm.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +30,12 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "mashud-rana"
+  }
+}]]></component>
   <component name="GitLabMergeRequestFiltersHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPENED&quot;,
@@ -83,6 +77,12 @@
       </RecentBranches>
     </option>
   </component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/mashud-rana/quagnite-frontend.git",
+    "accountId": "f04fc2c6-37f8-4b33-a54f-34396f9590ac"
+  }
+}]]></component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -167,6 +167,7 @@
       <workItem from="1760596371494" duration="15440000" />
       <workItem from="1760848329744" duration="22370000" />
       <workItem from="1761027476466" duration="8451000" />
+      <workItem from="1761103884970" duration="11166000" />
     </task>
     <servers />
   </component>

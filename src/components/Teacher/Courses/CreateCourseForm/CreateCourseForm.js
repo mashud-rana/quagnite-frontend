@@ -7,7 +7,7 @@ import styles from "./createform.module.css";
 import { BiChevronDown } from "react-icons/bi";
 import { RiUploadCloud2Line } from "react-icons/ri";
 import Image from "next/image";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useRef} from "react";
 import { Select } from 'antd';
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa6";
@@ -22,6 +22,7 @@ import {
   useCourseTagsQuery,
 } from "@/redux/features/teacher/course/courseApi";
 import {useAnnouncementsQuery} from "@/redux/features/teacher/announcements/announcementsApi";
+import { CloseOutlined } from '@ant-design/icons';
 
 import { FilePond, registerPlugin } from 'react-filepond';
 
@@ -51,8 +52,9 @@ const CreateCourseForm = ({register,
   const [courseDifficulty, setCourseDifficulty] = useState([]);
   const [courseTags, setCourseTags] = useState([]);
   const [files, setFiles] = useState([]);
+  const thumbnailInputRef = useRef(null);
 
-
+  console.log('thumbnailInputRef', thumbnailInputRef)
   // console.log('biggner', biggner)
   // console.log('course and course subcategoyr', courseCategory, courseSubCategory,watch('course_category_id'));
 
@@ -655,68 +657,104 @@ const CreateCourseForm = ({register,
       <div className={styles.section}>
 
         <div className={styles.videoSection}>
+
           <div className={styles.ic_file_input_container}>
+
             <div className={styles.uploadArea}>
               {thumbnailPreview ? (
-                <Image
-                  src={thumbnailPreview}
-                  alt="Thumbnail Preview"
-                  width={400}
-                  height={100}
-                  unoptimized
-                  style={{
-                    objectFit: "cover",
-                    borderRadius: "8px",
-                    height: "100%",
-                    width: "100%",
-                  }}
-                />
+                  <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                    <Image
+                        src={thumbnailPreview}
+                        alt="Thumbnail Preview"
+                        width={400}
+                        height={100}
+                        unoptimized
+                        style={{
+                          objectFit: "cover",
+                          borderRadius: "8px",
+                          height: "100%",
+                          width: "100%",
+                        }}
+                    />
+                    <button
+                        type="button"
+                        onClick={() => {
+                          setThumbnailPreview(null);
+                          // onChange(null);
+                          if (thumbnailInputRef.current) {
+                            thumbnailInputRef.current.value = ""; // 👈 clears the input
+                          }
+                          control._formValues.image = null; // 👈 ensures RHF knows it's cleared
+                        }}
+                        style={{
+                          position: 'absolute',
+                          top: '8px',
+                          right: '8px',
+                          background: 'rgba(0, 0, 0, 0.6)',
+                          border: 'none',
+                          borderRadius: '50%',
+                          width: '32px',
+                          height: '32px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          cursor: 'pointer',
+                          transition: 'background 0.2s',
+                        }}
+                        onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(0, 0, 0, 0.8)'}
+                        onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(0, 0, 0, 0.6)'}
+                    >
+                      <CloseOutlined style={{ color: 'white', fontSize: '16px' }} />
+                    </button>
+                  </div>
               ) : (
-                <>
-                  <Controller
-                      name="image"
-                      control={control}
-                      defaultValue={null}
-                      render={({ field: { onChange } }) => (
-                          <input
-                              type="file"
-                              accept="image/png, image/jpeg, image/jpg"
-                              id="bootcampThumbnail"
-                              className={styles.fileInput}
-                              onChange={(e) => {
-                                const file = e.target.files?.[0] ?? null;
+                  <>
+                    <Controller
+                        name="image"
+                        control={control}
+                        defaultValue={null}
+                        render={({ field: { onChange } }) => (
+                            <input
+                                ref={thumbnailInputRef}
+                                type="file"
+                                accept="image/png, image/jpeg, image/jpg"
+                                id="bootcampThumbnail"
+                                className={styles.fileInput}
+                                onChange={(e) => {
+                                  const file = e.target.files?.[0] ?? null;
 
-                                if (file) {
-                                  const previewUrl = URL.createObjectURL(file);
-                                  setThumbnailPreview(previewUrl);
-                                } else {
-                                  setThumbnailPreview(null);
-                                }
+                                  if (file) {
+                                    const previewUrl = URL.createObjectURL(file);
+                                    setThumbnailPreview(previewUrl);
+                                  } else {
+                                    setThumbnailPreview(null);
+                                  }
 
-                                onChange(file); // store single File object
-                              }}
-                          />
-                      )}
-                  />
+                                  onChange(file); // store single File object
+                                }}
 
-                  <label
-                    htmlFor="bootcampThumbnail"
-                    className={styles.uploadLabel}
-                  >
-                    <RiUploadCloud2Line className={styles.uploadIcon} />
-                    <p className={styles.uploadText}>
-                      Accepted Image format & size: 575px X 450px (2MB)
-                    </p>
-                    <p className={styles.uploadSubtext}>
-                      Accepted Image filetypes: jpg, jpeg, png
-                    </p>
-                  </label>
-                </>
+                            />
+                        )}
+                    />
+
+                    <label
+                        htmlFor="bootcampThumbnail"
+                        className={styles.uploadLabel}
+                    >
+                      <RiUploadCloud2Line className={styles.uploadIcon} />
+                      <p className={styles.uploadText}>
+                        Accepted Image format & size: 575px X 450px (2MB)
+                      </p>
+                      <p className={styles.uploadSubtext}>
+                        Accepted Image filetypes: jpg, jpeg, png
+                      </p>
+                    </label>
+                  </>
               )}
               {errors.image && (
-                <span className={styles.error}>
-                  {errors.image.message}
-                </span>
+                  <span className={styles.error}>
+        {errors.image.message}
+      </span>
               )}
             </div>
           </div>
