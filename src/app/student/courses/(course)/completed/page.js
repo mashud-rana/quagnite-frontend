@@ -10,6 +10,7 @@ import { setFilters, setAllCourses, appendCourses } from "@/redux/features/stude
 import AllEnrolledCourses from "@/components/Student/Courses/Course/AllEnrolledCourses";
 import FullscreenSpinner from "@/components/Spinner/FullscreenSpinner";
 import {setSpinnerVisible} from "@/redux/features/spinner/spinnerSlice";
+import CourseCardListSkeleton from "@/components/Student/Courses/Skeleton/CourseCardListSkeleton";
 
 const CompletedPage = () => {
 
@@ -69,11 +70,12 @@ const CompletedPage = () => {
 
   return (
     <div className="ic_courses_list" id="scrollableDiv">
-      <FullscreenSpinner />
-      <AllEnrolledCourses totalPages={coursesData?.data?.meta?.last_page || 1} />
-      {/* {mockCourses.map((course) => (
-        <CourseCard key={course.id} course={course} />
-      ))} */}
+      {/* <FullscreenSpinner /> */}
+      {/* <AllEnrolledCourses totalPages={coursesData?.data?.meta?.last_page || 1} /> */}
+      {
+        isLoading ? <CourseCardListSkeleton />: <AllEnrolledCourses totalPages={coursesData?.data?.meta?.last_page || 1} />
+      }
+    
     </div>
   );
 };

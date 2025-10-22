@@ -9,6 +9,7 @@ import AllEnrolledCourses from "@/components/Student/Courses/Course/AllEnrolledC
 import FullscreenSpinner from "@/components/Spinner/FullscreenSpinner";
 import {setSpinnerVisible} from "@/redux/features/spinner/spinnerSlice";
 import SectionSpinner from "@/components/Spinner/SectionSpinner";
+import CourseCardListSkeleton from "@/components/Student/Courses/Skeleton/CourseCardListSkeleton";
 
 const DashboardCoursesPage = () => {
    const searchParams = useSearchParams();
@@ -69,11 +70,7 @@ const DashboardCoursesPage = () => {
     <div className="ic_courses_list" id="scrollableDiv">
       {/* <FullscreenSpinner /> */}
       {
-        isLoading || isFetching ? <SectionSpinner message={
-          `Loading ${
-          type === 'all' ? 'enrolled' : type === 'in_progress' ? 'inprogress' : 'completed'
-          } courses...`
-        } /> : <AllEnrolledCourses totalPages={coursesData?.data?.meta?.last_page || 1} />
+        isLoading || isFetching ? <CourseCardListSkeleton />: <AllEnrolledCourses totalPages={coursesData?.data?.meta?.last_page || 1} />
       }
       
       

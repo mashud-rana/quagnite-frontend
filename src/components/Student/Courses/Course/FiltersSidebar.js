@@ -6,6 +6,7 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import {useDispatch, useSelector } from "react-redux";
 import { setPage, setFilters, setFiltersAndResetPage } from "@/redux/features/student/course/courseSlice";
 import {setSpinnerVisible} from "@/redux/features/spinner/spinnerSlice";
+import FilterSidebarSkeleton from "../Skeleton/FilterSidebarSkeleton";
 
 
 const FiltersSidebar = () => {
@@ -111,148 +112,158 @@ const FiltersSidebar = () => {
 
 
   return (
-    <aside className={styles.ic_sidebar}>
-      <div className={styles.ic_filter_section}>
-        <h5 className={styles.ic_filter_title}>Ways to learn</h5>
-        <hr className={styles.ic_hr} />
-        <div className={styles.ic_filter_options}>
-          <label className={styles.ic_checkbox_label}>
-          <input
-            type="checkbox"
-            className={styles.ic_checkbox}
-            checked={
-              filtersData &&
-              filtersData.data.categories.length > 0 &&
-              filters.category_ids.length > 0 &&
-              filters.category_ids.split(",").length === filtersData.data.categories.length
-            }
-            onChange={() => {
-              const allIds = filtersData.data.categories.map((cat) => String(cat.id));
-              updateQuery(
-                "category_ids",
-                filters.category_ids.split(",").length === filtersData.data.categories.length
-                  ? [] // Uncheck all
-                  : allIds // Check all
-              );
-            }}
-          />
-            
-            <span className={styles.ic_checkbox_text}>All</span>
-          </label>
-          {
-            filtersData && filtersData.data.categories.length > 0 && filtersData.data.categories.map((category, index) => (
-              <label key={`${category?.id}-${index}`} className={styles.ic_checkbox_label}>
-                <input
-                  type="checkbox"
-                  className={styles.ic_checkbox}
-                  checked={filters.category_ids.length > 0 && filters.category_ids.split(",").includes(String(category?.id))}
-                  onChange={() =>
-                    updateQuery(
-                      "category_ids",
-                      toggleArray(filters.category_ids, category.id)
-                    )
-                  }
-                />
-                <span className={styles.ic_checkbox_text}>{category?.name || "All"} </span>
-              </label>
-            ))
-          }
-          
-        
-        </div>
-      </div>    
+    <>
+      {
+        filtersIsLoading ? <FilterSidebarSkeleton /> : 
 
-      <div className={styles.ic_filter_section}>
-        <h5 className={styles.ic_filter_title}>Skill level</h5>
-        <hr className={styles.ic_hr} />
-        <div className={styles.ic_filter_options}>
-          <label className={styles.ic_checkbox_label}>
-            <input type="checkbox" className={styles.ic_checkbox} 
-            checked={
-              filtersData &&
-              filtersData.data.difficulties.length > 0 &&
-              filters.difficulty_level_ids.length > 0 &&
-              filters.difficulty_level_ids.split(",").length === filtersData.data.difficulties.length
-            }
-            onChange={() => {
-              const allIds = filtersData.data.difficulties.map((level) => String(level.id));
-              updateQuery(
-                "difficulty_level_ids",
-                filters.difficulty_level_ids.split(",").length === filtersData.data.difficulties.length
-                  ? [] // Uncheck all
-                  : allIds // Check all
-              );
-            }}
-            />
-            <span className={styles.ic_checkbox_text}>All</span>
-          </label>
-          {
-            filtersData && filtersData.data.difficulties.length > 0 && filtersData.data.difficulties.map((level, index) => (
-              <label key={`${level?.id}-${index}`} className={styles.ic_checkbox_label}>
-                <input type="checkbox" className={styles.ic_checkbox}
-                  checked={filters.difficulty_level_ids.length > 0 && filters.difficulty_level_ids.split(",").includes(String(level?.id))}
-                  onChange={() =>
-                    updateQuery(
-                      "difficulty_level_ids",
-                      toggleArray(filters.difficulty_level_ids, level.id)
-                    )
-                  }
-                />
-                <span className={styles.ic_checkbox_text}>{level?.title || ""}  </span>
+        (
+          <aside className={styles.ic_sidebar}>
+    
+          <div className={styles.ic_filter_section}>
+            <h5 className={styles.ic_filter_title}>Ways to learn</h5>
+            <hr className={styles.ic_hr} />
+            <div className={styles.ic_filter_options}>
+              <label className={styles.ic_checkbox_label}>
+              <input
+                type="checkbox"
+                className={styles.ic_checkbox}
+                checked={
+                  filtersData &&
+                  filtersData.data.categories.length > 0 &&
+                  filters.category_ids.length > 0 &&
+                  filters.category_ids.split(",").length === filtersData.data.categories.length
+                }
+                onChange={() => {
+                  const allIds = filtersData.data.categories.map((cat) => String(cat.id));
+                  updateQuery(
+                    "category_ids",
+                    filters.category_ids.split(",").length === filtersData.data.categories.length
+                      ? [] // Uncheck all
+                      : allIds // Check all
+                  );
+                }}
+              />
+                
+                <span className={styles.ic_checkbox_text}>All</span>
               </label>
-            ))
-          }
-        
-        </div>
-      </div>   
-      <div className={styles.ic_filter_section}>
-        <h5 className={styles.ic_filter_title}>Subject</h5>
-        <hr className={styles.ic_hr} />
-        <div className={styles.ic_filter_options}>
-            <label className={styles.ic_checkbox_label}>
-              <input type="checkbox" className={styles.ic_checkbox}
-              checked={
-                filtersData &&
-                filtersData.data.course_subjects_ids.length > 0 &&
-                filters.course_subjects_ids.length > 0 &&
-                filters.course_subjects_ids.split(",").length === filtersData.data.course_subjects_ids.length
+              {
+                filtersData && filtersData.data.categories.length > 0 && filtersData.data.categories.map((category, index) => (
+                  <label key={`${category?.id}-${index}`} className={styles.ic_checkbox_label}>
+                    <input
+                      type="checkbox"
+                      className={styles.ic_checkbox}
+                      checked={filters.category_ids.length > 0 && filters.category_ids.split(",").includes(String(category?.id))}
+                      onChange={() =>
+                        updateQuery(
+                          "category_ids",
+                          toggleArray(filters.category_ids, category.id)
+                        )
+                      }
+                    />
+                    <span className={styles.ic_checkbox_text}>{category?.name || "All"} </span>
+                  </label>
+                ))
               }
-            onChange={() => {
-              const allIds = filtersData.data.course_subjects_ids.map((level) => String(level.id));
-              updateQuery(
-                "course_subjects_ids",
-                filters.course_subjects_ids.split(",").length === filtersData.data.course_subjects_ids.length
-                  ? [] // Uncheck all
-                  : allIds // Check all
-              );
-            }}
-              />
-              <span className={styles.ic_checkbox_text}>All</span>
-            </label>
-          {
-            filtersData && filtersData.data.course_subjects_ids.length > 0 && filtersData.data.course_subjects_ids.map((subject, index)=>(
-              <label key={`${subject?.id}-${index}`} className={styles.ic_checkbox_label}>
-              <input type="checkbox" className={styles.ic_checkbox}
-              checked={filters.course_subjects_ids.length > 0 && filters.course_subjects_ids.split(",").includes(String(subject?.id))}
-                  onChange={() =>
-                    updateQuery(
-                      "course_subjects_ids",
-                      toggleArray(filters.course_subjects_ids, subject.id)
-                    )
+              
+            
+            </div>
+          </div>    
+
+          <div className={styles.ic_filter_section}>
+            <h5 className={styles.ic_filter_title}>Skill level</h5>
+            <hr className={styles.ic_hr} />
+            <div className={styles.ic_filter_options}>
+              <label className={styles.ic_checkbox_label}>
+                <input type="checkbox" className={styles.ic_checkbox} 
+                checked={
+                  filtersData &&
+                  filtersData.data.difficulties.length > 0 &&
+                  filters.difficulty_level_ids.length > 0 &&
+                  filters.difficulty_level_ids.split(",").length === filtersData.data.difficulties.length
+                }
+                onChange={() => {
+                  const allIds = filtersData.data.difficulties.map((level) => String(level.id));
+                  updateQuery(
+                    "difficulty_level_ids",
+                    filters.difficulty_level_ids.split(",").length === filtersData.data.difficulties.length
+                      ? [] // Uncheck all
+                      : allIds // Check all
+                  );
+                }}
+                />
+                <span className={styles.ic_checkbox_text}>All</span>
+              </label>
+              {
+                filtersData && filtersData.data.difficulties.length > 0 && filtersData.data.difficulties.map((level, index) => (
+                  <label key={`${level?.id}-${index}`} className={styles.ic_checkbox_label}>
+                    <input type="checkbox" className={styles.ic_checkbox}
+                      checked={filters.difficulty_level_ids.length > 0 && filters.difficulty_level_ids.split(",").includes(String(level?.id))}
+                      onChange={() =>
+                        updateQuery(
+                          "difficulty_level_ids",
+                          toggleArray(filters.difficulty_level_ids, level.id)
+                        )
+                      }
+                    />
+                    <span className={styles.ic_checkbox_text}>{level?.title || ""}  </span>
+                  </label>
+                ))
+              }
+            
+            </div>
+          </div>   
+          <div className={styles.ic_filter_section}>
+            <h5 className={styles.ic_filter_title}>Subject</h5>
+            <hr className={styles.ic_hr} />
+            <div className={styles.ic_filter_options}>
+                <label className={styles.ic_checkbox_label}>
+                  <input type="checkbox" className={styles.ic_checkbox}
+                  checked={
+                    filtersData &&
+                    filtersData.data.course_subjects_ids.length > 0 &&
+                    filters.course_subjects_ids.length > 0 &&
+                    filters.course_subjects_ids.split(",").length === filtersData.data.course_subjects_ids.length
                   }
-              />
-              <span className={styles.ic_checkbox_text}>
-                  {subject?.course_title?.length > 25
-                ? subject.course_title.slice(0, 25) + "..."
-                : subject.course_title || ""} 
-              </span>
-            </label>
-            ))
-          }
-        
-        </div>
-      </div>   
-    </aside>
+                onChange={() => {
+                  const allIds = filtersData.data.course_subjects_ids.map((level) => String(level.id));
+                  updateQuery(
+                    "course_subjects_ids",
+                    filters.course_subjects_ids.split(",").length === filtersData.data.course_subjects_ids.length
+                      ? [] // Uncheck all
+                      : allIds // Check all
+                  );
+                }}
+                  />
+                  <span className={styles.ic_checkbox_text}>All</span>
+                </label>
+              {
+                filtersData && filtersData.data.course_subjects_ids.length > 0 && filtersData.data.course_subjects_ids.map((subject, index)=>(
+                  <label key={`${subject?.id}-${index}`} className={styles.ic_checkbox_label}>
+                  <input type="checkbox" className={styles.ic_checkbox}
+                  checked={filters.course_subjects_ids.length > 0 && filters.course_subjects_ids.split(",").includes(String(subject?.id))}
+                      onChange={() =>
+                        updateQuery(
+                          "course_subjects_ids",
+                          toggleArray(filters.course_subjects_ids, subject.id)
+                        )
+                      }
+                  />
+                  <span className={styles.ic_checkbox_text}>
+                      {subject?.course_title?.length > 25
+                    ? subject.course_title.slice(0, 25) + "..."
+                    : subject.course_title || ""} 
+                  </span>
+                </label>
+                ))
+              }
+            
+            </div>
+          </div>   
+        </aside>
+        )
+      }
+    </>
+   
     // <aside className={styles.ic_sidebar}>
     //   {sections.map((section) => (
     //     <div key={section.title} className={styles.ic_filter_section}>

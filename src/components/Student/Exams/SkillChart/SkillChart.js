@@ -11,7 +11,7 @@ import ProgressInfo from "./ProgressInfo";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-const SkillChart = () => {
+const SkillChart = ({attempt ,examUuid, enrollUuid}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOk = () => {
@@ -124,7 +124,7 @@ const SkillChart = () => {
             </div>
             <p className={styles.chancesText}>2 of 3 chances remaining</p>
           </div> */}
-          <ProgressInfo />
+          <ProgressInfo attempt={attempt} examUuid={examUuid} enrollUuid={enrollUuid} />
 
           <div className={styles.chartContainer}>
             <Chart
