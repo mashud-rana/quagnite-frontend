@@ -19,12 +19,12 @@ const CoachingCard = ({ exam }) => {
           <h4 className={styles.examTitle}> {exam.title}</h4>
         </div>
 
-        {/* <p>{exam.description}</p> */}
+        {/* <p>{exams.description}</p> */}
 
         {/* <div className={styles.examDetailsRow}>
-          <span className={styles.examDetail}>Exam Id - {exam.examId}</span>
+          <span className={styles.examDetail}>Exam Id - {exams.examId}</span>
           <span className={styles.examDetail}>
-            No of Attempts - {exam.attempts}
+            No of Attempts - {exams.attempts}
           </span>
         </div> */}
 

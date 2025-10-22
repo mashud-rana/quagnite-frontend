@@ -9,10 +9,12 @@ import { useCourseListQuery } from "@/redux/features/teacher/course/courseApi";
 import { useEffect, useState } from "react";
 import { Skeleton, Card } from "antd";
 import CourseSkeleton from '@/components/Teacher/Courses/Skeleton/CourseSkeleton'
+import { useRouter } from "next/navigation";
 
 const TeacherDashboardPage = () => {
   const [courses, setCourses] = useState([]);
   const { data: courseListData, isLoading } = useCourseListQuery();
+  const router = useRouter();
 
 
   useEffect(() => {
@@ -66,7 +68,7 @@ const TeacherDashboardPage = () => {
                     <div className={styles.coachInfo}>
                       <h3 className={styles.coachName}>{course.title}</h3>
                       <div className={styles.ic_icon_container}>
-                        <BiEditAlt className={styles.contactIcon} />
+                        <BiEditAlt onClick={(e) => router.push(`/teacher/course/${course?.uuid}`)} className={styles.contactIcon} />
                         <RiDeleteBin6Line className={styles.contactIcon} />
                       </div>
                     </div>

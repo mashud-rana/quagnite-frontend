@@ -2,7 +2,7 @@
 
 import { useSelector } from "react-redux";
 import {Controller, useForm} from "react-hook-form";
-import styles from "./createform.module.css";
+import styles from "./editform.module.css";
 
 import { BiChevronDown } from "react-icons/bi";
 import { RiUploadCloud2Line } from "react-icons/ri";
@@ -20,6 +20,8 @@ import {
   useCourseLanguagesQuery,
   useCourseDifficultyQuery,
   useCourseTagsQuery,
+  useCourseCreateMutation,
+  useCourseUpdateMutation,
 } from "@/redux/features/teacher/course/courseApi";
 import {useAnnouncementsQuery} from "@/redux/features/teacher/announcements/announcementsApi";
 
@@ -34,12 +36,13 @@ registerPlugin(FilePondPluginImagePreview, FilePondPluginFileValidateType, FileP
 
 
 
-const CreateCourseForm = ({register,
+const EditCourseForm = ({register,
                             control,
                             watch,
                             setValue,
                             getValues,
-                            errors}) => {
+                            errors,
+                          courseData}) => {
   const navigator = useRouter();
   const token = useSelector((state) => state.auth.access_token);
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
@@ -52,6 +55,7 @@ const CreateCourseForm = ({register,
   const [courseTags, setCourseTags] = useState([]);
   const [files, setFiles] = useState([]);
 
+  console.log('courseData', courseData)
 
   // console.log('biggner', biggner)
   // console.log('course and course subcategoyr', courseCategory, courseSubCategory,watch('course_category_id'));
@@ -205,7 +209,7 @@ const CreateCourseForm = ({register,
             <Link href="/teacher" className="ic_back_button" aria-label="Go back">
               <FaArrowLeft />
             </Link>
-            <h1 className="ic_text_36">Create New Course</h1>
+            <h1 className="ic_text_36">Edit Course</h1>
           </div>
         </div>
 
@@ -456,13 +460,14 @@ const CreateCourseForm = ({register,
                     render={({field}) => (
                         <Select
                             {...field}
-                            mode="multiple"
+                            mode={"multiple"}
                             allowClear
                             showSearch
                             style={{width: '100%', height: '40px'}}
                             placeholder="Select Course Benefits"
                             optionFilterProp="label"
                             options={[...courseBenefits]}
+                            defaultValue={[field.value]}
                         />
                     )}
                 />
@@ -483,7 +488,6 @@ const CreateCourseForm = ({register,
                 <input
                     type="number"
                     min={0}
-                    defaultValue={0}
                     {...register("access_period")}
                     className={styles.input}
                     placeholder="Course Access Period"
@@ -642,6 +646,7 @@ const CreateCourseForm = ({register,
                       placeholder="Select Course Tags"
                       optionFilterProp="label"
                       options={[...courseTags]}
+                      defaultValue={[field.value]}
                     />
                   )}
                 />
@@ -856,4 +861,4 @@ const CreateCourseForm = ({register,
   );
 };
 
-export default CreateCourseForm;
+export default EditCourseForm;

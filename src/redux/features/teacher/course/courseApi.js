@@ -67,8 +67,12 @@ export const courseApi = apiSlice.injectEndpoints({
                 method: "GET",
                 }),
         }),
-
-
+        singleCourse:builder.query({
+            query: ({id:uuid}) => ({
+                url: `/teacher/course/${uuid}`,
+                method: "GET",
+            }),
+        }),
     }),
 });
 
@@ -82,4 +86,5 @@ export const {
     useCourseCreateMutation,
     useCourseUpdateMutation,
     useCourseListQuery,
+    useSingleCourseQuery,
 } = courseApi;

@@ -20,7 +20,7 @@
 
 //   const handleStartExam = () => {
 //     onCancel?.();
-//     router.push("/student/exams/start-exam");
+//     router.push("/student/exams/start-exams");
 //   };
 
 //   return (

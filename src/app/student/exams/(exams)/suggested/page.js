@@ -67,7 +67,7 @@ const SuggestedPage = () => {
       time: "10:00 AM EST",
       date: "22 Nov 2024",
       status: "upcoming",
-      image: "/exam-study-image.png",
+      image: "/exams-study-image.png",
     },
     {
       id: "2",
@@ -79,7 +79,7 @@ const SuggestedPage = () => {
       time: "10:00 AM EST",
       date: "22 Nov 2024",
       status: "upcoming",
-      image: "/exam-study-image.png",
+      image: "/exams-study-image.png",
     },
     {
       id: "3",
@@ -91,7 +91,7 @@ const SuggestedPage = () => {
       time: "10:00 AM EST",
       date: "22 Nov 2024",
       status: "upcoming",
-      image: "/exam-study-image.png",
+      image: "/exams-study-image.png",
     },
   ];
 
@@ -170,7 +170,7 @@ const SuggestedPage = () => {
         </div>
       </div>
 
-      {/* next exam  */}
+      {/* next exams  */}
       <div>
         <h6 className={styles.ic_today_title}>Next Exam</h6>
         <div className="examsGrid">

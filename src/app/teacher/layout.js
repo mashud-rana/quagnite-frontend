@@ -46,7 +46,7 @@ const TeacherLayout = ({ children }) => {
     // },
     {
       title: "Exams",
-      url: "/student/exams",
+      url: "/teacher/exams",
       icon: PiCirclesThreeBold,
     },
     {

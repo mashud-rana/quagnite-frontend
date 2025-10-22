@@ -16,7 +16,7 @@ const PastSession = () => {
       time: "10:00 AM EST",
       date: "22 Nov 2024",
       status: "upcoming",
-      image: "/exam-study-image.png",
+      image: "/exams-study-image.png",
     },
     {
       id: "2",
@@ -28,7 +28,7 @@ const PastSession = () => {
       time: "10:00 AM EST",
       date: "22 Nov 2024",
       status: "upcoming",
-      image: "/exam-study-image.png",
+      image: "/exams-study-image.png",
     },
     {
       id: "3",
@@ -40,7 +40,7 @@ const PastSession = () => {
       time: "10:00 AM EST",
       date: "22 Nov 2024",
       status: "upcoming",
-      image: "/exam-study-image.png",
+      image: "/exams-study-image.png",
     },
     {
       id: "4",
@@ -52,7 +52,7 @@ const PastSession = () => {
       time: "2:00 PM EST",
       date: "25 Nov 2024",
       status: "suggested",
-      image: "/exam-study-image.png",
+      image: "/exams-study-image.png",
     },
     {
       id: "5",
@@ -64,7 +64,7 @@ const PastSession = () => {
       time: "11:00 AM EST",
       date: "15 Nov 2024",
       status: "completed",
-      image: "/exam-study-image.png",
+      image: "/exams-study-image.png",
     },
   ];
   return (

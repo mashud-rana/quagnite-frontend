@@ -24,6 +24,7 @@ const schema = yup.object({
     course_category_id: yup.string().required("Course category is required"),
     course_subcategory_id: yup.string().nullable(true),
     course_announcement_id: yup.string().nullable(true),
+    benefits_id: yup.array().nullable(true).of(yup.string()),
     access_period: yup.number().typeError('Access period must be a number').required("Access period is required"),
     course_language_id: yup.string().required("Course language is required"),
     tag_id: yup.array().nullable(true).of(yup.string()),
@@ -95,7 +96,6 @@ const CreateCoursePage = () => {
         reValidateMode: 'onChange'
     });
 
-    console.log('yup wathc', watch('difficulty_level_id'))
 
     // RTK Query Start
     // course create mutation
