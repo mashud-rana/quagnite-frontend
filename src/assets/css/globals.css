@@ -3,6 +3,17 @@
   padding: 0;
   outline: 0;
   box-sizing: border-box;
+
+  /* ...........  */
+  --bg: #f6f7fb;
+  --card: #ffffff;
+  --muted: #9aa3b2;
+  --accent: #4b7cff;
+  --accent-2: #6ea0ff;
+  --light: #f1f4f9;
+  --shadow: 0 6px 18px rgba(19, 25, 33, 0.06);
+  --radius: 12px;
+  --radius-sm: 8px;
 }
 /* variable set up */
 :root {
@@ -1737,13 +1748,10 @@ h6 {
   border: 1px solid white;
 }
 
-.text-danger{
+.text-danger {
   color: red;
 }
 
-
-
-
-.ic_overflow_auto{
+.ic_overflow_auto {
   overflow: auto;
 }
