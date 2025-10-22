@@ -9,6 +9,15 @@ export const examApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    startExam: builder.query({
+      query: ({examUuid, enrollUuid}) => {
+      
+        return {
+          url: `/student/exam/start/${examUuid}/${enrollUuid}`,
+          method: "GET"
+        };
+      },
+    }),
     
     downloadResume: builder.mutation({
       query: (uuid) => ({
@@ -64,6 +73,7 @@ export const examApi = apiSlice.injectEndpoints({
 
 export const {
   useGetMyExamsQuery,
+  useStartExamQuery,
   useDownloadResumeMutation,
   useDeleteResumeMutation,
   useUploadResumeMutation
