@@ -25,21 +25,22 @@ const Overview = () => {
       {/* Header */}
       <div className={styles.header}>
         <h1 className={styles.title}>Dashboard</h1>
-        <div className={styles.actionButtons}>
-          <button className="ic_common_primary_btn">
-            CREATE NEW ASSIGNMENT
-          </button>
-          <button className="ic_common_primary_btn">SEND BULK MESSAGE</button>
-          <button className="ic_common_primary_btn">UPLOAD LECTURE</button>
-          <button className="ic_common_primary_btn">ADD LIVE CLASS</button>
+
+        <div className={styles.ic_btn_container}>
+          <button className={styles.ic_btn}>CREATE NEW ASSIGNMENT</button>
+          <button className={styles.ic_btn}>SEND BULK MESSAGE</button>
+          <button className={styles.ic_btn}>UPLOAD LECTURE</button>
+          <button className={styles.ic_btn}>ADD LIVE CLASS</button>
         </div>
       </div>
 
       <div className={styles.ic_overview_wrapper}>
         <div className={styles.contentGrid}>
           <CardOverview />
-          <TabTable />
-          <UpcomingTask />
+          <div className={styles.ic_wrapper}>
+            <TabTable />
+            <UpcomingTask />
+          </div>
         </div>
 
         {/* Content Grid */}
