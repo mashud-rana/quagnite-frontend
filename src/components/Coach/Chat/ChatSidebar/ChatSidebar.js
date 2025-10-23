@@ -133,20 +133,29 @@
 
 import React from "react";
 import styles from "./chatSidebar.module.css";
+import img from "@/assets/images/all/instractor.png";
+import Image from "next/image";
+import { FiPhone } from "react-icons/fi";
+import { FaAt } from "react-icons/fa";
 
 const ChatSidebar = ({ user }) => {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.avatar}>
-        <div className={styles.avaCircle}>{user.initials}</div>
+        <Image className={styles.avaCircle} src={img} alt="" />
       </div>
       <h3 className={styles.name}>{user.name}</h3>
       <div className={styles.info}>
-        <div>
-          <strong>Phone</strong>
-          <div className={styles.muted}>{user.phone}</div>
+        <div className={styles.ic_flex}>
+          <FiPhone className={styles.ic_icon} />
+          <div>
+            <strong>Phone</strong>
+            <div className={styles.muted}>{user.phone}</div>
+          </div>
         </div>
-        <div style={{ marginTop: 12 }}>
+
+        <div className={styles.ic_flex}>
+          <FaAt className={styles.ic_icon} />
           <strong>Username</strong>
           <div className={styles.muted}>savannah</div>
         </div>
