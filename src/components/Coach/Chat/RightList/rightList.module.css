@@ -1,0 +1,69 @@
+/* components/RightList/RightList.module.css */
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.card {
+  background: var(--card);
+  padding: 12px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.sectionTitle {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 320px;
+  overflow: auto;
+  padding-right: 8px;
+}
+.item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.item:hover {
+  background: var(--light);
+}
+.active {
+  background: linear-gradient(90deg, #eef6ff, #f6f9ff);
+  box-shadow: 0 6px 18px rgba(75, 124, 255, 0.05);
+}
+
+.ava {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+.meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.name {
+  font-weight: 600;
+  font-size: 14px;
+}
+.last {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.time {
+  font-size: 12px;
+  color: var(--muted);
+}

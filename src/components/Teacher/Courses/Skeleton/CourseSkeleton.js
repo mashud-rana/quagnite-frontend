@@ -1,5 +1,5 @@
 "use client";
-import styles from "@/app/teacher/(courses)/courses.module.css";
+import styles from "@/app/teacher/course/(courses)/courses.module.css";
 import {Card, Skeleton} from "antd";
 
 const CourseSkeleton = ({loop}) => {

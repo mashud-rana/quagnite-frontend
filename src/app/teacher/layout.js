@@ -31,7 +31,7 @@ const TeacherLayout = ({ children }) => {
     },
     {
       title: "Courses",
-      url: "/teacher",
+      url: "/teacher/course",
       icon: GiFeather,
     },
     {

@@ -139,7 +139,7 @@ const InvoicesPage = () => {
   // console.log("Table Data:", tableData);
 
   return (
-     <>
+     <div className="ic_overflow_auto">
     <Table
         columns={tableColumns}
         rowKey={(record) => record.id}
@@ -149,7 +149,7 @@ const InvoicesPage = () => {
         onChange={handleTableChange}
       />
    
-    </>
+    </div>
   );
 };
 

@@ -51,6 +51,33 @@ export const confirmDelete = (title="Are you sure?",text="You won't be able to r
     })
 }
 
+
+export const confirmAction = (
+    onConfirm = null,
+    id = null,
+    title = "Are you sure?",
+    text = "This action cannot be undone!",
+    confirmButtonText = "Yes, delete it!",
+) => {
+    Swal.fire({
+        title,
+        text,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText
+    }).then((result) => {
+        if (result.isConfirmed && typeof onConfirm === "function") {
+            if (id !== null) {
+                onConfirm(id);
+            } else {
+                onConfirm();
+            }
+        }
+    });
+};
+
 export const getLastTwoDigits = (num) => {
   // Ensure the number is positive and an integer
   num = Math.abs(parseInt(num, 10));

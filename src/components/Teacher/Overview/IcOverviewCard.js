@@ -7,7 +7,7 @@ const IcOverviewCard = ({ metric }) => {
     <div className={styles.metricCard}>
       <div className={styles.metricHeader}>
         <div className={`${styles.metricIcon} `}>
-          <TbCircleDashed size={20} />
+          <TbCircleDashed size={18} />
         </div>
         <span className={styles.metricLabel}>{metric.label}</span>
       </div>

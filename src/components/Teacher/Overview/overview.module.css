@@ -13,6 +13,7 @@
 
 .header {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 32px;
@@ -23,11 +24,6 @@
   font-weight: 600;
   color: #333;
   margin: 0;
-}
-
-.actionButtons {
-  display: flex;
-  gap: 12px;
 }
 
 .actionButton {
@@ -50,13 +46,12 @@
   font-size: 20px;
   line-height: 1.4;
   font-weight: 600;
-  color: #333;
-  /* margin-bottom: 16px; */
+  /* color: #333; */
 }
 
 .metricCard {
   background: var(--white);
-  padding: 24px;
+  padding: 18px;
   border-radius: 8px;
 }
 
@@ -127,7 +122,8 @@
 .contentGrid {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
+  overflow: auto;
 }
 
 .chatSection {
@@ -199,9 +195,8 @@
   background: #fdfdfd;
   padding: 16px;
   border-radius: 8px;
-  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); */
   border: 1px solid #e5e7eb;
-  overflow: auto;
+  max-width: 100%;
 }
 
 .tableTabs {
@@ -210,7 +205,6 @@
   justify-content: space-between;
   gap: 24px;
   margin-bottom: 20px;
-  gap: 30px;
 }
 
 .tableTab {
@@ -340,7 +334,7 @@
 }
 
 .eventTitle {
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 8px;
 }
 
@@ -421,6 +415,18 @@
   padding: 0;
 }
 
+.ic_btn_container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ic_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 @media (max-width: 1640px) {
   .metricsGridFour {
     gap: 16px;
@@ -469,9 +475,12 @@
   }
 
   .metricsGridFour {
-    /* grid-template-columns: repeat(3, 1fr); */
     gap: 10px;
     margin-bottom: 12px;
+  }
+
+  .metricsGridThree {
+    gap: 10px;
   }
 }
 
@@ -479,6 +488,114 @@
   .ic_overview_wrapper {
     grid-template-columns: repeat(1, 1fr);
   }
+
+  .header {
+    flex-direction: column;
+    align-items: start;
+    margin-bottom: 24px;
+  }
+
+  .chatTabs {
+    margin-bottom: 16px;
+  }
 }
 
-/* all  */
+@media (max-width: 775px) {
+  .metricsGridFour {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ic_btn_container {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .metricsGridThree {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 575px) {
+  .tableTab {
+    padding: 6px 0;
+    font-size: 15px;
+  }
+
+  .tableTabs {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .eventTitle {
+    margin-bottom: 4px;
+  }
+
+  .eventItem {
+    padding: 12px;
+    border-radius: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ic_tabs {
+    gap: 20px;
+  }
+
+  .tableTabs {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 12px;
+  }
+}
+
+/* table ...................  */
+
+/* .tableWrapper {
+  padding: 16px;
+}
+
+.tableContainer {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+  max-width: 100%;
+  padding-bottom: 8px;
+}
+
+
+.ic_action_conatiner {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.actionBtn {
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  color: white;
+}
+
+.editBtn {
+  background-color: #3b82f6;
+}
+
+.viewBtn {
+  background-color: #22c55e;
+}
+
+.actionBtn:hover {
+  opacity: 0.85;
+}
+
+.divider {
+  color: #9ca3af;
+} */

@@ -1,4 +1,4 @@
-.sidebar {
+/* .sidebar {
   background-color: #f9f9f9;
   border-radius: 16px;
   overflow-y: auto;
@@ -118,4 +118,74 @@
   .sidebar {
     display: none;
   }
+} */
+
+/* components/Sidebar/Sidebar.module.css */
+.sidebar {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.avatar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.avaCircle {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+  box-shadow: 0 6px 18px rgba(75, 124, 255, 0.14);
+}
+
+.name {
+  margin: 0;
+  font-size: 16px;
+  text-align: center;
+  width: 100%;
+}
+
+.info {
+  width: 100%;
+  font-size: 13px;
+  color: var(--muted);
+}
+.muted {
+  color: var(--muted);
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+.recentAvatars {
+  width: 100%;
+  margin-top: 8px;
+}
+.smallRow {
+  display: flex;
+  gap: 10px;
+}
+.small {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3a3f47;
+  font-weight: 600;
 }

@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d079e12f-27cf-42d7-900a-11a1310fc74f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/auth/login/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/login/page.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,12 +16,12 @@
     <execution />
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="origin/dev_rafia" />
+    <option name="BRANCH" value="origin/rafia_dev" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="mashud_dev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -98,7 +97,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "nuruzzaman__dev",
+    "git-widget-placeholder": "master",
     "js.debugger.nextJs.config.created.client": "true",
     "js.debugger.nextJs.config.created.server": "true",
     "last_opened_file_path": "D:/React App/quagnite/src/components/Teacher/Courses/EditCourseForm",
@@ -119,6 +118,7 @@
       <recent name="D:\React App\quagnite\src\redux\features\teacher\announcements" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\React App\quagnite\src\app\teacher\course" />
       <recent name="D:\React App\quagnite\src\app\teacher\course-announcements\create" />
     </key>
   </component>
@@ -168,7 +168,9 @@
       <workItem from="1760596371494" duration="15440000" />
       <workItem from="1760848329744" duration="22370000" />
       <workItem from="1761027476466" duration="8451000" />
-      <workItem from="1761103884970" duration="15004000" />
+      <workItem from="1761103884970" duration="24714000" />
+      <workItem from="1761196660779" duration="1695000" />
+      <workItem from="1761203386758" duration="3517000" />
     </task>
     <servers />
   </component>
