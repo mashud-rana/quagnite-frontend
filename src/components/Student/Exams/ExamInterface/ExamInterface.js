@@ -255,8 +255,7 @@ const ExamInterface = () => {
         </div>
         :
         <SkillChart attempt={startExamData?.data?.enrollExam?.attempt}
-        examUuid={startExamData?.data?.exam?.uuid}
-        enrollUuid={startExamData?.data?.enrollExam?.uuid}
+     
         />
       }
     </>
