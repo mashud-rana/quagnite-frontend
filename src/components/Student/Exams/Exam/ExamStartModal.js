@@ -64,6 +64,22 @@ const ExamStartModal = ({ open, onCancel, enrollExam }) => {
   //   if (open) getDevices();
   // }, [open]);
 
+  //initially get devices
+  useEffect(() => {
+    const getDevices = async () => {
+      try {
+        // must request permission once to list devices
+
+        if (devicesByType.video[0]) setSelectedCamera(devicesByType.video[0].deviceId);
+        if (devicesByType.audio[0]) setSelectedMic(devicesByType.audio[0].deviceId);
+      } catch (error) {
+        toastError("Cannot access camera/microphone. Please allow permission.");
+      }
+    };
+
+    if (open) getDevices();
+  }, [open]);
+
   // ✅ Test camera & mic with selected devices
   const checkCameraMic = async () => {
     setTesting(true);
