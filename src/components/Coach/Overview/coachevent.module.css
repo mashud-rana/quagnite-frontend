@@ -32,7 +32,7 @@
   flex-direction: column;
   gap: 16px;
   background-color: #f9f9f9;
-  padding: 16px;
+  padding: 12px;
   border-radius: 8px;
 }
 
@@ -134,7 +134,7 @@
 .calendar {
   background-color: white;
   border-radius: 12px;
-  padding: 24px;
+  padding: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -199,11 +199,10 @@
   color: transparent;
 }
 
-/* Availability Stats */
 .availabilityStats {
   background-color: white;
-  border-radius: 12px;
-  padding: 24px;
+  border-radius: 8px;
+  padding: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -233,22 +232,27 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1650px) {
+  .ic_flex {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 12px;
+  }
+}
+
 @media (max-width: 1399px) {
   .sectionTitle {
     font-size: 18px;
   }
 
-    .ic_btn {
+  .ic_btn {
     font-size: 11px;
     padding: 1px 8px;
   }
 
-    .content {
+  .content {
     grid-template-columns: 1fr;
   }
-
 }
-
 
 @media (max-width: 768px) {
   .container {
@@ -280,11 +284,9 @@
   }
 }
 
-
 @media (max-width: 575px) {
-
-.ic_flex {
-  grid-template-columns: repeat(1, 1fr);
-  gap: 12px;
-}
+  .ic_flex {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 12px;
+  }
 }

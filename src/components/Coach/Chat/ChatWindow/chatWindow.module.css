@@ -132,11 +132,17 @@
 }
 
 .iconBtn {
-  background: var(--light);
+  background: var(--primary-color);
+  color: var(--white);
+  height: 40px;
+  width: 40px;
   border: 0;
-  padding: 8px 10px;
-  border-radius: 10px;
+  /* padding: 8px 10px; */
+  border-radius: 100%;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Messages */

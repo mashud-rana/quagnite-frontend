@@ -3,6 +3,8 @@ import React, { useState, useRef, useEffect } from "react";
 import styles from "./chatWindow.module.css";
 import img from "@/assets/images/all/instractor.png";
 import Image from "next/image";
+import { FaPhoneAlt, FaVideo } from "react-icons/fa";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 const ChatWindow = ({ user, messages = [], onSend }) => {
   const [text, setText] = useState("");
@@ -51,7 +53,9 @@ const ChatWindow = ({ user, messages = [], onSend }) => {
 
       <div className={styles.header}>
         <div className={styles.user}>
-          <div className={styles.avaSmall}>{user.initials}</div>
+          <div>
+            <Image className={styles.avaSmall} src={img} alt="" />
+          </div>
           <div>
             <div className={styles.title}>{user.name}</div>
             <div className={styles.online}>Online</div>
@@ -59,13 +63,13 @@ const ChatWindow = ({ user, messages = [], onSend }) => {
         </div>
         <div className={styles.headerActions}>
           <button className={styles.iconBtn} aria-label="call">
-            📞
+            <FaPhoneAlt />
           </button>
           <button className={styles.iconBtn} aria-label="video">
-            🎥
+            <FaVideo />
           </button>
           <button className={styles.iconBtn} aria-label="more">
-            ⋯
+            <BsThreeDotsVertical />
           </button>
         </div>
       </div>

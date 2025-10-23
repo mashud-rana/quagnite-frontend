@@ -85,8 +85,8 @@ const CoachOverview = () => {
             </div>
           </div>
 
-          {/* <UpcomingTask /> */}
-          <CoachEvent/>
+          <UpcomingTask />
+          <CoachEvent />
         </div>
 
         {/* Content Grid */}

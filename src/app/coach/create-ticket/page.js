@@ -1,6 +1,7 @@
 import TicketForm from "@/components/Share/TicketForm/TicketForm";
+import React from "react";
 
-const CreateTicketPage = () => {
+const CoachCreateTicketPage = () => {
   return (
     <>
       <TicketForm />
@@ -8,4 +9,4 @@ const CreateTicketPage = () => {
   );
 };
 
-export default CreateTicketPage;
+export default CoachCreateTicketPage;
