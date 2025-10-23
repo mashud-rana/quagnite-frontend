@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d079e12f-27cf-42d7-900a-11a1310fc74f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Share/IcModal/Icmodal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Share/IcModal/Icmodal.js" afterDir="false" />
-    </list>
+    <list default="true" id="d079e12f-27cf-42d7-900a-11a1310fc74f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -166,7 +163,7 @@
       <workItem from="1761027476466" duration="8451000" />
       <workItem from="1761103884970" duration="24714000" />
       <workItem from="1761196660779" duration="1695000" />
-      <workItem from="1761203386758" duration="3020000" />
+      <workItem from="1761203386758" duration="3379000" />
     </task>
     <servers />
   </component>
