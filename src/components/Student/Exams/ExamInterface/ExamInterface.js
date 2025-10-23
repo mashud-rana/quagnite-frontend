@@ -122,25 +122,38 @@ const ExamInterface = () => {
   };
 
   //Response examSubmit action
-  useEffect(()=>{
-    if(submitExamIsSuccess){
+  useEffect(() => {
+  const cleanupRecording = async () => {
+    if (submitExamIsSuccess) {
       toastSuccess('Exam submitted successfully');
-     
-      // web camp api hit
-      closeCamera(currentRecording);
-      cancelRecording(currentRecording);
-      clearAllRecordings();
-      setCurrentRecording(null);
-      setTimeout(()=>{
-        router.push(`/student/exams/progress/${examUuid}/${enrollUuid}?camera=${cameraId}&mic=${micId}`);
-      },1000)
-    }
-    if (submitExamIsError) {
-        toastError(
-          submitExamError?.message || "Something is wrong. Please try again."
-        );
+
+      try {
+        // ✅ Stop the webcam properly
+        if (currentRecording) {
+      
+          await cancelRecording(currentRecording); // cleanup internal state
+        }
+
+
+        setCurrentRecording(null);
+
+        // ✅ Redirect after ensuring camera is off
+         router.push(`/student/exams/progress/${examUuid}/${enrollUuid}?camera=${cameraId}&mic=${micId}`);
+
+      } catch (err) {
+        console.error('Failed to close camera:', err);
+        toastError('Failed to close webcam. Please check permissions.');
       }
-  },[submitExamIsSuccess, submitExamIsError, submitExamError])
+    }
+
+    if (submitExamIsError) {
+      toastError(submitExamError?.message || "Something is wrong. Please try again.");
+    }
+  };
+
+  cleanupRecording();
+}, [submitExamIsSuccess, submitExamIsError, submitExamError]);
+
 
   // Step 1: Open camera and start recording
   const startWebCamp = async () => {
