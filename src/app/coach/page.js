@@ -113,5 +113,3 @@ const CoachOverview = () => {
 };
 
 export default CoachOverview;
-
-// ..
