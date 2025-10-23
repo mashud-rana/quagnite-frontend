@@ -40,30 +40,7 @@ const ExamStartModal = ({ open, onCancel, enrollExam }) => {
     };
   }, []);
 
-  // ✅ Get device list (camera + mic)
-  // useEffect(() => {
-  //   const getDevices = async () => {
-  //     try {
-  //       // must request permission once to list devices
-  //       await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
-
-  //       const devices = await navigator.mediaDevices.enumerateDevices();
-  //       const cameras = devices.filter((d) => d.kind === "videoinput");
-  //       const mics = devices.filter((d) => d.kind === "audioinput");
-
-  //       setCameraDevices(cameras);
-  //       setMicDevices(mics);
-
-  //       if (cameras[0]) setSelectedCamera(cameras[0].deviceId);
-  //       if (mics[0]) setSelectedMic(mics[0].deviceId);
-  //     } catch (error) {
-  //       toastError("Cannot access camera/microphone. Please allow permission.");
-  //     }
-  //   };
-
-  //   if (open) getDevices();
-  // }, [open]);
-
+  
   //initially get devices
   useEffect(() => {
     const getDevices = async () => {

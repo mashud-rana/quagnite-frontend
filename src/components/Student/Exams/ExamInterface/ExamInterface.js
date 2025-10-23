@@ -38,6 +38,10 @@ const ExamInterface = () => {
     // Keep the current recording object (or at least its id) in state
   const [currentRecording, setCurrentRecording] = useState(null);
 
+  const [isOnline, setIsOnline] = useState(true);
+  const [pendingSubmission, setPendingSubmission] = useState(null);
+
+
   const {
     activeRecordings,
     openCamera,
@@ -74,6 +78,20 @@ const ExamInterface = () => {
       isError: submitExamIsError,
       error: submitExamError 
     }] = useSubmitExamMutation();
+
+  //online offline check
+   useEffect(() => {
+      const handleOnline = () => setIsOnline(true);
+      const handleOffline = () => setIsOnline(false);
+  
+      window.addEventListener("online", handleOnline);
+      window.addEventListener("offline", handleOffline);
+  
+      return () => {
+        window.removeEventListener("online", handleOnline);
+        window.removeEventListener("offline", handleOffline);
+      };
+    }, []);
   
 
   //ans submit
@@ -102,6 +120,7 @@ const ExamInterface = () => {
   
   const stopRecordingAndSubmit = async () => {
 
+   
     let examId = startExamData?.data?.exam?.id;
 
     const formData = appendInFormData(
@@ -117,9 +136,33 @@ const ExamInterface = () => {
     const recorded = await stopRecording(currentRecording);
     // Upload the blob to a back-end
     formData.append('video', recorded.blob, `exam_${examId}_user.webm`);
+
+    if (!isOnline) {
+      toastError("You're offline. Exam will be auto-submitted when you're back online.");
+      setPendingSubmission(formData); // store the formData for later submission
+      return;
+    }
     await submitExam(formData).unwrap();
     
   };
+
+  //auto submit when back online
+  
+useEffect(() => {
+  const submitPendingExam = async () => {
+    if (isOnline && pendingSubmission) {
+      toastSuccess("You're back online! Submitting your exam...");
+      try {
+        await submitExam(pendingSubmission).unwrap();
+        setPendingSubmission(null);
+      } catch (err) {
+        toastError("Auto-submit failed. Please try manually.");
+      }
+    }
+  };
+  submitPendingExam();
+}, [isOnline]);
+
 
   //Response examSubmit action
   useEffect(() => {
@@ -130,11 +173,8 @@ const ExamInterface = () => {
       try {
         // ✅ Stop the webcam properly
         if (currentRecording) {
-      
           await cancelRecording(currentRecording); // cleanup internal state
         }
-
-
         setCurrentRecording(null);
 
         // ✅ Redirect after ensuring camera is off
@@ -214,6 +254,12 @@ const ExamInterface = () => {
           </div>
           {/* Exam Title and Info */}
           <div className={styles.examHeader}>
+            {!isOnline && (
+              <p style={{ color: 'red', fontSize: 13, marginTop: 5 }}>
+                ⚠️ You are offline. Your progress is saved locally.
+              </p>
+            )}
+
             <h5>{startExamData?.data?.exam?.title || "Untitled Exam"}</h5>
             <div className={styles.examInfo}>
               <span className="fw_500">Question {currentQusIndex + 1}/{qusCount}</span>
@@ -256,7 +302,7 @@ const ExamInterface = () => {
 
             {/* Submit Button */}
             <div className={`${styles.submitContainer} ic_text_end`}>
-              <button
+              {/* <button
                 className="ic_common_primary_btn"
                 disabled={!selectedAnswer || submitExamIsLoading}
                 onClick={submitAnswer}
@@ -265,6 +311,14 @@ const ExamInterface = () => {
                 {
                   submitExamIsLoading && <Spin indicator={antIcon} /> 
                 }
+              </button> */}
+              <button
+                className="ic_common_primary_btn"
+                disabled={!selectedAnswer || submitExamIsLoading || !isOnline}
+                onClick={submitAnswer}
+              >
+                {isOnline ? "SUBMIT ANSWER" : "OFFLINE MODE"}
+                {submitExamIsLoading && <Spin indicator={antIcon} />}
               </button>
             </div>
           </div>
