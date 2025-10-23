@@ -1,6 +1,6 @@
 'use client';
 
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import React,{ useEffect, useRef, useState } from "react";
 import { appendInFormData, toastError, toastSuccess, antIcon } from "@/utils/helper";
 
@@ -16,8 +16,9 @@ import NotDataFound from "@/components/Empty/NotDataFound";
 import { useRecordWebcam } from 'react-record-webcam';
 
 
-const ExamInterface = () => {
 
+const ExamInterface = () => {
+  const router = useRouter();
   const { examUuid, enrollUuid } = useParams()
   const searchParams = useSearchParams();
   const cameraId = searchParams.get("camera");
@@ -32,8 +33,6 @@ const ExamInterface = () => {
   const [score, setScore] = useState(0);
   const [correctAnswer, setCorrectAnswer] = useState(0);
   const [wrongAnswer, setWrongAnswer] = useState(0);
-  const [examStart, setExamStart] = useState(true);
-  const [examEnd, setExamEnd] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState("");
 
     // Keep the current recording object (or at least its id) in state
@@ -46,7 +45,8 @@ const ExamInterface = () => {
     stopRecording,
     createRecording,
     cancelRecording,
-    closeCamera 
+    closeCamera ,
+    clearAllRecordings
   } = useRecordWebcam({
     fileName: "exam_record",
     mimeType: "video/webm",
@@ -57,7 +57,6 @@ const ExamInterface = () => {
   });
 
   
-
   //fetch api
   const { 
     data:startExamData,
@@ -126,12 +125,15 @@ const ExamInterface = () => {
   useEffect(()=>{
     if(submitExamIsSuccess){
       toastSuccess('Exam submitted successfully');
-      setExamStart(false);
-      setExamEnd(true);
+     
       // web camp api hit
       closeCamera(currentRecording);
       cancelRecording(currentRecording);
+      clearAllRecordings();
       setCurrentRecording(null);
+      setTimeout(()=>{
+        router.push(`/student/exams/progress/${examUuid}/${enrollUuid}?camera=${cameraId}&mic=${micId}`);
+      },1000)
     }
     if (submitExamIsError) {
         toastError(
@@ -186,7 +188,7 @@ const ExamInterface = () => {
   return (
     <>
       {
-        examStart ?  
+         
         <div className={styles.examContent}>
           <div style={{ position: 'fixed', bottom: 12, left: 12, width: 220, zIndex: 999 }}>
             {
@@ -254,10 +256,7 @@ const ExamInterface = () => {
             </div>
           </div>
         </div>
-        :
-        <SkillChart attempt={startExamData?.data?.enrollExam?.attempt}
-     
-        />
+       
       }
     </>
    

@@ -7,6 +7,7 @@ import { SlMicrophone } from "react-icons/sl";
 import { useRouter } from "next/navigation";
 import styles from "./examCard.module.css";
 import { toastError, toastSuccess } from "@/utils/helper";
+import { useRecordWebcam } from 'react-record-webcam';
 
 const ExamStartModal = ({ open, onCancel, enrollExam }) => {
   const router = useRouter();
@@ -20,6 +21,10 @@ const ExamStartModal = ({ open, onCancel, enrollExam }) => {
   const [micDevices, setMicDevices] = useState([]);
   const [selectedCamera, setSelectedCamera] = useState("");
   const [selectedMic, setSelectedMic] = useState("");
+
+    const {
+    devicesByType,
+  } = useRecordWebcam();
 
   // ✅ Detect online/offline automatically
   useEffect(() => {
@@ -36,28 +41,28 @@ const ExamStartModal = ({ open, onCancel, enrollExam }) => {
   }, []);
 
   // ✅ Get device list (camera + mic)
-  useEffect(() => {
-    const getDevices = async () => {
-      try {
-        // must request permission once to list devices
-        await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
+  // useEffect(() => {
+  //   const getDevices = async () => {
+  //     try {
+  //       // must request permission once to list devices
+  //       await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
 
-        const devices = await navigator.mediaDevices.enumerateDevices();
-        const cameras = devices.filter((d) => d.kind === "videoinput");
-        const mics = devices.filter((d) => d.kind === "audioinput");
+  //       const devices = await navigator.mediaDevices.enumerateDevices();
+  //       const cameras = devices.filter((d) => d.kind === "videoinput");
+  //       const mics = devices.filter((d) => d.kind === "audioinput");
 
-        setCameraDevices(cameras);
-        setMicDevices(mics);
+  //       setCameraDevices(cameras);
+  //       setMicDevices(mics);
 
-        if (cameras[0]) setSelectedCamera(cameras[0].deviceId);
-        if (mics[0]) setSelectedMic(mics[0].deviceId);
-      } catch (error) {
-        toastError("Cannot access camera/microphone. Please allow permission.");
-      }
-    };
+  //       if (cameras[0]) setSelectedCamera(cameras[0].deviceId);
+  //       if (mics[0]) setSelectedMic(mics[0].deviceId);
+  //     } catch (error) {
+  //       toastError("Cannot access camera/microphone. Please allow permission.");
+  //     }
+  //   };
 
-    if (open) getDevices();
-  }, [open]);
+  //   if (open) getDevices();
+  // }, [open]);
 
   // ✅ Test camera & mic with selected devices
   const checkCameraMic = async () => {
@@ -99,7 +104,7 @@ const ExamStartModal = ({ open, onCancel, enrollExam }) => {
     // router.push("/student/exams/start-exam");
   };
 
-  console.log('device cameraDevices & micDevices',cameraDevices, micDevices)
+  console.log('device cameraDevices & micDevices',devicesByType)
 
   console.log('selected cam, mic', selectedCamera, selectedMic)
   return (
@@ -145,7 +150,7 @@ const ExamStartModal = ({ open, onCancel, enrollExam }) => {
             value={selectedCamera}
             onChange={(e) => setSelectedCamera(e.target.value)}
           >
-            {cameraDevices.map((cam) => (
+            {devicesByType?.video.map((cam) => (
               <option key={cam.deviceId} value={cam.deviceId}>
                 {cam.label || "Unnamed Camera"}
               </option>
@@ -161,7 +166,7 @@ const ExamStartModal = ({ open, onCancel, enrollExam }) => {
             value={selectedMic}
             onChange={(e) => setSelectedMic(e.target.value)}
           >
-            {micDevices.map((mic) => (
+            {devicesByType?.audio.map((mic) => (
               <option key={mic.deviceId} value={mic.deviceId}>
                 {mic.label || "Unnamed Microphone"}
               </option>
@@ -175,7 +180,7 @@ const ExamStartModal = ({ open, onCancel, enrollExam }) => {
           onClick={checkCameraMic}
           disabled={testing}
         >
-          {testing ? <Spin size="small" /> : "Test Camera & Mic"}
+         Test Camera & Mic  {testing ? <Spin size="small" /> : ""}
         </button>
       </div>
 
