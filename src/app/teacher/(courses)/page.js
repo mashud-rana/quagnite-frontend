@@ -26,7 +26,12 @@ const TeacherDashboardPage = () => {
 
 
   // API Call to fetch course list
-  const { data: courseListData, isLoading } = useCourseListQuery({
+  const { data: courseListData,
+    isLoading,
+    isError,
+    error,
+      refetch,
+  } = useCourseListQuery({
     page: page,
     limit: pageSize,
   });
@@ -43,6 +48,13 @@ const TeacherDashboardPage = () => {
   const deleteCourseById = (id) => {
     confirmAction(courseDelete, id);
   }
+
+  useEffect(() => {
+      if(courseDeleteData?.success){
+        setPage(1);
+        refetch();
+      }
+  }, [isDeletingLoading, deleteError, courseDeleteData]);
 
   useEffect(() => {
     if (courseListData?.data?.data?.length > 0) {
