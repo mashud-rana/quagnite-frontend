@@ -60,7 +60,7 @@ const Exam = () => {
     }
   }, [isSuccess, data, params.page]);
 
-  console.log("Exams Data:", models);
+  // console.log("Exams Data:", models);
 
   return (
     <div >
@@ -87,17 +87,24 @@ const Exam = () => {
             }
 
           >
-            <div className="examsGrid">
-              {models.length > 0
-                ? models.map((enrollExam) => {
-                    return (
-                       <ExamCard key={enrollExam.id} enrollExam={enrollExam} />
-                    );
-                  })
-                : !isLoading && (
+            {
+              models.length > 0 ? (
+                 <div className="examsGrid">
+                  {
+                    models.map((enrollExam) => {
+                      return (
+                        <ExamCard key={enrollExam.id} enrollExam={enrollExam} />
+                      );
+                    })
+                  }
+                </div>
+              ) : (
+                !isLoading && (
                     <NotDataFound message="No upcoming exam available at the moment." />
-                  )}
-            </div>
+                )
+              )
+            }
+           
           </InfiniteScroll>
         )}
 

@@ -124,7 +124,7 @@ const SkillChart = ({attempt ,examUuid, enrollUuid}) => {
             </div>
             <p className={styles.chancesText}>2 of 3 chances remaining</p>
           </div> */}
-          <ProgressInfo attempt={attempt} examUuid={examUuid} enrollUuid={enrollUuid} />
+          <ProgressInfo attempt={attempt}  />
 
           <div className={styles.chartContainer}>
             <Chart

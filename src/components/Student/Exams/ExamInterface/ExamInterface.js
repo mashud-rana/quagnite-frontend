@@ -13,24 +13,20 @@ import Timer from "./Timer";
 import ExamQuestionSkeleton from "./Skeleton/ExamQuestionSkeleton";
 import NotDataFound from "@/components/Empty/NotDataFound";
 
+import { useRecordWebcam } from 'react-record-webcam';
+
+
 const ExamInterface = () => {
 
   const { examUuid, enrollUuid } = useParams()
   const searchParams = useSearchParams();
   const cameraId = searchParams.get("camera");
   const micId = searchParams.get("mic");
- 
 
-  const videoRef = useRef(null);
-  const recorderRef = useRef(null);
-  const [chunks, setChunks] = useState([]);
-  const [recording, setRecording] = useState(false);
-  const [loading, setLoading] = useState(true);
   
   const [timer, setTimer] = useState(60 * 30); // 30 minutes for example
   const [questions,setQuestions] = useState([])
   const [currentQusIndex, setCurrentQusIndex] = useState(0);
-  const [index, setIndex] = useState(0);
   const [qusCount, setQusCount] = useState(0);
   const [passMark, setPassMark] = useState(0);
   const [score, setScore] = useState(0);
@@ -39,6 +35,27 @@ const ExamInterface = () => {
   const [examStart, setExamStart] = useState(true);
   const [examEnd, setExamEnd] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState("");
+
+    // Keep the current recording object (or at least its id) in state
+  const [currentRecording, setCurrentRecording] = useState(null);
+
+  const {
+    activeRecordings,
+    openCamera,
+    startRecording,
+    stopRecording,
+    createRecording,
+    cancelRecording,
+    closeCamera 
+  } = useRecordWebcam({
+    fileName: "exam_record",
+    mimeType: "video/webm",
+    options: {
+      video: cameraId ? { deviceId: { exact: cameraId } } : true,
+      audio: micId ? { deviceId: { exact: micId } } : true,
+    },
+  });
+
   
 
   //fetch api
@@ -85,13 +102,9 @@ const ExamInterface = () => {
 
   
   const stopRecordingAndSubmit = async () => {
-    // if (recorderRef.current?.state !== 'inactive') {
-    //   recorderRef.current.stop();
-    // }
 
-    // // create blob
-    // const blob = new Blob(chunks, { type: 'video/webm' });
     let examId = startExamData?.data?.exam?.id;
+
     const formData = appendInFormData(
       {
         exam_id: startExamData?.data?.exam?.id,
@@ -102,24 +115,11 @@ const ExamInterface = () => {
         total_qus:qusCount,
       }
     );
-
-    // formData.append('video', blob, `exam_${examId}_user.webm`);
+    const recorded = await stopRecording(currentRecording);
+    // Upload the blob to a back-end
+    formData.append('video', recorded.blob, `exam_${examId}_user.webm`);
     await submitExam(formData).unwrap();
-    // try {
-    //   message.loading({ content: 'Uploading video...', key: 'upload' });
-    //   await uploadExamVideo(formData).unwrap();
-    //   message.success({ content: 'Video uploaded', key: 'upload', duration: 2 });
-
-    //   // submit answers (example)
-    //   await submitAnswers({ examId, answers }).unwrap();
-    //   message.success('Answers submitted');
-    // } catch (err) {
-    //   console.error(err);
-    //   message.error('Upload failed. Please try again or contact admin.');
-    // } finally {
-    //   // stop media tracks
-    //   mediaStreamRef.current?.getTracks().forEach(t => t.stop());
-    // }
+    
   };
 
   //Response examSubmit action
@@ -128,6 +128,9 @@ const ExamInterface = () => {
       toastSuccess('Exam submitted successfully');
       setExamStart(false);
       setExamEnd(true);
+      closeCamera(currentRecording);
+      cancelRecording(currentRecording);
+      setCurrentRecording(null);
     }
     if (submitExamIsError) {
         toastError(
@@ -135,50 +138,21 @@ const ExamInterface = () => {
         );
       }
   },[submitExamIsSuccess, submitExamIsError, submitExamError])
-  // // // ✅ Start camera and recording when page loads
-  // // useEffect(() => {
-  // // const startRecording = async () => {
-  // //   try {
-  // //     const constraints = {
-  // //       video: cameraId ? { deviceId: { exact: cameraId } } : true,
-  // //       audio: micId ? { deviceId: { exact: micId } } : true,
-  // //     };
 
-  // //     const stream = await navigator.mediaDevices.getUserMedia(constraints);
-  // //     if (videoRef.current) {
-  // //       videoRef.current.srcObject = stream;
-  // //     }
-
-  // //     const recorder = new MediaRecorder(stream, { mimeType: "video/webm" });
-  // //     recorderRef.current = recorder;
-
-  // //     recorder.ondataavailable = (e) => {
-  // //       if (e.data.size > 0) setChunks((prev) => [...prev, e.data]);
-  // //     };
-
-      
-  // //     recorder.start(1000); // collect 1 second chunks
-  // //     // recorder.start();
-  // //     setRecording(true);
-  // //     toastSuccess("Exam recording started.");
-  // //   } catch (error) {
-  // //     toastError("Failed to access selected camera or mic.");
-  // //   } finally {
-  // //     setLoading(false);
-  // //   }
-  // // };
-
-  // // startRecording();
-
-  // // // 🧹 Cleanup on page leave
-  // // return () => {
-  // //   recorderRef.current?.stop();
-  // //   if (videoRef.current?.srcObject) {
-  // //     videoRef.current.srcObject.getTracks().forEach((t) => t.stop());
-  // //   }
-  // // };
-  // // }, [cameraId, micId]);
-
+  // Step 1: Open camera and start recording
+  const startWebCamp = async () => {
+    
+    const recording = await createRecording();
+    if (recording) await openCamera(recording.id);
+    await startRecording(recording.id);
+    setCurrentRecording(recording.id);
+  };
+ 
+   // ✅ Start recording when exam starts
+  useEffect(() => {
+      startWebCamp();
+  }, []);
+  
 
   //score calculate
   useEffect(()=>{
@@ -199,8 +173,7 @@ const ExamInterface = () => {
   const currentQuestion = currentQusIndex + 1;
   const progress = (currentQuestion / totalQuestions) * 100;
 
-  console.log('questions', questions);
-  console.log('selectedAnswer', selectedAnswer);
+ 
   if(isLoading || isFetching){
     return <ExamQuestionSkeleton />
   }
@@ -215,7 +188,13 @@ const ExamInterface = () => {
         examStart ?  
         <div className={styles.examContent}>
           <div style={{ position: 'fixed', bottom: 12, left: 12, width: 220, zIndex: 999 }}>
-            <video ref={videoRef} autoPlay muted playsInline style={{ width: '100%', borderRadius: 6, border: '1px solid #ddd' }} />
+            {
+              activeRecordings.map((recording) => (
+                <video key={recording.id} 
+                ref={recording.webcamRef} loop autoPlay playsInline  style={{ width: '100%', borderRadius: 6, border: '1px solid #ddd' }} />
+              ))
+            }
+            
           </div>
           {/* Exam Title and Info */}
           <div className={styles.examHeader}>
@@ -276,8 +255,7 @@ const ExamInterface = () => {
         </div>
         :
         <SkillChart attempt={startExamData?.data?.enrollExam?.attempt}
-        examUuid={startExamData?.data?.exam?.uuid}
-        enrollUuid={startExamData?.data?.enrollExam?.uuid}
+     
         />
       }
     </>
