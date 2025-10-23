@@ -128,6 +128,7 @@ const ExamInterface = () => {
       toastSuccess('Exam submitted successfully');
       setExamStart(false);
       setExamEnd(true);
+      // web camp api hit
       closeCamera(currentRecording);
       cancelRecording(currentRecording);
       setCurrentRecording(null);

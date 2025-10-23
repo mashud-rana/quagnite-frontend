@@ -89,7 +89,11 @@ const LoginPage = () => {
         router.push('/student');
       }else if(loginData?.user?.user_type === "teacher"){
         router.push('/teacher/overview');
-      }
+
+      }else if(loginData?.user?.user_type === "member")
+        {
+            router.push('/student');
+        }
     }
     if (isError) {
       toastError(error?.message || "Login failed. Please try again.");
