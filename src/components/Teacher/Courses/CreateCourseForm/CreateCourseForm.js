@@ -204,7 +204,7 @@ const CreateCourseForm = ({register,
 
         <div className="mb-24">
           <div className="ic_title_section">
-            <Link href="/teacher" className="ic_back_button" aria-label="Go back">
+            <Link href="/teacher/course" className="ic_back_button" aria-label="Go back">
               <FaArrowLeft />
             </Link>
             <h1 className="ic_text_36">Create New Course</h1>
@@ -883,7 +883,7 @@ const CreateCourseForm = ({register,
 
 
         <div className="ic_flex">
-          <button onClick={(e) => navigator.push('/teacher')} type="button" className="ic_btn">
+          <button onClick={(e) => navigator.push('/teacher/course')} type="button" className="ic_btn">
             BACK
           </button>
           <button type="submit" className="ic_btn">
