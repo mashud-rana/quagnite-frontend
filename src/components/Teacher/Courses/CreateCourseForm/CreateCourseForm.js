@@ -803,72 +803,63 @@ const CreateCourseForm = ({register,
 
 
             {watch('thumb_type') === "upload" && <div className="filepond-wrapper">
-              <FilePond
-                  {...register("video")}
+
+                <FilePond
+                  {...register("file")}
                   files={files}
                   onupdatefiles={setFiles}
                   allowMultiple={false}
-                  acceptedFileTypes={[
-                    'video/*',
-                  ]}
-                  labelFileTypeNotAllowed="Only video files are allowed"
-                  fileValidateTypeLabelExpectedTypes="Expects video files"
-                  name="video"
+                  acceptedFileTypes={['video/*']}
                   labelIdle='Drag & Drop your video or <span class="filepond--label-action">Browse</span>'
 
-                  /** ✅ File size validation */
-                  maxFileSize="5MB"
-                  labelMaxFileSizeExceeded="File is too large"
-                  labelMaxFileSize="Maximum file size is 5MB"
+                    /** ✅ File size validation */
+                    maxFileSize="5MB"
+                    labelMaxFileSizeExceeded="File is too large"
+                    labelMaxFileSize="Maximum file size is 5MB"
 
                   server={{
                     process: {
                       url: `${process.env.NEXT_PUBLIC_API_URL}/teacher/course/chunk-upload`,
                       method: "POST",
-                      headers: (file) => ({
-                        Authorization: `Bearer ${token}`, // ✅ Dynamic header for all chunks
-                        "Upload-Length": file.size.toString(),
-                      }),
-                      withCredentials: false,
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                      },
+                      withCredentials: true,
                       onload: (response) => {
-                        setValue('video', response?.response);
-                        return response?.response; // if your backend returns an ID
+                        // const parsed = JSON.parse(response);
+                        console.log('parsed', response)
+                        setValue("file", response);
+                        return response; // This is uploadId for PATCH chunks
                       },
-                      onerror: (error) => {
-                        console.error("Upload failed:", error);
-                      },
+                      onerror: (error) => console.error("Upload failed:", error),
                     },
                     patch: {
                       url: `${process.env.NEXT_PUBLIC_API_URL}/teacher/course/chunk-upload?patch=`,
                       method: "PATCH",
-                      headers: (file) => ({
+                      headers: {
                         Authorization: `Bearer ${token}`,
-                      }),
-                      withCredentials: false,
+                      },
+                      withCredentials: true,
                     },
-                    // ✅ This handles file removal
                     revert: (uniqueFileId, load, error) => {
-                      // uniqueFileId is returned from process's onload
-                      fetch(`${process.env.NEXT_PUBLIC_API_URL}/teacher/course/chunk-upload`, {
+                      fetch(`${process.env.NEXT_PUBLIC_API_URL}/teacher/course/chunk-upload/${uniqueFileId}`, {
                         method: "DELETE",
-                        headers: {
-                          Authorization: `Bearer ${token}`,
-                        },
+                        headers: { Authorization: `Bearer ${token}` },
                       })
                           .then((res) => {
                             if (!res.ok) throw new Error("Failed to delete file");
-                            load(); // signal FilePond the file is removed
+                            load();
                           })
                           .catch((err) => {
                             console.error(err);
-                            error("Could not delete file"); // signal error to FilePond
+                            error("Could not delete file");
                           });
                     },
                   }}
-                  chunkUploads={true}          // ✅ Enable chunked uploads
-                  chunkSize={process.env.FILE_CHUNK_SIZE}  // ✅ 5MB chunks (you can change this)
-                  chunkForce={true}            // ✅ Always use chunking, even for small files
-              />
+                  chunkUploads={false}
+                  chunkSize={Number(process.env.NEXT_PUBLIC_FILE_PUBLIC_CHUNK_SIZE) || 1000000}
+                  chunkForce={false}
+                />
               {errors.video && (
                   <span className={styles.error}>
                     {errors.video.message}

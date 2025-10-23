@@ -60,7 +60,7 @@ const schema = yup.object({
             return ["image/png", "image/jpeg", "image/jpg"].includes(value.type);
         }),
     thumb_type: yup.string().nullable(true),
-    video: yup.string().when('thumb_type', ([thumb_type]) => {
+    file: yup.string().when('thumb_type', ([thumb_type]) => {
         if (thumb_type === 'video') {
             return yup.string()
                 .required('Course video is required for youtube type');
@@ -119,6 +119,7 @@ const CreateCoursePage = () => {
     console.log('form errors', errors);
 
     const onSubmit = (data) => {
+        console.log("Course Create Form Data:", data);
         let formData = new FormData();
 
         Object.entries(data).forEach(([key, value]) => {
