@@ -169,6 +169,7 @@
 }
 
 .msgText {
+  position: relative;
   background: var(--primary-color);
   color: var(--white);
   padding: 16px;
