@@ -72,7 +72,9 @@ const ExamInterface = () => {
     error, 
     refetch,
     isFetching 
-  } = useStartExamQuery({examUuid, enrollUuid});
+  } = useStartExamQuery({examUuid, enrollUuid},{
+    refetchOnMountOrArgChange: true,
+  });
 
    const [submitExam, { 
       data:submitExamData,
