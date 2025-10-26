@@ -148,7 +148,23 @@ const ExamInterface = () => {
 
   },[])
 
- 
+   //before unload auto submit when page reload or closed
+    useEffect(() => {
+    const handleBeforeUnload = async (event) => {
+      // Show browser's default confirmation popup
+      event.preventDefault();
+      event.returnValue = "Are you sure you want to leave? The Exam will be ended.";
+  
+      // Auto-submit exam before closing
+      await stopRecordingAndSubmit();
+    };
+  
+    window.addEventListener("beforeunload", handleBeforeUnload);
+  
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [currentRecording]);
 
   //online offline check
   useEffect(() => {
@@ -339,8 +355,7 @@ useEffect(() => {
               </button> */}
               <button
                 className="ic_common_primary_btn"
-                disabled={!selectedAnswer || submitExamIsLoading || 
-                  (currentQuestion == totalQuestions)
+                disabled={!selectedAnswer || submitExamIsLoading 
                 }
                 onClick={submitAnswer}
               >

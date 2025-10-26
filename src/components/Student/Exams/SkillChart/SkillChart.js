@@ -11,8 +11,16 @@ import ProgressInfo from "./ProgressInfo";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
+import { useRecordWebcam } from 'react-record-webcam';
+
 const SkillChart = ({attempt ,examUuid, enrollUuid}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const {
+    
+      clearAllRecordings,
+ 
+    } = useRecordWebcam();
 
   const handleOk = () => {
     setIsModalOpen(false);
@@ -26,6 +34,10 @@ const SkillChart = ({attempt ,examUuid, enrollUuid}) => {
 
   useEffect(() => {
     setIsClient(true);
+    //webcam cleanup
+    return () =>{
+      clearAllRecordings();
+    }
   }, []);
 
   const chartOptions = {
