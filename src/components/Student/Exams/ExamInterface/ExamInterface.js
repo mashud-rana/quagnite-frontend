@@ -42,6 +42,7 @@ const ExamInterface = () => {
   const [pendingSubmission, setPendingSubmission] = useState(null);
   //visibility check
   const [isPageVisible, setIsPageVisible] = useState(true);
+  const [validExam, setValidExam] = useState(true);
 
   const {
     activeRecordings,
@@ -85,6 +86,10 @@ const ExamInterface = () => {
 
   //ans submit
   const submitAnswer = () => {
+    if(!validExam){
+      toastError("You are not allowed to take this exam.");
+      return;
+    }
     if(!selectedAnswer){
       //select ans first before submit ans
       toastError('Select option first before submit ansewer')
@@ -108,7 +113,10 @@ const ExamInterface = () => {
 
   
   const stopRecordingAndSubmit = async () => {
-
+    if(!validExam){
+      toastError("You are not allowed to take this exam.");
+      return;
+    }
     let examId = startExamData?.data?.exam?.id;
 
     const formData = appendInFormData(
@@ -137,7 +145,7 @@ const ExamInterface = () => {
     //visibility check
   useEffect(()=>{
     const handleVisibilityChange = () => {
-     
+      if(!validExam) return;
       setIsPageVisible(!document.hidden);
     };
 
@@ -152,6 +160,7 @@ const ExamInterface = () => {
    //before unload auto submit when page reload or closed
     useEffect(() => {
     const handleBeforeUnload = async (event) => {
+      if(!validExam) return;
       // Show browser's default confirmation popup
       event.preventDefault();
       event.returnValue = "Are you sure you want to leave? The Exam will be ended.";
@@ -165,13 +174,14 @@ const ExamInterface = () => {
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, [currentRecording]);
+  }, [currentRecording, validExam]);
 
   //online offline check
   useEffect(() => {
+    if(!validExam) return;
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
-
+    
     window.addEventListener("online", handleOnline);
     window.addEventListener("offline", handleOffline);
 
@@ -179,12 +189,13 @@ const ExamInterface = () => {
       window.removeEventListener("online", handleOnline);
       window.removeEventListener("offline", handleOffline);
     };
-  }, []);
+  }, [validExam]);
 
   
 //when page invisible then auto submit
 useEffect(()=>{
   if(!isPageVisible && currentRecording){
+     if(!validExam) return;
     toastError("Page is not visible. Auto-submitting your exam...");
     stopRecordingAndSubmit();
   }
@@ -192,6 +203,7 @@ useEffect(()=>{
   //auto submit when back online
 useEffect(() => {
   const submitPendingExam = async () => {
+     if(!validExam) return;
     if (isOnline && pendingSubmission) {
       toastSuccess("You're back online! Submitting your exam...");
       try {
@@ -239,7 +251,7 @@ useEffect(() => {
 
   // Step 1: Open camera and start recording
   const startWebCamp = async () => {
-    
+    if(!validExam) return;
     const recording = await createRecording();
     if (recording) await openCamera(recording.id);
     await startRecording(recording.id);
@@ -247,9 +259,9 @@ useEffect(() => {
   };
  
    // ✅ Start recording when exam starts
-  useEffect(() => {
-      startWebCamp();
-  }, []);
+  // useEffect(() => {
+  //     startWebCamp();
+  // }, []);
   
 
   //score calculate
@@ -257,15 +269,23 @@ useEffect(() => {
     setScore((correctAnswer / qusCount) * 100);
   },[correctAnswer, qusCount])
 
-  //set Query Data
+  //set Query Data and camera open when success
   useEffect(()=>{
     if(isSuccess){
+      if(startExamData?.data?.enrollExam?.attempt > 3){
+        setValidExam(false);
+        return;
+      }
       setQuestions(startExamData?.data?.questions || [])
       setTimer(startExamData?.data?.exam?.duration * 60 || 1800)
       setQusCount(startExamData?.data?.questions?.length || 0)
       setPassMark(startExamData?.data?.exam?.pass_mark || 0)
+      startWebCamp();
     }
-  },[isSuccess, startExamData])
+    if(submitExamIsError){
+      toastError(submitExamError?.data?.message || "Something is wrong. Please try again.");
+    }
+  },[isSuccess, startExamData,submitExamIsError, submitExamError])
 
   
 
@@ -278,7 +298,7 @@ useEffect(() => {
     return <ExamQuestionSkeleton />
   }
 
-  if(startExamData?.data?.enrollExam?.attempt >= 3){
+  if(startExamData?.data?.enrollExam?.attempt > 3){
     return <NotDataFound message="You have exceeded the maximum number of attempts." />
   }
   
