@@ -122,10 +122,10 @@
 
 /* components/Sidebar/Sidebar.module.css */
 .sidebar {
-  background: var(--card);
-  border-radius: var(--radius);
-  padding: 20px;
-  box-shadow: var(--shadow);
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 12px;
+  /* border: 1px solid black; */
   min-height: 380px;
   display: flex;
   flex-direction: column;
@@ -153,10 +153,17 @@
 }
 
 .name {
-  margin: 0;
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.4;
   text-align: center;
   width: 100%;
+}
+
+.ic_contact_info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
 .ic_flex {
@@ -170,32 +177,7 @@
 }
 
 .info {
-  width: 100%;
-  font-size: 13px;
-  color: var(--muted);
-}
-.muted {
-  color: var(--muted);
-  margin-top: 6px;
-  font-size: 14px;
-}
-
-.recentAvatars {
-  width: 100%;
-  margin-top: 8px;
-}
-.smallRow {
   display: flex;
-  gap: 10px;
-}
-.small {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  background: var(--light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #3a3f47;
-  font-weight: 600;
+  flex-direction: column;
+  gap: 12px;
 }

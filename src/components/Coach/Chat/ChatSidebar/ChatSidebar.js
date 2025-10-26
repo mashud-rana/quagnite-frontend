@@ -135,8 +135,9 @@ import React from "react";
 import styles from "./chatSidebar.module.css";
 import img from "@/assets/images/all/instractor.png";
 import Image from "next/image";
-import { FiPhone } from "react-icons/fi";
-import { FaAt } from "react-icons/fa";
+import { CiAt } from "react-icons/ci";
+import { IoIosInformationCircleOutline } from "react-icons/io";
+import { BsTelephone } from "react-icons/bs";
 
 const ChatSidebar = ({ user }) => {
   return (
@@ -147,31 +148,26 @@ const ChatSidebar = ({ user }) => {
       <h3 className={styles.name}>{user.name}</h3>
       <div className={styles.info}>
         <div className={styles.ic_flex}>
-          <FiPhone className={styles.ic_icon} />
-          <div>
-            <strong>Phone</strong>
-            <div className={styles.muted}>{user.phone}</div>
+          <BsTelephone className={styles.ic_icon} />
+          <div className={styles.ic_contact_info}>
+            <span>{user.phone}</span>
+            <span>Phone</span>
           </div>
         </div>
 
         <div className={styles.ic_flex}>
-          <FaAt className={styles.ic_icon} />
-          <strong>Username</strong>
-          <div className={styles.muted}>savannah</div>
+          <CiAt className={styles.ic_icon} />
+          <div className={styles.ic_contact_info}>
+            <span>Username</span>
+            <span>savannah</span>
+          </div>
         </div>
-        <div style={{ marginTop: 12 }}>
-          <strong>Status</strong>
-          <div className={styles.muted}>{user.role}</div>
-        </div>
-      </div>
-
-      <div className={styles.recentAvatars}>
-        {/* small row of avatars to match image design */}
-        <div className={styles.smallRow}>
-          <div className={styles.small}>SN</div>
-          <div className={styles.small}>JW</div>
-          <div className={styles.small}>JD</div>
-          <div className={styles.small}>AK</div>
+        <div className={styles.ic_flex}>
+          <IoIosInformationCircleOutline className={styles.ic_icon} />
+          <div className={styles.ic_contact_info}>
+            <span>Status</span>
+            <span>{user.role}</span>
+          </div>
         </div>
       </div>
     </aside>

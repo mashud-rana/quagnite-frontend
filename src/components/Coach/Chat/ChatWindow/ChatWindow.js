@@ -74,6 +74,8 @@ const ChatWindow = ({ user, messages = [], onSend }) => {
         </div>
       </div>
 
+      <hr className={styles.ic_hr} />
+
       <div className={styles.messages} ref={scrollRef}>
         {messages.length === 0 && (
           <div className={styles.empty}>No messages yet</div>
@@ -86,8 +88,30 @@ const ChatWindow = ({ user, messages = [], onSend }) => {
             }`}
           >
             <div className={styles.msgBubble}>
-              <div className={styles.msgText}>{msg.text}</div>
-              <div className={styles.msgDate}>{msg.date}</div>
+              <div className={styles.ic_titme_img_container}>
+                <p className={styles.msgDate}>
+                  Natasha Stark Saturday 10:12 am
+                </p>
+                <Image className={styles.ic_small_img} src={img} alt="" />
+              </div>
+              <div className={styles.msgText}>
+                {msg.text}
+
+                {msg.reactions && msg.reactions.length > 0 && (
+                  <div className={styles.ic_wrapper}>
+                    <div className={styles.reactionsWrap}>
+                      {msg.reactions.map((reaction, i) => (
+                        <span key={i} className={styles.reaction}>
+                          {reaction.emoji}{" "}
+                          <span className={styles.reactionCount}>
+                            {reaction.count}
+                          </span>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         ))}

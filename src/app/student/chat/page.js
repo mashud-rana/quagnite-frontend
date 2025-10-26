@@ -35,6 +35,10 @@ const chats = [
         from: "me",
         text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         date: "2023-09-08",
+        reactions: [
+          { emoji: "❤️", count: 2 },
+          { emoji: "😂", count: 1 },
+        ],
       },
       {
         id: 3,
@@ -47,6 +51,10 @@ const chats = [
         from: "me",
         text: "Sure — I'll check and send update.",
         date: "2023-09-09",
+        reactions: [
+          { emoji: "❤️", count: 2 },
+          { emoji: "😂", count: 1 },
+        ],
       },
     ],
   },
