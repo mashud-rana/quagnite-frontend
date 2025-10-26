@@ -11,7 +11,7 @@ const ProgressInfo = ({attempt, percentile}) => {
   const micId = searchParams.get("mic");
   const { examUuid, enrollUuid } = useParams()
 
-  console.log(attempt, percentile)
+  
 
   return (
     <div className={styles.ic_text_container}>
