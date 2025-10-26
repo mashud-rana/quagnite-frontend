@@ -28,6 +28,15 @@ export const examApi = apiSlice.injectEndpoints({
         };
       },
     }),
+    getExamProgress: builder.query({
+      query: ({enrollUuid}) => {
+      
+        return {
+          url: `/student/exam/progress/${enrollUuid}`,
+          method: "GET"
+        };
+      },
+    }),
     
    
 
@@ -39,5 +48,6 @@ export const {
   useGetMyExamsQuery,
   useStartExamQuery,
   useSubmitExamMutation,
+  useGetExamProgressQuery,
   
 } = examApi;

@@ -201,30 +201,30 @@ const ExamInterface = () => {
   }, [validExam]);
 
   
-//when page invisible then auto submit
-useEffect(()=>{
-  if(!isPageVisible && currentRecording){
-     if(!validExam) return;
-    toastError("Page is not visible. Auto-submitting your exam...");
-    stopRecordingAndSubmit();
-  }
-},[isPageVisible, currentRecording])
-  //auto submit when back online
-useEffect(() => {
-  const submitPendingExam = async () => {
-     if(!validExam) return;
-    if (isOnline && pendingSubmission) {
-      toastSuccess("You're back online! Submitting your exam...");
-      try {
-        await submitExam(pendingSubmission).unwrap();
-        setPendingSubmission(null);
-      } catch (err) {
-        toastError("Auto-submit failed. Please try manually.");
-      }
+  //when page invisible then auto submit
+  useEffect(()=>{
+    if(!isPageVisible && currentRecording){
+      if(!validExam) return;
+      toastError("Page is not visible. Auto-submitting your exam...");
+      stopRecordingAndSubmit();
     }
-  };
-  submitPendingExam();
-}, [isOnline]);
+  },[isPageVisible, currentRecording])
+    //auto submit when back online
+  useEffect(() => {
+    const submitPendingExam = async () => {
+      if(!validExam) return;
+      if (isOnline && pendingSubmission) {
+        toastSuccess("You're back online! Submitting your exam...");
+        try {
+          await submitExam(pendingSubmission).unwrap();
+          setPendingSubmission(null);
+        } catch (err) {
+          toastError("Auto-submit failed. Please try manually.");
+        }
+      }
+    };
+    submitPendingExam();
+  }, [isOnline]);
 
 
   //Response examSubmit action
