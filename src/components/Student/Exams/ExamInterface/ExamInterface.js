@@ -104,14 +104,21 @@ const ExamInterface = () => {
     }else{
       setWrongAnswer(wrongAnswer + 1);
     }
-    if(parseInt(currentQusIndex + 1) == parseInt(qusCount) ){
-      stopRecordingAndSubmit();
-    }else{
+    // if(parseInt(currentQusIndex + 1) == parseInt(qusCount) ){
+    //   stopRecordingAndSubmit();
+    // }else{
 
-      setCurrentQusIndex(currentQusIndex + 1);
-    }
+    //   setCurrentQusIndex(currentQusIndex + 1);
+    // }
+    setCurrentQusIndex(currentQusIndex + 1);
     setSelectedAnswer("");
   }
+  console.log("Current Question Index:", currentQusIndex, " / ", qusCount);
+  useEffect(()=>{
+    if(currentQusIndex  >= (qusCount)){
+      stopRecordingAndSubmit()
+    }
+  },[currentQusIndex])
 
   
   const stopRecordingAndSubmit = async () => {
@@ -328,8 +335,8 @@ useEffect(() => {
 
             <h5>{startExamData?.data?.exam?.title || "Untitled Exam"}</h5>
             <div className={styles.examInfo}>
-              <span className="fw_500">Question {currentQuestion}/{qusCount}</span>
-              {/* <div className={styles.timer}>{Math.floor(timer / 60)} : {timer % 60}</div> */}
+              <span className="fw_500">Question {currentQusIndex  >= (qusCount) ? currentQusIndex : currentQuestion}/{qusCount}</span>
+             
               <Timer duration={timer} onSubmit={stopRecordingAndSubmit} />
             </div>
           </div>
@@ -343,52 +350,51 @@ useEffect(() => {
           </div>
 
           {/* Question Section */}
-          <div>
-            <div className={styles.questionText}>{currentQusIndex + 1}. {questions[currentQusIndex]?.question} </div>
+          {
+            questions[currentQusIndex] ? 
+            (
+               <div>
+                  <div className={styles.questionText}>{currentQuestion}. {questions[currentQusIndex]?.question} </div>
 
-            {/* Answer Options */}
-            <div className={`${styles.optionsContainer} mb-24`}>
-              {questions[currentQusIndex]?.answers && Object.entries(questions[currentQusIndex]?.answers).map(([key, value]) => (
-                <div key={key} className={styles.optionItem}>
-                  <label className={styles.optionLabel}>
-                        <input
-                          type="radio"
-                          name="answer"
-                          className={styles.optionInput}
-                          value={key}
-                          checked={String(selectedAnswer) === String(key)}
-                          onChange={(e) => setSelectedAnswer(e.target.value)}
-                        />
-                    <span className={styles.customCheckbox}></span>
-                    <span className={styles.optionText}>{key.toUpperCase()}. {value}</span>
-                  </label>
+                  {/* Answer Options */}
+                  <div className={`${styles.optionsContainer} mb-24`}>
+                    {questions[currentQusIndex]?.answers && Object.entries(questions[currentQusIndex]?.answers).map(([key, value]) => (
+                      <div key={key} className={styles.optionItem}>
+                        <label className={styles.optionLabel}>
+                              <input
+                                type="radio"
+                                name="answer"
+                                className={styles.optionInput}
+                                value={key}
+                                checked={String(selectedAnswer) === String(key)}
+                                onChange={(e) => setSelectedAnswer(e.target.value)}
+                              />
+                          <span className={styles.customCheckbox}></span>
+                          <span className={styles.optionText}>{key.toUpperCase()}. {value}</span>
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Submit Button */}
+                  <div className={`${styles.submitContainer} ic_text_end`}>
+                    
+                    <button
+                      className="ic_common_primary_btn"
+                      disabled={!selectedAnswer || submitExamIsLoading 
+                      }
+                      onClick={submitAnswer}
+                    >
+                      {isOnline ? "SUBMIT ANSWER" : "OFFLINE MODE"}
+                      {submitExamIsLoading && <Spin indicator={antIcon} />}
+                    </button>
+                  </div>
                 </div>
-              ))}
-            </div>
-
-            {/* Submit Button */}
-            <div className={`${styles.submitContainer} ic_text_end`}>
-              {/* <button
-                className="ic_common_primary_btn"
-                disabled={!selectedAnswer || submitExamIsLoading}
-                onClick={submitAnswer}
-              >
-                SUBMIT ANSWER 
-                {
-                  submitExamIsLoading && <Spin indicator={antIcon} /> 
-                }
-              </button> */}
-              <button
-                className="ic_common_primary_btn"
-                disabled={!selectedAnswer || submitExamIsLoading 
-                }
-                onClick={submitAnswer}
-              >
-                {isOnline ? "SUBMIT ANSWER" : "OFFLINE MODE"}
-                {submitExamIsLoading && <Spin indicator={antIcon} />}
-              </button>
-            </div>
-          </div>
+            )
+            :
+            (<NotDataFound message=" Submit your answers. Please wait until the exam is submitted!!" />)
+          }
+         
         </div>
        
       }
