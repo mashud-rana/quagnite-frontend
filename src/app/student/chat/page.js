@@ -69,6 +69,8 @@ const chats = [
 const StudentChatPage = () => {
   const [activeUserId, setActiveUserId] = useState(2);
   const [allChats, setAllChats] = useState(chats);
+  const [showSidebar, setShowSidebar] = useState(false);
+  const [showRightList, setShowRightList] = useState(false);
 
   const activeUser = users.find((u) => u.id === activeUserId) || users[0];
 
@@ -92,10 +94,48 @@ const StudentChatPage = () => {
     });
   };
 
+  const handleCloseSidebars = () => {
+    setShowSidebar(false);
+    setShowRightList(false);
+  };
+
+  const handleShowSidebar = () => {
+    console.log("Opening sidebar", showSidebar);
+    setShowSidebar(true);
+  };
+
+  const handleShowRightList = () => {
+    console.log("Opening right list", showRightList);
+    setShowRightList(true);
+  };
+
   return (
     <div className={styles.pageWrap}>
+      {/* Mobile Navigation */}
+      <div className={styles.mobileNav}>
+        <button className={styles.navBtn} onClick={handleShowSidebar}>
+          ☰
+        </button>
+        <div className={styles.brand}>Chat</div>
+        <button className={styles.navBtn} onClick={handleShowRightList}>
+          👥
+        </button>
+      </div>
+
+      {/* Overlay */}
+      {(showSidebar || showRightList) && (
+        <div className={styles.overlay} onClick={handleCloseSidebars} />
+      )}
+
       <div className={styles.container}>
-        <ChatSidebar user={users[0]} />
+        <div
+          className={`${styles.sidebarWrap} ${
+            showSidebar ? styles.showSidebar : ""
+          }`}
+        >
+          <ChatSidebar user={users[0]} />
+        </div>
+
         <ChatWindow
           user={activeUser}
           messages={
@@ -104,11 +144,18 @@ const StudentChatPage = () => {
           }
           onSend={handleSend}
         />
-        <RightList
-          users={users}
-          activeUserId={activeUserId}
-          setActiveUserId={setActiveUserId}
-        />
+
+        <div
+          className={`${styles.rightListWrap} ${
+            showRightList ? styles.showRightList : ""
+          }`}
+        >
+          <RightList
+            users={users}
+            activeUserId={activeUserId}
+            setActiveUserId={setActiveUserId}
+          />
+        </div>
       </div>
     </div>
   );
