@@ -79,7 +79,7 @@ const Exam = () => {
             dataLength={models.length}
             next={fetchMoreData}
             hasMore={params.page < totalPages}
-            loader={<p className="text-center">Loading more...</p>}
+            loader={<ExamCardGridSkeleton />}
             endMessage={
               <p style={{ textAlign: "center", marginTop: "10px" }}>
                 {models.length > 0 && <b>No more upcoming exams available</b>}

@@ -91,8 +91,9 @@ const LoginPage = () => {
         router.push('/teacher/overview');
       }
     }
+   
     if (isError) {
-      toastError(error?.message || "Login failed. Please try again.");
+      toastError(error?.data?.message || "Login failed. Please try again.");
     }
   }, [isSuccess, isError, error, loginData]);
 
@@ -110,8 +111,8 @@ const LoginPage = () => {
         router.push('/student');
       }
     }
-    if (isError) {
-      toastError(error?.message || "Login failed. Please try again.");
+    if (socialIsError) {
+      toastError(socialError?.data?.message || "Login failed. Please try again.");
     }
   }, [socialIsSuccess, socialIsError, socialError, socialLoginData]);
 

@@ -6,7 +6,7 @@ import { HiOutlineVideoCamera } from "react-icons/hi2";
 import { SlMicrophone } from "react-icons/sl";
 import { useRouter } from "next/navigation";
 import styles from "./examCard.module.css";
-import { toastError, toastSuccess } from "@/utils/helper";
+import { antIcon, toastError, toastSuccess } from "@/utils/helper";
 import { useRecordWebcam } from 'react-record-webcam';
 
 const ExamStartModal = ({ open, onCancel, enrollExam }) => {
@@ -17,8 +17,6 @@ const ExamStartModal = ({ open, onCancel, enrollExam }) => {
   const [testing, setTesting] = useState(false);
   const [networkOk, setNetworkOk] = useState(true);
 
-  const [cameraDevices, setCameraDevices] = useState([]);
-  const [micDevices, setMicDevices] = useState([]);
   const [selectedCamera, setSelectedCamera] = useState("");
   const [selectedMic, setSelectedMic] = useState("");
 
@@ -60,6 +58,15 @@ const ExamStartModal = ({ open, onCancel, enrollExam }) => {
   // ✅ Test camera & mic with selected devices
   const checkCameraMic = async () => {
     setTesting(true);
+    if(!selectedCamera && !selectedMic){
+        if (devicesByType.video[0]) setSelectedCamera(devicesByType.video[0].deviceId);
+        if (devicesByType.audio[0]) setSelectedMic(devicesByType.audio[0].deviceId);
+    }
+    if(devicesByType.video.length ===0 && devicesByType.audio.length===0){
+      toastError("No camera or microphone devices found. Please connect and try again.");
+      setTesting(false);
+      return;
+    }
     try {
       const constraints = {
         video: selectedCamera ? { deviceId: { exact: selectedCamera } } : true,
@@ -173,7 +180,7 @@ const ExamStartModal = ({ open, onCancel, enrollExam }) => {
           onClick={checkCameraMic}
           disabled={testing}
         >
-         Test Camera & Mic  {testing ? <Spin size="small" /> : ""}
+         Test Camera & Mic  {testing ? <Spin indicator={antIcon} /> : ""}
         </button>
       </div>
 

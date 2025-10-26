@@ -40,7 +40,8 @@ const ExamInterface = () => {
 
   const [isOnline, setIsOnline] = useState(true);
   const [pendingSubmission, setPendingSubmission] = useState(null);
-
+  //visibility check
+  const [isPageVisible, setIsPageVisible] = useState(true);
 
   const {
     activeRecordings,
@@ -79,20 +80,7 @@ const ExamInterface = () => {
       error: submitExamError 
     }] = useSubmitExamMutation();
 
-  //online offline check
-   useEffect(() => {
-      const handleOnline = () => setIsOnline(true);
-      const handleOffline = () => setIsOnline(false);
-  
-      window.addEventListener("online", handleOnline);
-      window.addEventListener("offline", handleOffline);
-  
-      return () => {
-        window.removeEventListener("online", handleOnline);
-        window.removeEventListener("offline", handleOffline);
-      };
-    }, []);
-  
+
 
   //ans submit
   const submitAnswer = () => {
@@ -120,7 +108,6 @@ const ExamInterface = () => {
   
   const stopRecordingAndSubmit = async () => {
 
-   
     let examId = startExamData?.data?.exam?.id;
 
     const formData = appendInFormData(
@@ -136,7 +123,7 @@ const ExamInterface = () => {
     const recorded = await stopRecording(currentRecording);
     // Upload the blob to a back-end
     formData.append('video', recorded.blob, `exam_${examId}_user.webm`);
-
+    console.log("Submitting exam with data:", formData);
     if (!isOnline) {
       toastError("You're offline. Exam will be auto-submitted when you're back online.");
       setPendingSubmission(formData); // store the formData for later submission
@@ -146,8 +133,46 @@ const ExamInterface = () => {
     
   };
 
-  //auto submit when back online
+    //visibility check
+  useEffect(()=>{
+    const handleVisibilityChange = () => {
+     
+      setIsPageVisible(!document.hidden);
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () =>{
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    }
+
+  },[])
+
+ 
+
+  //online offline check
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+    };
+  }, []);
+
   
+//when page invisible then auto submit
+useEffect(()=>{
+  if(!isPageVisible && currentRecording){
+    toastError("Page is not visible. Auto-submitting your exam...");
+    stopRecordingAndSubmit();
+  }
+},[isPageVisible, currentRecording])
+  //auto submit when back online
 useEffect(() => {
   const submitPendingExam = async () => {
     if (isOnline && pendingSubmission) {
@@ -262,7 +287,7 @@ useEffect(() => {
 
             <h5>{startExamData?.data?.exam?.title || "Untitled Exam"}</h5>
             <div className={styles.examInfo}>
-              <span className="fw_500">Question {currentQusIndex + 1}/{qusCount}</span>
+              <span className="fw_500">Question {currentQuestion}/{qusCount}</span>
               {/* <div className={styles.timer}>{Math.floor(timer / 60)} : {timer % 60}</div> */}
               <Timer duration={timer} onSubmit={stopRecordingAndSubmit} />
             </div>
@@ -314,7 +339,9 @@ useEffect(() => {
               </button> */}
               <button
                 className="ic_common_primary_btn"
-                disabled={!selectedAnswer || submitExamIsLoading || !isOnline}
+                disabled={!selectedAnswer || submitExamIsLoading || 
+                  (currentQuestion == totalQuestions)
+                }
                 onClick={submitAnswer}
               >
                 {isOnline ? "SUBMIT ANSWER" : "OFFLINE MODE"}
