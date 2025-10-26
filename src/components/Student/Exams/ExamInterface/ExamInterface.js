@@ -51,7 +51,8 @@ const ExamInterface = () => {
     createRecording,
     cancelRecording,
     closeCamera ,
-    clearAllRecordings
+    clearAllRecordings,
+    devicesByType
   } = useRecordWebcam({
     fileName: "exam_record",
     mimeType: "video/webm",
@@ -265,6 +266,8 @@ useEffect(() => {
       setPassMark(startExamData?.data?.exam?.pass_mark || 0)
     }
   },[isSuccess, startExamData])
+
+  
 
   const totalQuestions = qusCount;
   const currentQuestion = currentQusIndex + 1;

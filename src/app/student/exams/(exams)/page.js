@@ -6,8 +6,13 @@ import { useGetMyExamsQuery } from "@/redux/features/student/exam/examApi";
 import ExamCardGridSkeleton from "@/components/Student/Exams/Exam/Skeleton/ExamCardGridSkeleton";
 import NotDataFound from "@/components/Empty/NotDataFound";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useRecordWebcam } from 'react-record-webcam';
 
 const Exam = () => {
+   const {
+      clearAllRecordings,
+    } = useRecordWebcam();
+
   const [params, setParams] = useState({
     page: Number(process.env.NEXT_PUBLIC_CURRENT_PAGE) || 1,
     per_page: 9,
@@ -59,6 +64,14 @@ const Exam = () => {
       setTotalPages(data?.data?.meta?.last_page || 1);
     }
   }, [isSuccess, data, params.page]);
+
+   useEffect(() => {
+  
+    const clearRecordings = async () => {
+      await clearAllRecordings()
+    }
+    clearRecordings();
+  }, []);
 
   // console.log("Exams Data:", models);
 

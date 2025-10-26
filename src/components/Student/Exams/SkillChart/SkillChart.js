@@ -17,9 +17,7 @@ const SkillChart = ({attempt ,examUuid, enrollUuid}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
     const {
-    
       clearAllRecordings,
- 
     } = useRecordWebcam();
 
   const handleOk = () => {
