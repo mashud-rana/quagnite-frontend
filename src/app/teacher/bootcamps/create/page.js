@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useMemo, useRef, useState } from "react";
+import {useEffect, useMemo, useRef, useState} from "react";
 import styles from "./create.module.css";
 // import JoditEditor from "jodit-react";
 import { BiChevronDown, BiChevronDownCircle, BiUpload } from "react-icons/bi";
@@ -15,6 +15,8 @@ import dynamic from "next/dynamic";
 import { RiUploadCloud2Line } from "react-icons/ri";
 import ProgressStepper from "@/components/Teacher/Courses/ProgressStepper/ProgressStepper";
 import Link from "next/link";
+import { useBootcampCategoriesQuery }  from "@/redux/features/teacher/bootcamp/bootcampApi";
+import {useCourseTagsQuery} from "@/redux/features/teacher/course/courseApi";
 
 const schema = yup.object({
   bootcampTitle: yup.string().required("Bootcamp title is required"),
@@ -49,7 +51,12 @@ const schema = yup.object({
 
 const CreateBootcampPage = () => {
   const editor = useRef(null);
+  const [bootcampCategory, setBootcampCategory] = useState([]);
+  const [bootcampTags, setBootcampTags] = useState([]);
   const [replyContent, setReplyContent] = useState("");
+
+
+  console.log('bootcampTags', bootcampTags)
 
   const {
     register,
@@ -66,6 +73,48 @@ const CreateBootcampPage = () => {
       whoShouldAttend: [],
     },
   });
+
+  // API Call
+  const { data: bootcampCategoriesData,
+          isLoading: bootcampCategoriesLoading,
+          isError: bootcampCategoriesError
+      } = useBootcampCategoriesQuery();
+
+  const {
+    data: bootcampTagsData,
+    isLoading: bootcampTagsIsLoading,
+    isError: bootcampTagsIsError
+  }= useCourseTagsQuery();
+
+
+  //  API Call end
+
+  // bootcamp Category
+  useEffect(() => {
+      setBootcampCategory([]);
+
+      if(bootcampCategoriesData)
+      {
+        bootcampCategoriesData?.data.map((item) => {
+          setBootcampCategory((prev) => [...prev, {label: item?.name, value: item?.id}])
+        })
+      }
+  },[bootcampCategoriesData, bootcampCategoriesLoading , bootcampCategoriesError]);
+
+  // Tags
+  useEffect(() => {
+    setBootcampTags([]);
+    if(bootcampTagsData?.data?.data)
+    {
+      bootcampTagsData?.data?.data.map((item) => {
+        setBootcampTags((prev) => [...prev, {label: item?.name, value: item?.id}])
+      })
+    }
+  },[bootcampTagsData,bootcampTagsIsLoading,bootcampTagsIsError])
+
+
+
+
 
   const editorConfig = useMemo(
     () => ({
@@ -119,28 +168,45 @@ const CreateBootcampPage = () => {
         <div className={styles.section}>
           <div className={styles.ic_details_wrapper}>
             <div className={styles.formRow}>
-              <label className={styles.label}>Bootcamp Title</label>
+              <label className={styles.label}>Bootcamp Title *</label>
               <div className={styles.inputContainer}>
                 <input
-                  {...register("bootcampTitle")}
+                  {...register("title")}
                   className={styles.input}
                   placeholder="Enter bootcamp title"
                 />
-                {errors.bootcampTitle && (
+                {errors.title && (
                   <span className={styles.error}>
-                    {errors.bootcampTitle.message}
+                    {errors.title.message}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <div className={styles.formRow}>
+              <label className={styles.label}>Bootcamp Subtitle *</label>
+              <div className={styles.inputContainer}>
+                <input
+                    {...register("subtitle")}
+                    className={styles.input}
+                    placeholder="Enter bootcamp subtitle"
+                />
+                {errors.subtitle && (
+                    <span className={styles.error}>
+                    {errors.subtitle.message}
                   </span>
                 )}
               </div>
             </div>
 
             <div className={styles.ic_grid}>
+
               <div className={styles.formRow}>
                 <label className={styles.label}>Bootcamp Category</label>
                 <div className={styles.inputContainer}>
                   <div className={styles.selectWrapper}>
                     <select
-                      {...register("bootcampCategory")}
+                      {...register("bootcamp_category_id")}
                       className={styles.select}
                     >
                       <option value="">Select category</option>
@@ -150,16 +216,16 @@ const CreateBootcampPage = () => {
                     </select>
                     <BiChevronDown className={styles.selectIcon} />
                   </div>
-                  {errors.bootcampCategory && (
+                  {errors.bootcamp_category_id && (
                     <span className={styles.error}>
-                      {errors.bootcampCategory.message}
+                      {errors.bootcamp_category_id.message}
                     </span>
                   )}
                 </div>
               </div>
 
               <div className={styles.formRow}>
-                <label className={styles.label}>Bootcamp Sub Category</label>
+                <label className={styles.label}>Bootcamp Subcategory</label>
                 <div className={styles.inputContainer}>
                   <div className={styles.selectWrapper}>
                     <select
@@ -182,6 +248,7 @@ const CreateBootcampPage = () => {
                   )}
                 </div>
               </div>
+
             </div>
 
             <div className={styles.ic_grid}>
@@ -221,38 +288,62 @@ const CreateBootcampPage = () => {
             </div>
 
             <div className={styles.ic_grid}>
+
               <div className={styles.formRow}>
-                <label className={styles.label}>Boot Camp Tags</label>
+                <label className={styles.label}>Bootcamp Tags</label>
                 <div className={styles.inputContainer}>
                   <input
-                    {...register("bootCampTags")}
+                    {...register("tag_id")}
                     className={styles.input}
-                    placeholder="Enter tags separated by commas"
+                    placeholder="Enter tags"
                   />
-                  {errors.bootCampTags && (
+                  {errors.tag_id && (
                     <span className={styles.error}>
-                      {errors.bootCampTags.message}
+                      {errors.tag_id.message}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+
+
+            <div className={styles.ic_grid}>
+
+              <div className={styles.formRow}>
+                <label className={styles.label}>Start date</label>
+                <div className={styles.inputContainer}>
+                  <input
+                    {...register("start_date")}
+                    type="date"
+                    className={styles.input}
+                    placeholder="Enter price"
+                  />
+                  {errors.start_date && (
+                    <span className={styles.error}>
+                      {errors.start_date.message}
                     </span>
                   )}
                 </div>
               </div>
 
+
               <div className={styles.formRow}>
-                <label className={styles.label}>Boot Camp Price</label>
+                <label className={styles.label}>End Date</label>
                 <div className={styles.inputContainer}>
                   <input
-                    {...register("bootCampPrice")}
-                    type="number"
-                    className={styles.input}
-                    placeholder="Enter price"
+                      {...register("end_date")}
+                      type="date"
+                      className={styles.input}
+                      placeholder="Enter price"
                   />
-                  {errors.bootCampPrice && (
-                    <span className={styles.error}>
-                      {errors.bootCampPrice.message}
+                  {errors.end_date && (
+                      <span className={styles.error}>
+                      {errors.end_date.message}
                     </span>
                   )}
                 </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -260,6 +351,7 @@ const CreateBootcampPage = () => {
         <div className={styles.section}>
           <h5 className={styles.sectionTitle}>Bootcamp Overview</h5>
           <JoditEditor
+              {...register("description")}
             ref={editor}
             value={replyContent}
             config={editorConfig}
@@ -267,11 +359,11 @@ const CreateBootcampPage = () => {
             onChange={(newContent) => setReplyContent(newContent)}
           />
 
-          {/* {errors.bootcampOverview && (
-            <span className={styles.error}>
-              {errors.bootcampOverview.message}
-            </span>
-          )} */}
+           {errors.description && (
+              <span className={styles.error}>
+                {errors.description.message}
+              </span>
+            )}
         </div>
 
         <div className={styles.section}>
