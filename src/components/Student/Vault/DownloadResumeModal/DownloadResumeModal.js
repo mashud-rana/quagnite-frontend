@@ -17,7 +17,16 @@ import Link from "next/link";
 import { antIcon, toastError, toastSuccess } from "@/utils/helper";
 import { Spin } from "antd";
 
-const DownloadResumeModal = ({ open, onCancel, fileUrl, isError, certificateNumber, onDownload, downloadIsLoading }) => {
+const DownloadResumeModal = ({ open, onCancel, fileUrl, isError, certificateNumber, onDownload, downloadIsLoading, certificateUuid }) => {
+
+  const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/certificate/${certificateUuid}`;
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(shareUrl);
+    toastSuccess("Link copied to clipboard!");
+ 
+  };
+
   if (open && (isError || !fileUrl)) return <p>Failed to load certificate.</p>;
   return (
     <Modal
@@ -90,9 +99,12 @@ const DownloadResumeModal = ({ open, onCancel, fileUrl, isError, certificateNumb
 
       <div className={styles.ic_copy_container}>
         <p className={styles.ic_copy_link}>
-          https://loremipsumdolorsitametconsecteturadipiscingelit
+          {/* https://loremipsumdolorsitametconsecteturadipiscingelit */}
+          {
+            shareUrl
+          }
         </p>
-        <button className="ic_common_primary_btn">copy link</button>
+        <button className="ic_common_primary_btn" onClick={handleCopy}>copy link</button>
       </div>
 
       {/* Custom footer with Close button */}

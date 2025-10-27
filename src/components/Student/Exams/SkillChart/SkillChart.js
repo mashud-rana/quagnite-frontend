@@ -10,6 +10,9 @@ import DownloadResumeModal from "../../Vault/DownloadResumeModal/DownloadResumeM
 import ProgressInfo from "./ProgressInfo";
 import {useGetExamProgressQuery} from "@/redux/features/student/exam/examApi";
 import ProgressTrackingSkeleton from "./Skeleton/ProgressTrackingSkeleton";
+import { antIcon, toastError, toastSuccess } from "@/utils/helper";
+import { Spin } from "antd";
+
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
@@ -70,6 +73,7 @@ const SkillChart = () => {
   };
 
   const handleCancel = () => {
+    setViewUuid(null);
     setIsModalOpen(false);
   };
 
@@ -80,7 +84,7 @@ const SkillChart = () => {
    
     if(viewIsSuccess && viewData){
       setFileUrl(viewData?.url);
-      setViewUuid(null);
+
       setIsModalOpen(true);
     }
  
@@ -171,6 +175,7 @@ const SkillChart = () => {
     return <ProgressTrackingSkeleton />;
   }
 
+  console.log('certificateUuid', viewUuid);
   return (
     <div>
       <div className={styles.ic_section_wrapper}>
@@ -178,14 +183,19 @@ const SkillChart = () => {
           <h1 className="ic_text_36 fw_600">Track your progress</h1>
           <button
             onClick={() => {
-              
-              setViewUuid(examProgressData?.data?.student_certificate?.uuid);
-              viewRefetch()
-             
+              const uuid = examProgressData?.data?.student_certificate?.uuid;
+              setViewUuid(uuid);
+
+              setTimeout(() => {
+                viewRefetch(); // safe after state updates
+              }, 300);
             }}
             className="ic_common_primary_btn"
           >
-            See certificate
+            See certificate 
+            {
+              viewIsLoading || viewIsFetching ? <Spin indicator={antIcon} /> : null
+            }
           </button>
         </div>
 
@@ -223,6 +233,7 @@ const SkillChart = () => {
           
         }}
         downloadIsLoading={downloadIsLoading}
+        certificateUuid={viewUuid}
       />
     </div>
   );
