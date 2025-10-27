@@ -15,6 +15,7 @@ const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 import { useRecordWebcam } from 'react-record-webcam';
 import { useParams } from "next/navigation";
+import { useDownloadMyCertificateMutation, useGetMyCertificateUrlQuery } from "@/redux/features/student/certificate/certificateApi";
 
 const SkillChart = () => {
   const { examUuid, enrollUuid } = useParams()
@@ -27,8 +28,11 @@ const SkillChart = () => {
   });
   const [attempts, setAttempts] = useState(0);
   const [percentile, setPercentile] = useState(0);
+  const [viewUuid, setViewUuid] = useState(null);
+  const [fileUrl, setFileUrl] = useState(null);
 
-  //fetch api
+
+  //fetch progress data api
   const { 
     data:examProgressData,
     isSuccess, 
@@ -37,9 +41,25 @@ const SkillChart = () => {
     isError,
     refetch,
     isFetching 
-  } = useGetExamProgressQuery({enrollUuid},{
-    refetchOnMountOrArgChange: true,
-  });
+  } = useGetExamProgressQuery({enrollUuid});
+
+   //View Certificate
+  const { 
+    data: viewData,
+    isSuccess: viewIsSuccess, 
+    isLoading: viewIsLoading, 
+    isFetching: viewIsFetching, 
+    refetch: viewRefetch,
+    isError: viewIsError,
+    error: viewError 
+  } = useGetMyCertificateUrlQuery({ uuid: viewUuid }, { skip: !viewUuid });
+
+  //download my certificate
+  const [downloadMyCertificate, 
+    { isLoading: downloadIsLoading, 
+      isSuccess: downloadIsSuccess,
+      isError: downloadIsError,
+      error: downloadError }] = useDownloadMyCertificateMutation();
 
   const {
       clearAllRecordings,
@@ -55,6 +75,16 @@ const SkillChart = () => {
 
   const [isClient, setIsClient] = useState(false);
 
+  //View Certificate response effect
+  useEffect(()=>{
+   
+    if(viewIsSuccess && viewData){
+      setFileUrl(viewData?.url);
+      setViewUuid(null);
+      setIsModalOpen(true);
+    }
+ 
+  }, [viewIsSuccess, viewData]);
   //set data after fetch
   useEffect(()=>{
     if(isSuccess && examProgressData){
@@ -75,9 +105,7 @@ const SkillChart = () => {
     }
   },[isSuccess, examProgressData, isError, error])
 
-  // console.log("Exam Progress Data:", examProgressData);
-  // console.log("Exam Progress categories:", categories);
-  // console.log("Exam Progress skill levels:", skillLevels);
+
 
   useEffect(() => {
     setIsClient(true);
@@ -87,7 +115,7 @@ const SkillChart = () => {
     }
   }, []);
 
- 
+
   const chartOptions = {
     chart: { type: "line", stacked: false, toolbar: { show: false } },
     stroke: { width: [3], curve: "smooth" },
@@ -123,7 +151,6 @@ const SkillChart = () => {
   ];
 
 
-  
 
   const mockCourses = [
     {
@@ -150,7 +177,12 @@ const SkillChart = () => {
         <div className={`${styles.ic_heading_containr} mb-24`}>
           <h1 className="ic_text_36 fw_600">Track your progress</h1>
           <button
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => {
+              
+              setViewUuid(examProgressData?.data?.student_certificate?.uuid);
+              viewRefetch()
+             
+            }}
             className="ic_common_primary_btn"
           >
             See certificate
@@ -183,7 +215,14 @@ const SkillChart = () => {
       <DownloadResumeModal
         open={isModalOpen}
         onCancel={handleCancel}
-        onOk={handleOk}
+        fileUrl={fileUrl}
+        isError={viewIsError}
+        certificateNumber={examProgressData?.data?.student_certificate?.certificate_number}
+        onDownload={()=>{
+          downloadMyCertificate(examProgressData?.data?.student_certificate?.uuid)
+          
+        }}
+        downloadIsLoading={downloadIsLoading}
       />
     </div>
   );

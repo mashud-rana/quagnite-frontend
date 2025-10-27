@@ -83,12 +83,16 @@ const LoginPage = () => {
   //login success or error handling can be done here
 
   useEffect(() => {
+    console.log('error message:',error?.data)
     if (isSuccess) {
       toastSuccess(loginData?.message || "Login successful");
       if(loginData?.user?.user_type === "student"){
         router.push('/student');
       }else if(loginData?.user?.user_type === "teacher"){
         router.push('/teacher/overview');
+      }
+      else if(loginData?.user?.user_type === "member"){
+        router.push('/student');
       }
     }
    

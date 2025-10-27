@@ -59,8 +59,22 @@ export const certificateApi = apiSlice.injectEndpoints({
         },
       }),
     }),
+    getMyCertificateUrl: builder.query({
+      query: ({ uuid }) => ({
+        url: `/student/certificates/my-certificates/view/${uuid}`,
+        method: "GET",
+        responseHandler: async (response) => {
+          const blob = await response.blob();
 
+          if (blob.size === 0) throw new Error("Empty PDF received from server");
 
+          const fileURL = window.URL.createObjectURL(blob);
+
+          // Return blob URL (used in modal)
+          return { success: true, url: fileURL };
+        },
+      }),
+    }),
 
   }),
 });
@@ -69,4 +83,5 @@ export const {
   useGetMyCertificatesQuery,
   useDownloadMyCertificateMutation,
   useViewMyCertificateQuery,
+  useGetMyCertificateUrlQuery,
 } = certificateApi;
