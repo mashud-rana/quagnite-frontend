@@ -148,7 +148,7 @@ const StudentChatPage = () => {
         <div
           className={`${styles.rightListWrap} ${
             showRightList ? styles.showRightList : ""
-          }`}
+          } ${styles.iC_right_sidebar}`}
         >
           <RightList
             users={users}
