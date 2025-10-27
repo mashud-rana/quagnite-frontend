@@ -753,8 +753,8 @@ const CreateCourseForm = ({register,
               )}
               {errors.image && (
                   <span className={styles.error}>
-        {errors.image.message}
-      </span>
+                  {errors.image.message}
+                </span>
               )}
             </div>
           </div>
