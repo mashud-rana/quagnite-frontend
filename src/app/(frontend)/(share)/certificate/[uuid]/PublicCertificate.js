@@ -56,14 +56,16 @@ export default function PublicCertificate({ uuid, resData }) {
         justifyContent: 'center', 
         alignItems: 'center', 
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+       
       }}>
         <Card 
           style={{ 
             textAlign: 'center', 
             minWidth: '300px',
             borderRadius: '16px',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.1)'
+            boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
+         
           }}
         >
           <Spin size="large" />
@@ -104,9 +106,10 @@ export default function PublicCertificate({ uuid, resData }) {
     <div style={{ 
       background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
       minHeight: '100vh',
-      padding: '40px 20px'
+      padding: '40px 20px',
+      marginTop: "70px" 
     }}>
-      <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+      <div style={{ maxWidth: '1400px', margin: '0 auto', }}>
         {/* Header Section */}
         <div style={{ 
           textAlign: 'center', 

@@ -2,7 +2,7 @@ import PublicCertificate from "./PublicCertificate";
 import {fetchCertificate} from "@/utils/helper";
 
 export async function generateMetadata({ params }) {
-  const { uuid } = params;
+  const { uuid } = await params; // 👈 await here
   
   try {
    
@@ -63,7 +63,7 @@ export async function generateMetadata({ params }) {
 
 export default async function CertificatePage({ params }) {
   // ✅ Get uuid from params
-  const { uuid } = params;
+  const { uuid } = await params; // 👈 await here
 
   const resData = await fetchCertificate(uuid);
  
