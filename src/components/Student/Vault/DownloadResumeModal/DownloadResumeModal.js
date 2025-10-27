@@ -16,10 +16,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { antIcon, toastError, toastSuccess } from "@/utils/helper";
 import { Spin } from "antd";
+import {FacebookShareButton, TwitterShareButton, LinkedinShareButton, InstagramShareButton, XIcon, FacebookIcon, LinkedinIcon} from "react-share";
 
 const DownloadResumeModal = ({ open, onCancel, fileUrl, isError, certificateNumber, onDownload, downloadIsLoading, certificateUuid }) => {
 
-  const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/certificate/${certificateUuid}`;
+  // const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/certificate/${certificateUuid}`;
+  const shareUrl = `https://itclanbd.com`;
+  const title = `Certificate Number: ${certificateNumber}`;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(shareUrl);
@@ -53,7 +56,7 @@ const DownloadResumeModal = ({ open, onCancel, fileUrl, isError, certificateNumb
           width="100%"
           height="600px"
           style={{ border: "none" }}
-          title={`Certificate Number: ${certificateNumber}`}
+          title={title}
         ></iframe>
       </div>
 
@@ -61,38 +64,28 @@ const DownloadResumeModal = ({ open, onCancel, fileUrl, isError, certificateNumb
 
       {/* Social Media Icons */}
       <div className={styles.socialIcons}>
-        <Link
-          href="https://facebook.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.icon}
-        >
-          <FaFacebookF />
-        </Link>
-        <Link
-          href="https://twitter.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.icon}
-        >
-          <FaTwitter />
-        </Link>
-        <Link
-          href="https://linkedin.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.icon}
-        >
-          <FaLinkedinIn />
-        </Link>
-        <Link
-          href="https://instagram.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.icon}
-        >
-          <FaInstagram />
-        </Link>
+        
+        
+           <FacebookShareButton
+            url={shareUrl}
+             className={styles.icon}
+          >
+             <FacebookIcon size={32} round/>
+          </FacebookShareButton>
+            <TwitterShareButton
+            url={shareUrl}
+             title={title}
+            className={styles.icon}
+          >
+            <XIcon size={32} round />
+          </TwitterShareButton>
+           <LinkedinShareButton
+            url={shareUrl}
+            className={styles.icon}
+          >
+            <LinkedinIcon size={32} round />
+          </LinkedinShareButton>
+        
       </div>
 
       <hr className={styles.ic_hr} />
