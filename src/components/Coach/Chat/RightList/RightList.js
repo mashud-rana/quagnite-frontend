@@ -3,10 +3,23 @@ import React from "react";
 import styles from "./rightList.module.css";
 import img from "@/assets/images/all/instractor.png";
 import Image from "next/image";
+import { FaBars } from "react-icons/fa";
 
-const RightList = ({ users = [], activeUserId, setActiveUserId }) => {
+const RightList = ({
+  users = [],
+  activeUserId,
+  setActiveUserId,
+  onShowSidebar,
+}) => {
   return (
     <aside className={styles.right}>
+      {/* {onShowSidebar && (
+        <div className={styles.sidebarToggle}>
+          <button className={styles.sidebarToggleBtn} onClick={onShowSidebar}>
+            <FaBars size={20} />
+          </button>
+        </div>
+      )} */}
       <div className={styles.card}>
         <div className={styles.sectionTitle}>Chats</div>
         <div className={styles.list}>

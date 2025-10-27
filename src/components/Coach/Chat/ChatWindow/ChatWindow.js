@@ -5,8 +5,11 @@ import img from "@/assets/images/all/instractor.png";
 import Image from "next/image";
 import { FaPhoneAlt, FaVideo } from "react-icons/fa";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { IoMdArrowBack } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
+import { HiMenuAlt2 } from "react-icons/hi";
 
-const ChatWindow = ({ user, messages = [], onSend }) => {
+const ChatWindow = ({ user, messages = [], onSend, onBack, className }) => {
   const [text, setText] = useState("");
   const scrollRef = useRef();
 
@@ -32,7 +35,14 @@ const ChatWindow = ({ user, messages = [], onSend }) => {
   ];
 
   return (
-    <section className={styles.chatWrap}>
+    <section className={`${styles.chatWrap} ${className || ""}`}>
+      {/* <button
+        className={styles.sidebarToggleBtn}
+        onClick={() => setShowSidebar(!showSidebar)}
+      >
+        {showSidebar ? <IoClose /> : <HiMenuAlt2 />}
+      </button> */}
+
       <div className={styles.topBar}>
         <div className={styles.avatars}>
           {activeUsers.map((u) => (
@@ -52,13 +62,20 @@ const ChatWindow = ({ user, messages = [], onSend }) => {
       </div>
 
       <div className={styles.header}>
-        <div className={styles.user}>
-          <div>
-            <Image className={styles.avaSmall} src={img} alt="" />
-          </div>
-          <div>
-            <div className={styles.title}>{user.name}</div>
-            <div className={styles.online}>Online</div>
+        <div className={styles.ic_flex}>
+          {onBack && (
+            <button className={styles.backBtn} onClick={onBack}>
+              <IoMdArrowBack size={24} />
+            </button>
+          )}
+          <div className={styles.user}>
+            <div>
+              <Image className={styles.avaSmall} src={img} alt="" />
+            </div>
+            <div>
+              <div className={styles.title}>{user.name}</div>
+              <div className={styles.online}>Online</div>
+            </div>
           </div>
         </div>
         <div className={styles.headerActions}>

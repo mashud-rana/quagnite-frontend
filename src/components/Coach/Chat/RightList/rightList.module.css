@@ -2,7 +2,41 @@
 .right {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  /* gap: 12px; */
+}
+
+.sidebarToggle {
+  display: none;
+  padding-bottom: 12px;
+}
+
+.sidebarToggleBtn {
+  background: var(--primary-color);
+  color: var(--white);
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.sidebarToggleBtn:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 999px) {
+  .sidebarToggle {
+    display: block;
+  }
+}
+
+@media (min-width: 1000px) {
+  .sidebarToggle {
+    display: none;
+  }
 }
 .card {
   padding: 12px;
