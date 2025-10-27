@@ -76,7 +76,7 @@ const CertificateList = ({certifiableTypes, search}) => {
       },
     },
     {
-      title: "Name ",
+      title: "Type ",
       key: "name",
       dataIndex: "name",
       render: (_, record) => {

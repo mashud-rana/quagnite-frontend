@@ -22,7 +22,6 @@ const Exam = () => {
   const [models, setModels] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
 
-
   //fetch api
   const {
     data,
