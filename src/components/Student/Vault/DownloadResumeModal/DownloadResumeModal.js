@@ -20,8 +20,8 @@ import {FacebookShareButton, TwitterShareButton, LinkedinShareButton, InstagramS
 
 const DownloadResumeModal = ({ open, onCancel, fileUrl, isError, certificateNumber, onDownload, downloadIsLoading, certificateUuid }) => {
 
-  // const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/certificate/${certificateUuid}`;
-  const shareUrl = `https://itclanbd.com`;
+  const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/certificate/${certificateUuid}`;
+  // const shareUrl = `https://itclanbd.com`;
   const title = `Certificate Number: ${certificateNumber}`;
 
   const handleCopy = () => {

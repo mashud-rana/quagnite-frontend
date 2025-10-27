@@ -113,3 +113,11 @@ export const truncateHtml = (html, limit = 250) => {
     const truncatedText = plainText.slice(0, limit) + "...";
     return truncatedText;
   };
+
+export async function fetchCertificate(uuid) {
+  const res = await fetch(`${process.env.API_URL}/student/certificates/my-certificates/${uuid}`, {
+    cache: "no-store",
+  });
+  if (!res.ok) return null;
+  return res.json();
+}
