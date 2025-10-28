@@ -1,0 +1,350 @@
+/* Top Section */
+.topSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 2rem;
+  background: #f9f9f9;
+  border-radius: 12px;
+}
+
+.questionGroup {
+  display: grid;
+  grid-template-columns: 350px 180px;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* gap: 0.75rem; */
+}
+
+.question {
+  font-weight: 500;
+  color: #353535;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn {
+  flex: 1;
+  padding: 3px 12px;
+  border: 2px solid #5b6ef5;
+  background: white;
+  color: #5b6ef5;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+}
+
+.btn:hover {
+  background: #f0f2ff;
+}
+
+.btnActive {
+  background: #5b6ef5;
+  color: white;
+}
+
+.rateGroup {
+  display: grid;
+  grid-template-columns: 350px 0.5fr;
+}
+
+.ic_flex {
+  display: flex;
+  gap: 80px;
+  align-items: center;
+}
+
+.rateInput {
+  padding: 4px 12px;
+  border: none;
+  background: #e0e0e0;
+  border-radius: 6px;
+  color: #666;
+}
+
+.rateInput::placeholder {
+  color: #999;
+}
+
+.submitBtn {
+  grid-column: 2;
+  align-self: flex-end;
+  padding: 4px 12px;
+  background: #5b6ef5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 14px;
+}
+
+.submitBtn:hover {
+  background: #4a5dd4;
+}
+
+/* Schedule Section */
+.scheduleSection {
+  padding: 2rem;
+  background: #f9f9f9;
+  border-radius: 12px;
+}
+
+.scheduleTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 1.5rem 0;
+}
+
+.scheduleGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dayRow {
+  display: grid;
+  grid-template-columns: 1.5fr 0.6fr 0.4fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.dayLabel {
+  font-weight: 500;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.dayContent {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.timeSlots {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.timeInput {
+  padding: 4px 12px;
+  border: none;
+  background: #e8e8e8;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.timeInput::placeholder {
+  color: #999;
+}
+
+.addSlotBtn {
+  padding: 4px 12px;
+  background: #5b6ef5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 400;
+  /* font-weight: 500; */
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.addSlotBtn:hover {
+  background: #4a5dd4;
+}
+
+.ic_toggole_btn {
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  padding: 4px 12px;
+  gap: 16px;
+  border-radius: 10px;
+}
+
+.toggleContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  /* justify-content: flex-end; */
+}
+
+.toggleLabel {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+}
+
+.toggle {
+  width: 50px;
+  height: 25px;
+  border: 2px solid #ddd;
+  border-radius: 14px;
+  background: white;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s;
+  padding: 0;
+}
+
+.toggle::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ddd;
+  top: 2px;
+  left: 2px;
+  transition: all 0.3s;
+}
+
+.toggleOn {
+  background: #4caf50;
+  border-color: #4caf50;
+}
+
+.toggleOn::after {
+  background: white;
+  left: 24px;
+}
+
+.toggleOff {
+  background: #f44336;
+  border-color: #f44336;
+}
+
+.toggleOff::after {
+  background: white;
+  left: 2px;
+}
+
+/* Responsive Design */
+
+@media (max-width: 1199px) {
+  .questionGroup {
+    grid-template-columns: 250px 180px;
+  }
+
+  .rateGroup {
+    grid-template-columns: 250px 0.5fr;
+  }
+
+  .ic_flex {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ic_flex {
+    gap: 16px;
+  }
+
+  .questionGroup {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 6px;
+  }
+
+  .rateGroup {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 6px;
+  }
+
+  .container {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .topSection {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .rateGroup {
+    grid-column: 1;
+  }
+
+  .submitBtn {
+    grid-column: 1;
+    align-self: auto;
+    width: 100%;
+  }
+
+  .dayRow {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .dayContent {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .timeSlots {
+    width: 100%;
+  }
+
+  .addSlotBtn {
+    width: 100%;
+  }
+
+  .toggleContainer {
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0.75rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .topSection {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .scheduleSection {
+    padding: 1rem;
+  }
+
+  .dayRow {
+    padding: 0.75rem;
+  }
+
+  .buttonGroup {
+    gap: 0.5rem;
+  }
+}

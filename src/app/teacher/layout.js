@@ -26,7 +26,7 @@ const TeacherLayout = ({ children }) => {
   const mainMenu = [
     {
       title: "Overview",
-      url: "/teacher/overview",
+      url: "/teacher",
       icon: GiFeather,
     },
     {
