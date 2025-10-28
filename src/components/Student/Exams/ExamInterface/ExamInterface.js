@@ -99,17 +99,22 @@ const ExamInterface = () => {
     }
 
     //check answer
-    if(selectedAnswer === questions[currentQusIndex]?.correctAnswer){
-      setCorrectAnswer(correctAnswer + 1);
-    }else{
-      setWrongAnswer(wrongAnswer + 1);
-    }
-    // if(parseInt(currentQusIndex + 1) == parseInt(qusCount) ){
-    //   stopRecordingAndSubmit();
+    // if(selectedAnswer === questions[currentQusIndex]?.correctAnswer){
+    //   setCorrectAnswer(correctAnswer + 1);
     // }else{
-
-    //   setCurrentQusIndex(currentQusIndex + 1);
+    //   setWrongAnswer(wrongAnswer + 1);
     // }
+    if (selectedAnswer === questions[currentQusIndex]?.correctAnswer) {
+      const newCorrect = correctAnswer + 1;
+      setCorrectAnswer(prev => prev + 1);
+      setScore((newCorrect / qusCount) * 100);
+    } else {
+      const newCorrect = correctAnswer + 1;
+      setWrongAnswer(prev => prev + 1);
+      setScore((newCorrect / qusCount) * 100);
+    }
+
+    
     setCurrentQusIndex(currentQusIndex + 1);
     setSelectedAnswer("");
   }
@@ -141,7 +146,7 @@ const ExamInterface = () => {
     const recorded = await stopRecording(currentRecording);
     // Upload the blob to a back-end
     formData.append('video', recorded.blob, `exam_${examId}_user.webm`);
-    console.log("Submitting exam with data:", formData);
+    
     if (!isOnline) {
       toastError("You're offline. Exam will be auto-submitted when you're back online.");
       setPendingSubmission(formData); // store the formData for later submission
@@ -267,16 +272,13 @@ const ExamInterface = () => {
     setCurrentRecording(recording.id);
   };
  
-   // ✅ Start recording when exam starts
+ 
+  // //score calculate
   // useEffect(() => {
-  //     startWebCamp();
-  // }, []);
-  
-
-  //score calculate
-  useEffect(()=>{
-    setScore((correctAnswer / qusCount) * 100);
-  },[correctAnswer, qusCount])
+  //   if (qusCount > 0) {
+  //     setScore((correctAnswer / qusCount) * 100);
+  //   }
+  // }, [correctAnswer, qusCount]);
 
   //set Query Data and camera open when success
   useEffect(()=>{
@@ -392,7 +394,24 @@ const ExamInterface = () => {
                 </div>
             )
             :
-            (<NotDataFound message=" Submit your answers. Please wait until the exam is submitted!!" />)
+            (
+              <div style={{ textAlign: 'center', padding: '60px 20px' }}>
+                <div style={{ fontSize: '64px', marginBottom: '20px' }}>
+                  {submitExamIsLoading ? '⏳' : submitExamIsSuccess ? '✅' : '📝'}
+                </div>
+                <h3 style={{ marginBottom: '12px', fontSize: '24px', fontWeight: '600' }}>
+                  {submitExamIsLoading ? 'Submitting Your Exam...' : submitExamIsSuccess ? 'Exam Submitted Successfully!' : 'Exam Completed!'}
+                </h3>
+                <p style={{ color: '#666', marginBottom: '24px' }}>
+                  {submitExamIsLoading 
+                    ? 'Please wait while we process your answers.' 
+                    : submitExamIsSuccess 
+                    ? 'Your exam has been submitted. Redirecting to results...' 
+                    : 'Please wait while your exam is being submitted.'}
+                </p>
+                {submitExamIsLoading && <Spin indicator={antIcon} size="large" />}
+              </div>
+            )
           }
          
         </div>
