@@ -43,6 +43,11 @@ const ExamInterface = () => {
   //visibility check
   const [isPageVisible, setIsPageVisible] = useState(true);
   const [validExam, setValidExam] = useState(true);
+  const [completedDuration, setCompletedDuration] = useState(null);
+
+  // console.log('check array', Array.isArray(questions));
+  // console.log('check object', typeof questions === 'object' && questions !== null);
+  // console.log('questions DATA:', questions);
 
   const {
     activeRecordings,
@@ -72,8 +77,10 @@ const ExamInterface = () => {
     error, 
     refetch,
     isFetching 
-  } = useStartExamQuery({examUuid, enrollUuid},{
+  } = useStartExamQuery({examUuid, enrollUuid}, { 
     refetchOnMountOrArgChange: true,
+    refetchOnFocus: true,
+    refetchOnReconnect: true
   });
 
    const [submitExam, { 
@@ -85,6 +92,9 @@ const ExamInterface = () => {
     }] = useSubmitExamMutation();
 
 
+const handleCompletedDuration = (timeString) => {
+  setCompletedDuration(timeString);
+};
 
   //ans submit
   const submitAnswer = () => {
@@ -113,8 +123,21 @@ const ExamInterface = () => {
 
     }
 
-    
+    // ✅ Update current question's answer and correctness
+    setQuestions(prev =>
+      prev.map((q, index) =>
+        index === currentQusIndex
+          ? {
+              ...q,
+              givenAnswer: selectedAnswer,
+              isCorrect: selectedAnswer === q.correctAnswer,
+            }
+          : q
+      )
+    );
+    //move next question
     setCurrentQusIndex(currentQusIndex + 1);
+    //clear selected answer
     setSelectedAnswer("");
   }
   console.log("Current Question Index:", currentQusIndex, " / ", qusCount);
@@ -126,34 +149,40 @@ const ExamInterface = () => {
 
   
   const stopRecordingAndSubmit = async () => {
-    if(!validExam){
-      toastError("You are not allowed to take this exam.");
-      return;
-    }
-    let examId = startExamData?.data?.exam?.id;
+      if (!validExam) {
+        toastError("You are not allowed to take this exam.");
+        return;
+      }
 
-    const formData = appendInFormData(
-      {
+      let examId = startExamData?.data?.exam?.id;
+
+      // ✅ Create form data with clean structure
+      const formData = appendInFormData({
         exam_id: startExamData?.data?.exam?.id,
         enroll_id: startExamData?.data?.enrollExam?.id,
         score: score,
-        correct_ans:correctAnswer,
-        wrong_ans:wrongAnswer,
-        total_qus:qusCount,
+        correct_ans: correctAnswer,
+        wrong_ans: wrongAnswer,
+        total_qus: qusCount,
+        exam_complete_duration: completedDuration || "00:00", // fallback if undefined
+        results: questions, // ✅ pass array directly, helper will JSON.stringify automatically
+      });
+
+      // ✅ Stop recording & attach video file
+      const recorded = await stopRecording(currentRecording);
+      formData.append('video', recorded.blob, `exam_${examId}_user.webm`);
+
+      // ✅ Handle offline scenario
+      if (!isOnline) {
+        toastError("You're offline. Exam will be auto-submitted when you're back online.");
+        setPendingSubmission(formData);
+        return;
       }
-    );
-    const recorded = await stopRecording(currentRecording);
-    // Upload the blob to a back-end
-    formData.append('video', recorded.blob, `exam_${examId}_user.webm`);
-    
-    if (!isOnline) {
-      toastError("You're offline. Exam will be auto-submitted when you're back online.");
-      setPendingSubmission(formData); // store the formData for later submission
-      return;
-    }
-    await submitExam(formData).unwrap();
-    
-  };
+
+      // ✅ Submit to API
+      await submitExam(formData).unwrap();
+    };
+
 
     //visibility check
   useEffect(()=>{
@@ -337,8 +366,11 @@ const ExamInterface = () => {
             <h5>{startExamData?.data?.exam?.title || "Untitled Exam"}</h5>
             <div className={styles.examInfo}>
               <span className="fw_500">Question {currentQusIndex  >= (qusCount) ? currentQusIndex : currentQuestion}/{qusCount}</span>
-             
-              <Timer duration={timer} onSubmit={stopRecordingAndSubmit} />
+              <Timer
+                duration={timer}
+                onSubmit={stopRecordingAndSubmit}
+                onCompletedDurationHandler={handleCompletedDuration}
+              />
             </div>
           </div>
 

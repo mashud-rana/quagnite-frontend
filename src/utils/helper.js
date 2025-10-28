@@ -92,17 +92,26 @@ export const getLastTwoDigits = (num) => {
 }
 
 // appendInFormData.js
+// ✅ appendInFormData.js
 export const appendInFormData = (data) => {
   const formData = new FormData();
-  Object.keys(data).forEach((key) => {
-    if(data[key] !== undefined && data[key] !== null) // Skip undefined or null values
-    {
 
-      formData.append(key, data[key]);
+  Object.keys(data).forEach((key) => {
+    const value = data[key];
+    if (value === undefined || value === null) return; // skip empty
+
+    // ✅ If value is array or object, stringify once
+    if (Array.isArray(value) || typeof value === "object") {
+      formData.append(key, JSON.stringify(value));
+    } else {
+      formData.append(key, value);
     }
   });
+
   return formData;
 };
+
+
 
 export const truncateHtml = (html, limit = 250) => {
     // Remove HTML tags to count plain text characters
