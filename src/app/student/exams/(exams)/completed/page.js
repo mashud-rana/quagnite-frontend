@@ -12,10 +12,11 @@ import NotDataFound from "@/components/Empty/NotDataFound";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { truncateHtml } from "@/utils/helper";
 import ExamCompletionCardsSkeleton from "@/components/Student/Exams/Exam/Skeleton/ExamCompletionCardsSkeleton";
-import { useGetMyExamsQuery } from "@/redux/features/student/exam/examApi";
+import { useGetExamResultsMutation, useGetMyExamsQuery } from "@/redux/features/student/exam/examApi";
 import { useDownloadMyCertificateMutation } from "@/redux/features/student/certificate/certificateApi";
 import { antIcon, toastError, toastSuccess } from "@/utils/helper";
 import { Spin } from "antd";
+import ExamResultModal from "@/components/Student/Exams/Exam/Modal/ExamResultModal";
 
 const CompletedPage = () => {
 
@@ -28,6 +29,9 @@ const CompletedPage = () => {
   const [models, setModels] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [selectedUuid, setSelectedUuid] = useState(null);
+  const [enrollUuid, setEnrollUuid] = useState(null);
+  const [examResults, setExamResults] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   //fetch api
   const {
@@ -40,6 +44,14 @@ const CompletedPage = () => {
   } = useGetMyExamsQuery(params);
 
   const [downloadMyCertificate, { isLoading: downloadIsLoading,isSuccess: downloadIsSuccess, isError: downloadIsError, error: downloadError }] = useDownloadMyCertificateMutation();
+  
+  const [getExamResults, 
+    { 
+      data: resultsData,
+      isLoading: resultsLoading, 
+      isSuccess: resultsSuccess, 
+      isError: resultsError, 
+      error: resultsErrorData }] = useGetExamResultsMutation();
 
   //scroll fetch
   const fetchMoreData = () => {
@@ -52,6 +64,19 @@ const CompletedPage = () => {
       return prev;
     });
   };
+
+  //close modal
+   const handleCancel = () => {
+    setExamResults(null);
+    setIsModalOpen(false);
+  };
+  //get exam results
+  useEffect(()=>{
+    if(resultsSuccess && resultsData){
+      setExamResults(resultsData?.data?.data);
+      setIsModalOpen(true);
+    }
+  },[resultsSuccess,resultsData])
   //set models
   useEffect(() => {
     if (isSuccess && data?.data?.data) {
@@ -153,8 +178,18 @@ const CompletedPage = () => {
                                 </div>
 
                                 <div className={styles.ic_icon_wrapper}>
-                                  <div className={styles.ic_icon_container}>
+                                  <div className={styles.ic_icon_container}
+                                  onClick={()=>{
+                                    getExamResults(enrollExam?.uuid);
+                                    setEnrollUuid(enrollExam?.uuid)
+                                  }}
+                                  >
                                     <TbEye />
+                                     {
+                                      resultsLoading && enrollUuid === enrollExam?.uuid ? (
+                                        <Spin indicator={antIcon} />
+                                      ) : null
+                                    }
                                   </div>
 
                                   <div className={styles.ic_icon_container} 
@@ -187,6 +222,13 @@ const CompletedPage = () => {
           
           </InfiniteScroll>
         )}
+
+        <ExamResultModal
+          open={isModalOpen}
+          onCancel={handleCancel}
+          isError={resultsError}
+          examResults={examResults}
+        />
     </div>
   );
 };

@@ -37,7 +37,19 @@ export const examApi = apiSlice.injectEndpoints({
         };
       },
     }),
-    
+    getExamResults: builder.mutation({
+      query: (enroll_uuid) => {
+      
+        return {
+          url: `/student/exam/results`,
+          method: "POST",
+          body: {
+            enroll_uuid: enroll_uuid
+          },
+          
+        };
+      },
+    }),
    
 
 
@@ -49,5 +61,6 @@ export const {
   useStartExamQuery,
   useSubmitExamMutation,
   useGetExamProgressQuery,
+  useGetExamResultsMutation
   
 } = examApi;
