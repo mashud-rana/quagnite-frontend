@@ -9,7 +9,7 @@ const ProgressInfo = ({attempt, percentile}) => {
   const searchParams = useSearchParams();
   const cameraId = searchParams.get("camera");
   const micId = searchParams.get("mic");
-  const { examUuid, enrollUuid } = useParams()
+  const { examUuid, enrollUuid, resultId } = useParams()
 
   
 
@@ -26,8 +26,10 @@ const ProgressInfo = ({attempt, percentile}) => {
           onClick={() => router.push(`/student/exams/start-exam/${examUuid}/${enrollUuid}?camera=${cameraId}&mic=${micId}`)}
           >RETAKE NOW</button>
         }
-     
-        <button className="ic_common_primary_btn">CHECK YOUR ANSWERS</button>
+      {/* C:\laragon\www\quagnite\src\app\student\exams\result\[resultId]\check-answer */}
+        <button className="ic_common_primary_btn"
+        onClick={() => router.push(`/student/exams/result/${resultId}/check-answer`)}
+        >CHECK YOUR ANSWERS</button>
       </div>
       <p className={styles.chancesText}>{attempt } of 3 chances remaining</p>
     </div>

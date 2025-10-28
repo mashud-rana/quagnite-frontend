@@ -50,6 +50,15 @@ export const examApi = apiSlice.injectEndpoints({
         };
       },
     }),
+    examResult: builder.query({
+      query: (id) => {
+      
+        return {
+          url: `/student/exam/result/${id}`,
+          method: "GET"
+        };
+      },
+    }),
    
 
 
@@ -61,6 +70,7 @@ export const {
   useStartExamQuery,
   useSubmitExamMutation,
   useGetExamProgressQuery,
-  useGetExamResultsMutation
+  useGetExamResultsMutation,
+  useExamResultQuery
   
 } = examApi;

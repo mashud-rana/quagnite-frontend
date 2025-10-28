@@ -274,7 +274,7 @@ const handleCompletedDuration = (timeString) => {
         setCurrentRecording(null);
 
         // ✅ Redirect after ensuring camera is off
-         router.push(`/student/exams/progress/${examUuid}/${enrollUuid}?camera=${cameraId}&mic=${micId}`);
+         router.push(`/student/exams/progress/${examUuid}/${enrollUuid}/${submitExamData?.data?.id}?camera=${cameraId}&mic=${micId}`);
 
       } catch (err) {
         console.error('Failed to close camera:', err);
