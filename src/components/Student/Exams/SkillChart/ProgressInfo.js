@@ -22,7 +22,7 @@ const ProgressInfo = ({attempt, percentile}) => {
 
       <div className={styles.buttonGroup}>
         {
-          attempt == 3 &&   <button className="ic_common_primary_btn"
+          attempt < 3 &&   <button className="ic_common_primary_btn"
           onClick={() => router.push(`/student/exams/start-exam/${examUuid}/${enrollUuid}?camera=${cameraId}&mic=${micId}`)}
           >RETAKE NOW</button>
         }

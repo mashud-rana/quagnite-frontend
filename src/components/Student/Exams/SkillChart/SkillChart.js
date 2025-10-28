@@ -44,7 +44,11 @@ const SkillChart = () => {
     isError,
     refetch,
     isFetching 
-  } = useGetExamProgressQuery({enrollUuid});
+  } = useGetExamProgressQuery({enrollUuid}, { 
+    refetchOnMountOrArgChange: true,
+    refetchOnFocus: true,
+    refetchOnReconnect: true
+  });
 
    //View Certificate
   const { 
@@ -100,8 +104,8 @@ const SkillChart = () => {
         min: examProgressData?.data?.yaxis_min || 0,
         max: examProgressData?.data?.yaxis_max || 300,
       })
-      setAttempts(examProgressData?.data?.attempt || 0);
-      setPercentile(examProgressData?.data?.percentile || 0);
+      setAttempts(examProgressData?.data?.attempt);
+      setPercentile(examProgressData?.data?.percentile);
     }
     if(isError){
       toastError(error?.data?.message ||"Error fetching exam progress data");

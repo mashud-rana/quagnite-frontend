@@ -109,9 +109,8 @@ const ExamInterface = () => {
       setCorrectAnswer(prev => prev + 1);
       setScore((newCorrect / qusCount) * 100);
     } else {
-      const newCorrect = correctAnswer + 1;
       setWrongAnswer(prev => prev + 1);
-      setScore((newCorrect / qusCount) * 100);
+
     }
 
     
