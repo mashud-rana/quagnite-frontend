@@ -5,6 +5,8 @@ import RightList from "@/components/Coach/Chat/RightList/RightList";
 import React, { useState } from "react";
 import { HiMenuAlt2 } from "react-icons/hi";
 import styles from "./chat.module.css";
+import { CgProfile } from "react-icons/cg";
+import { FaRegUser } from "react-icons/fa";
 
 const TeacherChatPage = () => {
   const users = [
@@ -101,7 +103,7 @@ const TeacherChatPage = () => {
   };
 
   const handleShowSidebar = () => {
-    setShowSidebar(true);
+    setShowSidebar(!showSidebar);
   };
 
   const handleShowRightList = () => {
@@ -117,14 +119,18 @@ const TeacherChatPage = () => {
     setShowChatWindow(false);
   };
 
+  // const handleProfileSidebar = () => {
+  //   setShowSidebar(!showSidebar);
+  // };
+
   return (
     <div className={styles.pageWrap}>
-      <button
+      {/* <button
         className={styles.sidebarToggleBtn}
         onClick={() => setShowSidebar(!showSidebar)}
       >
-        <HiMenuAlt2 />
-      </button>
+        <FaRegUser />
+      </button> */}
 
       <div className={styles.container}>
         {/* Sidebar */}
@@ -159,6 +165,7 @@ const TeacherChatPage = () => {
           }`}
         >
           <RightList
+            // handleProfileSidebar={handleProfileSidebar}
             users={users}
             activeUserId={activeUserId}
             setActiveUserId={handleChatSelect}

@@ -1,27 +1,26 @@
 "use client";
 import React from "react";
 import styles from "./rightList.module.css";
-import img from "@/assets/images/all/instractor.png";
+import img from "@/assets/images/all/boy.png";
 import Image from "next/image";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaRegUser } from "react-icons/fa";
 
 const RightList = ({
   users = [],
   activeUserId,
   setActiveUserId,
   onShowSidebar,
+  // handleProfileSidebar,
 }) => {
   return (
     <aside className={styles.right}>
-      {/* {onShowSidebar && (
-        <div className={styles.sidebarToggle}>
+      <div className={styles.card}>
+        <div className={styles.ic_flex}>
+          <h5 className={styles.sectionTitle}>Chats</h5>
           <button className={styles.sidebarToggleBtn} onClick={onShowSidebar}>
-            <FaBars size={20} />
+            <FaRegUser />
           </button>
         </div>
-      )} */}
-      <div className={styles.card}>
-        <div className={styles.sectionTitle}>Chats</div>
         <div className={styles.list}>
           {users.map((u) => (
             <div
@@ -36,7 +35,7 @@ const RightList = ({
               </div>
               <div className={styles.meta}>
                 <div className={styles.name}>{u.name}</div>
-                <div className={styles.last}>Lorem Ipsum Dolat sit amet...</div>
+                <p className={styles.last}>Lorem Ipsum Dolat sit amet...</p>
               </div>
               <div className={styles.time}>04:45 pm</div>
             </div>
@@ -45,7 +44,7 @@ const RightList = ({
       </div>
 
       <div className={styles.card} style={{ marginTop: 16 }}>
-        <div className={styles.sectionTitle}>Groups</div>
+        <h5 className={styles.sectionTitle}>Groups</h5>
         <div className={styles.list}>
           {users.map((u) => (
             <div key={"g" + u.id} className={styles.item}>
@@ -53,10 +52,15 @@ const RightList = ({
                 <Image className={styles.ava} src={img} alt="" />
               </div>
               <div className={styles.meta}>
-                <div className={styles.name}>Lorem Ipsum</div>
-                <div className={styles.last}>Hi,What new project?</div>
+                <div className={styles.ic_flex}>
+                  <p className={styles.name}>Lorem Ipsum</p>
+                  <span className={styles.time}>04:45 pm</span>
+                </div>
+                <div className={styles.ic_flex}>
+                  <p className={styles.last}>Hi,What new project?</p>
+                  <div className={styles.ic_notification}>02</div>
+                </div>
               </div>
-              <div className={styles.time}>04:45 pm</div>
             </div>
           ))}
         </div>

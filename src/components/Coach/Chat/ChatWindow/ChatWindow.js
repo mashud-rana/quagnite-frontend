@@ -63,11 +63,13 @@ const ChatWindow = ({ user, messages = [], onSend, onBack, className }) => {
 
       <div className={styles.header}>
         <div className={styles.ic_flex}>
-          {onBack && (
-            <button className={styles.backBtn} onClick={onBack}>
-              <IoMdArrowBack size={24} />
-            </button>
-          )}
+          <div className={styles.ic_desplay_btn}>
+            {onBack && (
+              <button className={styles.backBtn} onClick={onBack}>
+                <IoMdArrowBack size={20} />
+              </button>
+            )}
+          </div>
           <div className={styles.user}>
             <div>
               <Image className={styles.avaSmall} src={img} alt="" />

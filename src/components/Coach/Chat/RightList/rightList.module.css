@@ -1,63 +1,54 @@
-/* components/RightList/RightList.module.css */
 .right {
   display: flex;
   flex-direction: column;
-  background-color: #f9f9f9;
-  padding-top: 5px;
-  /* gap: 12px; */
-}
-
-.sidebarToggle {
-  display: none;
-  padding-bottom: 12px;
+  height: 80vh;
+  overflow: auto;
 }
 
 .sidebarToggleBtn {
-  background: var(--primary-color);
+  background-color: var(--primary-color);
   color: var(--white);
   border: none;
-  padding: 10px;
-  border-radius: 8px;
+  border-radius: 100%;
+  height: 30px;
+  width: 30px;
   cursor: pointer;
+  display: none;
+}
+
+.ic_flex {
   display: flex;
   align-items: center;
-  justify-content: center;
-  transition: transform 0.2s ease;
+  justify-content: space-between;
+  margin-right: 10px;
 }
 
-.sidebarToggleBtn:hover {
-  transform: scale(1.05);
-}
-
-@media (max-width: 999px) {
-  .sidebarToggle {
-    display: block;
-  }
-}
-
-@media (min-width: 1000px) {
-  .sidebarToggle {
-    display: none;
-  }
-}
-.card {
-  padding: 12px;
-  background-color: #f9f9f9;
-  border-radius: 12px;
-}
 .sectionTitle {
-  font-weight: 700;
-  margin-bottom: 8px;
+  font-weight: 500;
+  text-transform: capitalize;
 }
+
 .list {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-height: 320px;
+  /* max-height: 320px; */
   overflow: auto;
-  padding-right: 8px;
-  margin-top: 24px;
+  /* padding-right: 8px; */
+  margin-top: 16px;
 }
+
+.ic_notification {
+  font-size: 11px;
+  height: 22px;
+  width: 22px;
+  text-align: center;
+  align-content: center;
+  color: var(--white);
+  border-radius: 100%;
+  background-color: var(--primary-color);
+}
+
 .item {
   display: flex;
   gap: 12px;
@@ -81,8 +72,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
 }
+
 .meta {
   flex: 1;
   display: flex;
@@ -95,9 +86,44 @@
 .last {
   font-size: 13px;
   color: var(--muted);
-  margin-top: 4px;
+  /* margin-top: 4px; */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .time {
   font-size: 12px;
   color: var(--muted);
+}
+
+@media (max-width: 1399px) {
+  .right {
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    overflow: auto;
+  }
+}
+
+@media (max-width: 1199px) {
+  .sidebarToggleBtn {
+    display: block;
+  }
+
+  .sidebarToggleBtn {
+    display: block;
+  }
+}
+
+@media (max-width: 999px) {
+  .sidebarToggleBtn {
+    height: 26px;
+    width: 26px;
+    font-size: 12px;
+  }
+
+  .ava {
+    width: 36px;
+    height: 36px;
+  }
 }
