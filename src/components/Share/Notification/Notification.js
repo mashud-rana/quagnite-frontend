@@ -132,7 +132,7 @@ const Notification = () => {
           dataLength={announcements.length}
           next={fetchMoreData}
           hasMore={params.page < totalPages}
-          loader={<p className="text-center">Loading more...</p>}
+          loader={ <NotificationSkeleton />}
           endMessage={
             <p style={{ textAlign: "center", marginTop: "10px" }}>
               {announcements.length > 0 && <b>No more announcements</b>}

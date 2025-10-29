@@ -30,7 +30,11 @@ const Exam = () => {
     error,
     refetch,
     isFetching
-  } = useGetMyExamsQuery(params);
+  } = useGetMyExamsQuery(params,{
+    refetchOnFocus: true,
+    refetchOnReconnect: true,
+    refetchOnMountOrArgChange: true,
+  });
 
 
    //scroll fetch
@@ -105,7 +109,7 @@ const Exam = () => {
                   {
                     models.map((enrollExam) => {
                       return (
-                        <ExamCard key={enrollExam.id} enrollExam={enrollExam} />
+                        <ExamCard key={enrollExam.id} enrollExam={enrollExam} type="upcoming" />
                       );
                     })
                   }
