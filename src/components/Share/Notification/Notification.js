@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import styles from "./notification.module.css";
 import img from "@/assets/images/all/instractor.png";
@@ -7,94 +8,93 @@ import NotDataFound from "@/components/Empty/NotDataFound";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { antIcon, toastError, toastSuccess } from "@/utils/helper";
 import { Spin } from "antd";
-import { useGetAnnouncementQuery, useMakeAsReadAnnouncementMutation } from "@/redux/features/common/announcement/announcementApi";
+import {
+  useGetAnnouncementQuery,
+  useMakeAsReadAnnouncementMutation,
+} from "@/redux/features/common/announcement/announcementApi";
 import NotificationSkeleton from "./Skeleton/NotificationSkeleton";
 
 const Notification = () => {
-     const [params, setParams] = useState({
-      page: Number(process.env.NEXT_PUBLIC_CURRENT_PAGE) || 1,
-      per_page: Number(process.env.NEXT_PUBLIC_PAGE_SIZE) || 10,
-    });
-    const [announcements, setAnnouncements] = useState([]);
-    const [totalPages, setTotalPages] = useState(1);
-    const [selectedId, setSelectedId] = useState(null);
+  const [params, setParams] = useState({
+    page: Number(process.env.NEXT_PUBLIC_CURRENT_PAGE) || 1,
+    per_page: Number(process.env.NEXT_PUBLIC_PAGE_SIZE) || 10,
+  });
+  const [announcements, setAnnouncements] = useState([]);
+  const [totalPages, setTotalPages] = useState(1);
+  const [selectedId, setSelectedId] = useState(null);
   //fetch announcements
-    const { 
-    data,
-    isSuccess, 
-    isLoading, 
-    error, 
-    refetch,
-    isFetching 
-    } = useGetAnnouncementQuery(params);
-  
-    //make as read mutation
-    const [makeAsReadAnnouncement,
+  const { data, isSuccess, isLoading, error, refetch, isFetching } =
+    useGetAnnouncementQuery(params);
+
+  //make as read mutation
+  const [
+    makeAsReadAnnouncement,
     {
-    data:makeAsReadData,
-    isLoading: makeAsReadIsLoading,
-    isSuccess: makeAsReadIsSuccess,
-    isError: makeAsReadIsError,
-    error: makeAsReadError }] = useMakeAsReadAnnouncementMutation();
-  
-    //scroll fetch
-   const fetchMoreData = () => {
-      console.log("Fetching next page...");
-      setParams((prev) => {
-        if (prev.page < totalPages) {
-          return { ...prev, page: prev.page + 1 };
-        }
-        console.log("Reached last page");
-        return prev;
-      });
-    };
-  
-    //mark as read
-    const makeAsReadHandler = (announcementId) => {
-      if(!announcementId) return;
-      let find = announcements.find(a => a.id === announcementId);
-      if(!find || find.read_at) return; //already read
-      makeAsReadAnnouncement(announcementId);
-      setSelectedId(announcementId);
-    }
-  
-    //make as announcement success
-    useEffect(()=>{
-      console.log("makeAsReadData",makeAsReadData, announcements)
-      if(makeAsReadIsSuccess && makeAsReadData){
-        setAnnouncements((prev) =>{
-          return prev.map(item => {
-            if(item.id === makeAsReadData?.data?.announcement_id){
-              return {...item, read_at: new Date().toISOString()};
-            }
-            return item;
-          });
+      data: makeAsReadData,
+      isLoading: makeAsReadIsLoading,
+      isSuccess: makeAsReadIsSuccess,
+      isError: makeAsReadIsError,
+      error: makeAsReadError,
+    },
+  ] = useMakeAsReadAnnouncementMutation();
+
+  //scroll fetch
+  const fetchMoreData = () => {
+    console.log("Fetching next page...");
+    setParams((prev) => {
+      if (prev.page < totalPages) {
+        return { ...prev, page: prev.page + 1 };
+      }
+      console.log("Reached last page");
+      return prev;
+    });
+  };
+
+  //mark as read
+  const makeAsReadHandler = (announcementId) => {
+    if (!announcementId) return;
+    let find = announcements.find((a) => a.id === announcementId);
+    if (!find || find.read_at) return; //already read
+    makeAsReadAnnouncement(announcementId);
+    setSelectedId(announcementId);
+  };
+
+  //make as announcement success
+  useEffect(() => {
+    console.log("makeAsReadData", makeAsReadData, announcements);
+    if (makeAsReadIsSuccess && makeAsReadData) {
+      setAnnouncements((prev) => {
+        return prev.map((item) => {
+          if (item.id === makeAsReadData?.data?.announcement_id) {
+            return { ...item, read_at: new Date().toISOString() };
+          }
+          return item;
         });
-        setSelectedId(null);
+      });
+      setSelectedId(null);
+    }
+  }, [makeAsReadIsSuccess, makeAsReadData]);
+
+  //set announcements
+  useEffect(() => {
+    if (isSuccess && data?.data?.data) {
+      const newItems = data.data.data;
+
+      if (params.page === 1) {
+        setAnnouncements(newItems);
+      } else {
+        setAnnouncements((prev) => {
+          // avoid duplicates
+          const ids = new Set(prev.map((a) => a.id));
+          const uniqueNew = newItems.filter((a) => !ids.has(a.id));
+          return [...prev, ...uniqueNew];
+        });
       }
-    },[makeAsReadIsSuccess, makeAsReadData])
-  
-    //set announcements
-   useEffect(() => {
-      if (isSuccess && data?.data?.data) {
-        const newItems = data.data.data;
-  
-        if (params.page === 1) {
-          setAnnouncements(newItems);
-        } else {
-          setAnnouncements((prev) => {
-            // avoid duplicates
-            const ids = new Set(prev.map((a) => a.id));
-            const uniqueNew = newItems.filter((a) => !ids.has(a.id));
-            return [...prev, ...uniqueNew];
-          });
-        }
-  
-        setTotalPages(data?.data?.meta?.last_page || 1);
-      }
-    }, [isSuccess, data, params.page]);
-  
-  
+
+      setTotalPages(data?.data?.meta?.last_page || 1);
+    }
+  }, [isSuccess, data, params.page]);
+
   const [expandedItems, setExpandedItems] = useState({});
 
   const toggleExpand = (id) => {

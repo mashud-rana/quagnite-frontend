@@ -8,7 +8,7 @@ const MessagePage = () => {
     <div className="chat_container">
       <ChatUserProfile />
       <ChatArea />
-      <ChatSidebar />
+      {/* <ChatSidebar /> */}
     </div>
   );
 };
