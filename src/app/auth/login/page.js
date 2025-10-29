@@ -93,6 +93,7 @@ const LoginPage = () => {
       }
       else if(loginData?.user?.user_type === "member"){
         router.push('/student');
+        
       }
     }
    
