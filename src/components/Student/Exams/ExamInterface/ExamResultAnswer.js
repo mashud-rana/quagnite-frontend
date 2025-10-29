@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import styles from "./examInterface.module.css";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa6";
@@ -8,13 +8,14 @@ import { useParams } from "next/navigation";
 import { useExamResultQuery } from "@/redux/features/student/exam/examApi";
 import ExamQuestionNavSkeleton from "./Skeleton/ExamQuestionNavSkeleton";
 import NotDataFound from "@/components/Empty/NotDataFound";
+import PlyrReact from "@/components/Share/VideoPlayer/PlyrReact/PlyrReact";
 
 const ExamResultAnswer = () => {
 
   const { resultId } = useParams()
   const [questions,setQuestions] = useState([])
   const [model,setModel] = useState(null);
-  const [givenQuestions,setGivenQuestions] = useState([])
+  
   const [currentQusIndex, setCurrentQusIndex] = useState(0);
 
   //fetch result data api
@@ -44,30 +45,62 @@ const ExamResultAnswer = () => {
     setCurrentQusIndex(index)
   }
 
-
-  console.log('Response Data:', model, questions, givenQuestions);
-
   const totalQuestions = questions ? questions.length : 0;
   const currentQuestion = currentQusIndex + 1;
   const progress = (currentQuestion / totalQuestions) * 100;
 
-  const [submitted, setSubmitted] = useState(false);
-  const [results, setResults] = useState(Array(totalQuestions).fill(null));
-
-  const question = {
-    id: 1,
-    question: "Which of the following are examples of Development?",
-    options: [
-      "Key (for opening door)",
-      "32668 to 32667",
-      "32768 to 32767",
-      "Out Heart Choker Necklace Heart",
+   // Plyr config
+  const options = {
+    controls: [
+      "rewind",
+      "play-large",
+      "play",
+      "progress",
+      "current-time",
+      "duration",
+      "mute",
+      "volume",
+      "settings",
+      "fullscreen",
     ],
-    correctAnswers: [2],
-    type: "multiple",
+    seekTime: 10,
   };
 
+  const videoSrc = useMemo(
+    () => ({
+      type: "video",
+      sources: [
+        {
+          src: model?.full_video_url,
+          type: "video/webm",
+        },
+      ],
+    }),
+    [model?.full_video_url]
+  );
 
+  // ✅ Memoized player so it doesn't re-render when questions change
+  const memoizedVideoPlayer = useMemo(
+    () => (
+      <div
+        style={{
+          position: "fixed",
+          bottom: 24,
+          right: 24,
+          width: 320,
+          maxWidth: "90vw",
+          zIndex: 1000,
+          boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
+          borderRadius: 12,
+          background: "#fff",
+          padding: 8,
+        }}
+      >
+        <PlyrReact options={options} source={videoSrc} />
+      </div>
+    ),
+    [videoSrc] // only re-render if video URL changes
+  );
 
   if(isLoading || isFetching){
     return <ExamQuestionNavSkeleton />;
@@ -78,10 +111,10 @@ const ExamResultAnswer = () => {
 
   return (
     <div className={styles.examContent}>
-      <div style={{ position: 'fixed', bottom: 12, right: 12, width: 220, zIndex: 999 }}>
-        <video src={model?.full_video_url} loop autoPlay playsInline  style={{ width: '100%', borderRadius: 6, border: '1px solid #ddd' }} />
-          
-        </div>
+   
+       {/* ✅ Memoized video player */}
+      {memoizedVideoPlayer}
+
       {/* Exam Title and Info */}
       <div className={styles.examHeader}>
         <h5>{model?.exam?.title}</h5>
@@ -93,88 +126,95 @@ const ExamResultAnswer = () => {
         </div>
       </div>
 
-     
-        <div className={styles.progressBarWrapper}>
-          <div
-            className={styles.progressBarFill}
-            style={{ width: `${progress}%` }}
-          ></div>
-        </div>
+      <div className={styles.progressBarWrapper}>
+        <div
+          className={styles.progressBarFill}
+          style={{ width: `${progress}%` }}
+        ></div>
+      </div>
 
-         
-          <div className={styles.statusBoxContainer}>
-            {
-          questions && questions.length > 0 ? 
-          (
-            questions.map((q, index) => (
-          <div  className={styles.ic_box_container} key={index} 
-          onClick={()=> clickQuestionHandler(index)}
-          >
-            {
-          q.isCorrect === true ? (
-            <FaCheck size={20} className={`${styles.correct}`} />
-          ) : q.isCorrect === false ? (
-            <FaTimesCircle size={20} className={`${styles.incorrect}`} />
-          ) : q.isCorrect === null ? (
-            <FaCheckCircle size={20} className={`${styles.skipped}`} />
-          ) : null 
-            }
-            
-              <div className={styles.statusBox}>
-            <span>{index + 1}</span>
+      <div className={styles.statusBoxContainer}>
+        {questions && questions.length > 0
+          ? questions.map((q, index) => (
+              <div
+                className={styles.ic_box_container}
+                key={index}
+                onClick={() => clickQuestionHandler(index)}
+              >
+                {q.isCorrect === true ? (
+                  <FaCheck size={20} className={`${styles.correct}`} />
+                ) : q.isCorrect === false ? (
+                  <FaTimesCircle size={20} className={`${styles.incorrect}`} />
+                ) : q.isCorrect === null ? (
+                  <FaCheckCircle size={20} className={`${styles.skipped}`} />
+                ) : null}
+
+                <div className={styles.statusBox}>
+                  <span>{index + 1}</span>
+                </div>
               </div>
-            </div>
-          ))
-            )
-            : null
-          }
-         
+            ))
+          : null}
       </div>
 
       {/* Question Section */}
       <div>
-        <div className={styles.questionText}>1. {question.question}</div>
+        <div className={styles.questionText}>
+          {currentQuestion}. {questions[currentQusIndex]?.question}
+        </div>
 
-  
-          <div className={styles.optionsContainer}>
-            {
-              questions[currentQusIndex] ? 
-              (
-                    questions[currentQusIndex]?.answers && Object.entries(questions[currentQusIndex]?.answers).map(([key, value]) => {
-                const isCorrectAnswer = questions[currentQusIndex].correctAnswer === String(key);
-                const isGivenAnswer = String(questions[currentQusIndex].givenAnswer) === String(key);
-                const isCorrect = isGivenAnswer && isCorrectAnswer;
-                const isWrong = isGivenAnswer && !isCorrectAnswer;
-                
-                return (
-                  <div key={key} className={`${styles.optionItem} 
-                  ${isCorrect ? styles.ic_currect_bg : ''}
-                  ${isWrong ? styles.ic_wrong_bg : ''}
-                  ${isCorrectAnswer && !isGivenAnswer ? styles.ic_currect_bg : ''}
-                  `}>
-                    <label className={styles.optionLabel}>
-                    <input
-                      type="radio"
-                      name="answer"
-                      className={styles.optionInput}
-                      value={key}
-                      checked={isGivenAnswer}
-                      disabled
-                    
-                    />
-                      <span className={styles.customCheckbox}></span>
-                      <span className={styles.optionText}>{key.toUpperCase()}. {value}</span>
-                    </label>
-                  </div>
-                )
-                    })
-                  ) : null
+        <div className={styles.optionsContainer}>
+          {questions[currentQusIndex]
+            ? questions[currentQusIndex]?.answers &&
+              Object.entries(questions[currentQusIndex]?.answers).map(
+                ([key, value]) => {
+                  const isCorrectAnswer =
+                    questions[currentQusIndex].correctAnswer === String(key);
+                  const isGivenAnswer =
+                    String(questions[currentQusIndex].givenAnswer) ===
+                    String(key);
+                  const isCorrect = isGivenAnswer && isCorrectAnswer;
+                  const isWrong = isGivenAnswer && !isCorrectAnswer;
+
+                  return (
+                    <div
+                      key={key}
+                      className={`${styles.optionItem} 
+                      ${isCorrect ? styles.ic_currect_bg : ""}
+                      ${isWrong ? styles.ic_wrong_bg : ""}
+                      ${
+                        isCorrectAnswer && !isGivenAnswer
+                          ? styles.ic_currect_bg
+                          : ""
+                      }
+                      `}
+                    >
+                      <label className={styles.optionLabel}>
+                        <input
+                          type="radio"
+                          name="answer"
+                          className={styles.optionInput}
+                          value={key}
+                          checked={isGivenAnswer}
+                          disabled
+                        />
+                        <span className={styles.customCheckbox}></span>
+                        <span className={styles.optionText}>
+                          {key.toUpperCase()}. {value}
+                        </span>
+                      </label>
+                    </div>
+                  );
                 }
+              )
+            : null}
         </div>
 
         {/* Submit Button */}
-
-        <h6 className={styles.ic_score}> Score: {model?.score}% - Keep Pushing!</h6>
+        <h6 className={styles.ic_score}>
+          {" "}
+          Score: {model?.score}% - Keep Pushing!
+        </h6>
       </div>
     </div>
   );
