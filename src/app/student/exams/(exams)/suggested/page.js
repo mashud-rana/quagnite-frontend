@@ -10,8 +10,9 @@ import ExamCard from "@/components/Student/Exams/Exam/ExamCard";
 import ExamCardGridSkeleton from "@/components/Student/Exams/Exam/Skeleton/ExamCardGridSkeleton";
 import NotDataFound from "@/components/Empty/NotDataFound";
 import InfiniteScroll from "react-infinite-scroll-component";
-import {useGetMyExamsQuery} from "@/redux/features/student/exam/examApi";
+import {useGetMyExamsQuery, useSuggestedExamQuery} from "@/redux/features/student/exam/examApi";
 import TodayAnnouncement from './TodayAnnouncement';
+import { truncateHtml } from '@/utils/helper';
 
 const SuggestedPage = () => {
 
@@ -23,6 +24,8 @@ const SuggestedPage = () => {
 
   const [models, setModels] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
+  const [suggestedExams, setSuggestedExams] = useState([]);
+  const [suggestedSmallCards, setSuggestedSmallCards] = useState([]);
 
   //fetch api
   const {
@@ -37,6 +40,15 @@ const SuggestedPage = () => {
     refetchOnFocus: true,
     refetchOnReconnect: true
   });
+  //fetch suggested exams api
+  const {
+    data: suggestedData,
+    isSuccess: suggestedIsSuccess,
+    isLoading: suggestedIsLoading,
+    error: suggestedError,
+    refetch:suggestedRefetch,
+    isFetching: suggestedIsFetching
+  } = useSuggestedExamQuery();
 
     //scroll fetch
     const fetchMoreData = () => {
@@ -68,6 +80,16 @@ const SuggestedPage = () => {
         setTotalPages(data?.data?.meta?.last_page || 1);
       }
     }, [isSuccess, data, params.page]);
+
+    //set suggested exams
+    useEffect(()=>{
+      if(suggestedIsSuccess){
+        setSuggestedExams(suggestedData?.data?.data || []);
+        setSuggestedSmallCards(suggestedData?.data?.data?.slice(1) || []);
+      }
+    },[suggestedData, suggestedIsSuccess])
+
+    console.log('suggestedData DATA', suggestedExams);
   
   const filterData = [
     {
@@ -163,44 +185,64 @@ const SuggestedPage = () => {
         <FiltersSidebar sections={filterData} />
         <div className={styles.ic_grid}>
           {/* Left Column (Big Card) */}
-          <div className={styles.ic_left_column}>
-            <div className={styles.ic_card}>
-              <Image
-                src={bigCard.img}
-                alt="Big Card"
-                className={styles.ic_big_image}
-              />
-              <p className={styles.ic_card_title}>{bigCard.title}</p>
-              <p className={styles.ic_card_description}>
-                {bigCard.description}
-              </p>
-              <div>
-                <button className="ic_common_primary_btn">
-                  {bigCard.buttonText}
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column (Small Cards) */}
-          <div className={styles.ic_right_column}>
-            {smallCards.map((card, index) => (
-              <div key={index} className={styles.ic_card}>
-                <Image
-                  src={card.img}
-                  alt={`Small Card ${index}`}
-                  className={styles.ic_small_image}
-                />
-                <p className={styles.ic_card_title}>{card.title}</p>
-                <p className={styles.ic_card_description}>{card.description}</p>
-                <div>
-                  <button className="ic_common_primary_btn">
-                    {bigCard.buttonText}
-                  </button>
+          {
+            
+            suggestedExams.length > 0 && (
+               <div className={styles.ic_left_column}>
+                <div className={styles.ic_card}>
+                  <Image
+                    src={suggestedExams[0].image_url}
+                    alt="Big Card"
+                    className={styles.ic_big_image}
+                    width={400}
+                    height={200}
+                  />
+                  <p className={styles.ic_card_title}>{suggestedExams[0].title}</p>
+                  <p className={styles.ic_card_description}
+                    dangerouslySetInnerHTML={{
+                    __html: truncateHtml(suggestedExams[0]?.description),
+                  }}
+                  > 
+                  </p>
+                  <div>
+                    <button className="ic_common_primary_btn">
+                      Schedule now
+                    </button>
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
+            )
+          }
+          {/* Right Column (Small Cards) */}
+          {
+            suggestedSmallCards.length > 0 && (
+               <div className={styles.ic_right_column}>
+                {suggestedSmallCards.map((card, index) => (
+                  <div key={index} className={styles.ic_card}>
+                    <Image
+                      src={card.image_url}
+                      alt={`Small Card ${index}`}
+                      className={styles.ic_small_image}
+                      width={100}
+                      height={100}
+                    />
+                    <p className={styles.ic_card_title}>{card.title}</p>
+                    <p className={styles.ic_card_description}
+                      dangerouslySetInnerHTML={{
+                    __html: truncateHtml(card.description),
+                     }}
+                    ></p>
+                    <div>
+                      <button className="ic_common_primary_btn">
+                        Schedule now
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )
+          }
+         
         </div>
       </div>
 
