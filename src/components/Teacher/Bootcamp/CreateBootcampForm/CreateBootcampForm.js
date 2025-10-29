@@ -35,6 +35,7 @@ import {CloseOutlined} from "@ant-design/icons";
 import {useSelector} from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import SubmitButton from "@/components/Share/SubmitButton/SubmitButton";
 
 
 
@@ -43,7 +44,9 @@ const CreateBootcampForm = ({
                                 watch,
                                 control,
                                 setValue,
-                                errors
+                                errors,
+                                isLoading,
+                                createdCourseData,
                             }) => {
     const token = useSelector((state) => state.auth.access_token);
     const editor = useRef(null);
@@ -55,7 +58,7 @@ const CreateBootcampForm = ({
     const [bootcampAnnouncements, setBootcampAnnouncements] = useState([]);
     const [replyContent, setReplyContent] = useState("");
     const thumbnailInputRef = useRef(null);
-    const [thumbnailPreview, setThumbnailPreview] = useState(null);
+    const [thumbnailPreview, setThumbnailPreview] = useState('');
     const [files, setFiles] = useState([]);
     const [date, setDate] = useState(null);
 
@@ -211,6 +214,12 @@ const CreateBootcampForm = ({
         []
     );
 
+    useEffect(() => {
+        if(createdCourseData?.data)
+        {
+            setThumbnailPreview(createdCourseData?.data?.image);
+        }
+    },[createdCourseData]);
 
 
     return (
@@ -382,42 +391,13 @@ const CreateBootcampForm = ({
                             <div className={styles.formRow}>
                                 <label className={styles.label}>Start date *</label>
                                 <div className={styles.inputContainer}>
-                                    {/*<input*/}
-                                    {/*    {...register("start_date", {*/}
-                                    {/*        setValueAs: (value) => {*/}
-                                    {/*            if (!value) return null;*/}
-                                    {/*            const date = new Date(value);*/}
-                                    {/*            // Format as YYYY-MM-DD (no time, no timezone)*/}
-                                    {/*            const year = date.getFullYear();*/}
-                                    {/*            const month = String(date.getMonth() + 1).padStart(2, "0");*/}
-                                    {/*            const day = String(date.getDate()).padStart(2, "0");*/}
-                                    {/*            return `${year}-${month}-${day}`;*/}
-                                    {/*        },*/}
-                                    {/*    })}*/}
-                                    {/*    type="date"*/}
-                                    {/*    className={styles.input}*/}
-                                    {/*    placeholder="Enter price"*/}
-                                    {/*/>*/}
 
-                                    <Controller
-                                        name="start_date"
-                                        control={control}
-                                        render={({field}) => (
-                                            <DatePicker
-                                                {...field}
-                                                selected={field.value}
-                                                onChange={(d) => {
-                                                    field.onChange(d);
-                                                    setDate(d);
-                                                }}
-                                                dateFormat="yyyy-MM-dd"
-                                                placeholderText="Select a date"
-                                                className={styles.input}
-                                            />
-                                        )}
+                                    <input
+                                        {...register("start_date")}
+                                        type="date"
+                                        className={styles.input}
+                                        placeholder="End Date"
                                     />
-
-
 
                                     {errors.start_date && (
                                         <span className={styles.error}>
@@ -435,7 +415,7 @@ const CreateBootcampForm = ({
                                         {...register("end_date")}
                                         type="date"
                                         className={styles.input}
-                                        placeholder="Enter price"
+                                        placeholder="End Date"
                                     />
                                     {errors.end_date && (
                                         <span className={styles.error}>
@@ -907,13 +887,10 @@ const CreateBootcampForm = ({
                     <button type="button" className="ic_btn">
                         BACK
                     </button>
-                    <button
-                        // href="/teacher/bootcamps/upload-video"
-                        type="submit"
-                        className="ic_btn"
-                    >
-                        SAVE AND CONTINUE
-                    </button>
+
+                    <SubmitButton
+                        isLoading={isLoading}
+                    />
                 </div>
         </div>
     );

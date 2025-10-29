@@ -6,8 +6,10 @@ import ProgressStepper from "@/components/Teacher/Courses/ProgressStepper/Progre
 import CreateBootcampForm from "@/components/Teacher/Bootcamp/CreateBootcampForm/CreateBootcampForm";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {useCreateBootcampMutation} from "@/redux/features/teacher/bootcamp/bootcampApi";
-
+import {useCreateBootcampMutation, useUpdateBootcampMutation} from "@/redux/features/teacher/bootcamp/bootcampApi";
+import { format } from "date-fns";
+import {formatDate} from "@/utils/helper";
+import UploadVideoPage from "@/app/teacher/bootcamps/upload-video/page";
 
 
 const schema = yup.object({
@@ -75,7 +77,9 @@ const schema = yup.object({
 });
 
 const CreateBootcampPage = () => {
-    const [step, setStep] = useState(1);
+    const [currentStep, setCurrentStep] = useState(1);
+    const [bootcampId, setBootcampId] = useState(null);
+
 
   const {
     register,
@@ -104,44 +108,83 @@ const CreateBootcampPage = () => {
         }
     ] = useCreateBootcampMutation();
 
+    const [
+        bootcampUpdate,
+        {
+          isLoading: isUpdating,
+          data: updatedCourseData,
+          error: updateError
+        }
+        ] = useUpdateBootcampMutation();
+
+
+    // API Call End
+
   console.log('bootcamp form errors', errors);
 
   const onSubmit = (data) => {
-    console.log("Form submitted:", data);
-
     let formData = new FormData();
 
     Object.entries(data).forEach(([key, value]) => {
-      console.log(key, value);
       if (key === 'image' && value.length > 0) {
         formData.append(key, value[0]);
+      }else if(key === 'start_date' || key === 'end_date'){
+        const formattedDate = formatDate(value, 'yyyy-MM-dd');
+        formData.append(key, formattedDate);
       } else {
         formData.append(key, value);
       }
     });
 
-    // if (courseId !== null) {
-    //   formData.append('course_id', courseId);
-    //   courseUpdate(formData);
-    // } else {
-    //   bootcampCreate(formData);
-    // }
 
-    bootcampCreate(formData);
-
+      if (bootcampId !== null) {
+        formData.append('bootcamp_id', bootcampId);
+        bootcampUpdate(formData);
+      } else {
+        bootcampCreate(formData);
+      }
   };
+
+  useEffect(() => {
+      if(createdCourseData?.data)
+      {
+            setBootcampId(createdCourseData.data.id);
+            setCurrentStep(2);
+      }
+  }, [isCreating,createdCourseData]);
+
+  useEffect(() => {
+      if(updatedCourseData?.data)
+      {
+            setBootcampId(createdCourseData.data.id);
+            setCurrentStep(2);
+      }
+  }, [isUpdating,updatedCourseData]);
+
+  const goToStep = (step) => {
+    setCurrentStep(step);
+  }
+
 
   return (
     <div>
-      <ProgressStepper currentStep={step} />
+      <ProgressStepper currentStep={currentStep} />
+
       <form onSubmit={handleSubmit(onSubmit)}>
-        {step === 1 && (
+        {currentStep === 1 && (
             <CreateBootcampForm
                 register={register}
                 watch={watch}
                 control={control}
                 setValue={setValue}
                 errors={errors}
+                isLoading={bootcampId? isUpdating: isCreating}
+                createdCourseData={bootcampId? updatedCourseData : createdCourseData}
+            />
+        )}
+        {currentStep === 2 && (
+            <UploadVideoPage
+                goToStep={goToStep}
             />
         )}
       </form>

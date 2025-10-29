@@ -17,10 +17,18 @@ export const bootcampApi = apiSlice.injectEndpoints({
                 body: bootcampData,
             }),
         }),
+        updateBootcamp: builder.mutation({
+            query: ( bootcampData ) => ({
+                url: `/teacher/bootcamp/update`,
+                method: "POST",
+                body: bootcampData,
+            }),
+        }),
     }),
 });
 
 export const {
     useBootcampCategoriesQuery,
     useCreateBootcampMutation,
+    useUpdateBootcampMutation,
 } = bootcampApi;
