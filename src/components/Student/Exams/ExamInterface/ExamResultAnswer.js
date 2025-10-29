@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import styles from "./examInterface.module.css";
-import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import { FaCheckCircle, FaTimesCircle, FaQuestionCircle  } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa6";
 import { useParams } from "next/navigation";
 import { useExamResultQuery } from "@/redux/features/student/exam/examApi";
@@ -145,8 +145,8 @@ const ExamResultAnswer = () => {
                   <FaCheck size={20} className={`${styles.correct}`} />
                 ) : q.isCorrect === false ? (
                   <FaTimesCircle size={20} className={`${styles.incorrect}`} />
-                ) : q.isCorrect === null ? (
-                  <FaCheckCircle size={20} className={`${styles.skipped}`} />
+                ) : q.isCorrect === '' ? (
+                  <FaQuestionCircle size={20} className={`${styles.skipped}`} />
                 ) : null}
 
                 <div className={styles.statusBox}>

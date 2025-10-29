@@ -13,6 +13,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import {useGetMyExamsQuery, useSuggestedExamQuery} from "@/redux/features/student/exam/examApi";
 import TodayAnnouncement from './TodayAnnouncement';
 import { truncateHtml } from '@/utils/helper';
+import DualColumnContentSkeleton from '@/components/Student/Exams/Exam/Skeleton/DualColumnContentSkeleton';
 
 const SuggestedPage = () => {
 
@@ -181,13 +182,22 @@ const SuggestedPage = () => {
 
   return (
     <div>
+      
       <div className="ic_content_wrapper">
+         
+        
         <FiltersSidebar sections={filterData} />
-        <div className={styles.ic_grid}>
-          {/* Left Column (Big Card) */}
+        {
+          suggestedIsLoading && <DualColumnContentSkeleton />
+        }
+        
+         {
+          suggestedIsSuccess && (
+            <div className={styles.ic_grid}>
+        
           {
             
-            suggestedExams.length > 0 && (
+            suggestedIsSuccess && suggestedExams.length > 0 && (
                <div className={styles.ic_left_column}>
                 <div className={styles.ic_card}>
                   <Image
@@ -213,9 +223,9 @@ const SuggestedPage = () => {
               </div>
             )
           }
-          {/* Right Column (Small Cards) */}
+          
           {
-            suggestedSmallCards.length > 0 && (
+            suggestedIsSuccess && suggestedSmallCards.length > 0 && (
                <div className={styles.ic_right_column}>
                 {suggestedSmallCards.map((card, index) => (
                   <div key={index} className={styles.ic_card}>
@@ -244,6 +254,9 @@ const SuggestedPage = () => {
           }
          
         </div>
+          )
+         }
+        
       </div>
 
       {/* whats today section card  */}
