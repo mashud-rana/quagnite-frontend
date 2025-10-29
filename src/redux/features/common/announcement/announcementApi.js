@@ -17,12 +17,19 @@ export const announcementApi = apiSlice.injectEndpoints({
       }),
     
     }),
+    getTodayAnnouncement: builder.query({
+      query: ({page,per_page}) => ({
+        url: `/announcements/get-today?page=${page}&per_page=${per_page}`,
+        method: "GET"
+      })
+    }),
     
   })
 });
 
 export const {
   useGetAnnouncementQuery,
-  useMakeAsReadAnnouncementMutation
+  useMakeAsReadAnnouncementMutation,
+  useGetTodayAnnouncementQuery
   
 } = announcementApi;

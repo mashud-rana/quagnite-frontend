@@ -6,8 +6,13 @@ import { useGetMyExamsQuery } from "@/redux/features/student/exam/examApi";
 import ExamCardGridSkeleton from "@/components/Student/Exams/Exam/Skeleton/ExamCardGridSkeleton";
 import NotDataFound from "@/components/Empty/NotDataFound";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useRecordWebcam } from 'react-record-webcam';
 
 const Exam = () => {
+   const {
+      clearAllRecordings,
+    } = useRecordWebcam();
+
   const [params, setParams] = useState({
     page: Number(process.env.NEXT_PUBLIC_CURRENT_PAGE) || 1,
     per_page: 9,
@@ -17,7 +22,6 @@ const Exam = () => {
   const [models, setModels] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
 
-
   //fetch api
   const {
     data,
@@ -26,7 +30,11 @@ const Exam = () => {
     error,
     refetch,
     isFetching
-  } = useGetMyExamsQuery(params);
+  } = useGetMyExamsQuery(params,{
+    refetchOnFocus: true,
+    refetchOnReconnect: true,
+    refetchOnMountOrArgChange: true,
+  });
 
 
    //scroll fetch
@@ -60,6 +68,14 @@ const Exam = () => {
     }
   }, [isSuccess, data, params.page]);
 
+   useEffect(() => {
+  
+    const clearRecordings = async () => {
+      await clearAllRecordings()
+    }
+    clearRecordings();
+  }, []);
+
   // console.log("Exams Data:", models);
 
   return (
@@ -79,7 +95,7 @@ const Exam = () => {
             dataLength={models.length}
             next={fetchMoreData}
             hasMore={params.page < totalPages}
-            loader={<p className="text-center">Loading more...</p>}
+            loader={<ExamCardGridSkeleton />}
             endMessage={
               <p style={{ textAlign: "center", marginTop: "10px" }}>
                 {models.length > 0 && <b>No more upcoming exams available</b>}
@@ -93,7 +109,7 @@ const Exam = () => {
                   {
                     models.map((enrollExam) => {
                       return (
-                        <ExamCard key={enrollExam.id} enrollExam={enrollExam} />
+                        <ExamCard key={enrollExam.id} enrollExam={enrollExam} type="upcoming" />
                       );
                     })
                   }

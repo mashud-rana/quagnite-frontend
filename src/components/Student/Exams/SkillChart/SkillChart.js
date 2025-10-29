@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import styles from "./skillchart.module.css";
 import Link from "next/link";
@@ -8,78 +8,157 @@ import { FaArrowLeft } from "react-icons/fa";
 import CourseCard from "../../Courses/Course/CourseCard";
 import DownloadResumeModal from "../../Vault/DownloadResumeModal/DownloadResumeModal";
 import ProgressInfo from "./ProgressInfo";
+import {useGetExamProgressQuery} from "@/redux/features/student/exam/examApi";
+import ProgressTrackingSkeleton from "./Skeleton/ProgressTrackingSkeleton";
+import { antIcon, toastError, toastSuccess } from "@/utils/helper";
+import { Spin } from "antd";
+
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-const SkillChart = ({attempt ,examUuid, enrollUuid}) => {
+import { useRecordWebcam } from 'react-record-webcam';
+import { useParams } from "next/navigation";
+import { useDownloadMyCertificateMutation, useGetMyCertificateUrlQuery } from "@/redux/features/student/certificate/certificateApi";
+
+const SkillChart = () => {
+  const { examUuid, enrollUuid } = useParams()
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [skillLevels , setSkillLevels] = useState([]);
+  const [yaxisData, setYaxisData] = useState({
+    min:0,
+    max:300
+  });
+  const [attempts, setAttempts] = useState(0);
+  const [percentile, setPercentile] = useState(0);
+  const [viewUuid, setViewUuid] = useState(null);
+  const [fileUrl, setFileUrl] = useState(null);
+
+
+  //fetch progress data api
+  const { 
+    data:examProgressData,
+    isSuccess, 
+    isLoading, 
+    error, 
+    isError,
+    refetch,
+    isFetching 
+  } = useGetExamProgressQuery({enrollUuid}, { 
+    refetchOnMountOrArgChange: true,
+    refetchOnFocus: true,
+    refetchOnReconnect: true
+  });
+
+   //View Certificate
+  const { 
+    data: viewData,
+    isSuccess: viewIsSuccess, 
+    isLoading: viewIsLoading, 
+    isFetching: viewIsFetching, 
+    refetch: viewRefetch,
+    isError: viewIsError,
+    error: viewError 
+  } = useGetMyCertificateUrlQuery({ uuid: viewUuid }, { skip: !viewUuid });
+
+  //download my certificate
+  const [downloadMyCertificate, 
+    { isLoading: downloadIsLoading, 
+      isSuccess: downloadIsSuccess,
+      isError: downloadIsError,
+      error: downloadError }] = useDownloadMyCertificateMutation();
+
+  const {
+      clearAllRecordings,
+  } = useRecordWebcam();
 
   const handleOk = () => {
     setIsModalOpen(false);
   };
 
   const handleCancel = () => {
+    setViewUuid(null);
     setIsModalOpen(false);
   };
 
   const [isClient, setIsClient] = useState(false);
 
+  //View Certificate response effect
+  useEffect(()=>{
+   
+    if(viewIsSuccess && viewData){
+      setFileUrl(viewData?.url);
+
+      setIsModalOpen(true);
+    }
+ 
+  }, [viewIsSuccess, viewData]);
+  //set data after fetch
+  useEffect(()=>{
+    if(isSuccess && examProgressData){
+      const categoriesData = examProgressData?.data?.chart.map(item => item.label);
+      const skillLevelsData = examProgressData?.data?.chart.map(item => item.skill);
+      setCategories(categoriesData);
+      setSkillLevels(skillLevelsData);
+      setYaxisData({
+        min: examProgressData?.data?.yaxis_min || 0,
+        max: examProgressData?.data?.yaxis_max || 300,
+      })
+      setAttempts(examProgressData?.data?.attempt);
+      setPercentile(examProgressData?.data?.percentile);
+    }
+    if(isError){
+      toastError(error?.data?.message ||"Error fetching exam progress data");
+      console.error("Error fetching exam progress data:", error);
+    }
+  },[isSuccess, examProgressData, isError, error])
+
+
+
   useEffect(() => {
     setIsClient(true);
+    //webcam cleanup
+    return () =>{
+      clearAllRecordings();
+    }
   }, []);
 
+
   const chartOptions = {
-    chart: {
-      type: "line",
-      stacked: false,
-      toolbar: { show: false },
-    },
-    stroke: {
-      width: [0, 3],
-      curve: "smooth",
-    },
-    plotOptions: {
-      bar: {
-        columnWidth: "80%",
-        borderRadius: 0,
-      },
-    },
-    colors: ["#FF8C42", "#4CAF50"],
+    chart: { type: "line", stacked: false, toolbar: { show: false } },
+    stroke: { width: [3], curve: "smooth" },
+    colors: ["#00C49F"],
     xaxis: {
-      categories: ["0-10th", "20-39th", "40-50th", "60-70th", "80-100th"],
+      categories,
       tickPlacement: "on",
     },
     yaxis: {
-      min: 0,
-      max: 300,
-      tickAmount: 5,
-      title: {
-        text: "Skill Level",
-      },
+      min: yaxisData.min,
+      max: yaxisData.max,
+      title: { text: "Skill Level" },
+    },
+    markers: {
+      size: 6,
+      colors: ["#fff"],
+      strokeColors: "#00C49F",
+      strokeWidth: 3,
     },
     tooltip: {
-      shared: true,
-      intersect: false,
-    },
-    legend: {
-      position: "top",
+      y: {
+        formatter: (val) => `Skill IQ: ${val}`,
+      },
     },
   };
 
   const chartSeries = [
     {
-      name: "Novice (Column)",
+      name: "Skill Level",
       type: "column",
-      data: [240, 180, 220, 140, 300],
-    },
-    {
-      name: "Emerging (Line)",
-      type: "line",
-      data: [0, 100, 90, 180, 300],
+      data: skillLevels,
     },
   ];
 
-  if (!isClient) return <div>Loading...</div>;
+
 
   const mockCourses = [
     {
@@ -96,35 +175,37 @@ const SkillChart = ({attempt ,examUuid, enrollUuid}) => {
     },
   ];
 
+  if(isLoading || isFetching){
+    return <ProgressTrackingSkeleton />;
+  }
+
+  console.log('certificateUuid', viewUuid);
   return (
     <div>
       <div className={styles.ic_section_wrapper}>
         <div className={`${styles.ic_heading_containr} mb-24`}>
           <h1 className="ic_text_36 fw_600">Track your progress</h1>
           <button
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => {
+              const uuid = examProgressData?.data?.student_certificate?.uuid;
+              setViewUuid(uuid);
+
+              setTimeout(() => {
+                viewRefetch(); // safe after state updates
+              }, 300);
+            }}
             className="ic_common_primary_btn"
           >
-            See certificate
+            See certificate 
+            {
+              viewIsLoading || viewIsFetching ? <Spin indicator={antIcon} /> : null
+            }
           </button>
         </div>
 
         <div className={styles.ic_grid}>
-          {/* <div className={styles.ic_text_container}>
-            <p className={styles.performanceText}>
-              Last time, you did better than 7% of your peers.
-            </p>
-            <p>Where do you stand now?</p>
 
-            <div className={styles.buttonGroup}>
-              <button className="ic_common_primary_btn">RETAKE NOW</button>
-              <button className="ic_common_primary_btn">
-                CHECK YOUR ANSWERS
-              </button>
-            </div>
-            <p className={styles.chancesText}>2 of 3 chances remaining</p>
-          </div> */}
-          <ProgressInfo attempt={attempt}  />
+          <ProgressInfo attempt={attempts} percentile={percentile} />
 
           <div className={styles.chartContainer}>
             <Chart
@@ -137,18 +218,26 @@ const SkillChart = ({attempt ,examUuid, enrollUuid}) => {
         </div>
       </div>
 
-      <h5 className={styles.ic_heading}>Next, we recommend:</h5>
+      {/* <h5 className={styles.ic_heading}>Next, we recommend:</h5>
 
       <div className="ic_courses_list">
         {mockCourses.map((course) => (
           <CourseCard key={course.id} course={course} />
         ))}
-      </div>
+      </div> */}
 
       <DownloadResumeModal
         open={isModalOpen}
         onCancel={handleCancel}
-        onOk={handleOk}
+        fileUrl={fileUrl}
+        isError={viewIsError}
+        certificateNumber={examProgressData?.data?.student_certificate?.certificate_number}
+        onDownload={()=>{
+          downloadMyCertificate(examProgressData?.data?.student_certificate?.uuid)
+          
+        }}
+        downloadIsLoading={downloadIsLoading}
+        certificateUuid={viewUuid}
       />
     </div>
   );

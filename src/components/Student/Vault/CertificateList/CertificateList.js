@@ -64,7 +64,7 @@ const CertificateList = ({certifiableTypes, search}) => {
     
     },
     {
-      title: "Course / Exam Name ",
+      title: "Name ",
       key: "name",
       dataIndex: "name",
       render: (_, record) => {
@@ -73,6 +73,15 @@ const CertificateList = ({certifiableTypes, search}) => {
         } else if(record?.certifiable?.type === 'exam'){
           return record?.certifiable?.data?.exam?.title || "N/A";
         }
+      },
+    },
+    {
+      title: "Type ",
+      key: "name",
+      dataIndex: "name",
+      render: (_, record) => {
+        const type = record?.certifiable?.type || "N/A";
+        return type === "N/A" ? type : type.charAt(0).toUpperCase() + type.slice(1);
       },
     },
     {
