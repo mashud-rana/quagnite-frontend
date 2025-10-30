@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -34,42 +35,42 @@ const SkillChart = () => {
   const [viewUuid, setViewUuid] = useState(null);
   const [fileUrl, setFileUrl] = useState(null);
 
-
+  // console.log('enrollUuid', enrollUuid)
   //fetch progress data api
-  const { 
+  const {
     data:examProgressData,
-    isSuccess, 
-    isLoading, 
-    error, 
+    isSuccess,
+    isLoading,
+    error,
     isError,
     refetch,
-    isFetching 
-  } = useGetExamProgressQuery({enrollUuid}, { 
+    isFetching
+  } = useGetExamProgressQuery({enrollUuid}, {
     refetchOnMountOrArgChange: true,
     refetchOnFocus: true,
     refetchOnReconnect: true
   });
 
-   //View Certificate
-  const { 
+  //View Certificate
+  const {
     data: viewData,
-    isSuccess: viewIsSuccess, 
-    isLoading: viewIsLoading, 
-    isFetching: viewIsFetching, 
+    isSuccess: viewIsSuccess,
+    isLoading: viewIsLoading,
+    isFetching: viewIsFetching,
     refetch: viewRefetch,
     isError: viewIsError,
-    error: viewError 
+    error: viewError
   } = useGetMyCertificateUrlQuery({ uuid: viewUuid }, { skip: !viewUuid });
 
   //download my certificate
-  const [downloadMyCertificate, 
-    { isLoading: downloadIsLoading, 
+  const [downloadMyCertificate,
+    { isLoading: downloadIsLoading,
       isSuccess: downloadIsSuccess,
       isError: downloadIsError,
       error: downloadError }] = useDownloadMyCertificateMutation();
 
   const {
-      clearAllRecordings,
+    clearAllRecordings,
   } = useRecordWebcam();
 
   const handleOk = () => {
@@ -85,13 +86,13 @@ const SkillChart = () => {
 
   //View Certificate response effect
   useEffect(()=>{
-   
+
     if(viewIsSuccess && viewData){
       setFileUrl(viewData?.url);
 
       setIsModalOpen(true);
     }
- 
+
   }, [viewIsSuccess, viewData]);
   //set data after fetch
   useEffect(()=>{
@@ -165,7 +166,7 @@ const SkillChart = () => {
       id: "1",
       title: "Blockchain Mastery",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis venenatis magna. Aenean mattis id lacus at accumsan. Vestibulum non malesuada ex. Ut ultrices nulla ut tortor ullamcorper fermentum. Praesent sagittis enim sit amet ligula pharetra mattis id facilisis purus. Sed eu ante semper, varius velit vitae, sagittis turpis. Donec et posuere lectus. Praesent dignissim vulputate ipsum a molestie. Quisque ullamcorper non ligula ut tempus. Nullam tempor consectetur ultricies.",
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis venenatis magna. Aenean mattis id lacus at accumsan. Vestibulum non malesuada ex. Ut ultrices nulla ut tortor ullamcorper fermentum. Praesent sagittis enim sit amet ligula pharetra mattis id facilisis purus. Sed eu ante semper, varius velit vitae, sagittis turpis. Donec et posuere lectus. Praesent dignissim vulputate ipsum a molestie. Quisque ullamcorper non ligula ut tempus. Nullam tempor consectetur ultricies.",
       level: "Beginner",
       duration: "1h 10m",
       date: "22 Nov 2024",
@@ -181,44 +182,44 @@ const SkillChart = () => {
 
   console.log('certificateUuid', viewUuid);
   return (
-    <div>
-      <div className={styles.ic_section_wrapper}>
-        <div className={`${styles.ic_heading_containr} mb-24`}>
-          <h1 className="ic_text_36 fw_600">Track your progress</h1>
-          <button
-            onClick={() => {
-              const uuid = examProgressData?.data?.student_certificate?.uuid;
-              setViewUuid(uuid);
+      <div>
+        <div className={styles.ic_section_wrapper}>
+          <div className={`${styles.ic_heading_containr} mb-24`}>
+            <h1 className="ic_text_36 fw_600">Track your progress</h1>
+            <button
+                onClick={() => {
+                  const uuid = examProgressData?.data?.student_certificate?.uuid;
+                  setViewUuid(uuid);
 
-              setTimeout(() => {
-                viewRefetch(); // safe after state updates
-              }, 300);
-            }}
-            className="ic_common_primary_btn"
-          >
-            See certificate 
-            {
-              viewIsLoading || viewIsFetching ? <Spin indicator={antIcon} /> : null
-            }
-          </button>
-        </div>
+                  setTimeout(() => {
+                    viewRefetch(); // safe after state updates
+                  }, 300);
+                }}
+                className="ic_common_primary_btn"
+            >
+              See certificate
+              {
+                viewIsLoading || viewIsFetching ? <Spin indicator={antIcon} /> : null
+              }
+            </button>
+          </div>
 
-        <div className={styles.ic_grid}>
+          <div className={styles.ic_grid}>
 
-          <ProgressInfo attempt={attempts} percentile={percentile} />
+            <ProgressInfo attempt={attempts} percentile={percentile} />
 
-          <div className={styles.chartContainer}>
-            <Chart
-              options={chartOptions}
-              series={chartSeries}
-              type="line"
-              height={350}
-            />
+            <div className={styles.chartContainer}>
+              <Chart
+                  options={chartOptions}
+                  series={chartSeries}
+                  type="line"
+                  height={350}
+              />
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* <h5 className={styles.ic_heading}>Next, we recommend:</h5>
+        {/* <h5 className={styles.ic_heading}>Next, we recommend:</h5>
 
       <div className="ic_courses_list">
         {mockCourses.map((course) => (
@@ -226,21 +227,22 @@ const SkillChart = () => {
         ))}
       </div> */}
 
-      <DownloadResumeModal
-        open={isModalOpen}
-        onCancel={handleCancel}
-        fileUrl={fileUrl}
-        isError={viewIsError}
-        certificateNumber={examProgressData?.data?.student_certificate?.certificate_number}
-        onDownload={()=>{
-          downloadMyCertificate(examProgressData?.data?.student_certificate?.uuid)
-          
-        }}
-        downloadIsLoading={downloadIsLoading}
-        certificateUuid={viewUuid}
-      />
-    </div>
+        <DownloadResumeModal
+            open={isModalOpen}
+            onCancel={handleCancel}
+            fileUrl={fileUrl}
+            isError={viewIsError}
+            certificateNumber={examProgressData?.data?.student_certificate?.certificate_number}
+            onDownload={()=>{
+              downloadMyCertificate(examProgressData?.data?.student_certificate?.uuid)
+
+            }}
+            downloadIsLoading={downloadIsLoading}
+            certificateUuid={viewUuid}
+        />
+      </div>
   );
 };
 
 export default SkillChart;
+
