@@ -1,6 +1,7 @@
-import { toast } from "react-toastify";
-import { LoadingOutlined } from "@ant-design/icons";
+import {toast} from "react-toastify";
+import {LoadingOutlined} from "@ant-design/icons";
 import Swal from 'sweetalert2'
+import {format} from "date-fns";
 
 export const toastSuccess = (message) => {
   toast.success(message, {
@@ -119,8 +120,8 @@ export const truncateHtml = (html, limit = 250) => {
     if (plainText.length <= limit) return html;
 
     // Slice text safely
-    const truncatedText = plainText.slice(0, limit) + "...";
-    return truncatedText;
+    return plainText.slice(0, limit) + "...";
+
   };
 
 export async function fetchCertificate(uuid) {
@@ -130,3 +131,7 @@ export async function fetchCertificate(uuid) {
   if (!res.ok) return null;
   return res.json();
 }
+
+export const formatDate = (datetime, getFormat = 'd M Y') => {
+    return format(new Date(datetime), getFormat);
+};

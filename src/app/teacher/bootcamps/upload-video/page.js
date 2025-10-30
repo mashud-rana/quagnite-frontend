@@ -8,7 +8,7 @@ import styles from "./upload.module.css";
 import UploadVideo from "@/components/Teacher/Bootcamp/UploadVideo/UploadVideo";
 import BootcampModal from "@/components/Teacher/Bootcamp/BootcampModal/BootcampModal";
 
-const UploadVideoPage = () => {
+const UploadVideoPage = ({goToStep}) => {
   const lessons = [
     {
       id: 1,
@@ -39,13 +39,12 @@ const UploadVideoPage = () => {
   return (
     <div>
       <div>
-        <ProgressStepper currentStep={2} />
 
         <div className="mb-24 ic_flex">
           <div className="ic_title_section">
-            <Link href="#" className="ic_back_button">
-              <FaArrowLeft />
-            </Link>
+              <span onClick={(e) => goToStep(1)} className="ic_back_button">
+                  <FaArrowLeft />
+              </span>
             <h1 className="ic_text_36">Upload Course Video</h1>
           </div>
         </div>

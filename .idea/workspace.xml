@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d079e12f-27cf-42d7-900a-11a1310fc74f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.edit.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/quagnite.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="d079e12f-27cf-42d7-900a-11a1310fc74f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,7 +56,7 @@
                 <list>
                   <RecentBranch>
                     <option name="branchName" value="mashud_dev" />
-                    <option name="lastUsedInstant" value="1760352831" />
+                    <option name="lastUsedInstant" value="1761451999" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="master" />
@@ -101,7 +91,7 @@
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;mashud__dev&quot;,
     &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
     &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/React App/quagnite/src/components/Teacher/Courses/EditCourseForm&quot;,
@@ -173,6 +163,14 @@
       <workItem from="1761027476466" duration="8451000" />
       <workItem from="1761103884970" duration="15004000" />
       <workItem from="1761451257624" duration="561000" />
+      <workItem from="1761452051007" duration="122000" />
+      <workItem from="1761452181384" duration="14078000" />
+      <workItem from="1761536613496" duration="530000" />
+      <workItem from="1761537166647" duration="20077000" />
+      <workItem from="1761623464366" duration="3449000" />
+      <workItem from="1761710299178" duration="13177000" />
+      <workItem from="1761794819937" duration="266000" />
+      <workItem from="1761795102017" duration="2354000" />
     </task>
     <servers />
   </component>
