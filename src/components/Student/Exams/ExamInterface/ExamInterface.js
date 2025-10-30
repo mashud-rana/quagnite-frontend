@@ -1,6 +1,6 @@
 'use client';
 
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import React,{ useEffect, useRef, useState } from "react";
 import { appendInFormData, toastError, toastSuccess, antIcon } from "@/utils/helper";
 
@@ -16,8 +16,9 @@ import NotDataFound from "@/components/Empty/NotDataFound";
 import { useRecordWebcam } from 'react-record-webcam';
 
 
-const ExamInterface = () => {
 
+const ExamInterface = () => {
+  const router = useRouter();
   const { examUuid, enrollUuid } = useParams()
   const searchParams = useSearchParams();
   const cameraId = searchParams.get("camera");
@@ -32,12 +33,21 @@ const ExamInterface = () => {
   const [score, setScore] = useState(0);
   const [correctAnswer, setCorrectAnswer] = useState(0);
   const [wrongAnswer, setWrongAnswer] = useState(0);
-  const [examStart, setExamStart] = useState(true);
-  const [examEnd, setExamEnd] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState("");
 
     // Keep the current recording object (or at least its id) in state
   const [currentRecording, setCurrentRecording] = useState(null);
+
+  const [isOnline, setIsOnline] = useState(true);
+  const [pendingSubmission, setPendingSubmission] = useState(null);
+  //visibility check
+  const [isPageVisible, setIsPageVisible] = useState(true);
+  const [validExam, setValidExam] = useState(true);
+  const [completedDuration, setCompletedDuration] = useState(null);
+
+  // console.log('check array', Array.isArray(questions));
+  // console.log('check object', typeof questions === 'object' && questions !== null);
+  // console.log('questions DATA:', questions);
 
   const {
     activeRecordings,
@@ -46,7 +56,9 @@ const ExamInterface = () => {
     stopRecording,
     createRecording,
     cancelRecording,
-    closeCamera 
+    closeCamera ,
+    clearAllRecordings,
+    devicesByType
   } = useRecordWebcam({
     fileName: "exam_record",
     mimeType: "video/webm",
@@ -57,7 +69,6 @@ const ExamInterface = () => {
   });
 
   
-
   //fetch api
   const { 
     data:startExamData,
@@ -66,7 +77,11 @@ const ExamInterface = () => {
     error, 
     refetch,
     isFetching 
-  } = useStartExamQuery({examUuid, enrollUuid});
+  } = useStartExamQuery({examUuid, enrollUuid}, { 
+    refetchOnMountOrArgChange: true,
+    refetchOnFocus: true,
+    refetchOnReconnect: true
+  });
 
    const [submitExam, { 
       data:submitExamData,
@@ -75,10 +90,18 @@ const ExamInterface = () => {
       isError: submitExamIsError,
       error: submitExamError 
     }] = useSubmitExamMutation();
-  
+
+
+const handleCompletedDuration = (timeString) => {
+  setCompletedDuration(timeString);
+};
 
   //ans submit
   const submitAnswer = () => {
+    if(!validExam){
+      toastError("You are not allowed to take this exam.");
+      return;
+    }
     if(!selectedAnswer){
       //select ans first before submit ans
       toastError('Select option first before submit ansewer')
@@ -86,89 +109,224 @@ const ExamInterface = () => {
     }
 
     //check answer
-    if(selectedAnswer === questions[currentQusIndex]?.correctAnswer){
-      setCorrectAnswer(correctAnswer + 1);
-    }else{
-      setWrongAnswer(wrongAnswer + 1);
-    }
-    if(parseInt(currentQusIndex + 1) == parseInt(qusCount) ){
-      stopRecordingAndSubmit();
-    }else{
+    // if(selectedAnswer === questions[currentQusIndex]?.correctAnswer){
+    //   setCorrectAnswer(correctAnswer + 1);
+    // }else{
+    //   setWrongAnswer(wrongAnswer + 1);
+    // }
+    if (selectedAnswer === questions[currentQusIndex]?.correctAnswer) {
+      const newCorrect = correctAnswer + 1;
+      setCorrectAnswer(prev => prev + 1);
+      setScore((newCorrect / qusCount) * 100);
+    } else {
+      setWrongAnswer(prev => prev + 1);
 
-      setCurrentQusIndex(currentQusIndex + 1);
     }
+
+    // ✅ Update current question's answer and correctness
+    setQuestions(prev =>
+      prev.map((q, index) =>
+        index === currentQusIndex
+          ? {
+              ...q,
+              givenAnswer: selectedAnswer,
+              isCorrect: selectedAnswer === q.correctAnswer,
+            }
+          : q
+      )
+    );
+    //move next question
+    setCurrentQusIndex(currentQusIndex + 1);
+    //clear selected answer
     setSelectedAnswer("");
   }
+  console.log("Current Question Index:", currentQusIndex, " / ", qusCount);
+  useEffect(()=>{
+    if(currentQusIndex  >= (qusCount)){
+      stopRecordingAndSubmit()
+    }
+  },[currentQusIndex])
 
   
   const stopRecordingAndSubmit = async () => {
+      if (!validExam) {
+        toastError("You are not allowed to take this exam.");
+        return;
+      }
 
-    let examId = startExamData?.data?.exam?.id;
+      let examId = startExamData?.data?.exam?.id;
 
-    const formData = appendInFormData(
-      {
+      // ✅ Create form data with clean structure
+      const formData = appendInFormData({
         exam_id: startExamData?.data?.exam?.id,
         enroll_id: startExamData?.data?.enrollExam?.id,
         score: score,
-        correct_ans:correctAnswer,
-        wrong_ans:wrongAnswer,
-        total_qus:qusCount,
+        correct_ans: correctAnswer,
+        wrong_ans: wrongAnswer,
+        total_qus: qusCount,
+        exam_complete_duration: completedDuration || "00:00", // fallback if undefined
+        results: questions, // ✅ pass array directly, helper will JSON.stringify automatically
+      });
+
+      // ✅ Stop recording & attach video file
+      const recorded = await stopRecording(currentRecording);
+      formData.append('video', recorded.blob, `exam_${examId}_user.webm`);
+
+      // ✅ Handle offline scenario
+      if (!isOnline) {
+        toastError("You're offline. Exam will be auto-submitted when you're back online.");
+        setPendingSubmission(formData);
+        return;
       }
-    );
-    const recorded = await stopRecording(currentRecording);
-    // Upload the blob to a back-end
-    formData.append('video', recorded.blob, `exam_${examId}_user.webm`);
-    await submitExam(formData).unwrap();
+
+      // ✅ Submit to API
+      await submitExam(formData).unwrap();
+    };
+
+
+    //visibility check
+  useEffect(()=>{
+    const handleVisibilityChange = () => {
+      if(!validExam) return;
+      setIsPageVisible(!document.hidden);
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () =>{
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    }
+
+  },[])
+
+   //before unload auto submit when page reload or closed
+    useEffect(() => {
+    const handleBeforeUnload = async (event) => {
+      if(!validExam) return;
+      // Show browser's default confirmation popup
+      event.preventDefault();
+      event.returnValue = "Are you sure you want to leave? The Exam will be ended.";
+  
+      // Auto-submit exam before closing
+      await stopRecordingAndSubmit();
+    };
+  
+    window.addEventListener("beforeunload", handleBeforeUnload);
+  
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [currentRecording, validExam]);
+
+  //online offline check
+  useEffect(() => {
+    if(!validExam) return;
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
     
-  };
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+    };
+  }, [validExam]);
+
+  
+  //when page invisible then auto submit
+  useEffect(()=>{
+    if(!isPageVisible && currentRecording){
+      if(!validExam) return;
+      toastError("Page is not visible. Auto-submitting your exam...");
+      stopRecordingAndSubmit();
+    }
+  },[isPageVisible, currentRecording])
+    //auto submit when back online
+  useEffect(() => {
+    const submitPendingExam = async () => {
+      if(!validExam) return;
+      if (isOnline && pendingSubmission) {
+        toastSuccess("You're back online! Submitting your exam...");
+        try {
+          await submitExam(pendingSubmission).unwrap();
+          setPendingSubmission(null);
+        } catch (err) {
+          toastError("Auto-submit failed. Please try manually.");
+        }
+      }
+    };
+    submitPendingExam();
+  }, [isOnline]);
+
 
   //Response examSubmit action
-  useEffect(()=>{
-    if(submitExamIsSuccess){
+  useEffect(() => {
+  const cleanupRecording = async () => {
+    if (submitExamIsSuccess) {
       toastSuccess('Exam submitted successfully');
-      setExamStart(false);
-      setExamEnd(true);
-      // web camp api hit
-      closeCamera(currentRecording);
-      cancelRecording(currentRecording);
-      setCurrentRecording(null);
-    }
-    if (submitExamIsError) {
-        toastError(
-          submitExamError?.message || "Something is wrong. Please try again."
-        );
+
+      try {
+        // ✅ Stop the webcam properly
+        if (currentRecording) {
+          await cancelRecording(currentRecording); // cleanup internal state
+        }
+        setCurrentRecording(null);
+
+        // ✅ Redirect after ensuring camera is off
+         router.push(`/student/exams/progress/${examUuid}/${enrollUuid}/${submitExamData?.data?.id}?camera=${cameraId}&mic=${micId}`);
+
+      } catch (err) {
+        console.error('Failed to close camera:', err);
+        toastError('Failed to close webcam. Please check permissions.');
       }
-  },[submitExamIsSuccess, submitExamIsError, submitExamError])
+    }
+
+    if (submitExamIsError) {
+      toastError(submitExamError?.message || "Something is wrong. Please try again.");
+    }
+  };
+
+  cleanupRecording();
+}, [submitExamIsSuccess, submitExamIsError, submitExamError]);
+
 
   // Step 1: Open camera and start recording
   const startWebCamp = async () => {
-    
+    if(!validExam) return;
     const recording = await createRecording();
     if (recording) await openCamera(recording.id);
     await startRecording(recording.id);
     setCurrentRecording(recording.id);
   };
  
-   // ✅ Start recording when exam starts
-  useEffect(() => {
-      startWebCamp();
-  }, []);
-  
+ 
+  // //score calculate
+  // useEffect(() => {
+  //   if (qusCount > 0) {
+  //     setScore((correctAnswer / qusCount) * 100);
+  //   }
+  // }, [correctAnswer, qusCount]);
 
-  //score calculate
-  useEffect(()=>{
-    setScore((correctAnswer / qusCount) * 100);
-  },[correctAnswer, qusCount])
-
-  //set Query Data
+  //set Query Data and camera open when success
   useEffect(()=>{
     if(isSuccess){
+      if(startExamData?.data?.enrollExam?.attempt > 3){
+        setValidExam(false);
+        return;
+      }
       setQuestions(startExamData?.data?.questions || [])
       setTimer(startExamData?.data?.exam?.duration * 60 || 1800)
       setQusCount(startExamData?.data?.questions?.length || 0)
       setPassMark(startExamData?.data?.exam?.pass_mark || 0)
+      startWebCamp();
     }
-  },[isSuccess, startExamData])
+    if(submitExamIsError){
+      toastError(submitExamError?.data?.message || "Something is wrong. Please try again.");
+    }
+  },[isSuccess, startExamData,submitExamIsError, submitExamError])
+
+  
 
   const totalQuestions = qusCount;
   const currentQuestion = currentQusIndex + 1;
@@ -179,14 +337,14 @@ const ExamInterface = () => {
     return <ExamQuestionSkeleton />
   }
 
-  if(startExamData?.data?.enrollExam?.attempt >= 3){
+  if(startExamData?.data?.enrollExam?.attempt > 3){
     return <NotDataFound message="You have exceeded the maximum number of attempts." />
   }
   
   return (
     <>
       {
-        examStart ?  
+         
         <div className={styles.examContent}>
           <div style={{ position: 'fixed', bottom: 12, left: 12, width: 220, zIndex: 999 }}>
             {
@@ -199,11 +357,20 @@ const ExamInterface = () => {
           </div>
           {/* Exam Title and Info */}
           <div className={styles.examHeader}>
+            {!isOnline && (
+              <p style={{ color: 'red', fontSize: 13, marginTop: 5 }}>
+                ⚠️ You are offline. Your progress is saved locally.
+              </p>
+            )}
+
             <h5>{startExamData?.data?.exam?.title || "Untitled Exam"}</h5>
             <div className={styles.examInfo}>
-              <span className="fw_500">Question {currentQusIndex + 1}/{qusCount}</span>
-              {/* <div className={styles.timer}>{Math.floor(timer / 60)} : {timer % 60}</div> */}
-              <Timer duration={timer} onSubmit={stopRecordingAndSubmit} />
+              <span className="fw_500">Question {currentQusIndex  >= (qusCount) ? currentQusIndex : currentQuestion}/{qusCount}</span>
+              <Timer
+                duration={timer}
+                onSubmit={stopRecordingAndSubmit}
+                onCompletedDurationHandler={handleCompletedDuration}
+              />
             </div>
           </div>
 
@@ -216,48 +383,70 @@ const ExamInterface = () => {
           </div>
 
           {/* Question Section */}
-          <div>
-            <div className={styles.questionText}>{currentQusIndex + 1}. {questions[currentQusIndex]?.question} </div>
+          {
+            questions[currentQusIndex] ? 
+            (
+               <div>
+                  <div className={styles.questionText}>{currentQuestion}. {questions[currentQusIndex]?.question} </div>
 
-            {/* Answer Options */}
-            <div className={`${styles.optionsContainer} mb-24`}>
-              {questions[currentQusIndex]?.answers && Object.entries(questions[currentQusIndex]?.answers).map(([key, value]) => (
-                <div key={key} className={styles.optionItem}>
-                  <label className={styles.optionLabel}>
-                        <input
-                          type="radio"
-                          name="answer"
-                          className={styles.optionInput}
-                          value={key}
-                          checked={String(selectedAnswer) === String(key)}
-                          onChange={(e) => setSelectedAnswer(e.target.value)}
-                        />
-                    <span className={styles.customCheckbox}></span>
-                    <span className={styles.optionText}>{key.toUpperCase()}. {value}</span>
-                  </label>
+                  {/* Answer Options */}
+                  <div className={`${styles.optionsContainer} mb-24`}>
+                    {questions[currentQusIndex]?.answers && Object.entries(questions[currentQusIndex]?.answers).map(([key, value]) => (
+                      <div key={key} className={styles.optionItem}>
+                        <label className={styles.optionLabel}>
+                              <input
+                                type="radio"
+                                name="answer"
+                                className={styles.optionInput}
+                                value={key}
+                                checked={String(selectedAnswer) === String(key)}
+                                onChange={(e) => setSelectedAnswer(e.target.value)}
+                              />
+                          <span className={styles.customCheckbox}></span>
+                          <span className={styles.optionText}>{key.toUpperCase()}. {value}</span>
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Submit Button */}
+                  <div className={`${styles.submitContainer} ic_text_end`}>
+                    
+                    <button
+                      className="ic_common_primary_btn"
+                      disabled={!selectedAnswer || submitExamIsLoading 
+                      }
+                      onClick={submitAnswer}
+                    >
+                      {isOnline ? "SUBMIT ANSWER" : "OFFLINE MODE"}
+                      {submitExamIsLoading && <Spin indicator={antIcon} />}
+                    </button>
+                  </div>
                 </div>
-              ))}
-            </div>
-
-            {/* Submit Button */}
-            <div className={`${styles.submitContainer} ic_text_end`}>
-              <button
-                className="ic_common_primary_btn"
-                disabled={!selectedAnswer || submitExamIsLoading}
-                onClick={submitAnswer}
-              >
-                SUBMIT ANSWER 
-                {
-                  submitExamIsLoading && <Spin indicator={antIcon} /> 
-                }
-              </button>
-            </div>
-          </div>
+            )
+            :
+            (
+              <div style={{ textAlign: 'center', padding: '60px 20px' }}>
+                <div style={{ fontSize: '64px', marginBottom: '20px' }}>
+                  {submitExamIsLoading ? '⏳' : submitExamIsSuccess ? '✅' : '📝'}
+                </div>
+                <h3 style={{ marginBottom: '12px', fontSize: '24px', fontWeight: '600' }}>
+                  {submitExamIsLoading ? 'Submitting Your Exam...' : submitExamIsSuccess ? 'Exam Submitted Successfully!' : 'Exam Completed!'}
+                </h3>
+                <p style={{ color: '#666', marginBottom: '24px' }}>
+                  {submitExamIsLoading 
+                    ? 'Please wait while we process your answers.' 
+                    : submitExamIsSuccess 
+                    ? 'Your exam has been submitted. Redirecting to results...' 
+                    : 'Please wait while your exam is being submitted.'}
+                </p>
+                {submitExamIsLoading && <Spin indicator={antIcon} size="large" />}
+              </div>
+            )
+          }
+         
         </div>
-        :
-        <SkillChart attempt={startExamData?.data?.enrollExam?.attempt}
-     
-        />
+       
       }
     </>
    

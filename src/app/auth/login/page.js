@@ -83,20 +83,21 @@ const LoginPage = () => {
   //login success or error handling can be done here
 
   useEffect(() => {
+    console.log('error message:',error?.data)
     if (isSuccess) {
       toastSuccess(loginData?.message || "Login successful");
       if(loginData?.user?.user_type === "student"){
         router.push('/student');
       }else if(loginData?.user?.user_type === "teacher"){
         router.push('/teacher/overview');
-
-      }else if(loginData?.user?.user_type === "member")
-        {
-            router.push('/student');
-        }
+      }
+      else if(loginData?.user?.user_type === "member"){
+        router.push('/student'); 
+      }
     }
+   
     if (isError) {
-      toastError(error?.message || "Login failed. Please try again.");
+      toastError(error?.data?.message || "Login failed. Please try again.");
     }
   }, [isSuccess, isError, error, loginData]);
 
@@ -114,8 +115,8 @@ const LoginPage = () => {
         router.push('/student');
       }
     }
-    if (isError) {
-      toastError(error?.message || "Login failed. Please try again.");
+    if (socialIsError) {
+      toastError(socialError?.data?.message || "Login failed. Please try again.");
     }
   }, [socialIsSuccess, socialIsError, socialError, socialLoginData]);
 

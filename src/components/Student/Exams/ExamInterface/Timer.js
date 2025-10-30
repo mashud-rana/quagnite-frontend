@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import styles from "./examInterface.module.css";
-const Timer = ({ duration, onSubmit }) =>{
+const Timer = ({ duration, onSubmit , onCompletedDurationHandler }) =>{
       const [timer, setTimer] = useState(60 * 30); // 30 minutes for example
+    
 
     // ✅ Timer countdown
     useEffect(() => {
@@ -17,12 +18,25 @@ const Timer = ({ duration, onSubmit }) =>{
     return () => clearInterval(interval);
     }, [timer]);
 
+     // 🕒 whenever timer changes, send formatted duration to parent
+    useEffect(() => {
+        if (onCompletedDurationHandler) {
+        const minutes = Math.floor(timer / 60);
+        const seconds = timer % 60;
+        onCompletedDurationHandler(`${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`);
+        }
+    }, [timer, onCompletedDurationHandler]);
+
     useEffect(()=>{
         setTimer(duration);
     },[duration])
+
+    let minutes = Math.floor(timer / 60);
+    let seconds = timer % 60;
+     
     return (
         <>
-        <div className={styles.timer}>{Math.floor(timer / 60)} : {timer % 60}</div>
+        <div className={styles.timer}>{minutes} : {seconds < 10 ? `0${seconds}` : seconds}</div>
         </>
     )
 }

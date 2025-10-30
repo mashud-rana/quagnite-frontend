@@ -5,8 +5,11 @@ import img from "@/assets/images/all/instractor.png";
 import Image from "next/image";
 import { FaPhoneAlt, FaVideo } from "react-icons/fa";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { IoMdArrowBack } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
+import { HiMenuAlt2 } from "react-icons/hi";
 
-const ChatWindow = ({ user, messages = [], onSend }) => {
+const ChatWindow = ({ user, messages = [], onSend, onBack, className }) => {
   const [text, setText] = useState("");
   const scrollRef = useRef();
 
@@ -32,7 +35,14 @@ const ChatWindow = ({ user, messages = [], onSend }) => {
   ];
 
   return (
-    <section className={styles.chatWrap}>
+    <section className={`${styles.chatWrap} ${className || ""}`}>
+      {/* <button
+        className={styles.sidebarToggleBtn}
+        onClick={() => setShowSidebar(!showSidebar)}
+      >
+        {showSidebar ? <IoClose /> : <HiMenuAlt2 />}
+      </button> */}
+
       <div className={styles.topBar}>
         <div className={styles.avatars}>
           {activeUsers.map((u) => (
@@ -52,13 +62,22 @@ const ChatWindow = ({ user, messages = [], onSend }) => {
       </div>
 
       <div className={styles.header}>
-        <div className={styles.user}>
-          <div>
-            <Image className={styles.avaSmall} src={img} alt="" />
+        <div className={styles.ic_flex}>
+          <div className={styles.ic_desplay_btn}>
+            {onBack && (
+              <button className={styles.backBtn} onClick={onBack}>
+                <IoMdArrowBack size={20} />
+              </button>
+            )}
           </div>
-          <div>
-            <div className={styles.title}>{user.name}</div>
-            <div className={styles.online}>Online</div>
+          <div className={styles.user}>
+            <div>
+              <Image className={styles.avaSmall} src={img} alt="" />
+            </div>
+            <div>
+              <div className={styles.title}>{user.name}</div>
+              <div className={styles.online}>Online</div>
+            </div>
           </div>
         </div>
         <div className={styles.headerActions}>
@@ -74,6 +93,8 @@ const ChatWindow = ({ user, messages = [], onSend }) => {
         </div>
       </div>
 
+      <hr className={styles.ic_hr} />
+
       <div className={styles.messages} ref={scrollRef}>
         {messages.length === 0 && (
           <div className={styles.empty}>No messages yet</div>
@@ -86,8 +107,30 @@ const ChatWindow = ({ user, messages = [], onSend }) => {
             }`}
           >
             <div className={styles.msgBubble}>
-              <div className={styles.msgText}>{msg.text}</div>
-              <div className={styles.msgDate}>{msg.date}</div>
+              <div className={styles.ic_titme_img_container}>
+                <p className={styles.msgDate}>
+                  Natasha Stark Saturday 10:12 am
+                </p>
+                <Image className={styles.ic_small_img} src={img} alt="" />
+              </div>
+              <div className={styles.msgText}>
+                {msg.text}
+
+                {msg.reactions && msg.reactions.length > 0 && (
+                  <div className={styles.ic_wrapper}>
+                    <div className={styles.reactionsWrap}>
+                      {msg.reactions.map((reaction, i) => (
+                        <span key={i} className={styles.reaction}>
+                          {reaction.emoji}{" "}
+                          <span className={styles.reactionCount}>
+                            {reaction.count}
+                          </span>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         ))}

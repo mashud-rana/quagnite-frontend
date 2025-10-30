@@ -28,7 +28,46 @@ export const examApi = apiSlice.injectEndpoints({
         };
       },
     }),
-    
+    getExamProgress: builder.query({
+      query: ({enrollUuid}) => {
+      
+        return {
+          url: `/student/exam/progress/${enrollUuid}`,
+          method: "GET"
+        };
+      },
+    }),
+    getExamResults: builder.mutation({
+      query: (enroll_uuid) => {
+      
+        return {
+          url: `/student/exam/results`,
+          method: "POST",
+          body: {
+            enroll_uuid: enroll_uuid
+          },
+          
+        };
+      },
+    }),
+    examResult: builder.query({
+      query: (id) => {
+      
+        return {
+          url: `/student/exam/result/${id}`,
+          method: "GET"
+        };
+      },
+    }),
+   
+    suggestedExam: builder.query({
+      query: () => {
+        return {
+          url: `/student/exam/suggested`,
+          method: "GET"
+        };
+      },
+    }),
    
 
 
@@ -39,5 +78,9 @@ export const {
   useGetMyExamsQuery,
   useStartExamQuery,
   useSubmitExamMutation,
+  useGetExamProgressQuery,
+  useGetExamResultsMutation,
+  useExamResultQuery,
+  useSuggestedExamQuery
   
 } = examApi;

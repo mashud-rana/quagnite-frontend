@@ -9,7 +9,7 @@ import styles from "./examCard.module.css";
 import ExamStartModal from "./ExamStartModal";
 import {truncateHtml} from "@/utils/helper";
 
-const ExamCard = ({ enrollExam }) => {
+const ExamCard = ({ enrollExam, type }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOk = () => {
@@ -37,7 +37,7 @@ const ExamCard = ({ enrollExam }) => {
       <div>
         <div className={styles.ic_text_container}>
           <h4 className={styles.examTitle}>{enrollExam?.exam?.title}</h4>
-          <span className={styles.statusBadge}>Upcoming exam</span>
+          <span className={styles.statusBadge}>{type == 'upcoming' ? 'Upcoming exam' : 'Ongoing exam'}</span>
         </div>
 
         <div dangerouslySetInnerHTML={{ __html: shortDescription }} />

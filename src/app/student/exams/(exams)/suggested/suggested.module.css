@@ -5,6 +5,12 @@
   align-items: stretch;
   width: 100%;
 }
+.ic_flex {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
 
 .ic_left_column {
   display: flex;
@@ -87,6 +93,16 @@
   padding: 20px;
   border: 1px solid #e2e2e2;
   border-radius: 16px;
+}
+
+.ic_btn {
+  font-size: 12px;
+  border: none;
+  padding: 2px 8px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 @media (max-width: 1650px) {

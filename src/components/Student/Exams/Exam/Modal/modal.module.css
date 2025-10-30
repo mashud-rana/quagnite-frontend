@@ -1,0 +1,164 @@
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.modalTitle {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  line-height: 1.4;
+  margin-bottom: 16px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  font-size: 18px;
+  color: var(--white);
+  transition: all 0.5s ease-in-out;
+}
+
+.icon:hover {
+  background-color: #4b67c6;
+  color: var(--white);
+}
+
+.ic_btn {
+  margin-right: 20px;
+}
+
+.ic_img_container {
+  display: flex;
+  justify-content: center;
+  margin: 16px;
+}
+
+.ic_img {
+  height: auto;
+  overflow: hidden;
+}
+
+.ic_copy_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px 0;
+  gap: 10px;
+}
+
+.ic_copy_link {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background-color: var(--gray);
+  width: 80%;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: #262626;
+}
+
+.modalTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.examResultModal :global(.ant-modal-header) {
+  border-bottom: 2px solid #f0f0f0;
+  padding: 20px 24px;
+}
+
+.examResultModal :global(.ant-modal-body) {
+  padding: 24px;
+}
+
+.examResultModal :global(.ant-modal-footer) {
+  border-top: 1px solid #f0f0f0;
+  padding: 16px 24px;
+  text-align: right;
+}
+
+.examResultModal :global(.ant-table-thead > tr > th) {
+  background-color: #fafafa;
+  font-weight: 600;
+  color: #262626;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.examResultModal :global(.ant-table-tbody > tr:hover > td) {
+  background-color: #f5f5f5;
+}
+
+.examResultModal :global(.ant-table-tbody > tr > td) {
+  padding: 16px;
+  font-size: 14px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .modalTitle {
+    font-size: 16px;
+  }
+  
+  .examResultModal :global(.ant-table-tbody > tr > td) {
+    padding: 12px 8px;
+    font-size: 12px;
+  }
+}
+@media (max-width: 768px) {
+  .ic_copy_container {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .ic_copy_link {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 575px) {
+  /* .modalHeader {
+    flex-direction: column;
+    gap: 5px;
+  } */
+
+  .sectionTitle {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .socialIcons {
+    justify-content: center;
+  }
+}
