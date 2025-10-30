@@ -1,0 +1,92 @@
+.coachesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  padding: 0;
+}
+
+.coachImage {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.coachPhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.coachCard:hover .coachPhoto {
+  transform: scale(1.05);
+}
+
+.coachInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.coachName {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-top: 12px;
+}
+
+.contactIcon {
+  font-size: 20px;
+}
+
+.ic_icon_container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: end;
+}
+
+/* Responsive Design */
+@media (max-width: 1650px) {
+  .coachesGrid {
+    gap: 30px;
+  }
+
+  .coachName {
+    font-size: 18px;
+    line-height: 1.3;
+    margin-top: 10px;
+  }
+
+  .coachInfo {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 1399px) {
+  .coachesGrid {
+    gap: 25px;
+  }
+}
+
+@media (max-width: 1299px) {
+  .coachesGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .coachName {
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 575px) {
+  .coachesGrid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .coachInfo {
+    gap: 8px;
+  }
+}

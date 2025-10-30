@@ -24,6 +24,20 @@ export const bootcampApi = apiSlice.injectEndpoints({
                 body: bootcampData,
             }),
         }),
+        bootcampList:builder.query({
+            query: ({page,limit}) => ({
+                url: `/teacher/bootcamp?page=${page}&limit=${limit}`,
+                method: "GET",
+            }),
+            providesTags: ['bootcamp']
+        }),
+        deleteBootcamp: builder.mutation({
+            query: (id) => ({
+                url: `/teacher/bootcamp/delete/${id}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: ['bootcamp']
+        }),
     }),
 });
 
@@ -31,4 +45,6 @@ export const {
     useBootcampCategoriesQuery,
     useCreateBootcampMutation,
     useUpdateBootcampMutation,
+    useBootcampListQuery,
+    useDeleteBootcampMutation,
 } = bootcampApi;

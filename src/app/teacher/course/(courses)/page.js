@@ -58,7 +58,6 @@ const TeacherDashboardPage = () => {
 
   useEffect(() => {
     if (courseListData?.data?.data?.length > 0) {
-      // setCourses([...courseListData.data.data]);
       setCourses((prev) =>
           page === 1 ? courseListData?.data?.data : [...prev, ...courseListData?.data?.data]
       );
@@ -69,7 +68,6 @@ const TeacherDashboardPage = () => {
 
 
   const fetchMoreData = () => {
-    console.log('jksjdjdf')
     if (courseListData?.data?.meta?.current_page < courseListData?.data?.meta?.last_page) {
       setPage((prev) => prev + 1);
     }
