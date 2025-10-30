@@ -6,11 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d079e12f-27cf-42d7-900a-11a1310fc74f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/teacher/bootcamps/create/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/teacher/bootcamps/create/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/teacher/bootcamps/upload-video/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/teacher/bootcamps/upload-video/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Teacher/Bootcamp/CreateBootcampForm/CreateBootcampForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Teacher/Bootcamp/CreateBootcampForm/CreateBootcampForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/features/teacher/bootcamp/bootcampApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/features/teacher/bootcamp/bootcampApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/helper.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +170,9 @@
       <workItem from="1761536613496" duration="530000" />
       <workItem from="1761537166647" duration="20077000" />
       <workItem from="1761623464366" duration="3449000" />
-      <workItem from="1761710299178" duration="11794000" />
+      <workItem from="1761710299178" duration="13177000" />
+      <workItem from="1761794819937" duration="266000" />
+      <workItem from="1761795102017" duration="2076000" />
     </task>
     <servers />
   </component>
